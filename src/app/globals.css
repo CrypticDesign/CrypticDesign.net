@@ -1,22 +1,46 @@
 @import "tailwindcss";
 
 :root {
-  /* Cryptic Design base palette — black background, neon accents */
+  /* Cryptic Design semantic foundation — consumers use roles, not hex values. */
   --background: #000000;
+  --surface: #0a0a0a;
+  --surface-raised: #171717;
+  --border: #262626;
   --foreground: #f5f5f5;
+  --muted-foreground: #a3a3a3;
   --accent-blue: #2f81f7;
   --accent-cyan: #22d3ee;
   --accent-magenta: #e879f9;
   --accent-gold: #fbbf24;
+  --success: #4ade80;
+  --warning: #fbbf24;
+  --danger: #fb7185;
+  --info: #38bdf8;
+  --restricted: #f97316;
+  --internal-only: #a78bfa;
+  --radius-control: 0.375rem;
+  --radius-card: 0.75rem;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-border: var(--border);
   --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
   --color-accent-blue: var(--accent-blue);
   --color-accent-cyan: var(--accent-cyan);
   --color-accent-magenta: var(--accent-magenta);
   --color-accent-gold: var(--accent-gold);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-info: var(--info);
+  --color-restricted: var(--restricted);
+  --color-internal-only: var(--internal-only);
+  --radius-control: var(--radius-control);
+  --radius-card: var(--radius-card);
 }
 
 body {
