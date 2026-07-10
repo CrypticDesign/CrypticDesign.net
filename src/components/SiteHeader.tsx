@@ -5,10 +5,13 @@ import { usePathname } from "next/navigation";
 
 const NAV = [
   { href: "/", label: "Home" },
-  { href: "/personal", label: "Personal" },
-  { href: "/professional", label: "Professional" },
-  { href: "/account", label: "Account" },
-  { href: "/search", label: "Search" },
+  { href: "/professional", label: "Professional Services" },
+  { href: "/creator-tools", label: "Creator Tools" },
+  { href: "/creative-works", label: "Creative Works" },
+  { href: "/worlds", label: "Worlds" },
+  { href: "/labs", label: "Labs" },
+  { href: "/releases", label: "Releases" },
+  { href: "/account", label: "Sign In" },
 ] as const;
 
 export default function SiteHeader() {

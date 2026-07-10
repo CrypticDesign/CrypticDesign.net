@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import LaneRow from "@/components/LaneRow";
-import { LANES, RELEASES, newestReleases, releasesForLane } from "@/lib/releases";
+import { LANES, newestReleases, publicReleases, releasesForLane } from "@/lib/releases";
 
 export const metadata: Metadata = {
   title: "Personal",
@@ -11,7 +11,9 @@ export const metadata: Metadata = {
 };
 
 export default function PersonalHub() {
-  const hero = RELEASES.find((r) => r.slug === "singularis-vertical-slice");
+  const hero = publicReleases().find(
+    (release) => release.slug === "singularis-vertical-slice",
+  );
 
   return (
     <main className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-10 sm:px-6">
