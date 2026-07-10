@@ -2,12 +2,19 @@
 
 This repository is the source of truth for **implementation** of the CrypticDesign.net platform (Jira epic CRY-242). Architecture lives in Confluence, executable work in Jira, sitemap/IA in FigJam.
 
-## Locked platform model
+## Locked platform model (audience-first doctrine, 2026-07-10)
 
-- Top-level IA: Home, Personal, Professional, Account, Search.
-- Personal = Netflix-style entertainment hub (Hub, Feed, Library, Character) with discovery lanes: Hero Feature, Continue, New Releases, Featured, Watch, Listen, Play, Read, Creative Labs, Rooms, Collections.
-- Professional = studio, services, case studies, platform capabilities, articles/research, creator-facing, contact/inquiry.
-- Every account creates a required character. Account = ownership/access/billing. Character = identity/progression/presence/history.
+- CrypticDesign.net is an **entertainment hub first, digital media services and solutions second**. Target more personal audience members than professionals.
+- **Home IS the entertainment hub**: hero feature, Continue, New Releases, and discovery lane rows (Watch, Listen, Play, Read, Creative Labs, Rooms, Collections) routing to releases.
+- Top nav is slim: Home, Library, Studio & Services, Sign In. Releases, Creative Works, Worlds, Labs, Creator Tools, Search are secondary (footer) destinations.
+- Professional ("Studio & Services") = services, service detail, review-based inquiry — fully built, deliberately secondary in prominence.
+- Account is universal; Character is contextual (worlds/games/immersive only, never required for browsing, inquiry, or account basics).
+- Rights/visibility governance is non-negotiable: nothing renders publicly without passing `isPubliclyRenderable` (rights, visibility, publication status).
+- Doctrine trail: Gate 1–4 locks (Confluence) as amended by the audience-first correction recorded on CRY-255 (2026-07-10). If these conflict, the amendment wins.
+
+## Sitemap sync rule
+
+Any change to routes, navigation, or IA MUST bump the FigJam sitemap version on board `oen38yFKbFtgqx9LQKn38Y` in the same working session (current: v12). A stale sitemap caused two costly direction swings — do not skip this.
 
 ## Core doctrine
 
