@@ -1,55 +1,86 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import LaneRow from "@/components/LaneRow";
-import { newestReleases } from "@/lib/releases";
+import {
+  LANES,
+  newestReleases,
+  publicReleases,
+  releasesForLane,
+} from "@/lib/releases";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
   description:
-    "Cryptic Design is a platform for professional services, original work, and creative technology.",
+    "Cryptic Design — an entertainment hub of original worlds, games, music, film, and experiments. Watch, listen, play, and read.",
 };
 
-const INTENT_ROUTES = [
-  { label: "Hire", href: "/professional", body: "Professional services" },
-  { label: "Collaborate", href: "/creator-tools", body: "Creator pathways" },
-  { label: "Create", href: "/creator-tools", body: "Tools and requests" },
-  { label: "Explore", href: "/creative-works", body: "Original works" },
-  { label: "Sign In", href: "/account", body: "Library and account" },
-] as const;
-
 export default function Home() {
+  const hero = publicReleases().find(
+    (release) => release.slug === "singularis-vertical-slice",
+  );
+
   return (
-    <main className="mx-auto flex max-w-6xl flex-col gap-12 px-4 py-12 sm:px-6">
-      <section className="flex flex-col gap-4 py-8 sm:py-16">
-        <h1 className="max-w-2xl text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-          Original worlds. Holistic design.
-        </h1>
-        <p className="max-w-xl text-neutral-400">
-          CrypticDesign.net brings Cryptic Design&apos;s professional services,
-          creator pathways, and original work into one governed platform.
-        </p>
-        <div className="mt-2 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-          {INTENT_ROUTES.map((intent) => (
+    <main className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-10 sm:px-6">
+      {hero && (
+        <section className="flex flex-col gap-3 rounded-card border border-border bg-gradient-to-br from-neutral-950 to-neutral-900 p-6 sm:p-10">
+          <span className="text-xs uppercase tracking-widest text-accent-magenta">
+            Hero Feature
+          </span>
+          <h1 className="text-3xl font-semibold text-white sm:text-4xl">
+            {hero.title}
+          </h1>
+          <p className="max-w-xl text-muted-foreground">{hero.tagline}</p>
+          <div>
             <Link
-              key={intent.label}
-              href={intent.href}
-              className="rounded-card border border-border bg-surface p-4 transition-colors hover:border-accent-cyan"
+              href={`/releases/${hero.slug}`}
+              className="mt-2 inline-block rounded-control bg-accent-magenta px-5 py-2.5 text-sm font-medium text-black transition-opacity hover:opacity-90"
             >
-              <span className="block text-sm font-medium text-foreground">
-                {intent.label}
-              </span>
-              <span className="mt-1 block text-xs text-muted-foreground">
-                {intent.body}
-              </span>
+              View release
             </Link>
-          ))}
-        </div>
-      </section>
+          </div>
+        </section>
+      )}
+
       <LaneRow
-        title="New Releases"
-        href="/releases"
-        releases={newestReleases(6)}
+        title="Continue"
+        releases={[]}
+        emptyNote="Your in-progress releases will appear here once accounts arrive."
       />
+      <LaneRow title="New Releases" href="/releases" releases={newestReleases(6)} />
+
+      {LANES.map((lane) => (
+        <LaneRow
+          key={lane.slug}
+          title={lane.name}
+          href={
+            lane.slug === "creative-labs"
+              ? "/labs"
+              : lane.slug === "rooms"
+                ? "/worlds"
+                : lane.slug === "collections"
+                  ? "/creative-works"
+                  : "/releases"
+          }
+          releases={releasesForLane(lane.slug)}
+          emptyNote={lane.blurb}
+        />
+      ))}
+
+      <section className="flex flex-col gap-2 rounded-card border border-border bg-surface p-6">
+        <h2 className="text-lg font-semibold text-foreground">
+          The studio behind the worlds
+        </h2>
+        <p className="max-w-xl text-sm text-muted-foreground">
+          Cryptic Design also builds for clients — holistic UX, game UX, and
+          creative technology.
+        </p>
+        <Link
+          href="/professional"
+          className="w-fit text-sm text-accent-blue hover:underline"
+        >
+          Studio &amp; Services →
+        </Link>
+      </section>
     </main>
   );
 }

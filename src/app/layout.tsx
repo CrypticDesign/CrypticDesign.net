@@ -28,9 +28,23 @@ export default function RootLayout({
         <SiteHeader />
         <div className="flex-1">{children}</div>
         <footer className="border-t border-neutral-800">
-          <div className="mx-auto max-w-6xl px-4 py-6 text-xs text-neutral-500 sm:px-6">
-            © {new Date().getFullYear()} Cryptic Design, LLC. Science, art,
-            and technology — designed as one system.
+          <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-6 sm:px-6">
+            <nav
+              aria-label="Secondary"
+              className="flex flex-wrap gap-x-5 gap-y-2 text-xs text-neutral-500"
+            >
+              <a href="/releases" className="hover:text-neutral-300">Releases</a>
+              <a href="/creative-works" className="hover:text-neutral-300">Creative Works</a>
+              <a href="/worlds" className="hover:text-neutral-300">Worlds</a>
+              <a href="/labs" className="hover:text-neutral-300">Labs</a>
+              <a href="/creator-tools" className="hover:text-neutral-300">Creator Tools</a>
+              <a href="/professional" className="hover:text-neutral-300">Studio &amp; Services</a>
+              <a href="/search" className="hover:text-neutral-300">Search</a>
+            </nav>
+            <p className="text-xs text-neutral-500">
+              © {new Date().getFullYear()} Cryptic Design, LLC. Science, art,
+              and technology — designed as one system.
+            </p>
           </div>
         </footer>
       </body>
