@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import "./globals.css";
 
@@ -33,13 +34,13 @@ export default function RootLayout({
               aria-label="Secondary"
               className="flex flex-wrap gap-x-5 gap-y-2 text-xs text-neutral-500"
             >
-              <a href="/releases" className="hover:text-neutral-300">Releases</a>
-              <a href="/creative-works" className="hover:text-neutral-300">Creative Works</a>
-              <a href="/worlds" className="hover:text-neutral-300">Worlds</a>
-              <a href="/labs" className="hover:text-neutral-300">Labs</a>
-              <a href="/creator-tools" className="hover:text-neutral-300">Creator Tools</a>
-              <a href="/professional" className="hover:text-neutral-300">Studio &amp; Services</a>
-              <a href="/search" className="hover:text-neutral-300">Search</a>
+              <Link href="/releases" className="hover:text-neutral-300">Releases</Link>
+              <Link href="/creative-works" className="hover:text-neutral-300">Creative Works</Link>
+              <Link href="/worlds" className="hover:text-neutral-300">Worlds</Link>
+              <Link href="/labs" className="hover:text-neutral-300">Labs</Link>
+              <Link href="/creator-tools" className="hover:text-neutral-300">Creator Tools</Link>
+              <Link href="/professional" className="hover:text-neutral-300">Studio &amp; Services</Link>
+              <Link href="/search" className="hover:text-neutral-300">Search</Link>
             </nav>
             <p className="text-xs text-neutral-500">
               © {new Date().getFullYear()} Cryptic Design, LLC. Science, art,
