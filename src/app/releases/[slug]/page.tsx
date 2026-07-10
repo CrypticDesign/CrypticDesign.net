@@ -66,13 +66,12 @@ export default async function ReleasePage({
       <div className="flex flex-wrap items-center gap-3">
         <SaveButton slug={release.slug} />
         {lanes.map((lane) => (
-          <Link
+          <span
             key={lane.slug}
-            href={`/personal/${lane.slug}`}
-            className="rounded-full border border-neutral-800 px-3 py-1 text-xs text-neutral-400 transition-colors hover:border-neutral-500 hover:text-neutral-200"
+            className="rounded-full border border-neutral-800 px-3 py-1 text-xs text-neutral-400"
           >
             {lane.name}
-          </Link>
+          </span>
         ))}
       </div>
 
@@ -81,8 +80,8 @@ export default async function ReleasePage({
       </article>
 
       <footer className="border-t border-neutral-800 pt-6 text-sm">
-        <Link href="/personal" className="text-accent-cyan hover:underline">
-          ← Back to the Hub
+        <Link href="/releases" className="text-accent-cyan hover:underline">
+          ← All releases
         </Link>
       </footer>
     </main>
