@@ -46,7 +46,13 @@ export interface Lane {
   blurb: string;
 }
 
-export interface Release {
+export interface PublicContentGovernance {
+  rights_status: RightsStatus;
+  visibility_status: VisibilityStatus;
+  publication_status: PublicationStatus;
+}
+
+export interface Release extends PublicContentGovernance {
   slug: string;
   title: string;
   tagline: string;
@@ -58,10 +64,6 @@ export interface Release {
   /** ISO date (YYYY-MM-DD). */
   releasedAt: string;
   status: "released" | "coming-soon";
-  /** Required before any public rendering decision. */
-  rights_status: RightsStatus;
-  visibility_status: VisibilityStatus;
-  publication_status: PublicationStatus;
   accent: Accent;
 }
 
@@ -190,18 +192,20 @@ export function getLane(slug: string): Lane | undefined {
  * Public pages must use this guard before rendering content. Its explicit
  * checks keep a future untyped/admin-fed item from leaking by default.
  */
-export function isPubliclyRenderable(release: Release): boolean {
+export function isPubliclyRenderable<T extends PublicContentGovernance>(
+  content: T,
+): boolean {
   const rightsPermitPublicView = [
     "owned",
     "licensed",
     "client-approved",
     "collaborator-approved",
-  ].includes(release.rights_status);
+  ].includes(content.rights_status);
 
-  const isPubliclyVisible = release.visibility_status === "public";
+  const isPubliclyVisible = content.visibility_status === "public";
   const isPublishedOrScheduled =
-    release.publication_status === "published" ||
-    release.publication_status === "scheduled";
+    content.publication_status === "published" ||
+    content.publication_status === "scheduled";
 
   return rightsPermitPublicView && isPubliclyVisible && isPublishedOrScheduled;
 }
