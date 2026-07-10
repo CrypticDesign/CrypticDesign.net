@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import SaveButton from "@/components/SaveButton";
-import { LANES, RELEASES, getRelease } from "@/lib/releases";
+import { LANES, getRelease, publicReleases } from "@/lib/releases";
 
 export function generateStaticParams() {
-  return RELEASES.map((release) => ({ slug: release.slug }));
+  return publicReleases().map((release) => ({ slug: release.slug }));
 }
 
 export async function generateMetadata({

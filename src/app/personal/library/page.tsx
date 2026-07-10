@@ -3,14 +3,14 @@
 import { useEffect, useState } from "react";
 import ReleaseCard from "@/components/ReleaseCard";
 import { getSavedSlugs } from "@/lib/library";
-import { RELEASES, type Release } from "@/lib/releases";
+import { publicReleases, type Release } from "@/lib/releases";
 
 export default function LibraryPage() {
   const [saved, setSaved] = useState<Release[] | null>(null);
 
   useEffect(() => {
     const slugs = getSavedSlugs();
-    setSaved(RELEASES.filter((release) => slugs.includes(release.slug)));
+    setSaved(publicReleases().filter((release) => slugs.includes(release.slug)));
   }, []);
 
   return (

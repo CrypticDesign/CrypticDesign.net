@@ -18,6 +18,28 @@ export type ReleaseKind = "video" | "audio" | "game" | "article" | "lab";
 
 export type Accent = "blue" | "cyan" | "magenta" | "gold";
 
+/** Asset-rights state. Restricted states always override public visibility. */
+export type RightsStatus =
+  | "owned"
+  | "licensed"
+  | "client-approved"
+  | "collaborator-approved"
+  | "restricted"
+  | "internal-only"
+  | "blocked-pending-review";
+
+/** Audience/access state, evaluated after rights status. */
+export type VisibilityStatus =
+  | "public"
+  | "unlisted"
+  | "account-required"
+  | "entitlement-required"
+  | "client-private"
+  | "operator-only"
+  | "hidden";
+
+export type PublicationStatus = "draft" | "scheduled" | "published";
+
 export interface Lane {
   slug: LaneSlug;
   name: string;
@@ -36,6 +58,10 @@ export interface Release {
   /** ISO date (YYYY-MM-DD). */
   releasedAt: string;
   status: "released" | "coming-soon";
+  /** Required before any public rendering decision. */
+  rights_status: RightsStatus;
+  visibility_status: VisibilityStatus;
+  publication_status: PublicationStatus;
   accent: Accent;
 }
 
@@ -69,6 +95,9 @@ export const RELEASES: Release[] = [
     project: "Singularis",
     releasedAt: "2026-08-01",
     status: "coming-soon",
+    rights_status: "owned",
+    visibility_status: "public",
+    publication_status: "scheduled",
     accent: "magenta",
   },
   {
@@ -82,6 +111,9 @@ export const RELEASES: Release[] = [
     project: "Singularis",
     releasedAt: "2026-08-15",
     status: "coming-soon",
+    rights_status: "owned",
+    visibility_status: "public",
+    publication_status: "scheduled",
     accent: "blue",
   },
   {
@@ -95,6 +127,9 @@ export const RELEASES: Release[] = [
     project: "Singularis",
     releasedAt: "2026-08-15",
     status: "coming-soon",
+    rights_status: "owned",
+    visibility_status: "public",
+    publication_status: "scheduled",
     accent: "gold",
   },
   {
@@ -108,6 +143,9 @@ export const RELEASES: Release[] = [
     project: "Creative Labs",
     releasedAt: "2026-07-20",
     status: "coming-soon",
+    rights_status: "owned",
+    visibility_status: "public",
+    publication_status: "scheduled",
     accent: "cyan",
   },
   {
@@ -121,6 +159,9 @@ export const RELEASES: Release[] = [
     project: "Studio",
     releasedAt: "2026-07-25",
     status: "coming-soon",
+    rights_status: "owned",
+    visibility_status: "public",
+    publication_status: "scheduled",
     accent: "blue",
   },
   {
@@ -134,6 +175,9 @@ export const RELEASES: Release[] = [
     project: "Platform",
     releasedAt: "2026-07-15",
     status: "coming-soon",
+    rights_status: "owned",
+    visibility_status: "public",
+    publication_status: "scheduled",
     accent: "cyan",
   },
 ];
@@ -142,18 +186,42 @@ export function getLane(slug: string): Lane | undefined {
   return LANES.find((lane) => lane.slug === slug);
 }
 
+/**
+ * Public pages must use this guard before rendering content. Its explicit
+ * checks keep a future untyped/admin-fed item from leaking by default.
+ */
+export function isPubliclyRenderable(release: Release): boolean {
+  const rightsPermitPublicView = [
+    "owned",
+    "licensed",
+    "client-approved",
+    "collaborator-approved",
+  ].includes(release.rights_status);
+
+  const isPubliclyVisible = release.visibility_status === "public";
+  const isPublishedOrScheduled =
+    release.publication_status === "published" ||
+    release.publication_status === "scheduled";
+
+  return rightsPermitPublicView && isPubliclyVisible && isPublishedOrScheduled;
+}
+
+export function publicReleases(): Release[] {
+  return RELEASES.filter(isPubliclyRenderable);
+}
+
 export function getRelease(slug: string): Release | undefined {
-  return RELEASES.find((release) => release.slug === slug);
+  return publicReleases().find((release) => release.slug === slug);
 }
 
 export function releasesForLane(lane: LaneSlug): Release[] {
-  return RELEASES.filter((release) => release.lanes.includes(lane)).sort(
+  return publicReleases().filter((release) => release.lanes.includes(lane)).sort(
     (a, b) => b.releasedAt.localeCompare(a.releasedAt),
   );
 }
 
 export function newestReleases(count: number): Release[] {
-  return [...RELEASES]
+  return publicReleases()
     .sort((a, b) => b.releasedAt.localeCompare(a.releasedAt))
     .slice(0, count);
 }
