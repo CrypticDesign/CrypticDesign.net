@@ -22,7 +22,7 @@ export default function LaneRow({
             href={href}
             className="text-sm text-accent-cyan hover:underline"
           >
-            View lane
+            See all
           </Link>
         )}
       </div>

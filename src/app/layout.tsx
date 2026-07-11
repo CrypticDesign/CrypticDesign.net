@@ -35,11 +35,12 @@ export default function RootLayout({
               className="flex flex-wrap gap-x-5 gap-y-2 text-xs text-neutral-500"
             >
               <Link href="/releases" className="hover:text-neutral-300">Releases</Link>
-              <Link href="/creative-works" className="hover:text-neutral-300">Creative Works</Link>
-              <Link href="/worlds" className="hover:text-neutral-300">Worlds</Link>
-              <Link href="/labs" className="hover:text-neutral-300">Labs</Link>
+              <Link href="/entertainment" className="hover:text-neutral-300">Entertainment</Link>
+              <Link href="/products" className="hover:text-neutral-300">Products</Link>
+              <Link href="/audio" className="hover:text-neutral-300">Audio</Link>
+              <Link href="/library" className="hover:text-neutral-300">My Library</Link>
+              <Link href="/professional" className="hover:text-neutral-300">Professional Studio</Link>
               <Link href="/creator-tools" className="hover:text-neutral-300">Creator Tools</Link>
-              <Link href="/professional" className="hover:text-neutral-300">Studio &amp; Services</Link>
               <Link href="/search" className="hover:text-neutral-300">Search</Link>
             </nav>
             <p className="text-xs text-neutral-500">

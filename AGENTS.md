@@ -2,15 +2,18 @@
 
 This repository is the source of truth for **implementation** of the CrypticDesign.net platform (Jira epic CRY-242). Architecture lives in Confluence, executable work in Jira, sitemap/IA in FigJam.
 
-## Locked platform model (audience-first doctrine, 2026-07-10)
+## Locked platform model (SITEMAP v9 — Robert's final direction, 2026-07-10, supersedes all prior frames)
 
-- CrypticDesign.net is an **entertainment hub first, digital media services and solutions second**. Target more personal audience members than professionals.
-- **Home IS the entertainment hub**: hero feature, Continue, New Releases, and discovery lane rows (Watch, Listen, Play, Read, Creative Labs, Rooms, Collections) routing to releases.
-- Top nav is slim: Home, Library, Studio & Services, Sign In. Releases, Creative Works, Worlds, Labs, Creator Tools, Search are secondary (footer) destinations.
-- Professional ("Studio & Services") = services, service detail, review-based inquiry — fully built, deliberately secondary in prominence.
-- Account is universal; Character is contextual (worlds/games/immersive only, never required for browsing, inquiry, or account basics).
-- Rights/visibility governance is non-negotiable: nothing renders publicly without passing `isPubliclyRenderable` (rights, visibility, publication status).
-- Doctrine trail: Gate 1–4 locks (Confluence) as amended by the audience-first correction recorded on CRY-255 (2026-07-10). If these conflict, the amendment wins.
+- **The v9 "Release Platform" diagram on FigJam board oen38yFKbFtgqx9LQKn38Y is the canonical IA.** Entertainment hub first, digital media services second; more audience members than professionals.
+- Global nav: **Home · Releases · Entertainment · Professional · Account · Search**.
+- **Entertainment Channel** (/entertainment): Channel Home, Arcade, Cinema, Listening Rooms, Virtual Rooms, Creative Labs, My Library.
+- **Account** (/account): create account → **required character creation** (UI-preview only until backend approved), sign in, character profile (stats/XP/presence/history), subscription tiers (Free/Supporter/Premium — no payments yet), notifications (strict, platform-owned messaging), settings.
+- **Products & Franchises** (/products): Singularis, Lifa, Soundwave, Cryptic Design Audio, Image of the Day (reclassified → Creative Labs / Visual Studies).
+- **Audio backbone** (/audio): shared player, catalog, artist profiles, playlists, submissions — Soundwave-powered, preview shells.
+- **Professional Studio** (/professional): home, services + service detail, case studies, articles/research, contributing creators, contact, inquiry.
+- Rights/visibility governance is non-negotiable: nothing renders publicly without passing `isPubliclyRenderable`.
+- Backend-heavy systems (real auth, payments, messaging, rooms runtime) remain frontend previews until Robert explicitly approves backend work.
+- Do NOT re-derive direction from the Gate 1-4 Confluence locks or the "corrected IA" — those documents predate this decision and need updating to match v9.
 
 ## Sitemap sync rule
 

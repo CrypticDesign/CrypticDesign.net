@@ -3,11 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+// Global navigation per Sitemap v9: Releases | Entertainment | Professional | Account | Search
 const NAV = [
   { href: "/", label: "Home" },
-  { href: "/library", label: "Library" },
-  { href: "/professional", label: "Studio & Services" },
-  { href: "/account", label: "Sign In" },
+  { href: "/releases", label: "Releases" },
+  { href: "/entertainment", label: "Entertainment" },
+  { href: "/professional", label: "Professional" },
+  { href: "/account", label: "Account" },
+  { href: "/search", label: "Search" },
 ] as const;
 
 export default function SiteHeader() {

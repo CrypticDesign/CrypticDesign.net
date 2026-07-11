@@ -30,6 +30,22 @@ export default function ProfessionalHub() {
       <Link href="/professional/inquiry" className="w-fit rounded-control bg-accent-blue px-5 py-2.5 text-sm font-medium text-black">
         Start an inquiry
       </Link>
+      <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {[
+          { href: "/professional/case-studies", title: "Case Studies" },
+          { href: "/professional/articles", title: "Articles & Research" },
+          { href: "/professional/creators", title: "Contributing Creators" },
+          { href: "/professional/contact", title: "Contact" },
+        ].map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            className="rounded-card border border-border bg-surface p-4 text-sm font-medium text-foreground transition-colors hover:border-accent-blue"
+          >
+            {item.title}
+          </Link>
+        ))}
+      </section>
     </main>
   );
 }
