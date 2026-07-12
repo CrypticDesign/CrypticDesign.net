@@ -13,13 +13,16 @@ export default function ReleaseIndex({
   emptyNote?: string;
 }) {
   return (
-    <main className="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-10 sm:px-6">
-      <header className="flex flex-col gap-2">
-        <h1 className="text-3xl font-semibold text-white">{title}</h1>
+    <main className="shell page-stack">
+      <header className="art-field grid min-h-64 items-end border border-border p-6 sm:p-8 lg:grid-cols-[1fr_.7fr]">
+        <div className="flex flex-col gap-3">
+        <span className="eyebrow text-accent-cyan">Entertainment channel</span>
+        <h1 className="display-title text-white">{title}</h1>
         <p className="max-w-2xl text-neutral-400">{description}</p>
+        </div><div />
       </header>
       {releases.length > 0 ? (
-        <div className="flex flex-wrap gap-4">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 [&>a]:w-full [&>a]:max-w-none">
           {releases.map((release) => (
             <ReleaseCard key={release.slug} release={release} />
           ))}

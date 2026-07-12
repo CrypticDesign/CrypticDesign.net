@@ -41,8 +41,9 @@ export default async function ReleasePage({
   const lanes = LANES.filter((lane) => release.lanes.includes(lane.slug));
 
   return (
-    <main className="mx-auto flex max-w-4xl flex-col gap-8 px-4 py-12 sm:px-6">
-      <header className="flex flex-col gap-3">
+    <main className="shell page-stack">
+      <header className="art-field grid min-h-[27rem] items-end border border-border p-6 sm:p-10 lg:grid-cols-[1fr_.7fr]">
+        <div className="flex flex-col gap-3">
         <div className="flex flex-wrap items-center gap-2 text-xs uppercase tracking-wider text-neutral-500">
           <span>{release.kind}</span>
           {release.project && (
@@ -57,10 +58,11 @@ export default async function ReleasePage({
             {release.releasedAt}
           </time>
         </div>
-        <h1 className="text-3xl font-semibold text-white sm:text-4xl">
+        <h1 className="display-title text-white">
           {release.title}
         </h1>
         <p className="max-w-xl text-lg text-neutral-400">{release.tagline}</p>
+        </div><div />
       </header>
 
       <div className="flex flex-wrap items-center gap-3">

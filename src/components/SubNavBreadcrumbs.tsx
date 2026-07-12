@@ -57,10 +57,10 @@ export default function SubNavBreadcrumbs({ position }: { position: "top" | "bot
   if (crumbs.length < 2) return null;
 
   return (
-    <div className={position === "top" ? "border-b border-border" : "border-t border-border"}>
+    <div className={position === "top" ? "border-b border-border/70 bg-surface/30" : "border-t border-border/70 bg-surface/20"}>
       <nav
         aria-label={`${position === "top" ? "Top" : "Bottom"} breadcrumb`}
-        className="mx-auto flex max-w-6xl flex-wrap items-center gap-2 px-4 py-3 text-xs text-muted-foreground sm:px-6"
+        className="shell flex flex-wrap items-center gap-2 py-2.5 text-[10px] uppercase tracking-wider text-muted-foreground"
       >
         {crumbs.map(({ segment, href }, index) => {
           const current = index === crumbs.length - 1;

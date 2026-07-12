@@ -2,12 +2,12 @@
 
 :root {
   /* Cryptic Design semantic foundation — consumers use roles, not hex values. */
-  --background: #000000;
-  --surface: #0a0a0a;
-  --surface-raised: #171717;
-  --border: #262626;
-  --foreground: #f5f5f5;
-  --muted-foreground: #a3a3a3;
+  --background: #02070d;
+  --surface: #07111b;
+  --surface-raised: #0b1824;
+  --border: #173044;
+  --foreground: #edf7ff;
+  --muted-foreground: #8299aa;
   --accent-blue: #2f81f7;
   --accent-cyan: #22d3ee;
   --accent-magenta: #e879f9;
@@ -19,7 +19,7 @@
   --restricted: #f97316;
   --internal-only: #a78bfa;
   --radius-control: 0.375rem;
-  --radius-card: 0.75rem;
+  --radius-card: 0.35rem;
 }
 
 @theme inline {
@@ -44,6 +44,38 @@
 }
 
 body {
-  background: var(--background);
+  background:
+    radial-gradient(circle at 72% -10%, rgb(22 92 140 / 16%), transparent 32rem),
+    linear-gradient(180deg, #030a11 0%, var(--background) 40%);
   color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: .01em;
+}
+
+::selection { background: rgb(34 211 238 / 30%); color: white; }
+
+a, button { outline-offset: 3px; }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 1px solid var(--accent-cyan);
+}
+
+.shell { width: min(100% - 2rem, 76rem); margin-inline: auto; }
+.page-stack { display: flex; flex-direction: column; gap: clamp(2.25rem, 5vw, 5rem); padding-block: clamp(2.5rem, 6vw, 5rem); }
+.eyebrow { font-size: .67rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+.display-title { max-width: 13ch; font-size: clamp(2.35rem, 6vw, 5.4rem); line-height: .94; letter-spacing: -.055em; font-weight: 650; text-wrap: balance; }
+.section-title { font-size: clamp(1.35rem, 3vw, 2rem); line-height: 1.05; letter-spacing: -.035em; font-weight: 650; }
+.panel { border: 1px solid var(--border); border-radius: var(--radius-card); background: linear-gradient(145deg, rgb(11 24 36 / 94%), rgb(4 12 20 / 94%)); box-shadow: inset 0 1px rgb(255 255 255 / 3%); }
+.panel-interactive { transition: border-color .2s ease, transform .2s ease, background-color .2s ease; }
+.panel-interactive:hover { transform: translateY(-2px); border-color: #31566f; }
+.art-field { position: relative; overflow: hidden; isolation: isolate; background: #06111b; }
+.art-field::before { content: ""; position: absolute; inset: 0; z-index: -2; background: radial-gradient(circle at 62% 48%, rgb(34 211 238 / 70%) 0 2%, transparent 3%), radial-gradient(ellipse at 62% 50%, rgb(47 129 247 / 38%), transparent 30%), conic-gradient(from 220deg at 62% 50%, transparent, rgb(232 121 249 / 30%), transparent 25%, rgb(34 211 238 / 35%), transparent 52%); filter: blur(1px); transform: scale(1.2); }
+.art-field::after { content: ""; position: absolute; inset: 0; z-index: -1; opacity: .28; background-image: linear-gradient(rgb(34 211 238 / 18%) 1px, transparent 1px), linear-gradient(90deg, rgb(34 211 238 / 12%) 1px, transparent 1px); background-size: 3rem 3rem; mask-image: linear-gradient(to right, transparent, black); }
+.art-orb::before { border-radius: 50%; background: radial-gradient(circle at center, transparent 18%, rgb(232 121 249 / 24%) 20%, rgb(34 211 238 / 55%) 23%, transparent 27%), repeating-radial-gradient(ellipse at 60% 50%, transparent 0 8px, rgb(47 129 247 / 18%) 9px 10px); transform: scale(1.8); }
+.art-figure::before { background: radial-gradient(ellipse at 65% 25%, rgb(34 211 238 / 52%), transparent 7%), radial-gradient(ellipse at 63% 62%, rgb(47 129 247 / 45%), transparent 14%), linear-gradient(110deg, transparent 45%, rgb(34 211 238 / 20%) 54%, transparent 64%); }
+.metric { border-left: 1px solid var(--border); padding-left: 1rem; }
+
+@media (max-width: 640px) {
+  .shell { width: min(100% - 1.25rem, 76rem); }
+  .page-stack { gap: 2.75rem; padding-block: 2rem 3.5rem; }
+  .display-title { font-size: clamp(2.25rem, 13vw, 3.5rem); }
 }

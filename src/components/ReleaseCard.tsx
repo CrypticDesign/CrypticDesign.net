@@ -2,10 +2,10 @@ import Link from "next/link";
 import type { Release } from "@/lib/releases";
 
 const ACCENT_BORDER: Record<Release["accent"], string> = {
-  blue: "border-t-accent-blue",
-  cyan: "border-t-accent-cyan",
-  magenta: "border-t-accent-magenta",
-  gold: "border-t-accent-gold",
+  blue: "after:bg-accent-blue",
+  cyan: "after:bg-accent-cyan",
+  magenta: "after:bg-accent-magenta",
+  gold: "after:bg-accent-gold",
 };
 
 const KIND_LABEL: Record<Release["kind"], string> = {
@@ -24,22 +24,25 @@ export default function ReleaseCard({ release }: { release: Release }) {
   return (
     <Link
       href={href}
-      className={`group flex w-64 shrink-0 flex-col gap-2 rounded-lg border border-neutral-800 border-t-2 bg-neutral-950 p-4 transition-colors hover:border-neutral-600 sm:w-72 ${ACCENT_BORDER[release.accent]}`}
+      className={`panel panel-interactive group relative flex w-[82vw] max-w-80 shrink-0 flex-col overflow-hidden after:absolute after:inset-x-0 after:bottom-0 after:h-px sm:w-72 ${ACCENT_BORDER[release.accent]}`}
     >
-      <div className="flex items-center justify-between text-xs text-neutral-500">
+      <div className={`art-field h-32 border-b border-border ${release.kind === "video" ? "art-orb" : release.kind === "article" ? "art-figure" : ""}`} />
+      <div className="flex flex-col gap-2 p-4">
+      <div className="flex items-center justify-between text-[10px] text-muted-foreground">
         <span className="uppercase tracking-wider">
           {KIND_LABEL[release.kind]}
         </span>
         {release.status === "coming-soon" && (
-          <span className="rounded bg-neutral-900 px-2 py-0.5">
+          <span className="border border-border bg-surface-raised px-2 py-0.5">
             Coming soon
           </span>
         )}
       </div>
-      <h3 className="font-medium text-neutral-100 group-hover:text-white">
+      <h3 className="font-semibold text-foreground group-hover:text-white">
         {release.title}
       </h3>
-      <p className="text-sm text-neutral-400">{release.tagline}</p>
+      <p className="text-sm leading-relaxed text-muted-foreground">{release.tagline}</p>
+      </div>
     </Link>
   );
 }

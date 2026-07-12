@@ -20,14 +20,15 @@ const SURFACES = [
 export default function AudioPage() {
   const audio = publicReleases().filter((r) => r.kind === "audio");
   return (
-    <main className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-10 sm:px-6">
-      <header className="flex flex-col gap-2">
-        <h1 className="text-3xl font-semibold text-white">Audio</h1>
+    <main className="shell page-stack">
+      <header className="art-field art-orb grid min-h-72 items-end border border-accent-cyan/30 p-6 sm:p-8 lg:grid-cols-[1fr_.7fr]">
+        <div className="flex flex-col gap-3"><span className="eyebrow text-accent-cyan">Soundwave-powered preview</span>
+        <h1 className="display-title text-white">Audio</h1>
         <p className="max-w-2xl text-muted-foreground">
           Native platform audio, built on the Soundwave backbone. These
           surfaces are frontend previews — playback lands with the shared
           player.
-        </p>
+        </p></div><div />
       </header>
       {audio.length > 0 && (
         <section className="flex flex-col gap-3">
@@ -39,7 +40,7 @@ export default function AudioPage() {
       )}
       <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {SURFACES.map((s) => (
-          <div key={s.title} className="rounded-card border border-border bg-surface p-5">
+          <div key={s.title} className="panel min-h-36 p-5">
             <h2 className="font-medium text-foreground">{s.title}</h2>
             <p className="mt-2 text-sm text-muted-foreground">{s.body}</p>
           </div>

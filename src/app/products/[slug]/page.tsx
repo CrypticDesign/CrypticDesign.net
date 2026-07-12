@@ -47,17 +47,19 @@ export default async function ProductHome({
     : releases;
 
   return (
-    <main className="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-12 sm:px-6">
-      <header className="flex flex-col gap-3">
+    <main className="shell page-stack">
+      <header className="art-field grid min-h-[28rem] items-end border border-border p-6 sm:p-10 lg:grid-cols-[1fr_.8fr]">
+        <div className="flex flex-col gap-3">
         <span className="text-xs uppercase tracking-widest text-muted-foreground">
           Product view · {product.status.replace("-", " ")}
         </span>
-        <h1 className="text-3xl font-semibold text-white sm:text-4xl">{product.title}</h1>
+        <h1 className="display-title text-white">{product.title}</h1>
         <p className="max-w-2xl text-muted-foreground">{product.description}</p>
+        </div><div />
       </header>
 
       {selectedRelease && (
-        <section className="flex flex-col gap-4 rounded-card border border-accent-magenta bg-gradient-to-br from-neutral-950 to-neutral-900 p-6 sm:p-8">
+        <section className="panel flex flex-col gap-4 border-accent-magenta p-6 sm:p-8">
           <span className="text-xs uppercase tracking-widest text-accent-magenta">
             Selected release · {selectedRelease.kind}
           </span>

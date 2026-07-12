@@ -20,26 +20,29 @@ const SURFACES = [
 
 export default function EntertainmentHub() {
   return (
-    <main className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-10 sm:px-6">
-      <header className="flex flex-col gap-2">
+    <main className="shell page-stack">
+      <header className="art-field art-orb grid min-h-[28rem] items-end border border-border p-6 sm:p-10 lg:grid-cols-[1fr_.8fr]">
+        <div className="flex flex-col gap-4">
         <span className="text-xs uppercase tracking-widest text-accent-magenta">The content front door</span>
-        <h1 className="text-3xl font-semibold text-white">Entertainment Hub</h1>
+        <h1 className="display-title text-white">Enter the worlds, sound, and systems in motion.</h1>
         <p className="max-w-2xl text-muted-foreground">
           Everything Cryptic Design creates for audiences—releases, franchises,
           games, cinema, audio, rooms, visual studies, and experiments.
         </p>
+        <div />
+        </div>
       </header>
 
       <LaneRow title="Featured Releases" href="/releases" releases={newestReleases(6)} />
 
-      <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <section><div className="mb-5 flex items-end justify-between"><h2 className="section-title">Explore the platform</h2><span className="eyebrow text-accent-magenta">Six channels</span></div><div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {SURFACES.map((surface) => (
-          <Link key={surface.href} href={surface.href} className="rounded-card border border-border bg-surface p-5 transition-colors hover:border-accent-magenta">
-            <h2 className="font-medium text-foreground">{surface.title}</h2>
+          <Link key={surface.href} href={surface.href} className="panel panel-interactive min-h-36 p-5 hover:border-accent-magenta">
+            <h3 className="font-semibold text-foreground">{surface.title}</h3>
             <p className="mt-2 text-sm text-muted-foreground">{surface.body}</p>
           </Link>
         ))}
-      </section>
+      </div></section>
 
       <section className="grid gap-4 sm:grid-cols-3">
         <Link href="/products" className="rounded-card border border-border bg-surface p-5 transition-colors hover:border-accent-magenta">
