@@ -3,30 +3,28 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+// Public discovery navigation: releases surface contextually through Home and Entertainment.
 const NAV = [
-  { href: "/", label: "Home" },
-  { href: "/professional", label: "Professional Services" },
-  { href: "/creator-tools", label: "Creator Tools" },
-  { href: "/creative-works", label: "Creative Works" },
-  { href: "/worlds", label: "Worlds" },
-  { href: "/labs", label: "Labs" },
-  { href: "/releases", label: "Releases" },
-  { href: "/account", label: "Sign In" },
+  { href: "/", label: "My Home" },
+  { href: "/entertainment", label: "Entertainment" },
+  { href: "/professional", label: "Professional" },
+  { href: "/account", label: "Account" },
+  { href: "/search", label: "Search" },
 ] as const;
 
 export default function SiteHeader() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-neutral-800 bg-black/85 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3 sm:px-6">
+    <header className="sticky top-0 z-50 border-b border-border/80 bg-[#02070d]/90 backdrop-blur-xl">
+      <div className="shell flex h-14 items-center justify-between gap-4">
         <Link
           href="/"
-          className="text-sm font-semibold tracking-widest uppercase text-neutral-100"
+          className="shrink-0 text-[11px] font-bold tracking-[.2em] uppercase text-foreground"
         >
           Cryptic Design
         </Link>
-        <nav aria-label="Primary" className="flex flex-wrap items-center gap-1">
+        <nav aria-label="Primary" className="flex min-w-0 items-center gap-1 overflow-x-auto [scrollbar-width:none]">
           {NAV.map((item) => {
             const active =
               item.href === "/"
@@ -37,10 +35,10 @@ export default function SiteHeader() {
                 key={item.href}
                 href={item.href}
                 aria-current={active ? "page" : undefined}
-                className={`rounded px-3 py-1.5 text-sm transition-colors ${
+                className={`shrink-0 border-b px-2 py-4 text-[11px] font-medium tracking-wide transition-colors sm:px-3 ${
                   active
-                    ? "bg-neutral-900 text-accent-cyan"
-                    : "text-neutral-400 hover:bg-neutral-900 hover:text-neutral-100"
+                    ? "border-accent-cyan text-accent-cyan"
+                    : "border-transparent text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {item.label}
