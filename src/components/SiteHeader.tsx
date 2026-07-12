@@ -3,10 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-// Global navigation per Sitemap v9: Releases | Entertainment | Professional | Account | Search
+// Public discovery navigation: releases surface contextually through Home and Entertainment.
 const NAV = [
-  { href: "/", label: "Home" },
-  { href: "/releases", label: "Releases" },
+  { href: "/", label: "My Home" },
   { href: "/entertainment", label: "Entertainment" },
   { href: "/professional", label: "Professional" },
   { href: "/account", label: "Account" },

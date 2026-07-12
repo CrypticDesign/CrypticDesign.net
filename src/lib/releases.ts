@@ -61,6 +61,8 @@ export interface Release extends PublicContentGovernance {
   lanes: LaneSlug[];
   /** Originating project (grouping metadata only — projects are not hubs). */
   project?: string;
+  /** In-platform product context used for franchise release discovery. */
+  productSlug?: string;
   /** ISO date (YYYY-MM-DD). */
   releasedAt: string;
   status: "released" | "coming-soon";
@@ -95,6 +97,7 @@ export const RELEASES: Release[] = [
     kind: "game",
     lanes: ["play"],
     project: "Singularis",
+    productSlug: "singularis",
     releasedAt: "2026-08-01",
     status: "coming-soon",
     rights_status: "owned",
@@ -111,6 +114,7 @@ export const RELEASES: Release[] = [
     kind: "video",
     lanes: ["watch"],
     project: "Singularis",
+    productSlug: "singularis",
     releasedAt: "2026-08-15",
     status: "coming-soon",
     rights_status: "owned",
@@ -127,6 +131,7 @@ export const RELEASES: Release[] = [
     kind: "audio",
     lanes: ["listen"],
     project: "Singularis",
+    productSlug: "singularis",
     releasedAt: "2026-08-15",
     status: "coming-soon",
     rights_status: "owned",

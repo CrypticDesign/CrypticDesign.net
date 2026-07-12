@@ -17,9 +17,13 @@ const KIND_LABEL: Record<Release["kind"], string> = {
 };
 
 export default function ReleaseCard({ release }: { release: Release }) {
+  const href = release.productSlug
+    ? `/products/${release.productSlug}?release=${release.slug}`
+    : `/releases/${release.slug}`;
+
   return (
     <Link
-      href={`/releases/${release.slug}`}
+      href={href}
       className={`group flex w-64 shrink-0 flex-col gap-2 rounded-lg border border-neutral-800 border-t-2 bg-neutral-950 p-4 transition-colors hover:border-neutral-600 sm:w-72 ${ACCENT_BORDER[release.accent]}`}
     >
       <div className="flex items-center justify-between text-xs text-neutral-500">

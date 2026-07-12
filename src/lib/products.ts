@@ -14,6 +14,8 @@ export interface Product extends PublicContentGovernance {
   description: string;
   status: "active" | "in-development" | "on-hold" | "reclassified" | "future";
   releaseSlugs: string[];
+  /** Optional owned franchise destination outside the platform shell. */
+  franchiseUrl?: string;
 }
 
 export const PRODUCTS: Product[] = [
@@ -29,6 +31,7 @@ export const PRODUCTS: Product[] = [
       "singularis-overture",
       "singularis-themes-vol-1",
     ],
+    franchiseUrl: "https://singularis.crypticdesign.net",
     rights_status: "owned",
     visibility_status: "public",
     publication_status: "scheduled",
@@ -41,6 +44,7 @@ export const PRODUCTS: Product[] = [
       "Lifa's product home is reserved. Public material lands here once its first release is rights-reviewed and published.",
     status: "in-development",
     releaseSlugs: [],
+    franchiseUrl: "https://lifa.crypticdesign.net",
     rights_status: "owned",
     visibility_status: "public",
     publication_status: "scheduled",

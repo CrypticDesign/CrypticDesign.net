@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
+import SubNavBreadcrumbs from "@/components/SubNavBreadcrumbs";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -27,14 +28,15 @@ export default function RootLayout({
     <html lang="en">
       <body className="flex min-h-screen flex-col antialiased">
         <SiteHeader />
+        <SubNavBreadcrumbs position="top" />
         <div className="flex-1">{children}</div>
+        <SubNavBreadcrumbs position="bottom" />
         <footer className="border-t border-neutral-800">
           <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-6 sm:px-6">
             <nav
               aria-label="Secondary"
               className="flex flex-wrap gap-x-5 gap-y-2 text-xs text-neutral-500"
             >
-              <Link href="/releases" className="hover:text-neutral-300">Releases</Link>
               <Link href="/entertainment" className="hover:text-neutral-300">Entertainment</Link>
               <Link href="/products" className="hover:text-neutral-300">Products</Link>
               <Link href="/audio" className="hover:text-neutral-300">Audio</Link>

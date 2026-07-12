@@ -16,6 +16,7 @@ export default function SignInPage() {
         stored on this device until then.
       </p>
       <div className="flex gap-3 text-sm">
+        <Link href="/" className="rounded-control bg-accent-cyan px-4 py-2 font-medium text-black hover:opacity-90">Continue to homepage</Link>
         <Link href="/library" className="text-accent-cyan hover:underline">My Library</Link>
         <Link href="/account" className="text-accent-cyan hover:underline">← Account</Link>
       </div>
