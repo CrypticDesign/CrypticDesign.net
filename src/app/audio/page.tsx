@@ -6,7 +6,7 @@ import { publicReleases } from "@/lib/releases";
 export const metadata: Metadata = {
   title: "Audio",
   alternates: { canonical: "/audio" },
-  description: "The Soundwave-powered audio backbone: catalog, artists, playlists, shared player.",
+  description: "Cryptic Design audio releases, catalog, artists, playlists, and shared playback.",
 };
 
 const AUDIO_FEATURES = [
@@ -22,7 +22,7 @@ export default function AudioPage() {
   return (
     <main className="shell page-stack">
       <header className="art-field art-orb grid min-h-72 items-end border border-accent-cyan/30 p-6 sm:p-8 lg:grid-cols-[1fr_.7fr]">
-        <div className="flex flex-col gap-3"><span className="eyebrow text-accent-cyan">Soundwave-powered preview</span>
+        <div className="flex flex-col gap-3"><span className="eyebrow text-accent-cyan">Cryptic Design audio</span>
         <h1 className="display-title text-white">Audio</h1>
         <p className="max-w-2xl text-muted-foreground">
           Listen to music, scores, soundscapes, and audio releases from Cryptic

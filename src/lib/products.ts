@@ -1,5 +1,5 @@
 /**
- * Product & Franchise homes — contextual destinations in Sitemap v15.
+ * Product & Franchise homes — contextual destinations in Sitemap v16.
  * Placeholder-safe owned IP only; frontend shells until backend approval.
  */
 import {
@@ -46,18 +46,6 @@ export const PRODUCTS: Product[] = withReviewMetadata<Product>([
     status: "in-development",
     releaseSlugs: [],
     franchiseUrl: "https://lifa.crypticdesign.net",
-    rights_status: "owned",
-    visibility_status: "public",
-    publication_status: "scheduled",
-  },
-  {
-    slug: "soundwave",
-    title: "Soundwave",
-    summary: "A music platform built to help artists create momentum and connect with audiences.",
-    description:
-      "Soundwave is a creator-focused music platform designed to help artists manage releases, grow audiences, and build stronger connections around their work. Its distribution, promotion, analytics, and artist tools inform listening experiences across CrypticDesign.net. The standalone product remains on hold.",
-    status: "on-hold",
-    releaseSlugs: [],
     rights_status: "owned",
     visibility_status: "public",
     publication_status: "scheduled",
