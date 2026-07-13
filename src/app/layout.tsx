@@ -3,55 +3,5 @@ import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import SubNavBreadcrumbs from "@/components/SubNavBreadcrumbs";
 import "./globals.css";
-
-export const metadata: Metadata = {
-  metadataBase: new URL("https://crypticdesign.net"),
-  title: {
-    default: "Cryptic Design",
-    template: "%s | Cryptic Design",
-  },
-  description:
-    "CrypticDesign.net — the Cryptic Design platform for entertainment, professional services, and original releases.",
-  openGraph: {
-    siteName: "Cryptic Design",
-    type: "website",
-    images: ["/share-placeholder.svg"],
-  },
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en">
-      <body className="flex min-h-screen flex-col antialiased">
-        <SiteHeader />
-        <SubNavBreadcrumbs position="top" />
-        <div className="flex-1">{children}</div>
-        <SubNavBreadcrumbs position="bottom" />
-        <footer className="border-t border-neutral-800">
-          <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-6 sm:px-6">
-            <nav
-              aria-label="Secondary"
-              className="flex flex-wrap gap-x-5 gap-y-2 text-xs text-neutral-500"
-            >
-              <Link href="/entertainment" className="hover:text-neutral-300">Entertainment</Link>
-              <Link href="/products" className="hover:text-neutral-300">Products</Link>
-              <Link href="/audio" className="hover:text-neutral-300">Audio</Link>
-              <Link href="/library" className="hover:text-neutral-300">My Library</Link>
-              <Link href="/professional" className="hover:text-neutral-300">Professional Studio</Link>
-              <Link href="/creator-tools" className="hover:text-neutral-300">Creator Tools</Link>
-              <Link href="/search" className="hover:text-neutral-300">Search</Link>
-            </nav>
-            <p className="text-xs text-neutral-500">
-              © {new Date().getFullYear()} Cryptic Design, LLC. Science, art,
-              and technology — designed as one system.
-            </p>
-          </div>
-        </footer>
-      </body>
-    </html>
-  );
-}
+export const metadata:Metadata={metadataBase:new URL("https://crypticdesign.net"),title:{default:"Cryptic Design",template:"%s | Cryptic Design"},description:"CrypticDesign.net — entertainment, professional services, and original releases.",openGraph:{siteName:"Cryptic Design",type:"website",images:["/share-placeholder.svg"]}};
+export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en"><body className="flex min-h-screen flex-col antialiased"><SiteHeader/><SubNavBreadcrumbs position="top"/><div className="flex-1">{children}</div><SubNavBreadcrumbs position="bottom"/><footer className="site-footer"><div className="site-footer__inner"><div className="site-footer__top"><div><h2>CRYPTIC DESIGN</h2><p>Independent research, design, development, and media production.</p></div><div className="footer-columns"><div className="footer-column"><strong>PLATFORM</strong><Link href="/">My Home</Link><Link href="/entertainment">Entertainment</Link><Link href="/professional">Professional</Link></div><div className="footer-column"><strong>STUDIO</strong><Link href="/products">Projects</Link><Link href="/professional/articles">Articles</Link><Link href="/entertainment/creative-labs">Creative Labs</Link></div><div className="footer-column"><strong>CONNECT</strong><Link href="/professional/contact">Contact</Link><Link href="/creator-tools">Creators</Link><Link href="/account">Account</Link></div></div></div><div className="site-footer__bottom"><p>© {new Date().getFullYear()} Cryptic Design LLC. All rights reserved.</p><p>PRIVACY &nbsp; ACCESSIBILITY &nbsp; TERMS</p></div></div></footer></body></html>}

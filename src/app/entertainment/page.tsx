@@ -1,63 +1,7 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import LaneRow from "@/components/LaneRow";
-import { newestReleases } from "@/lib/releases";
-
-export const metadata: Metadata = {
-  title: "Entertainment Hub",
-  alternates: { canonical: "/entertainment" },
-  description: "The complete front door to Cryptic Design entertainment, releases, franchises, and content categories.",
-};
-
-const SURFACES = [
-  { href: "/entertainment/arcade", title: "Arcade", body: "Playable web releases and prototypes." },
-  { href: "/entertainment/cinema", title: "Cinema", body: "Video, episodes, and cinematics." },
-  { href: "/entertainment/listening-rooms", title: "Listening Rooms", body: "Scores, themes, and soundscapes." },
-  { href: "/entertainment/virtual-rooms", title: "Virtual Rooms", body: "Lightweight shared spaces around releases." },
-  { href: "/entertainment/creative-labs", title: "Creative Labs", body: "Visual Studies and experiments." },
-  { href: "/library", title: "My Library", body: "Saved releases and history." },
-] as const;
-
-export default function EntertainmentHub() {
-  return (
-    <main className="shell page-stack">
-      <header className="art-field art-orb grid min-h-[28rem] items-end border border-border p-6 sm:p-10 lg:grid-cols-[1fr_.8fr]">
-        <div className="flex flex-col gap-4">
-        <span className="text-xs uppercase tracking-widest text-accent-magenta">The content front door</span>
-        <h1 className="display-title text-white">Enter the worlds, sound, and systems in motion.</h1>
-        <p className="max-w-2xl text-muted-foreground">
-          Everything Cryptic Design creates for audiences—releases, franchises,
-          games, cinema, audio, rooms, visual studies, and experiments.
-        </p>
-        <div />
-        </div>
-      </header>
-
-      <LaneRow title="Featured Releases" href="/releases" releases={newestReleases(6)} />
-
-      <section><div className="mb-5 flex items-end justify-between"><h2 className="section-title">Explore the platform</h2><span className="eyebrow text-accent-magenta">Six channels</span></div><div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {SURFACES.map((surface) => (
-          <Link key={surface.href} href={surface.href} className="panel panel-interactive min-h-36 p-5 hover:border-accent-magenta">
-            <h3 className="font-semibold text-foreground">{surface.title}</h3>
-            <p className="mt-2 text-sm text-muted-foreground">{surface.body}</p>
-          </Link>
-        ))}
-      </div></section>
-
-      <section className="grid gap-4 sm:grid-cols-3">
-        <Link href="/products" className="rounded-card border border-border bg-surface p-5 transition-colors hover:border-accent-magenta">
-          <h2 className="font-medium text-foreground">Products &amp; Franchises</h2>
-          <p className="mt-2 text-sm text-muted-foreground">Singularis, Lifa, Soundwave, Cryptic Design Audio, and future worlds.</p>
-        </Link>
-        <Link href="/audio" className="rounded-card border border-border bg-surface p-5 transition-colors hover:border-accent-cyan">
-          <h2 className="font-medium text-foreground">Audio</h2>
-          <p className="mt-2 text-sm text-muted-foreground">The Soundwave-powered catalog, artists, playlists, and listening experiences.</p>
-        </Link>
-        <Link href="/releases" className="rounded-card border border-border bg-surface p-5 transition-colors hover:border-accent-blue">
-          <h2 className="font-medium text-foreground">All Releases</h2>
-          <p className="mt-2 text-sm text-muted-foreground">Browse the complete governed release catalog.</p>
-        </Link>
-      </section>
-    </main>
-  );
-}
+import type{Metadata}from"next";import Image from"next/image";import Link from"next/link";import MediaCard from"@/components/MediaCard";import PlayerDock from"@/components/PlayerDock";
+export const metadata:Metadata={title:"Entertainment Hub",alternates:{canonical:"/entertainment"},description:"The complete front door to Cryptic Design entertainment."};
+const channels=[['/entertainment','In motion'],['/entertainment/arcade','Watch'],['/entertainment/cinema','Listen'],['/entertainment/arcade','Play'],['/entertainment/virtual-rooms','Share'],['/products','Worlds'],['/entertainment/creative-labs','Creative Labs']];
+export default function EntertainmentHub(){return <main><section className="visual-hero !min-h-[560px]"><div className="visual-hero__image"><Image src="/images/entertainment-hero.png" alt="Cosmic circular system" fill priority sizes="100vw"/></div><div className="visual-hero__wash"/><div className="visual-hero__content"><div className="signal-rail text-[#00e5ff]"/><span className="kicker">Entertainment / discovery / media</span><h1 className="display-title">Enter the worlds, sound, and systems in motion.</h1><p>Explore releases, franchises, games, cinema, audio, articles, creative experiments, and the connected ideas behind them.</p><div className="hero-actions"><Link href="/releases" className="button">Explore now</Link><Link href="/library" className="button secondary">Open your library</Link></div></div></section><div className="shell"><nav className="channel-rail" aria-label="Entertainment channels">{channels.map(([href,label])=><Link href={href} key={label}>{label}</Link>)}</nav></div><div className="shell page-stack">
+<section className="feature-split"><div className="feature-split__image"><Image src="/images/entertainment-feature.png" alt="Blue geometric signal artwork" fill sizes="(max-width:900px) 100vw, 60vw"/></div><div className="feature-split__content !border-l-2 !border-[#ed00a8]"><span className="kicker">Current release / Cryptic Design Audio</span><h2>Signal &amp; Systems: Deep Space Transmission</h2><p>A fourteen-track instrumental space-ambient transmission created through the same research, production, and visual systems shaping the wider Cryptic Design platform.</p><div className="hero-actions"><Link href="/audio" className="button">Open release</Link><Link href="/products" className="button secondary">View production notes</Link></div></div></section>
+<section><div className="section-heading"><div><span className="kicker">Trending across the platform</span><h2 className="section-title">What people are entering now</h2></div><p>A live mix of releases, visual studies, production threads, and franchise worlds.</p></div><div className="media-grid four"><MediaCard href="/audio" image="/images/signal-systems.png" eyebrow="Night release" title="Signal & Systems" body="Popular across audio and visual production." accent="gold"/><MediaCard href="/professional/articles" image="/images/human-machine.png" eyebrow="Human capability" title="Human & Machine" body="A continuing exploration of human identity."/><MediaCard href="/products/singularis" image="/images/singularis.png" eyebrow="Franchise development" title="Singularis" body="A cinematic science-fiction systems universe." accent="magenta"/><MediaCard href="/products/lifa" image="/images/entertainment-feature.png" eyebrow="Interactive world" title="Lifa: Genesis" body="A living-systems simulation built around rhythm." accent="green"/></div></section>
+<section><div className="section-heading"><div><span className="kicker !text-[#ed00a8]">Franchise worlds</span><h2 className="section-title">Enter a long-form universe</h2></div></div><div className="media-grid"><MediaCard href="/products/singularis" image="/images/singularis.png" eyebrow="Franchise" title="Singularis" body="A continuous solar story about humanity." accent="magenta"/><MediaCard href="/products/lifa" image="/images/entertainment-feature.png" eyebrow="World" title="Lifa" body="Closed systems, space travel, and evolving life."/><MediaCard href="/products/soundwave" image="/images/human-machine.png" eyebrow="Platform" title="Soundwave" body="A social music, listening, and discovery system." accent="green"/></div></section><section><div className="section-heading"><div><span className="kicker">Now playing / expanded audio</span><h2 className="section-title">Expanded listening session</h2></div></div><PlayerDock/></section></div></main>}
