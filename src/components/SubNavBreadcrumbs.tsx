@@ -14,6 +14,7 @@ const LABELS: Record<string, string> = {
   "create-character": "Create Character",
   "creative-labs": "Creative Labs",
   creators: "Contributing Creators",
+  "creator-tools": "Creator Tools",
   entertainment: "Entertainment Hub",
   inquiry: "Inquiry",
   library: "My Library",
@@ -23,6 +24,7 @@ const LABELS: Record<string, string> = {
   products: "Products",
   professional: "Professional",
   releases: "Releases",
+  request: "Creator Access Request",
   settings: "Settings",
   "sign-in": "Sign In",
   subscription: "Subscription",
@@ -39,6 +41,14 @@ function routeCrumbs(pathname: string): Crumb[] {
   const segments = pathname.split("/").filter(Boolean);
   const route = segments.map((segment, index) => ({ segment, href: `/${segments.slice(0, index + 1).join("/")}` }));
   const first = segments[0];
+
+  if (pathname === "/creator-tools/request") {
+    return [
+      { segment: "professional", href: "/professional" },
+      { segment: "creators", href: "/professional/creators" },
+      { segment: "request", href: pathname },
+    ];
+  }
 
   if (["releases", "products", "audio"].includes(first)) {
     return [{ segment: "entertainment", href: "/entertainment" }, ...route];

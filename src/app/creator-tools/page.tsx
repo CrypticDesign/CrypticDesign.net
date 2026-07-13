@@ -49,9 +49,9 @@ export default function CreatorToolsPage() {
       <section className="flex flex-col gap-3 rounded-card border border-border bg-surface p-6 sm:p-8">
         <h2 className="text-xl font-semibold text-white">Request access</h2>
         <p className="max-w-xl text-sm text-muted-foreground">
-          Creators and collaborators can request access now. Requests are
-          stored locally in this browser for V1; no collaboration or publishing
-          begins automatically.
+          Creators and collaborators can request access now. This preview saves
+          requests in this browser; no collaboration or publishing begins
+          automatically.
         </p>
         <Link
           href="/creator-tools/request"
