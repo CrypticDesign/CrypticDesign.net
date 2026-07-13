@@ -26,7 +26,7 @@ export default function ArcadePage() {
         </div>
       ) : (
         <p className="rounded-card border border-dashed border-border p-8 text-sm text-muted-foreground">
-          First playable release is in the pipeline.
+          The first playable release is coming soon.
         </p>
       )}
       <Link href="/entertainment" className="text-sm text-accent-cyan hover:underline">← Entertainment Channel</Link>

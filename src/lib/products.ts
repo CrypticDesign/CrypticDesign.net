@@ -54,7 +54,7 @@ export const PRODUCTS: Product[] = [
     title: "Soundwave",
     summary: "A music platform built to help artists create momentum and connect with audiences.",
     description:
-      "Soundwave is a creator-focused music platform designed to help artists manage releases, grow audiences, and build stronger connections around their work. Distribution, promotion, analytics, and artist tools inform the Soundwave-powered listening surfaces represented across CrypticDesign.net. The standalone product remains on hold.",
+      "Soundwave is a creator-focused music platform designed to help artists manage releases, grow audiences, and build stronger connections around their work. Its distribution, promotion, analytics, and artist tools inform listening experiences across CrypticDesign.net. The standalone product remains on hold.",
     status: "on-hold",
     releaseSlugs: [],
     rights_status: "owned",
@@ -66,7 +66,7 @@ export const PRODUCTS: Product[] = [
     title: "Cryptic Design Audio",
     summary: "Original scores, themes, and soundscapes from the studio.",
     description:
-      "The studio's original audio output — starting with Singularis Themes, Vol. 1 — published through the platform's native audio surfaces.",
+      "Original scores, themes, and soundscapes from Cryptic Design, beginning with Singularis Themes, Vol. 1.",
     status: "active",
     releaseSlugs: ["singularis-themes-vol-1"],
     rights_status: "owned",

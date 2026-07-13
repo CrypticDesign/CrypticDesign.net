@@ -26,7 +26,7 @@ export default function ListeningRoomsPage() {
         </div>
       ) : (
         <p className="rounded-card border border-dashed border-border p-8 text-sm text-muted-foreground">
-          First listening session is in the pipeline.
+          The first listening session is coming soon.
         </p>
       )}
       <div className="flex gap-4 text-sm">

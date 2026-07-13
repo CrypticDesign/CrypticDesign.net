@@ -52,11 +52,10 @@ export default function CreatorAccessRequestForm() {
   if (submitted) {
     return (
       <section className="rounded-card border border-success/40 bg-surface p-6">
-        <h2 className="font-medium text-foreground">Request recorded</h2>
+        <h2 className="font-medium text-foreground">Saved in this browser</h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          This V1 placeholder stored your request in this browser&apos;s local
-          review queue. It did not send an email, create an account, or contact
-          anyone automatically.
+          Your application is saved in this browser. It has not been submitted
+          to Cryptic Design, and no account or email was created.
         </p>
       </section>
     );
@@ -132,14 +131,14 @@ export default function CreatorAccessRequestForm() {
           className="mt-1"
         />
         I confirm that any material I share is my own work or work I have the
-        rights to share. I understand this V1 form is a local review-queue
-        placeholder and does not send an email automatically.
+        rights to share. I understand this preview saves my application in
+        this browser and does not submit it to Cryptic Design.
       </label>
       <button
         type="submit"
         className="w-fit rounded-control bg-accent-cyan px-5 py-2.5 text-sm font-medium text-black transition-opacity hover:opacity-90"
       >
-        Submit access request
+        Save application
       </button>
     </form>
   );

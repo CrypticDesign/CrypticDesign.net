@@ -82,8 +82,8 @@ export default function CharacterCreator() {
         </div>
       </fieldset>
       <div className="rounded-card border border-dashed border-border p-4 text-sm text-muted-foreground">
-        Visual form: placeholder — portrait and presence styling arrive with
-        the character system. Starter stats: Level 1 · 0 XP.
+        Choose your starting identity. Portrait and presence options are coming
+        later. Starter stats: Level 1 · 0 XP.
       </div>
       <button
         type="submit"

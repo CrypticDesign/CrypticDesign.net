@@ -93,7 +93,7 @@ export const RELEASES: Release[] = [
     title: "Singularis: Vertical Slice",
     tagline: "A playable first passage into the Singularis universe.",
     description:
-      "The first playable slice of Singularis — a browser-first vertical slice exploring the core loop, tone, and world of Cryptic Design's flagship original IP. Placeholder entry pending the published build.",
+      "The first playable slice of Singularis — a browser-first experience exploring the core loop, tone, and world of Cryptic Design's flagship original IP.",
     kind: "game",
     lanes: ["play"],
     project: "Singularis",
@@ -110,7 +110,7 @@ export const RELEASES: Release[] = [
     title: "Singularis: Overture",
     tagline: "A cinematic prologue rendered in the Unreal + AI pipeline.",
     description:
-      "A short cinematic introducing the Singularis universe, produced through the studio's Unreal-plus-AI production pipeline. Placeholder entry pending the published cut.",
+      "A short cinematic introducing the Singularis universe, produced through the studio's Unreal-plus-AI creative process.",
     kind: "video",
     lanes: ["watch"],
     project: "Singularis",
@@ -127,7 +127,7 @@ export const RELEASES: Release[] = [
     title: "Singularis Themes, Vol. 1",
     tagline: "First musical sketches from the Singularis score.",
     description:
-      "Early thematic material from the Singularis score — motifs and atmospheres from the world's first act. Placeholder entry pending the published tracks.",
+      "Early thematic material from the Singularis score — motifs and atmospheres from the world's first act.",
     kind: "audio",
     lanes: ["listen"],
     project: "Singularis",
@@ -144,7 +144,7 @@ export const RELEASES: Release[] = [
     title: "Visual Study 01",
     tagline: "A generative study in signal, structure, and light.",
     description:
-      "The first entry in the Creative Labs visual-studies series — an experiment at the intersection of code, composition, and motion. Placeholder entry pending migration of the Visual Studies archive (CRY-256).",
+      "The first entry in the Creative Labs visual-studies series — an experiment at the intersection of code, composition, and motion.",
     kind: "lab",
     lanes: ["creative-labs"],
     project: "Creative Labs",
@@ -160,7 +160,7 @@ export const RELEASES: Release[] = [
     title: "Holistic UX: Field Notes",
     tagline: "Designing whole systems, not screens.",
     description:
-      "Notes from two decades of UX practice across games, entertainment, and enterprise — on designing systems holistically rather than screen by screen. Placeholder entry pending the published article.",
+      "Notes from two decades of UX practice across games, entertainment, and enterprise — on designing systems holistically rather than screen by screen.",
     kind: "article",
     lanes: ["read"],
     project: "Studio",
@@ -176,7 +176,7 @@ export const RELEASES: Release[] = [
     title: "Platform Devlog 01",
     tagline: "Building CrypticDesign.net in the open.",
     description:
-      "The first development log for the CrypticDesign.net platform itself — architecture, doctrine, and what ships next. Placeholder entry pending the published post.",
+      "The first development log for CrypticDesign.net — its architecture, guiding principles, and what ships next.",
     kind: "article",
     lanes: ["read"],
     project: "Platform",

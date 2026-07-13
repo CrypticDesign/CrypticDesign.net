@@ -12,7 +12,7 @@ export default function ProfessionalInquiryPage() {
     <main className="mx-auto flex max-w-4xl flex-col gap-6 px-4 py-12 sm:px-6">
       <header className="flex flex-col gap-2">
         <h1 className="text-3xl font-semibold text-white">Start an inquiry</h1>
-        <p className="max-w-2xl text-neutral-400">Tell Cryptic Design what you are working on. This V1 route records a local review-queue placeholder only.</p>
+        <p className="max-w-2xl text-neutral-400">Tell Cryptic Design what you are working on. This preview saves your inquiry in this browser and does not send it.</p>
       </header>
       <ProfessionalInquiryForm />
     </main>

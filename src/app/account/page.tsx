@@ -23,9 +23,8 @@ export default function AccountHub() {
         <div className="flex flex-col gap-3"><span className="eyebrow text-accent-gold">Member identity</span>
         <h1 className="display-title text-white">Account</h1>
         <p className="max-w-2xl text-muted-foreground">
-          Accounts are the platform&apos;s return layer — and every account
-          creates a character. These surfaces are frontend previews until the
-          account backend ships.
+          Your account connects your character, library, history, and settings.
+          Every account begins with a character; account syncing is coming later.
         </p></div><div />
       </header>
       <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
