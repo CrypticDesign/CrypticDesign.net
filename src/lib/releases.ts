@@ -50,6 +50,23 @@ export interface PublicContentGovernance {
   rights_status: RightsStatus;
   visibility_status: VisibilityStatus;
   publication_status: PublicationStatus;
+  owner: string;
+  approval_notes: string;
+  last_reviewed: string;
+}
+
+type ReviewMetadata = "owner" | "approval_notes" | "last_reviewed";
+type GovernedSeed<T extends PublicContentGovernance> = Omit<T, ReviewMetadata>;
+
+export function withReviewMetadata<T extends PublicContentGovernance>(
+  items: GovernedSeed<T>[],
+): T[] {
+  return items.map((item) => ({
+    ...item,
+    owner: "Cryptic Design, LLC",
+    approval_notes: "Owned seed content; final publishing review required.",
+    last_reviewed: "2026-07-13",
+  })) as T[];
 }
 
 export interface Release extends PublicContentGovernance {
@@ -87,7 +104,7 @@ export const LANES: Lane[] = [
   },
 ];
 
-export const RELEASES: Release[] = [
+export const RELEASES: Release[] = withReviewMetadata<Release>([
   {
     slug: "singularis-vertical-slice",
     title: "Singularis: Vertical Slice",
@@ -187,7 +204,7 @@ export const RELEASES: Release[] = [
     publication_status: "scheduled",
     accent: "cyan",
   },
-];
+]);
 
 export function getLane(slug: string): Lane | undefined {
   return LANES.find((lane) => lane.slug === slug);

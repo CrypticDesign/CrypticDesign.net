@@ -1,6 +1,7 @@
 import {
   isPubliclyRenderable,
   type PublicContentGovernance,
+  withReviewMetadata,
 } from "@/lib/releases";
 
 export interface Service extends PublicContentGovernance {
@@ -12,7 +13,7 @@ export interface Service extends PublicContentGovernance {
   capabilities: string[];
 }
 
-export const SERVICES: Service[] = [
+export const SERVICES: Service[] = withReviewMetadata<Service>([
   {
     slug: "product-strategy",
     title: "Product Strategy",
@@ -61,7 +62,7 @@ export const SERVICES: Service[] = [
     visibility_status: "public",
     publication_status: "published",
   },
-];
+]);
 
 export function publicServices(): Service[] {
   return SERVICES.filter(isPubliclyRenderable);
