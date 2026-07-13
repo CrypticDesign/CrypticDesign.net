@@ -16,8 +16,8 @@ export default function ListeningRoomsPage() {
       <header className="flex flex-col gap-2">
         <h1 className="text-3xl font-semibold text-white">Listening Rooms</h1>
         <p className="max-w-xl text-muted-foreground">
-          Audio releases played through the platform&apos;s shared player —
-          powered by the Soundwave backbone as it comes online.
+          Audio releases played through CrypticDesign.net&apos;s shared player as
+          the native listening system comes online.
         </p>
       </header>
       {audio.length > 0 ? (
