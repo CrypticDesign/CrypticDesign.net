@@ -5,6 +5,7 @@
 import {
   isPubliclyRenderable,
   type PublicContentGovernance,
+  withReviewMetadata,
 } from "@/lib/releases";
 
 export interface Product extends PublicContentGovernance {
@@ -18,7 +19,7 @@ export interface Product extends PublicContentGovernance {
   franchiseUrl?: string;
 }
 
-export const PRODUCTS: Product[] = [
+export const PRODUCTS: Product[] = withReviewMetadata<Product>([
   {
     slug: "singularis",
     title: "Singularis",
@@ -85,7 +86,7 @@ export const PRODUCTS: Product[] = [
     visibility_status: "public",
     publication_status: "published",
   },
-];
+]);
 
 export function publicProducts(): Product[] {
   return PRODUCTS.filter(isPubliclyRenderable);

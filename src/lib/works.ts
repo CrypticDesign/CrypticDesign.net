@@ -1,6 +1,7 @@
 import {
   isPubliclyRenderable,
   type PublicContentGovernance,
+  withReviewMetadata,
 } from "@/lib/releases";
 
 export type WorkKind = "world" | "lab" | "article" | "platform";
@@ -14,7 +15,7 @@ export interface Work extends PublicContentGovernance {
   releaseSlugs: string[];
 }
 
-export const WORKS: Work[] = [
+export const WORKS: Work[] = withReviewMetadata<Work>([
   {
     slug: "singularis",
     title: "Singularis",
@@ -63,7 +64,7 @@ export const WORKS: Work[] = [
     visibility_status: "public",
     publication_status: "scheduled",
   },
-];
+]);
 
 export function publicWorks(): Work[] {
   return WORKS.filter(isPubliclyRenderable);
