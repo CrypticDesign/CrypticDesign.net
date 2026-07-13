@@ -16,8 +16,8 @@ export default function CreatorAccessRequestPage() {
         </h1>
         <p className="max-w-xl text-muted-foreground">
           Tell us who you are and what you&apos;d like to make or collaborate
-          on. This V1 route records a browser-local review-queue placeholder;
-          nothing is published, shared, or sent automatically.
+          on. This preview saves your application in this browser; nothing is
+          published, shared, or sent automatically.
         </p>
       </header>
       <CreatorAccessRequestForm />

@@ -26,7 +26,7 @@ export default function CinemaPage() {
         </div>
       ) : (
         <p className="rounded-card border border-dashed border-border p-8 text-sm text-muted-foreground">
-          First screening is in the pipeline.
+          The first screening is coming soon.
         </p>
       )}
       <Link href="/entertainment" className="text-sm text-accent-cyan hover:underline">← Entertainment Channel</Link>

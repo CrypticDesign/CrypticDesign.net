@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Creator Tools",
-  description: "Governed creator pathways for work, releases, and collaboration.",
+  description: "Ways to contribute to Cryptic Design releases and productions.",
   alternates: { canonical: "/creator-tools" },
 };
 
@@ -14,7 +14,7 @@ const PATHWAYS = [
   },
   {
     title: "Publishing pathways",
-    body: "Approved collaborator work can route into governed releases on the platform. Every item carries rights, visibility, and publication status.",
+    body: "Approved collaborators can contribute to Cryptic Design releases. Every contribution is reviewed for ownership, permission, and where it may appear.",
   },
   {
     title: "Tooling previews",
@@ -28,10 +28,9 @@ export default function CreatorToolsPage() {
       <header className="flex flex-col gap-3">
         <h1 className="text-3xl font-semibold text-white">Creator Tools</h1>
         <p className="max-w-2xl text-muted-foreground">
-          The maker and collaborator side of CrypticDesign.net. V1 access is
-          review-based: tell us who you are and what you want to make, and
-          requests enter a browser-local review-queue placeholder - no open
-          onboarding, no account required to apply, and no email delivery yet.
+          The maker and collaborator side of CrypticDesign.net. Tell us who you
+          are and what you want to make. Applications are reviewed individually;
+          this preview saves requests in your browser and does not send an email.
         </p>
       </header>
 

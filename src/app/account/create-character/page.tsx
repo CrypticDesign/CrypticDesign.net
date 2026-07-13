@@ -15,7 +15,7 @@ export default function CreateCharacterPage() {
         <p className="max-w-xl text-muted-foreground">
           Your character is platform identity, not a simple avatar — it carries
           saves, history, room presence, Arcade identity, and listening
-          identity. This is a frontend preview of the required onboarding step.
+          identity. This preview saves your character on this device.
         </p>
       </header>
       <CharacterCreator />

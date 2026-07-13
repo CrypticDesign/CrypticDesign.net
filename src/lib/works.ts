@@ -56,7 +56,7 @@ export const WORKS: Work[] = [
     title: "CrypticDesign.net",
     summary: "The browser-first platform foundation for Cryptic Design.",
     description:
-      "CrypticDesign.net is the owned platform where governed releases, professional services, creator pathways, and original work meet.",
+      "CrypticDesign.net brings together original releases, professional services, creator opportunities, and the worlds behind the work.",
     kind: "platform",
     releaseSlugs: ["platform-devlog-01"],
     rights_status: "owned",

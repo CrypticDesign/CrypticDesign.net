@@ -9,12 +9,12 @@ export const metadata: Metadata = {
   description: "The Soundwave-powered audio backbone: catalog, artists, playlists, shared player.",
 };
 
-const SURFACES = [
+const AUDIO_FEATURES = [
   { title: "Shared Player", body: "One persistent player across the platform — plays releases, rooms, and playlists." },
   { title: "Audio Catalog", body: "Every published track, theme, and soundscape." },
   { title: "Artist Profiles", body: "Studio and collaborator credits behind each release." },
   { title: "Playlists", body: "Curated and personal listening threads." },
-  { title: "Audio Submissions", body: "Approved-collaborator pipeline into governed audio releases." },
+  { title: "Audio Submissions", body: "A submission path for approved collaborators creating audio with Cryptic Design." },
 ] as const;
 
 export default function AudioPage() {
@@ -25,9 +25,8 @@ export default function AudioPage() {
         <div className="flex flex-col gap-3"><span className="eyebrow text-accent-cyan">Soundwave-powered preview</span>
         <h1 className="display-title text-white">Audio</h1>
         <p className="max-w-2xl text-muted-foreground">
-          Native platform audio, built on the Soundwave backbone. These
-          surfaces are frontend previews — playback lands with the shared
-          player.
+          Listen to music, scores, soundscapes, and audio releases from Cryptic
+          Design. Shared playback is coming later.
         </p></div><div />
       </header>
       {audio.length > 0 && (
@@ -39,7 +38,7 @@ export default function AudioPage() {
         </section>
       )}
       <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {SURFACES.map((s) => (
+        {AUDIO_FEATURES.map((s) => (
           <div key={s.title} className="panel min-h-36 p-5">
             <h2 className="font-medium text-foreground">{s.title}</h2>
             <p className="mt-2 text-sm text-muted-foreground">{s.body}</p>

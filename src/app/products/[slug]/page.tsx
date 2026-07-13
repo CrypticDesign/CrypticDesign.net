@@ -51,7 +51,7 @@ export default async function ProductHome({
       <header className="art-field grid min-h-[28rem] items-end border border-border p-6 sm:p-10 lg:grid-cols-[1fr_.8fr]">
         <div className="flex flex-col gap-3">
         <span className="text-xs uppercase tracking-widest text-muted-foreground">
-          Product view · {product.status.replace("-", " ")}
+          {product.status.replace("-", " ")}
         </span>
         <h1 className="display-title text-white">{product.title}</h1>
         <p className="max-w-2xl text-muted-foreground">{product.description}</p>

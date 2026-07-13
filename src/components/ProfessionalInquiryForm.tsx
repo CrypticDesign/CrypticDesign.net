@@ -47,9 +47,9 @@ export default function ProfessionalInquiryForm() {
   if (submitted) {
     return (
       <section className="rounded-card border border-success/40 bg-surface p-6">
-        <h2 className="text-xl font-semibold text-foreground">Inquiry recorded</h2>
+        <h2 className="text-xl font-semibold text-foreground">Saved in this browser</h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          This V1 placeholder stored your inquiry in this browser&apos;s local review queue. It did not send an email or contact anyone automatically.
+          Your inquiry is saved in this browser. It has not been sent to Cryptic Design.
         </p>
       </section>
     );
@@ -83,10 +83,10 @@ export default function ProfessionalInquiryForm() {
       </label>
       <label className="flex gap-2 text-sm text-muted-foreground">
         <input required type="checkbox" checked={consented} onChange={(event) => setConsented(event.target.checked)} />
-        I understand this V1 form is a local review-queue placeholder and does not send an email automatically.
+        I understand this preview saves my inquiry in this browser and does not send it to Cryptic Design.
       </label>
       <button type="submit" className="w-fit rounded-control bg-accent-blue px-5 py-2.5 text-sm font-medium text-black">
-        Submit inquiry
+        Save inquiry
       </button>
     </form>
   );

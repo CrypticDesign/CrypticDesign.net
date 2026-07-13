@@ -12,7 +12,7 @@ export default function ReleasesPage() {
   return (
     <ReleaseIndex
       title="Releases"
-      description="Governed drops, versions, and experiences from across the Cryptic Design platform."
+      description="Games, films, music, stories, and experiments from across Cryptic Design."
       releases={publicReleases()}
     />
   );

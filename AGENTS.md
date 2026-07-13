@@ -41,6 +41,14 @@ Any change to routes, navigation, or IA must bump the FigJam sitemap version on 
 - No backend-heavy systems without explicit approval.
 - No destructive file moves or broad refactors without approval.
 
+## Public vocabulary
+
+- Use the approved CRY-271 vocabulary in `docs/CRY_271_PublicVocabularyProposal_2026-07-13.md` for all audience-facing copy.
+- Public copy names what a person can see, do, or expect. Keep implementation and governance terms such as `lane`, `surface`, `shell`, `placeholder`, `V1`, `review queue`, and field-level publication statuses internal.
+- Use **My Home**, **Entertainment Hub**, **Professional**, **release**, **product**, **franchise**, **world**, **character**, and **My Library** consistently with their v15 meanings.
+- CTAs begin with a specific verb and name the outcome or destination. Preview forms must state clearly when data is saved only in the browser and is not submitted.
+- `platform`, `system`, `rights`, and `production` remain valid when they add specific meaning; do not use them as vague interface filler.
+
 ## Source-of-truth links
 
 - FigJam: CrypticDesign.net Sitemap v15 — `figma.com/board/oen38yFKbFtgqx9LQKn38Y`
