@@ -1,5 +1,5 @@
 /**
- * Product & Franchise homes — contextual destinations in Sitemap v16.
+ * Product & Franchise homes — contextual destinations in Sitemap v17.
  * Placeholder-safe owned IP only; frontend shells until backend approval.
  */
 import {
@@ -51,11 +51,11 @@ export const PRODUCTS: Product[] = withReviewMetadata<Product>([
     publication_status: "scheduled",
   },
   {
-    slug: "cryptic-design-audio",
-    title: "Cryptic Design Audio",
-    summary: "Original scores, themes, and soundscapes from the studio.",
+    slug: "cryptic-signal",
+    title: "Cryptic Signal",
+    summary: "The home of Cryptic Design music, scores, themes, soundscapes, and sonic media.",
     description:
-      "Original scores, themes, and soundscapes from Cryptic Design, beginning with Singularis Themes, Vol. 1.",
+      "Cryptic Signal bundles all Cryptic Design audio through one public music and sonic-media identity, beginning with Singularis Themes, Vol. 1.",
     status: "active",
     releaseSlugs: ["singularis-themes-vol-1"],
     rights_status: "owned",

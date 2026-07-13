@@ -19,11 +19,12 @@ Playback, catalog, artist, playlist, release, submission, and analytics concepts
 - Remove the Soundwave product page generated from public product data.
 - Remove Soundwave from Entertainment franchise discovery.
 - Keep `/audio`, Listening Rooms, the shared player, and governed audio releases as native CrypticDesign.net experiences.
-- Keep Cryptic Design Audio as the public studio/division identity for owned music, scores, themes, and soundscapes.
+- Bundle all Cryptic Design audio through Cryptic Signal as the public music and sonic-media division.
+- Retire Cryptic Design Audio as a public brand while preserving CDA catalog identifiers internally where needed.
 
 ## Source-of-truth change
 
-Sitemap v16, FigJam section `81:2660`, supersedes v15 for this correction. The v15 section remains historical.
+Sitemap v17, FigJam section `82:3118`, supersedes v16 for this correction. The v16 section remains historical.
 
 ## Constraints
 
