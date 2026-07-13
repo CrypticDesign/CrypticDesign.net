@@ -18,9 +18,10 @@ const LABELS: Record<string, string> = {
   inquiry: "Inquiry",
   library: "My Library",
   "listening-rooms": "Listening Rooms",
+  "my-home": "My Home",
   notifications: "Notifications",
   products: "Products",
-  professional: "Professional Studio",
+  professional: "Professional",
   releases: "Releases",
   settings: "Settings",
   "sign-in": "Sign In",
@@ -28,53 +29,41 @@ const LABELS: Record<string, string> = {
   "virtual-rooms": "Virtual Rooms",
 };
 
+type Crumb = { segment: string; href: string };
+
 function labelFor(segment: string) {
-  return (
-    LABELS[segment] ??
-    segment
-      .split("-")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ")
-  );
+  return LABELS[segment] ?? segment.split("-").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+}
+
+function routeCrumbs(pathname: string): Crumb[] {
+  const segments = pathname.split("/").filter(Boolean);
+  const route = segments.map((segment, index) => ({ segment, href: `/${segments.slice(0, index + 1).join("/")}` }));
+  const first = segments[0];
+
+  if (["releases", "products", "audio"].includes(first)) {
+    return [{ segment: "entertainment", href: "/entertainment" }, ...route];
+  }
+  if (["account", "library"].includes(first)) {
+    return [{ segment: "my-home", href: "/" }, ...route];
+  }
+  return route;
 }
 
 export default function SubNavBreadcrumbs({ position }: { position: "top" | "bottom" }) {
   const pathname = usePathname();
-  const segments = pathname.split("/").filter(Boolean);
-  const crumbs = pathname.startsWith("/releases")
-    ? [
-        { segment: "entertainment", href: "/entertainment" },
-        ...segments.map((segment, index) => ({
-          segment,
-          href: `/${segments.slice(0, index + 1).join("/")}`,
-        })),
-      ]
-    : segments.map((segment, index) => ({
-        segment,
-        href: `/${segments.slice(0, index + 1).join("/")}`,
-      }));
+  const crumbs = routeCrumbs(pathname);
 
   if (crumbs.length < 2) return null;
 
   return (
     <div className={position === "top" ? "border-b border-border/70 bg-surface/30" : "border-t border-border/70 bg-surface/20"}>
-      <nav
-        aria-label={`${position === "top" ? "Top" : "Bottom"} breadcrumb`}
-        className="shell flex flex-wrap items-center gap-2 py-2.5 text-[10px] uppercase tracking-wider text-muted-foreground"
-      >
+      <nav aria-label={`${position === "top" ? "Top" : "Bottom"} breadcrumb`} className="shell flex flex-wrap items-center gap-2 py-2.5 text-[10px] uppercase tracking-wider text-muted-foreground">
         {crumbs.map(({ segment, href }, index) => {
           const current = index === crumbs.length - 1;
-
           return (
-            <span key={href} className="flex items-center gap-2">
+            <span key={`${href}-${index}`} className="flex items-center gap-2">
               {index > 0 && <span aria-hidden className="text-neutral-700">/</span>}
-              {current ? (
-                <span aria-current="page" className="text-foreground">{labelFor(segment)}</span>
-              ) : (
-                <Link href={href} className="transition-colors hover:text-accent-cyan">
-                  {labelFor(segment)}
-                </Link>
-              )}
+              {current ? <span aria-current="page" className="text-foreground">{labelFor(segment)}</span> : <Link href={href} className="transition-colors hover:text-accent-cyan">{labelFor(segment)}</Link>}
             </span>
           );
         })}

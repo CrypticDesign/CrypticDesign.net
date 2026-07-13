@@ -32,3 +32,12 @@ button,input,select,textarea{font:inherit}
 .ui-disabled,[aria-disabled="true"]{opacity:.62;cursor:not-allowed}
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.panel-interactive:hover{transform:none}.media-card:hover img{transform:none}}
+
+@media(max-width:760px){
+  .site-header{height:auto!important;min-height:64px}
+  .site-header .shell{height:auto!important;min-height:64px;flex-wrap:wrap;padding-block:10px}
+  .site-brand{min-height:44px}
+  .primary-nav{order:2;width:100%;justify-content:space-between;gap:8px!important;border-top:1px solid var(--line-soft)}
+  .primary-nav>a{display:flex;min-height:44px;align-items:center;padding-block:0!important;font-size:8px!important}
+  .utility-nav,.nav-divider{display:none!important}
+}

@@ -223,6 +223,13 @@ export function getRelease(slug: string): Release | undefined {
   return publicReleases().find((release) => release.slug === slug);
 }
 
+export function releaseImage(release: Release): string {
+  if (release.productSlug === "singularis") return "/images/singularis.png";
+  if (release.kind === "audio") return "/images/signal-systems.png";
+  if (release.kind === "article") return "/images/human-machine.png";
+  return "/images/entertainment-feature.png";
+}
+
 export function releasesForLane(lane: LaneSlug): Release[] {
   return publicReleases().filter((release) => release.lanes.includes(lane)).sort(
     (a, b) => b.releasedAt.localeCompare(a.releasedAt),
