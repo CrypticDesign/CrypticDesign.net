@@ -2,7 +2,7 @@
 
 Owner: Robert Croft  
 Submitted: 2026-07-12  
-Status: Approved direction for the next implementation session  
+Status: Implementation in progress on `codex/figma-visual-system`  
 Applies to: CrypticDesign.net desktop and mobile frontend
 
 ## Source reference
@@ -22,7 +22,15 @@ Applies to: CrypticDesign.net desktop and mobile frontend
 
 ## Next-session implementation intent
 
-Translate this reference into the existing v14 information architecture and responsive Next.js frontend. Preserve current route behavior, governance checks, contextual product flow, and preview-only backend boundaries while replacing the placeholder visual language with this integrated system.
+Translate this reference into the existing v15 information architecture and responsive Next.js frontend. Preserve current route behavior, governance checks, contextual product flow, and preview-only backend boundaries while replacing the placeholder visual language with this integrated system.
+
+## Implementation checkpoint — 2026-07-12
+
+- Imported approved Figma artwork for the three primary front doors.
+- Rebuilt My Home, Entertainment, and Professional around the integrated desktop and mobile compositions.
+- Added the shared cinematic hero, editorial media cards, metrics, capability cards, method steps, player dock, and structured footer system.
+- Preserved v15 navigation, breadcrumbs, contextual release/product flow, and frontend-only backend boundaries.
+- Verified desktop and 390px mobile rendering locally with no horizontal overflow.
 
 ## Guardrails
 

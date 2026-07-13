@@ -1,5 +1,5 @@
 /**
- * Product & Franchise homes — per Sitemap v9 (Products and Franchises).
+ * Product & Franchise homes — contextual destinations in Sitemap v15.
  * Placeholder-safe owned IP only; frontend shells until backend approval.
  */
 import {
@@ -22,9 +22,9 @@ export const PRODUCTS: Product[] = [
   {
     slug: "singularis",
     title: "Singularis",
-    summary: "Flagship original IP — playable, cinematic, and musical releases.",
+    summary: "A near-future transmedia universe about humanity during technological acceleration.",
     description:
-      "Singularis is Cryptic Design's flagship original universe. Its product home gathers the vertical slice, the Overture cinematic, and the first score sketches as they release.",
+      "Singularis is a near-future science-fiction universe spanning games, animation, music, and interconnected worldbuilding systems. Set during humanity's transition into a multi-planetary civilization, it explores what happens when technology, infrastructure, automation, and planetary-scale systems begin moving faster than human institutions can coordinate or control—not after collapse, but during acceleration.",
     status: "in-development",
     releaseSlugs: [
       "singularis-vertical-slice",
@@ -39,9 +39,9 @@ export const PRODUCTS: Product[] = [
   {
     slug: "lifa",
     title: "Lifa",
-    summary: "An original Cryptic Design product line.",
+    summary: "A universe-building experience about creation, emergence, and life at planetary scale.",
     description:
-      "Lifa's product home is reserved. Public material lands here once its first release is rights-reviewed and published.",
+      "Lifa is a science-driven interactive experience where players shape systems from early formation toward life-sustaining worlds. Blending simulation, strategy, and discovery, it invites players to experiment with planetary development, environmental conditions, and cosmic systems.",
     status: "in-development",
     releaseSlugs: [],
     franchiseUrl: "https://lifa.crypticdesign.net",
@@ -52,9 +52,9 @@ export const PRODUCTS: Product[] = [
   {
     slug: "soundwave",
     title: "Soundwave",
-    summary: "The audio experience powering listening across the platform.",
+    summary: "A music platform built to help artists create momentum and connect with audiences.",
     description:
-      "Soundwave is the audio backbone of CrypticDesign.net — shared player, catalog, and playlists. The product is currently on hold as a standalone build; its platform surfaces are represented in the Audio area.",
+      "Soundwave is a creator-focused music platform designed to help artists manage releases, grow audiences, and build stronger connections around their work. Distribution, promotion, analytics, and artist tools inform the Soundwave-powered listening surfaces represented across CrypticDesign.net. The standalone product remains on hold.",
     status: "on-hold",
     releaseSlugs: [],
     rights_status: "owned",

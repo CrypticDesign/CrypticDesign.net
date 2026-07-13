@@ -1,45 +1,10 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { publicServices } from "@/lib/services";
-
-export const metadata: Metadata = {
-  title: "Professional",
-  alternates: { canonical: "/professional" },
-  description: "The front door to Cryptic Design LLC services, collaborations, capabilities, and partnerships.",
-};
-
-export default function ProfessionalHub() {
-  const services = publicServices();
-  return (
-    <main className="shell page-stack">
-      <section className="art-field art-figure grid min-h-[27rem] items-center border border-accent-magenta/25 p-6 sm:p-10 lg:grid-cols-[1fr_.8fr]">
-        <div className="flex flex-col gap-4">
-        <span className="text-xs uppercase tracking-widest text-accent-blue">Cryptic Design LLC</span>
-        <h1 className="display-title text-white">Designing systems people can understand, trust, and use.</h1>
-        <p className="max-w-2xl text-neutral-400">
-          The front door to our services, collaborations, capabilities, research,
-          partnerships, and professional work. Explore a focused path or begin a review-based inquiry.
-        </p><div className="flex flex-wrap gap-3"><Link href="/professional/inquiry" className="rounded-control bg-accent-magenta px-5 py-2.5 text-sm font-semibold text-black">Start an inquiry</Link><Link href="/professional/case-studies" className="rounded-control border border-border bg-background/40 px-5 py-2.5 text-sm text-foreground">View our work</Link></div>
-        </div><div />
-      </section>
-      <section><div className="mb-5"><span className="eyebrow text-accent-magenta">Capabilities</span><h2 className="section-title mt-3">Capability built across the product stack.</h2></div><div className="grid gap-4 sm:grid-cols-3">
-        {services.map((service) => (
-          <Link key={service.slug} href={`/professional/${service.slug}`} className="panel panel-interactive min-h-44 p-5 hover:border-accent-magenta">
-            <h2 className="font-medium text-foreground">{service.title}</h2>
-            <p className="mt-2 text-sm text-muted-foreground">{service.summary}</p>
-          </Link>
-        ))}
-      </div></section>
-      <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {[
-          { href: "/professional/case-studies", title: "Case Studies" },
-          { href: "/professional/articles", title: "Articles & Research" },
-          { href: "/professional/creators", title: "Collaborating Creators" },
-          { href: "/professional/contact", title: "Contact" },
-        ].map((item) => (
-          <Link key={item.href} href={item.href} className="rounded-card border border-border bg-surface p-4 text-sm font-medium text-foreground transition-colors hover:border-accent-blue">{item.title}</Link>
-        ))}
-      </section>
-    </main>
-  );
-}
+import type{Metadata}from"next";import Image from"next/image";import Link from"next/link";import PlayerDock from"@/components/PlayerDock";import{publicServices}from"@/lib/services";
+export const metadata:Metadata={title:"Professional",alternates:{canonical:"/professional"},description:"Cryptic Design LLC services, collaborations, and capabilities."};
+const imgs=["/images/service-strategy.png","/images/service-ux.png","/images/service-interface.png","/images/service-creative-tech.png"];
+export default function ProfessionalHub(){const services=publicServices().slice(0,4);return <main><section className="visual-hero !min-h-[620px]"><div className="visual-hero__image"><Image src="/images/professional-hero.png" alt="Abstract professional systems field" fill priority sizes="100vw"/></div><div className="visual-hero__wash"/><div className="visual-hero__content"><div className="signal-rail text-[#ed00a8]"/><span className="kicker !text-[#ed00a8]">Experience design / systems / consulting</span><h1 className="display-title">Designing systems people can understand, trust, and use.</h1><p>Cryptic Design brings senior product thinking, interaction design, interface systems, and creative technology together in one disciplined practice.</p><div className="hero-actions"><Link href="/professional/inquiry" className="button">Start a conversation</Link><Link href="/professional/case-studies" className="button secondary !border-[#ed00a8]">View case studies</Link></div></div></section><div className="shell page-stack">
+<section><div className="section-heading"><div><span className="kicker !text-[#ed00a8]">What we do</span><h2 className="section-title">Capability built across the product stack.</h2></div><p>Focused engagements, embedded leadership, and systems-level design support.</p></div><div className="service-grid">{services.map((s,i)=><Link key={s.slug} href={`/professional/${s.slug}`} className="service-card"><div className="service-card__image"><Image src={imgs[i]} alt="" fill sizes="(max-width:640px) 100vw, 25vw"/></div><div className="service-card__copy"><span className="kicker">0{i+1} / Capability</span><h3>{s.title}</h3><p>{s.summary}</p></div></Link>)}</div></section>
+<section><div className="section-heading"><div><span className="kicker !text-[#ed00a8]">Mission &amp; ethos</span><h2 className="section-title">Science, art, and technology—designed around people.</h2></div><p>Cryptic Design blends research, design, and creative technology to build intuitive, empowering experiences that connect people with complex systems.</p></div><div className="metric-grid"><div className="metric-card magenta"><span className="kicker !text-[#ed00a8]">Learn</span><strong>01</strong><p>Curiosity, evidence, and continuous growth shape every engagement.</p></div><div className="metric-card"><span className="kicker">Empathize</span><strong>02</strong><p>User needs and lived context remain central to product decisions.</p></div><div className="metric-card green"><span className="kicker !text-[#00f0a8]">Collaborate</span><strong>03</strong><p>Open communication connects leaders, designers, developers, and researchers.</p></div><div className="metric-card gold"><span className="kicker !text-[#ffd400]">Adapt</span><strong>04</strong><p>Systems evolve through iteration without losing strategic coherence.</p></div></div></section>
+<section className="panel p-7 sm:p-10"><div className="section-heading !mb-0"><div><span className="kicker !text-[#ed00a8]">Selected experience</span><h2 className="section-title">Senior practice across games, media, enterprise, and emerging technology.</h2></div><p>Experience includes work associated with Ubisoft, Electronic Arts, Zynga, Kabam, WellSky, projekt202, Red Storm, NBC, Disney, and Mercedes-Benz. Client and contracted-work imagery remains subject to case-study rights review.</p></div></section>
+<section><div className="section-heading"><div><span className="kicker !text-[#ed00a8]">Selected proof</span><h2 className="section-title">Complex work, made clear and usable.</h2></div><p>Representative engagement patterns. Final case studies will replace these directional placeholders.</p></div><div className="feature-split !grid-cols-[1.3fr_.7fr]"><div className="feature-split__image"><Image src="/images/professional-case.png" alt="Complex operational ecosystem visualization" fill sizes="(max-width:900px) 100vw, 65vw"/></div><div className="feature-split__content !border-l-2 !border-[#ed00a8]"><span className="kicker !text-[#ed00a8]">Enterprise platform</span><h2>Unifying a complex operational ecosystem</h2><p>Information architecture, workflows, interaction design, and interface systems for a large multi-role product environment.</p><Link href="/professional/case-studies" className="text-link">View case study +</Link></div></div></section>
+<section><div className="section-heading"><div><span className="kicker !text-[#ed00a8]">How we work</span><h2 className="section-title">A disciplined path from ambiguity to delivery.</h2></div></div><div className="method-grid">{[['01','Research','Understand people, systems, constraints, and context.'],['02','Define','Frame the opportunity and align the decision model.'],['03','Design','Create flows, visuals, interfaces, and prototypes.'],['04','Validate','Test comprehension, usability, and system behavior.'],['05','Deliver','Support implementation, launch, and product evolution.']].map((x,i)=><div className={`method-step ${i===2?'active':''}`} key={x[0]}><strong>{x[0]}</strong><h3>{x[1]}</h3><p>{x[2]}</p></div>)}</div></section>
+<section className="feature-split"><div className="feature-split__content"><span className="kicker !text-[#ed00a8]">Founder &amp; managing member</span><h2>Robert K. Croft</h2><p>A user-experience designer and creative strategist with more than 25 years across UX, game design, and creative technology. Robert founded Cryptic Design to build meaningful experiences spanning games, music, XR, digital services, and original worlds.</p><div className="hero-actions"><Link href="/professional/inquiry" className="button">Start a conversation</Link><Link href="/professional/contact" className="button secondary !border-[#ed00a8]">Contact the studio</Link></div></div><div className="feature-split__image"><Image src="/images/singularis.png" alt="Abstract Cryptic Design system artwork" fill sizes="(max-width:900px) 100vw, 40vw"/></div></section><PlayerDock/></div></main>}
