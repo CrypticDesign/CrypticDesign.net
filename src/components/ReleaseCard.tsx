@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import type { Release } from "@/lib/releases";
+import type { ContentAccessDecision, Release } from "@/lib/releases";
 import { releaseImage } from "@/lib/releases";
 
 const ACCENT_BORDER: Record<Release["accent"], string> = {
@@ -18,7 +18,7 @@ const KIND_LABEL: Record<Release["kind"], string> = {
   lab: "Lab",
 };
 
-export default function ReleaseCard({ release }: { release: Release }) {
+export default function ReleaseCard({ release, accessDecision }: { release: Release; accessDecision?: ContentAccessDecision }) {
   const href = `/releases/${release.slug}`;
 
   return (
@@ -37,6 +37,11 @@ export default function ReleaseCard({ release }: { release: Release }) {
         {release.status === "coming-soon" && (
           <span className="border border-border bg-surface-raised px-2 py-0.5">
             Coming soon
+          </span>
+        )}
+        {release.visibility_status === "entitlement-required" && (
+          <span className="border border-accent-gold/60 px-2 py-0.5 text-accent-gold">
+            {accessDecision === "granted" ? "Unlocked" : accessDecision === "account-required" ? "Sign in" : accessDecision === "entitlement-required" ? "Membership required" : "Member access"}
           </span>
         )}
       </div>

@@ -84,6 +84,8 @@ export interface Release extends PublicContentGovernance {
   releasedAt: string;
   status: "released" | "coming-soon";
   accent: Accent;
+  /** Benefit required when visibility_status is entitlement-required. */
+  requiredBenefitId?: string;
 }
 
 export const LANES: Lane[] = [
@@ -200,7 +202,8 @@ export const RELEASES: Release[] = withReviewMetadata<Release>([
     releasedAt: "2026-07-15",
     status: "coming-soon",
     rights_status: "owned",
-    visibility_status: "public",
+    visibility_status: "entitlement-required",
+    requiredBenefitId: "benefit_updates",
     publication_status: "scheduled",
     accent: "cyan",
   },
@@ -224,12 +227,27 @@ export function isPubliclyRenderable<T extends PublicContentGovernance>(
     "collaborator-approved",
   ].includes(content.rights_status);
 
-  const isPubliclyVisible = content.visibility_status === "public";
+  const isPubliclyVisible = ["public", "account-required", "entitlement-required"].includes(content.visibility_status);
   const isPublishedOrScheduled =
     content.publication_status === "published" ||
     content.publication_status === "scheduled";
 
   return rightsPermitPublicView && isPubliclyVisible && isPublishedOrScheduled;
+}
+
+export type ContentAccessDecision = "granted" | "account-required" | "entitlement-required" | "not-renderable";
+
+export function evaluateReleaseAccess(
+  release: Release,
+  viewer: { authenticated: boolean; entitlements: readonly string[] },
+): ContentAccessDecision {
+  if (!isPubliclyRenderable(release)) return "not-renderable";
+  if (release.visibility_status === "public") return "granted";
+  if (!viewer.authenticated) return "account-required";
+  if (release.visibility_status === "account-required") return "granted";
+  return release.requiredBenefitId && viewer.entitlements.includes(release.requiredBenefitId)
+    ? "granted"
+    : "entitlement-required";
 }
 
 export function publicReleases(): Release[] {
