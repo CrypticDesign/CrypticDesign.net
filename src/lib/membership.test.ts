@@ -83,3 +83,26 @@ test("resolves unique benefits only from trialing or active subscriptions", () =
   ];
   assert.deepEqual(resolveEntitlements(subscriptions, SANDBOX_TIERS), ["benefit_early_access", "benefit_updates"]);
 });
+
+test("revokes tier benefits when a subscription is canceled or expired", () => {
+  for (const status of ["canceled", "expired"] as const) {
+    assert.deepEqual(resolveEntitlements([{ ...subscription, tierId: "tier_architect", status }], SANDBOX_TIERS), []);
+  }
+});
+
+test("covers canonical recovery, refund, dispute, and termination transitions", () => {
+  const allowed: Array<[typeof subscription.status, typeof subscription.status]> = [
+    ["pending", "trialing"],
+    ["active", "past_due"],
+    ["past_due", "grace"],
+    ["grace", "active"],
+    ["active", "refunded"],
+    ["refunded", "terminated"],
+    ["active", "disputed"],
+    ["disputed", "active"],
+    ["active", "terminated"],
+  ];
+  for (const [from, to] of allowed) assert.equal(canTransitionSubscription(from, to), true, `${from} -> ${to}`);
+  assert.equal(canTransitionSubscription("terminated", "active"), false);
+  assert.equal(canTransitionSubscription("expired", "active"), false);
+});

@@ -1,5 +1,6 @@
 create type public.subscription_status as enum (
-  'incomplete', 'trialing', 'active', 'past_due', 'paused', 'canceled', 'expired'
+  'pending', 'incomplete', 'trialing', 'active', 'past_due', 'grace', 'paused',
+  'canceled', 'expired', 'refunded', 'disputed', 'terminated'
 );
 
 create table public.member_profiles (

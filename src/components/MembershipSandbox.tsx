@@ -53,16 +53,16 @@ export default function MembershipSandbox() {
     setMessage(`${tier.name} preview created locally. No payment was collected.`);
   }
 
-  async function activate(subscription: Subscription) {
-    setMessage("Activating the local preview…");
+  async function changeStatus(subscription: Subscription, status: "active" | "canceled" | "expired", label: string) {
+    setMessage(`${label}…`);
     const response = await fetch(`/api/membership/subscriptions/${subscription.id}/transition`, {
       method: "POST",
       headers: { "content-type": "application/json", "idempotency-key": crypto.randomUUID() },
-      body: JSON.stringify({ status: "active", reason: "local framework preview activation" }),
+      body: JSON.stringify({ status, reason: `local framework: ${label.toLowerCase()}` }),
     });
     if (!response.ok) { setMessage("The preview transition could not be completed."); return; }
     await loadMember();
-    setMessage("Local membership preview activated. No payment was collected.");
+    setMessage(`${label} complete. Membership access has been recalculated locally.`);
   }
 
   if (!catalog) return <p className="ui-loading" aria-live="polite">{message}</p>;
@@ -93,7 +93,7 @@ export default function MembershipSandbox() {
           <div className="mt-4 grid gap-3">
             {member.subscriptions.map((subscription) => {
               const tier = catalog.tiers.find((item) => item.id === subscription.tierId);
-              return <article key={subscription.id} className="border border-border p-4"><div className="flex flex-wrap items-center justify-between gap-3"><div><strong>{tier?.name ?? "Membership"}</strong><p className="mt-1 text-sm text-muted-foreground">Status: {subscription.status.replace("_", " ")}</p></div>{subscription.status === "incomplete" ? <button type="button" className="button secondary" onClick={() => activate(subscription)}>Activate locally</button> : null}</div></article>;
+              return <article key={subscription.id} className="border border-border p-4"><div className="flex flex-wrap items-center justify-between gap-3"><div><strong>{tier?.name ?? "Membership"}</strong><p className="mt-1 text-sm text-muted-foreground">Status: {subscription.status.replace("_", " ")}</p></div><div className="flex flex-wrap gap-2">{subscription.status === "incomplete" ? <button type="button" className="button secondary" onClick={() => changeStatus(subscription, "active", "Activate local preview")}>Activate locally</button> : null}{subscription.status === "active" ? <button type="button" className="button secondary" onClick={() => changeStatus(subscription, "canceled", "Cancel local membership")}>Cancel locally</button> : null}{subscription.status === "canceled" ? <button type="button" className="button secondary" onClick={() => changeStatus(subscription, "expired", "Expire local membership")}>Expire locally</button> : null}</div></div></article>;
             })}
           </div>
           <h3 className="mt-6 font-medium">Current access</h3>
