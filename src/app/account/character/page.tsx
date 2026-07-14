@@ -4,11 +4,16 @@ import { FormEvent, useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { CHARACTER_ARCHETYPES, type CharacterHistoryEvent, type CharacterProfile } from "@/lib/characters";
 import type { ProgressionSnapshot } from "@/lib/progression";
+import type { RpgProjection } from "@/lib/rpg-experience-store";
+import { CORE_ATTRIBUTES } from "@/lib/rpg-experience";
+import type { RpgContentSnapshot } from "@/lib/rpg-content-store";
 
 export default function CharacterProfilePage() {
   const [character, setCharacter] = useState<CharacterProfile | null>(null);
   const [history, setHistory] = useState<CharacterHistoryEvent[]>([]);
   const [progression, setProgression] = useState<ProgressionSnapshot | null>(null);
+  const [rpg, setRpg] = useState<RpgProjection | null>(null);
+  const [rpgContent, setRpgContent] = useState<RpgContentSnapshot | null>(null);
   const [loaded, setLoaded] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -26,6 +31,12 @@ export default function CharacterProfilePage() {
         const progressionResponse = await fetch(`/api/characters/${payload.character.id}/progression`);
         const progressionPayload = await progressionResponse.json();
         if (progressionResponse.ok) setProgression(progressionPayload.progression);
+        const rpgResponse = await fetch(`/api/characters/${payload.character.id}/rpg`);
+        const rpgPayload = await rpgResponse.json();
+        if (rpgResponse.ok) setRpg(rpgPayload.rpg);
+        const contentResponse = await fetch(`/api/characters/${payload.character.id}/rpg-content`);
+        const contentPayload = await contentResponse.json();
+        if (contentResponse.ok) setRpgContent(contentPayload.content);
       }
     } catch (caught) { setError((caught as Error).message); }
     finally { setLoaded(true); }
@@ -78,6 +89,28 @@ export default function CharacterProfilePage() {
     finally { setSaving(false); }
   }
 
+  async function recordRpgFixture() {
+    if (!character || !rpg) return;
+    setSaving(true); setError(null);
+    try {
+      const response = await fetch(`/api/characters/${character.id}/rpg`, { method: "POST", headers: { "content-type": "application/json", "idempotency-key": crypto.randomUUID() }, body: JSON.stringify({ experienceId: "signal-run-fixture", sessionId: crypto.randomUUID(), snapshotVersion: rpg.timeLedger.length + 1 }) });
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.error);
+      setRpg(payload.rpg);
+    } catch (caught) { setError((caught as Error).message); }
+    finally { setSaving(false); }
+  }
+
+  async function questAction(body: Record<string, string>) {
+    if (!character) return;
+    setSaving(true); setError(null);
+    try {
+      const response = await fetch(`/api/characters/${character.id}/rpg-content`, { method: "POST", headers: { "content-type": "application/json", "idempotency-key": crypto.randomUUID() }, body: JSON.stringify(body) });
+      const payload = await response.json(); if (!response.ok) throw new Error(payload.error); setRpgContent(payload.content);
+    } catch (caught) { setError((caught as Error).message); }
+    finally { setSaving(false); }
+  }
+
   if (!loaded) return <main className="mx-auto max-w-6xl px-4 py-10 sm:px-6"><p className="ui-loading" aria-busy="true">Loading character…</p></main>;
   if (!character) return <main className="mx-auto max-w-6xl px-4 py-10 sm:px-6"><h1 className="text-3xl font-semibold">Character Profile</h1><p className="ui-empty mt-6">{error === "Authentication required" ? <><Link href="/account/sign-in" className="text-accent-cyan hover:underline">Sign in</Link> to view your character.</> : <>No character belongs to this account. <Link href="/account/create-character" className="text-accent-cyan hover:underline">Create one</Link>.</>}</p></main>;
 
@@ -106,6 +139,21 @@ export default function CharacterProfilePage() {
       <p className="mt-4 text-2xl font-semibold">{progression?.internalBalance ?? 0} internal units</p>
       <button type="button" className="button secondary mt-4" disabled={saving || character.status !== "active"} onClick={recordTestActivity}>Record test discovery</button>
       <ol className="mt-4 flex flex-col gap-2">{progression?.ledger.map((entry) => <li key={entry.id} className="rounded-control border border-border p-3 text-sm"><strong>{entry.delta > 0 ? `+${entry.delta}` : entry.delta} units</strong><span className="ml-2 text-muted-foreground">{entry.reason.replaceAll("_", " ")} · rule {entry.ruleId} v{entry.ruleVersion} · {new Date(entry.recordedAt).toLocaleString()}</span></li>)}</ol>
+    </section>
+    <section className="panel p-5" aria-labelledby="quests-title">
+      <span className="kicker">Persistent experiences</span><h2 id="quests-title" className="section-title mt-2">Quests and achievements</h2>
+      <div className="mt-4 grid gap-4 sm:grid-cols-2">{rpgContent?.quests.map(({ definition, run }) => <article key={`${definition.id}:${definition.version}`} className="rounded-control border border-border p-4"><h3 className="font-semibold">{definition.title}</h3><p className="mt-1 text-sm text-muted-foreground">{run?.status ?? "available"} · version {definition.version}</p>{!run ? <button type="button" className="button secondary mt-3" disabled={saving || character.status !== "active"} onClick={() => questAction({ action: "start", questId: definition.id })}>Start quest</button> : run.status === "active" ? <div className="mt-3 flex flex-wrap gap-2">{definition.objectives.map((objective) => <button key={objective.id} type="button" className="button secondary" disabled={saving} onClick={() => questAction({ action: "evidence", questId: definition.id, objectiveId: objective.id, evidenceEventId: crypto.randomUUID() })}>Complete {objective.id.replaceAll("-", " ")}</button>)}</div> : null}</article>)}</div>
+      <div className="mt-5"><h3 className="font-semibold">Achievements</h3><ul className="mt-2 text-sm text-muted-foreground">{rpgContent?.achievements.length ? rpgContent.achievements.map((award) => <li key={award.id}>{award.explanation} · {award.status} · definition v{award.definitionVersion}</li>) : <li>No achievements earned yet.</li>}</ul></div>
+      <div className="mt-5"><h3 className="font-semibold">Collectibles</h3><ul className="mt-2 text-sm text-muted-foreground">{rpgContent?.collectibles.length ? rpgContent.collectibles.map((grant) => <li key={grant.id}>{grant.collectibleId.replaceAll("-", " ")} · nontransferable · no commercial value</li>) : <li>No collectibles earned yet.</li>}</ul></div>
+    </section>
+    <section className="panel p-5" aria-labelledby="rpg-title">
+      <span className="kicker">Owner-private RPG sandbox</span><h2 id="rpg-title" className="section-title mt-2">Level {rpg?.level.level ?? 1}</h2>
+      <p className="mt-2 text-sm text-muted-foreground">{rpg?.totalTime ?? 0} Time from verified active minutes. RPG state cannot grant account authority or purchased access.</p>
+      <div className="mt-4 h-2 overflow-hidden bg-surface"><div className="h-full bg-accent-cyan" style={{ width: `${rpg ? Math.min(100, (rpg.level.levelTime / rpg.level.requiredForNextLevel) * 100) : 0}%` }} /></div>
+      <dl className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">{CORE_ATTRIBUTES.map((attribute) => <div key={attribute} className="rounded-control border border-border p-3"><dt className="text-xs uppercase tracking-wide text-muted-foreground">{attribute}</dt><dd className="mt-1 text-xl font-semibold">{rpg?.attributes[attribute] ?? 10}</dd></div>)}</dl>
+      <dl className="mt-5 grid grid-cols-3 gap-3"><div><dt className="text-xs text-muted-foreground">Health</dt><dd className="text-lg font-semibold">{rpg?.resources.health ?? 70}</dd></div><div><dt className="text-xs text-muted-foreground">Focus</dt><dd className="text-lg font-semibold">{rpg?.resources.focus ?? 70}</dd></div><div><dt className="text-xs text-muted-foreground">Resolve</dt><dd className="text-lg font-semibold">{rpg?.resources.resolve ?? 70}</dd></div></dl>
+      <button type="button" className="button secondary mt-5" disabled={saving || character.status !== "active" || !rpg} onClick={recordRpgFixture}>Run Signal Run fixture</button>
+      <p className="mt-2 text-xs text-muted-foreground">This local fixture simulates a failed twelve-minute Arcade run. Failure still records experience; no commercial reward or access is granted.</p>
     </section>
     <section><h2 className="section-title">History</h2><ol className="mt-4 flex flex-col gap-2">{history.map((event) => <li key={event.id} className="panel p-4 text-sm"><strong>{event.type.replaceAll("_", " ")}</strong><span className="ml-2 text-muted-foreground">{new Date(event.occurredAt).toLocaleString()} · {event.changedFields.join(", ")}</span></li>)}</ol></section>
   </main>;
