@@ -1,4 +1,5 @@
 import { isPubliclyRenderable } from "./releases.ts";
+import { DEFAULT_AVATAR_RECIPE, validateAvatarRecipe, type AvatarRecipe } from "./avatar.ts";
 
 export const CHARACTER_ARCHETYPES = ["Signal Seeker", "Archivist", "Composer", "Navigator", "Builder"] as const;
 export type CharacterArchetype = (typeof CHARACTER_ARCHETYPES)[number];
@@ -15,6 +16,7 @@ export interface CharacterIdentity {
   archetype: CharacterArchetype;
   bio: string;
   portraitUrl: string | null;
+  avatarRecipe?: AvatarRecipe;
   affiliation: string | null;
   presence: CharacterPresence;
   discoverable: boolean;
@@ -35,6 +37,7 @@ export interface CharacterProfile {
   archetype: CharacterArchetype;
   bio: string;
   portraitUrl: string | null;
+  avatarRecipe: AvatarRecipe;
   affiliation: string | null;
   presence: CharacterPresence;
   discoverable: boolean;
@@ -55,8 +58,8 @@ export interface CharacterHistoryEvent {
 }
 
 export function characterProfile(identity: CharacterIdentity): CharacterProfile {
-  const { id, kind, name, handle, archetype, bio, portraitUrl, affiliation, presence, discoverable, visibility, publicationConsent, status } = identity;
-  return { id, kind, name, handle, archetype, bio, portraitUrl, affiliation, presence, discoverable, visibility, publicationConsent, status };
+  const { id, kind, name, handle, archetype, bio, portraitUrl, avatarRecipe, affiliation, presence, discoverable, visibility, publicationConsent, status } = identity;
+  return { id, kind, name, handle, archetype, bio, portraitUrl, avatarRecipe: avatarRecipe ?? DEFAULT_AVATAR_RECIPE, affiliation, presence, discoverable, visibility, publicationConsent, status };
 }
 
 export function isCharacterPubliclyRenderable(identity: CharacterIdentity): boolean {
@@ -74,11 +77,12 @@ export function canManageCharacter(accountId: string | null, identity: Character
   return Boolean(accountId && identity.kind === "member" && identity.ownerAccountId === accountId);
 }
 
-export function validateCharacterInput(input: { name: string; handle?: string; archetype: string; bio?: string; portraitUrl?: string | null; affiliation?: string | null; presence?: string; discoverable?: boolean; visibility?: string; publicationConsent?: boolean }) {
+export function validateCharacterInput(input: { name: string; handle?: string; archetype: string; bio?: string; portraitUrl?: string | null; avatarRecipe?: unknown; affiliation?: string | null; presence?: string; discoverable?: boolean; visibility?: string; publicationConsent?: boolean }) {
   const name = input.name.trim();
   const handle = (input.handle?.trim().toLowerCase() || name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")).slice(0, 32);
   const bio = input.bio?.trim() ?? "";
   const portraitUrl = input.portraitUrl?.trim() || null;
+  const avatarRecipe = validateAvatarRecipe(input.avatarRecipe ?? DEFAULT_AVATAR_RECIPE);
   const affiliation = input.affiliation?.trim() || null;
   if (name.length < 1 || name.length > 32) throw new Error("Character name must be between 1 and 32 characters");
   if (!CHARACTER_ARCHETYPES.includes(input.archetype as CharacterArchetype)) throw new Error("Unknown character archetype");
@@ -93,5 +97,5 @@ export function validateCharacterInput(input: { name: string; handle?: string; a
   const publicationConsent = Boolean(input.publicationConsent);
   const discoverable = Boolean(input.discoverable);
   if (visibility === "public" && !publicationConsent) throw new Error("Public visibility requires explicit publication consent");
-  return { name, handle, archetype: input.archetype as CharacterArchetype, bio, portraitUrl, affiliation, presence: presence as CharacterPresence, discoverable, visibility: visibility as CharacterVisibility, publicationConsent };
+  return { name, handle, archetype: input.archetype as CharacterArchetype, bio, portraitUrl, avatarRecipe, affiliation, presence: presence as CharacterPresence, discoverable, visibility: visibility as CharacterVisibility, publicationConsent };
 }

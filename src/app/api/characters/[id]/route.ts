@@ -15,7 +15,7 @@ export async function PATCH(request: NextRequest, context: { params: Promise<{ i
     const common = { characterId: id, accountId, requestId: request.headers.get("idempotency-key") ?? randomUUID(), occurredAt: new Date().toISOString() };
     const character = body.status === "active" || body.status === "retired"
       ? await getCharacterStore().setStatus({ ...common, status: body.status })
-      : await getCharacterStore().update({ ...common, name: body.name, handle: body.handle, archetype: body.archetype, bio: body.bio, portraitUrl: body.portraitUrl, affiliation: body.affiliation, presence: body.presence, discoverable: body.discoverable, visibility: body.visibility, publicationConsent: body.publicationConsent });
+      : await getCharacterStore().update({ ...common, name: body.name, handle: body.handle, archetype: body.archetype, bio: body.bio, portraitUrl: body.portraitUrl, avatarRecipe: body.avatarRecipe, affiliation: body.affiliation, presence: body.presence, discoverable: body.discoverable, visibility: body.visibility, publicationConsent: body.publicationConsent });
     return NextResponse.json({ character: characterProfile(character) });
   } catch (error) { return characterErrorResponse(error); }
 }
