@@ -1,16 +1,24 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
 import ReleaseCard from "@/components/ReleaseCard";
 import { getSavedSlugs } from "@/lib/library";
-import { publicReleases, type Release } from "@/lib/releases";
+import { evaluateReleaseAccess, publicReleases, type Release } from "@/lib/releases";
 
 export default function LibraryPage() {
   const [saved, setSaved] = useState<Release[] | null>(null);
+  const [viewer, setViewer] = useState<{ authenticated: boolean; entitlements: string[] }>({ authenticated: false, entitlements: [] });
 
   useEffect(() => {
     const slugs = getSavedSlugs();
     setSaved(publicReleases().filter((release) => slugs.includes(release.slug)));
+    fetch("/api/membership/subscriptions", { cache: "no-store" })
+      .then(async (response) => response.ok ? response.json() : null)
+      .then((data: { entitlements?: string[] } | null) => {
+        setViewer({ authenticated: Boolean(data), entitlements: data?.entitlements ?? [] });
+      })
+      .catch(() => setViewer({ authenticated: false, entitlements: [] }));
   }, []);
 
   return (
@@ -18,14 +26,13 @@ export default function LibraryPage() {
       <header className="flex flex-col gap-2">
         <h1 className="text-3xl font-semibold text-white">Library</h1>
         <p className="max-w-xl text-muted-foreground">
-          Releases you save live here. For now this is stored on this device —
-          it moves to your account when sign-in arrives.
+          Saved releases remain visible even when member access is locked. Saves stay on this device during the local framework phase.
         </p>
       </header>
-      {saved === null ? null : saved.length > 0 ? (
+      {saved === null ? <p className="ui-loading" aria-busy="true">Loading your saved releases…</p> : saved.length > 0 ? (
         <div className="flex flex-wrap gap-4">
           {saved.map((release) => (
-            <ReleaseCard key={release.slug} release={release} />
+            <ReleaseCard key={release.slug} release={release} accessDecision={evaluateReleaseAccess(release, viewer)} />
           ))}
         </div>
       ) : (
