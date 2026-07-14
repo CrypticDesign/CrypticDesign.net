@@ -3,10 +3,12 @@
 import { FormEvent, useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { CHARACTER_ARCHETYPES, type CharacterHistoryEvent, type CharacterProfile } from "@/lib/characters";
+import type { ProgressionSnapshot } from "@/lib/progression";
 
 export default function CharacterProfilePage() {
   const [character, setCharacter] = useState<CharacterProfile | null>(null);
   const [history, setHistory] = useState<CharacterHistoryEvent[]>([]);
+  const [progression, setProgression] = useState<ProgressionSnapshot | null>(null);
   const [loaded, setLoaded] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -21,6 +23,9 @@ export default function CharacterProfilePage() {
         const historyResponse = await fetch(`/api/characters/${payload.character.id}/history`);
         const historyPayload = await historyResponse.json();
         if (historyResponse.ok) setHistory(historyPayload.history);
+        const progressionResponse = await fetch(`/api/characters/${payload.character.id}/progression`);
+        const progressionPayload = await progressionResponse.json();
+        if (progressionResponse.ok) setProgression(progressionPayload.progression);
       }
     } catch (caught) { setError((caught as Error).message); }
     finally { setLoaded(true); }
@@ -61,6 +66,18 @@ export default function CharacterProfilePage() {
     finally { setSaving(false); }
   }
 
+  async function recordTestActivity() {
+    if (!character) return;
+    setSaving(true); setError(null);
+    try {
+      const response = await fetch(`/api/characters/${character.id}/progression`, { method: "POST", headers: { "content-type": "application/json", "idempotency-key": crypto.randomUUID() }, body: JSON.stringify({ type: "release_discovered" }) });
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.error);
+      setProgression(payload.progression);
+    } catch (caught) { setError((caught as Error).message); }
+    finally { setSaving(false); }
+  }
+
   if (!loaded) return <main className="mx-auto max-w-6xl px-4 py-10 sm:px-6"><p className="ui-loading" aria-busy="true">Loading character…</p></main>;
   if (!character) return <main className="mx-auto max-w-6xl px-4 py-10 sm:px-6"><h1 className="text-3xl font-semibold">Character Profile</h1><p className="ui-empty mt-6">{error === "Authentication required" ? <><Link href="/account/sign-in" className="text-accent-cyan hover:underline">Sign in</Link> to view your character.</> : <>No character belongs to this account. <Link href="/account/create-character" className="text-accent-cyan hover:underline">Create one</Link>.</>}</p></main>;
 
@@ -83,6 +100,13 @@ export default function CharacterProfilePage() {
       <label className="flex items-center gap-2 sm:col-span-2"><input type="checkbox" name="publicationConsent" defaultChecked={character.publicationConsent} disabled={unavailable} /> I explicitly consent to publishing the selected profile fields.</label>
       <div className="flex flex-wrap gap-3 sm:col-span-2"><button className="button" disabled={saving || unavailable}>{saving ? "Saving…" : "Save profile"}</button>{character.status === "active" ? <button type="button" className="button secondary" disabled={saving || unavailable} onClick={() => changeStatus("retired")}>Retire character</button> : character.status === "retired" ? <button type="button" className="button secondary" disabled={saving} onClick={() => changeStatus("active")}>Restore character</button> : null}</div>
     </form>
+    <section className="panel p-5" aria-labelledby="progression-title">
+      <span className="kicker">Internal sandbox</span><h2 id="progression-title" className="section-title mt-2">Progression evidence</h2>
+      <p className="mt-2 text-sm text-muted-foreground">Internal units are test evidence only. They do not grant access, purchases, rewards, or public status.</p>
+      <p className="mt-4 text-2xl font-semibold">{progression?.internalBalance ?? 0} internal units</p>
+      <button type="button" className="button secondary mt-4" disabled={saving || character.status !== "active"} onClick={recordTestActivity}>Record test discovery</button>
+      <ol className="mt-4 flex flex-col gap-2">{progression?.ledger.map((entry) => <li key={entry.id} className="rounded-control border border-border p-3 text-sm"><strong>{entry.delta > 0 ? `+${entry.delta}` : entry.delta} units</strong><span className="ml-2 text-muted-foreground">{entry.reason.replaceAll("_", " ")} · rule {entry.ruleId} v{entry.ruleVersion} · {new Date(entry.recordedAt).toLocaleString()}</span></li>)}</ol>
+    </section>
     <section><h2 className="section-title">History</h2><ol className="mt-4 flex flex-col gap-2">{history.map((event) => <li key={event.id} className="panel p-4 text-sm"><strong>{event.type.replaceAll("_", " ")}</strong><span className="ml-2 text-muted-foreground">{new Date(event.occurredAt).toLocaleString()} · {event.changedFields.join(", ")}</span></li>)}</ol></section>
   </main>;
 }
