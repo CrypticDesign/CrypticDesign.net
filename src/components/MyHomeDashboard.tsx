@@ -3,33 +3,46 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { CHARACTER_KEY } from "@/components/CharacterCreator";
 import MediaCard from "@/components/MediaCard";
 import PlayerDock from "@/components/PlayerDock";
+import type { PublicCharacterIdentity } from "@/lib/characters";
 import { getSavedSlugs } from "@/lib/library";
 
-type Character = { name: string; archetype: string; level: number; xp: number };
-
 export default function MyHomeDashboard() {
-  const [character, setCharacter] = useState<Character | null>(null);
+  const [character, setCharacter] = useState<PublicCharacterIdentity | null>(null);
+  const [authenticated, setAuthenticated] = useState(false);
+  const [sessionLoaded, setSessionLoaded] = useState(false);
   const [savedCount, setSavedCount] = useState(0);
 
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem(CHARACTER_KEY);
-      if (raw) setCharacter(JSON.parse(raw));
-    } catch {}
+    Promise.all([
+      fetch("/api/membership/session").then((response) => response.json()),
+      fetch("/api/characters").then(async (response) => response.ok ? response.json() : { character: null }),
+    ])
+      .then(([session, characterPayload]) => {
+        setAuthenticated(Boolean(session.authenticated));
+        setCharacter(characterPayload.character);
+      })
+      .catch(() => {
+        setAuthenticated(false);
+        setCharacter(null);
+      })
+      .finally(() => setSessionLoaded(true));
     setSavedCount(getSavedSlugs().length);
   }, []);
 
-  const name = character?.name || "Robert";
+  const greeting = !sessionLoaded
+    ? "Loading your space…"
+    : authenticated
+      ? `Welcome back${character ? `, ${character.name}` : ""}.`
+      : "Welcome to Cryptic Design.";
 
   return (
     <main>
       <section className="visual-hero">
         <div className="visual-hero__image"><Image src="/images/my-home-hero.png" alt="" fill priority sizes="100vw" /></div>
         <div className="visual-hero__wash" />
-        <div className="visual-hero__content"><div className="signal-rail text-[#ffd400]" /><span className="kicker !text-[#ffd400]">Your space</span><h1 className="display-title">Welcome back, {name}.</h1><p>Your character, activity, saved releases, interests, and progress are all here.</p><div className="hero-actions"><Link href="/account/character" className="button">♙ &nbsp; View profile</Link><Link href="/account/settings" className="button secondary">⚙ &nbsp; Account settings</Link></div></div>
+        <div className="visual-hero__content"><div className="signal-rail text-[#ffd400]" /><span className="kicker !text-[#ffd400]">{authenticated ? "Your space" : "Entertainment · creativity · connection"}</span><h1 className="display-title">{greeting}</h1><p>{authenticated ? "Your character, activity, saved releases, interests, and progress are all here." : "Sign in to return to your character, library, and activity."}</p><div className="hero-actions">{authenticated ? <><Link href="/account/character" className="button">♙ &nbsp; View profile</Link><Link href="/account/settings" className="button secondary">⚙ &nbsp; Account settings</Link></> : <><Link href="/account/sign-in" className="button">Sign in</Link><Link href="/account/create" className="button secondary">Create account</Link></>}</div></div>
       </section>
       <div className="shell page-stack">
         <section>
