@@ -32,6 +32,6 @@ export default function CharacterCreator() {
     <label className="flex flex-col gap-1 text-sm text-foreground">Public bio <span className="text-xs text-muted-foreground">Optional · 280 characters</span><textarea maxLength={280} value={bio} onChange={(e) => setBio(e.target.value)} className="min-h-24 rounded-control border border-border bg-surface px-3 py-2 text-sm text-foreground" /></label>
     <p className="rounded-card border border-dashed border-border p-4 text-sm text-muted-foreground">This creates identity only. Progression, permissions, membership, and purchased access remain separate account systems.</p>
     {error ? <p role="alert" className="text-sm text-red-300">{error}</p> : null}
-    <button disabled={saving} type="submit" className="w-fit rounded-control bg-accent-gold px-5 py-2.5 text-sm font-medium text-black disabled:opacity-50">{saving ? "Creating…" : "Create character"}</button>
+    <button disabled={saving} type="submit" className="button w-fit disabled:cursor-not-allowed disabled:opacity-50">{saving ? "Creating…" : "Create character"}</button>
   </form>;
 }
