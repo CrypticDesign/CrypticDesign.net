@@ -64,4 +64,40 @@ assert.equal(unlockedRelease.status, 200);
 assert.match(unlockedHtml, new RegExp(protectedExcerpt));
 assert.doesNotMatch(unlockedHtml, /requires an active membership benefit/);
 
-console.log("Membership E2E passed: lock -> sign-in -> subscribe -> activate -> entitlement -> unlock");
+for (const activeSubscription of membership.body.subscriptions.filter((item) => ["active", "trialing"].includes(item.status))) {
+  const cancel = await json(`/api/membership/subscriptions/${activeSubscription.id}/transition`, {
+    method: "POST",
+    headers: {
+      cookie,
+      "content-type": "application/json",
+      "idempotency-key": `e2e_cancel_${activeSubscription.id}_${requestSuffix}`,
+    },
+    body: JSON.stringify({ status: "canceled", reason: "HTTP end-to-end cancellation verification" }),
+  });
+  assert.equal(cancel.response.status, 200);
+  assert.equal(cancel.body.subscription.status, "canceled");
+}
+
+const revokedMembership = await json("/api/membership/subscriptions", { headers: { cookie } });
+assert.equal(revokedMembership.response.status, 200);
+assert.doesNotMatch(revokedMembership.body.entitlements.join(","), /benefit_updates/);
+
+const relockedRelease = await fetch(`${baseUrl}${lockedPath}`, { headers: { cookie } });
+const relockedHtml = await relockedRelease.text();
+assert.equal(relockedRelease.status, 200);
+assert.match(relockedHtml, /requires an active membership benefit/);
+assert.doesNotMatch(relockedHtml, new RegExp(protectedExcerpt));
+
+const expire = await json(`/api/membership/subscriptions/${subscriptionId}/transition`, {
+  method: "POST",
+  headers: {
+    cookie,
+    "content-type": "application/json",
+    "idempotency-key": `e2e_expire_${requestSuffix}`,
+  },
+  body: JSON.stringify({ status: "expired", reason: "HTTP end-to-end expiration verification" }),
+});
+assert.equal(expire.response.status, 200);
+assert.equal(expire.body.subscription.status, "expired");
+
+console.log("Membership E2E passed: lock -> sign-in -> activate -> unlock -> cancel -> revoke -> relock -> expire");

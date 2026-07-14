@@ -1,11 +1,16 @@
 export const SUBSCRIPTION_STATUSES = [
+  "pending",
   "incomplete",
   "trialing",
   "active",
   "past_due",
+  "grace",
   "paused",
   "canceled",
   "expired",
+  "refunded",
+  "disputed",
+  "terminated",
 ] as const;
 
 export type SubscriptionStatus = (typeof SUBSCRIPTION_STATUSES)[number];
@@ -82,13 +87,18 @@ export function resolveEntitlements(
 }
 
 const ALLOWED_TRANSITIONS: Readonly<Record<SubscriptionStatus, readonly SubscriptionStatus[]>> = {
+  pending: ["active", "trialing", "incomplete", "canceled"],
   incomplete: ["trialing", "active", "canceled", "expired"],
   trialing: ["active", "past_due", "canceled", "expired"],
-  active: ["past_due", "paused", "canceled", "expired"],
-  past_due: ["active", "paused", "canceled", "expired"],
-  paused: ["active", "canceled", "expired"],
+  active: ["past_due", "paused", "canceled", "expired", "refunded", "disputed", "terminated"],
+  past_due: ["active", "grace", "paused", "canceled", "expired", "terminated"],
+  grace: ["active", "expired", "terminated"],
+  paused: ["active", "canceled", "expired", "terminated"],
   canceled: ["active", "expired"],
   expired: [],
+  refunded: ["active", "expired", "terminated"],
+  disputed: ["active", "expired", "terminated"],
+  terminated: [],
 };
 
 export function canTransitionSubscription(
