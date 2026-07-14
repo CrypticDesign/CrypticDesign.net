@@ -27,6 +27,8 @@ export interface ExperienceActivityEvent {
   challengeFactor: number;
   noveltyFactor: number;
   valueFactor: number;
+  outcome?: "success" | "partial" | "failure" | "abandoned";
+  evidenceIds?: string[];
   occurredAt: string;
   recordedAt: string;
 }
@@ -102,7 +104,7 @@ export class RpgExperienceStore {
     return this.withLock(async () => {
       const data = await this.readUnlocked();
       const scope = `rpg-session:${input.accountId}:${input.characterId}`;
-      const payload = { experienceId: input.experienceId, experienceVersion: input.experienceVersion, sessionId: input.sessionId, source: input.source, verifiedActiveMinutes: input.verifiedActiveMinutes, context: input.context, challengeFactor: input.challengeFactor, noveltyFactor: input.noveltyFactor, valueFactor: input.valueFactor, occurredAt: input.occurredAt };
+      const payload = { experienceId: input.experienceId, experienceVersion: input.experienceVersion, sessionId: input.sessionId, source: input.source, verifiedActiveMinutes: input.verifiedActiveMinutes, context: input.context, challengeFactor: input.challengeFactor, noveltyFactor: input.noveltyFactor, valueFactor: input.valueFactor, outcome: input.outcome, evidenceIds: input.evidenceIds, occurredAt: input.occurredAt };
       const payloadHash = hash(payload);
       const replay = data.idempotency.find((item) => item.scope === scope && item.requestId === input.requestId);
       if (replay) {
@@ -111,7 +113,7 @@ export class RpgExperienceStore {
       }
       if (data.events.some((event) => event.experienceId === input.experienceId && event.sessionId === input.sessionId)) throw new Error("Experience session was already recorded");
       const usage = contextualAttributeUsage(input);
-      const event: ExperienceActivityEvent = { id: randomUUID(), characterId: input.characterId, accountId: input.accountId, experienceId: input.experienceId, experienceVersion: input.experienceVersion, sessionId: input.sessionId, source: input.source, verifiedActiveMinutes: input.verifiedActiveMinutes, context: input.context, challengeFactor: input.challengeFactor, noveltyFactor: input.noveltyFactor, valueFactor: input.valueFactor, occurredAt: input.occurredAt, recordedAt: input.recordedAt };
+      const event: ExperienceActivityEvent = { id: randomUUID(), characterId: input.characterId, accountId: input.accountId, experienceId: input.experienceId, experienceVersion: input.experienceVersion, sessionId: input.sessionId, source: input.source, verifiedActiveMinutes: input.verifiedActiveMinutes, context: input.context, challengeFactor: input.challengeFactor, noveltyFactor: input.noveltyFactor, valueFactor: input.valueFactor, outcome: input.outcome, evidenceIds: input.evidenceIds, occurredAt: input.occurredAt, recordedAt: input.recordedAt };
       const timeEntry: TimeLedgerEntry = { id: randomUUID(), characterId: input.characterId, sourceEventId: event.id, delta: input.verifiedActiveMinutes, reason: "verified_activity", reversesEntryId: null, ruleId: TIME_RULE.id, ruleVersion: TIME_RULE.version, levelRuleId: LEVEL_RULE.id, levelRuleVersion: LEVEL_RULE.version, recordedAt: input.recordedAt };
       const attributeEntry: AttributeUsageEntry = { id: randomUUID(), characterId: input.characterId, sourceEventId: event.id, usage, reason: "verified_activity", reversesEntryId: null, ruleId: ATTRIBUTE_RULE.id, ruleVersion: ATTRIBUTE_RULE.version, recordedAt: input.recordedAt };
       data.events.push(event); data.timeLedger.push(timeEntry); data.attributeLedger.push(attributeEntry); data.idempotency.push({ scope, requestId: input.requestId, payloadHash, timeEntryId: timeEntry.id });
