@@ -115,6 +115,10 @@ export default function CharacterProfilePage() {
   if (!character) return <main className="mx-auto max-w-6xl px-4 py-10 sm:px-6"><h1 className="text-3xl font-semibold">Character Profile</h1><p className="ui-empty mt-6">{error === "Authentication required" ? <><Link href="/account/sign-in" className="text-accent-cyan hover:underline">Sign in</Link> to view your character.</> : <>No character belongs to this account. <Link href="/account/create-character" className="text-accent-cyan hover:underline">Create one</Link>.</>}</p></main>;
 
   const unavailable = character.status === "suspended";
+  const progressionEvidence = [
+    ...(progression?.ledger.map((entry) => ({ id: entry.id, occurredAt: entry.recordedAt, content: <><strong>{entry.delta > 0 ? `+${entry.delta}` : entry.delta} units</strong><span className="ml-2 text-muted-foreground">{entry.reason.replaceAll("_", " ")} · rule {entry.ruleId} v{entry.ruleVersion} · {new Date(entry.recordedAt).toLocaleString()}</span></> })) ?? []),
+    ...(rpgContent?.evidence.map((entry) => ({ id: entry.id, occurredAt: entry.occurredAt, content: <><strong>{entry.title}</strong><span className="ml-2 text-muted-foreground">{entry.detail} · {new Date(entry.occurredAt).toLocaleString()}</span></> })) ?? []),
+  ].sort((left, right) => Date.parse(right.occurredAt) - Date.parse(left.occurredAt));
   return <main className="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-10 sm:px-6">
     <header><span className="kicker">Account-private identity</span><h1 className="mt-2 text-3xl font-semibold">{character.name}</h1><p className="mt-2 text-muted-foreground">@{character.handle} · {character.archetype} · {character.status}</p></header>
     {character.status === "retired" ? <p role="status" className="rounded-card border border-amber-400/40 p-4 text-amber-100">This character is retired and hidden from presence and discovery. You can restore it at any time.</p> : null}
@@ -135,10 +139,10 @@ export default function CharacterProfilePage() {
     </form>
     <section className="panel p-5" aria-labelledby="progression-title">
       <span className="kicker">Internal sandbox</span><h2 id="progression-title" className="section-title mt-2">Progression evidence</h2>
-      <p className="mt-2 text-sm text-muted-foreground">Internal units are test evidence only. They do not grant access, purchases, rewards, or public status.</p>
+      <p className="mt-2 text-sm text-muted-foreground">Chronological activity, quest, achievement, and collectible evidence. Internal units are test-only and do not grant access, purchases, rewards, or public status.</p>
       <p className="mt-4 text-2xl font-semibold">{progression?.internalBalance ?? 0} internal units</p>
       <button type="button" className="button secondary mt-4" disabled={saving || character.status !== "active"} onClick={recordTestActivity}>Record test discovery</button>
-      <ol className="mt-4 flex flex-col gap-2">{progression?.ledger.map((entry) => <li key={entry.id} className="rounded-control border border-border p-3 text-sm"><strong>{entry.delta > 0 ? `+${entry.delta}` : entry.delta} units</strong><span className="ml-2 text-muted-foreground">{entry.reason.replaceAll("_", " ")} · rule {entry.ruleId} v{entry.ruleVersion} · {new Date(entry.recordedAt).toLocaleString()}</span></li>)}</ol>
+      <ol className="mt-4 flex flex-col gap-2">{progressionEvidence.map((entry) => <li key={entry.id} className="rounded-control border border-border p-3 text-sm">{entry.content}</li>)}</ol>
     </section>
     <section className="panel p-5" aria-labelledby="quests-title">
       <span className="kicker">Persistent experiences</span><h2 id="quests-title" className="section-title mt-2">Quests and achievements</h2>

@@ -15,5 +15,9 @@ test("persists an idempotent onboarding quest and grants explainable noncommerci
   const snapshot = await store.snapshot("char_1");
   assert.equal(snapshot.achievements.length, 1); assert.equal(snapshot.achievements[0].explanation, "Completed the First Signal onboarding quest.");
   assert.equal(snapshot.collectibles.length, 1); assert.equal(snapshot.collectibles[0].transferable, false); assert.equal(snapshot.collectibles[0].commercialValue, null);
+  const completion = snapshot.evidence.find((entry) => entry.type === "quest_completed");
+  assert.equal(completion?.title, "First Signal");
+  assert.equal(completion?.occurredAt, "2026-07-13T00:02:00Z");
+  assert.match(completion?.detail ?? "", /objectives completed/);
 });
 

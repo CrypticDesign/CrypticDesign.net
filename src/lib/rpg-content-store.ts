@@ -14,13 +14,36 @@ const EMPTY: ContentData = { runs: [], achievements: [], collectibles: [], idemp
 const queues = new Map<string, Promise<void>>();
 const hash = (value: unknown) => createHash("sha256").update(JSON.stringify(value)).digest("hex");
 
-export interface RpgContentSnapshot { quests: Array<{ definition: QuestDefinition; run: QuestRun | null }>; achievements: AchievementAward[]; collectibles: CollectibleGrant[] }
+export interface RpgEvidenceEntry {
+  id: string;
+  type: "quest_started" | "quest_completed" | "quest_failed" | "quest_abandoned" | "quest_expired" | "achievement_earned" | "collectible_granted";
+  title: string;
+  detail: string;
+  occurredAt: string;
+}
+
+export interface RpgContentSnapshot { quests: Array<{ definition: QuestDefinition; run: QuestRun | null }>; achievements: AchievementAward[]; collectibles: CollectibleGrant[]; evidence: RpgEvidenceEntry[] }
 
 export class RpgContentStore {
   private readonly filePath: string;
   constructor(filePath: string) { this.filePath = path.resolve(filePath); }
 
-  async snapshot(characterId: string): Promise<RpgContentSnapshot> { return this.withLock(async () => { const data = await this.readUnlocked(); return { quests: QUEST_FIXTURES.map((definition) => ({ definition, run: data.runs.find((run) => run.characterId === characterId && run.questId === definition.id && run.questVersion === definition.version) ?? null })), achievements: data.achievements.filter((award) => award.characterId === characterId), collectibles: data.collectibles.filter((grant) => grant.characterId === characterId) }; }); }
+  async snapshot(characterId: string): Promise<RpgContentSnapshot> { return this.withLock(async () => {
+    const data = await this.readUnlocked();
+    const quests = QUEST_FIXTURES.map((definition) => ({ definition, run: data.runs.find((run) => run.characterId === characterId && run.questId === definition.id && run.questVersion === definition.version) ?? null }));
+    const achievements = data.achievements.filter((award) => award.characterId === characterId);
+    const collectibles = data.collectibles.filter((grant) => grant.characterId === characterId);
+    const evidence: RpgEvidenceEntry[] = [];
+    for (const { definition, run } of quests) {
+      if (!run) continue;
+      if (run.startedAt) evidence.push({ id: `${run.id}:started`, type: "quest_started", title: definition.title, detail: `Quest started · definition v${definition.version}`, occurredAt: run.startedAt });
+      if (run.resolvedAt && run.status !== "active" && run.status !== "available") evidence.push({ id: `${run.id}:resolved`, type: `quest_${run.status}`, title: definition.title, detail: `Quest ${run.status.replaceAll("_", " ")} · ${run.resolutionReason?.replaceAll("_", " ") ?? "resolved"} · definition v${definition.version}`, occurredAt: run.resolvedAt });
+    }
+    for (const award of achievements) evidence.push({ id: `${award.id}:awarded`, type: "achievement_earned", title: award.definitionId.replaceAll("-", " "), detail: `${award.explanation} · definition v${award.definitionVersion}`, occurredAt: award.awardedAt });
+    for (const grant of collectibles) evidence.push({ id: `${grant.id}:granted`, type: "collectible_granted", title: grant.collectibleId.replaceAll("-", " "), detail: `Collectible granted · definition v${grant.definitionVersion}`, occurredAt: grant.grantedAt });
+    evidence.sort((left, right) => Date.parse(right.occurredAt) - Date.parse(left.occurredAt));
+    return { quests, achievements, collectibles, evidence };
+  }); }
 
   async start(input: { characterId: string; questId: string; requestId: string; occurredAt: string }) { return this.mutate(`quest-start:${input.characterId}`, input.requestId, { questId: input.questId }, async (data) => { const definition = this.definition(input.questId); const existing = data.runs.find((run) => run.characterId === input.characterId && run.questId === definition.id && run.questVersion === definition.version); if (existing) return existing; const run = startQuest(definition, { runId: randomUUID(), characterId: input.characterId, repeatWindow: "once", startedAt: input.occurredAt }); data.runs.push(run); return run; }); }
 
