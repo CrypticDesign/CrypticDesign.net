@@ -3,22 +3,20 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { CHARACTER_KEY } from "@/components/CharacterCreator";
 import MediaCard from "@/components/MediaCard";
 import PlayerDock from "@/components/PlayerDock";
+import type { PublicCharacterIdentity } from "@/lib/characters";
 import { getSavedSlugs } from "@/lib/library";
 
-type Character = { name: string; archetype: string; level: number; xp: number };
-
 export default function MyHomeDashboard() {
-  const [character, setCharacter] = useState<Character | null>(null);
+  const [character, setCharacter] = useState<PublicCharacterIdentity | null>(null);
   const [savedCount, setSavedCount] = useState(0);
 
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem(CHARACTER_KEY);
-      if (raw) setCharacter(JSON.parse(raw));
-    } catch {}
+    fetch("/api/characters")
+      .then(async (response) => response.ok ? response.json() : { character: null })
+      .then((payload) => setCharacter(payload.character))
+      .catch(() => setCharacter(null));
     setSavedCount(getSavedSlugs().length);
   }, []);
 
