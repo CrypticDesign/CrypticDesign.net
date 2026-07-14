@@ -6,6 +6,9 @@
 # testing
 /coverage
 
+# local sandbox runtime data
+/.data/
+
 # next.js
 /.next/
 /out/
@@ -23,6 +26,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+.codex-dev.*.log
 
 # env files
 .env*

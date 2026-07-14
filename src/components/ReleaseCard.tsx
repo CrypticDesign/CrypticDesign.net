@@ -39,6 +39,9 @@ export default function ReleaseCard({ release }: { release: Release }) {
             Coming soon
           </span>
         )}
+        {release.visibility_status === "entitlement-required" && (
+          <span className="border border-accent-gold/60 px-2 py-0.5 text-accent-gold">Member access</span>
+        )}
       </div>
       <h3 className="font-semibold text-foreground group-hover:text-white">
         {release.title}

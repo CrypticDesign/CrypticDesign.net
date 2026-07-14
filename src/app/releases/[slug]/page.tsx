@@ -2,14 +2,16 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { cookies } from "next/headers";
 import ReleaseCard from "@/components/ReleaseCard";
 import SaveButton from "@/components/SaveButton";
 import { getProduct } from "@/lib/products";
-import { LANES, getRelease, publicReleases, releaseImage } from "@/lib/releases";
+import { resolveEntitlements } from "@/lib/membership";
+import { getMembershipStore, membershipSandboxEnabled } from "@/lib/membership-store";
+import { LANES, evaluateReleaseAccess, getRelease, publicReleases, releaseImage } from "@/lib/releases";
+import { SANDBOX_SESSION_COOKIE, verifySandboxSession } from "@/lib/sandbox-session";
 
-export function generateStaticParams() {
-  return publicReleases().map((release) => ({ slug: release.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -27,6 +29,20 @@ export default async function ReleasePage({ params }: { params: Promise<{ slug: 
   const { slug } = await params;
   const release = getRelease(slug);
   if (!release) notFound();
+
+  const cookieStore = await cookies();
+  const memberId = membershipSandboxEnabled()
+    ? verifySandboxSession(cookieStore.get(SANDBOX_SESSION_COOKIE)?.value)
+    : null;
+  let entitlements: string[] = [];
+  if (memberId) {
+    const membership = await getMembershipStore().read();
+    entitlements = resolveEntitlements(
+      membership.subscriptions.filter((item) => item.memberId === memberId),
+      membership.tiers,
+    );
+  }
+  const access = evaluateReleaseAccess(release, { authenticated: Boolean(memberId), entitlements });
 
   const product = release.productSlug ? getProduct(release.productSlug) : undefined;
   const lanes = LANES.filter((lane) => release.lanes.includes(lane.slug));
@@ -55,7 +71,14 @@ export default async function ReleasePage({ params }: { params: Promise<{ slug: 
           <div className="feature-split__content">
             <span className="kicker">Selected release</span>
             <h2>{release.title}</h2>
-            <p>{release.description}</p>
+            {access === "granted" ? <p>{release.description}</p> : (
+              <div className="ui-empty">
+                <p>{access === "account-required" ? "Start a local preview session to check member access." : "This release requires an active membership benefit."}</p>
+                <Link href={access === "account-required" ? "/account/sign-in" : "/account/subscription"} className="text-accent-cyan hover:underline">
+                  {access === "account-required" ? "Start preview session" : "View membership access"}
+                </Link>
+              </div>
+            )}
             <div className="flex flex-wrap gap-2 text-[10px] uppercase tracking-wider text-muted-foreground">
               {lanes.map((lane) => <span key={lane.slug} className="border border-border px-3 py-2">{lane.name}</span>)}
               <time dateTime={release.releasedAt} className="border border-border px-3 py-2">{release.status === "coming-soon" ? "Coming " : "Released "}{release.releasedAt}</time>
