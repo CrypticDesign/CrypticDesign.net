@@ -1,6 +1,6 @@
 # CRY-293 RPG Experience Architecture
 
-**Status:** Draft for Robert approval  
+**Status:** Implemented and completed under CRY-293; later slices tracked separately
 **Date:** 2026-07-13  
 **Depends on:** CRY-292 character identity and CRY-291 persistent RPG ledger, both Done  
 **Authority:** Local architecture draft only; no production services, public economy, or external data collection
@@ -302,4 +302,12 @@ Robert approval is still required for:
 * scarce, tradable, purchasable, or prize-bearing rewards
 * production casino-like experiences
 * production event ingestion, analytics, personal-data collection, and database provisioning
+
+## CRY-318 Journey and Condition Lifecycle Checkpoint — 2026-07-15
+
+CRY-318 integrates the versioned Time-lived and era presentation with the RPG projection while retaining internal levels only as compatibility infrastructure. Character Home now presents the journey through Time lived and eras.
+
+The RPG store now persists condition applications, resource modifiers, and additive recovery or correction records. Projections distinguish base from effective attributes and resources. First Signal failure records session-fatigue evidence without allowing a completed session condition to permanently reduce current capability. Condition lifecycle entries also join the owner-private chronological Progression Evidence view.
+
+Verification passed with 91/91 automated tests, ESLint, TypeScript no-emit, and a clean Next.js production build generating 49 static pages. The portable PostgreSQL migration remains unapplied. Production data, deployment, public reward economics, Character Forge visuals, Blender, 3D assets, and wardrobe remain outside this slice.
 

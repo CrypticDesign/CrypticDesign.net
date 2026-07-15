@@ -57,10 +57,17 @@ export async function POST(request: NextRequest, context: { params: Promise<{ id
       const proposal = firstSignalProposal({ characterId: id, sessionId: body.sessionId, snapshotVersion: current.rpg.timeLedger.length + 1, choice: body.choice, occurredAt: now, practice });
       const validated = validateExperienceResult({ characterId: id, snapshotVersion: current.rpg.timeLedger.length + 1, level: current.rpg.level.level, totalTime: current.rpg.totalTime, baseAttributes: current.rpg.attributes, effectiveAttributes: current.rpg.attributes, conditionIds: [] }, proposal);
       if (!validated.persistent) return NextResponse.json({ ...current, resolution: { outcome: validated.outcome, timeAwarded: 0, context: validated.context, condition: firstSignalCondition(body.choice, body.sessionId), questCompleted: true, practice: true } }, { status: 200 });
-      await getRpgExperienceStore().record({ characterId: id, accountId: ownership.accountId, experienceId: validated.experienceId, experienceVersion: validated.experienceVersion, sessionId: validated.sessionId, source: validated.source, verifiedActiveMinutes: validated.verifiedActiveMinutes, context: validated.context, challengeFactor: validated.challengeFactor, noveltyFactor: validated.noveltyFactor, valueFactor: validated.valueFactor, outcome: validated.outcome, evidenceIds: validated.evidenceIds, requestId, occurredAt: validated.occurredAt, recordedAt: now });
+      const experienceStore = getRpgExperienceStore();
+      const timeEntry = await experienceStore.record({ characterId: id, accountId: ownership.accountId, experienceId: validated.experienceId, experienceVersion: validated.experienceVersion, sessionId: validated.sessionId, source: validated.source, verifiedActiveMinutes: validated.verifiedActiveMinutes, context: validated.context, challengeFactor: validated.challengeFactor, noveltyFactor: validated.noveltyFactor, valueFactor: validated.valueFactor, outcome: validated.outcome, evidenceIds: validated.evidenceIds, requestId, occurredAt: validated.occurredAt, recordedAt: now });
+      const condition = firstSignalCondition(body.choice, body.sessionId, timeEntry.sourceEventId, now);
+      if (condition) {
+        const { explanation, ...persistedCondition } = condition;
+        void explanation;
+        await experienceStore.applyCondition({ characterId: id, accountId: ownership.accountId, condition: persistedCondition, requestId: `${requestId}:condition`, recordedAt: now });
+      }
       if (validated.outcome === "success") await contentStore.evidence({ characterId: id, questId: "onboarding-first-signal", objectiveId: "enter-arcade", evidenceEventId: validated.evidenceIds[0], requestId: `${requestId}:quest`, occurredAt: now });
       const updated = await state(id);
-      return NextResponse.json({ ...updated, resolution: { outcome: validated.outcome, timeAwarded: validated.verifiedActiveMinutes, context: validated.context, condition: firstSignalCondition(body.choice, body.sessionId), questCompleted: updated.firstSignal.run?.status === "completed" } }, { status: 201 });
+      return NextResponse.json({ ...updated, resolution: { outcome: validated.outcome, timeAwarded: validated.verifiedActiveMinutes, context: validated.context, condition, questCompleted: updated.firstSignal.run?.status === "completed" } }, { status: 201 });
     } else throw new Error("Unknown First Signal action");
     return NextResponse.json(await state(id), { status: 201 });
   } catch (error) { return NextResponse.json({ error: (error as Error).message }, { status: /Idempotency|already recorded/.test((error as Error).message) ? 409 : 422 }); }

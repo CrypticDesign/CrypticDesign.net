@@ -61,10 +61,13 @@ create table public.rpg_conditions (
   session_id text,
   severity integer not null check (severity > 0),
   attribute_modifiers jsonb not null default '{}',
+  resource_modifiers jsonb not null default '{}',
   source_event_id uuid not null references public.rpg_experience_events(id) on delete restrict,
   effective_at timestamptz not null,
   expires_at timestamptz,
-  removed_at timestamptz
+  removed_at timestamptz,
+  reason public.rpg_entry_reason not null default 'verified_activity',
+  reverses_condition_id uuid unique references public.rpg_conditions(id) on delete restrict
 );
 
 create table public.quest_definitions (

@@ -101,6 +101,7 @@ export interface CharacterCondition {
   sessionId: string | null;
   severity: number;
   attributeModifiers: Partial<AttributeScores>;
+  resourceModifiers?: Partial<CharacterResources>;
   effectiveAt: string;
   expiresAt: string | null;
   removedAt: string | null;
@@ -126,6 +127,19 @@ export function effectiveAttributes(base: AttributeScores, conditions: readonly 
 }
 
 export interface CharacterResources { health: number; focus: number; resolve: number }
+
+export function effectiveResources(base: CharacterResources, conditions: readonly CharacterCondition[], evaluatedAt: string): CharacterResources {
+  const result = { ...base };
+  for (const condition of conditions.filter((candidate) => conditionIsActive(candidate, evaluatedAt))) {
+    result.health += condition.resourceModifiers?.health ?? 0;
+    result.focus += condition.resourceModifiers?.focus ?? 0;
+    result.resolve += condition.resourceModifiers?.resolve ?? 0;
+  }
+  result.health = Math.max(0, result.health);
+  result.focus = Math.max(0, result.focus);
+  result.resolve = Math.max(0, result.resolve);
+  return result;
+}
 
 export function maximumResources(attributes: AttributeScores, level: number): CharacterResources {
   if (!Number.isSafeInteger(level) || level < 1) throw new Error("Level must be a positive integer");
