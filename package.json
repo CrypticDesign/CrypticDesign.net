@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint .",
     "test": "node --experimental-strip-types --test src/**/*.test.ts",
-    "test:e2e": "node tests/membership-flow.e2e.mjs"
+    "test:e2e": "npm run test:e2e:membership && npm run test:e2e:character",
+    "test:e2e:membership": "node tests/membership-flow.e2e.mjs",
+    "test:e2e:character": "node tests/character-flow.e2e.mjs"
   },
   "dependencies": {
     "next": "^15.3.0",
