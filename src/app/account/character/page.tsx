@@ -7,6 +7,7 @@ import type { ProgressionSnapshot } from "@/lib/progression";
 import type { RpgProjection } from "@/lib/rpg-experience-store";
 import { CORE_ATTRIBUTES } from "@/lib/rpg-experience";
 import type { RpgContentSnapshot } from "@/lib/rpg-content-store";
+import AvatarStudio from "@/components/AvatarStudio";
 
 export default function CharacterProfilePage() {
   const [character, setCharacter] = useState<CharacterProfile | null>(null);
@@ -53,6 +54,7 @@ export default function CharacterProfilePage() {
     const body = {
       name: form.get("name"), handle: form.get("handle"), archetype: form.get("archetype"),
       bio: form.get("bio"), portraitUrl: form.get("portraitUrl"), affiliation: form.get("affiliation"),
+      avatarRecipe: character.avatarRecipe,
       presence: form.get("presence"), discoverable: form.get("discoverable") === "on", visibility,
       publicationConsent: visibility === "public" && form.get("publicationConsent") === "on",
     };
@@ -99,11 +101,11 @@ export default function CharacterProfilePage() {
     ...(rpg?.events.map((entry) => ({ id: entry.id, occurredAt: entry.recordedAt, content: <><strong>+{entry.verifiedActiveMinutes} Time</strong><span className="ml-2 text-muted-foreground">{entry.experienceId.replaceAll("-", " ")} · {entry.outcome ?? "recorded"} · experience v{entry.experienceVersion} · {Object.entries(entry.context).filter(([, weight]) => weight > 0).map(([name, weight]) => `${name} ${Math.round(weight * 100)}%`).join(", ")} · {new Date(entry.recordedAt).toLocaleString()}</span></> })) ?? []),
   ].sort((left, right) => Date.parse(right.occurredAt) - Date.parse(left.occurredAt));
   return <main className="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-10 sm:px-6">
-    <header><span className="kicker">Account-private identity</span><h1 className="mt-2 text-3xl font-semibold">{character.name}</h1><p className="mt-2 text-muted-foreground">@{character.handle} · {character.archetype} · {character.status}</p></header>
+    <header className="character-home-hero panel"><AvatarStudio recipe={character.avatarRecipe} label={character.name} /><div className="character-home-hero__copy"><span className="kicker">Your persistent persona</span><h1 className="display-title">{character.name}</h1><p>@{character.handle} · {character.archetype} · <span className="presence-dot">{character.status}</span></p><div className="character-home-metrics"><div><strong>Level {rpg?.level.level ?? 1}</strong><span>Journey</span></div><div><strong>{rpgContent?.achievements.length ?? 0}</strong><span>Achievements</span></div><div><strong>{rpgContent?.collectibles.length ?? 0}</strong><span>Discoveries</span></div></div></div></header>
     {character.status === "retired" ? <p role="status" className="rounded-card border border-amber-400/40 p-4 text-amber-100">This character is retired and hidden from presence and discovery. You can restore it at any time.</p> : null}
     {unavailable ? <p role="alert" className="rounded-card border border-red-400/40 p-4 text-red-200">This character is suspended. Profile and lifecycle changes require operator review.</p> : null}
     {error ? <p role="alert" className="text-red-300">{error}</p> : null}
-    <form onSubmit={submit} className="grid gap-5 panel p-5 sm:grid-cols-2" aria-label="Edit character profile">
+    <details className="panel identity-settings"><summary><span><span className="kicker">Identity & privacy</span><strong>Manage character settings</strong></span><span aria-hidden="true">＋</span></summary><form onSubmit={submit} className="grid gap-5 p-5 sm:grid-cols-2" aria-label="Edit character profile">
       <label className="flex flex-col gap-1">Display name<input name="name" required maxLength={32} defaultValue={character.name} disabled={unavailable} className="rounded-control border border-border bg-surface px-3 py-2" /></label>
       <label className="flex flex-col gap-1">Handle<input name="handle" required minLength={3} maxLength={32} pattern="[a-z0-9][a-z0-9-]{1,30}[a-z0-9]" defaultValue={character.handle} disabled={unavailable} className="rounded-control border border-border bg-surface px-3 py-2" /></label>
       <label className="flex flex-col gap-1">Archetype<select name="archetype" defaultValue={character.archetype} disabled={unavailable} className="rounded-control border border-border bg-surface px-3 py-2">{CHARACTER_ARCHETYPES.map((item) => <option key={item}>{item}</option>)}</select></label>
@@ -115,7 +117,7 @@ export default function CharacterProfilePage() {
       <label className="flex flex-col gap-1">Visibility<select name="visibility" defaultValue={character.visibility} disabled={unavailable} className="rounded-control border border-border bg-surface px-3 py-2"><option value="private">Account private</option><option value="public">Request public visibility</option></select></label>
       <label className="flex items-center gap-2 sm:col-span-2"><input type="checkbox" name="publicationConsent" defaultChecked={character.publicationConsent} disabled={unavailable} /> I explicitly consent to publishing the selected profile fields.</label>
       <div className="flex flex-wrap gap-3 sm:col-span-2"><button className="button" disabled={saving || unavailable}>{saving ? "Saving…" : "Save profile"}</button>{character.status === "active" ? <button type="button" className="button secondary" disabled={saving || unavailable} onClick={() => changeStatus("retired")}>Retire character</button> : character.status === "retired" ? <button type="button" className="button secondary" disabled={saving} onClick={() => changeStatus("active")}>Restore character</button> : null}</div>
-    </form>
+    </form></details>
     <section className="panel p-5" aria-labelledby="progression-title">
       <span className="kicker">Internal sandbox</span><h2 id="progression-title" className="section-title mt-2">Progression evidence</h2>
       <p className="mt-2 text-sm text-muted-foreground">Chronological activity, quest, achievement, and collectible evidence. Internal units are test-only and do not grant access, purchases, rewards, or public status.</p>

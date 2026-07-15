@@ -11,6 +11,7 @@ export class CharacterStoreError extends Error {
 
 interface CharacterProfileInput {
   name: string; handle?: string; archetype: string; bio?: string; portraitUrl?: string | null;
+  avatarRecipe?: unknown;
   affiliation?: string | null; presence?: string; discoverable?: boolean; visibility?: string; publicationConsent?: boolean;
 }
 
@@ -54,6 +55,7 @@ export class CharacterStore {
         ...character,
         handle: character.handle || character.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || `character-${character.id.slice(0, 8)}`,
         portraitUrl: character.portraitUrl ?? null,
+        avatarRecipe: validateCharacterInput({ ...character, avatarRecipe: character.avatarRecipe }).avatarRecipe,
         presence: character.presence ?? "offline",
         discoverable: character.discoverable ?? false,
         visibility: character.visibility ?? "private",
