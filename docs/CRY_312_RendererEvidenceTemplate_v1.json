@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "REPLACE",
+  "assetId": "REPLACE",
+  "assetSha256": "REPLACE_WITH_APPROVED_LOWERCASE_SHA256",
+  "budgetVersion": "CRY-312-3D-BUDGET-v1",
+  "capturedAt": "REPLACE_WITH_ISO_8601_TIMESTAMP",
+  "commitSha": "REPLACE",
+  "deviceProfile": "REPLACE",
+  "browserName": "REPLACE",
+  "browserVersion": "REPLACE",
+  "synthetic": false,
+  "rigBound": false,
+  "cameraFramed": false,
+  "materialVariantApplied": false,
+  "wardrobeAttached": false,
+  "staticPortraitCaptured": false,
+  "staticFullBodyCaptured": false,
+  "contextRecovered": false,
+  "resourcesDisposed": false,
+  "measurements": {
+    "loadMilliseconds": 0,
+    "firstFrameMilliseconds": 0,
+    "sustainedFramesPerSecond": 0,
+    "gpuMemoryBytes": 0,
+    "contextRecoveryMilliseconds": 0,
+    "residualResourcesAfterDisposal": 0,
+    "sampleSeconds": 0
+  },
+  "supplementalMeasurements": {
+    "onePercentLowFramesPerSecond": 0,
+    "longTasksOver50Milliseconds": 0,
+    "longestMainThreadTaskMilliseconds": 0
+  },
+  "accessibility": {
+    "keyboardOnlyPassed": false,
+    "keyboardInspectionPassed": false,
+    "reducedMotionPassed": false,
+    "staticAlternativePassed": false,
+    "structuredTextAlternativePassed": false,
+    "zoom200PercentPassed": false,
+    "screenReaderPassed": false,
+    "touchTargetsPassed": false,
+    "contrastPassed": false
+  },
+  "runReferences": [],
+  "attachmentReferences": [],
+  "exceptions": [],
+  "review": {
+    "reviewer": null,
+    "reviewedAt": null,
+    "disposition": "not-reviewed"
+  }
+}
