@@ -45,3 +45,32 @@ test("reverses Time and attribute usage additively", async (t) => {
   await assert.rejects(() => store.reverse({ characterId: "char_1", accountId: "member_1", timeEntryId: original.id, requestId: "reverse_2", recordedAt: "2026-07-13T02:00:00Z" }), /already reversed/);
 });
 
+test("projects journey, active conditions, effective capability, and additive recovery", async (t) => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), "cryptic-rpg-")); t.after(() => rm(directory, { recursive: true, force: true }));
+  const store = new RpgExperienceStore(path.join(directory, "rpg.json"));
+  const timeEntry = await store.record(activity);
+  const condition = await store.applyCondition({
+    characterId: "char_1",
+    accountId: "member_1",
+    requestId: "condition_1",
+    recordedAt: "2026-07-13T00:31:00Z",
+    condition: { definitionId: "signal-fatigue", definitionVersion: 1, scope: "session", campaignId: null, sessionId: "session_1", severity: 1, attributeModifiers: { resolve: -2 }, resourceModifiers: { focus: -5 }, effectiveAt: "2026-07-13T00:31:00Z", expiresAt: null, removedAt: null, sourceEventId: timeEntry.sourceEventId },
+  });
+  const affected = await store.projection("char_1", "2026-07-13T00:32:00Z");
+  assert.equal(affected.journey.era, "origin");
+  assert.equal(affected.journey.milestones.length, 1);
+  assert.equal(affected.conditions.length, 1);
+  assert.equal(affected.effectiveAttributes.resolve, affected.baseAttributes.resolve - 2);
+  assert.equal(affected.effectiveResources.focus, affected.baseResources.focus - 5);
+
+  const correction = await store.removeCondition({ characterId: "char_1", accountId: "member_1", conditionEntryId: condition.id, requestId: "recover_1", removedAt: "2026-07-13T00:33:00Z" });
+  const replay = await store.removeCondition({ characterId: "char_1", accountId: "member_1", conditionEntryId: condition.id, requestId: "recover_1", removedAt: "2026-07-13T00:33:00Z" });
+  assert.equal(replay.id, correction.id);
+  const recovered = await store.projection("char_1", "2026-07-13T00:34:00Z");
+  assert.equal(recovered.conditions.length, 0);
+  assert.deepEqual(recovered.effectiveAttributes, recovered.baseAttributes);
+  assert.deepEqual(recovered.effectiveResources, recovered.baseResources);
+  assert.equal(recovered.conditionLedger.length, 2);
+  await assert.rejects(() => store.removeCondition({ characterId: "char_1", accountId: "member_1", conditionEntryId: condition.id, requestId: "recover_2", removedAt: "2026-07-13T00:35:00Z" }), /already corrected/);
+});
+

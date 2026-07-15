@@ -34,6 +34,6 @@ export function firstSignalProposal(input: { characterId: string; sessionId: str
   };
 }
 
-export function firstSignalCondition(choice: FirstSignalChoice, sessionId: string) {
-  return choice === "force" ? { id: `signal-fatigue:${sessionId}`, definitionId: "signal-fatigue", definitionVersion: 1, scope: "session" as const, severity: 1, attributeModifiers: { focus: -5 }, explanation: "Forcing the unstable signal causes temporary session-scoped fatigue. Permanent attributes are unchanged." } : null;
+export function firstSignalCondition(choice: FirstSignalChoice, sessionId: string, sourceEventId = `first-signal:${sessionId}:force`, effectiveAt = new Date().toISOString()) {
+  return choice === "force" ? { id: `signal-fatigue:${sessionId}`, definitionId: "signal-fatigue", definitionVersion: 1, scope: "session" as const, campaignId: null, sessionId, severity: 1, attributeModifiers: {}, resourceModifiers: { focus: -5 }, effectiveAt, expiresAt: effectiveAt, removedAt: null, sourceEventId, explanation: "Forcing the unstable signal caused fatigue for that Signal Run. The condition remains in history, but the completed session no longer changes current capability." } : null;
 }

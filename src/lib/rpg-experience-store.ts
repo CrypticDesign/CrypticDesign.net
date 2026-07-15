@@ -8,11 +8,15 @@ import {
   TIME_RULE,
   attributeScoreForUsage,
   contextualAttributeUsage,
+  effectiveAttributes,
+  effectiveResources,
   levelProgress,
   maximumResources,
   type AttributeScores,
+  type CharacterCondition,
   type ContextVector,
 } from "./rpg-experience.ts";
+import { PROVISIONAL_JOURNEY_ERAS_V1, projectCharacterJourney } from "./character-journey.ts";
 
 export interface ExperienceActivityEvent {
   id: string;
@@ -59,9 +63,16 @@ export interface AttributeUsageEntry {
   recordedAt: string;
 }
 
-interface IdempotencyRecord { scope: string; requestId: string; payloadHash: string; timeEntryId: string }
-interface ExperienceData { events: ExperienceActivityEvent[]; timeLedger: TimeLedgerEntry[]; attributeLedger: AttributeUsageEntry[]; idempotency: IdempotencyRecord[] }
-const EMPTY_DATA: ExperienceData = { events: [], timeLedger: [], attributeLedger: [], idempotency: [] };
+export interface ConditionLedgerEntry extends CharacterCondition {
+  characterId: string;
+  reason: "applied" | "correction";
+  reversesEntryId: string | null;
+  recordedAt: string;
+}
+
+interface IdempotencyRecord { scope: string; requestId: string; payloadHash: string; resultId: string }
+interface ExperienceData { events: ExperienceActivityEvent[]; timeLedger: TimeLedgerEntry[]; attributeLedger: AttributeUsageEntry[]; conditionLedger: ConditionLedgerEntry[]; idempotency: IdempotencyRecord[] }
+const EMPTY_DATA: ExperienceData = { events: [], timeLedger: [], attributeLedger: [], conditionLedger: [], idempotency: [] };
 const queues = new Map<string, Promise<void>>();
 const hash = (value: unknown) => createHash("sha256").update(JSON.stringify(value)).digest("hex");
 
@@ -72,6 +83,13 @@ export interface RpgProjection {
   attributes: AttributeScores;
   attributeUsage: AttributeScores;
   resources: ReturnType<typeof maximumResources>;
+  baseAttributes: AttributeScores;
+  effectiveAttributes: AttributeScores;
+  baseResources: ReturnType<typeof maximumResources>;
+  effectiveResources: ReturnType<typeof maximumResources>;
+  conditions: CharacterCondition[];
+  conditionLedger: ConditionLedgerEntry[];
+  journey: ReturnType<typeof projectCharacterJourney>;
   events: ExperienceActivityEvent[];
   timeLedger: TimeLedgerEntry[];
   attributeLedger: AttributeUsageEntry[];
@@ -86,17 +104,31 @@ export class RpgExperienceStore {
   private readonly filePath: string;
   constructor(filePath: string) { this.filePath = path.resolve(filePath); }
 
-  async projection(characterId: string): Promise<RpgProjection> {
+  async projection(characterId: string, evaluatedAt = new Date().toISOString()): Promise<RpgProjection> {
     return this.withLock(async () => {
       const data = await this.readUnlocked();
       const events = data.events.filter((event) => event.characterId === characterId);
       const timeLedger = data.timeLedger.filter((entry) => entry.characterId === characterId);
       const attributeLedger = data.attributeLedger.filter((entry) => entry.characterId === characterId);
+      const conditionLedger = data.conditionLedger.filter((entry) => entry.characterId === characterId);
       const totalTime = Math.max(0, timeLedger.reduce((total, entry) => total + entry.delta, 0));
       const attributeUsage = addScores(attributeLedger);
       const attributes = Object.fromEntries(CORE_ATTRIBUTES.map((attribute) => [attribute, attributeScoreForUsage(Math.max(0, attributeUsage[attribute])).score])) as AttributeScores;
       const level = levelProgress(totalTime);
-      return { characterId, totalTime, level, attributes, attributeUsage, resources: maximumResources(attributes, level.level), events, timeLedger, attributeLedger };
+      const reversedConditionIds = new Set(conditionLedger.filter(({ reason }) => reason === "correction").map(({ reversesEntryId }) => reversesEntryId));
+      const conditions = conditionLedger.filter(({ reason, id }) => reason === "applied" && !reversedConditionIds.has(id));
+      const baseResources = maximumResources(attributes, level.level);
+      const effective = effectiveAttributes(attributes, conditions, evaluatedAt);
+      return {
+        characterId, totalTime, level, attributes, attributeUsage, resources: baseResources, events, timeLedger, attributeLedger,
+        baseAttributes: attributes,
+        effectiveAttributes: effective,
+        baseResources,
+        effectiveResources: effectiveResources(baseResources, conditions, evaluatedAt),
+        conditions,
+        conditionLedger,
+        journey: projectCharacterJourney({ totalTimeMinutes: totalTime, definitionVersion: 1, definitions: PROVISIONAL_JOURNEY_ERAS_V1, chapters: [], milestones: events.map((event) => ({ id: event.id, title: event.experienceId.replaceAll("-", " "), occurredAt: event.occurredAt })) }),
+      };
     });
   }
 
@@ -109,14 +141,14 @@ export class RpgExperienceStore {
       const replay = data.idempotency.find((item) => item.scope === scope && item.requestId === input.requestId);
       if (replay) {
         if (replay.payloadHash !== payloadHash) throw new Error("Idempotency key was reused with different experience data");
-        return data.timeLedger.find(({ id }) => id === replay.timeEntryId)!;
+        return data.timeLedger.find(({ id }) => id === replay.resultId)!;
       }
       if (data.events.some((event) => event.experienceId === input.experienceId && event.sessionId === input.sessionId)) throw new Error("Experience session was already recorded");
       const usage = contextualAttributeUsage(input);
       const event: ExperienceActivityEvent = { id: randomUUID(), characterId: input.characterId, accountId: input.accountId, experienceId: input.experienceId, experienceVersion: input.experienceVersion, sessionId: input.sessionId, source: input.source, verifiedActiveMinutes: input.verifiedActiveMinutes, context: input.context, challengeFactor: input.challengeFactor, noveltyFactor: input.noveltyFactor, valueFactor: input.valueFactor, outcome: input.outcome, evidenceIds: input.evidenceIds, occurredAt: input.occurredAt, recordedAt: input.recordedAt };
       const timeEntry: TimeLedgerEntry = { id: randomUUID(), characterId: input.characterId, sourceEventId: event.id, delta: input.verifiedActiveMinutes, reason: "verified_activity", reversesEntryId: null, ruleId: TIME_RULE.id, ruleVersion: TIME_RULE.version, levelRuleId: LEVEL_RULE.id, levelRuleVersion: LEVEL_RULE.version, recordedAt: input.recordedAt };
       const attributeEntry: AttributeUsageEntry = { id: randomUUID(), characterId: input.characterId, sourceEventId: event.id, usage, reason: "verified_activity", reversesEntryId: null, ruleId: ATTRIBUTE_RULE.id, ruleVersion: ATTRIBUTE_RULE.version, recordedAt: input.recordedAt };
-      data.events.push(event); data.timeLedger.push(timeEntry); data.attributeLedger.push(attributeEntry); data.idempotency.push({ scope, requestId: input.requestId, payloadHash, timeEntryId: timeEntry.id });
+      data.events.push(event); data.timeLedger.push(timeEntry); data.attributeLedger.push(attributeEntry); data.idempotency.push({ scope, requestId: input.requestId, payloadHash, resultId: timeEntry.id });
       await this.writeUnlocked(data); return timeEntry;
     });
   }
@@ -133,18 +165,55 @@ export class RpgExperienceStore {
       const replay = data.idempotency.find((item) => item.scope === scope && item.requestId === input.requestId);
       if (replay) {
         if (replay.payloadHash !== payloadHash) throw new Error("Idempotency key was reused with a different correction");
-        return data.timeLedger.find(({ id }) => id === replay.timeEntryId)!;
+        return data.timeLedger.find(({ id }) => id === replay.resultId)!;
       }
       if (data.timeLedger.some((entry) => entry.reversesEntryId === original.id)) throw new Error("Time entry is already reversed");
       const timeEntry: TimeLedgerEntry = { ...original, id: randomUUID(), delta: -original.delta, reason: "correction", reversesEntryId: original.id, recordedAt: input.recordedAt };
       const attributeEntry: AttributeUsageEntry = { ...originalUsage, id: randomUUID(), usage: Object.fromEntries(CORE_ATTRIBUTES.map((attribute) => [attribute, -originalUsage.usage[attribute]])) as AttributeScores, reason: "correction", reversesEntryId: originalUsage.id, recordedAt: input.recordedAt };
-      data.timeLedger.push(timeEntry); data.attributeLedger.push(attributeEntry); data.idempotency.push({ scope, requestId: input.requestId, payloadHash, timeEntryId: timeEntry.id });
+      data.timeLedger.push(timeEntry); data.attributeLedger.push(attributeEntry); data.idempotency.push({ scope, requestId: input.requestId, payloadHash, resultId: timeEntry.id });
       await this.writeUnlocked(data); return timeEntry;
     });
   }
 
+  async applyCondition(input: { characterId: string; accountId: string; condition: Omit<CharacterCondition, "id"> & { id?: string }; requestId: string; recordedAt: string }) {
+    return this.withLock(async () => {
+      const data = await this.readUnlocked();
+      const scope = `rpg-condition:${input.accountId}:${input.characterId}`;
+      const payloadHash = hash(input.condition);
+      const replay = data.idempotency.find((item) => item.scope === scope && item.requestId === input.requestId);
+      if (replay) {
+        if (replay.payloadHash !== payloadHash) throw new Error("Idempotency key was reused with a different condition");
+        return data.conditionLedger.find(({ id }) => id === replay.resultId)!;
+      }
+      const entry: ConditionLedgerEntry = { ...input.condition, id: input.condition.id ?? randomUUID(), characterId: input.characterId, reason: "applied", reversesEntryId: null, recordedAt: input.recordedAt };
+      data.conditionLedger.push(entry);
+      data.idempotency.push({ scope, requestId: input.requestId, payloadHash, resultId: entry.id });
+      await this.writeUnlocked(data); return entry;
+    });
+  }
+
+  async removeCondition(input: { characterId: string; accountId: string; conditionEntryId: string; requestId: string; removedAt: string }) {
+    return this.withLock(async () => {
+      const data = await this.readUnlocked();
+      const original = data.conditionLedger.find((entry) => entry.id === input.conditionEntryId && entry.characterId === input.characterId && entry.reason === "applied");
+      if (!original) throw new Error("Condition entry not found");
+      const scope = `rpg-condition-correction:${input.accountId}:${input.characterId}`;
+      const payloadHash = hash({ conditionEntryId: input.conditionEntryId, removedAt: input.removedAt });
+      const replay = data.idempotency.find((item) => item.scope === scope && item.requestId === input.requestId);
+      if (replay) {
+        if (replay.payloadHash !== payloadHash) throw new Error("Idempotency key was reused with a different condition correction");
+        return data.conditionLedger.find(({ id }) => id === replay.resultId)!;
+      }
+      if (data.conditionLedger.some(({ reversesEntryId }) => reversesEntryId === original.id)) throw new Error("Condition entry is already corrected");
+      const correction: ConditionLedgerEntry = { ...original, id: randomUUID(), reason: "correction", reversesEntryId: original.id, removedAt: input.removedAt, recordedAt: input.removedAt };
+      data.conditionLedger.push(correction);
+      data.idempotency.push({ scope, requestId: input.requestId, payloadHash, resultId: correction.id });
+      await this.writeUnlocked(data); return correction;
+    });
+  }
+
   private async readUnlocked(): Promise<ExperienceData> {
-    try { return JSON.parse(await readFile(this.filePath, "utf8")) as ExperienceData; }
+    try { const data = JSON.parse(await readFile(this.filePath, "utf8")) as ExperienceData; return { ...data, conditionLedger: data.conditionLedger ?? [], idempotency: (data.idempotency ?? []).map((item) => ({ ...item, resultId: item.resultId ?? (item as IdempotencyRecord & { timeEntryId?: string }).timeEntryId! })) }; }
     catch (error) { if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error; await this.writeUnlocked(EMPTY_DATA); return structuredClone(EMPTY_DATA); }
   }
   private async writeUnlocked(data: ExperienceData) { await mkdir(path.dirname(this.filePath), { recursive: true }); const temporary = `${this.filePath}.${process.pid}.${randomUUID()}.tmp`; await writeFile(temporary, JSON.stringify(data, null, 2), "utf8"); await rename(temporary, this.filePath); }
