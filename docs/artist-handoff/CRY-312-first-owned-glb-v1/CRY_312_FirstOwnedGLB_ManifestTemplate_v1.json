@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "assetId": "cry-cf-first-owned-test-character-v1",
+  "assetType": "character-glb",
+  "format": "glb",
+  "localPath": "/assets/character-forge/CRY_CF_FirstOwnedTestCharacter_v1.glb",
+  "sha256": "REPLACE_WITH_LOWERCASE_SHA256",
+  "owner": "Cryptic Design",
+  "designOwner": "Robert K. Croft",
+  "rights": {
+    "provenanceRecordId": "REPLACE_WITH_IMMUTABLE_RECORD_ID",
+    "approvedForTesting": false,
+    "thirdPartyRestrictions": [],
+    "contributors": [],
+    "sourceAssets": [],
+    "tools": [],
+    "aiAssistance": null
+  },
+  "conceptReference": {
+    "assetId": "cry-cf-first-test-character-model-sheet-v1",
+    "file": "CRY_CF_FirstTestCharacter_ModelSheet_v1.png",
+    "sha256": "52b6d27a289f6ea436adfab77c6ee6e448c61633c1b879777f3943f4b9f1339f",
+    "approvalScope": "Approved for 3D production planning"
+  },
+  "export": {
+    "version": "v1",
+    "sourceApplication": "REPLACE",
+    "sourceApplicationVersion": "REPLACE",
+    "exporter": "REPLACE",
+    "exporterVersion": "REPLACE",
+    "units": "meters",
+    "forwardAxis": "REPLACE",
+    "upAxis": "REPLACE",
+    "compression": "REPLACE",
+    "gltfExtensionsUsed": [],
+    "gltfExtensionsRequired": []
+  },
+  "rig": {
+    "id": "cry-humanoid-v1",
+    "version": "v1",
+    "bindPose": "REPLACE",
+    "attachmentPoints": ["head", "chest", "back", "left-hand", "right-hand"]
+  },
+  "budget": {
+    "id": "CRY-312-3D-BUDGET-v1",
+    "targetProfile": "mobile"
+  },
+  "metrics": {
+    "fileBytes": 0,
+    "triangles": 0,
+    "drawCalls": 0,
+    "textureBytes": 0,
+    "maxTextureDimension": 0,
+    "bones": 0,
+    "morphTargets": 0,
+    "materialSlots": 0,
+    "vertices": 0,
+    "animationClips": 0,
+    "maxJointInfluencesPerVertex": 0
+  },
+  "validation": {
+    "validator": "Khronos glTF Validator",
+    "validatorVersion": "REPLACE",
+    "validatedAt": "REPLACE_WITH_ISO_8601_TIMESTAMP",
+    "errors": 0,
+    "warnings": 0,
+    "reportFile": "REPLACE"
+  },
+  "approvals": {
+    "artistDeliveryAt": null,
+    "provenanceApprovedBy": null,
+    "provenanceApprovedAt": null,
+    "testingApprovedBy": null,
+    "testingApprovedAt": null,
+    "productionApprovedBy": null,
+    "productionApprovedAt": null
+  },
+  "tracking": {
+    "jira": "CRY-312",
+    "confluencePageId": "437125121"
+  },
+  "notes": [],
+  "deviationsFromModelSheet": []
+}
