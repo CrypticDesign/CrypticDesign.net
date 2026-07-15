@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "assetId": "cry-cf-first-test-character-model-sheet-v1",
+  "assetType": "concept-model-sheet",
+  "file": "CRY_CF_FirstTestCharacter_ModelSheet_v1.png",
+  "sha256": "52b6d27a289f6ea436adfab77c6ee6e448c61633c1b879777f3943f4b9f1339f",
+  "owner": "Cryptic Design",
+  "designOwner": "Robert K. Croft",
+  "approvedAt": "2026-07-15",
+  "approvalScope": "Approved for 3D production planning",
+  "productionStatus": "Not a finished GLB and not approval of the complete launch library",
+  "generation": {
+    "method": "OpenAI built-in image generation",
+    "sourceReference": "Internal Singularis character art supplied by Robert K. Croft",
+    "referenceUse": "Visual-language and fidelity reference only",
+    "propertyNeutralization": "Singularis branding, insignia, property-specific equipment, and astronaut costume details excluded"
+  },
+  "figma": {
+    "fileKey": "CjZrOKGoy7zKKFsO1QyPzx",
+    "pageId": "1:2",
+    "frameId": "92:2",
+    "imageNodeId": "92:6"
+  },
+  "tracking": {
+    "jira": "CRY-312",
+    "confluencePageId": "437125121"
+  }
+}
