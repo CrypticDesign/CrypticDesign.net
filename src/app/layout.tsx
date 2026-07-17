@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://crypticdesign.net"),
   title: { default: "Cryptic Design", template: "%s | Cryptic Design" },
   description: "CrypticDesign.net — entertainment, professional services, and original releases.",
-  openGraph: { siteName: "Cryptic Design", type: "website", images: ["/share-placeholder.svg"] },
+  openGraph: { siteName: "Cryptic Design", type: "website", images: ["/share.png"] },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -11,6 +11,16 @@ const nextConfig: NextConfig = {
       { source: "/personal/collections", destination: "/creative-works", permanent: false },
       { source: "/personal/:lane", destination: "/releases", permanent: false },
       { source: "/personal", destination: "/", permanent: false },
+      { source: "/worlds", destination: "/entertainment", permanent: false },
+      { source: "/labs", destination: "/entertainment/visual-studies", permanent: false },
+      { source: "/creative-works", destination: "/entertainment", permanent: false },
+      { source: "/creative-works/visual-studies", destination: "/entertainment/visual-studies", permanent: false },
+      // PROVISIONAL targets — Robert to confirm:
+      { source: "/creative-works/singularis", destination: "/products/singularis", permanent: false },
+      { source: "/creative-works/holistic-ux", destination: "/professional/articles", permanent: false },
+      { source: "/creative-works/crypticdesign-net", destination: "/professional", permanent: false },
+      // Safety net for any unmapped legacy slug:
+      { source: "/creative-works/:slug*", destination: "/entertainment", permanent: false },
     ];
   },
 };

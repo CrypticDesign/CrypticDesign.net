@@ -11,8 +11,7 @@ export default function SearchPage() {
     <main className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-16 sm:px-6">
       <h1 className="text-3xl font-semibold text-white">Search</h1>
       <p className="max-w-xl text-neutral-400">
-        Site-wide search across releases arrives with the basic search release
-        (CRY-259).
+        Site-wide search across releases is coming soon.
       </p>
       <input
         type="search"
