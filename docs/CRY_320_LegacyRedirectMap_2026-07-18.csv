@@ -1,0 +1,22 @@
+source_url,target_path,status,authority,evidence,notes
+https://www.crypticdesign.net/,/,proposed,CRY-344,required,Confirm against live inventory
+https://www.crypticdesign.net/aboutcrypticdesign,/professional,proposed,CRY-344,public-route-confirmed,Capture and reconcile approved company copy
+https://www.crypticdesign.net/products,/products,retain-path-content-migration,CRY-344,public-route-confirmed,Do not migrate retired Soundwave positioning as active
+https://www.crypticdesign.net/services,/professional,proposed,CRY-344,public-route-confirmed,Map service detail content before cutover
+https://www.crypticdesign.net/portfolio,/professional/case-studies,proposed,CRY-344,public-route-confirmed,Rights review required for contracted work
+https://www.crypticdesign.net/articles,/professional/articles,proposed,CRY-344,public-route-confirmed,Inventory every article slug before approval
+https://www.crypticdesign.net/contact,/professional/contact,proposed,CRY-344,public-route-confirmed,Preserve form destination and consent evidence
+https://www.crypticdesign.net/store,TBD,blocked-owner-decision,CRY-344,public-route-confirmed,Commerce catalog and fulfillment disposition required
+https://www.crypticdesign.net/privacy-policy,TBD,blocked-content-migration,CRY-344,public-route-confirmed,Preserve legal text and provide canonical policy destination
+/personal,/,implemented-temporary,CRY-255,next.config.ts,Review permanence at cutover
+/personal/library,/library,implemented-temporary,CRY-255,next.config.ts,Account-adjacent route excluded from public sitemap
+/personal/creative-labs,/entertainment/visual-studies,implemented-temporary,CRY-344,next.config.ts,Direct Sitemap v18 target
+/personal/rooms,/entertainment,implemented-temporary,CRY-344,next.config.ts,Direct Sitemap v18 target
+/personal/collections,/entertainment,implemented-temporary,CRY-344,next.config.ts,Direct Sitemap v18 target
+/worlds,/entertainment,implemented-temporary,CRY-266,next.config.ts,Review permanence at cutover
+/labs,/entertainment/visual-studies,implemented-temporary,CRY-266,next.config.ts,Review permanence at cutover
+/creative-works,/entertainment,implemented-temporary,CRY-266,next.config.ts,Review permanence at cutover
+/creative-works/visual-studies,/entertainment/visual-studies,implemented-temporary,CRY-266,next.config.ts,Review permanence at cutover
+/creative-works/singularis,/products/singularis,provisional,Robert decision,next.config.ts,Confirm before permanent redirect
+/creative-works/holistic-ux,/professional/articles,provisional,Robert decision,next.config.ts,Confirm before permanent redirect
+/creative-works/crypticdesign-net,/professional,provisional,Robert decision,next.config.ts,Confirm before permanent redirect

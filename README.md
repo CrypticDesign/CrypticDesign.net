@@ -44,8 +44,8 @@ src/app/    App Router routes, layouts, global styles
 
 ## Source of truth
 
-- Architecture/IA: Confluence — "Corrected IA and Native Feature Taxonomy", "Native Audio Feature Correction", "MVP Boundary by Native Feature Set"
-- Sitemap: FigJam — CrypticDesign.net Sitemap v11
+- Architecture/IA: Confluence — "CrypticDesign.net — Creator-Owned Entertainment Operating System"
+- Sitemap: FigJam — CrypticDesign.net Sitemap v18, section `82:3118`
 - Executable work: Jira — epic CRY-242
 - Implementation: this repository
 
