@@ -15,7 +15,7 @@ export default function ReleaseIndex({
   return (
     <main className="shell page-stack">
       <header className="art-field grid min-h-64 items-end border border-border p-6 sm:p-8 lg:grid-cols-[1fr_.7fr]">
-        <div className="flex flex-col gap-3">
+        <div className="flex min-w-0 flex-col gap-3">
         <span className="eyebrow text-accent-cyan">Entertainment channel</span>
         <h1 className="display-title text-white">{title}</h1>
         <p className="max-w-2xl text-neutral-400">{description}</p>

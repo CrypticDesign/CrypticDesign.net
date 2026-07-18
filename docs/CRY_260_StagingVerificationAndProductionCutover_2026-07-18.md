@@ -2,9 +2,9 @@
 
 **Owner:** Robert Croft  
 **Prepared:** 2026-07-18  
-**Status:** Staging verified; production cutover blocked by two launch issues  
+**Status:** Staging launch blockers resolved; production cutover awaiting Robert approval  
 **Staging:** https://demo.crypticdesign.net/  
-**Verified commit:** `3eec770be8eba2a370f5614a3d9bfba0ed36628c`
+**Verified source:** GitHub `main`; record the final release SHA at the cutover approval gate
 
 ## Verification summary
 
@@ -14,14 +14,18 @@
 - All CRY-260 legacy routes returned the intended temporary redirects.
 - Visual Studies and the custom 404 render cleanly at desktop width.
 - Visual Studies renders cleanly at 390 × 844 mobile width.
+- Visual Studies has no horizontal overflow at 768px, 1024px, or desktop width.
 - The 1200 × 630 social-share image has strong contrast, safe margins, and readable brand hierarchy.
+- The homepage emits `og:url`, complete structured Open Graph image metadata, and the existing `summary_large_image` Twitter/X card.
 - ESLint, `tsc --noEmit`, and the Next.js production build passed before deployment.
 
-## Production blockers
+## Resolved staging blockers
 
 ### 1. Tablet horizontal overflow
 
 At 768 × 1024, the primary navigation and the Visual Studies hero heading extend beyond the right edge of the viewport. The mobile layout at 390px does not show the same defect.
+
+**Resolution:** The wrapped header breakpoint now activates at 900px, and the release hero content has a defensive minimum-width constraint. Responsive verification passes without horizontal overflow.
 
 **Acceptance criteria**
 
@@ -34,6 +38,8 @@ At 768 × 1024, the primary navigation and the Visual Studies hero heading exten
 
 The staging homepage currently emits `og:title`, `og:type`, `og:image`, `og:description`, and `og:site_name`, plus a complete `summary_large_image` Twitter/X card. It does not emit the required Open Graph `og:url` property. Recommended structured image properties are also absent: `og:image:type`, `og:image:width`, `og:image:height`, and `og:image:alt`.
 
+**Resolution:** Root metadata now emits the production `og:url`, PNG type, 1200 × 630 dimensions, descriptive image alt text, and the existing Twitter/X card fields.
+
 **Acceptance criteria**
 
 - Emit `og:url` using the production canonical URL.
@@ -45,13 +51,13 @@ The staging homepage currently emits `og:title`, `og:type`, `og:image`, `og:desc
 
 ### Pre-cutover
 
-- [ ] Resolve the tablet overflow blocker and verify responsive acceptance criteria.
-- [ ] Complete Open Graph metadata and verify the rendered `<head>`.
-- [ ] Run `npm run lint`, `npx tsc --noEmit`, and `npm run build`.
-- [ ] Smoke-test every staging sitemap URL and all legacy redirects.
-- [ ] Confirm `robots.txt` allows public pages and blocks `/account/` and `/api/`.
-- [ ] Confirm `share.png` is 1200 × 630, publicly accessible, and returned as `image/png`.
-- [ ] Confirm FigJam sitemap v18 remains aligned with the deployed routes.
+- [x] Resolve the tablet overflow blocker and verify responsive acceptance criteria.
+- [x] Complete Open Graph metadata and verify the rendered `<head>`.
+- [x] Run `npm run lint`, `npx tsc --noEmit`, and `npm run build`.
+- [x] Smoke-test every staging sitemap URL and all legacy redirects.
+- [x] Confirm `robots.txt` allows public pages and blocks `/account/` and `/api/`.
+- [x] Confirm `share.png` is 1200 × 630, publicly accessible, and returned as `image/png`.
+- [x] Confirm FigJam sitemap v18 remains aligned with the deployed routes.
 - [ ] Record the release commit SHA and a rollback commit/deployment target.
 
 ### Cutover approval gate
@@ -95,13 +101,13 @@ Rollback means restoring the previously recorded production routing/deployment t
 
 **CRY-260 staging verification — 2026-07-18**
 
-Commit `3eec770` is deployed to `https://demo.crypticdesign.net/`. All 28 sitemap URLs return HTTP 200, all approved legacy redirects resolve correctly, and launch primitives are live: robots, sitemap, custom 404, app icon, Visual Studies, and the 1200 × 630 share image. Desktop and 390px mobile visual checks pass. Production cutover remains blocked by horizontal overflow at the 768px tablet breakpoint and incomplete Open Graph metadata (`og:url` plus recommended structured image properties). Lint, TypeScript, and production build pass. FigJam sitemap v18 is synchronized.
+The latest GitHub `main` deployment is verified at `https://demo.crypticdesign.net/`. All 28 sitemap URLs return HTTP 200, all approved legacy redirects resolve correctly, and launch primitives are live: robots, sitemap, custom 404, app icon, Visual Studies, and the 1200 × 630 share image. Responsive checks pass at mobile, tablet, 1024px, and desktop widths without horizontal overflow. Required Open Graph URL and structured image metadata are present, and the existing Twitter/X large-card metadata is preserved. Lint, TypeScript, and production build pass. FigJam sitemap v18 is synchronized. Production cutover now awaits Robert's explicit approval and a recorded release/rollback SHA.
 
 ## Confluence-ready status
 
 ### Decision
 
-Keep `demo.crypticdesign.net` as the temporary staging source of truth. Do not switch production DNS or retire the Squarespace rollback path until the two launch blockers are resolved and Robert approves the production cutover.
+Keep `demo.crypticdesign.net` as the temporary staging source of truth. The identified launch blockers are resolved; do not switch production DNS or retire the Squarespace rollback path until Robert approves the production cutover and the release/rollback SHAs are recorded.
 
 ### Evidence
 
@@ -115,4 +121,4 @@ Keep `demo.crypticdesign.net` as the temporary staging source of truth. Do not s
 
 ### Next action
 
-Create and verify a small responsive/metadata fix, then rerun the pre-cutover checklist and return the production authority decision to Robert.
+Record the approved release and rollback SHAs, then return the production cutover authority decision to Robert.
