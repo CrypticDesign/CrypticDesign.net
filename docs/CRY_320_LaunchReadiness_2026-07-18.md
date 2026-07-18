@@ -65,9 +65,9 @@ Safe staging, build, package, redirect preparation, preservation planning, and s
 - Packaged-server smoke: pass for all front doors, releases, products, Cryptic Signal, inquiry, robots, sitemap, icon, Open Graph image, legacy redirects, 404 handling, and the production backend boundary.
 - `https://demo.crypticdesign.net` automated smoke: pass for the same route set, including expected 404 and 503 responses. This does not replace the outstanding physical desktop/tablet/mobile two-browser visual and keyboard matrix.
 - Real-browser staging check at 1440 × 900: all five canonical primary-navigation destinations are visible, with no horizontal overflow, missing image alt attributes, empty links, or captured console warnings/errors on My Home.
-- Real-browser staging check at 390 × 844: My Home, Entertainment, and Professional are visible, but Account and Search are hidden. The current branch contains the responsive rule intended to expose all five items; the deployed staging build has not received or validated that correction. Classify staging as Severity 2 until the branch is deployed and rechecked.
+- Real-browser staging check at 390 × 844 after publication: My Home, Entertainment, Professional, Account, and Search are all visible; no horizontal overflow, missing image alt attributes, empty links, or captured console warnings/errors were found on My Home. The prior mobile navigation Severity 2 is resolved on staging.
 - Browser-engine coverage: one Chromium-family engine was exercised. Chrome and Edge are installed locally but both use Chromium; no second engine is available on this workstation.
-- Netlify staging configuration: production branch remains `main`; branch deploys are restricted to the additional named branch `codex/cry-320-launch-readiness`. The branch deploy must build successfully and be explicitly promoted before `demo.crypticdesign.net` changes.
+- Netlify staging deployment: production branch remains `main`; branch deploys are restricted to the additional named branch `codex/cry-320-launch-readiness`. Deploy `6a5bcee8ea0eda000883a78b` built commit `9ab0f33` successfully in 56 seconds and was explicitly published to `https://demo.crypticdesign.net`. The full HTTP suite and 1440 × 900 / 390 × 844 browser checks passed after publication.
 
 ## Authorities reviewed
 
@@ -81,7 +81,7 @@ Historical Confluence rows still naming Cryptic Design Audio conflict with the n
 ## Current defect classification
 
 - Severity 1: none known locally.
-- Severity 2: the deployed staging build hides Account and Search at 390 px. The current branch contains the responsive-navigation correction, but staging must be updated and visually revalidated before this defect can close.
+- Severity 2: none known in the validated staging launch-critical path after publishing the responsive-navigation correction.
 - Severity 3: two moderate transitive PostCSS audit findings without a safe npm-proposed remediation; monitor upstream Next.js.
 - Severity 3: the legacy public Squarespace products page still positions Soundwave as active; this is contained to the preserved legacy site but must be corrected by CRY-344 before canonical cutover.
 - Severity 4: Node 22.12.0 engine warning in the local workstation; use Node 20.19+ or 22.13+ for deployment and future clean installs.
@@ -93,18 +93,18 @@ Historical Confluence rows still naming Cryptic Design Audio conflict with the n
 | Clean production build | Verified | Build and local checks pass. |
 | Canonical HTTPS domain on existing GoDaddy hosting | Blocked | Requires GoDaddy account inspection, compatible Node runtime, production upload, and Robert approval. |
 | Sitemap v18 demo journey | Locally and staging verified | Packaged-server and deployed staging smoke routes pass; physical two-browser matrix remains. |
-| Global navigation exactly My Home, Entertainment, Professional, Account, Search | Branch prepared; staging blocked | Header labels and responsive correction are present in the branch, but current staging hides Account and Search at 390 px. |
+| Global navigation exactly My Home, Entertainment, Professional, Account, Search | Verified on staging | All five destinations are visible at 1440 × 900 and 390 × 844 after deploy `6a5bcee8ea0eda000883a78b`. |
 | Soundwave/CDA absent; Cryptic Signal correct | Verified locally | Public-source search found no retired terms; `/audio` and product copy use Cryptic Signal. |
 | Preview not represented as live backend | Verified | Copy discloses local/browser-only behavior; production sandbox API returns 503. |
 | Desktop/tablet/mobile, keyboard, two-browser smoke | Partial | Responsive/focus implementation audited; physical two-engine browser matrix still required. |
-| No known Severity 1/2 launch-path defect | Blocked on staging | No Severity 1 is known; the deployed mobile-navigation mismatch remains Severity 2 until redeployed and revalidated. |
+| No known Severity 1/2 launch-path defect | Verified on staging | No Severity 1 or Severity 2 defect is known in the validated staging launch-critical path. |
 | Metadata, redirects, robots, sitemap, favicon, OG, alt text, 404/fallback | Automated staging verified | Build routes, production-package smoke, and deployed-host smoke pass; visual/browser review remains. |
 | Reproducible deploy and rollback | Prepared | Standalone archive, checksum, smoke script, backup/rollback procedure documented. |
 | Squarespace archive complete | Blocked | Evidence checklist exists; CRY-344 inventory/capture must complete. |
 | No paid infrastructure or unapproved backend | Verified | No paid service added; production sandbox disabled. |
 | Squarespace cancellation after approval | Gated | No cancellation or account change performed. |
 
-Current recommendation: **no-go for canonical production cutover** until the CRY-320 branch is deployed to staging and the mobile navigation is revalidated, CRY-344 completes, GoDaddy Node-hosting facts are verified, Squarespace evidence is captured, the two-browser responsive matrix passes, and Robert explicitly approves cutover.
+Current recommendation: **no-go for canonical production cutover** until CRY-344 completes, GoDaddy Node-hosting facts are verified, Squarespace evidence is captured, the two-browser responsive matrix passes, and Robert explicitly approves cutover.
 
 ## Approval gates
 
