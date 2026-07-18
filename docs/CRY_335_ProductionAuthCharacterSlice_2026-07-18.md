@@ -43,6 +43,12 @@ Jira: CRY-335
 - `npm audit` reports two moderate findings in Next.js's nested PostCSS dependency (GHSA-qx2v-qp2m-jg93). npm currently offers only an invalid major downgrade path for this dependency graph; resolve or formally accept this risk before public production launch.
 - The confirmed test account and its character remain isolated test fixtures and should be removed or formally retained before production data initialization.
 
+## Netlify staging configuration
+
+- Branch deploys explicitly include `codex/cry-335-production-auth` while `main` remains the production branch.
+- The Supabase URL and publishable key are configured as branch-specific values for `codex/cry-335-production-auth`; they were not added to the production deploy context.
+- A generic manual deploy was canceled after Netlify identified its target as `main`; its deploy stage was skipped and the published production site was not changed.
+
 ## Rollback
 
 - Remove the Supabase environment variables from the staging deploy to return the application to its configured sandbox/disabled behavior.
