@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import AccountAccessForm from "@/components/AccountAccessForm";
 
 export const metadata: Metadata = {
   title: "Create Account",
   alternates: { canonical: "/account/create" },
-  description: "Preview CrypticDesign.net account onboarding and character creation.",
+  description: "Create a CrypticDesign.net account and persistent character.",
 };
 
 export default function CreateAccountPage() {
@@ -13,24 +14,12 @@ export default function CreateAccountPage() {
       <header className="flex flex-col gap-2">
         <h1 className="text-3xl font-semibold text-white">Create Account</h1>
         <p className="max-w-xl text-muted-foreground">
-          Preview account onboarding locally, then create the character that
-          carries your identity across the Entertainment Hub. This sandbox
-          creates no production account and sends no personal data.
+          Create a free member account, confirm your email, then build the character
+          that carries your identity across the Entertainment Hub.
         </p>
       </header>
-      <div className="panel max-w-xl p-5 text-sm text-muted-foreground">
-        The next step starts a temporary local preview session before showing
-        character creation. Membership, permissions, and purchased access
-        remain separate from character identity.
-      </div>
-      <div className="flex flex-wrap gap-3">
-        <Link href="/account/create-character" className="button">
-          Start local account preview
-        </Link>
-        <Link href="/account" className="button secondary">
-          Back to Account
-        </Link>
-      </div>
+      <AccountAccessForm mode="create" />
+      <div className="flex flex-wrap gap-3 text-sm"><Link href="/account/sign-in" className="text-accent-cyan hover:underline">Already have an account? Sign in</Link><Link href="/account" className="text-accent-cyan hover:underline">Back to Account</Link></div>
     </main>
   );
 }
