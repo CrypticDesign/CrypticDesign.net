@@ -27,7 +27,7 @@ Account inspection must verify the plan name, supported Node versions, applicati
 
 Run `npm ci`, lint, `npx tsc --noEmit`, tests, build, then `npm run package:deployment`. The archive and SHA-256 file are written to ignored `artifacts/`. On a compatible host, extract it, enter approved environment values through the host, set `PORT` if required, and start `node server.js`.
 
-Validated artifact: `artifacts/cry-320-standalone.zip` (25,126,136 bytes). SHA-256: `2d1075390d4777a656af0f15ce1f51a56f70f7820e30513b64e84ceb5ba0f09e`. Archive inspection found no `.env*` or `.data` entries.
+Validated artifact: `artifacts/cry-320-standalone.zip` (25,125,939 bytes). SHA-256: `71969698427692225c216fe0e894944a7fdaa90766885b4dff1e56598cd94194`. Archive inspection found no `.env*` or `.data` entries.
 
 ## Backup and rollback
 
@@ -35,7 +35,7 @@ Before upload or routing changes, record the approved release SHA, rollback SHA 
 
 ## Dependency decision
 
-CRY-344 must complete content migration, QA, and redirect handoff before CRY-320 final production cutover. Jira currently represents CRY-320 as blocking CRY-344, conflicting with the latest CRY-320 comment and canonical Live Site Content Migration Control page. Recommended correction: make CRY-320 **is blocked by** CRY-344. Do not change it without external-write approval.
+CRY-344 must complete content migration, QA, and redirect handoff before CRY-320 final production cutover. Jira was rechecked on 2026-07-18 and now correctly represents CRY-320 as **is blocked by** CRY-344. No dependency-link correction remains outstanding.
 
 Safe staging, build, package, redirect preparation, preservation planning, and smoke testing may continue before CRY-344 completes. Production cutover, canonical-domain replacement, and Squarespace cancellation may not.
 
@@ -54,6 +54,16 @@ Safe staging, build, package, redirect preparation, preservation planning, and s
 | Redirects and 404 | Pass | `/personal/creative-labs` → `/entertainment/visual-studies`; `/worlds` → `/entertainment`; unknown route returned 404. |
 | Backend-preview boundary | Pass | Production `POST /api/membership/session` returned 503; sandbox APIs remain disabled in production. |
 | Dependency audit | Conditional | Two moderate PostCSS advisories are reported through Next.js. npm offers only a breaking forced change; do not apply it. No user-supplied CSS serialization exists in the launch path. |
+
+## Revalidation evidence — 2026-07-18
+
+- `npm run lint` through `npm.cmd`: pass.
+- `tsc --noEmit`: pass.
+- `npm test`: pass, 91/91 tests.
+- `npm run build` through `npm.cmd`: pass, 53 static/SSG pages plus expected SSR/API routes.
+- `npm run package:deployment`: pass; archive and checksum above regenerated from the current branch.
+- Packaged-server smoke: pass for all front doors, releases, products, Cryptic Signal, inquiry, robots, sitemap, icon, Open Graph image, legacy redirects, 404 handling, and the production backend boundary.
+- `https://demo.crypticdesign.net` automated smoke: pass for the same route set, including expected 404 and 503 responses. This does not replace the outstanding physical desktop/tablet/mobile two-browser visual and keyboard matrix.
 
 ## Authorities reviewed
 
@@ -78,13 +88,13 @@ Historical Confluence rows still naming Cryptic Design Audio conflict with the n
 |---|---|---|
 | Clean production build | Verified | Build and local checks pass. |
 | Canonical HTTPS domain on existing GoDaddy hosting | Blocked | Requires GoDaddy account inspection, compatible Node runtime, production upload, and Robert approval. |
-| Sitemap v18 demo journey | Locally verified | Public smoke routes pass; final staging/browser matrix remains. |
+| Sitemap v18 demo journey | Locally and staging verified | Packaged-server and deployed staging smoke routes pass; physical two-browser matrix remains. |
 | Global navigation exactly My Home, Entertainment, Professional, Account, Search | Verified locally | Header labels present; responsive CSS retains all five. |
 | Soundwave/CDA absent; Cryptic Signal correct | Verified locally | Public-source search found no retired terms; `/audio` and product copy use Cryptic Signal. |
 | Preview not represented as live backend | Verified | Copy discloses local/browser-only behavior; production sandbox API returns 503. |
 | Desktop/tablet/mobile, keyboard, two-browser smoke | Partial | Responsive/focus implementation audited; physical two-engine browser matrix still required. |
 | No known Severity 1/2 launch-path defect | Verified locally | See classification above; external hosting/content blockers remain. |
-| Metadata, redirects, robots, sitemap, favicon, OG, alt text, 404/fallback | Locally verified | Build routes and production-package smoke pass; deployed-host verification remains. |
+| Metadata, redirects, robots, sitemap, favicon, OG, alt text, 404/fallback | Automated staging verified | Build routes, production-package smoke, and deployed-host smoke pass; visual/browser review remains. |
 | Reproducible deploy and rollback | Prepared | Standalone archive, checksum, smoke script, backup/rollback procedure documented. |
 | Squarespace archive complete | Blocked | Evidence checklist exists; CRY-344 inventory/capture must complete. |
 | No paid infrastructure or unapproved backend | Verified | No paid service added; production sandbox disabled. |
