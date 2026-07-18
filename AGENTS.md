@@ -2,9 +2,9 @@
 
 This repository is the implementation source of truth for the CrypticDesign.net platform (Jira epic CRY-242). Architecture lives in Confluence, executable work in Jira, and sitemap/IA in FigJam.
 
-## Locked platform model (SITEMAP v17 — Robert's current direction, 2026-07-13)
+## Locked platform model (SITEMAP v18 — Robert's current direction, 2026-07-17)
 
-- **The v17 "Three Front Doors" section on FigJam board `oen38yFKbFtgqx9LQKn38Y` is the canonical IA.** It preserves the release-platform model while defining clear personal, audience, and business entry points.
+- **The v18 "Three Front Doors" section on FigJam board `oen38yFKbFtgqx9LQKn38Y` is the canonical IA.** It preserves the release-platform model while defining clear personal, audience, and business entry points.
 - Global nav: **My Home · Entertainment · Professional · Account · Search**. Releases and products surface contextually rather than as primary navigation destinations.
 - **My Home** (`/`): personal member dashboard for character, progression, activity, library, interests, notifications, and settings. It is not a summary of Cryptic Design content.
 - **Entertainment Hub** (`/entertainment`): the complete audience front door for all releases, franchises, content categories, games, cinema, audio, rooms, visual studies, and experiments.
@@ -19,11 +19,17 @@ This repository is the implementation source of truth for the CrypticDesign.net 
 - **Professional Studio** (`/professional`): home, services and service detail, case studies, articles/research, contributing creators, contact, and inquiry.
 - Rights and visibility governance is non-negotiable: nothing renders publicly without passing `isPubliclyRenderable`.
 - Backend-heavy systems remain frontend previews until Robert explicitly approves backend work.
-- Do not derive current direction from Gate 1–4 Confluence locks, the "Corrected IA," or v9–v16 sitemap sections. Those are historical references superseded by v17.
+- Do not derive current direction from Gate 1–4 Confluence locks, the "Corrected IA," or v9–v17 sitemap sections. Those are historical references superseded by v18.
+
+## Deployment environments
+
+- **Temporary staging source of truth:** `https://demo.crypticdesign.net/`. Use this URL for deployment verification, route and redirect smoke tests, visual review, and pre-production acceptance until Robert explicitly promotes the build or names a replacement staging URL.
+- `https://crypticdesign.net/` and `https://www.crypticdesign.net/` remain production-facing domains and may continue serving the legacy site during staging. Do not interpret their state as evidence that the current Next.js staging deployment failed.
+- Production metadata may intentionally use `https://crypticdesign.net` for canonical, Open Graph, robots, sitemap, and host values while the build is staged at the temporary URL.
 
 ## Sitemap sync rule
 
-Any change to routes, navigation, or IA must bump the FigJam sitemap version on board `oen38yFKbFtgqx9LQKn38Y` in the same working session (current: v17). A stale sitemap caused costly direction swings; do not skip this.
+Any change to routes, navigation, or IA must bump the FigJam sitemap version on board `oen38yFKbFtgqx9LQKn38Y` in the same working session (current: v18). A stale sitemap caused costly direction swings; do not skip this.
 
 ## Core doctrine
 
@@ -45,13 +51,13 @@ Any change to routes, navigation, or IA must bump the FigJam sitemap version on 
 
 - Use the approved CRY-271 vocabulary in `docs/CRY_271_PublicVocabularyProposal_2026-07-13.md` for all audience-facing copy.
 - Public copy names what a person can see, do, or expect. Keep implementation and governance terms such as `lane`, `surface`, `shell`, `placeholder`, `V1`, `review queue`, and field-level publication statuses internal.
-- Use **My Home**, **Entertainment Hub**, **Professional**, **Cryptic Signal**, **release**, **product**, **franchise**, **world**, **character**, and **My Library** consistently with their v17 meanings.
+- Use **My Home**, **Entertainment Hub**, **Professional**, **Cryptic Signal**, **release**, **product**, **franchise**, **world**, **character**, and **My Library** consistently with their v18 meanings.
 - CTAs begin with a specific verb and name the outcome or destination. Preview forms must state clearly when data is saved only in the browser and is not submitted.
 - `platform`, `system`, `rights`, and `production` remain valid when they add specific meaning; do not use them as vague interface filler.
 
 ## Source-of-truth links
 
-- FigJam: CrypticDesign.net Sitemap v17 — `figma.com/board/oen38yFKbFtgqx9LQKn38Y`, section `82:3118`
+- FigJam: CrypticDesign.net Sitemap v18 — `figma.com/board/oen38yFKbFtgqx9LQKn38Y`, section `82:3118`
 - Visual direction: `docs/CRY_VisualDirection_IntegratedScreens_2026-07-12.md`
 - Jira: CRY-242 and children
 - Historical Confluence IA pages remain reference-only where they conflict with v13.

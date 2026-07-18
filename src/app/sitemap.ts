@@ -7,7 +7,7 @@ const BASE = "https://crypticdesign.net";
 const STATIC_ROUTES = [
   "", "/entertainment", "/entertainment/arcade", "/entertainment/cinema",
   "/entertainment/creative-labs", "/entertainment/listening-rooms",
-  "/entertainment/virtual-rooms", "/professional", "/professional/articles",
+  "/entertainment/virtual-rooms", "/entertainment/visual-studies", "/professional", "/professional/articles",
   "/professional/case-studies", "/professional/creators", "/professional/contact",
   "/professional/inquiry", "/releases", "/products", "/audio", "/search",
 ];
