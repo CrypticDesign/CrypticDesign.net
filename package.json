@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
+    "package:deployment": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/package-deployment.ps1",
+    "smoke": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/smoke-test.ps1",
     "start": "next start",
     "lint": "eslint .",
     "test": "node --experimental-strip-types --test src/**/*.test.ts",
