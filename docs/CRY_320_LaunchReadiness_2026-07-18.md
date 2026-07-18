@@ -67,6 +67,7 @@ Safe staging, build, package, redirect preparation, preservation planning, and s
 - Real-browser staging check at 1440 × 900: all five canonical primary-navigation destinations are visible, with no horizontal overflow, missing image alt attributes, empty links, or captured console warnings/errors on My Home.
 - Real-browser staging check at 390 × 844: My Home, Entertainment, and Professional are visible, but Account and Search are hidden. The current branch contains the responsive rule intended to expose all five items; the deployed staging build has not received or validated that correction. Classify staging as Severity 2 until the branch is deployed and rechecked.
 - Browser-engine coverage: one Chromium-family engine was exercised. Chrome and Edge are installed locally but both use Chromium; no second engine is available on this workstation.
+- Netlify staging configuration: production branch remains `main`; branch deploys are restricted to the additional named branch `codex/cry-320-launch-readiness`. The branch deploy must build successfully and be explicitly promoted before `demo.crypticdesign.net` changes.
 
 ## Authorities reviewed
 
