@@ -73,4 +73,4 @@ Apply this rule to every assistant and agent response in every session loop:
 - FigJam: CrypticDesign.net Sitemap v18 — `figma.com/board/oen38yFKbFtgqx9LQKn38Y`, section `82:3118`
 - Visual direction: `docs/CRY_VisualDirection_IntegratedScreens_2026-07-12.md`
 - Jira: CRY-242 and children
-- Historical Confluence IA pages remain reference-only where they conflict with v13.
+- Historical Confluence IA pages remain reference-only where they conflict with v18.

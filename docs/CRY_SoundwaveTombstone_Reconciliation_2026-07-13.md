@@ -24,7 +24,7 @@ Playback, catalog, artist, playlist, release, submission, and analytics concepts
 
 ## Source-of-truth change
 
-Sitemap v17, FigJam section `82:3118`, supersedes v16 for this correction. The v16 section remains historical.
+Sitemap v18, FigJam section `82:3118`, is the current authority and supersedes v17 and earlier sections for this correction. The earlier sections remain historical.
 
 ## Constraints
 
