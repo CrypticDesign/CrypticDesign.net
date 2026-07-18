@@ -47,6 +47,19 @@ Any change to routes, navigation, or IA must bump the FigJam sitemap version on 
 - No backend-heavy systems without explicit approval.
 - No destructive file moves or broad refactors without approval.
 
+## Response completion protocol
+
+Apply this rule to every assistant and agent response in every session loop:
+
+1. End with a clear **Accomplished** summary stating what was completed, changed, verified, created, attempted, decided, or left unresolved.
+2. Follow the summary with exactly four numbered **Action options** that are concrete, materially distinct next steps.
+3. Add a fifth numbered option labeled **Do all** when executing all four actions together is relevant, authorized, and safe.
+4. When **Do all** is not relevant, state that it is not applicable rather than inventing unnecessary work.
+5. Keep the action menu grounded in the current task, Jira, Confluence, Figma, GitHub, repository state, and Robert's latest explicit direction.
+6. Distinguish successful mutations from failed attempts, permission errors, blockers, and pending work.
+7. Do not use the action menu to defer work that was already authorized and should have been completed in the current response.
+8. Apply this format after audits, mutations, drafts, troubleshooting, research, and partial completions.
+
 ## Public vocabulary
 
 - Use the approved CRY-271 vocabulary in `docs/CRY_271_PublicVocabularyProposal_2026-07-13.md` for all audience-facing copy.
