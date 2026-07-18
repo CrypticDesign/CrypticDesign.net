@@ -1,5 +1,5 @@
 /**
- * Product & Franchise homes — contextual destinations in Sitemap v17.
+ * Product & Franchise homes — contextual destinations in Sitemap v18.
  * Placeholder-safe owned IP only; frontend shells until backend approval.
  */
 import {
