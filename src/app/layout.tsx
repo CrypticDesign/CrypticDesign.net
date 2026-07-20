@@ -43,7 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <div className="footer-column"><strong>CONNECT</strong><Link href="/professional/contact">Contact</Link><Link href="/creator-tools">Creators</Link><Link href="/account">Account</Link></div>
               </div>
             </div>
-            <div className="site-footer__bottom"><p>© {new Date().getFullYear()} Cryptic Design LLC. All rights reserved.</p><p>PRIVACY &nbsp; ACCESSIBILITY &nbsp; TERMS</p></div>
+            <div className="site-footer__bottom"><p>© {new Date().getFullYear()} Cryptic Design LLC. All rights reserved.</p><p><Link href="/privacy" className="hover:text-white">PRIVACY</Link> &nbsp; ACCESSIBILITY &nbsp; <Link href="/terms" className="hover:text-white">TERMS</Link></p></div>
           </div>
         </footer>
       </body>
