@@ -50,19 +50,19 @@ const caseStudies: CaseStudy[] = [
       "Console editions retained the original PC version's depth while fitting the constraints and capabilities of console platforms, delivering a polished, user-friendly strategy experience.",
     shots: [
       {
-        src: "/images/case-studies/humankind-wonders.jpg",
-        alt: "Console optimized wonders management interface for Humankind featuring streamlined navigation and readability.",
-        caption: "Wonders management",
+        src: "/images/case-studies/humankind-turnstart.jpg",
+        alt: "Turn start gameplay interface for Humankind console editions emphasizing strategic awareness and streamlined player feedback.",
+        caption: "Turn start & awareness",
       },
       {
-        src: "/images/case-studies/humankind-military.jpg",
-        alt: "Military movement and tactical action interface designed for Humankind console gameplay and controller based strategy interactions.",
-        caption: "Tactical movement",
+        src: "/images/case-studies/humankind-deployment.jpg",
+        alt: "Deployment phase interface for Humankind console gameplay supporting tactical positioning and combat preparation.",
+        caption: "Tactical deployment",
       },
       {
-        src: "/images/case-studies/humankind-cities.jpg",
-        alt: "City management interface for Humankind designed to improve usability, navigation clarity, and readability.",
-        caption: "City management",
+        src: "/images/case-studies/humankind-contender.jpg",
+        alt: "Combat contender results screen focused on tactical clarity and battle outcome visualization in Humankind.",
+        caption: "Combat outcomes",
       },
       {
         src: "/images/case-studies/humankind-battle.jpg",
@@ -191,9 +191,9 @@ const caseStudies: CaseStudy[] = [
         caption: "Base management",
       },
       {
-        src: "/images/case-studies/risetopower-build.jpg",
-        alt: "Star Wars themed game interface showing resource counts, ship icons, and menu options for ships, items, mail, and guild.",
-        caption: "Build & progression HUD",
+        src: "/images/case-studies/risetopower-city.jpg",
+        alt: "City-building and strategy game interface with buildings, terrain, resource counters, and player controls.",
+        caption: "Base HUD & world view",
       },
     ],
   },
