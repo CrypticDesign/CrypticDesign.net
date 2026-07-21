@@ -60,3 +60,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   .feature-split.reverse{grid-template-columns:1fr}
   .feature-split.reverse .feature-split__image{order:0}
 }
+
+
+/* CRY-344: hero content had padding-top but no bottom padding, so CTAs sat
+   flush against the hero's lower edge whenever content filled the band.
+   Symmetric padding; min-height means shorter heroes are unaffected. */
+.visual-hero__content{padding-bottom:72px}
+@media(max-width:640px){.visual-hero__content{padding-bottom:48px}}

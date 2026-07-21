@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import PlayerDock from "@/components/PlayerDock";
+import CaseStudyGallery from "@/components/CaseStudyGallery";
 
 export const metadata: Metadata = {
   title: "Case Studies",
@@ -69,6 +70,41 @@ const caseStudies: CaseStudy[] = [
         alt: "Battle results interface for Humankind communicating tactical outcomes, rewards, and combat summaries.",
         caption: "Battle results",
       },
+      {
+        src: "/images/case-studies/humankind-attack.jpg",
+        alt: "Attack decision interaction flow designed for tactical gameplay clarity and responsive controller navigation.",
+        caption: "Attack decisions",
+      },
+      {
+        src: "/images/case-studies/humankind-unitturn.jpg",
+        alt: "Unit turn gameplay interface supporting tactical decision making and strategic interaction design.",
+        caption: "Unit turn flow",
+      },
+      {
+        src: "/images/case-studies/humankind-unitresults.jpg",
+        alt: "Unit results interface providing streamlined combat feedback and controller optimized tactical interaction.",
+        caption: "Unit results",
+      },
+      {
+        src: "/images/case-studies/humankind-opponent.jpg",
+        alt: "Opponent turn state interface designed to maintain gameplay clarity and pacing during large scale strategy sessions.",
+        caption: "Opponent turn state",
+      },
+      {
+        src: "/images/case-studies/humankind-turnend.jpg",
+        alt: "Turn end interaction systems featuring strategic notifications, gameplay transitions, and console optimized usability.",
+        caption: "Turn end transitions",
+      },
+      {
+        src: "/images/case-studies/humankind-wire-city.jpg",
+        alt: "Wireframe UX concept for city construction systems and vertical navigation flows.",
+        caption: "Wireframe — city construction",
+      },
+      {
+        src: "/images/case-studies/humankind-wire-pop.jpg",
+        alt: "Population management dialog wireframes focused on readability, interaction flow, and strategic decision support.",
+        caption: "Wireframe — population dialogs",
+      },
     ],
   },
   {
@@ -110,6 +146,21 @@ const caseStudies: CaseStudy[] = [
         src: "/images/case-studies/winreality-components.png",
         alt: "Detailed breakdown of UI components within the pitcher selection system, ensuring usability and clarity.",
         caption: "UI component system",
+      },
+      {
+        src: "/images/case-studies/winreality-cards.png",
+        alt: "Comparison of different UI styles for drill selection cards, balancing readability and engagement.",
+        caption: "Drill card explorations",
+      },
+      {
+        src: "/images/case-studies/winreality-grid.png",
+        alt: "Screen space resolution grid — a UI layout reference for optimal spacing and visual hierarchy across resolutions in VR.",
+        caption: "Screen-space layout grid",
+      },
+      {
+        src: "/images/case-studies/winreality-logo.jpg",
+        alt: "WIN Reality brand mark in purple on black, part of the refreshed visual theme.",
+        caption: "Brand mark",
       },
     ],
   },
@@ -153,6 +204,36 @@ const caseStudies: CaseStudy[] = [
         alt: "Button styles within the WellSky design language system including contained, disabled, and focused states across light and dark themes.",
         caption: "Component states",
       },
+      {
+        src: "/images/case-studies/wellsky-nav-menu.jpg",
+        alt: "Expanded primary navigation menu offering access to Patients, Orders, Inventory, Product Testing, Administration, and Billing.",
+        caption: "Expanded navigation",
+      },
+      {
+        src: "/images/case-studies/wellsky-search.jpg",
+        alt: "Search bar functionality allowing users to type or scan for specific patient or inventory details.",
+        caption: "Search & scan",
+      },
+      {
+        src: "/images/case-studies/wellsky-testing.jpg",
+        alt: "Product testing submenu enabling selection of bacterial platelet, ABO, unit, and automated testing types.",
+        caption: "Product testing flows",
+      },
+      {
+        src: "/images/case-studies/wellsky-navdesktop.jpg",
+        alt: "Desktop navigation guidelines detailing top main navigation and left side navigation interaction patterns.",
+        caption: "Navigation guidelines",
+      },
+      {
+        src: "/images/case-studies/wellsky-material.jpg",
+        alt: "Explanation of the adoption of Material Design principles to create a unified visual language across platforms.",
+        caption: "Material foundations",
+      },
+      {
+        src: "/images/case-studies/wellsky-color.jpg",
+        alt: "Guide to color implementation in the design language system covering primary, secondary, and tertiary roles.",
+        caption: "Color system",
+      },
     ],
   },
   {
@@ -194,6 +275,36 @@ const caseStudies: CaseStudy[] = [
         src: "/images/case-studies/risetopower-city.jpg",
         alt: "City-building and strategy game interface with buildings, terrain, resource counters, and player controls.",
         caption: "Base HUD & world view",
+      },
+      {
+        src: "/images/case-studies/risetopower-shipyard2.jpg",
+        alt: "Fleet production interface focused on ship construction, tactical planning, and mobile strategy gameplay systems.",
+        caption: "Fleet production",
+      },
+      {
+        src: "/images/case-studies/risetopower-destroyer.jpg",
+        alt: "Ship detail interface for an Imperial Star Destroyer showing stats, resources, and upgrade or build options.",
+        caption: "Ship detail & upgrades",
+      },
+      {
+        src: "/images/case-studies/risetopower-buildmenu.jpg",
+        alt: "Fleet control upgrade systems focused on ship progression, tactical customization, and strategic gameplay usability.",
+        caption: "Build & upgrade menu",
+      },
+      {
+        src: "/images/case-studies/risetopower-guild.jpg",
+        alt: "Guild and coalition interface with tabs, statistics, and notifications set against a galaxy background.",
+        caption: "Guild & coalition",
+      },
+      {
+        src: "/images/case-studies/risetopower-popup.jpg",
+        alt: "Confirmation dialog systems supporting player decisions and streamlined mobile gameplay interaction workflows.",
+        caption: "Confirmation dialogs",
+      },
+      {
+        src: "/images/case-studies/risetopower-terrain.jpg",
+        alt: "Science fiction strategy base view showing buildings, terrain, and on-screen statistics and menus.",
+        caption: "Terrain & base reskin",
       },
     ],
   },
@@ -301,28 +412,12 @@ export default function CaseStudiesPage() {
                 </div>
               </div>
 
-              <div className="media-grid four">
-                {cs.shots.map((shot) => (
-                  <figure
-                    key={shot.src}
-                    className={`media-card accent-${cs.accent} m-0`}
-                  >
-                    <div className="media-card__image">
-                      <Image
-                        src={shot.src}
-                        alt={shot.alt}
-                        fill
-                        sizes="(max-width:640px) 100vw, 25vw"
-                      />
-                    </div>
-                    <figcaption className="media-card__body">
-                      <span className="kicker" style={{ color: hex }}>
-                        {shot.caption}
-                      </span>
-                    </figcaption>
-                  </figure>
-                ))}
-              </div>
+              <CaseStudyGallery
+                shots={cs.shots}
+                accent={cs.accent}
+                accentHex={hex}
+                studyTitle={cs.title}
+              />
             </section>
           );
         })}
