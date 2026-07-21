@@ -263,16 +263,8 @@ export default function CaseStudiesPage() {
                 <p>{cs.engagement}</p>
               </div>
 
-              <div
-                className={`feature-split ${
-                  imageFirst ? "" : "!grid-cols-[.85fr_1.55fr]"
-                }`}
-              >
-                <div
-                  className={`feature-split__image ${
-                    imageFirst ? "" : "order-2"
-                  }`}
-                >
+              <div className={`feature-split ${imageFirst ? "" : "reverse"}`}>
+                <div className="feature-split__image">
                   <Image
                     src={cs.hero.src}
                     alt={cs.hero.alt}
