@@ -46,7 +46,10 @@ export default function StorePreviewPage() {
 
           <div className="media-grid four">
             {itemsIn(collection.id).map((item) => (
-              <figure key={item.slug} className="media-card m-0">
+              <figure
+                key={item.slug}
+                className={`media-card ${collection.accentClass} m-0`}
+              >
                 <div className="media-card__image !aspect-square">
                   <Image
                     src={item.image}

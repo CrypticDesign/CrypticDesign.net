@@ -109,12 +109,14 @@ export const collections = [
     blurb:
       "Formation, stellar birth, and supernova studies from the Lifa universe, printed on canvas.",
     accent: "#00e5ff",
+    accentClass: "accent-cyan",
   },
   {
     id: "merchandise" as const,
     title: "Studio Merchandise",
     blurb: "Headwear, apparel, and stickers carrying the Cryptic Design mark.",
     accent: "#ffd400",
+    accentClass: "accent-gold",
   },
 ];
 
