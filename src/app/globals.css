@@ -67,3 +67,58 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
    Symmetric padding; min-height means shorter heroes are unaffected. */
 .visual-hero__content{padding-bottom:72px}
 @media(max-width:640px){.visual-hero__content{padding-bottom:48px}}
+
+
+/* CRY-344 — channel rail: single-row scroller at every breakpoint.
+   The rail was a 6-col grid (8 items => 6+2) and a 3-col grid under 900px
+   (8 items => 3 rows). Robert reports users failing to see the second row,
+   so wrapping is removed entirely rather than tuned. Items grow to fill on
+   wide screens and scroll horizontally when they don't fit. */
+.channel-rail{
+  display:flex;
+  flex-wrap:nowrap;
+  overflow-x:auto;
+  overscroll-behavior-x:contain;
+  scroll-snap-type:x proximity;
+  scroll-padding-inline:2px;
+  padding-bottom:14px;
+  scrollbar-width:thin;
+  scrollbar-color:#1d3d54 #0a1420;
+}
+/* grow to fill when there is room, never shrink below a readable target */
+.channel-rail a{
+  flex:1 0 148px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  scroll-snap-align:start;
+}
+.channel-rail::-webkit-scrollbar{height:6px}
+.channel-rail::-webkit-scrollbar-track{background:#0a1420}
+.channel-rail::-webkit-scrollbar-thumb{background:#1d3d54;border-radius:3px}
+.channel-rail:hover::-webkit-scrollbar-thumb{background:var(--cyan)}
+@media(max-width:640px){
+  /* narrower basis so a partial item peeks — the affordance that it scrolls */
+  .channel-rail a{flex:0 0 132px}
+}
+
+
+/* CRY-320 — restore utility nav on mobile.
+   An earlier rule hid .utility-nav with display:none!important under 640px,
+   so Search and Create account disappeared on phones. That breaks the
+   five-item global-nav AC and hides the only account entry point on the
+   device class most likely to use it. The nav already becomes its own
+   full-width row under 900px, so there is room for all five. */
+@media(max-width:640px){
+  .utility-nav{display:inline-flex!important;align-items:center}
+  .primary-nav{gap:.45rem!important;flex-wrap:wrap;row-gap:.25rem}
+  .primary-nav>a,.utility-nav{font-size:7px!important;letter-spacing:.02em!important}
+}
+
+
+/* The utility nav is hidden by TWO rules — one at 640px and one at 900px.
+   The 640px override above is not enough on tablet, so cover 900px too. */
+@media(max-width:900px){
+  .utility-nav{display:inline-flex!important;align-items:center;min-height:44px}
+  .primary-nav{flex-wrap:wrap;row-gap:.25rem}
+}
