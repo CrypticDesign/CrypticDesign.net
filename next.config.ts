@@ -33,9 +33,9 @@ const nextConfig: NextConfig = {
       { source: "/cryptic-academy", destination: "/professional/articles", permanent: true },
       { source: "/crypticcareers", destination: "/professional/contact", permanent: true },
       { source: "/contact", destination: "/professional/contact", permanent: true },
-      // Store preview destination pending (matrix §8.1); temporary until it ships:
-      { source: "/store", destination: "/", permanent: false },
-      { source: "/cart", destination: "/", permanent: true },
+      { source: "/store", destination: "/entertainment/store", permanent: true },
+      { source: "/store/:path*", destination: "/entertainment/store", permanent: true },
+      { source: "/cart", destination: "/entertainment/store", permanent: true },
       { source: "/privacy-policy", destination: "/privacy", permanent: true },
       { source: "/portfolio", destination: "/professional", permanent: true },
       { source: "/portfolio/signal-systems", destination: "/audio", permanent: true },
