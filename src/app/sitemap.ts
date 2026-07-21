@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { publicReleases } from "@/lib/releases";
 import { publicProducts } from "@/lib/products";
+import { allArticles } from "@/lib/articles";
 
 const BASE = "https://crypticdesign.net";
 
@@ -17,5 +18,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticEntries = STATIC_ROUTES.map((path) => ({ url: `${BASE}${path || "/"}`, lastModified: now }));
   const releaseEntries = publicReleases().map((r) => ({ url: `${BASE}/releases/${r.slug}`, lastModified: now }));
   const productEntries = publicProducts().map((p) => ({ url: `${BASE}/products/${p.slug}`, lastModified: now }));
-  return [...staticEntries, ...releaseEntries, ...productEntries];
+  const articleEntries = allArticles().map((a) => ({
+    url: `${BASE}/professional/articles/${a.slug}`,
+    lastModified: a.published ? new Date(a.published) : now,
+  }));
+  return [...staticEntries, ...releaseEntries, ...productEntries, ...articleEntries];
 }

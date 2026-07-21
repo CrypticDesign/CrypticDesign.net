@@ -44,8 +44,13 @@ const nextConfig: NextConfig = {
       { source: "/articles", destination: "/professional/articles", permanent: true },
       { source: "/articles/category/:path*", destination: "/professional/articles", permanent: true },
       { source: "/articles/tag/:path*", destination: "/professional/articles", permanent: true },
-      // TODO CRY-344 item 3: switch to /professional/articles/:slug once article detail routes ship.
-      { source: "/articles/:slug", destination: "/professional/articles", permanent: false },
+      // Legacy post that 404s on the live site (stale sitemap entry) — send to the index.
+      {
+        source: "/articles/player-psychology-game-design",
+        destination: "/professional/articles",
+        permanent: true,
+      },
+      { source: "/articles/:slug", destination: "/professional/articles/:slug", permanent: true },
     ];
   },
 };
