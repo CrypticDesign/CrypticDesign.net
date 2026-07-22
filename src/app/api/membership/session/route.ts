@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { membershipSandboxEnabled } from "@/lib/membership-store";
 import { createSandboxSession, requireSandboxMember, SANDBOX_SESSION_COOKIE } from "@/lib/sandbox-session";
+import { signOutSupabaseSession } from "@/lib/supabase/auth";
 import { createRequestSupabaseClient, supabaseConfigured } from "@/lib/supabase/server";
 
 export async function GET(request: NextRequest) {
@@ -68,7 +69,7 @@ export async function DELETE(request: NextRequest) {
   if (supabaseConfigured()) {
     try {
       const session = createRequestSupabaseClient(request);
-      await session.client.auth.signOut();
+      await signOutSupabaseSession(session.client);
       return session.applyCookies(NextResponse.json({ authenticated: false, mode: "supabase", message: "You are signed out." }));
     } catch {
       return NextResponse.json({ error: "Account services are temporarily unavailable", mode: "supabase" }, { status: 503 });

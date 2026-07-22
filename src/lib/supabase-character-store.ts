@@ -1,6 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { CharacterStoreError, type CharacterProfileInput, type CharacterStoreContract } from "./character-store";
-import { validateCharacterInput, type CharacterHistoryEvent, type CharacterIdentity } from "./characters";
+import { CharacterStoreError, type CharacterProfileInput, type CharacterStoreContract } from "./character-store.ts";
+import { validateCharacterInput, type CharacterHistoryEvent, type CharacterIdentity } from "./characters.ts";
 
 type CharacterRow = Record<string, unknown>;
 
@@ -41,7 +41,11 @@ function storeError(error: { message: string; code?: string }): never {
 }
 
 export class SupabaseCharacterStore implements CharacterStoreContract {
-  constructor(private readonly client: SupabaseClient) {}
+  private readonly client: SupabaseClient;
+
+  constructor(client: SupabaseClient) {
+    this.client = client;
+  }
 
   async findByOwner(accountId: string): Promise<CharacterIdentity | null> {
     const { data, error } = await this.client.from("characters").select("*").eq("owner_account_id", accountId).eq("kind", "member").maybeSingle();
@@ -62,7 +66,7 @@ export class SupabaseCharacterStore implements CharacterStoreContract {
     const { data, error } = await this.client.rpc("create_member_character", {
       p_id: input.id, p_name: profile.name, p_handle: profile.handle, p_archetype: profile.archetype,
       p_bio: profile.bio, p_portrait_url: profile.portraitUrl, p_avatar_recipe: profile.avatarRecipe,
-      p_affiliation: profile.affiliation, p_request_id: input.requestId, p_occurred_at: input.occurredAt,
+      p_affiliation: profile.affiliation, p_request_id: input.requestId,
     });
     if (error) storeError(error);
     return characterFromRow(rpcRow(data));
@@ -75,7 +79,7 @@ export class SupabaseCharacterStore implements CharacterStoreContract {
       p_bio: profile.bio, p_portrait_url: profile.portraitUrl, p_avatar_recipe: profile.avatarRecipe,
       p_affiliation: profile.affiliation, p_presence: profile.presence, p_discoverable: profile.discoverable,
       p_visibility: profile.visibility, p_publication_consent: profile.publicationConsent,
-      p_request_id: input.requestId, p_occurred_at: input.occurredAt,
+      p_request_id: input.requestId,
     });
     if (error) storeError(error);
     return characterFromRow(rpcRow(data));
@@ -83,7 +87,7 @@ export class SupabaseCharacterStore implements CharacterStoreContract {
 
   async setStatus(input: { characterId: string; accountId: string; status: "active" | "retired"; requestId: string; occurredAt: string }) {
     const { data, error } = await this.client.rpc("set_member_character_status", {
-      p_character_id: input.characterId, p_status: input.status, p_request_id: input.requestId, p_occurred_at: input.occurredAt,
+      p_character_id: input.characterId, p_status: input.status, p_request_id: input.requestId,
     });
     if (error) storeError(error);
     return characterFromRow(rpcRow(data));

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
 
 export default function AccountAccessForm({ mode }: { mode: "create" | "sign-in" }) {
+  const inputClassName = "min-h-11 w-full border border-[var(--line)] bg-[var(--canvas)] px-3 py-3 text-[var(--text)]";
   const [authenticated, setAuthenticated] = useState(false);
   const [serviceMode, setServiceMode] = useState<"supabase" | "sandbox" | "disabled">("disabled");
   const [statusLoaded, setStatusLoaded] = useState(false);
@@ -44,6 +45,10 @@ export default function AccountAccessForm({ mode }: { mode: "create" | "sign-in"
     try {
       const response = await fetch("/api/membership/session", { method: "DELETE" });
       const payload = await response.json();
+      if (!response.ok) {
+        setMessage(payload.error ?? "Sign-out could not be completed. Please try again.");
+        return;
+      }
       setAuthenticated(false);
       setMessage(payload.message ?? "You are signed out.");
     } catch {
@@ -81,9 +86,9 @@ export default function AccountAccessForm({ mode }: { mode: "create" | "sign-in"
   return (
     <form onSubmit={submit} className="panel flex max-w-xl flex-col gap-4 p-5">
       <span className="eyebrow">{mode === "create" ? "Free member account" : "Member access"}</span>
-      {mode === "create" ? <label className="flex flex-col gap-2 text-sm">Display name<input name="displayName" required minLength={1} maxLength={80} autoComplete="name" /></label> : null}
-      <label className="flex flex-col gap-2 text-sm">Email<input name="email" type="email" required autoComplete="email" /></label>
-      <label className="flex flex-col gap-2 text-sm">Password<input name="password" type="password" required minLength={8} autoComplete={mode === "create" ? "new-password" : "current-password"} /></label>
+      {mode === "create" ? <label className="flex flex-col gap-2 text-sm">Display name<input className={inputClassName} name="displayName" required minLength={1} maxLength={80} autoComplete="name" /></label> : null}
+      <label className="flex flex-col gap-2 text-sm">Email<input className={inputClassName} name="email" type="email" required autoComplete="email" /></label>
+      <label className="flex flex-col gap-2 text-sm">Password<input className={inputClassName} name="password" type="password" required minLength={8} autoComplete={mode === "create" ? "new-password" : "current-password"} /></label>
       <p className="text-sm text-muted-foreground" aria-live="polite">{message}</p>
       <button className="button self-start" type="submit" disabled={saving}>{saving ? "Working…" : mode === "create" ? "Create free account" : "Sign in"}</button>
     </form>

@@ -1,8 +1,8 @@
 # CRY-335 Production Authentication and Character Slice
 
-Date: 2026-07-18
+Date: 2026-07-18; verification updated 2026-07-22
 
-Status: implementation verified locally; staging deployment pending
+Status: draft pull request verified locally and in staging; production approval pending
 
 Jira: CRY-335
 
@@ -27,20 +27,23 @@ Jira: CRY-335
 ## Verification evidence
 
 - SQL migrations applied successfully to the isolated development project.
+- The complete migration chain, including the 2026-07-22 RPC hardening migration, applied successfully to a disposable local PostgreSQL 18 instance.
+- Database-boundary regression checks confirmed canonical archetype enforcement, database-owned character/history timestamps, and removal of every caller-timestamp RPC overload.
 - Confirmed test account signed in, signed out, and signed back in successfully.
 - Character `CRY-335 Test Character` was created through the application and remained available after a fresh sign-in.
 - A separate HTTP client session independently authenticated and retrieved the same persisted character (HTTP 200/200).
 - Live RLS simulation using a different authenticated UUID returned `0` visible character rows.
 - TypeScript: pass.
 - ESLint: pass.
-- Unit tests: 91/91 pass.
-- Clean Next.js production build: pass, 54 generated pages/routes.
+- Unit tests: 97/97 pass, including account-control, sign-out, RPC-argument, and migration-hardening regressions.
+- Account controls: visible border, opaque background, 45.3px computed height, and 12px padding confirmed in a real browser.
+- Clean Next.js production build: pass, 68 generated pages/routes.
 
 ## Security and launch boundaries
 
 - The current Supabase Free project is for development/staging validation. A paid plan requires Robert's explicit approval.
 - Public account launch still requires explicit production approval plus SMTP/email-deliverability validation, CAPTCHA and abuse-rate-limit review, administrator MFA, recovery/backup runbook confirmation, privacy/terms review, and a production-domain cutover decision.
-- `npm audit` reports two moderate findings in Next.js's nested PostCSS dependency (GHSA-qx2v-qp2m-jg93). npm currently offers only an invalid major downgrade path for this dependency graph; resolve or formally accept this risk before public production launch.
+- `npm audit` reports three advisories: one moderate PostCSS finding and two high findings in the current Next.js/Sharp dependency path. npm currently offers only an invalid or breaking forced downgrade path for this dependency graph; resolve or formally accept this risk before public production launch.
 - The confirmed test account and its character remain isolated test fixtures and should be removed or formally retained before production data initialization.
 
 ## Netlify staging configuration
