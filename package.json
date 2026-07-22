@@ -27,8 +27,10 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/three": "^0.185.1",
+    "cheerio": "^1.2.0",
     "eslint": "^9",
     "eslint-config-next": "^15.3.0",
+    "playwright": "^1.61.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

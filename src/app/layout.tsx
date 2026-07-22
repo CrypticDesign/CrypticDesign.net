@@ -39,11 +39,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <div><h2>CRYPTIC DESIGN</h2><p>Independent research, design, development, and media production.</p></div>
               <div className="footer-columns">
                 <div className="footer-column"><strong>PLATFORM</strong><Link href="/">My Home</Link><Link href="/entertainment">Entertainment</Link><Link href="/professional">Professional</Link></div>
-                <div className="footer-column"><strong>STUDIO</strong><Link href="/products">Projects</Link><Link href="/professional/articles">Articles</Link><Link href="/entertainment/creative-labs">Creative Labs</Link></div>
+                <div className="footer-column"><strong>STUDIO</strong><Link href="/products">Projects</Link><Link href="/professional/articles">Articles</Link><Link href="/entertainment/creative-labs">Creative Labs</Link><Link href="/entertainment/store">Store</Link></div>
                 <div className="footer-column"><strong>CONNECT</strong><Link href="/professional/contact">Contact</Link><Link href="/creator-tools">Creators</Link><Link href="/account">Account</Link></div>
               </div>
             </div>
-            <div className="site-footer__bottom"><p>© {new Date().getFullYear()} Cryptic Design LLC. All rights reserved.</p><p>PRIVACY &nbsp; ACCESSIBILITY &nbsp; TERMS</p></div>
+            <div className="site-footer__bottom"><p>© {new Date().getFullYear()} Cryptic Design LLC. All rights reserved.</p><p><Link href="/privacy" className="hover:text-white">PRIVACY</Link> &nbsp; ACCESSIBILITY &nbsp; <Link href="/terms" className="hover:text-white">TERMS</Link></p></div>
           </div>
         </footer>
       </body>

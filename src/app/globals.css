@@ -49,3 +49,76 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .character-home-hero{display:grid;grid-template-columns:minmax(320px,.9fr) 1.1fr;min-height:520px;overflow:hidden;background:radial-gradient(circle at 25% 45%,#102c3d 0,#07111b 46%,#03080f 100%)}.character-home-hero .avatar-stage{min-height:520px}.character-home-hero__copy{display:flex;flex-direction:column;justify-content:center;padding:48px}.character-home-hero__copy h1{margin:12px 0}.character-home-hero__copy>p{color:var(--muted)}.presence-dot{color:var(--green)}.character-home-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:38px}.character-home-metrics div{padding:15px;border-top:2px solid var(--cyan);background:rgba(3,8,15,.65)}.character-home-metrics strong,.character-home-metrics span{display:block}.character-home-metrics span{margin-top:5px;color:var(--muted);font-size:10px;text-transform:uppercase}.identity-settings summary{display:flex;align-items:center;justify-content:space-between;padding:20px;cursor:pointer;list-style:none}.identity-settings summary strong{display:block;margin-top:5px}.identity-settings summary::-webkit-details-marker{display:none}.identity-settings[open] summary{border-bottom:1px solid var(--line)}
 @media(max-width:900px){.character-forge,.character-home-hero{grid-template-columns:1fr}.character-forge__stage{min-height:520px}.character-forge__controls{border-width:1px 0 0}.character-home-hero__copy{padding:30px}.forge-complete{grid-template-columns:1fr}}
 @media(max-width:640px){.forge-steps{width:100%;max-width:100%;overflow-x:auto;overflow-y:hidden;display:flex}.forge-steps button{min-width:78px}.forge-control-body{padding:24px 18px}.choice-grid{grid-template-columns:1fr 1fr}.character-home-metrics{grid-template-columns:1fr}.avatar-stage,.character-forge__stage{min-height:440px}.avatar-stage__hint{top:14px;right:14px;max-width:180px}.character-home-hero .avatar-stage{min-height:440px}}
+
+
+/* CRY-344 case studies: mirrored feature-split (content leads, image trails).
+   Defined here rather than via !important utilities so the existing
+   responsive collapse at <=900px still wins on tablet and mobile. */
+.feature-split.reverse{grid-template-columns:.85fr 1.55fr}
+.feature-split.reverse .feature-split__image{order:2}
+@media(max-width:900px){
+  .feature-split.reverse{grid-template-columns:1fr}
+  .feature-split.reverse .feature-split__image{order:0}
+}
+
+
+/* CRY-344: hero content had padding-top but no bottom padding, so CTAs sat
+   flush against the hero's lower edge whenever content filled the band.
+   Symmetric padding; min-height means shorter heroes are unaffected. */
+.visual-hero__content{padding-bottom:72px}
+@media(max-width:640px){.visual-hero__content{padding-bottom:48px}}
+
+
+/* CRY-344 — channel rail: single-row scroller at every breakpoint.
+   The rail was a 6-col grid (8 items => 6+2) and a 3-col grid under 900px
+   (8 items => 3 rows). Robert reports users failing to see the second row,
+   so wrapping is removed entirely rather than tuned. Items grow to fill on
+   wide screens and scroll horizontally when they don't fit. */
+.channel-rail{
+  display:flex;
+  flex-wrap:nowrap;
+  overflow-x:auto;
+  overscroll-behavior-x:contain;
+  scroll-snap-type:x proximity;
+  scroll-padding-inline:2px;
+  padding-bottom:14px;
+  scrollbar-width:thin;
+  scrollbar-color:#1d3d54 #0a1420;
+}
+/* grow to fill when there is room, never shrink below a readable target */
+.channel-rail a{
+  flex:1 0 148px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  scroll-snap-align:start;
+}
+.channel-rail::-webkit-scrollbar{height:6px}
+.channel-rail::-webkit-scrollbar-track{background:#0a1420}
+.channel-rail::-webkit-scrollbar-thumb{background:#1d3d54;border-radius:3px}
+.channel-rail:hover::-webkit-scrollbar-thumb{background:var(--cyan)}
+@media(max-width:640px){
+  /* narrower basis so a partial item peeks — the affordance that it scrolls */
+  .channel-rail a{flex:0 0 132px}
+}
+
+
+/* CRY-320 — restore utility nav on mobile.
+   An earlier rule hid .utility-nav with display:none!important under 640px,
+   so Search and Create account disappeared on phones. That breaks the
+   five-item global-nav AC and hides the only account entry point on the
+   device class most likely to use it. The nav already becomes its own
+   full-width row under 900px, so there is room for all five. */
+@media(max-width:640px){
+  .utility-nav{display:inline-flex!important;align-items:center}
+  .primary-nav{gap:.45rem!important;flex-wrap:wrap;row-gap:.25rem}
+  .primary-nav>a,.utility-nav{font-size:7px!important;letter-spacing:.02em!important}
+}
+
+
+/* The utility nav is hidden by TWO rules — one at 640px and one at 900px.
+   The 640px override above is not enough on tablet, so cover 900px too. */
+@media(max-width:900px){
+  .utility-nav{display:inline-flex!important;align-items:center;min-height:44px}
+  .primary-nav{flex-wrap:wrap;row-gap:.25rem}
+}

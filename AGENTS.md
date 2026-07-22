@@ -27,6 +27,17 @@ This repository is the implementation source of truth for the CrypticDesign.net 
 - `https://crypticdesign.net/` and `https://www.crypticdesign.net/` remain production-facing domains and may continue serving the legacy site during staging. Do not interpret their state as evidence that the current Next.js staging deployment failed.
 - Production metadata may intentionally use `https://crypticdesign.net` for canonical, Open Graph, robots, sitemap, and host values while the build is staged at the temporary URL.
 
+## Deployment cost discipline (Netlify)
+
+Demo hosting runs on Netlify (`frabjous-frangipane-650548`, project `demo.crypticdesign.net`), auto-deploying from GitHub on every push to `main`. **Build credits are finite and metered.**
+
+- **Every push/merge to `main` triggers one production build that spends credits.** Plan allowances: Free = 300 credits/month, Personal = 1,000/month, Pro = 3,000/month. The billing period resets mid-month (currently the 17th). When credits run out, production deploys pause until reset — the demo freezes at the last successful build and review-by-demo goes dark for the rest of the cycle.
+- **Never use `main` as the debugging loop.** In July 2026, ~13 same-day pushes to `main` burned 275 of 300 monthly credits in four days and froze the demo. Do not repeat this.
+- **Validate locally before deploying.** Run `npm run build`, `tsc --noEmit`, `npm test`, and viewport QA (`scripts/qa-viewports.mjs`) on a branch first. The deploy is the last step after the change is proven, not the tool you use to prove it.
+- **One coherent unit = one merge = one deploy.** Batch related edits on a branch, open a PR, get review, then merge once. Do not push a fix, notice a problem, and push again — that is two builds where one would do.
+- **Do not push directly to `main`.** Work on `agent/<topic>` branches and merge via PR. This gates review and naturally batches deploys.
+- **Treat every deploy as a spend.** Before merging, confirm the change is worth a build credit and that nothing else is about to follow it that could be batched in.
+
 ## Sitemap sync rule
 
 Any change to routes, navigation, or IA must bump the FigJam sitemap version on board `oen38yFKbFtgqx9LQKn38Y` in the same working session (current: v18). A stale sitemap caused costly direction swings; do not skip this.
@@ -42,6 +53,7 @@ Any change to routes, navigation, or IA must bump the FigJam sitemap version on 
 
 - Never commit secrets, API keys, or credentials. Use `.env.local` (ignored) and document variable names in `.env.example`.
 - Keep changes small and reviewable. Preserve working functionality.
+- Work on `agent/<topic>` branches and merge via PR. Do not push to `main` directly — every push deploys and spends Netlify credits (see Deployment cost discipline).
 - Use placeholder-safe content only; no CLIENT or UNCLEAR IP in public-facing content.
 - Every page supports mobile and desktop.
 - No backend-heavy systems without explicit approval.
