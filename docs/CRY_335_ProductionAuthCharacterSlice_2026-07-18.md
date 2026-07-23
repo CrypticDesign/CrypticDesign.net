@@ -34,6 +34,8 @@ Jira: CRY-335
 - Confirmed test account signed in, signed out, and signed back in successfully.
 - Character `CRY-335 Test Character` was created through the application and remained available after a fresh sign-in.
 - A separate HTTP client session independently authenticated and retrieved the same persisted character (HTTP 200/200).
+- A representative external Gmail account completed the hosted sign-up and required email-confirmation flow through Resend on 2026-07-22; Resend reported the confirmation message as delivered and the confirmed account signed in successfully.
+- Character `CRY-335 Persistence` was created through deploy preview 32, the account was signed out and signed back in, and the same owner-scoped character, handle, archetype, and creation-history event were retrieved from Supabase.
 - Live RLS simulation using a different authenticated UUID returned `0` visible character rows.
 - TypeScript: pass.
 - ESLint: pass.
@@ -45,9 +47,21 @@ Jira: CRY-335
 ## Security and launch boundaries
 
 - The current Supabase Free project is for development/staging validation. A paid plan requires Robert's explicit approval.
-- Public account launch still requires explicit production approval plus SMTP/email-deliverability validation, CAPTCHA and abuse-rate-limit review, administrator MFA, recovery/backup runbook confirmation, privacy/terms review, and a production-domain cutover decision.
-- `npm audit` reports three advisories: one moderate PostCSS finding and two high findings in the current Next.js/Sharp dependency path. npm currently offers only an invalid or breaking forced downgrade path for this dependency graph; resolve or formally accept this risk before public production launch.
+- Public account launch still requires explicit production approval plus CAPTCHA implementation, recovery/backup runbook confirmation, privacy/terms review, dependency-advisory handling, and a production-domain cutover decision.
+- `npm audit` reports three advisories: one moderate PostCSS finding and two high findings in the current Next.js/Sharp dependency path. The installed Next.js 15.5.20 build is below the advisory-fixed 15.5.21 patch; upgrade and regression-test that dependency path before public production launch.
 - The confirmed test account and its character remain isolated test fixtures and should be removed or formally retained before production data initialization.
+
+### Authentication launch-gate audit (2026-07-22)
+
+- Pass: email/password sign-up is enabled and email confirmation is required.
+- Pass: Supabase Auth rate limits are active. After custom SMTP configuration, the dashboard allows 25 auth emails per hour and 30 sign-up/sign-in requests per 5 minutes per IP address.
+- Pass for staging only: the Site URL is `https://demo.crypticdesign.net`, with confirmation redirects allowed for staging and local development.
+- Pass: Resend Free is connected through the official Supabase integration, `auth.crypticdesign.net` has verified DKIM/SPF/MX records in GoDaddy, and Supabase custom SMTP is enabled with sender `Cryptic Design <no-reply@auth.crypticdesign.net>`. Resend reported a representative external Gmail confirmation message as delivered, and the recipient completed confirmation and authenticated successfully.
+- Blocked for public launch: CAPTCHA protection is disabled, and the application does not yet supply a CAPTCHA token in its sign-up flow.
+- Pass: the Supabase administrator account has a primary TOTP authenticator configured. Supabase verified one enrolled app on 2026-07-22; a separate backup factor remains part of the recovery gate.
+- Blocked for public launch: this Free project has no scheduled database backups. A recovery runbook and off-site logical backup are not yet established.
+- Blocked for production-domain cutover: `https://crypticdesign.net/auth/confirm` is not yet in the redirect allow list, and the Site URL intentionally remains the staging domain.
+- Administrator MFA was enrolled by Robert after the read-only audit. Robert authorized the official Resend integration's Supabase organization-level Auth and Projects read/write scope before custom SMTP configuration. The email-delivery and hosted persistence gates passed on 2026-07-22. The pull request must remain draft until recovery, CAPTCHA implementation, dependency-advisory handling, and production-domain decisions are completed or explicitly deferred with accepted risk.
 
 ## Netlify staging configuration
 
