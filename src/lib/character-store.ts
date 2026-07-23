@@ -9,10 +9,18 @@ export class CharacterStoreError extends Error {
   constructor(message: string, code: "conflict" | "invalid" | "not_found") { super(message); this.code = code; }
 }
 
-interface CharacterProfileInput {
+export interface CharacterProfileInput {
   name: string; handle?: string; archetype: string; bio?: string; portraitUrl?: string | null;
   avatarRecipe?: unknown;
   affiliation?: string | null; presence?: string; discoverable?: boolean; visibility?: string; publicationConsent?: boolean;
+}
+
+export interface CharacterStoreContract {
+  findByOwner(accountId: string): Promise<CharacterIdentity | null>;
+  historyFor(characterId: string, accountId: string): Promise<CharacterHistoryEvent[]>;
+  create(input: CharacterProfileInput & { id: string; accountId: string; requestId: string; occurredAt: string }): Promise<CharacterIdentity>;
+  update(input: CharacterProfileInput & { characterId: string; accountId: string; requestId: string; occurredAt: string }): Promise<CharacterIdentity>;
+  setStatus(input: { characterId: string; accountId: string; status: "active" | "retired"; requestId: string; occurredAt: string }): Promise<CharacterIdentity>;
 }
 
 interface IdempotencyRecord {
@@ -36,7 +44,7 @@ function fingerprint(value: unknown): string {
   return createHash("sha256").update(JSON.stringify(value)).digest("hex");
 }
 
-export class CharacterStore {
+export class CharacterStore implements CharacterStoreContract {
   private readonly filePath: string;
 
   constructor(filePath: string) {
@@ -179,3 +187,11 @@ export class CharacterStore {
 }
 
 export function getCharacterStore() { return new CharacterStore(path.join(process.cwd(), ".data", "characters-sandbox.json")); }
+
+export async function getAccountCharacterStore(client?: import("@supabase/supabase-js").SupabaseClient | null): Promise<CharacterStoreContract> {
+  if (client) {
+    const { SupabaseCharacterStore } = await import("./supabase-character-store");
+    return new SupabaseCharacterStore(client);
+  }
+  return getCharacterStore();
+}

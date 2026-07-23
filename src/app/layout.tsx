@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import SubNavBreadcrumbs from "@/components/SubNavBreadcrumbs";
+import { getInitialAccountAuthenticated } from "@/lib/server-account-state";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -24,12 +25,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const initialAuthenticated = await getInitialAccountAuthenticated();
   return (
     <html lang="en">
       <body className="flex min-h-screen flex-col antialiased">
         <a className="skip-link" href="#main-content">Skip to main content</a>
-        <SiteHeader />
+        <SiteHeader initialAuthenticated={initialAuthenticated} />
         <SubNavBreadcrumbs position="top" />
         <div id="main-content" className="flex-1" tabIndex={-1}>{children}</div>
         <SubNavBreadcrumbs position="bottom" />
