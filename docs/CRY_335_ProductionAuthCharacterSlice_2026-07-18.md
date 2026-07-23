@@ -2,7 +2,7 @@
 
 Date: 2026-07-18; verification updated 2026-07-22
 
-Status: draft pull request verified locally and in staging; production approval pending
+Status: draft pull request verified locally, in staging, and against the isolated development database; production approval pending
 
 Jira: CRY-335
 
@@ -26,7 +26,9 @@ Jira: CRY-335
 
 ## Verification evidence
 
-- SQL migrations applied successfully to the isolated development project.
+- SQL migrations, including `202607220001_harden_production_auth_character_slice.sql`, applied successfully to the isolated development project on 2026-07-22.
+- Post-deployment database inspection confirmed the old caller-timestamp `create_member_character` overload is absent, the hardened overload is present, and the `valid_member_character_archetype` constraint is installed.
+- A rollback-only authenticated database acceptance test passed create, update, retire, reactivate, four-event history generation, and invalid-archetype rejection. The transaction was rolled back and retained no acceptance-test character or history.
 - The complete migration chain, including the 2026-07-22 RPC hardening migration, applied successfully to a disposable local PostgreSQL 18 instance.
 - Database-boundary regression checks confirmed canonical archetype enforcement, database-owned character/history timestamps, and removal of every caller-timestamp RPC overload.
 - Confirmed test account signed in, signed out, and signed back in successfully.
