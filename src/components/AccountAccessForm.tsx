@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
 import TurnstileWidget from "@/components/TurnstileWidget";
+import { announceMembershipSession } from "@/lib/membership-session-events";
 
 export default function AccountAccessForm({ mode }: { mode: "create" | "sign-in" }) {
   const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? "";
@@ -43,7 +44,9 @@ export default function AccountAccessForm({ mode }: { mode: "create" | "sign-in"
         body: JSON.stringify({ action: mode, email: form.get("email"), password: form.get("password"), displayName: form.get("displayName"), captchaToken }),
       });
       const payload = await response.json();
-      setAuthenticated(Boolean(payload.authenticated));
+      const nextAuthenticated = Boolean(payload.authenticated);
+      setAuthenticated(nextAuthenticated);
+      announceMembershipSession(nextAuthenticated);
       setServiceMode(payload.mode ?? serviceMode);
       setMessage(payload.message ?? payload.error ?? (payload.authenticated ? "You are signed in." : "Check your email to confirm your account."));
     } catch {
@@ -63,6 +66,7 @@ export default function AccountAccessForm({ mode }: { mode: "create" | "sign-in"
         return;
       }
       setAuthenticated(false);
+      announceMembershipSession(false);
       setMessage(payload.message ?? "You are signed out.");
     } catch {
       setMessage("Sign-out could not be completed. Please try again.");
