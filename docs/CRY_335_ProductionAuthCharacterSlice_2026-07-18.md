@@ -2,7 +2,7 @@
 
 Date: 2026-07-18; verification updated 2026-07-23
 
-Status: draft pull request verified locally, in staging, and against the isolated development database; final hosted confirmation acceptance and production approval pending
+Status: ready-for-review pull request verified locally, in staging, against the isolated development database, and through fresh external-mailbox confirmation; public production approval pending
 
 Jira: CRY-335
 
@@ -23,7 +23,7 @@ Jira: CRY-335
 - Persistent, owner-scoped character create/read/update/status/history access.
 - Transaction-safe character write functions with owner checks, idempotency records, and additive history events.
 - Sandbox fallback remains available when Supabase is not configured.
-- Staging and local confirmation redirect URLs are configured in Supabase. The Netlify deploy-preview wildcard remains a dashboard configuration gate.
+- Staging, local, and Netlify deploy-preview confirmation redirect URLs are configured in Supabase.
 
 ## Verification evidence
 
@@ -57,13 +57,13 @@ Jira: CRY-335
 - Pass: email/password sign-up is enabled and email confirmation is required.
 - Pass: Supabase Auth rate limits are active. After custom SMTP configuration, the dashboard allows 25 auth emails per hour and 30 sign-up/sign-in requests per 5 minutes per IP address.
 - Pass for staging and local development: the Site URL is `https://demo.crypticdesign.net`, with confirmation redirects allowed for those stable origins.
-- Pending hosted acceptance: add `https://**--frabjous-frangipane-650548.netlify.app/**` to the Supabase redirect allow list so deploy-preview confirmation links do not fall back to the Site URL.
+- Pass: `https://**--frabjous-frangipane-650548.netlify.app/**` is in the Supabase redirect allow list, so deploy-preview confirmation links remain on their originating preview.
 - Pass: Resend Free is connected through the official Supabase integration, `auth.crypticdesign.net` has verified DKIM/SPF/MX records in GoDaddy, and Supabase custom SMTP is enabled with sender `Cryptic Design <no-reply@auth.crypticdesign.net>`. Resend reported a representative external Gmail confirmation message as delivered, and the recipient completed confirmation and authenticated successfully.
 - Pass: Cloudflare Turnstile is rendered by account creation and sign-in, both API actions fail closed without a token, and Supabase validates the token server-side.
 - Pass: the Supabase administrator account has a primary TOTP authenticator configured. Supabase verified one enrolled app on 2026-07-22; a separate backup factor remains part of the recovery gate.
 - Blocked for public launch: this Free project has no scheduled database backups. A recovery runbook and off-site logical backup are not yet established.
 - Blocked for production-domain cutover: `https://crypticdesign.net/auth/confirm` is not yet in the redirect allow list, and the Site URL intentionally remains the staging domain.
-- Administrator MFA was enrolled by Robert after the read-only audit. Robert authorized the official Resend integration's Supabase organization-level Auth and Projects read/write scope before custom SMTP configuration. The email-delivery and hosted persistence gates passed on 2026-07-22. On 2026-07-23 an Outlook security scanner consumed a conventional one-click confirmation link before the recipient used it; the application now requires an intentional POST, but the Supabase confirmation template and deploy-preview redirect allowlist must be updated and retested before this pull request is marked ready. Recovery, dependency-advisory, and production-domain items remain public-launch gates unless Robert explicitly promotes them to merge gates.
+- Administrator MFA was enrolled by Robert after the read-only audit. Robert authorized the official Resend integration's Supabase organization-level Auth and Projects read/write scope before custom SMTP configuration. The email-delivery and hosted persistence gates passed on 2026-07-22. On 2026-07-23 an Outlook security scanner consumed a conventional one-click confirmation link before the recipient used it. The application now requires an intentional POST, the Supabase confirmation template uses `RedirectTo` plus `TokenHash`, and the deploy-preview wildcard is allowlisted. A fresh external-mailbox confirmation passed on 2026-07-23; the pull request is eligible to be marked ready. Recovery, dependency-advisory, and production-domain items remain public-launch gates unless Robert explicitly promotes them to merge gates.
 
 ### Scanner-resistant confirmation configuration (2026-07-23)
 
@@ -79,7 +79,10 @@ Required redirect allow-list entry for Netlify previews:
 https://**--frabjous-frangipane-650548.netlify.app/**
 ```
 
-Acceptance requires a newly created external email account. Opening or previewing the email must not confirm the account; pressing **Confirm email address** on the Cryptic Design review page must confirm it, establish the session, and continue to Character Forge.
+Both settings were applied successfully in Supabase on 2026-07-23. Netlify deploy `6a6265f492ac7700098de459` passed its deploy-preview, header, and redirect checks. A hosted GET with a non-secret render-check token displayed the deliberate confirmation screen without consuming the token. A fresh external Gmail-alias signup passed Turnstile, delivered the hardened confirmation email, displayed the non-mutating review page, and completed confirmation only after the recipient pressed **Confirm email address**. The resulting authenticated session redirected to Character Forge and the global header displayed **Account**.
+
+Acceptance passed with a newly created external email account on 2026-07-23. Opening the email link displayed the review page without confirming the account; pressing **Confirm email address** confirmed it, established the session, and continued to Character Forge.
+
 ## Netlify staging configuration
 
 - Branch deploys explicitly include `codex/cry-335-production-auth` while `main` remains the production branch.
