@@ -40,6 +40,7 @@ Jira: CRY-335
 - Unit tests: 97/97 pass, including account-control, sign-out, RPC-argument, and migration-hardening regressions.
 - Account controls: visible border, opaque background, 45.3px computed height, and 12px padding confirmed in a real browser.
 - Clean Next.js production build: pass, 68 generated pages/routes.
+- Netlify environment inspection confirmed both Supabase public client variables are configured for the Production deploy context and retain their `codex/cry-335-production-auth` branch overrides.
 
 ## Security and launch boundaries
 
@@ -51,10 +52,11 @@ Jira: CRY-335
 ## Netlify staging configuration
 
 - Branch deploys explicitly include `codex/cry-335-production-auth` while `main` remains the production branch.
-- The Supabase URL and publishable key are configured as branch-specific values for `codex/cry-335-production-auth`; they were not added to the production deploy context.
+- The Supabase URL and publishable key are configured for both the Production deploy context and the `codex/cry-335-production-auth` branch override as of 2026-07-22.
+- Adding the Production-context values did not trigger a production deploy; the live production site was not changed.
 - A generic manual deploy was canceled after Netlify identified its target as `main`; its deploy stage was skipped and the published production site was not changed.
 
 ## Rollback
 
-- Remove the Supabase environment variables from the staging deploy to return the application to its configured sandbox/disabled behavior.
+- Remove the Supabase environment variables from the Production deploy context and staging branch override to return those deploys to the configured sandbox/disabled behavior.
 - Do not delete the Supabase project or test fixtures without an explicit cleanup decision.
