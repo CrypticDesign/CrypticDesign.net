@@ -48,7 +48,7 @@ Jira: CRY-335
 
 - The current Supabase Free project is for development/staging validation. A paid plan requires Robert's explicit approval.
 - Public account launch still requires explicit production approval plus CAPTCHA implementation, recovery/backup runbook confirmation, privacy/terms review, dependency-advisory handling, and a production-domain cutover decision.
-- `npm audit` reports three advisories: one moderate PostCSS finding and two high findings in the current Next.js/Sharp dependency path. The installed Next.js 15.5.20 build is below the advisory-fixed 15.5.21 patch; upgrade and regression-test that dependency path before public production launch.
+- Next.js and `eslint-config-next` were upgraded from 15.5.20 to 15.5.21. The patched stack passed 97/97 unit tests, ESLint, the 68-route production build, and both membership and character HTTP end-to-end suites. This clears the direct Next.js advisories, but `npm audit` still reports one moderate PostCSS finding and one high Sharp/libvips finding inherited through Next.js. npm offers only an invalid breaking downgrade to Next.js 9.3.3 for those transitive findings; resolve or explicitly accept that residual risk before public production launch.
 - The confirmed test account and its character remain isolated test fixtures and should be removed or formally retained before production data initialization.
 
 ### Authentication launch-gate audit (2026-07-22)
