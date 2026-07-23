@@ -1,8 +1,8 @@
 # CRY-335 Production Authentication and Character Slice
 
-Date: 2026-07-18; verification updated 2026-07-22
+Date: 2026-07-18; verification updated 2026-07-23
 
-Status: draft pull request verified locally, in staging, and against the isolated development database; production approval pending
+Status: draft pull request verified locally, in staging, and against the isolated development database; final hosted confirmation acceptance and production approval pending
 
 Jira: CRY-335
 
@@ -18,11 +18,12 @@ Jira: CRY-335
 ## Implemented slice
 
 - Supabase SSR cookie authentication for create account, sign in, sign out, and email confirmation callbacks.
+- Scanner-resistant email confirmation: email links open a non-mutating review page, and the one-time token is consumed only by an intentional form POST.
 - Automatic member-profile provisioning from confirmed Supabase users.
 - Persistent, owner-scoped character create/read/update/status/history access.
 - Transaction-safe character write functions with owner checks, idempotency records, and additive history events.
 - Sandbox fallback remains available when Supabase is not configured.
-- Staging and local confirmation redirect URLs are configured in Supabase.
+- Staging and local confirmation redirect URLs are configured in Supabase. The Netlify deploy-preview wildcard remains a dashboard configuration gate.
 
 ## Verification evidence
 
@@ -39,30 +40,46 @@ Jira: CRY-335
 - Live RLS simulation using a different authenticated UUID returned `0` visible character rows.
 - TypeScript: pass.
 - ESLint: pass.
-- Unit tests: 97/97 pass, including account-control, sign-out, RPC-argument, and migration-hardening regressions.
+- Unit tests: 103/103 pass, including account-control, sign-out, RPC-argument, migration-hardening, global header-auth synchronization, and deliberate email-confirmation regressions.
 - Account controls: visible border, opaque background, 45.3px computed height, and 12px padding confirmed in a real browser.
-- Clean Next.js production build: pass, 68 generated pages/routes.
+- Clean Next.js production build: pass, 69 application pages/routes. Routes using the server-authenticated global header are intentionally dynamic.
 - Netlify environment inspection confirmed both Supabase public client variables are configured for the Production deploy context and retain their `codex/cry-335-production-auth` branch overrides.
 
 ## Security and launch boundaries
 
 - The current Supabase Free project is for development/staging validation. A paid plan requires Robert's explicit approval.
-- Public account launch still requires explicit production approval plus CAPTCHA implementation, recovery/backup runbook confirmation, privacy/terms review, dependency-advisory handling, and a production-domain cutover decision.
-- Next.js and `eslint-config-next` were upgraded from 15.5.20 to 15.5.21. The patched stack passed 97/97 unit tests, ESLint, the 68-route production build, and both membership and character HTTP end-to-end suites. This clears the direct Next.js advisories, but `npm audit` still reports one moderate PostCSS finding and one high Sharp/libvips finding inherited through Next.js. npm offers only an invalid breaking downgrade to Next.js 9.3.3 for those transitive findings; resolve or explicitly accept that residual risk before public production launch.
+- Public account launch still requires explicit production approval plus recovery/backup runbook confirmation, privacy/terms review, dependency-advisory handling, and a production-domain cutover decision. Turnstile CAPTCHA is implemented and enforced.
+- Next.js and `eslint-config-next` were upgraded from 15.5.20 to 15.5.21. The patched stack passed 103/103 unit tests, ESLint, the 69-route production build, and both membership and character HTTP end-to-end suites. This clears the direct Next.js advisories, but `npm audit` still reports one moderate PostCSS finding and one high Sharp/libvips finding inherited through Next.js. npm offers only an invalid breaking downgrade to Next.js 9.3.3 for those transitive findings; resolve or explicitly accept that residual risk before public production launch.
 - The confirmed test account and its character remain isolated test fixtures and should be removed or formally retained before production data initialization.
 
 ### Authentication launch-gate audit (2026-07-22)
 
 - Pass: email/password sign-up is enabled and email confirmation is required.
 - Pass: Supabase Auth rate limits are active. After custom SMTP configuration, the dashboard allows 25 auth emails per hour and 30 sign-up/sign-in requests per 5 minutes per IP address.
-- Pass for staging only: the Site URL is `https://demo.crypticdesign.net`, with confirmation redirects allowed for staging and local development.
+- Pass for staging and local development: the Site URL is `https://demo.crypticdesign.net`, with confirmation redirects allowed for those stable origins.
+- Pending hosted acceptance: add `https://**--frabjous-frangipane-650548.netlify.app/**` to the Supabase redirect allow list so deploy-preview confirmation links do not fall back to the Site URL.
 - Pass: Resend Free is connected through the official Supabase integration, `auth.crypticdesign.net` has verified DKIM/SPF/MX records in GoDaddy, and Supabase custom SMTP is enabled with sender `Cryptic Design <no-reply@auth.crypticdesign.net>`. Resend reported a representative external Gmail confirmation message as delivered, and the recipient completed confirmation and authenticated successfully.
-- Blocked for public launch: CAPTCHA protection is disabled, and the application does not yet supply a CAPTCHA token in its sign-up flow.
+- Pass: Cloudflare Turnstile is rendered by account creation and sign-in, both API actions fail closed without a token, and Supabase validates the token server-side.
 - Pass: the Supabase administrator account has a primary TOTP authenticator configured. Supabase verified one enrolled app on 2026-07-22; a separate backup factor remains part of the recovery gate.
 - Blocked for public launch: this Free project has no scheduled database backups. A recovery runbook and off-site logical backup are not yet established.
 - Blocked for production-domain cutover: `https://crypticdesign.net/auth/confirm` is not yet in the redirect allow list, and the Site URL intentionally remains the staging domain.
-- Administrator MFA was enrolled by Robert after the read-only audit. Robert authorized the official Resend integration's Supabase organization-level Auth and Projects read/write scope before custom SMTP configuration. The email-delivery and hosted persistence gates passed on 2026-07-22. The pull request must remain draft until recovery, CAPTCHA implementation, dependency-advisory handling, and production-domain decisions are completed or explicitly deferred with accepted risk.
+- Administrator MFA was enrolled by Robert after the read-only audit. Robert authorized the official Resend integration's Supabase organization-level Auth and Projects read/write scope before custom SMTP configuration. The email-delivery and hosted persistence gates passed on 2026-07-22. On 2026-07-23 an Outlook security scanner consumed a conventional one-click confirmation link before the recipient used it; the application now requires an intentional POST, but the Supabase confirmation template and deploy-preview redirect allowlist must be updated and retested before this pull request is marked ready. Recovery, dependency-advisory, and production-domain items remain public-launch gates unless Robert explicitly promotes them to merge gates.
 
+### Scanner-resistant confirmation configuration (2026-07-23)
+
+The Supabase **Confirm signup** email template must link to the application review page instead of `{{ .ConfirmationURL }}`. Preserve the existing branded surrounding HTML and use this destination:
+
+```html
+<a href="{{ .RedirectTo }}?token_hash={{ .TokenHash }}&type=email">Confirm email address</a>
+```
+
+Required redirect allow-list entry for Netlify previews:
+
+```text
+https://**--frabjous-frangipane-650548.netlify.app/**
+```
+
+Acceptance requires a newly created external email account. Opening or previewing the email must not confirm the account; pressing **Confirm email address** on the Cryptic Design review page must confirm it, establish the session, and continue to Character Forge.
 ## Netlify staging configuration
 
 - Branch deploys explicitly include `codex/cry-335-production-auth` while `main` remains the production branch.
