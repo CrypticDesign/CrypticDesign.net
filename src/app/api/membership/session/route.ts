@@ -23,26 +23,28 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   if (supabaseConfigured()) {
-    let body: { action?: string; email?: string; password?: string; displayName?: string };
+    let body: { action?: string; email?: string; password?: string; displayName?: string; captchaToken?: string };
     try { body = await request.json(); }
     catch { return NextResponse.json({ error: "Account details must be valid JSON", mode: "supabase" }, { status: 400 }); }
     const email = body.email?.trim().toLowerCase();
     const password = body.password ?? "";
+    const captchaToken = body.captchaToken?.trim();
     if (!email || password.length < 8) return NextResponse.json({ error: "Enter a valid email and a password of at least 8 characters", mode: "supabase" }, { status: 422 });
+    if (!captchaToken) return NextResponse.json({ error: "Complete human verification before continuing", mode: "supabase" }, { status: 422 });
 
     try {
       const session = createRequestSupabaseClient(request);
       if (body.action === "create") {
         const displayName = body.displayName?.trim();
         if (!displayName) return NextResponse.json({ error: "Display name is required", mode: "supabase" }, { status: 422 });
-        const { data, error } = await session.client.auth.signUp({ email, password, options: { data: { display_name: displayName }, emailRedirectTo: `${request.nextUrl.origin}/auth/confirm` } });
+        const { data, error } = await session.client.auth.signUp({ email, password, options: { captchaToken, data: { display_name: displayName }, emailRedirectTo: `${request.nextUrl.origin}/auth/confirm` } });
         if (error) return session.applyCookies(NextResponse.json({ error: error.message, mode: "supabase" }, { status: 400 }));
         const authenticated = Boolean(data.session && data.user);
         return session.applyCookies(NextResponse.json({ authenticated, memberId: data.user?.id ?? null, mode: "supabase", message: authenticated ? "Your account is ready." : "Check your email to confirm your account, then sign in." }, { status: 201 }));
       }
 
       if (body.action === "sign-in") {
-        const { data, error } = await session.client.auth.signInWithPassword({ email, password });
+        const { data, error } = await session.client.auth.signInWithPassword({ email, password, options: { captchaToken } });
         if (error) return session.applyCookies(NextResponse.json({ error: "Email or password was not accepted", mode: "supabase" }, { status: 401 }));
         return session.applyCookies(NextResponse.json({ authenticated: true, memberId: data.user.id, mode: "supabase", message: "You are signed in." }));
       }

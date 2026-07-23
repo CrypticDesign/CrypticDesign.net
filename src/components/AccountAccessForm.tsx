@@ -2,10 +2,14 @@
 
 import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
+import TurnstileWidget from "@/components/TurnstileWidget";
 
 export default function AccountAccessForm({ mode }: { mode: "create" | "sign-in" }) {
+  const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? "";
   const inputClassName = "min-h-11 w-full border border-[var(--line)] bg-[var(--canvas)] px-3 py-3 text-[var(--text)]";
   const [authenticated, setAuthenticated] = useState(false);
+  const [captchaResetCounter, setCaptchaResetCounter] = useState(0);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const [serviceMode, setServiceMode] = useState<"supabase" | "sandbox" | "disabled">("disabled");
   const [statusLoaded, setStatusLoaded] = useState(false);
   const [message, setMessage] = useState("Checking account status…");
@@ -21,6 +25,14 @@ export default function AccountAccessForm({ mode }: { mode: "create" | "sign-in"
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (!turnstileSiteKey) {
+      setMessage("Human verification is unavailable. Please try again later.");
+      return;
+    }
+    if (!captchaToken) {
+      setMessage("Complete human verification before continuing.");
+      return;
+    }
     setSaving(true);
     setMessage(mode === "create" ? "Creating your account…" : "Signing you in…");
     try {
@@ -28,7 +40,7 @@ export default function AccountAccessForm({ mode }: { mode: "create" | "sign-in"
       const response = await fetch("/api/membership/session", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ action: mode, email: form.get("email"), password: form.get("password"), displayName: form.get("displayName") }),
+        body: JSON.stringify({ action: mode, email: form.get("email"), password: form.get("password"), displayName: form.get("displayName"), captchaToken }),
       });
       const payload = await response.json();
       setAuthenticated(Boolean(payload.authenticated));
@@ -37,6 +49,7 @@ export default function AccountAccessForm({ mode }: { mode: "create" | "sign-in"
     } catch {
       setMessage("Account services could not be reached. Please try again.");
     } finally {
+      setCaptchaResetCounter((value) => value + 1);
       setSaving(false);
     }
   }
@@ -89,8 +102,18 @@ export default function AccountAccessForm({ mode }: { mode: "create" | "sign-in"
       {mode === "create" ? <label className="flex flex-col gap-2 text-sm">Display name<input className={inputClassName} name="displayName" required minLength={1} maxLength={80} autoComplete="name" /></label> : null}
       <label className="flex flex-col gap-2 text-sm">Email<input className={inputClassName} name="email" type="email" required autoComplete="email" /></label>
       <label className="flex flex-col gap-2 text-sm">Password<input className={inputClassName} name="password" type="password" required minLength={8} autoComplete={mode === "create" ? "new-password" : "current-password"} /></label>
+      {turnstileSiteKey ? (
+        <TurnstileWidget
+          action={mode === "create" ? "account_create" : "account_signin"}
+          onTokenChange={setCaptchaToken}
+          resetCounter={captchaResetCounter}
+          siteKey={turnstileSiteKey}
+        />
+      ) : (
+        <p role="alert" className="text-sm text-red-300">Human verification is not configured.</p>
+      )}
       <p className="text-sm text-muted-foreground" aria-live="polite">{message}</p>
-      <button className="button self-start" type="submit" disabled={saving}>{saving ? "Working…" : mode === "create" ? "Create free account" : "Sign in"}</button>
+      <button className="button self-start" type="submit" disabled={saving || !captchaToken}>{saving ? "Working…" : mode === "create" ? "Create free account" : "Sign in"}</button>
     </form>
   );
 }

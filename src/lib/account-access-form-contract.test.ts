@@ -11,3 +11,11 @@ test("account inputs retain a visible, minimum-size control treatment", async ()
   assert.match(source, /bg-\[var\(--canvas\)\]/);
   assert.equal((source.match(/className=\{inputClassName\}/g) ?? []).length, 3);
 });
+
+test("Supabase account forms fail closed until Turnstile supplies a token", async () => {
+  const source = await readFile(componentUrl, "utf8");
+  assert.match(source, /NEXT_PUBLIC_TURNSTILE_SITE_KEY/);
+  assert.match(source, /captchaToken/);
+  assert.match(source, /disabled=\{saving \|\| !captchaToken\}/);
+  assert.match(source, /Complete human verification before continuing/);
+});
