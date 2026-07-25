@@ -15,19 +15,31 @@ export default function MyHomeDashboard() {
   const [savedCount, setSavedCount] = useState(0);
 
   useEffect(() => {
-    Promise.all([
-      fetch("/api/membership/session").then((response) => response.json()),
-      fetch("/api/characters").then(async (response) => response.ok ? response.json() : { character: null }),
-    ])
-      .then(([session, characterPayload]) => {
-        setAuthenticated(Boolean(session.authenticated));
-        setCharacter(characterPayload.character);
-      })
-      .catch(() => {
+    // Resolve the session first, then only request the character when signed in.
+    // /api/characters returns 401 for anonymous visitors by design (CRY-335);
+    // calling it eagerly on this public page logged a 401 to the console for
+    // every signed-out visitor. Gating the call removes that without changing
+    // the auth API.
+    (async () => {
+      try {
+        const session = await fetch("/api/membership/session").then((r) => r.json());
+        const isAuthed = Boolean(session.authenticated);
+        setAuthenticated(isAuthed);
+        if (isAuthed) {
+          const payload = await fetch("/api/characters").then((r) =>
+            r.ok ? r.json() : { character: null },
+          );
+          setCharacter(payload.character ?? null);
+        } else {
+          setCharacter(null);
+        }
+      } catch {
         setAuthenticated(false);
         setCharacter(null);
-      })
-      .finally(() => setSessionLoaded(true));
+      } finally {
+        setSessionLoaded(true);
+      }
+    })();
     setSavedCount(getSavedSlugs().length);
   }, []);
 

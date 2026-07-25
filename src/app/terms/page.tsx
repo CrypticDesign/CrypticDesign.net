@@ -3,8 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Terms of Use",
   alternates: { canonical: "/terms" },
-  description:
-    "Terms of use and intellectual property notice for CrypticDesign.net.",
+  description: "Terms of use and intellectual-property notice for CrypticDesign.net — how the site may be used, ownership of content, and disclosures for preview features.",
 };
 
 // Seeded from the legacy site's rights statement per CRY-344 ruling #3

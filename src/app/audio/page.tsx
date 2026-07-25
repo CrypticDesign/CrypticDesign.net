@@ -6,7 +6,7 @@ import { publicReleases } from "@/lib/releases";
 export const metadata: Metadata = {
   title: "Audio",
   alternates: { canonical: "/audio" },
-  description: "Cryptic Signal music, scores, soundscapes, and audio releases from Cryptic Design.",
+  description: "Cryptic Signal — the public music and sonic-media division of Cryptic Design. Scores, soundscapes, and audio releases, beginning with Signal & Systems.",
 };
 
 const AUDIO_FEATURES = [
