@@ -6,8 +6,7 @@ import { collections, itemsIn } from "@/lib/store";
 export const metadata: Metadata = {
   title: "Store — Preview",
   alternates: { canonical: "/entertainment/store" },
-  description:
-    "A preview of the Cryptic Design store: Lifa cosmic canvas prints and studio merchandise. Not yet available for purchase.",
+  description: "Prints and studio goods from Cryptic Design — Lifa cosmic-series canvas art and studio merchandise. A preview of the rebuilt store; ordering returns at launch.",
 };
 
 // CRY-344 item 5: catalog preview only. No pricing, cart, or checkout —

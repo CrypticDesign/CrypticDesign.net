@@ -7,8 +7,7 @@ import CaseStudyGallery from "@/components/CaseStudyGallery";
 export const metadata: Metadata = {
   title: "Case Studies",
   alternates: { canonical: "/professional/case-studies" },
-  description:
-    "Selected Cryptic Design work — problem, approach, craft, outcome.",
+  description: "Selected Cryptic Design work — console game UX, VR training, enterprise health systems, and mobile strategy — told as problem, approach, craft, and outcome.",
 };
 
 // CRY-344 item 4: content + imagery migrated from the legacy services and

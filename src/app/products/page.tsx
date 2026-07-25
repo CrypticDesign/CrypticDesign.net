@@ -5,7 +5,7 @@ import { publicProducts } from "@/lib/products";
 export const metadata: Metadata = {
   title: "Products & Franchises",
   alternates: { canonical: "/products" },
-  description: "Cryptic Design product and franchise homes.",
+  description: "Cryptic Design product and franchise homes — Singularis, Lifa, and Cryptic Signal — where releases, interactive worlds, and long-form universes come together.",
 };
 
 export default function ProductsPage() {
