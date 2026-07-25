@@ -40,3 +40,6 @@ yarn-error.log*
 
 qa-screens/
 qa-screens/
+
+qa-matrix-report.*
+metadata-audit-report.*
