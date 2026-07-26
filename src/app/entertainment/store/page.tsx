@@ -5,7 +5,7 @@ import { collections, itemsIn } from "@/lib/store";
 
 export const metadata: Metadata = {
   title: "Store — Preview",
-  alternates: { canonical: "/entertainment/store" },
+  alternates: { canonical: "/entertainment/store" }, openGraph: { images: ["/share/store.png"] }, twitter: { card: "summary_large_image", images: ["/share/store.png"] }, 
   description: "Prints and studio goods from Cryptic Design — Lifa cosmic-series canvas art and studio merchandise. A preview of the rebuilt store; ordering returns at launch.",
 };
 
