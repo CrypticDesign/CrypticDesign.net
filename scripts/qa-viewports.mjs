@@ -25,9 +25,17 @@ for (const vp of viewports) {
   const page = await ctx.newPage();
   await page.goto(base + path, { waitUntil: "networkidle" });
 
-  // Measure the channel rail: is it one row, and is it scrollable?
-  const rail = await page.evaluate(() => {
-    const el = document.querySelector(".channel-rail");
+  // Measure CRY-413 navigation: destinations must not depend on horizontal scrolling.
+  const trigger = page.locator(".entertainment-navigation__trigger");
+  const triggerVisible = await trigger.isVisible();
+  if (triggerVisible) {
+    await trigger.focus();
+    await trigger.press("Enter");
+  }
+  const keyboardOpened = triggerVisible ? await trigger.getAttribute("aria-expanded") === "true" : null;
+  await page.locator(".entertainment-navigation__panel").scrollIntoViewIfNeeded();
+  const navigation = await page.evaluate(() => {
+    const el = document.querySelector(".entertainment-navigation__panel");
     if (!el) return null;
     const links = [...el.querySelectorAll("a")];
     const tops = new Set(links.map((a) => Math.round(a.getBoundingClientRect().top)));
@@ -36,16 +44,18 @@ for (const vp of viewports) {
       itemCount: links.length,
       scrollWidth: el.scrollWidth,
       clientWidth: el.clientWidth,
-      scrollable: el.scrollWidth > el.clientWidth + 1,
+      horizontallyScrollable: el.scrollWidth > el.clientWidth + 1,
       minLinkHeight: Math.min(...links.map((a) => Math.round(a.getBoundingClientRect().height))),
-      lastItemVisible:
-        links.length > 0 &&
-        links[links.length - 1].getBoundingClientRect().right <= el.getBoundingClientRect().right + 1,
+      allItemsVisible: links.every((link) => {
+        const rect = link.getBoundingClientRect();
+        return rect.width > 0 && rect.height > 0;
+      }),
+      currentLabel: el.querySelector('[aria-current="page"]')?.textContent?.trim() ?? null,
     };
   });
 
   await page.screenshot({ path: `${outDir}/${vp.name}.png`, fullPage: false });
-  results.push({ viewport: vp.name, rail });
+  results.push({ viewport: vp.name, triggerVisible, keyboardOpened, navigation });
   await ctx.close();
 }
 

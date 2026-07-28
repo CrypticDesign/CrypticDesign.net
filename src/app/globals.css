@@ -122,7 +122,33 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   .utility-nav{display:inline-flex!important;align-items:center;min-height:44px}
   .primary-nav{flex-wrap:wrap;row-gap:.25rem}
 }
-
+/* CRY-413 — destination navigation without hidden horizontal overflow. */
+.entertainment-navigation{border-block:1px solid var(--line);background:color-mix(in srgb,var(--surface) 92%,transparent)}
+.entertainment-navigation__trigger{display:none}
+.entertainment-navigation__panel{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(260px,1fr);gap:var(--space-5);padding-block:var(--space-4)}
+.entertainment-navigation__group{min-width:0}
+.entertainment-navigation__group h2{margin:0 0 var(--space-2);color:var(--muted);font:700 9px "IBM Plex Sans",Arial;letter-spacing:.14em;text-transform:uppercase}
+.entertainment-navigation__links{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--space-2)}
+.entertainment-navigation__links a{display:flex;min-height:64px;flex-direction:column;justify-content:center;gap:3px;padding:var(--space-2) var(--space-3);border:1px solid var(--line);border-left:2px solid transparent;border-radius:var(--radius-control);background:var(--canvas);color:var(--text);transition:border-color var(--motion-fast) var(--ease-standard),background var(--motion-fast) var(--ease-standard),color var(--motion-fast) var(--ease-standard)}
+.entertainment-navigation__links a:hover,.entertainment-navigation__links a:focus-visible{border-color:var(--cyan);background:var(--surface-2);color:var(--cyan)}
+.entertainment-navigation__links a[aria-current="page"]{border-color:var(--cyan);border-left-color:var(--cyan);background:color-mix(in srgb,var(--cyan) 9%,var(--canvas));color:var(--cyan)}
+.entertainment-navigation__links a span{font:700 10px "IBM Plex Sans",Arial;letter-spacing:.05em;text-transform:uppercase}
+.entertainment-navigation__links a small{color:var(--muted);font-size:10px;line-height:1.35}
+.entertainment-navigation__chevron{width:9px;height:9px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);transition:transform var(--motion-fast) var(--ease-standard)}
+@media(max-width:720px){
+  .entertainment-navigation{padding-block:var(--space-3)}
+  .entertainment-navigation__trigger{display:flex;width:100%;min-height:56px;align-items:center;justify-content:space-between;gap:var(--space-3);padding:var(--space-2) var(--space-3);border:1px solid var(--line);border-radius:var(--radius-control);background:var(--canvas);color:var(--text);text-align:left;cursor:pointer}
+  .entertainment-navigation__trigger strong,.entertainment-navigation__trigger small{display:block}
+  .entertainment-navigation__trigger strong{font:700 11px "IBM Plex Sans",Arial;letter-spacing:.08em;text-transform:uppercase}
+  .entertainment-navigation__trigger small{margin-top:3px;color:var(--muted);font-size:10px}
+  .entertainment-navigation__trigger:hover,.entertainment-navigation__trigger:focus-visible,.entertainment-navigation__trigger[aria-expanded="true"]{border-color:var(--cyan)}
+  .entertainment-navigation__trigger[aria-expanded="true"] .entertainment-navigation__chevron{transform:rotate(225deg)}
+  .entertainment-navigation__panel{display:none;grid-template-columns:1fr;gap:var(--space-4);padding:var(--space-3) 0 0}
+  .entertainment-navigation__panel[data-open="true"]{display:grid}
+  .entertainment-navigation__links{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .entertainment-navigation__links a{min-height:72px}
+}
+@media(max-width:340px){.entertainment-navigation__links{grid-template-columns:1fr}}
 /* CRY-412 — persistent, keyboard-accessible account controls. */
 .primary-nav>a,.utility-nav{font:600 9px "IBM Plex Sans",Arial;letter-spacing:.08em}
 .account-menu{position:relative;display:flex;align-items:center}
