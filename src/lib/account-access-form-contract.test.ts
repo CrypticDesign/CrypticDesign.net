@@ -19,3 +19,10 @@ test("Supabase account forms fail closed until Turnstile supplies a token", asyn
   assert.match(source, /disabled=\{saving \|\| !captchaToken\}/);
   assert.match(source, /Complete human verification before continuing/);
 });
+
+test("local sandbox offers a credential-free test account", async () => {
+  const component = await readFile(componentUrl, "utf8");
+  assert.match(component, /Continue with local test account/);
+  assert.match(component, /startSandboxSession/);
+  assert.match(component, /announceMembershipSession\(true\)/);
+});

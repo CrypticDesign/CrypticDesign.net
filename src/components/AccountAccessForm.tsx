@@ -73,6 +73,26 @@ export default function AccountAccessForm({ mode }: { mode: "create" | "sign-in"
     }
   }
 
+  async function startSandboxSession() {
+    setSaving(true);
+    setMessage("Starting a local test session…");
+    try {
+      const response = await fetch("/api/membership/session", { method: "POST" });
+      const payload = await response.json();
+      if (!response.ok) {
+        setMessage(payload.error ?? "The local test session could not be started.");
+        return;
+      }
+      setAuthenticated(true);
+      announceMembershipSession(true);
+      setMessage("Local test account active.");
+    } catch {
+      setMessage("The local test session could not be started.");
+    } finally {
+      setSaving(false);
+    }
+  }
+
   if (!statusLoaded) return <p className="ui-loading" aria-busy="true">Checking account status…</p>;
 
   if (authenticated) return (
@@ -89,7 +109,8 @@ export default function AccountAccessForm({ mode }: { mode: "create" | "sign-in"
   if (serviceMode === "sandbox") return (
     <section className="panel max-w-xl p-5">
       <span className="eyebrow">Local sandbox</span>
-      <p className="my-4 text-sm text-muted-foreground" aria-live="polite">Real account services are not configured in this environment.</p>
+      <p className="my-4 text-sm text-muted-foreground" aria-live="polite">Use a temporary local account to test authenticated features. No account is created and no credentials are sent.</p>
+      <button className="button" type="button" disabled={saving} onClick={startSandboxSession}>{saving ? "Starting…" : "Continue with local test account"}</button>
     </section>
   );
 

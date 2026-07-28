@@ -1,12 +1,16 @@
 import { randomUUID } from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
 
-import { membershipSandboxEnabled } from "@/lib/membership-store";
+import { membershipSandboxEnabled, membershipSandboxPreferred } from "@/lib/membership-store";
 import { createSandboxSession, requireSandboxMember, SANDBOX_SESSION_COOKIE } from "@/lib/sandbox-session";
 import { signOutSupabaseSession } from "@/lib/supabase/auth";
 import { createRequestSupabaseClient, supabaseConfigured } from "@/lib/supabase/server";
 
 export async function GET(request: NextRequest) {
+  if (membershipSandboxPreferred()) {
+    const memberId = requireSandboxMember(request);
+    return NextResponse.json({ authenticated: Boolean(memberId), memberId, mode: "sandbox" });
+  }
   if (supabaseConfigured()) {
     try {
       const session = createRequestSupabaseClient(request);
@@ -22,6 +26,7 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+  if (membershipSandboxPreferred()) return createSandboxResponse();
   if (supabaseConfigured()) {
     let body: { action?: string; email?: string; password?: string; displayName?: string; captchaToken?: string };
     try { body = await request.json(); }
@@ -55,6 +60,10 @@ export async function POST(request: NextRequest) {
     }
   }
   if (!membershipSandboxEnabled()) return NextResponse.json({ error: "Membership sandbox is disabled" }, { status: 503 });
+  return createSandboxResponse();
+}
+
+function createSandboxResponse() {
   const memberId = `member_local_${randomUUID()}`;
   const response = NextResponse.json({ authenticated: true, memberId, mode: "sandbox" });
   response.cookies.set(SANDBOX_SESSION_COOKIE, createSandboxSession(memberId), {
@@ -68,6 +77,7 @@ export async function POST(request: NextRequest) {
 }
 
 export async function DELETE(request: NextRequest) {
+  if (membershipSandboxPreferred()) return clearSandboxResponse();
   if (supabaseConfigured()) {
     try {
       const session = createRequestSupabaseClient(request);
@@ -77,7 +87,11 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: "Account services are temporarily unavailable", mode: "supabase" }, { status: 503 });
     }
   }
-  const response = NextResponse.json({ authenticated: false });
+  return clearSandboxResponse();
+}
+
+function clearSandboxResponse() {
+  const response = NextResponse.json({ authenticated: false, mode: "sandbox", message: "You are signed out." });
   response.cookies.set(SANDBOX_SESSION_COOKIE, "", { httpOnly: true, sameSite: "strict", path: "/", maxAge: 0 });
   return response;
 }
