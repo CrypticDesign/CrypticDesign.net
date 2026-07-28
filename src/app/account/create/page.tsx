@@ -4,8 +4,8 @@ import AccountAccessForm from "@/components/AccountAccessForm";
 
 export const metadata: Metadata = {
   title: "Create Account",
-  alternates: { canonical: "/account/create" },
-  description: "Create a CrypticDesign.net account and persistent character.",
+  alternates: { canonical: "/account/create" }, openGraph: { images: ["/share/account-create.png"] }, twitter: { card: "summary_large_image", images: ["/share/account-create.png"] }, 
+  description: "Create a CrypticDesign.net account to build your persistent character, save a library, follow releases, and carry your activity and progress as you go.",
 };
 
 export default function CreateAccountPage() {

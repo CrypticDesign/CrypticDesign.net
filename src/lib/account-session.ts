@@ -1,9 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
-import { membershipSandboxEnabled } from "./membership-store";
+import { membershipSandboxEnabled, membershipSandboxPreferred } from "./membership-store";
 import { requireSandboxMember } from "./sandbox-session";
 import { createRequestSupabaseClient, supabaseConfigured, type AccountSession } from "./supabase/server";
 
 export async function resolveAccountSession(request: NextRequest): Promise<AccountSession> {
+  if (membershipSandboxPreferred()) {
+    return {
+      accountId: requireSandboxMember(request),
+      mode: "sandbox",
+      client: null,
+      applyCookies: <T extends NextResponse>(response: T) => response,
+    };
+  }
   if (supabaseConfigured()) {
     const session = createRequestSupabaseClient(request);
     const { data, error } = await session.client.auth.getUser();

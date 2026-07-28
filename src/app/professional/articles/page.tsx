@@ -5,9 +5,8 @@ import { allArticles } from "@/lib/articles";
 
 export const metadata: Metadata = {
   title: "Articles & Research",
-  alternates: { canonical: "/professional/articles" },
-  description:
-    "Writing and research from the Cryptic Design studio — UX practice, game design analysis, and creative technology.",
+  alternates: { canonical: "/professional/articles" }, openGraph: { images: ["/share/articles.png"] }, twitter: { card: "summary_large_image", images: ["/share/articles.png"] }, 
+  description: "Writing and research from the Cryptic Design studio: holistic UX practice, game design analysis, creative technology, and notes from building original systems.",
 };
 
 const formatDate = (iso: string) =>

@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Search",
-  alternates: { canonical: "/search" },
-  description: "Search Cryptic Design releases.",
+  alternates: { canonical: "/search" }, openGraph: { images: ["/share/search.png"] }, twitter: { card: "summary_large_image", images: ["/share/search.png"] }, 
+  description: "Search Cryptic Design releases, products, franchises, articles, and creative work across the entertainment platform and professional studio, all in one place.",
 };
 
 export default function SearchPage() {

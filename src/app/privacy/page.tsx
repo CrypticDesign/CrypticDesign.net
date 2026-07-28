@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  alternates: { canonical: "/privacy" },
-  description:
-    "How Cryptic Design collects, uses, and protects your personal data.",
+  alternates: { canonical: "/privacy" }, openGraph: { images: ["/share/privacy.png"] }, twitter: { card: "summary_large_image", images: ["/share/privacy.png"] }, 
+  description: "How Cryptic Design collects, uses, and protects your personal data across the website, inquiry forms, analytics, and marketing — and the choices you control.",
 };
 
 // Carried over from the legacy crypticdesign.net privacy policy per CRY-344

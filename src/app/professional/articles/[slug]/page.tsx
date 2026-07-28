@@ -15,14 +15,23 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
   const article = getArticle(slug);
   if (!article) return { title: "Article not found" };
+  // CRY-260: keep the SEO <title> <=60 chars and the meta description in the
+  // 140-160 band. The full headline stays as the on-page H1; these are the
+  // truncated search/social variants only.
+  const clamp = (s: string, max: number) =>
+    s.length <= max ? s : s.slice(0, max - 1).replace(/\s+\S*$/, "").trimEnd() + "…";
+  const metaTitle = clamp(article.title, 60);
+  const metaDescription = clamp(article.description, 158);
   return {
-    title: article.title,
-    description: article.description,
+    // `absolute` skips the root layout's "%s | Cryptic Design" suffix so the
+    // article's own headline can use the full 60-char budget (CRY-260).
+    title: { absolute: metaTitle },
+    description: metaDescription,
     alternates: { canonical: `/professional/articles/${article.slug}` },
     openGraph: {
       type: "article",
-      title: article.title,
-      description: article.description,
+      title: metaTitle,
+      description: metaDescription,
       publishedTime: article.published || undefined,
       images: article.hero ? [article.hero] : undefined,
     },

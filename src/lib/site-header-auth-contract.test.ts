@@ -27,8 +27,24 @@ test("global account navigation synchronizes after navigation and auth mutations
   assert.match(header, /fetch\("\/api\/membership\/session"/);
   assert.match(header, /MEMBERSHIP_SESSION_CHANGED_EVENT/);
   assert.match(header, /\[pathname\]/);
-  assert.match(header, /authenticated \? "\/account" : "\/account\/create"/);
-  assert.match(header, /authenticated \? "Account" : "Create account"/);
+  assert.match(header, /\{authenticated \? \(/);
+  assert.match(header, />◇ Account<\/button>/);
+  assert.match(header, /href="\/account\/create"/);
+  assert.match(header, />◇ Create account<\/Link>/);
   assert.match(accessForm, /announceMembershipSession\(nextAuthenticated\)/);
   assert.match(accessForm, /announceMembershipSession\(false\)/);
+});
+
+test("authenticated account navigation exposes an accessible sign-out menu", async () => {
+  const header = await readFile(headerUrl, "utf8");
+  assert.match(header, /const ACCOUNT_ITEMS = \[\s*\{ href: "\/account\/character", icon: "♙", label: "View Profile" \}/);
+  assert.match(header, /aria-haspopup="menu"/);
+  assert.match(header, /aria-expanded=\{accountMenuOpen\}/);
+  assert.match(header, /role="menu"/);
+  assert.match(header, />\{signingOut \? "Signing out…" : "Sign out"\}</);
+  assert.match(header, /fetch\("\/api\/membership\/session", \{ method: "DELETE" \}\)/);
+  assert.match(header, /announceMembershipSession\(false\)/);
+  assert.match(header, /window\.location\.assign\("\/\?signedOut=1"\)/);
+  assert.match(header, /event\.key !== "Escape"/);
+  assert.match(header, /role="status" aria-live="polite"/);
 });
