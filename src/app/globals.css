@@ -122,3 +122,21 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   .utility-nav{display:inline-flex!important;align-items:center;min-height:44px}
   .primary-nav{flex-wrap:wrap;row-gap:.25rem}
 }
+
+/* CRY-412 — persistent, keyboard-accessible account controls. */
+.primary-nav>a,.utility-nav{font:600 9px "IBM Plex Sans",Arial;letter-spacing:.08em}
+.account-menu{position:relative;display:flex;align-items:center}
+.account-menu__trigger{min-height:var(--target-min);padding-inline:var(--space-2);border:1px solid transparent;background:transparent;color:var(--muted);cursor:pointer;text-transform:uppercase;transition:border-color var(--motion-fast) var(--ease-standard),color var(--motion-fast) var(--ease-standard)}
+.account-menu__trigger:hover{color:var(--text)}
+.account-menu__trigger[aria-expanded="true"]{border-color:var(--cyan);color:var(--cyan)}
+.account-menu__panel{position:absolute;right:0;top:calc(100% + var(--space-2));z-index:80;width:min(296px,calc(100vw - var(--space-6)));padding:var(--space-2);border:1px solid var(--line);border-top:2px solid var(--cyan);background:var(--surface)}
+.account-menu__item{display:grid;width:100%;min-height:var(--target-min);grid-template-columns:28px minmax(0,1fr) 12px;align-items:center;gap:var(--space-3);padding:var(--space-2) var(--space-3);border:0;border-left:2px solid transparent;border-radius:var(--radius-control);background:transparent;color:var(--text);text-align:left;font:700 10px "IBM Plex Sans",Arial;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:border-color var(--motion-fast) var(--ease-standard),background var(--motion-fast) var(--ease-standard),color var(--motion-fast) var(--ease-standard)}
+.account-menu__item:hover,.account-menu__item:focus-visible{border-left-color:var(--cyan);background:var(--surface-2);color:var(--cyan)}
+.account-menu__icon{display:grid;width:28px;height:28px;place-items:center;border:1px solid var(--line);border-radius:var(--radius-control);background:var(--canvas);color:var(--cyan);font-size:13px;line-height:1}
+.account-menu__chevron{color:var(--muted);font-size:18px;font-weight:400}
+.account-menu__sign-out{grid-template-columns:28px minmax(0,1fr);margin-top:var(--space-2);padding-top:var(--space-3);border-top:1px solid var(--line-soft);border-radius:0}
+.account-menu__sign-out:disabled{cursor:progress;opacity:.72}
+.account-menu__status{margin:var(--space-2) var(--space-3);color:var(--muted);font-size:11px;line-height:1.5}
+.account-session-status{position:fixed;right:var(--space-5);top:80px;z-index:70;margin:0;padding:var(--space-3) var(--space-4);border:1px solid var(--line);border-left:3px solid var(--cyan);background:var(--surface);color:var(--text);font:700 10px "IBM Plex Sans",Arial;letter-spacing:.06em;text-transform:uppercase}
+@media(max-width:900px){.account-menu__panel{position:fixed;right:var(--space-3);top:126px}.primary-nav>a,.utility-nav{font-size:8px!important;letter-spacing:.04em!important}}
+@media(max-width:640px){.account-menu__panel{left:var(--space-3);right:var(--space-3);top:126px;width:auto}.account-session-status{left:var(--space-3);right:var(--space-3);top:126px;text-align:center}.primary-nav>a,.utility-nav{font-size:7px!important;letter-spacing:.02em!important}}

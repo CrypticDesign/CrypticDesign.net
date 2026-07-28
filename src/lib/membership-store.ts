@@ -120,3 +120,7 @@ export function getMembershipStore(): MembershipStore {
 export function membershipSandboxEnabled(): boolean {
   return process.env.NODE_ENV !== "production" && process.env.MEMBERSHIP_SANDBOX_ENABLED === "true";
 }
+
+export function membershipSandboxPreferred(): boolean {
+  return membershipSandboxEnabled() && !process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY?.trim();
+}

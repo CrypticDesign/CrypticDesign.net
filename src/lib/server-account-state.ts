@@ -2,12 +2,16 @@ import "server-only";
 
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
-import { membershipSandboxEnabled } from "./membership-store";
+import { membershipSandboxEnabled, membershipSandboxPreferred } from "./membership-store";
 import { SANDBOX_SESSION_COOKIE, verifySandboxSession } from "./sandbox-session";
 import { supabaseConfigured } from "./supabase/server";
 
 export async function getInitialAccountAuthenticated(): Promise<boolean> {
   const cookieStore = await cookies();
+
+  if (membershipSandboxPreferred()) {
+    return Boolean(verifySandboxSession(cookieStore.get(SANDBOX_SESSION_COOKIE)?.value));
+  }
 
   if (supabaseConfigured()) {
     const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
