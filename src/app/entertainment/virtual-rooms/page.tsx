@@ -1,27 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-
-export const metadata: Metadata = {
-  title: "Virtual Rooms",
-  alternates: { canonical: "/entertainment/virtual-rooms" },
-  description: "Lightweight shared spaces wrapped around selected releases.",
-};
-
-export default function VirtualRoomsPage() {
-  return (
-    <main className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10 sm:px-6">
-      <header className="flex flex-col gap-2">
-        <h1 className="text-3xl font-semibold text-white">Virtual Rooms</h1>
-        <p className="max-w-xl text-muted-foreground">
-          Shared spaces built around releases, events, and creative worlds.
-          Desktop gets a light 3D treatment; mobile gets a simplified view.
-        </p>
-      </header>
-      <p className="rounded-card border border-dashed border-border p-8 text-sm text-muted-foreground">
-        The first room opens around a Singularis release. Rooms require the
-        account and character foundation. Shared-room features are coming later.
-      </p>
-      <Link href="/entertainment" className="text-sm text-accent-cyan hover:underline">← Entertainment Channel</Link>
-    </main>
-  );
-}
+import EntertainmentDestinationPage from "@/components/EntertainmentDestinationPage";
+export const metadata: Metadata = { title: "Virtual Rooms", alternates: { canonical: "/entertainment/virtual-rooms" }, description: "Lightweight shared spaces wrapped around selected releases." };
+export default function VirtualRoomsPage() { return <EntertainmentDestinationPage eyebrow="Explore" title="Virtual Rooms" description="Immersive spaces, live gatherings, and persistent digital environments built around releases and creative worlds." releases={[]} emptyMessage="The first room will open around a Singularis release. Shared-room features are coming later." />; }
