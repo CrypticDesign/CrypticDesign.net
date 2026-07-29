@@ -149,6 +149,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   .entertainment-navigation__links a{min-height:72px}
 }
 @media(max-width:340px){.entertainment-navigation__links{grid-template-columns:1fr}}
+.destination-hero{border-bottom:1px solid var(--line);background:radial-gradient(circle at 78% 28%,rgba(124,58,237,.2),transparent 36%),linear-gradient(135deg,#101827,#050a12 66%)}
+.destination-hero__content{padding-block:96px 80px}.destination-hero h1{margin:16px 0}.destination-hero p{max-width:720px;margin:0;color:#b6c2cf;font-size:18px;line-height:1.65}.destination-state{padding:40px;border-left:3px solid var(--cyan)}.destination-state h2{margin:12px 0}.destination-state p{max-width:720px;color:var(--muted);line-height:1.65}
+@media(max-width:640px){.destination-hero__content{padding-block:64px 56px}.destination-hero p{font-size:16px}.destination-state{padding:26px 20px}}
 /* CRY-412 — persistent, keyboard-accessible account controls. */
 .primary-nav>a,.utility-nav{font:600 9px "IBM Plex Sans",Arial;letter-spacing:.08em}
 .account-menu{position:relative;display:flex;align-items:center}
