@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReleaseCard from "@/components/ReleaseCard";
+import SingularisGamespace from "@/components/SingularisGamespace";
 import { getProduct, publicProducts } from "@/lib/products";
 import { publicReleases } from "@/lib/releases";
 
@@ -45,6 +46,19 @@ export default async function ProductHome({
   const remainingReleases = selectedRelease
     ? releases.filter((release) => release.slug !== selectedRelease.slug)
     : releases;
+
+  if (product.slug === "singularis") {
+    return (
+      <main className="singularis-page">
+        <SingularisGamespace />
+        <div className="shell singularis-page__releases">
+          <span className="kicker">From the Singularis universe</span>
+          <h2 className="section-title">Releases and transmissions</h2>
+          <div className="flex flex-wrap gap-4">{releases.map((release) => <ReleaseCard key={release.slug} release={release} />)}</div>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="shell page-stack">
