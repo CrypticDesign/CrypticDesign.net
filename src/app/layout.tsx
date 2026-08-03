@@ -4,6 +4,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SubNavBreadcrumbs from "@/components/SubNavBreadcrumbs";
 import { getInitialAccountAuthenticated } from "@/lib/server-account-state";
 import "./globals.css";
+import "./singularis.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://crypticdesign.net"),
