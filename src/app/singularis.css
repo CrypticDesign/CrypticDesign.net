@@ -23,3 +23,66 @@
 .sin-cgs__prototype-controls:not([open]) summary{padding-inline:14px}
 .sin-cgs__game-frame{display:block;width:100%;height:100%;border:0;background:#04050c}
 @media(prefers-reduced-motion:reduce){.sin-cgs *{animation:none!important;transition:none!important}}
+
+/* Contextual Singularis workspace navigation: rail on wide screens, disclosure below. */
+.sin-cgs__nav-menu{display:none}
+.sin-cgs__nav-rail{display:flex;min-width:0;flex-direction:column;align-self:stretch;overflow:hidden;border:1px solid #1a2737;border-radius:12px;background:#07101a;color:#93a0af;font:600 10px "Open Sans",Arial;letter-spacing:.04em;text-transform:uppercase}
+.sin-cgs__nav-rail strong{padding:20px 18px;border-bottom:1px solid #1a2737;color:#f4f7fa;font:600 15px "IBM Plex Sans",Arial}
+.sin-cgs__nav-rail span{position:relative;padding:15px 18px;border-bottom:1px solid #111d2a}
+.sin-cgs__nav-rail span[aria-current="page"]{background:linear-gradient(90deg,rgba(160,80,240,.16),transparent);color:#d7b2ff}
+.sin-cgs__nav-rail span[aria-current="page"]:before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:#a050f0;box-shadow:0 0 14px #a050f0}
+.sin-cgs__workspace{grid-template-columns:minmax(170px,210px) minmax(0,930px) minmax(300px,390px);gap:20px}
+@media(max-width:1100px){
+  .sin-cgs__nav-rail{display:none}
+  .sin-cgs__nav-menu{display:block;border-bottom:1px solid #1a2737;background:#07101a;color:#f4f7fa}
+  .sin-cgs__nav-menu summary{display:flex;min-height:50px;align-items:center;justify-content:space-between;gap:14px;padding:0 16px;list-style:none;cursor:pointer}
+  .sin-cgs__nav-menu summary::-webkit-details-marker{display:none}
+  .sin-cgs__nav-menu summary strong{font:600 14px "IBM Plex Sans",Arial;text-transform:uppercase}
+  .sin-cgs__nav-menu summary span{margin-left:auto;color:#d7b2ff;font:600 10px "Open Sans",Arial;text-transform:uppercase}
+  .sin-cgs__nav-menu summary:after{content:"+";color:#a050f0;font-size:18px}
+  .sin-cgs__nav-menu[open] summary:after{content:"−"}
+  .sin-cgs__nav-menu nav{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #1a2737}
+  .sin-cgs__nav-menu nav span{padding:13px 16px;border-right:1px solid #1a2737;border-bottom:1px solid #1a2737;color:#93a0af;font:600 9px "Open Sans",Arial;text-transform:uppercase}
+  .sin-cgs__nav-menu nav span[aria-current="page"]{background:rgba(160,80,240,.12);color:#d7b2ff}
+  .sin-cgs__workspace,.sin-cgs--immersive .sin-cgs__workspace{grid-template-columns:minmax(0,1fr) minmax(290px,360px)}
+}
+@media(max-width:900px){.sin-cgs__workspace,.sin-cgs--immersive .sin-cgs__workspace{grid-template-columns:1fr}}
+@media(max-width:560px){.sin-cgs__nav-menu nav{grid-template-columns:1fr 1fr}}
+
+/* Franchise tier remains horizontal; page content retains its two-panel composition. */
+.sin-cgs__workspace,.sin-cgs--immersive .sin-cgs__workspace{grid-template-columns:minmax(0,930px) minmax(330px,430px);gap:24px}
+@media(max-width:900px){.sin-cgs__workspace,.sin-cgs--immersive .sin-cgs__workspace{grid-template-columns:1fr}}
+
+/* Arcade controls the existing franchise tier as a collapsible navigation drawer. Recompiled 2026-08-04. */
+.sin-cgs__nav{max-height:48px;opacity:1;transition:max-height .18s ease,opacity .18s ease}
+.sin-cgs__nav[data-open="false"]{max-height:0;overflow:hidden;opacity:0}
+
+/* Singularis franchise navigation occupies the left workspace panel on wide screens. */
+.sin-cgs__workspace,.sin-cgs--immersive .sin-cgs__workspace{grid-template-columns:minmax(58px,210px) minmax(0,930px) minmax(300px,390px);gap:20px;transition:grid-template-columns 260ms ease}
+.sin-cgs__workspace[data-nav-open="false"],.sin-cgs--immersive .sin-cgs__workspace[data-nav-open="false"]{grid-template-columns:58px minmax(0,930px) minmax(300px,390px)}
+.sin-cgs__nav-rail{display:flex;border-radius:0}
+.sin-cgs__nav-rail{position:sticky;top:210px;max-height:calc(100svh - 232px)}
+.sin-cgs__nav-rail>div{display:flex;min-width:0;flex-direction:column;transition:width 220ms ease,opacity 180ms ease}
+.sin-cgs__nav-toggle{display:flex!important;width:100%;min-height:50px!important;align-items:center;justify-content:flex-end;padding:0 12px!important;border:0!important;border-bottom:1px solid #1a2737!important;border-radius:0!important;background:#091421!important;color:#f4f7fa!important}
+.sin-cgs__nav-toggle b{display:grid;min-width:26px;height:26px;place-items:center;border:1px solid #35465d;border-radius:4px;color:#d7b2ff;font-size:20px;line-height:1}
+.sin-cgs__workspace[data-nav-open="false"] .sin-cgs__nav-toggle{justify-content:center;padding-inline:10px!important}
+.sin-cgs__nav-rail>div>button{display:grid!important;width:100%;min-height:52px!important;grid-template-columns:28px minmax(0,1fr);align-items:center;gap:10px;padding:0 14px!important;border:0!important;border-bottom:1px solid #111d2a!important;border-radius:0!important;background:transparent!important;color:#93a0af!important;text-align:left}
+.sin-cgs__nav-rail>div>button i{display:grid;width:28px;height:28px;place-items:center;color:#8ecfff;font-style:normal;font-size:17px}
+.sin-cgs__nav-rail>div>button span{overflow:hidden;font:600 10px "Open Sans",Arial;letter-spacing:.04em;white-space:nowrap;text-transform:uppercase}
+.sin-cgs__nav-rail>div>button[aria-current="page"]{background:linear-gradient(90deg,rgba(160,80,240,.16),transparent)!important;color:#d7b2ff!important;box-shadow:inset 3px 0 #a050f0}
+.sin-cgs__workspace[data-nav-open="false"] .sin-cgs__nav-rail>div{width:100%;opacity:1}
+.sin-cgs__workspace[data-nav-open="false"] .sin-cgs__nav-rail>div>button{grid-template-columns:28px;justify-content:center;padding-inline:14px!important}
+.sin-cgs__workspace[data-nav-open="false"] .sin-cgs__nav-rail>div>button span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media(max-width:1100px){
+  .sin-cgs__nav-rail{display:none}
+  .sin-cgs__nav-menu{display:block;margin-bottom:18px;border:1px solid #1a2737;border-radius:8px}
+  .sin-cgs__workspace,.sin-cgs--immersive .sin-cgs__workspace,.sin-cgs__workspace[data-nav-open="false"],.sin-cgs--immersive .sin-cgs__workspace[data-nav-open="false"]{grid-template-columns:minmax(0,1fr) minmax(290px,360px)}
+}
+@media(max-width:900px){.sin-cgs__workspace,.sin-cgs--immersive .sin-cgs__workspace,.sin-cgs__workspace[data-nav-open="false"],.sin-cgs--immersive .sin-cgs__workspace[data-nav-open="false"]{grid-template-columns:1fr}}
+
+/* Approved Singularis marketing artwork anchors the first-contact hero. */
+.sin-cgs__hero-art{position:relative;width:100%;height:clamp(220px,28vw,390px);margin-bottom:24px;overflow:hidden;border:1px solid #1a2737;background:#07101a}
+.sin-cgs__hero-art:after{content:"";position:absolute;inset:0;box-shadow:inset 0 -42px 50px rgb(5 8 13 / 58%);pointer-events:none}
+.sin-cgs__hero-art img{object-fit:cover;object-position:center 52%}
+.sin-cgs__heading-copy>span{color:#d6a62e;font:600 11px "IBM Plex Sans",Arial;letter-spacing:.05em;text-transform:uppercase}
+@media(max-width:560px){.sin-cgs__hero-art{height:210px;margin-bottom:18px}.sin-cgs__hero-art img{object-position:center 50%}}

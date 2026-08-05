@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import SubNavBreadcrumbs from "@/components/SubNavBreadcrumbs";
+import EntertainmentNavigation from "@/components/EntertainmentNavigation";
 import { getInitialAccountAuthenticated } from "@/lib/server-account-state";
 import "./globals.css";
 import "./singularis.css";
@@ -33,6 +34,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body className="flex min-h-screen flex-col antialiased">
         <a className="skip-link" href="#main-content">Skip to main content</a>
         <SiteHeader initialAuthenticated={initialAuthenticated} />
+        <EntertainmentNavigation />
         <SubNavBreadcrumbs position="top" />
         <div id="main-content" className="flex-1" tabIndex={-1}>{children}</div>
         <SubNavBreadcrumbs position="bottom" />

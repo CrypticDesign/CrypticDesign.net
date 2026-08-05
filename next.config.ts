@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Keep the live Turbopack preview isolated from `next build`; sharing
+  // `.next` lets a production build delete development manifests mid-session.
+  distDir: process.env.NODE_ENV === "development" ? ".next-dev" : ".next",
   async redirects() {
     // Legacy /personal routes: Home itself is now the entertainment hub
     // (audience-first correction, 2026-07-10; tracked on CRY-255).
@@ -21,6 +24,13 @@ const nextConfig: NextConfig = {
       { source: "/creative-works/crypticdesign-net", destination: "/professional", permanent: false },
       // Safety net for any unmapped legacy slug:
       { source: "/creative-works/:slug*", destination: "/entertainment", permanent: false },
+      // Singularis has one continuous playable destination. Preserve the old
+      // release URL as an inbound link without keeping a duplicate page.
+      {
+        source: "/releases/singularis-vertical-slice",
+        destination: "/products/singularis",
+        permanent: true,
+      },
       // CRY-344: legacy Squarespace routes → v18 destinations (matrix §7, approved 2026-07-20).
       { source: "/home", destination: "/", permanent: true },
       { source: "/aboutcrypticdesign", destination: "/professional", permanent: true },

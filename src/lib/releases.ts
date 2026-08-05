@@ -75,6 +75,7 @@ export interface Release extends PublicContentGovernance {
   tagline: string;
   description: string;
   kind: ReleaseKind;
+  genres?: readonly (typeof import("./entertainment-navigation").ARCADE_GENRES)[number][];
   lanes: LaneSlug[];
   /** Originating project (grouping metadata only — projects are not hubs). */
   project?: string;
@@ -114,6 +115,7 @@ export const RELEASES: Release[] = withReviewMetadata<Release>([
     description:
       "The first playable slice of Singularis — a browser-first experience exploring the core loop, tone, and world of Cryptic Design's flagship original IP.",
     kind: "game",
+    genres: ["Action", "Rhythm", "Shooter"],
     lanes: ["play"],
     project: "Singularis",
     productSlug: "singularis",
@@ -256,6 +258,15 @@ export function publicReleases(): Release[] {
 
 export function getRelease(slug: string): Release | undefined {
   return publicReleases().find((release) => release.slug === slug);
+}
+
+/** Audience-facing destination for discovery cards. */
+export function releaseDestination(release: Release): string {
+  if (release.slug === "singularis-vertical-slice") {
+    return "/products/singularis";
+  }
+
+  return `/releases/${release.slug}`;
 }
 
 export function releaseImage(release: Release): string {

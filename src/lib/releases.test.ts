@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { evaluateReleaseAccess, type Release } from "./releases.ts";
+import { evaluateReleaseAccess, releaseDestination, type Release } from "./releases.ts";
 
 const release: Release = {
   slug: "locked", title: "Locked", tagline: "Test", description: "Protected body",
@@ -25,4 +25,15 @@ test("grants content when the required entitlement is present", () => {
 
 test("rights and publication governance override membership", () => {
   assert.equal(evaluateReleaseAccess({ ...release, rights_status: "restricted" }, { authenticated: true, entitlements: ["benefit_updates"] }), "not-renderable");
+});
+
+test("routes the Singularis vertical slice into the continuous gamespace", () => {
+  assert.equal(
+    releaseDestination({ ...release, slug: "singularis-vertical-slice", kind: "game" }),
+    "/products/singularis",
+  );
+});
+
+test("keeps ordinary releases on their release detail pages", () => {
+  assert.equal(releaseDestination(release), "/releases/locked");
 });

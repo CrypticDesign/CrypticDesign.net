@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import test from "node:test";
 
 const component = readFileSync("src/components/SingularisGamespace.tsx", "utf8");
@@ -16,6 +16,23 @@ test("keeps the embedded runtime in a stable parent render tree", () => {
   assert.match(component, /\{renderUniverse\(immersive\)\}/);
   assert.doesNotMatch(component, /const Universe =/);
   assert.doesNotMatch(component, /<Universe\b/);
+});
+
+test("uses the approved Singularis marketing artwork for first contact", () => {
+  assert.match(component, /state\.phase === "arrival" && <div className="sin-cgs__hero-art">/);
+  assert.match(component, /src="\/images\/singularis-marketing-02\.jpg"/);
+  assert.equal(existsSync("public/images/singularis-marketing-02.jpg"), true);
+});
+
+test("keeps franchise navigation in a collapsible left workspace rail", () => {
+  assert.match(component, /id="singularis-franchise-drawer" className="sin-cgs__nav-rail"/);
+  assert.match(component, /className="sin-cgs__nav-toggle"/);
+  assert.match(component, /data-nav-open=\{franchiseDrawerOpen\}/);
+  assert.match(component, /aria-current=\{workspaceSection === section\.id \? "page" : undefined\}/);
+  assert.match(component, /data-runtime-file=\{`\/games\/singularis\/workspaces\/\$\{section\.id\}\/index\.html`\}/);
+  assert.match(component, /workspaceSection !== "mission-control" \? <iframe/);
+  assert.match(component, /className="sin-cgs__nav-menu"/);
+  assert.doesNotMatch(component, /cryptic:arcade-drawer/);
 });
 
 test("v05 exposes a versioned same-origin page bridge", () => {

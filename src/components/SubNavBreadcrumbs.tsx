@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { shouldShowTopBreadcrumb } from "@/lib/site-navigation";
 
 const LABELS: Record<string, string> = {
   account: "Account",
@@ -63,6 +64,7 @@ export default function SubNavBreadcrumbs({ position }: { position: "top" | "bot
   const pathname = usePathname();
   const crumbs = routeCrumbs(pathname);
 
+  if (position === "top" && !shouldShowTopBreadcrumb(pathname)) return null;
   if (crumbs.length < 2) return null;
 
   return (
