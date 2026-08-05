@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { ContentAccessDecision, Release } from "@/lib/releases";
-import { releaseImage } from "@/lib/releases";
+import { releaseDestination, releaseImage } from "@/lib/releases";
 
 const ACCENT_BORDER: Record<Release["accent"], string> = {
   blue: "after:bg-accent-blue",
@@ -19,7 +19,7 @@ const KIND_LABEL: Record<Release["kind"], string> = {
 };
 
 export default function ReleaseCard({ release, accessDecision }: { release: Release; accessDecision?: ContentAccessDecision }) {
-  const href = `/releases/${release.slug}`;
+  const href = releaseDestination(release);
 
   return (
     <Link

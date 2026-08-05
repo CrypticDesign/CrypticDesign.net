@@ -1,5 +1,4 @@
 import Link from "next/link";
-import EntertainmentNavigation from "@/components/EntertainmentNavigation";
 import ReleaseCard from "@/components/ReleaseCard";
 import type { Release } from "@/lib/releases";
 
@@ -26,7 +25,6 @@ export default function EntertainmentDestinationPage({ eyebrow, title, descripti
           </div>
         </div>
       </header>
-      <EntertainmentNavigation />
       <div className="shell page-stack">
         <section id="featured" aria-labelledby="featured-heading">
           <div className="section-heading">

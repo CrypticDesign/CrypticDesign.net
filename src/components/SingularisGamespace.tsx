@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useReducer, useRef, useState } from "react";
 import SingularisUniverseViewport from "@/components/SingularisUniverseViewport";
 import { createSingularisGamespaceState, singularisGamespaceReducer, type GamespacePhase, type SingularisSimpleActionType } from "@/lib/singularis-gamespace";
@@ -41,11 +42,23 @@ interface EmbeddedRuntimeState {
 
 const initialEmbeddedRuntime: EmbeddedRuntimeState = { ready: false, lifecycle: "loading", score: 0, checkpoint: 0, wave: 1, waveCount: 106, coreIntegrity: 100, outcome: null };
 
+const singularisWorkspaceSections = [
+  { id: "mission-control", label: "Mission Control", icon: "⌁" },
+  { id: "hangar", label: "Hangar", icon: "◇" },
+  { id: "pilot", label: "Pilot", icon: "◎" },
+  { id: "arsenal", label: "Arsenal", icon: "✦" },
+  { id: "codex", label: "Codex", icon: "▤" },
+  { id: "war-effort", label: "War Effort", icon: "⬡" },
+] as const;
+type SingularisWorkspaceSection = typeof singularisWorkspaceSections[number]["id"];
+
 export default function SingularisGamespace() {
   const [state, dispatch] = useReducer(singularisGamespaceReducer, undefined, () => createSingularisGamespaceState());
   const stageRef = useRef<HTMLDivElement>(null);
   const [fullscreen, setFullscreen] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const [franchiseDrawerOpen, setFranchiseDrawerOpen] = useState(true);
+  const [workspaceSection, setWorkspaceSection] = useState<SingularisWorkspaceSection>("mission-control");
   const [embeddedRuntime, setEmbeddedRuntime] = useState<EmbeddedRuntimeState>(initialEmbeddedRuntime);
   const immersive = ["entering", "training", "interrupted", "complete", "operation"].includes(state.phase);
 
@@ -152,7 +165,7 @@ export default function SingularisGamespace() {
   const renderUniverse = (active = false) => (
     <div ref={stageRef} className={`sin-cgs__runtime ${active ? "sin-cgs__runtime--active" : ""} ${expanded ? "sin-cgs__runtime--expanded" : ""}`}>
       <div className="sin-cgs__runtime-head"><span>{active ? state.session.simulationId : "Live universe"}</span><span>{active ? "Runtime active" : "World status"} <i /></span></div>
-      <div className="sin-cgs__viewport">{state.phase === "operation" ? <iframe className="sin-cgs__game-frame" src="/games/singularis/v05/index.html" title="Singularis Leviathan Protocol v05 game runtime" allow="autoplay; fullscreen; gamepad" onLoad={() => setEmbeddedRuntime((current) => ({ ...current, ready: true, lifecycle: current.lifecycle === "loading" ? "ready" : current.lifecycle }))} /> : <SingularisUniverseViewport session={state.session} onCheckpoint={() => dispatch({ type: "ADVANCE_CHECKPOINT" })} />}{fullscreenButton}
+      <div className="sin-cgs__viewport">{state.phase === "operation" ? <iframe className="sin-cgs__game-frame" src="/games/singularis/v05/index.html" title="Singularis Leviathan Protocol v05 game runtime" allow="autoplay; fullscreen; gamepad" onLoad={() => setEmbeddedRuntime((current) => ({ ...current, ready: true, lifecycle: current.lifecycle === "loading" ? "ready" : current.lifecycle }))} /> : workspaceSection !== "mission-control" ? <iframe className="sin-cgs__game-frame" src={`/games/singularis/workspaces/${workspaceSection}/index.html`} title={`Singularis ${singularisWorkspaceSections.find((section) => section.id === workspaceSection)?.label} workspace`} /> : <SingularisUniverseViewport session={state.session} onCheckpoint={() => dispatch({ type: "ADVANCE_CHECKPOINT" })} />}{fullscreenButton}
         {active && state.phase !== "operation" && <div className="sin-cgs__score"><strong>Score {state.session.score.toLocaleString()}</strong><strong>Wave {String(state.session.wave).padStart(2, "0")} / {String(state.session.waveCount).padStart(2, "0")}</strong></div>}
         {state.phase === "entering" && <div className="sin-cgs__center-card"><span>Training Simulation 01</span><h2>Synchronizing controls</h2><p>Input remains locked until runtime readiness is confirmed.</p></div>}
         {state.phase === "interrupted" && <div className="sin-cgs__center-card"><span>Flight control</span><h2>Your flight is paused</h2><p>Return when ready, or end the simulation. The living universe continues outside this training instance.</p><div><button onClick={() => act("RESUME", "training_simulation_resumed")}>Return to flight</button><button className="secondary" onClick={() => act("END_SIMULATION", "training_simulation_ended")}>End simulation</button></div></div>}
@@ -172,8 +185,9 @@ export default function SingularisGamespace() {
     return <aside className="sin-cgs__panel"><span>Pilot Preparation</span><h2>{activePilot ? "Ready for your first Operation" : "Ready to become active"}</h2><p>{activePilot ? "Training is now part of your Pilot record. The page has returned with your next approved activity ready." : "Your member account becomes a Singularis Pilot identity when you begin."}</p><hr/><div className="sin-cgs__two"><div><h3>Pilot</h3><strong>{activePilot ? "Robert K. Croft" : "Pilot Candidate"}</strong><p>{activePilot ? "Active · Cadet" : "Flight clearance pending"}</p></div><div><h3>Leviathan</h3><strong>{state.player.leviathan}</strong><p>Bond {state.player.leviathanBond}</p></div></div><article><span>Recommended {activePilot ? "next" : "first"} activity</span><strong>{activePilot ? "Transit Escort" : "Training Simulation 01"}</strong><p>{activePilot ? "A low-risk introductory Operation focused on navigation and live-world awareness." : "Learn movement, targeting, and recovery in a risk-free simulation."}</p></article><h3>Pilot progression</h3><div className="sin-cgs__progress"><i /></div>{activePilot ? <button onClick={() => state.phase === "updated" ? act("SYNCHRONIZE_WORLD", "persistent_world_synchronized") : act("BEGIN_TRANSIT_ESCORT", "transit_escort_selected")}>Begin Transit Escort</button> : <button onClick={() => act("ENTER_TRAINING", "training_simulation_entered")}>Play Training Simulation</button>}</aside>;
   };
 
+  const workspaceNavigation = singularisWorkspaceSections.map((section) => <button type="button" key={section.id} aria-current={workspaceSection === section.id ? "page" : undefined} data-runtime-file={`/games/singularis/workspaces/${section.id}/index.html`} onClick={() => setWorkspaceSection(section.id)}><i aria-hidden="true">{section.icon}</i><span>{section.label}</span></button>);
+
   return <section className={`sin-cgs sin-cgs--${state.phase} ${immersive ? "sin-cgs--immersive" : ""}`} aria-labelledby="singularis-title">
-    <nav className="sin-cgs__nav" aria-label="Singularis"><strong>Singularis</strong><span>Mission Control</span><span>Hangar</span><span>Pilot</span><span>Arsenal</span><span>Codex</span><span>War Effort</span></nav>
     <div className="sin-cgs__wrap">
       <details className="sin-cgs__prototype-controls">
         <summary>Prototype controls</summary>
@@ -183,8 +197,21 @@ export default function SingularisGamespace() {
           <button type="button" className="secondary" onClick={resetExperience}>Reset to First Contact</button>
         </div>
       </details>
-      <header className="sin-cgs__heading"><span>{state.phase === "arrival" ? "First-time arrival" : state.phase === "training" ? "State 04" : "Working draft"}</span><h1 id="singularis-title">{title}</h1><p>{subtitle}</p>{state.phase === "arrival" && <div className="sin-cgs__tags"><b>Persistent world</b><b>Arcade action</b><b>Music-driven</b></div>}</header>
-      <div className="sin-cgs__workspace">{renderUniverse(immersive)}{renderSidePanel()}</div>
+      <header className="sin-cgs__heading">
+        {state.phase === "arrival" && <div className="sin-cgs__hero-art"><Image src="/images/singularis-marketing-02.jpg" alt="Singularis above the horizon of Earth" fill priority sizes="(max-width: 1440px) 100vw, 1440px" /></div>}
+        <div className="sin-cgs__heading-copy"><span>{state.phase === "arrival" ? "First-time arrival" : state.phase === "training" ? "State 04" : "Working draft"}</span><h1 id="singularis-title">{title}</h1><p>{subtitle}</p>{state.phase === "arrival" && <div className="sin-cgs__tags"><b>Persistent world</b><b>Arcade action</b><b>Music-driven</b></div>}</div>
+      </header>
+      <details className="sin-cgs__nav-menu">
+        <summary><strong>Singularis workspace</strong><span>{singularisWorkspaceSections.find((section) => section.id === workspaceSection)?.label}</span></summary>
+        <nav aria-label="Compact Singularis workspace">{workspaceNavigation}</nav>
+      </details>
+      <div className="sin-cgs__workspace" data-nav-open={franchiseDrawerOpen}>
+        <nav id="singularis-franchise-drawer" className="sin-cgs__nav-rail" aria-label="Singularis workspace">
+          <button type="button" className="sin-cgs__nav-toggle" aria-expanded={franchiseDrawerOpen} aria-label={franchiseDrawerOpen ? "Collapse Singularis navigation" : "Expand Singularis navigation"} onClick={() => setFranchiseDrawerOpen((open) => !open)}><b aria-hidden="true">{franchiseDrawerOpen ? "‹" : "›"}</b></button>
+          <div>{workspaceNavigation}</div>
+        </nav>
+        {renderUniverse(immersive)}{renderSidePanel()}
+      </div>
       {state.phase === "arrival" && <div className="sin-cgs__arrival-body"><section><span>Discover the experience</span><h2>What is Singularis?</h2><p>Singularis is a persistent science-fiction action experience where arcade gameplay, original music, and an evolving world operate as one continuous system.</p></section><aside><span>The promise</span><p>Every Operation advances your pilot and reveals more of a universe that continues moving before, during, and after you play.</p></aside><section className="wide"><h2>What you’ll do</h2><div className="sin-cgs__actions">{actionCards.map(([k,t,d])=><article key={k}><span>{k}</span><strong>{t}</strong><p>{d}</p></article>)}</div></section><section className="wide"><span>Your path into the world</span><h2>How Singularis works</h2><ol className="sin-cgs__path">{pathSteps.map((step,index)=><li key={step}><b>{index+1}</b><span>{step}</span></li>)}</ol></section><section className="sin-cgs__help"><span>Learn before you fly</span><h2>Help is visible from the start.</h2><p>Getting Started · Controls · HUD Guide · Accessibility · Supported Devices · Controller Setup · Operations vs Simulations · FAQ</p></section><section className="sin-cgs__choices"><span>Choose how to enter</span><p>All three paths are valid. None implies that you are already flying.</p><div><button onClick={() => act("PREPARE", "pilot_preparation_viewed")}>Begin Pilot Initialization</button><button className="secondary" onClick={() => { act("PREPARE"); window.setTimeout(() => act("ENTER_TRAINING", "training_simulation_entered"), 0); }}>Play Training Simulation</button><button className="secondary" onClick={() => recordSingularisEvent("singularis_arrival_viewed")}>Explore the Singularis Universe</button></div></section></div>}
       {state.phase !== "arrival" && <footer className="sin-cgs__continuity"><span>Continuity</span><p>{state.phase === "interrupted" ? "Interruption never discards identity, craft assignment, training state, or the persistent-world connection." : "Player identity, progression, available Operations, and live-world context form one continuous state."}</p><strong>Next · {state.phase === "training" ? "Complete training" : state.phase === "complete" ? "Pilot Preparation" : "First introductory Operation"}</strong></footer>}
     </div>

@@ -27,6 +27,7 @@ const EXPECTED: Record<string, string> = {
   "/creative-works/holistic-ux": "/professional/articles",
   "/creative-works/crypticdesign-net": "/professional",
   "/creative-works/:slug*": "/entertainment",
+  "/releases/singularis-vertical-slice": "/products/singularis",
   // Legacy /personal chain must point at final destinations, not deleted routes
   "/personal/creative-labs": "/entertainment/visual-studies",
   "/personal/rooms": "/entertainment",

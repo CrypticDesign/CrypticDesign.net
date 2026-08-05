@@ -48,14 +48,20 @@ export default async function ProductHome({
     : releases;
 
   if (product.slug === "singularis") {
+    const transmissions = releases.filter(
+      (release) => release.slug !== "singularis-vertical-slice",
+    );
+
     return (
       <main className="singularis-page">
         <SingularisGamespace />
-        <div className="shell singularis-page__releases">
-          <span className="kicker">From the Singularis universe</span>
-          <h2 className="section-title">Releases and transmissions</h2>
-          <div className="flex flex-wrap gap-4">{releases.map((release) => <ReleaseCard key={release.slug} release={release} />)}</div>
-        </div>
+        {transmissions.length > 0 && (
+          <div className="shell singularis-page__releases">
+            <span className="kicker">From the Singularis universe</span>
+            <h2 className="section-title">Releases and transmissions</h2>
+            <div className="flex flex-wrap gap-4">{transmissions.map((release) => <ReleaseCard key={release.slug} release={release} />)}</div>
+          </div>
+        )}
       </main>
     );
   }
