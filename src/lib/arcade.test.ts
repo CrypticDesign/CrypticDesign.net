@@ -3,10 +3,12 @@ import test from "node:test";
 import { ARCADE_ENTRIES, arcadeEntriesFor } from "./arcade.ts";
 
 test("Arcade MVP exposes the approved Cryptic-specific discovery groups", () => {
-  assert.ok(arcadeEntriesFor("featured").some((entry) => entry.slug === "singularis-browser-prototype"));
   assert.ok(arcadeEntriesFor("lifa").some((entry) => entry.slug === "lifa-genesis"));
-  assert.ok(arcadeEntriesFor("missions").some((entry) => entry.slug === "cross-media-missions"));
-  assert.ok(arcadeEntriesFor("experiments").some((entry) => entry.slug === "interactive-experiments"));
+});
+
+test("Arcade does not duplicate Featured or Cryptic Originals as catalog buckets", () => {
+  assert.equal(ARCADE_ENTRIES.some((entry) => entry.slug === "cryptic-originals-program"), false);
+  assert.equal(ARCADE_ENTRIES.some((entry) => entry.categories.some((category) => category === "featured" || category === "cryptic-originals")), false);
 });
 
 test("construction entries expose the required planning fields", () => {

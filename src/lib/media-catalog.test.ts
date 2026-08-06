@@ -4,8 +4,8 @@ import { MUSIC_CATEGORIES, VIDEO_CATEGORIES } from "./entertainment-navigation.t
 import { MUSIC_ENTRIES, VIDEO_ENTRIES } from "./media-catalog.ts";
 
 test("Music and Video expose the approved Cryptic Design filters", () => {
-  assert.deepEqual(MUSIC_CATEGORIES.map((item) => item.label), ["All Music","Featured","Singularis","Cryptic Signal","Songs","Scores","Soundscapes","Collections","Coming Soon"]);
-  assert.deepEqual(VIDEO_CATEGORIES.map((item) => item.label), ["All Video","Featured","Singularis","Episodes","Shorts","Transmissions","Trailers","Behind the Work","Visualizers","Coming Soon"]);
+  assert.deepEqual(MUSIC_CATEGORIES.map((item) => item.label), ["All Music","Singularis","Cryptic Signal","Songs","Scores","Soundscapes","Collections"]);
+  assert.deepEqual(VIDEO_CATEGORIES.map((item) => item.label), ["All Video","Singularis","Episodes","Shorts","Transmissions","Trailers","Behind the Work","Visualizers"]);
 });
 
 test("every Music and Video stub carries shared construction-page fields", () => {

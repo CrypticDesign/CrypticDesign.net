@@ -17,30 +17,22 @@ export const ENTERTAINMENT_NAV_ITEMS: readonly EntertainmentNavItem[] = [
 
 export const ARCADE_CATEGORIES = [
   { slug: "all", label: "Lobby" },
-  { slug: "featured", label: "Featured" },
   { slug: "singularis", label: "Singularis" },
   { slug: "lifa", label: "Lifa" },
-  { slug: "cryptic-originals", label: "Cryptic Originals" },
-  { slug: "missions", label: "Missions" },
-  { slug: "experiments", label: "Experiments" },
-  { slug: "coming-soon", label: "Coming Soon" },
 ] as const;
 
 export const MUSIC_CATEGORIES = [
   { slug: "all", label: "All Music" },
-  { slug: "featured", label: "Featured" },
   { slug: "singularis", label: "Singularis" },
   { slug: "cryptic-signal", label: "Cryptic Signal" },
   { slug: "songs", label: "Songs" },
   { slug: "scores", label: "Scores" },
   { slug: "soundscapes", label: "Soundscapes" },
   { slug: "collections", label: "Collections" },
-  { slug: "coming-soon", label: "Coming Soon" },
 ] as const;
 
 export const VIDEO_CATEGORIES = [
   { slug: "all", label: "All Video" },
-  { slug: "featured", label: "Featured" },
   { slug: "singularis", label: "Singularis" },
   { slug: "episodes", label: "Episodes" },
   { slug: "shorts", label: "Shorts" },
@@ -48,7 +40,6 @@ export const VIDEO_CATEGORIES = [
   { slug: "trailers", label: "Trailers" },
   { slug: "behind-the-work", label: "Behind the Work" },
   { slug: "visualizers", label: "Visualizers" },
-  { slug: "coming-soon", label: "Coming Soon" },
 ] as const;
 
 export const ARCADE_GENRES = ["Action", "Adventure", "Strategy", "RPG", "Puzzle", "Simulation", "Rhythm", "Shooter"] as const;
@@ -69,6 +60,14 @@ export function videoCategory(slug: string | undefined) {
   return VIDEO_CATEGORIES.find((category) => category.slug === slug);
 }
 
+export function entertainmentCategoryHref(destination: "arcade" | "music" | "video", slug: string) {
+  if (destination === "arcade" && slug === "singularis") return "/products/singularis";
+  if (destination === "arcade" && slug === "lifa") return "/products/lifa";
+  const roots = { arcade: "/entertainment/arcade", music: "/audio", video: "/entertainment/cinema" } as const;
+  const queries = { arcade: "genre", music: "filter", video: "filter" } as const;
+  return slug === "all" ? roots[destination] : `${roots[destination]}?${queries[destination]}=${slug}`;
+}
+
 const ENTERTAINMENT_NAV_ROOTS = ["/entertainment", "/audio", "/products", "/releases", "/library"] as const;
 
 export function isEntertainmentNavigationRelevant(pathname: string) {
@@ -79,8 +78,9 @@ export function isEntertainmentNavigationRelevant(pathname: string) {
 
 export function isEntertainmentDestinationActive(pathname: string, href: string) {
   if (href === "/entertainment") {
-    return pathname === href || ((pathname.startsWith("/products/") || pathname.startsWith("/releases/")) && !pathname.includes("singularis"));
+    const arcadeFranchise = pathname.includes("singularis") || pathname === "/products/lifa" || pathname.startsWith("/products/lifa/");
+    return pathname === href || ((pathname.startsWith("/products/") || pathname.startsWith("/releases/")) && !arcadeFranchise);
   }
-  if (href === "/entertainment/arcade" && pathname.includes("singularis")) return true;
+  if (href === "/entertainment/arcade" && (pathname.includes("singularis") || pathname === "/products/lifa" || pathname.startsWith("/products/lifa/"))) return true;
   return pathname === href || pathname.startsWith(`${href}/`);
 }

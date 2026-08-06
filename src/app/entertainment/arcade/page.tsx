@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { ARCADE_ENTRIES, arcadeEntriesFor, type ArcadeEntry } from "@/lib/arcade";
 import { arcadeCategory } from "@/lib/entertainment-navigation";
 
@@ -34,7 +35,11 @@ function ArcadeSection({ eyebrow, title, entries }: { eyebrow: string; title: st
 }
 
 export default async function ArcadePage({ searchParams }: { searchParams: Promise<{ genre?: string }> }) {
-  const selected = arcadeCategory((await searchParams).genre) ?? arcadeCategory("all")!;
+  const requestedCategory = (await searchParams).genre;
+  if (requestedCategory === "singularis") redirect("/products/singularis");
+  if (requestedCategory === "lifa") redirect("/products/lifa");
+  if (["featured", "cryptic-originals", "missions", "experiments", "coming-soon"].includes(requestedCategory ?? "")) redirect("/entertainment/arcade");
+  const selected = arcadeCategory(requestedCategory) ?? arcadeCategory("all")!;
   const filtered = arcadeEntriesFor(selected.slug);
   const rootView = selected.slug === "all";
 
@@ -55,7 +60,7 @@ export default async function ArcadePage({ searchParams }: { searchParams: Promi
         <section className="arcade-continue panel" aria-labelledby="continue-playing-heading" hidden>
           <span className="kicker">Continue playing</span><h2 id="continue-playing-heading" className="section-title">Return to your activity</h2><p>Shown only when the signed-in player has saved or recent Arcade activity.</p>
         </section>
-        <ArcadeSection eyebrow="Coming soon" title="Known future games and prototypes" entries={arcadeEntriesFor("coming-soon")} />
+        <ArcadeSection eyebrow="In development" title="Known future games and prototypes" entries={ARCADE_ENTRIES.filter((entry) => entry.status !== "Public sample")} />
       </> : <ArcadeSection eyebrow={selected.label} title={`${selected.label} in Arcade`} entries={filtered} />}
     </div>
   </main>;

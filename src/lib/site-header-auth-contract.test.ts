@@ -68,14 +68,14 @@ test("Entertainment and Arcade expose independent drawer controls", async () => 
     readFile(globalsUrl, "utf8"),
   ]);
   assert.match(header, /className="site-primary-drawer"/);
-  assert.match(header, /className="site-primary-link__arrow"/);
+  assert.doesNotMatch(header, /className="site-primary-link__arrow"/);
   assert.match(entertainmentNavigation, /className="entertainment-navigation__item-drawer"/);
   assert.match(header, /aria-controls="entertainment-category-drawer"/);
   assert.match(entertainmentNavigation, /aria-label=\{`\$\{item\.label\} drawer`\}/);
   assert.match(entertainmentNavigation, /aria-controls=\{`\$\{item\.icon\}-destination-drawer-\$\{surface\}`\}/);
   assert.match(entertainmentNavigation, /id=\{`\$\{item\.icon\}-destination-drawer-\$\{surface\}`\}/);
   assert.match(entertainmentNavigation, /useState<ArcadeCategorySlug>\("all"\)/);
-  assert.match(entertainmentNavigation, /setSelectedArcadeCategory\(singularisRoute \? "singularis" : arcadeCategory\(searchParams\.get\("genre"\) \?\? undefined\)\?\.slug \?\? "all"\)/);
+  assert.match(entertainmentNavigation, /setSelectedArcadeCategory\(singularisRoute \? "singularis" : lifaRoute \? "lifa" : arcadeCategory\(searchParams\.get\("genre"\) \?\? undefined\)\?\.slug \?\? "all"\)/);
   assert.match(entertainmentNavigation, /aria-current=\{category\.slug === selected \? "page" : undefined\}/);
   assert.doesNotMatch(entertainmentNavigation, /entertainment-navigation__drawer/);
   assert.match(header, /const changingSection = pathname !== item\.href/);
