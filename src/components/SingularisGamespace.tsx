@@ -55,6 +55,7 @@ type SingularisWorkspaceSection = typeof singularisWorkspaceSections[number]["id
 export default function SingularisGamespace() {
   const [state, dispatch] = useReducer(singularisGamespaceReducer, undefined, () => createSingularisGamespaceState());
   const stageRef = useRef<HTMLDivElement>(null);
+  const previousPhaseRef = useRef(state.phase);
   const [fullscreen, setFullscreen] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [franchiseDrawerOpen, setFranchiseDrawerOpen] = useState(true);
@@ -74,6 +75,11 @@ export default function SingularisGamespace() {
   useEffect(() => {
     if (state.player.pilotStatus === "active") window.localStorage.setItem("cryptic:singularis-pilot-active", "true");
   }, [state.player.pilotStatus]);
+  useEffect(() => {
+    if (previousPhaseRef.current === state.phase) return;
+    previousPhaseRef.current = state.phase;
+    window.requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0, behavior: "auto" }));
+  }, [state.phase]);
   useEffect(() => {
     const receiveRuntimeMessage = (event: MessageEvent) => {
       if (event.origin !== window.location.origin || event.data?.source !== "singularis-v05" || event.data?.contractVersion !== 1) return;
@@ -188,6 +194,7 @@ export default function SingularisGamespace() {
   const workspaceNavigation = singularisWorkspaceSections.map((section) => <button type="button" key={section.id} aria-current={workspaceSection === section.id ? "page" : undefined} data-runtime-file={`/games/singularis/workspaces/${section.id}/index.html`} onClick={() => setWorkspaceSection(section.id)}><i aria-hidden="true">{section.icon}</i><span>{section.label}</span></button>);
 
   return <section className={`sin-cgs sin-cgs--${state.phase} ${immersive ? "sin-cgs--immersive" : ""}`} aria-labelledby="singularis-title">
+    {state.phase === "arrival" && <div className="sin-cgs__hero-art"><Image src="/images/singularis-marketing-02.jpg" alt="Singularis above the horizon of Earth" fill priority sizes="100vw" /></div>}
     <div className="sin-cgs__wrap">
       <details className="sin-cgs__prototype-controls">
         <summary>Prototype controls</summary>
@@ -198,7 +205,6 @@ export default function SingularisGamespace() {
         </div>
       </details>
       <header className="sin-cgs__heading">
-        {state.phase === "arrival" && <div className="sin-cgs__hero-art"><Image src="/images/singularis-marketing-02.jpg" alt="Singularis above the horizon of Earth" fill priority sizes="(max-width: 1440px) 100vw, 1440px" /></div>}
         <div className="sin-cgs__heading-copy"><span>{state.phase === "arrival" ? "First-time arrival" : state.phase === "training" ? "State 04" : "Working draft"}</span><h1 id="singularis-title">{title}</h1><p>{subtitle}</p>{state.phase === "arrival" && <div className="sin-cgs__tags"><b>Persistent world</b><b>Arcade action</b><b>Music-driven</b></div>}</div>
       </header>
       <details className="sin-cgs__nav-menu">

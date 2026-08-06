@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { ARCADE_CATEGORIES, ENTERTAINMENT_NAV_ITEMS, arcadeCategory, isEntertainmentDestinationActive, isEntertainmentNavigationRelevant } from "./entertainment-navigation.ts";
+import { ARCADE_CATEGORIES, ENTERTAINMENT_NAV_ITEMS, arcadeCategory, entertainmentCategoryHref, isEntertainmentDestinationActive, isEntertainmentNavigationRelevant } from "./entertainment-navigation.ts";
 
 const canonicalDestinations = [
   "/entertainment",
@@ -29,16 +29,22 @@ test("active matching includes nested routes without activating the hub", () => 
 
 test("Arcade drawer exposes scalable categories instead of franchise links", () => {
   assert.deepEqual(ARCADE_CATEGORIES.map((category) => category.label), [
-    "Lobby", "Featured", "Singularis", "Lifa", "Cryptic Originals", "Missions", "Experiments", "Coming Soon",
+    "Lobby", "Singularis", "Lifa",
   ]);
-  assert.equal(arcadeCategory("missions")?.label, "Missions");
+  assert.equal(arcadeCategory("lifa")?.label, "Lifa");
   assert.equal(arcadeCategory("not-a-category"), undefined);
 });
 
 test("Singularis game routes activate Arcade while other legacy directors activate Overview", () => {
   assert.equal(isEntertainmentDestinationActive("/products/singularis", "/entertainment/arcade"), true);
   assert.equal(isEntertainmentDestinationActive("/products/singularis", "/entertainment"), false);
-  assert.equal(isEntertainmentDestinationActive("/products/lifa", "/entertainment"), true);
+  assert.equal(isEntertainmentDestinationActive("/products/lifa", "/entertainment/arcade"), true);
+  assert.equal(isEntertainmentDestinationActive("/products/lifa", "/entertainment"), false);
+});
+
+test("Arcade Singularis navigation resolves to the single franchise root", () => {
+  assert.equal(entertainmentCategoryHref("arcade", "singularis"), "/products/singularis");
+  assert.equal(entertainmentCategoryHref("arcade", "lifa"), "/products/lifa");
 });
 
 test("shows the shared bar across connected entertainment content only", () => {

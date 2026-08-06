@@ -35,6 +35,12 @@ test("keeps franchise navigation in a collapsible left workspace rail", () => {
   assert.doesNotMatch(component, /cryptic:arcade-drawer/);
 });
 
+test("resets document scroll after Singularis phase navigation", () => {
+  assert.match(component, /previousPhaseRef = useRef\(state\.phase\)/);
+  assert.match(component, /window\.requestAnimationFrame\(\(\) => window\.scrollTo\(\{ top: 0, left: 0, behavior: "auto" \}\)\)/);
+  assert.doesNotMatch(component, /history\.scrollRestoration/);
+});
+
 test("v05 exposes a versioned same-origin page bridge", () => {
   assert.match(build, /source:'singularis-v05'/);
   assert.match(build, /contractVersion:1/);

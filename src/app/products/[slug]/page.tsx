@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReleaseCard from "@/components/ReleaseCard";
@@ -62,6 +63,33 @@ export default async function ProductHome({
             <div className="flex flex-wrap gap-4">{transmissions.map((release) => <ReleaseCard key={release.slug} release={release} />)}</div>
           </div>
         )}
+      </main>
+    );
+  }
+
+  if (product.slug === "lifa") {
+    return (
+      <main className="lifa-page">
+        <section className="lifa-page__hero" aria-label="Lifa franchise artwork">
+          <Image src="/images/lifa-marketing-intro-01.png" alt="Lifa above a forming planetary world" fill priority sizes="100vw" />
+        </section>
+        <div className="shell lifa-page__content">
+          <header className="lifa-page__heading">
+            <span className="kicker">{product.status.replace("-", " ")}</span>
+            <h1 className="display-title">{product.title}</h1>
+            <p>{product.description}</p>
+          </header>
+          <section className="panel lifa-page__introduction">
+            <span className="kicker">World introduction</span>
+            <h2 className="section-title">Shape systems toward life.</h2>
+            <p>{product.summary}</p>
+            <p>Lifa combines simulation, strategy, discovery, and planetary-scale experimentation in one evolving universe.</p>
+          </section>
+          <div className="flex flex-wrap gap-4 text-sm">
+            {product.franchiseUrl && <a href={product.franchiseUrl} className="text-accent-magenta hover:underline">Visit {product.title} franchise home ↗</a>}
+            <Link href="/products" className="text-accent-cyan hover:underline">← All products</Link>
+          </div>
+        </div>
       </main>
     );
   }

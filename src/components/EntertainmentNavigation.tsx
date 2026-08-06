@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { ARCADE_CATEGORIES, ENTERTAINMENT_NAV_ITEMS, MUSIC_CATEGORIES, VIDEO_CATEGORIES, arcadeCategory, musicCategory, videoCategory, isEntertainmentDestinationActive, isEntertainmentNavigationRelevant, type ArcadeCategorySlug, type EntertainmentNavIcon } from "@/lib/entertainment-navigation";
+import { ARCADE_CATEGORIES, ENTERTAINMENT_NAV_ITEMS, MUSIC_CATEGORIES, VIDEO_CATEGORIES, arcadeCategory, entertainmentCategoryHref, musicCategory, videoCategory, isEntertainmentDestinationActive, isEntertainmentNavigationRelevant, type ArcadeCategorySlug, type EntertainmentNavIcon } from "@/lib/entertainment-navigation";
 
 const destinationCategories = { arcade: ARCADE_CATEGORIES, music: MUSIC_CATEGORIES, video: VIDEO_CATEGORIES } as const;
 const destinationQueries = { arcade: "genre", music: "filter", video: "filter" } as const;
@@ -24,10 +24,12 @@ export default function EntertainmentNavigation() {
   const [openDestination, setOpenDestination] = useState<"arcade" | "music" | "video" | null>(null);
   const [selectedArcadeCategory, setSelectedArcadeCategory] = useState<ArcadeCategorySlug>("all");
   const singularisRoute = pathname.includes("singularis");
+  const lifaRoute = pathname === "/products/lifa" || pathname.startsWith("/products/lifa/");
+  const arcadeFranchiseRoute = singularisRoute || lifaRoute;
 
   useEffect(() => {
-    setSelectedArcadeCategory(singularisRoute ? "singularis" : arcadeCategory(searchParams.get("genre") ?? undefined)?.slug ?? "all");
-  }, [searchParams, singularisRoute]);
+    setSelectedArcadeCategory(singularisRoute ? "singularis" : lifaRoute ? "lifa" : arcadeCategory(searchParams.get("genre") ?? undefined)?.slug ?? "all");
+  }, [searchParams, singularisRoute, lifaRoute]);
 
   useEffect(() => {
     function syncCategoryDrawer(event: Event) {
@@ -38,11 +40,11 @@ export default function EntertainmentNavigation() {
   }, []);
 
   useEffect(() => {
-    const open = singularisRoute || pathname === "/entertainment/arcade" || pathname.startsWith("/entertainment/arcade/");
+    const open = arcadeFranchiseRoute || pathname === "/entertainment/arcade" || pathname.startsWith("/entertainment/arcade/");
     setArcadeMenuOpen(open);
     setOpenDestination(open ? "arcade" : pathname === "/audio" || pathname.startsWith("/audio/") ? "music" : pathname === "/entertainment/cinema" || pathname.startsWith("/entertainment/cinema/") ? "video" : null);
     window.dispatchEvent(new CustomEvent("cryptic:arcade-drawer", { detail: { open } }));
-  }, [pathname, singularisRoute]);
+  }, [pathname, arcadeFranchiseRoute]);
 
   if (!isEntertainmentNavigationRelevant(pathname)) return null;
   const activeItem = ENTERTAINMENT_NAV_ITEMS.find((item) =>
@@ -67,7 +69,7 @@ export default function EntertainmentNavigation() {
           <nav id={`${item.icon}-destination-drawer-${surface}`} className="entertainment-navigation__item-options" data-open={drawerOpen} aria-hidden={!drawerOpen} aria-label={`${item.label} drawer`}>
             {categories.map((category) => (
               <Link
-                href={category.slug === "all" ? item.href : `${item.href}?${query}=${category.slug}`}
+                href={entertainmentCategoryHref(destinationIcon, category.slug)}
                 key={category.slug}
                 aria-current={category.slug === selected ? "page" : undefined}
               >
@@ -90,12 +92,12 @@ export default function EntertainmentNavigation() {
   const compactCategories = openDestination ? destinationCategories[openDestination] : null;
   const compactQuery = openDestination ? destinationQueries[openDestination] : null;
   const compactSelected = openDestination === "arcade" ? selectedArcadeCategory : openDestination === "music" ? (musicCategory(searchParams.get("filter") ?? undefined)?.slug ?? "all") : (videoCategory(searchParams.get("filter") ?? undefined)?.slug ?? "all");
-  const compactArcadeMenu = compactItem && compactCategories && compactQuery ? <details className="arcade-filter-menu" data-theme={compactItem.theme}>
-    <summary><span>{compactItem.label} navigation</span><strong>{compactCategories.find((category) => category.slug === compactSelected)?.label}</strong></summary><nav aria-label={`Compact ${compactItem.label} navigation`}>{compactCategories.map((category) => <Link href={category.slug === "all" ? compactItem.href : `${compactItem.href}?${compactQuery}=${category.slug}`} key={category.slug} aria-current={category.slug === compactSelected ? "page" : undefined}>{category.label}</Link>)}</nav>
+  const compactArcadeMenu = compactItem && compactCategories && compactQuery && openDestination ? <details className="arcade-filter-menu" data-theme={compactItem.theme}>
+    <summary><span>{compactItem.label} navigation</span><strong>{compactCategories.find((category) => category.slug === compactSelected)?.label}</strong></summary><nav aria-label={`Compact ${compactItem.label} navigation`}>{compactCategories.map((category) => <Link href={entertainmentCategoryHref(openDestination, category.slug)} key={category.slug} aria-current={category.slug === compactSelected ? "page" : undefined}>{category.label}</Link>)}</nav>
   </details> : null;
 
   return (
-    <section id="entertainment-category-drawer" className="entertainment-navigation" data-open={categoryDrawerOpen} data-franchise={singularisRoute || undefined} data-section-theme={activeItem?.theme ?? "cyan"} aria-label="Explore Entertainment">
+    <section id="entertainment-category-drawer" className="entertainment-navigation" data-open={categoryDrawerOpen} data-franchise={arcadeFranchiseRoute || undefined} data-section-theme={activeItem?.theme ?? "cyan"} aria-label="Explore Entertainment">
       <div className="shell entertainment-navigation__viewport">
         <nav className="entertainment-navigation__bar entertainment-navigation__desktop" aria-label="Entertainment destinations">{renderDestinations("desktop")}</nav>
         <details className="entertainment-navigation__menu">
