@@ -3,6 +3,8 @@ import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import SubNavBreadcrumbs from "@/components/SubNavBreadcrumbs";
 import EntertainmentNavigation from "@/components/EntertainmentNavigation";
+import FabMediaPlayer from "@/components/player/FabMediaPlayer";
+import { PlayerProvider } from "@/components/player/PlayerProvider";
 import { getInitialAccountAuthenticated } from "@/lib/server-account-state";
 import "./globals.css";
 import "./singularis.css";
@@ -33,6 +35,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="en">
       <body className="flex min-h-screen flex-col antialiased">
         <a className="skip-link" href="#main-content">Skip to main content</a>
+        <PlayerProvider>
         <SiteHeader initialAuthenticated={initialAuthenticated} />
         <EntertainmentNavigation />
         <SubNavBreadcrumbs position="top" />
@@ -51,6 +54,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <div className="site-footer__bottom"><p>© {new Date().getFullYear()} Cryptic Design LLC. All rights reserved.</p><p><Link href="/privacy" className="hover:text-white">PRIVACY</Link> &nbsp; ACCESSIBILITY &nbsp; <Link href="/terms" className="hover:text-white">TERMS</Link></p></div>
           </div>
         </footer>
+        <FabMediaPlayer />
+        </PlayerProvider>
       </body>
     </html>
   );
