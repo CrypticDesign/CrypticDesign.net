@@ -374,7 +374,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
    the rest of the platform.
 --------------------------------------------------------------------------- */
 :root{
-  --cs-notch:polygon(22px 0,calc(100% - 10px) 0,100% 10px,100% calc(100% - 22px),calc(100% - 22px) 100%,10px 100%,0 calc(100% - 10px),0 22px);
   --cs-panel-pad:22px;
   --cs-arc:#f0a62c;
   --cs-ink:#e8f1f7;
@@ -401,27 +400,29 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .cs-root[data-playing="false"] .cs-wave i{animation-play-state:paused;opacity:.5}
 @keyframes cs-bar{from{transform:scaleY(.26)}to{transform:scaleY(1)}}
 
-/* Expanded panel: chassis > frame > panel ------------------------------ */
-.cs-chassis{position:relative;padding:8px}
-.cs-bracket{position:absolute;width:34px;height:34px;border:3px solid var(--cyan);box-shadow:0 0 12px rgba(0,229,255,.55)}
-.cs-bracket--tl{top:0;left:0;border-right:0;border-bottom:0}
-.cs-bracket--tr{top:0;right:0;border-left:0;border-bottom:0}
-.cs-bracket--bl{bottom:0;left:0;border-right:0;border-top:0}
-.cs-bracket--br{bottom:0;right:0;border-left:0;border-top:0}
-.cs-rule{position:absolute;height:2px;background:rgba(0,229,255,.55)}
-.cs-rule--top{top:0;left:46px;right:46px}
-.cs-rule--bottom{bottom:0;left:78px;right:46px}
-.cs-tick{position:absolute;bottom:0;left:46px;width:24px;height:2px;background:var(--cs-arc);box-shadow:0 0 8px rgba(240,166,44,.6)}
+/* Expanded panel: SVG HUD chassis over the panel ------------------------
+   The frame is real vector geometry (stepped edges, corner brackets, rungs,
+   amber service marks) so it reads as one engraved object rather than a stack
+   of CSS borders. It stretches with the panel; strokes stay constant. */
+.cs-chassis{position:relative;width:min(94vw,600px);padding:16px 22px}
+.cs-hud{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.cs-hud path{vector-effect:non-scaling-stroke;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.cs-hud__fill{fill:#040a11;stroke:none}
+.cs-hud__outer{stroke:#39ecff;stroke-width:2;filter:drop-shadow(0 0 6px rgba(0,229,255,.85))}
+.cs-hud__inner{stroke:rgba(0,229,255,.45);stroke-width:1}
+.cs-hud__bracket{stroke:#7ff5ff;stroke-width:4;filter:drop-shadow(0 0 7px rgba(0,229,255,.9))}
+.cs-hud__rung{stroke:rgba(0,229,255,.55);stroke-width:2}
+.cs-hud__midbar{stroke:rgba(0,229,255,.7);stroke-width:3}
+.cs-hud__amber{stroke:var(--cs-arc);stroke-width:2.5;filter:drop-shadow(0 0 5px rgba(240,166,44,.7))}
+.cs-hud__vent{stroke:rgba(0,229,255,.5);stroke-width:2}
 
-.cs-frame{width:min(94vw,548px);padding:1px;background:linear-gradient(140deg,rgba(0,229,255,.9),rgba(0,229,255,.2) 48%,rgba(0,229,255,.75));clip-path:var(--cs-notch);box-shadow:0 26px 64px rgba(0,0,0,.62),0 0 46px rgba(0,229,255,.14)}
-.cs-panel{position:relative;clip-path:var(--cs-notch);background:radial-gradient(120% 100% at 50% 0,#0d1f2e 0,#071320 52%,#040b12 100%)}
-.cs-panel::before{content:"";position:absolute;inset:7px;border:1px solid rgba(0,229,255,.18);pointer-events:none}
+.cs-panel{position:relative;z-index:1;background:radial-gradient(90% 120% at 50% 108%,rgba(0,229,255,.07) 0,transparent 60%)}
 
-.cs-panel__bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px var(--cs-panel-pad) 8px}
-.cs-panel__eyebrow{color:var(--cyan);font:600 11px/1 "IBM Plex Sans",Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+.cs-panel__bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px var(--cs-panel-pad) 10px}
+.cs-panel__eyebrow{color:var(--cyan);font:500 12px/1 "IBM Plex Sans",Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase}
 .cs-panel__tools{display:flex;align-items:center;gap:10px}
 
-.cs-icon-btn{display:grid;place-items:center;width:34px;height:34px;padding:0;border:0;border-radius:var(--radius-control);background:none;color:var(--cs-ink);cursor:pointer;transition:color var(--motion-fast) var(--ease-standard),background-color var(--motion-fast) var(--ease-standard)}
+.cs-icon-btn{display:grid;place-items:center;width:40px;height:40px;padding:0;border:0;border-radius:var(--radius-control);background:none;color:var(--cs-ink);cursor:pointer;transition:color var(--motion-fast) var(--ease-standard),background-color var(--motion-fast) var(--ease-standard)}
 .cs-icon-btn:hover{color:var(--cyan);background:rgba(0,229,255,.08)}
 .cs-icon-btn[aria-pressed="true"],.cs-icon-btn[aria-expanded="true"]{color:var(--cyan)}
 @media(pointer:coarse){.cs-icon-btn{width:var(--target-min);height:var(--target-min)}}
@@ -431,35 +432,35 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .cs-vol__pop{position:absolute;top:calc(100% + 4px);left:50%;transform:translateX(-50%);padding:10px 12px;background:#08151f;border:1px solid var(--line);opacity:0;visibility:hidden;transition:opacity var(--motion-fast) var(--ease-standard);z-index:2}
 .cs-vol:hover .cs-vol__pop,.cs-vol:focus-within .cs-vol__pop{opacity:1;visibility:visible}
 
-.cs-panel__body{display:grid;grid-template-columns:88px minmax(0,1fr) auto;gap:18px;align-items:center;padding:4px var(--cs-panel-pad) 10px}
-.cs-panel__art{position:relative;width:88px;height:88px;overflow:hidden;border-radius:6px;background:#0a1621;border:1px solid rgba(0,229,255,.28)}
+.cs-panel__body{display:grid;grid-template-columns:100px minmax(0,1fr) auto;gap:20px;align-items:center;padding:0 var(--cs-panel-pad) 14px;border-bottom:1px solid rgba(120,160,190,.16);margin-bottom:8px}
+.cs-panel__art{position:relative;width:100px;height:100px;overflow:hidden;border-radius:8px;background:#0a1621;border:1px solid rgba(150,180,200,.35)}
 .cs-panel__meta{min-width:0}
-.cs-panel__title{margin:0;font:400 20px/1.25 "IBM Plex Sans",Arial,sans-serif;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cs-panel__title{margin:0;font:400 22px/1.2 "IBM Plex Sans",Arial,sans-serif;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .cs-panel__title a:hover{color:var(--cyan)}
-.cs-panel__artist{margin:4px 0 0;color:var(--cs-arc);font-size:13px}
+.cs-panel__artist{margin:6px 0 0;color:var(--cs-arc);font-size:15px}
 .cs-panel__badges{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
-.cs-panel__badges span{padding:4px 9px;border:1px solid rgba(120,148,168,.35);border-radius:4px;color:#b9c8d4;font:400 11px "IBM Plex Sans",Arial,sans-serif}
+.cs-panel__badges span{padding:5px 11px;border:1px solid rgba(140,168,188,.4);border-radius:5px;color:#c3d1dc;font:400 12px "IBM Plex Sans",Arial,sans-serif}
 
-/* Spectrum reads as an equaliser: bars sit on a baseline and fade downward. */
-.cs-panel__body .cs-wave{align-items:flex-end;height:58px;width:152px;gap:2px}
-.cs-panel__body .cs-wave i{width:3px;min-height:2px;transform-origin:bottom;background:linear-gradient(180deg,#8af4ff 0,#00e5ff 42%,rgba(0,229,255,.28) 100%)}
+/* Spectrum reads as a segmented LED equaliser sitting on a baseline. */
+.cs-panel__body .cs-wave{align-items:flex-end;height:70px;width:168px;gap:3px}
+.cs-panel__body .cs-wave i{width:4px;min-height:3px;transform-origin:bottom;background:linear-gradient(180deg,#9bf6ff 0,#22e2ff 40%,#0aa8d6 100%);-webkit-mask:repeating-linear-gradient(0deg,#000 0 4px,transparent 4px 6px);mask:repeating-linear-gradient(0deg,#000 0 4px,transparent 4px 6px)}
 
-.cs-panel__transport{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:2px 68px 16px}
-.cs-play{display:grid;place-items:center;width:62px;height:62px;padding:0;border:2px solid rgba(0,229,255,.85);border-radius:50%;background:rgba(0,229,255,.06);color:#fff;cursor:pointer;box-shadow:0 0 26px rgba(0,229,255,.28);transition:background-color var(--motion-fast) var(--ease-standard),box-shadow var(--motion-fast) var(--ease-standard)}
+.cs-panel__transport{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 92px 10px}
+.cs-play{display:grid;place-items:center;width:64px;height:64px;padding:0;border:2px solid rgba(0,229,255,.7);border-radius:50%;background:rgba(4,16,26,.5);color:#fff;cursor:pointer;box-shadow:0 0 30px rgba(0,229,255,.22),inset 0 0 24px rgba(0,229,255,.08);transition:background-color var(--motion-fast) var(--ease-standard),box-shadow var(--motion-fast) var(--ease-standard)}
 .cs-play:hover{background:rgba(0,229,255,.16);box-shadow:0 0 34px rgba(0,229,255,.5)}
 
-.cs-panel__timeline{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:16px;padding:0 var(--cs-panel-pad) 20px;color:var(--cs-ink);font:400 13px "IBM Plex Sans",Arial,sans-serif;font-variant-numeric:tabular-nums}
+.cs-panel__timeline{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:18px;padding:0 var(--cs-panel-pad) 4px;color:#fff;font:400 15px "IBM Plex Sans",Arial,sans-serif;font-variant-numeric:tabular-nums}
 
 .cs-range{-webkit-appearance:none;appearance:none;width:100%;height:20px;margin:0;background:transparent;cursor:pointer}
 .cs-range--volume{width:88px}
-.cs-range::-webkit-slider-runnable-track{height:3px;border-radius:2px;background:linear-gradient(90deg,var(--cyan) 0 calc(var(--cs-fill,0) * 100%),#243544 calc(var(--cs-fill,0) * 100%) 100%)}
-.cs-range::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:11px;height:11px;margin-top:-4px;border:0;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px rgba(0,229,255,.8)}
-.cs-range::-moz-range-track{height:3px;border-radius:2px;background:#243544}
-.cs-range::-moz-range-progress{height:3px;border-radius:2px;background:var(--cyan)}
-.cs-range::-moz-range-thumb{width:11px;height:11px;border:0;border-radius:50%;background:var(--cyan)}
+.cs-range::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:linear-gradient(90deg,#22e2ff 0 calc(var(--cs-fill,0) * 100%),#2b3d4c calc(var(--cs-fill,0) * 100%) 100%)}
+.cs-range::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:14px;height:14px;margin-top:-5px;border:0;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px rgba(0,229,255,.8)}
+.cs-range::-moz-range-track{height:4px;border-radius:2px;background:#2b3d4c}
+.cs-range::-moz-range-progress{height:4px;border-radius:2px;background:#22e2ff}
+.cs-range::-moz-range-thumb{width:14px;height:14px;border:0;border-radius:50%;background:var(--cyan)}
 
-.cs-panel__queue{max-height:196px;overflow:auto;margin:4px var(--cs-panel-pad) 10px;padding:0;list-style:none;border:1px solid var(--line-soft);background:rgba(3,8,15,.6)}
-.cs-panel__queue button{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:10px;width:100%;padding:10px 12px;border:0;background:none;color:var(--text);font-size:12px;text-align:left;cursor:pointer}
+.cs-panel__queue{position:absolute;right:0;bottom:calc(100% + 10px);width:100%;max-height:230px;overflow:auto;margin:0;padding:0;list-style:none;border:1px solid rgba(0,229,255,.3);background:#061019;box-shadow:0 18px 40px rgba(0,0,0,.6)}
+.cs-panel__queue button{display:grid;grid-template-columns:26px minmax(0,1fr) auto;gap:12px;width:100%;padding:11px 16px;border:0;background:none;color:var(--cs-ink);font-size:13px;text-align:left;cursor:pointer}
 .cs-panel__queue button:hover{background:rgba(0,229,255,.08)}
 .cs-panel__queue li[aria-current="true"] button{color:var(--cyan)}
 .cs-queue__index{color:var(--muted);font-variant-numeric:tabular-nums}
@@ -471,14 +472,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   .cs-orb{width:88px;height:88px}
   .cs-orb__track{inset:8px;border-width:6px}
   .cs-orb .cs-wave{height:28px;gap:3px}
-  .cs-frame{width:100%}
-  .cs-panel__body{grid-template-columns:72px minmax(0,1fr);gap:14px}
-  .cs-panel__art{width:72px;height:72px}
+  .cs-chassis{width:100%;padding:14px 12px}
+  .cs-panel__body{grid-template-columns:76px minmax(0,1fr);gap:14px}
+  .cs-panel__art{width:76px;height:76px}
   .cs-panel__title{font-size:18px}
   .cs-panel__body .cs-wave{display:none}
-  .cs-panel__transport{padding-inline:18px}
-  .cs-bracket{width:26px;height:26px}
-  .cs-rule--top{left:36px;right:36px}
-  .cs-rule--bottom{left:64px;right:36px}
-  .cs-tick{left:36px}
+  .cs-panel__transport{padding-inline:10px}
 }

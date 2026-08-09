@@ -83,6 +83,43 @@ function Waveform({ bars }: { bars: Bar[] }) {
   );
 }
 
+/**
+ * The HUD chassis. Real vector geometry — stepped edges, corner brackets,
+ * rungs and amber service marks — authored at 560x336 and stretched to the
+ * panel box. Strokes stay constant via non-scaling-stroke.
+ */
+const HUD_SILHOUETTE =
+  "M30 4 H196 L210 15 H350 L364 4 H530 L556 30 V138 L548 148 L556 158 V306 " +
+  "L530 332 H364 L350 321 H210 L196 332 H30 L4 306 V158 L12 148 L4 138 V30 Z";
+const HUD_INNER =
+  "M38 16 H206 L220 27 H340 L354 16 H522 L544 38 V298 L522 320 H354 L340 309 " +
+  "H220 L206 320 H38 L16 298 V38 Z";
+const HUD_BRACKETS = [
+  "M4 60 V30 L30 4 H86",
+  "M474 4 H530 L556 30 V60",
+  "M556 276 V306 L530 332 H474",
+  "M86 332 H30 L4 306 V276",
+];
+const HUD_RUNGS = ["M4 176 H16", "M4 190 H16", "M4 204 H16", "M544 176 H556", "M544 190 H556", "M544 204 H556"];
+const HUD_MIDBARS = ["M4 150 V132", "M556 150 V132"];
+const HUD_AMBER = ["M108 332 H150", "M4 236 V262"];
+const HUD_VENTS = ["M243 4 V15", "M252 4 V15", "M261 4 V15"];
+
+function ChassisFrame() {
+  return (
+    <svg className="cs-hud" viewBox="0 0 560 336" preserveAspectRatio="none" aria-hidden="true">
+      <path className="cs-hud__fill" d={HUD_SILHOUETTE} />
+      <path className="cs-hud__outer" d={HUD_SILHOUETTE} />
+      <path className="cs-hud__inner" d={HUD_INNER} />
+      {HUD_BRACKETS.map((d) => <path key={d} className="cs-hud__bracket" d={d} />)}
+      {HUD_RUNGS.map((d) => <path key={d} className="cs-hud__rung" d={d} />)}
+      {HUD_MIDBARS.map((d) => <path key={d} className="cs-hud__midbar" d={d} />)}
+      {HUD_AMBER.map((d) => <path key={d} className="cs-hud__amber" d={d} />)}
+      {HUD_VENTS.map((d) => <path key={d} className="cs-hud__vent" d={d} />)}
+    </svg>
+  );
+}
+
 export default function FabMediaPlayer() {
   const {
     queue,
@@ -161,16 +198,24 @@ export default function FabMediaPlayer() {
         </span>
       </button>
 
-      <div className="cs-chassis" hidden={!expanded}>
-        <span className="cs-bracket cs-bracket--tl" aria-hidden="true" />
-        <span className="cs-bracket cs-bracket--tr" aria-hidden="true" />
-        <span className="cs-bracket cs-bracket--bl" aria-hidden="true" />
-        <span className="cs-bracket cs-bracket--br" aria-hidden="true" />
-        <span className="cs-rule cs-rule--top" aria-hidden="true" />
-        <span className="cs-rule cs-rule--bottom" aria-hidden="true" />
-        <span className="cs-tick" aria-hidden="true" />
+    {expanded && queueOpen ? (
+      <ol className="cs-panel__queue" aria-label="Playback queue">
+        {queue.map((item, position) => (
+          <li key={item.id} aria-current={position === index ? "true" : undefined}>
+            <button type="button" onClick={() => playTrackAt(position)}>
+              <span className="cs-queue__index">
+                {String(position + 1).padStart(2, "0")}
+              </span>
+              <span className="cs-queue__title">{item.title}</span>
+              <span className="cs-queue__time">{formatTime(item.duration)}</span>
+            </button>
+          </li>
+        ))}
+      </ol>
+    ) : null}
 
-        <div className="cs-frame">
+      <div className="cs-chassis" hidden={!expanded}>
+      <ChassisFrame />
           <section
             id={panelId}
             className="cs-panel"
@@ -228,21 +273,6 @@ export default function FabMediaPlayer() {
               </div>
             </header>
 
-            {queueOpen ? (
-              <ol className="cs-panel__queue" aria-label="Playback queue">
-                {queue.map((item, position) => (
-                  <li key={item.id} aria-current={position === index ? "true" : undefined}>
-                    <button type="button" onClick={() => playTrackAt(position)}>
-                      <span className="cs-queue__index">
-                        {String(position + 1).padStart(2, "0")}
-                      </span>
-                      <span className="cs-queue__title">{item.title}</span>
-                      <span className="cs-queue__time">{formatTime(item.duration)}</span>
-                    </button>
-                  </li>
-                ))}
-              </ol>
-            ) : null}
 
             <div className="cs-panel__body">
               <div className="cs-panel__art">
@@ -332,7 +362,6 @@ export default function FabMediaPlayer() {
               </p>
             ) : null}
           </section>
-        </div>
       </div>
     </div>
   );
