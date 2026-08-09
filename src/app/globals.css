@@ -407,7 +407,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .cs-chassis{position:relative;width:min(94vw,600px);padding:16px 22px}
 .cs-hud{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
 .cs-hud path{vector-effect:non-scaling-stroke;fill:none;stroke-linecap:round;stroke-linejoin:round}
-.cs-hud__fill{fill:#040a11;stroke:none}
+.cs-hud path.cs-hud__fill{fill:#040a11;stroke:none}
 .cs-hud__outer{stroke:#39ecff;stroke-width:2;filter:drop-shadow(0 0 6px rgba(0,229,255,.85))}
 .cs-hud__inner{stroke:rgba(0,229,255,.45);stroke-width:1}
 .cs-hud__bracket{stroke:#7ff5ff;stroke-width:4;filter:drop-shadow(0 0 7px rgba(0,229,255,.9))}
