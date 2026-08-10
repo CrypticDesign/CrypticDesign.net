@@ -1,0 +1,244 @@
+{
+  "generated": "2026-08-10T16:41:35.116Z",
+  "base": "http://127.0.0.1:3100",
+  "results": [
+    {
+      "route": "/professional",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "main": true,
+      "horizontalOverflow": false,
+      "images": 8,
+      "brokenImages": [],
+      "failures": []
+    },
+    {
+      "route": "/professional",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "main": true,
+      "horizontalOverflow": false,
+      "images": 8,
+      "brokenImages": [],
+      "failures": []
+    },
+    {
+      "route": "/professional",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "main": true,
+      "horizontalOverflow": false,
+      "images": 8,
+      "brokenImages": [],
+      "failures": []
+    },
+    {
+      "route": "/professional/case-studies",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "main": true,
+      "horizontalOverflow": false,
+      "images": 44,
+      "brokenImages": [],
+      "failures": []
+    },
+    {
+      "route": "/professional/case-studies",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "main": true,
+      "horizontalOverflow": false,
+      "images": 44,
+      "brokenImages": [],
+      "failures": []
+    },
+    {
+      "route": "/professional/case-studies",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "main": true,
+      "horizontalOverflow": false,
+      "images": 44,
+      "brokenImages": [],
+      "failures": []
+    },
+    {
+      "route": "/professional/articles",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "main": true,
+      "horizontalOverflow": false,
+      "images": 12,
+      "brokenImages": [],
+      "failures": []
+    },
+    {
+      "route": "/professional/articles",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "main": true,
+      "horizontalOverflow": false,
+      "images": 12,
+      "brokenImages": [],
+      "failures": []
+    },
+    {
+      "route": "/professional/articles",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "main": true,
+      "horizontalOverflow": false,
+      "images": 12,
+      "brokenImages": [],
+      "failures": []
+    },
+    {
+      "route": "/professional/articles/holistic-ux-design-systems-thinking",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "main": true,
+      "horizontalOverflow": false,
+      "images": 2,
+      "brokenImages": [],
+      "failures": []
+    },
+    {
+      "route": "/professional/articles/holistic-ux-design-systems-thinking",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "main": true,
+      "horizontalOverflow": false,
+      "images": 2,
+      "brokenImages": [],
+      "failures": []
+    },
+    {
+      "route": "/professional/articles/holistic-ux-design-systems-thinking",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "main": true,
+      "horizontalOverflow": false,
+      "images": 2,
+      "brokenImages": [],
+      "failures": []
+    },
+    {
+      "route": "/professional/product-strategy",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "main": true,
+      "horizontalOverflow": false,
+      "images": 1,
+      "brokenImages": [],
+      "failures": []
+    },
+    {
+      "route": "/professional/product-strategy",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "main": true,
+      "horizontalOverflow": false,
+      "images": 1,
+      "brokenImages": [],
+      "failures": []
+    },
+    {
+      "route": "/professional/product-strategy",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "main": true,
+      "horizontalOverflow": false,
+      "images": 1,
+      "brokenImages": [],
+      "failures": []
+    },
+    {
+      "route": "/professional/contact",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "main": true,
+      "horizontalOverflow": false,
+      "images": 1,
+      "brokenImages": [],
+      "failures": []
+    },
+    {
+      "route": "/professional/contact",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "main": true,
+      "horizontalOverflow": false,
+      "images": 1,
+      "brokenImages": [],
+      "failures": []
+    },
+    {
+      "route": "/professional/contact",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "main": true,
+      "horizontalOverflow": false,
+      "images": 1,
+      "brokenImages": [],
+      "failures": []
+    },
+    {
+      "route": "/professional/inquiry",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "main": true,
+      "horizontalOverflow": false,
+      "images": 1,
+      "brokenImages": [],
+      "failures": []
+    },
+    {
+      "route": "/professional/inquiry",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "main": true,
+      "horizontalOverflow": false,
+      "images": 1,
+      "brokenImages": [],
+      "failures": []
+    },
+    {
+      "route": "/professional/inquiry",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "main": true,
+      "horizontalOverflow": false,
+      "images": 1,
+      "brokenImages": [],
+      "failures": []
+    }
+  ],
+  "keyboard": {
+    "opened": true,
+    "nextWorked": true,
+    "closed": true
+  },
+  "problems": [],
+  "pass": true
+}
