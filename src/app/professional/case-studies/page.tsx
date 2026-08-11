@@ -521,8 +521,8 @@ export default function CaseStudiesPage() {
       <section className="visual-hero">
         <div className="visual-hero__image">
           <Image
-            src="/images/case-studies/humankind-hero.jpg"
-            alt="Console strategy interface design work by Cryptic Design"
+            src="/images/professional-hero.png"
+            alt="Abstract luminous network representing interconnected experience systems"
             fill
             priority
             sizes="100vw"
@@ -565,11 +565,27 @@ export default function CaseStudiesPage() {
             </div>
             <p className="m-0 max-w-xl text-sm text-[var(--muted)]">Jump directly to the product context most relevant to your team.</p>
           </div>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {caseStudies.map((cs) => (
-              <a key={cs.slug} href={`#${cs.slug}`} className="group border border-[var(--border)] p-4 transition-colors hover:border-[var(--foreground)]">
-                <span className="mb-2 block text-[10px] font-bold uppercase tracking-[.1em]" style={{ color: accentHex[cs.accent] }}>{cs.years} / {cs.discipline}</span>
-                <span className="text-sm font-semibold group-hover:underline">{cs.title}</span>
+              <a
+                key={cs.slug}
+                href={`#${cs.slug}`}
+                className="group relative grid min-h-28 grid-cols-[5.5rem_1fr] overflow-hidden bg-white/[.035] transition duration-200 hover:-translate-y-0.5 hover:bg-white/[.07] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                style={{ outlineColor: accentHex[cs.accent] }}
+              >
+                <span className="relative block overflow-hidden">
+                  <Image src={cs.hero.src} alt="" fill sizes="88px" className="object-cover opacity-70 transition duration-300 group-hover:scale-105 group-hover:opacity-100" />
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent to-[#07111a]/70" />
+                </span>
+                <span className="flex min-w-0 flex-col justify-center gap-2 px-4 py-3" style={{ borderBottom: `2px solid ${accentHex[cs.accent]}` }}>
+                  <span className="text-[9px] font-bold uppercase tracking-[.1em]" style={{ color: accentHex[cs.accent] }}>{cs.years} / {cs.discipline}</span>
+                  <span className="flex items-end justify-between gap-3 text-sm font-semibold leading-snug">
+                    <span>{cs.title}</span>
+                    <svg aria-hidden="true" viewBox="0 0 20 20" className="mb-0.5 h-4 w-4 shrink-0 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <path d="M4 10h11M11 6l4 4-4 4" />
+                    </svg>
+                  </span>
+                </span>
               </a>
             ))}
           </div>
