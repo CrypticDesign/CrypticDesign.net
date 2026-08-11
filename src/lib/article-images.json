@@ -27,10 +27,6 @@
                                                               {
                                                                   "src":  "/images/articles/editorial/owning-the-stack-post-generative-creative-economy/SIN_IMG_OrbitingEarth.png",
                                                                   "alt":  "SIN IMG OrbitingEarth"
-                                                              },
-                                                              {
-                                                                  "src":  "/images/articles/editorial/owning-the-stack-post-generative-creative-economy/CRY_IMG_PlatonicSolidsBG.png----contentType--",
-                                                                  "alt":  "CRY IMG PlatonicSolidsBG"
                                                               }
                                                           ],
     "2026-game-design-benchmarks":  [
@@ -53,10 +49,6 @@
                                         {
                                             "src":  "/images/articles/editorial/2026-game-design-benchmarks/CRY_IMG_SystemicDensity_v1.png",
                                             "alt":  "CRY IMG SystemicDensity v1"
-                                        },
-                                        {
-                                            "src":  "/images/articles/editorial/2026-game-design-benchmarks/CRY_IMG_PlatonicSolidsBG.png--",
-                                            "alt":  "CRY IMG PlatonicSolidsBG"
                                         }
                                     ],
     "arc-raiders-a-player-experience-review":  [
@@ -155,10 +147,6 @@
                                                    {
                                                        "src":  "/images/articles/editorial/arc-raiders-a-player-experience-review/CRY_IMG_ARCRaidersScreenshot_013.jpg",
                                                        "alt":  "CRY IMG ARCRaidersScreenshot 013"
-                                                   },
-                                                   {
-                                                       "src":  "/images/articles/editorial/arc-raiders-a-player-experience-review/CRY_IMG_PlatonicSolidsBG.png----contentType--",
-                                                       "alt":  "CRY IMG PlatonicSolidsBG"
                                                    }
                                                ],
     "when-tools-begin-to-decide":  [
@@ -185,70 +173,42 @@
                                        {
                                            "src":  "/images/articles/editorial/when-tools-begin-to-decide/CRY_IMG_FracturedAgency_01.png",
                                            "alt":  "CRY IMG FracturedAgency 01"
-                                       },
-                                       {
-                                           "src":  "/images/articles/editorial/when-tools-begin-to-decide/CRY_IMG_PlatonicSolidsBG.png----contentType--",
-                                           "alt":  "CRY IMG PlatonicSolidsBG"
                                        }
                                    ],
     "ai-in-ux-design":  [
                             {
                                 "src":  "/images/articles/editorial/ai-in-ux-design/CRY_IMG_MarketingSeamlessUX.png",
                                 "alt":  "CRY IMG MarketingSeamlessUX"
-                            },
-                            {
-                                "src":  "/images/articles/editorial/ai-in-ux-design/CRY_IMG_PlatonicSolidsBG.png--",
-                                "alt":  "CRY IMG PlatonicSolidsBG"
                             }
                         ],
     "scalable-ui-systems-design-tokens-components":  [
                                                          {
                                                              "src":  "/images/articles/editorial/scalable-ui-systems-design-tokens-components/CRY_IMG_MarketingScalabilityModularity.png",
                                                              "alt":  "CRY IMG MarketingScalabilityModularity"
-                                                         },
-                                                         {
-                                                             "src":  "/images/articles/editorial/scalable-ui-systems-design-tokens-components/CRY_IMG_PlatonicSolidsBG.png----contentType--",
-                                                             "alt":  "CRY IMG PlatonicSolidsBG"
                                                          }
                                                      ],
     "how-to-conduct-a-ux-audit":  [
                                       {
                                           "src":  "/images/articles/editorial/how-to-conduct-a-ux-audit/CRY_IMG_MarketingScalabilityModularity.png",
                                           "alt":  "CRY IMG MarketingScalabilityModularity"
-                                      },
-                                      {
-                                          "src":  "/images/articles/editorial/how-to-conduct-a-ux-audit/CRY_IMG_PlatonicSolidsBG.png--",
-                                          "alt":  "CRY IMG PlatonicSolidsBG"
                                       }
                                   ],
     "holistic-ux-design-systems-thinking":  [
                                                 {
                                                     "src":  "/images/articles/editorial/holistic-ux-design-systems-thinking/CRY_IMG_MarketingUXProcess.png",
                                                     "alt":  "CRY IMG MarketingUXProcess"
-                                                },
-                                                {
-                                                    "src":  "/images/articles/editorial/holistic-ux-design-systems-thinking/CRY_IMG_PlatonicSolidsBG.png----contentType--",
-                                                    "alt":  "CRY IMG PlatonicSolidsBG"
                                                 }
                                             ],
     "video-games-2023-q1-cryptic-insights":  [
                                                  {
                                                      "src":  "/images/articles/editorial/video-games-2023-q1-cryptic-insights/CRY_IMG_MarketingGamingInsights.png",
                                                      "alt":  "CRY IMG MarketingGamingInsights"
-                                                 },
-                                                 {
-                                                     "src":  "/images/articles/editorial/video-games-2023-q1-cryptic-insights/CRY_IMG_PlatonicSolidsBG.png----contentType--",
-                                                     "alt":  "CRY IMG PlatonicSolidsBG"
                                                  }
                                              ],
     "artificial-intelligence-2023-q1-cryptic-insights":  [
                                                              {
                                                                  "src":  "/images/articles/editorial/artificial-intelligence-2023-q1-cryptic-insights/CRY_IMG_ArtificialIntelligence.jpg",
                                                                  "alt":  "CRY IMG ArtificialIntelligence"
-                                                             },
-                                                             {
-                                                                 "src":  "/images/articles/editorial/artificial-intelligence-2023-q1-cryptic-insights/CRY_IMG_PlatonicSolidsBG.png--",
-                                                                 "alt":  "CRY IMG PlatonicSolidsBG"
                                                              }
                                                          ],
     "shaping-the-universe":  [

@@ -31,6 +31,7 @@ foreach ($article in $rawArticles) {
   foreach ($imageUrl in $urls) {
     $index++
     $cleanUrl = $imageUrl -replace '&quot;.*$', '' -replace '\\u0026.*$', ''
+    if ($cleanUrl -match 'favicon\.ico|CRY_IMG_PlatonicSolidsBG\.png') { continue }
     $baseName = [System.Uri]::UnescapeDataString(([System.Uri]$cleanUrl).Segments[-1])
     $safeName = $baseName -replace '[^A-Za-z0-9._-]', '-'
     if ([string]::IsNullOrWhiteSpace($safeName)) { $safeName = "image-$index.jpg" }

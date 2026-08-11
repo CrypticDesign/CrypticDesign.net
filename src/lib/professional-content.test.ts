@@ -43,7 +43,7 @@ test("Professional publishes six case studies and maps all 55 proof images", () 
 test("Professional preserves owned editorial imagery from the live articles", () => {
   const articleImages = JSON.parse(readFileSync(path.join(root, "src/lib/article-images.json"), "utf8").replace(/^\uFEFF/, "")) as Record<string, { src: string; alt: string }[]>;
   const images = Object.values(articleImages).flat();
-  assert.ok(images.length >= 50, `expected at least 50 editorial images, found ${images.length}`);
+  assert.ok(images.length >= 45, `expected at least 45 editorial images, found ${images.length}`);
   for (const image of images) {
     assert.ok(image.alt.trim(), `missing alt text for ${image.src}`);
     assert.ok(existsSync(path.join(root, "public", image.src.slice(1))), `missing ${image.src}`);
