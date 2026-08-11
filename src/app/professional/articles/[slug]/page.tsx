@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ArticleBody from "@/components/ArticleBody";
 import { allArticles, getArticle } from "@/lib/articles";
+import articleImages from "@/lib/article-images.json";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -56,29 +57,18 @@ export default async function ArticlePage({ params }: Params) {
   const others = allArticles()
     .filter((a) => a.slug !== article.slug)
     .slice(0, 3);
+  const editorialImages = (articleImages as Record<string, { src: string; alt: string }[]>)[article.slug] ?? [];
+  const uniqueImages = editorialImages.filter((image, index, images) => images.findIndex((candidate) => candidate.src === image.src) === index);
 
   return (
-    <main className="mx-auto flex w-full max-w-3xl flex-col gap-8 px-4 py-12 sm:px-6">
-      <nav
-        aria-label="Breadcrumb"
-        className="text-[10px] uppercase tracking-[.1em] text-neutral-500"
-      >
-        <Link href="/professional" className="hover:text-white">
-          Professional
-        </Link>
-        <span className="mx-2 opacity-40">/</span>
-        <Link href="/professional/articles" className="hover:text-white">
-          Articles
-        </Link>
-      </nav>
-
-      <header className="flex flex-col gap-4">
+    <main className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 py-12 sm:px-6">
+      <header className="flex max-w-4xl flex-col gap-4">
         {article.categories.length > 0 && (
           <p className="m-0 text-[10px] font-bold uppercase tracking-[.1em] text-accent-cyan">
             {article.categories.slice(0, 3).join(" · ")}
           </p>
         )}
-        <h1 className="text-[34px] font-semibold leading-[1.15] text-white sm:text-[42px]">
+        <h1 className="text-[38px] font-semibold leading-[1.08] text-white sm:text-[56px]">
           {article.title}
         </h1>
         <p className="m-0 text-sm text-neutral-500">
@@ -88,21 +78,31 @@ export default async function ArticlePage({ params }: Params) {
       </header>
 
       {article.hero && (
-        <div className="relative aspect-[16/9] w-full overflow-hidden border border-[#173049]">
+        <div className="relative aspect-[21/9] w-full overflow-hidden bg-[#07111b]">
           <Image
             src={article.hero}
             alt=""
             fill
             priority
-            sizes="(max-width:900px) 100vw, 768px"
+            sizes="(max-width:1200px) 100vw, 1152px"
             className="object-cover"
           />
         </div>
       )}
 
-      <article>
-        <ArticleBody blocks={article.blocks} />
-      </article>
+      <div className="grid gap-10 lg:grid-cols-[220px_minmax(0,720px)] lg:justify-center">
+        <aside className="h-fit border-t-2 border-[#ed00a8] pt-5 lg:sticky lg:top-32">
+          <span className="kicker !text-[#ed00a8]">Article</span>
+          <p className="mt-3 text-sm leading-relaxed text-neutral-400">{article.description}</p>
+          <Link href="/professional/articles" className="text-link">All articles +</Link>
+        </aside>
+        <article><ArticleBody blocks={article.blocks} /></article>
+      </div>
+
+      {uniqueImages.length > 1 && <section className="border-t border-[#173049] pt-10">
+        <div className="section-heading"><div><span className="kicker !text-[#ed00a8]">From the original article</span><h2 className="section-title">Visual references</h2></div><p>Editorial images and diagrams preserved from the live Cryptic Design publication.</p></div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{uniqueImages.map((image, index) => <figure key={image.src} className={`m-0 overflow-hidden bg-[#07111b] ${index % 7 === 0 ? "sm:col-span-2" : ""}`}><div className="relative aspect-[16/10]"><Image src={image.src} alt={image.alt} fill sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw" className="object-cover" /></div></figure>)}</div>
+      </section>}
 
       {article.tags.length > 0 && (
         <ul className="flex list-none flex-wrap gap-2 p-0">

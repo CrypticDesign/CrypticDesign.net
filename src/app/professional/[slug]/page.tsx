@@ -58,7 +58,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
           <span className="kicker" style={{ color: detail.accent }}>Professional capability</span>
           <h1 className="display-title">{service.title}</h1>
           <p>{detail.promise}</p>
-          <div className="hero-actions"><Link href="/professional/inquiry" className="button">Start a project</Link><Link href="/professional#services" className="button secondary" style={{ borderColor: detail.accent }}>All services</Link></div>
+          <div className="hero-actions"><Link href="/professional/inquiry" className="button">Start a project</Link><Link href="/professional/services" className="button secondary" style={{ borderColor: detail.accent }}>All services</Link></div>
         </div>
       </section>
 

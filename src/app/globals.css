@@ -296,6 +296,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .entertainment-navigation[data-section-theme="violet"]{--section-accent:#9b5cff}
 .entertainment-navigation[data-section-theme="gold"]{--section-accent:var(--gold)}
 .entertainment-navigation[data-section-theme="blue"]{--section-accent:#55a7ff}
+.entertainment-navigation[data-section-theme="magenta"]{--section-accent:var(--magenta)}
 .entertainment-navigation[data-franchise="true"]{box-shadow:0 9px 12px rgb(0 0 0 / 88%),0 2px 9px color-mix(in srgb,var(--section-accent) 24%,transparent)}
 .entertainment-navigation__viewport{width:100%;max-width:none;padding-inline:0}
 .entertainment-navigation__bar{width:100%;border-inline:0}

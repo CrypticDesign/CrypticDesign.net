@@ -40,6 +40,16 @@ test("Professional publishes six case studies and maps all 55 proof images", () 
   assert.match(source, /<details key=\{item\.question\}/);
 });
 
+test("Professional preserves owned editorial imagery from the live articles", () => {
+  const articleImages = JSON.parse(readFileSync(path.join(root, "src/lib/article-images.json"), "utf8").replace(/^\uFEFF/, "")) as Record<string, { src: string; alt: string }[]>;
+  const images = Object.values(articleImages).flat();
+  assert.ok(images.length >= 50, `expected at least 50 editorial images, found ${images.length}`);
+  for (const image of images) {
+    assert.ok(image.alt.trim(), `missing alt text for ${image.src}`);
+    assert.ok(existsSync(path.join(root, "public", image.src.slice(1))), `missing ${image.src}`);
+  }
+});
+
 test("Professional launch routes expose canonical and share metadata", () => {
   for (const file of ["src/app/professional/page.tsx", "src/app/professional/articles/page.tsx", "src/app/professional/case-studies/page.tsx"]) {
     const source = readFileSync(path.join(root, file), "utf8");
@@ -55,6 +65,8 @@ test("Professional uses one contact path, section tabs, and complete capability 
   const services = readFileSync(path.join(root, "src/app/professional/[slug]/page.tsx"), "utf8");
   const inquiry = readFileSync(path.join(root, "src/components/ProfessionalInquiryForm.tsx"), "utf8");
   for (const label of ["Overview", "Services", "Case Studies", "Articles", "Start a Project"]) assert.match(navigation, new RegExp(label));
+  assert.match(navigation, /href: "\/professional\/services"/);
+  assert.ok(existsSync(path.join(root, "src/app/professional/services/page.tsx")));
   assert.match(breadcrumbs, /pathname\.startsWith\("\/professional\/"\)/);
   assert.match(services, /How the work moves/);
   assert.match(services, /Typical deliverables/);

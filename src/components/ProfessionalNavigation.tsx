@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 const serviceSlugs = new Set(["product-strategy", "ux-interaction", "interface-systems", "creative-technology"]);
 const items = [
   { label: "Overview", description: "Professional studio", href: "/professional", icon: "overview" },
-  { label: "Services", description: "Strategy through delivery", href: "/professional#services", icon: "services" },
+  { label: "Services", description: "Strategy through delivery", href: "/professional/services", icon: "services" },
   { label: "Case Studies", description: "Selected client work", href: "/professional/case-studies", icon: "cases" },
   { label: "Articles", description: "Research & analysis", href: "/professional/articles", icon: "articles" },
   { label: "Start a Project", description: "Tell us the problem", href: "/professional/inquiry", icon: "inquiry" },
@@ -23,6 +23,6 @@ function Icon({ name }: { name: string }) {
 export default function ProfessionalNavigation() {
   const pathname = usePathname();
   const segment = pathname.split("/")[2] ?? "";
-  const active = (href: string) => href.includes("#services") ? serviceSlugs.has(segment) : href === "/professional" ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
+  const active = (href: string) => href === "/professional/services" ? pathname === href || serviceSlugs.has(segment) : href === "/professional" ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
   return <section className="entertainment-navigation professional-navigation" data-section-theme="magenta" aria-label="Explore Professional"><div className="shell entertainment-navigation__viewport"><nav className="entertainment-navigation__bar professional-navigation__bar" aria-label="Professional sections">{items.map((item) => <Link href={item.href} key={item.href} className="entertainment-navigation__item" data-theme="magenta" aria-current={active(item.href) ? "page" : undefined}><span className="entertainment-navigation__icon"><Icon name={item.icon}/></span><span className="entertainment-navigation__copy"><strong>{item.label}</strong><small>{item.description}</small></span></Link>)}</nav></div></section>;
 }
