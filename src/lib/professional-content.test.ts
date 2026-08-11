@@ -31,6 +31,10 @@ test("Professional publishes four case studies and maps all 42 proof images", ()
   assert.doesNotMatch(source, /caption:\s*"\s*"/);
   assert.match(source, /question: "What is Humankind\?"/);
   assert.match(source, /question: "What were Cryptic Design's primary contributions\?"/);
+  assert.match(source, /question: "What is WIN Reality\?"/);
+  assert.match(source, /question: "What is WellSky\?"/);
+  assert.match(source, /question: "What was Star Wars: Rise to Power\?"/);
+  assert.equal([...source.matchAll(/\n\s+faq: \[/g)].length, 4);
   assert.match(source, /<details key=\{item\.question\}/);
 });
 

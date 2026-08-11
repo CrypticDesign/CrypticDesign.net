@@ -183,6 +183,31 @@ const caseStudies: CaseStudy[] = [
       "New visual theme, brand direction, restructured user flows, and a documented UI component system built for legibility inside immersive VR training contexts.",
     outcome:
       "A clearer, more cohesive training experience grounded in research rather than assumption, aligned with both athlete needs and company goals.",
+    faq: [
+      {
+        title: "About",
+        items: [
+          { question: "What is WIN Reality?", answer: "WIN Reality is a virtual-reality baseball and softball training platform. It combines realistic pitching simulations, pitch-recognition drills, reaction training, and performance feedback for athletes at multiple levels." },
+          { question: "What was the goal of the project?", answer: "The goal was to create an intuitive immersive environment where athletes could enter realistic training scenarios, find appropriate drills, make faster decisions, and understand their progress without interface friction." },
+          { question: "What made the product distinctive?", answer: "The experience combined sports science, motion-captured pitchers, and interactive VR training in a tool designed for athletes ranging from developing youth players to professionals." },
+          { question: "How did UX/UI support the training experience?", answer: "The interface clarified onboarding, drill discovery, profile selection, training customization, and feedback so players could focus on practice rather than learning the software." },
+        ],
+      },
+      {
+        title: "Project scope & role",
+        items: [
+          { question: "What was the scope of the project?", answer: "The work covered research, user flows, visual direction, brand expression, design-library foundations, and immersive interface design for the Meta Quest baseball and softball training experience." },
+          { question: "What was Robert's role?", answer: "As Senior UX Designer, Robert contributed across discovery, requirements, workshops, prototyping, visual design, documentation, and implementation support in collaboration with product, engineering, art, and company stakeholders." },
+        ],
+      },
+      {
+        title: "Key responsibilities",
+        items: [
+          { question: "What were the primary responsibilities?", answer: "The role connected research and delivery across the product experience:", bullets: ["Research athlete, coach, product, and stakeholder needs.", "Design legible immersive interfaces and training flows for Meta Quest.", "Facilitate workshops and align stakeholders on experience priorities.", "Prototype and evaluate VR interactions.", "Develop the visual theme and reusable interface library.", "Support engineering implementation and iteration."] },
+          { question: "How did the work contribute to the product?", answer: "The work clarified onboarding, training selection, immersive interaction, and the surrounding pod experience, helping athletes reach useful practice more confidently and consistently." },
+        ],
+      },
+    ],
     shots: [
       {
         src: "/images/case-studies/winreality-login.png",
@@ -240,6 +265,29 @@ const caseStudies: CaseStudy[] = [
       "Information architecture, workflows, and interface systems for complex operational healthcare products, alongside heuristic evaluation and design language system documentation covering foundations, navigation, color, and component states.",
     outcome:
       "Coherent, user-centered UX support across one of the largest product portfolios in post-acute healthcare software.",
+    faq: [
+      {
+        title: "About",
+        items: [
+          { question: "What is WellSky?", answer: "WellSky provides software for health and community-care organizations. At the time of this work, its portfolio included roughly 70 products serving complex healthcare, caregiving, rehabilitation, hospice, and social-service workflows." },
+          { question: "What was the focus of the work?", answer: "The work focused on improving consistency, interoperability, and usability across a broad product portfolio through shared design foundations, clearer interaction patterns, and a formalized design-library system." },
+        ],
+      },
+      {
+        title: "Project scope & role",
+        items: [
+          { question: "What was the scope of the project?", answer: "The scope crossed multiple enterprise products and teams, with emphasis on standardizing visual language, improving cross-product workflows, documenting foundations, and resolving interaction-design needs in operational healthcare software." },
+          { question: "What was Robert's role?", answer: "As a Senior User Experience Designer embedded in engineering, Robert helped establish and maintain design-system foundations, collaborated with product teams, led research and requirements discussions, and designed solutions for multiple products." },
+        ],
+      },
+      {
+        title: "Key responsibilities",
+        items: [
+          { question: "What were the primary responsibilities?", answer: "The role supported product teams and the broader portfolio through several connected responsibilities:", bullets: ["Create and maintain a formalized design library and shared visual standards.", "Improve interoperability and cross-product experience consistency.", "Partner with product managers, designers, engineers, and researchers.", "Lead UX research, requirements definition, and design documentation.", "Facilitate stakeholder reviews and translate findings into implementable solutions."] },
+          { question: "How did the work contribute to the portfolio?", answer: "Shared design foundations reduced inconsistency, gave teams a clearer implementation reference, and supported more coherent experiences across a large family of healthcare products." },
+        ],
+      },
+    ],
     shots: [
       {
         src: "/images/case-studies/wellsky-dashboard.jpg",
@@ -312,6 +360,29 @@ const caseStudies: CaseStudy[] = [
       "High-quality concept interfaces focused on intuitive navigation, strategic decision-making mechanics, and scalable UI elements supporting fleet management, diplomacy, and base building.",
     outcome:
       "A defined UI design language for the game's core systems; the title was ultimately unlaunched, and the work stands as a study in strategy-game interface design at franchise scale.",
+    faq: [
+      {
+        title: "About",
+        items: [
+          { question: "What was Star Wars: Rise to Power?", answer: "Star Wars: Rise to Power was an unreleased mobile strategy game developed by Electronic Arts in collaboration with Lucasfilm. Its systems included faction alignment, base building, fleet management, alliances, and large-scale strategic conflict." },
+          { question: "What was the focus of the project?", answer: "The project focused on a scalable UI/UX foundation for strategic play, including navigation, fleet and base management, diplomacy, live-service systems, and mobile interactions consistent with the Star Wars universe." },
+        ],
+      },
+      {
+        title: "Project scope & role",
+        items: [
+          { question: "What was the scope of the project?", answer: "The work covered concept development, information architecture, interaction design, prototyping, implementation collaboration, and testing for the game's central mobile-strategy systems." },
+          { question: "What was Robert's role?", answer: "As Senior UX Designer at Electronic Arts, Robert defined UI/UX direction, created high-fidelity interface concepts, structured navigation and information architecture, and worked with game design, UI art, programming, and QA to refine the experience." },
+        ],
+      },
+      {
+        title: "Key responsibilities",
+        items: [
+          { question: "What were the primary responsibilities?", answer: "The work established an interface foundation for a dense strategy game:", bullets: ["Define a cohesive UI framework for strategic systems.", "Design concepts for fleet control, base building, diplomacy, progression, and live events.", "Build navigation and information architecture around player decisions.", "Collaborate with cross-functional teams during implementation.", "Test and iterate interface components for usability and scalability.", "Maintain franchise consistency while designing for mobile constraints."] },
+          { question: "How did the work contribute to the project?", answer: "The resulting concepts and interaction structures gave the unreleased title a coherent foundation for presenting complex strategy systems with greater clarity, consistency, and mobile usability." },
+        ],
+      },
+    ],
     shots: [
       {
         src: "/images/case-studies/risetopower-sector.jpg",
