@@ -29,6 +29,9 @@ test("Professional publishes four case studies and maps all 42 proof images", ()
   for (const image of images) assert.ok(existsSync(path.join(root, "public", image.slice(1))), `missing ${image}`);
   assert.doesNotMatch(source, /alt:\s*"\s*"/);
   assert.doesNotMatch(source, /caption:\s*"\s*"/);
+  assert.match(source, /question: "What is Humankind\?"/);
+  assert.match(source, /question: "What were Cryptic Design's primary contributions\?"/);
+  assert.match(source, /<details key=\{item\.question\}/);
 });
 
 test("Professional launch routes expose canonical and share metadata", () => {

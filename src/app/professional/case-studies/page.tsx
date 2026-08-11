@@ -13,6 +13,8 @@ export const metadata: Metadata = {
 // CRY-344 item 4: content + imagery migrated from the legacy services and
 // portfolio pages. Rights confirmed by Robert 2026-07-20.
 type Shot = { src: string; alt: string; caption: string };
+type FaqItem = { question: string; answer: string; bullets?: string[] };
+type FaqSection = { title: string; items: FaqItem[] };
 type CaseStudy = {
   slug: string;
   title: string;
@@ -26,6 +28,7 @@ type CaseStudy = {
   craft: string;
   outcome: string;
   shots: Shot[];
+  faq?: FaqSection[];
 };
 
 const caseStudies: CaseStudy[] = [
@@ -48,6 +51,61 @@ const caseStudies: CaseStudy[] = [
       "Optimized interfaces and refined control schemes across the game's core management systems — wonders, military movement, outposts, and cities — tuned for readability and strategy-focused interaction on console.",
     outcome:
       "Console editions retained the original PC version's depth while fitting the constraints and capabilities of console platforms, delivering a polished, user-friendly strategy experience.",
+    faq: [
+      {
+        title: "About",
+        items: [
+          {
+            question: "What is Humankind?",
+            answer:
+              "Humankind is a turn-based historical strategy game developed by Amplitude Studios and published by SEGA. Players guide a civilization from the Neolithic era to the modern age, shaping culture, diplomacy, cities, and military power through strategic decisions.",
+          },
+          {
+            question: "What was the goal of this project?",
+            answer:
+              "The goal was to adapt Humankind's complex PC interface and game mechanics into a seamless console experience. Navigation, controls, and layouts were reworked so the game's strategic depth remained accessible through gamepad interaction.",
+          },
+        ],
+      },
+      {
+        title: "Project scope & role",
+        items: [
+          {
+            question: "What was Cryptic Design's role in this project?",
+            answer:
+              "Cryptic Design collaborated with Amplitude Studios and Aspyr Media to refine and develop the UX/UI framework for the console adaptation. The work included interaction-model redesign, controller-friendly navigation, and iterative usability evaluation without compromising the game's strategic complexity.",
+          },
+          {
+            question: "What were the primary UX challenges?",
+            answer: "The console adaptation had to preserve precision, clarity, and depth across several connected challenges:",
+            bullets: [
+              "Translate mouse-and-keyboard interactions into gamepad-friendly controls.",
+              "Keep complex menus accessible without overwhelming console players.",
+              "Improve information hierarchy and readability at television viewing distances.",
+              "Reduce cognitive load by restructuring menu navigation.",
+              "Refine HUD and tooltip behavior while preserving necessary game detail.",
+            ],
+          },
+        ],
+      },
+      {
+        title: "Key responsibilities",
+        items: [
+          {
+            question: "What were Cryptic Design's primary contributions?",
+            answer: "Cryptic Design's primary responsibilities included:",
+            bullets: [
+              "UX and UI adaptation for controller-based console navigation.",
+              "Menu-flow and layout optimization.",
+              "HUD and information-architecture improvements.",
+              "Interaction, legibility, accessibility, and button-mapping enhancements.",
+              "Heuristic evaluation and iterative usability testing.",
+              "Prototyping and validation of interface components and interaction models.",
+            ],
+          },
+        ],
+      },
+    ],
     shots: [
       {
         src: "/images/case-studies/humankind-turnstart.jpg",
@@ -417,6 +475,39 @@ export default function CaseStudiesPage() {
                 accentHex={hex}
                 studyTitle={cs.title}
               />
+
+              {cs.faq && (
+                <section aria-labelledby={`${cs.slug}-faq-heading`} className="panel p-6 sm:p-8">
+                  <div className="mb-6 max-w-3xl">
+                    <span className="kicker" style={{ color: hex }}>Project FAQ</span>
+                    <h3 id={`${cs.slug}-faq-heading`} className="section-title">Questions about the work</h3>
+                  </div>
+                  <div className="grid gap-8 lg:grid-cols-3">
+                    {cs.faq.map((group) => (
+                      <div key={group.title} className="flex flex-col gap-3">
+                        <h4 className="text-sm font-semibold uppercase tracking-[.08em]" style={{ color: hex }}>
+                          {group.title}
+                        </h4>
+                        {group.items.map((item) => (
+                          <details key={item.question} className="border-t border-[var(--border)] py-4">
+                            <summary className="cursor-pointer text-sm font-semibold leading-relaxed text-[var(--foreground)]">
+                              {item.question}
+                            </summary>
+                            <div className="pt-3 text-[13px] leading-relaxed text-[var(--muted)]">
+                              <p>{item.answer}</p>
+                              {item.bullets && (
+                                <ul className="mt-3 list-disc space-y-2 pl-5">
+                                  {item.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}
+                                </ul>
+                              )}
+                            </div>
+                          </details>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
             </section>
           );
         })}
