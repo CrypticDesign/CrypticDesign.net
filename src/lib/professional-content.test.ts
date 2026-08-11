@@ -16,6 +16,8 @@ test("Professional publishes the approved eleven-article inventory with local he
     assert.match(article.published, /^\d{4}-\d{2}-\d{2}$/);
     assert.ok(article.blocks.length > 0);
     assert.ok(existsSync(path.join(root, "public", article.hero.slice(1))), `missing ${article.hero}`);
+    const bodyText = article.blocks.flatMap((block) => "text" in block ? [block.text] : []).join("\n");
+    assert.doesNotMatch(bodyText, /^(Image Title|Image Description)/m, `${article.slug} exposes image metadata as prose`);
   }
 });
 

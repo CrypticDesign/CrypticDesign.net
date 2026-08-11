@@ -2699,10 +2699,31 @@ export const articles: Article[] = [
   }
 ];
 
+const imageMetadataCaptions = new Set([
+  "Leviathan-class spacecraft concept in Singularis universe – post-singularity expansion",
+  "A cinematic orbital sunrise concept for Singularis.",
+  "Interstellar cloud concept illustration",
+  "Object focus concept illustration.",
+  "L.I.S.A Introduction concept illustration",
+  "System overview concept illustration.",
+  "Game loop diagram",
+]);
+
+function articleWithoutImageMetadata(article: Article): Article {
+  return {
+    ...article,
+    blocks: article.blocks.filter((block) => {
+      if (!("text" in block)) return true;
+      return !block.text.startsWith("Image Title") && !block.text.startsWith("Image Description") && !imageMetadataCaptions.has(block.text);
+    }),
+  };
+}
+
 export function allArticles(): Article[] {
-  return articles;
+  return articles.map(articleWithoutImageMetadata);
 }
 
 export function getArticle(slug: string): Article | undefined {
-  return articles.find((a) => a.slug === slug);
+  const article = articles.find((a) => a.slug === slug);
+  return article ? articleWithoutImageMetadata(article) : undefined;
 }
