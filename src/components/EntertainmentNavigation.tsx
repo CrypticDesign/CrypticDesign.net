@@ -64,7 +64,6 @@ export default function EntertainmentNavigation() {
           <summary className="entertainment-navigation__item" data-theme={item.theme} aria-current={active ? "page" : undefined} aria-expanded={drawerOpen} aria-controls={`${item.icon}-destination-drawer-${surface}`} onClick={(event) => { event.preventDefault(); const onRoute = pathname === item.href || pathname.startsWith(`${item.href}/`); setOpenDestination(destinationIcon); if (destinationIcon === "arcade") { setArcadeMenuOpen(true); window.dispatchEvent(new CustomEvent("cryptic:arcade-drawer", { detail: { open: true } })); } if (!onRoute || searchParams.has(query)) router.push(item.href); }}>
             <span className="entertainment-navigation__icon"><NavIcon icon={item.icon} /></span>
             <span className="entertainment-navigation__copy"><strong>{item.label}</strong><small>{item.description}</small></span>
-            <span className="entertainment-navigation__item-arrow" aria-hidden="true">▼</span>
           </summary>
           <nav id={`${item.icon}-destination-drawer-${surface}`} className="entertainment-navigation__item-options" data-open={drawerOpen} aria-hidden={!drawerOpen} aria-label={`${item.label} drawer`}>
             {categories.map((category) => (

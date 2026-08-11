@@ -16,6 +16,8 @@ test("Professional publishes the approved eleven-article inventory with local he
     assert.match(article.published, /^\d{4}-\d{2}-\d{2}$/);
     assert.ok(article.blocks.length > 0);
     assert.ok(existsSync(path.join(root, "public", article.hero.slice(1))), `missing ${article.hero}`);
+    const bodyText = article.blocks.flatMap((block) => "text" in block ? [block.text] : []).join("\n");
+    assert.doesNotMatch(bodyText, /^(Image Title|Image Description)/m, `${article.slug} exposes image metadata as prose`);
   }
 });
 
@@ -40,11 +42,42 @@ test("Professional publishes six case studies and maps all 55 proof images", () 
   assert.match(source, /<details key=\{item\.question\}/);
 });
 
+test("Professional preserves owned editorial imagery from the live articles", () => {
+  const articleImages = JSON.parse(readFileSync(path.join(root, "src/lib/article-images.json"), "utf8").replace(/^\uFEFF/, "")) as Record<string, { src: string; alt: string }[]>;
+  const images = Object.values(articleImages).flat();
+  assert.ok(images.length >= 45, `expected at least 45 editorial images, found ${images.length}`);
+  for (const image of images) {
+    assert.ok(image.alt.trim(), `missing alt text for ${image.src}`);
+    assert.ok(existsSync(path.join(root, "public", image.src.slice(1))), `missing ${image.src}`);
+  }
+});
+
 test("Professional launch routes expose canonical and share metadata", () => {
-  for (const file of ["src/app/professional/page.tsx", "src/app/professional/articles/page.tsx", "src/app/professional/case-studies/page.tsx"]) {
+  for (const file of ["src/app/professional/page.tsx", "src/app/professional/services/page.tsx", "src/app/professional/articles/page.tsx", "src/app/professional/case-studies/page.tsx", "src/app/professional/inquiry/page.tsx", "src/app/professional/contact/page.tsx", "src/app/professional/creators/page.tsx"]) {
     const source = readFileSync(path.join(root, file), "utf8");
     assert.match(source, /canonical:/, `${file} lacks canonical metadata`);
     assert.match(source, /openGraph:/, `${file} lacks Open Graph metadata`);
     assert.match(source, /twitter:/, `${file} lacks Twitter metadata`);
   }
+  const articlePage = readFileSync(path.join(root, "src/app/professional/articles/[slug]/page.tsx"), "utf8");
+  for (const field of ["canonical:", "openGraph:", "twitter:", "authors:", "keywords:", "robots:"]) assert.match(articlePage, new RegExp(field), `article detail lacks ${field}`);
+  const articleBody = readFileSync(path.join(root, "src/components/ArticleBody.tsx"), "utf8");
+  assert.match(articleBody, /https\?:\\\/\\\//, "article URLs are not linkified");
+  for (const network of ["LinkedIn", "Facebook", ">X<"]) assert.match(articleBody, new RegExp(network));
+});
+
+test("Professional uses one contact path, section tabs, and complete capability pages", () => {
+  const navigation = readFileSync(path.join(root, "src/components/ProfessionalNavigation.tsx"), "utf8");
+  const breadcrumbs = readFileSync(path.join(root, "src/components/SubNavBreadcrumbs.tsx"), "utf8");
+  const services = readFileSync(path.join(root, "src/app/professional/[slug]/page.tsx"), "utf8");
+  const inquiry = readFileSync(path.join(root, "src/components/ProfessionalInquiryForm.tsx"), "utf8");
+  for (const label of ["Overview", "Services", "Case Studies", "Articles", "Start a Project"]) assert.match(navigation, new RegExp(label));
+  assert.match(navigation, /href: "\/professional\/services"/);
+  assert.ok(existsSync(path.join(root, "src/app/professional/services/page.tsx")));
+  assert.match(breadcrumbs, /pathname\.startsWith\("\/professional\/"\)/);
+  assert.match(services, /How the work moves/);
+  assert.match(services, /Typical deliverables/);
+  assert.match(services, /Selected proof/);
+  assert.match(inquiry, /mailto:robert\.croft@crypticdesign\.net/);
+  assert.doesNotMatch(inquiry, /localStorage|does not send/);
 });

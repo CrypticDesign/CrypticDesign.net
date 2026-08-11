@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-11T18:09:20.792Z",
+  "generated": "2026-08-11T18:49:46.905Z",
   "base": "http://127.0.0.1:3100",
   "results": [
     {
@@ -135,13 +135,112 @@
       "failures": []
     },
     {
+      "route": "/professional/ux-interaction",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "main": true,
+      "horizontalOverflow": false,
+      "images": 4,
+      "brokenImages": [],
+      "failures": []
+    },
+    {
+      "route": "/professional/ux-interaction",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "main": true,
+      "horizontalOverflow": false,
+      "images": 4,
+      "brokenImages": [],
+      "failures": []
+    },
+    {
+      "route": "/professional/ux-interaction",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "main": true,
+      "horizontalOverflow": false,
+      "images": 4,
+      "brokenImages": [],
+      "failures": []
+    },
+    {
+      "route": "/professional/interface-systems",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "main": true,
+      "horizontalOverflow": false,
+      "images": 4,
+      "brokenImages": [],
+      "failures": []
+    },
+    {
+      "route": "/professional/interface-systems",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "main": true,
+      "horizontalOverflow": false,
+      "images": 4,
+      "brokenImages": [],
+      "failures": []
+    },
+    {
+      "route": "/professional/interface-systems",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "main": true,
+      "horizontalOverflow": false,
+      "images": 4,
+      "brokenImages": [],
+      "failures": []
+    },
+    {
+      "route": "/professional/creative-technology",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "main": true,
+      "horizontalOverflow": false,
+      "images": 4,
+      "brokenImages": [],
+      "failures": []
+    },
+    {
+      "route": "/professional/creative-technology",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "main": true,
+      "horizontalOverflow": false,
+      "images": 4,
+      "brokenImages": [],
+      "failures": []
+    },
+    {
+      "route": "/professional/creative-technology",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "main": true,
+      "horizontalOverflow": false,
+      "images": 4,
+      "brokenImages": [],
+      "failures": []
+    },
+    {
       "route": "/professional/product-strategy",
       "viewport": "mobile",
       "status": 200,
       "h1": 1,
       "main": true,
       "horizontalOverflow": false,
-      "images": 2,
+      "images": 4,
       "brokenImages": [],
       "failures": []
     },
@@ -152,7 +251,7 @@
       "h1": 1,
       "main": true,
       "horizontalOverflow": false,
-      "images": 2,
+      "images": 4,
       "brokenImages": [],
       "failures": []
     },
@@ -163,7 +262,7 @@
       "h1": 1,
       "main": true,
       "horizontalOverflow": false,
-      "images": 2,
+      "images": 4,
       "brokenImages": [],
       "failures": []
     },

@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Contact",
   alternates: { canonical: "/professional/contact" },
   description: "Reach the Cryptic Design studio.",
+  openGraph: { title: "Contact Cryptic Design", description: "Contact the Cryptic Design studio or start a structured project inquiry.", url: "/professional/contact", images: ["/share/professional.png"] },
+  twitter: { card: "summary_large_image", images: ["/share/professional.png"] },
+  robots: { index: true, follow: true },
 };
 
 export default function ContactPage() {

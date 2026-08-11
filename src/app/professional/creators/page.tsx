@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Contributing Creators",
   alternates: { canonical: "/professional/creators" },
   description: "The review-based path for creators and collaborators.",
+  openGraph: { title: "Contributing Creators", description: "Apply to contribute to Cryptic Design releases and productions.", url: "/professional/creators", images: ["/share/professional.png"] },
+  twitter: { card: "summary_large_image", images: ["/share/professional.png"] },
+  robots: { index: true, follow: true },
 };
 
 export default function CreatorsPage() {

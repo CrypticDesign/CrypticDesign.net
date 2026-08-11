@@ -9,7 +9,7 @@ const STATIC_ROUTES = [
   "", "/entertainment", "/entertainment/arcade", "/entertainment/cinema",
   "/entertainment/creative-labs", "/entertainment/listening-rooms",
   "/entertainment/virtual-rooms", "/entertainment/visual-studies", "/entertainment/store",
-  "/professional", "/professional/articles", "/privacy", "/terms",
+  "/professional", "/professional/services", "/professional/articles", "/privacy", "/terms",
   "/professional/case-studies", "/professional/creators", "/professional/contact",
   "/professional/inquiry", "/releases", "/products", "/audio", "/search",
 ];

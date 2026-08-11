@@ -36,6 +36,8 @@ const EXPECTED: Record<string, string> = {
   "/soundwave": "/products/cryptic-signal",
   "/store": "/entertainment/store",
   "/portfolio/humankind": "/professional/case-studies",
+  "/contact": "/professional/inquiry",
+  "/professional/contact": "/professional/inquiry",
   "/articles/:slug": "/professional/articles/:slug",
 };
 

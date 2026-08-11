@@ -2,92 +2,34 @@
 
 import { FormEvent, useState } from "react";
 
-type Inquiry = {
-  name: string;
-  email: string;
-  organization: string;
-  projectType: string;
-  budgetTimeline: string;
-  message: string;
-  submittedAt: string;
-  status: "new";
-};
-
-const INITIAL_INQUIRY: Omit<Inquiry, "submittedAt" | "status"> = {
-  name: "",
-  email: "",
-  organization: "",
-  projectType: "",
-  budgetTimeline: "",
-  message: "",
-};
+const initial = { name: "", email: "", organization: "", projectType: "", budgetTimeline: "", message: "" };
 
 export default function ProfessionalInquiryForm() {
-  const [inquiry, setInquiry] = useState(INITIAL_INQUIRY);
-  const [consented, setConsented] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-
-  function update(field: keyof typeof INITIAL_INQUIRY, value: string) {
-    setInquiry((current) => ({ ...current, [field]: value }));
-  }
+  const [inquiry, setInquiry] = useState(initial);
+  const update = (field: keyof typeof initial, value: string) => setInquiry((current) => ({ ...current, [field]: value }));
 
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const record: Inquiry = {
-      ...inquiry,
-      submittedAt: new Date().toISOString(),
-      status: "new",
-    };
-    const key = "crypticdesign.professional-inquiry-review-queue";
-    const existing = JSON.parse(localStorage.getItem(key) ?? "[]") as Inquiry[];
-    localStorage.setItem(key, JSON.stringify([...existing, record]));
-    setSubmitted(true);
+    const subject = `Professional inquiry — ${inquiry.projectType}`;
+    const body = [`Name: ${inquiry.name}`, `Email: ${inquiry.email}`, `Organization: ${inquiry.organization || "Not provided"}`, `Project type: ${inquiry.projectType}`, `Budget / timeline: ${inquiry.budgetTimeline || "Not provided"}`, "", "Project context:", inquiry.message].join("\n");
+    window.location.href = `mailto:robert.croft@crypticdesign.net?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   }
 
-  if (submitted) {
-    return (
-      <section className="rounded-card border border-success/40 bg-surface p-6">
-        <h2 className="text-xl font-semibold text-foreground">Saved in this browser</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Your inquiry is saved in this browser. It has not been sent to Cryptic Design.
-        </p>
-      </section>
-    );
-  }
-
+  const control = "min-h-12 rounded-control border border-[var(--border)] bg-[#07111a] px-4 py-3 text-[var(--foreground)] outline-none transition focus:border-[#ed00a8] focus:shadow-[0_0_0_2px_rgba(237,0,168,.15)]";
   return (
-    <form onSubmit={submit} className="grid max-w-2xl gap-4">
-      <label className="grid gap-1 text-sm text-foreground">
-        Name
-        <input required value={inquiry.name} onChange={(event) => update("name", event.target.value)} className="rounded-control border border-border bg-surface px-3 py-2 text-foreground" />
-      </label>
-      <label className="grid gap-1 text-sm text-foreground">
-        Email
-        <input required type="email" value={inquiry.email} onChange={(event) => update("email", event.target.value)} className="rounded-control border border-border bg-surface px-3 py-2 text-foreground" />
-      </label>
-      <label className="grid gap-1 text-sm text-foreground">
-        Organization
-        <input value={inquiry.organization} onChange={(event) => update("organization", event.target.value)} className="rounded-control border border-border bg-surface px-3 py-2 text-foreground" />
-      </label>
-      <label className="grid gap-1 text-sm text-foreground">
-        Project type
-        <input required value={inquiry.projectType} onChange={(event) => update("projectType", event.target.value)} className="rounded-control border border-border bg-surface px-3 py-2 text-foreground" />
-      </label>
-      <label className="grid gap-1 text-sm text-foreground">
-        Budget or timeline (optional)
-        <input value={inquiry.budgetTimeline} onChange={(event) => update("budgetTimeline", event.target.value)} className="rounded-control border border-border bg-surface px-3 py-2 text-foreground" />
-      </label>
-      <label className="grid gap-1 text-sm text-foreground">
-        Message
-        <textarea required rows={5} value={inquiry.message} onChange={(event) => update("message", event.target.value)} className="rounded-control border border-border bg-surface px-3 py-2 text-foreground" />
-      </label>
-      <label className="flex gap-2 text-sm text-muted-foreground">
-        <input required type="checkbox" checked={consented} onChange={(event) => setConsented(event.target.checked)} />
-        I understand this preview saves my inquiry in this browser and does not send it to Cryptic Design.
-      </label>
-      <button type="submit" className="w-fit rounded-control bg-accent-blue px-5 py-2.5 text-sm font-medium text-black">
-        Save inquiry
-      </button>
+    <form onSubmit={submit} className="grid gap-5" aria-describedby="inquiry-handoff-note">
+      <div className="grid gap-5 sm:grid-cols-2">
+        <label className="grid gap-2 text-sm font-medium">Name<input required autoComplete="name" value={inquiry.name} onChange={(event) => update("name", event.target.value)} className={control} /></label>
+        <label className="grid gap-2 text-sm font-medium">Email<input required type="email" autoComplete="email" value={inquiry.email} onChange={(event) => update("email", event.target.value)} className={control} /></label>
+      </div>
+      <div className="grid gap-5 sm:grid-cols-2">
+        <label className="grid gap-2 text-sm font-medium">Organization <span className="sr-only">optional</span><input autoComplete="organization" value={inquiry.organization} onChange={(event) => update("organization", event.target.value)} className={control} /></label>
+        <label className="grid gap-2 text-sm font-medium">Project type<input required placeholder="Product, game, platform, research…" value={inquiry.projectType} onChange={(event) => update("projectType", event.target.value)} className={control} /></label>
+      </div>
+      <label className="grid gap-2 text-sm font-medium">Budget or timeline <span className="text-xs font-normal text-[var(--muted)]">Optional</span><input value={inquiry.budgetTimeline} onChange={(event) => update("budgetTimeline", event.target.value)} className={control} /></label>
+      <label className="grid gap-2 text-sm font-medium">What are you trying to make, change, or understand?<textarea required rows={7} value={inquiry.message} onChange={(event) => update("message", event.target.value)} className={control} /></label>
+      <p id="inquiry-handoff-note" className="m-0 text-xs leading-relaxed text-[var(--muted)]">Continue to email opens your email application with these details prepared. You can review and edit everything before sending; this site does not store the form.</p>
+      <button type="submit" className="button w-fit">Continue to email</button>
     </form>
   );
 }
