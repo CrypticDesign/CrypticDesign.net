@@ -48,3 +48,17 @@ test("Professional launch routes expose canonical and share metadata", () => {
     assert.match(source, /twitter:/, `${file} lacks Twitter metadata`);
   }
 });
+
+test("Professional uses one contact path, section tabs, and complete capability pages", () => {
+  const navigation = readFileSync(path.join(root, "src/components/ProfessionalNavigation.tsx"), "utf8");
+  const breadcrumbs = readFileSync(path.join(root, "src/components/SubNavBreadcrumbs.tsx"), "utf8");
+  const services = readFileSync(path.join(root, "src/app/professional/[slug]/page.tsx"), "utf8");
+  const inquiry = readFileSync(path.join(root, "src/components/ProfessionalInquiryForm.tsx"), "utf8");
+  for (const label of ["Overview", "Services", "Case Studies", "Articles", "Start a Project"]) assert.match(navigation, new RegExp(label));
+  assert.match(breadcrumbs, /pathname\.startsWith\("\/professional\/"\)/);
+  assert.match(services, /How the work moves/);
+  assert.match(services, /Typical deliverables/);
+  assert.match(services, /Selected proof/);
+  assert.match(inquiry, /mailto:robert\.croft@crypticdesign\.net/);
+  assert.doesNotMatch(inquiry, /localStorage|does not send/);
+});

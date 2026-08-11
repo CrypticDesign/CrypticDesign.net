@@ -64,7 +64,7 @@ export default function SubNavBreadcrumbs({ position }: { position: "top" | "bot
   const pathname = usePathname();
   const crumbs = routeCrumbs(pathname);
 
-  if (pathname.replace(/\/$/, "") === "/professional/case-studies") return null;
+  if (pathname === "/professional" || pathname.startsWith("/professional/")) return null;
   if (position === "top" && !shouldShowTopBreadcrumb(pathname)) return null;
   if (crumbs.length < 2) return null;
 
