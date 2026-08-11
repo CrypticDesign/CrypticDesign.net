@@ -96,13 +96,8 @@ export default async function ArticlePage({ params }: Params) {
           <p className="mt-3 text-sm leading-relaxed text-neutral-400">{article.description}</p>
           <Link href="/professional/articles" className="text-link">All articles +</Link>
         </aside>
-        <article><ArticleBody blocks={article.blocks} /></article>
+        <article><ArticleBody blocks={article.blocks} images={uniqueImages} /></article>
       </div>
-
-      {uniqueImages.length > 1 && <section className="border-t border-[#173049] pt-10">
-        <div className="section-heading"><div><span className="kicker !text-[#ed00a8]">From the original article</span><h2 className="section-title">Visual references</h2></div><p>Editorial images and diagrams preserved from the live Cryptic Design publication.</p></div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{uniqueImages.map((image, index) => <figure key={image.src} className={`m-0 overflow-hidden bg-[#07111b] ${index % 7 === 0 ? "sm:col-span-2" : ""}`}><div className="relative aspect-[16/10]"><Image src={image.src} alt={image.alt} fill sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw" className="object-cover" /></div></figure>)}</div>
-      </section>}
 
       {article.tags.length > 0 && (
         <ul className="flex list-none flex-wrap gap-2 p-0">
