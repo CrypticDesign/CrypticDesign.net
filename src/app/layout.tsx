@@ -12,7 +12,10 @@ import "./singularis.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://crypticdesign.net"),
   title: { default: "Cryptic Design", template: "%s | Cryptic Design" },
+  alternates: { canonical: "/" },
+  robots: { index: true, follow: true },
   description: "CrypticDesign.net — entertainment, professional services, and original releases.",
+  twitter: { card: "summary_large_image", images: ["/share.png"] },
   openGraph: {
     url: "https://crypticdesign.net",
     siteName: "Cryptic Design",

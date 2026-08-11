@@ -5,7 +5,7 @@ import CaseStudyGallery from "@/components/CaseStudyGallery";
 
 export const metadata: Metadata = {
   title: "Case Studies",
-  alternates: { canonical: "/professional/case-studies" }, openGraph: { images: ["/share/case-studies.png"] }, twitter: { card: "summary_large_image", images: ["/share/case-studies.png"] }, 
+  alternates: { canonical: "/professional/case-studies" }, openGraph: { title: "UX & Product Design Case Studies", description: "Console game UX, VR training, enterprise health systems, tactical games, and mobile strategy work.", url: "/professional/case-studies", images: ["/share/case-studies.png"] }, twitter: { card: "summary_large_image", images: ["/share/case-studies.png"] }, robots: { index: true, follow: true },
   description: "Selected Cryptic Design work — console game UX, VR training, enterprise health systems, and mobile strategy — told as problem, approach, craft, and outcome.",
 };
 

@@ -39,7 +39,7 @@ export function generateStaticParams() { return publicServices().map((service) =
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const service = getService((await params).slug);
-  return service ? { title: service.title, description: service.summary, alternates: { canonical: `/professional/${service.slug}` }, openGraph: { images: ["/share/professional.png"] }, twitter: { card: "summary_large_image", images: ["/share/professional.png"] } } : {};
+  return service ? { title: service.title, description: service.summary, alternates: { canonical: `/professional/${service.slug}` }, openGraph: { title: service.title, description: service.summary, url: `/professional/${service.slug}`, images: ["/share/professional.png"] }, twitter: { card: "summary_large_image", title: service.title, description: service.summary, images: ["/share/professional.png"] }, robots: { index: true, follow: true } } : {};
 }
 
 export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import ProfessionalInquiryForm from "@/components/ProfessionalInquiryForm";
 
-export const metadata: Metadata = { title: "Start a Project", description: "Start a professional services conversation with Cryptic Design.", alternates: { canonical: "/professional/inquiry" } };
+export const metadata: Metadata = { title: "Start a Project", description: "Start a professional services conversation with Cryptic Design about product strategy, UX, interface systems, or creative technology.", alternates: { canonical: "/professional/inquiry" }, openGraph: { title: "Start a Project with Cryptic Design", description: "Tell us what you are building, where the friction is, and what decision needs to become clearer.", url: "/professional/inquiry", images: ["/share/professional.png"] }, twitter: { card: "summary_large_image", images: ["/share/professional.png"] }, robots: { index: true, follow: true } };
 
 export default function ProfessionalInquiryPage() {
   return (

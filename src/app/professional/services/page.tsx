@@ -7,8 +7,9 @@ export const metadata: Metadata = {
   title: "Professional Services",
   description: "Product strategy, UX and interaction, interface systems, and creative technology services from Cryptic Design.",
   alternates: { canonical: "/professional/services" },
-  openGraph: { images: ["/share/professional.png"] },
+  openGraph: { title: "Professional Services", description: "Product strategy, UX and interaction, interface systems, and creative technology services.", url: "/professional/services", images: ["/share/professional.png"] },
   twitter: { card: "summary_large_image", images: ["/share/professional.png"] },
+  robots: { index: true, follow: true },
 };
 
 const images = ["/images/service-strategy.png", "/images/service-ux.png", "/images/service-interface.png", "/images/service-creative-tech.png"];

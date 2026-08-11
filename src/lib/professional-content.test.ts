@@ -53,12 +53,17 @@ test("Professional preserves owned editorial imagery from the live articles", ()
 });
 
 test("Professional launch routes expose canonical and share metadata", () => {
-  for (const file of ["src/app/professional/page.tsx", "src/app/professional/articles/page.tsx", "src/app/professional/case-studies/page.tsx"]) {
+  for (const file of ["src/app/professional/page.tsx", "src/app/professional/services/page.tsx", "src/app/professional/articles/page.tsx", "src/app/professional/case-studies/page.tsx", "src/app/professional/inquiry/page.tsx", "src/app/professional/contact/page.tsx", "src/app/professional/creators/page.tsx"]) {
     const source = readFileSync(path.join(root, file), "utf8");
     assert.match(source, /canonical:/, `${file} lacks canonical metadata`);
     assert.match(source, /openGraph:/, `${file} lacks Open Graph metadata`);
     assert.match(source, /twitter:/, `${file} lacks Twitter metadata`);
   }
+  const articlePage = readFileSync(path.join(root, "src/app/professional/articles/[slug]/page.tsx"), "utf8");
+  for (const field of ["canonical:", "openGraph:", "twitter:", "authors:", "keywords:", "robots:"]) assert.match(articlePage, new RegExp(field), `article detail lacks ${field}`);
+  const articleBody = readFileSync(path.join(root, "src/components/ArticleBody.tsx"), "utf8");
+  assert.match(articleBody, /https\?:\\\/\\\//, "article URLs are not linkified");
+  for (const network of ["LinkedIn", "Facebook", ">X<"]) assert.match(articleBody, new RegExp(network));
 });
 
 test("Professional uses one contact path, section tabs, and complete capability pages", () => {

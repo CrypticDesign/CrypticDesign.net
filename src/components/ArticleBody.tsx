@@ -4,8 +4,14 @@ import type { ArticleBlock } from "@/lib/articles";
 // CRY-344: renders imported article blocks with our own typography —
 // no runtime markdown parser and no HTML injection.
 type EditorialImage = { src: string; alt: string };
+type SocialLinks = { linkedin: string; x: string; facebook: string };
 
-export default function ArticleBody({ blocks, images = [] }: { blocks: ArticleBlock[]; images?: EditorialImage[] }) {
+function LinkedText({ text }: { text: string }) {
+  const parts = text.split(/(https?:\/\/[^\s]+)/g);
+  return <>{parts.map((part, index) => /^https?:\/\//.test(part) ? <a key={index} href={part} target="_blank" rel="noopener noreferrer" className="text-accent-cyan underline decoration-transparent underline-offset-4 hover:decoration-current">{part}</a> : part)}</>;
+}
+
+export default function ArticleBody({ blocks, images = [], socialLinks }: { blocks: ArticleBlock[]; images?: EditorialImage[]; socialLinks?: SocialLinks }) {
   const imageSlots = new Map<number, EditorialImage[]>();
   images.forEach((image, index) => {
     const slot = Math.min(blocks.length - 1, Math.max(0, Math.floor(((index + 1) * blocks.length) / (images.length + 1))));
@@ -61,7 +67,7 @@ export default function ArticleBody({ blocks, images = [] }: { blocks: ArticleBl
                 className="flex list-disc flex-col gap-2 pl-6 text-[15px] leading-relaxed text-neutral-400"
               >
                 {block.items.map((item, j) => (
-                  <li key={j}>{item}</li>
+                  <li key={j}><LinkedText text={item} /></li>
                 ))}
               </ul>
             );
@@ -73,7 +79,7 @@ export default function ArticleBody({ blocks, images = [] }: { blocks: ArticleBl
                 className="flex list-decimal flex-col gap-2 pl-6 text-[15px] leading-relaxed text-neutral-400"
               >
                 {block.items.map((item, j) => (
-                  <li key={j}>{item}</li>
+                  <li key={j}><LinkedText text={item} /></li>
                 ))}
               </ol>
             );
@@ -84,9 +90,13 @@ export default function ArticleBody({ blocks, images = [] }: { blocks: ArticleBl
             );
             break;
           default:
-            content = (
+            content = block.text === "Back to Top" ? (
+              <a href="#article-top" className="text-sm font-semibold text-accent-cyan hover:underline">Back to top ↑</a>
+            ) : block.text === "LinkedIn · X · Facebook" && socialLinks ? (
+              <p className="flex flex-wrap gap-x-3 text-[15px] text-neutral-300"><a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="text-accent-cyan hover:underline">LinkedIn</a><span aria-hidden>·</span><a href={socialLinks.x} target="_blank" rel="noopener noreferrer" className="text-accent-cyan hover:underline">X</a><span aria-hidden>·</span><a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="text-accent-cyan hover:underline">Facebook</a></p>
+            ) : (
               <p key={i} className="text-[15px] leading-[1.75] text-neutral-400">
-                {block.text}
+                <LinkedText text={block.text} />
               </p>
             );
             break;
