@@ -5,31 +5,24 @@ import { usePathname } from "next/navigation";
 
 const serviceSlugs = new Set(["product-strategy", "ux-interaction", "interface-systems", "creative-technology"]);
 const items = [
-  { label: "Overview", href: "/professional" },
-  { label: "Services", href: "/professional#services" },
-  { label: "Case Studies", href: "/professional/case-studies" },
-  { label: "Articles", href: "/professional/articles" },
-  { label: "Start a Project", href: "/professional/inquiry" },
+  { label: "Overview", description: "Professional studio", href: "/professional", icon: "overview" },
+  { label: "Services", description: "Strategy through delivery", href: "/professional#services", icon: "services" },
+  { label: "Case Studies", description: "Selected client work", href: "/professional/case-studies", icon: "cases" },
+  { label: "Articles", description: "Research & analysis", href: "/professional/articles", icon: "articles" },
+  { label: "Start a Project", description: "Tell us the problem", href: "/professional/inquiry", icon: "inquiry" },
 ];
+
+function Icon({ name }: { name: string }) {
+  if (name === "services") return <svg viewBox="0 0 32 32" aria-hidden><path d="M5 9h22M5 16h22M5 23h22"/><circle cx="11" cy="9" r="2"/><circle cx="21" cy="16" r="2"/><circle cx="14" cy="23" r="2"/></svg>;
+  if (name === "cases") return <svg viewBox="0 0 32 32" aria-hidden><rect x="5" y="8" width="22" height="17" rx="1"/><path d="M11 8V5h10v3M5 14h22M13 14v3h6v-3"/></svg>;
+  if (name === "articles") return <svg viewBox="0 0 32 32" aria-hidden><path d="M8 4h12l5 5v19H8zM20 4v6h5M12 15h9M12 20h9M12 25h6"/></svg>;
+  if (name === "inquiry") return <svg viewBox="0 0 32 32" aria-hidden><path d="M4 7h24v18H4zM5 8l11 9L27 8"/></svg>;
+  return <svg viewBox="0 0 32 32" aria-hidden><circle cx="16" cy="16" r="6"/><path d="M16 2v6M16 24v6M2 16h6M24 16h6M6 6l4 4M22 22l4 4M26 6l-4 4M10 22l-4 4"/></svg>;
+}
 
 export default function ProfessionalNavigation() {
   const pathname = usePathname();
   const segment = pathname.split("/")[2] ?? "";
-  const active = (href: string) => href.includes("#services")
-    ? serviceSlugs.has(segment)
-    : href === "/professional"
-      ? pathname === href
-      : pathname === href || pathname.startsWith(`${href}/`);
-
-  return (
-    <section className="sticky top-[58px] z-40 border-y border-[#ed00a8]/25 bg-[#06101a]/95 shadow-[0_10px_24px_rgba(0,0,0,.65)] backdrop-blur" aria-label="Professional navigation">
-      <nav className="shell flex overflow-x-auto" aria-label="Professional sections">
-        {items.map((item) => (
-          <Link key={item.href} href={item.href} aria-current={active(item.href) ? "page" : undefined} className="relative flex min-h-14 shrink-0 items-center px-5 text-[10px] font-bold uppercase tracking-[.09em] text-[var(--muted)] transition hover:bg-[#ed00a8]/10 hover:text-[#ed00a8] aria-[current=page]:bg-[#ed00a8]/10 aria-[current=page]:text-[#ed00a8] after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:bg-transparent aria-[current=page]:after:bg-[#ed00a8]">
-            {item.label}
-          </Link>
-        ))}
-      </nav>
-    </section>
-  );
+  const active = (href: string) => href.includes("#services") ? serviceSlugs.has(segment) : href === "/professional" ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
+  return <section className="entertainment-navigation professional-navigation" data-section-theme="magenta" aria-label="Explore Professional"><div className="shell entertainment-navigation__viewport"><nav className="entertainment-navigation__bar professional-navigation__bar" aria-label="Professional sections">{items.map((item) => <Link href={item.href} key={item.href} className="entertainment-navigation__item" data-theme="magenta" aria-current={active(item.href) ? "page" : undefined}><span className="entertainment-navigation__icon"><Icon name={item.icon}/></span><span className="entertainment-navigation__copy"><strong>{item.label}</strong><small>{item.description}</small></span></Link>)}</nav></div></section>;
 }
