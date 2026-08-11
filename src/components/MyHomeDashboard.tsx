@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import MediaCard from "@/components/MediaCard";
-import PlayerDock from "@/components/PlayerDock";
 import type { PublicCharacterIdentity } from "@/lib/characters";
 import { getSavedSlugs } from "@/lib/library";
 
@@ -67,7 +66,6 @@ export default function MyHomeDashboard() {
           <div className="metric-grid"><Link href="/library" className="metric-card gold"><span className="kicker !text-[#ffd400]">Library</span><strong>{savedCount || 47}</strong><p>Saved releases, articles, projects, and references.</p></Link><Link href="/account/notifications" className="metric-card"><span className="kicker">Activity</span><strong>12</strong><p>Recent sessions, decisions, comments, and changes.</p></Link><div className="metric-card green"><span className="kicker !text-[#00f0a8]">Interests</span><strong>09</strong><p>Topics and creative signals shaping recommendations.</p></div><Link href="/account/notifications" className="metric-card magenta"><span className="kicker !text-[#ed00a8]">Notifications</span><strong>03</strong><p>Reviews, messages, and account events needing attention.</p></Link></div>
         </section>
         <section><div className="section-heading"><div><span className="kicker !text-[#ffd400]">Saved &amp; recent</span><h2 className="section-title">Return to what matters</h2></div><p>Recently viewed and personally saved experiences.</p></div><div className="media-grid"><MediaCard href="/audio" image="/images/signal-systems.png" eyebrow="Night release" title="Signal & Systems" body="Viewed 2 hours ago" accent="gold" /><MediaCard href="/professional/articles" image="/images/human-machine.png" eyebrow="Human capability" title="Human & Machine" body="Saved to research library" /><MediaCard href="/products/singularis" image="/images/singularis.png" eyebrow="Franchise development" title="Singularis" body="Episode 01 production notes" accent="magenta" /></div></section>
-        <PlayerDock />
       </div>
     </main>
   );
