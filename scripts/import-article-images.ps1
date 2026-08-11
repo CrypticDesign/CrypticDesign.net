@@ -48,5 +48,7 @@ foreach ($article in $rawArticles) {
   $manifest[$article.slug] = $items
 }
 
-$manifest | ConvertTo-Json -Depth 5 | Set-Content -Encoding utf8 (Join-Path $repoRoot "src\lib\article-images.json")
+$manifestJson = $manifest | ConvertTo-Json -Depth 5
+$utf8WithoutBom = New-Object System.Text.UTF8Encoding($false)
+[System.IO.File]::WriteAllText((Join-Path $repoRoot "src\lib\article-images.json"), $manifestJson, $utf8WithoutBom)
 Write-Host "Wrote article image manifest for $($manifest.Count) articles."
