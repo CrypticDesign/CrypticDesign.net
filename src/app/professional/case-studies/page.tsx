@@ -246,6 +246,41 @@ const caseStudies: CaseStudy[] = [
     ],
   },
   {
+    slug: "digimancy-wire",
+    title: "Digimancy — Project WIRE",
+    years: "2021",
+    engagement: "UX/UI design contribution while working with Digimancy Entertainment",
+    discipline: "Tactical RPG UX / interaction systems",
+    accent: "gold",
+    hero: { src: "/images/case-studies/digimancy-hazard.png", alt: "Project WIRE narrative encounter interface for an environmental hazard" },
+    problem: "Create a readable interaction framework for a new narrative-driven science-fiction RPG where dense tactical information and consequential choices had to coexist.",
+    approach: "Combined competitive research and stakeholder input into a UX strategy, then moved from low- and high-fidelity mockups to a functional Figma prototype.",
+    craft: "Dialogue encounters, menu navigation, combat HUDs, and a distinct breather phase that let players assess units, buffs, and tactical options before committing to the next action.",
+    outcome: "A cohesive interface direction that improved combat readability, streamlined navigation, and gave the team an implementation-ready framework for the emerging IP.",
+    faq: [
+      { title: "About", items: [
+        { question: "What was Project WIRE?", answer: "WIRE was a strategic science-fiction RPG in development at Digimancy Entertainment, built around narrative choice, world building, and turn-based tactical combat." },
+        { question: "What made the interaction model distinctive?", answer: "A combat breather phase gave players a deliberate pause to understand battlefield state, unit status, buffs, and tactical options before the next exchange." },
+      ] },
+      { title: "Project scope & role", items: [
+        { question: "What was Robert's role?", answer: "Robert contributed UX/UI design, interaction models, visual hierarchy, menus, HUDs, dialogue flows, prototypes, and implementation guidance while working with Digimancy." },
+        { question: "What tools supported the work?", answer: "Figma supported wireframing and functional prototyping, with Adobe Creative Suite and Unity used across visual design, iteration, and in-engine collaboration." },
+      ] },
+      { title: "Key responsibilities", items: [
+        { question: "What were the main UX challenges?", answer: "The work concentrated on information density and clear player feedback:", bullets: ["Balance high-information screens without overwhelming players.", "Create HUD states that adapted to different combat situations.", "Make actions, consequences, and combat feedback immediately legible.", "Maintain visual and interaction consistency across dialogue, menus, and combat."] },
+        { question: "How was accessibility considered?", answer: "Usability evaluation focused on text readability, color contrast, interactive clarity, and keeping essential gameplay information accessible without unnecessary overload." },
+      ] },
+    ],
+    shots: [
+      { src: "/images/case-studies/digimancy-hazard.png", alt: "Environmental hazard narrative encounter with consequential crew and ship decisions", caption: "Environmental hazard encounter" },
+      { src: "/images/case-studies/digimancy-pirate.png", alt: "Dialogue-driven pirate confrontation with branching player choices", caption: "Pirate confrontation" },
+      { src: "/images/case-studies/digimancy-negotiation.png", alt: "Pirate negotiation interface offering diplomatic, threatening, and bribery choices", caption: "Branching negotiation" },
+      { src: "/images/case-studies/digimancy-breather.png", alt: "Combat breather phase for reviewing battlefield state and tactical options", caption: "Combat breather phase" },
+      { src: "/images/case-studies/digimancy-breather-expanded.png", alt: "Expanded combat breather interface with unit statistics and status effects", caption: "Expanded tactical state" },
+      { src: "/images/case-studies/digimancy-combat.png", alt: "Tactical space-combat HUD with weapons, abilities, and ship status", caption: "Combat clash HUD" },
+    ],
+  },
+  {
     slug: "wellsky",
     title: "WellSky — Enterprise Health Portfolio",
     years: "2019–2020",
@@ -338,6 +373,42 @@ const caseStudies: CaseStudy[] = [
         alt: "Guide to color implementation in the design language system covering primary, secondary, and tertiary roles.",
         caption: "Color system",
       },
+    ],
+  },
+  {
+    slug: "onward-vr",
+    title: "Onward — Tactical VR",
+    years: "2019",
+    engagement: "UX design contribution while working with Downpour Interactive",
+    discipline: "VR game UX / design systems",
+    accent: "cyan",
+    hero: { src: "/images/case-studies/onward-role.jpg", alt: "Onward tactical VR role-selection interface" },
+    problem: "Improve navigation, readability, and interaction consistency for a realism-focused VR military shooter with detailed roles, equipment, weapons, and community content.",
+    approach: "Used competitive analysis and heuristic evaluation to shape the UX strategy, information architecture, design principles, and a unified visual style guide.",
+    craft: "Role and loadout selection, weapon customization and statistics, attachment workflows, tryout interactions, and workshop browsing, with UI assets implemented in Unity.",
+    outcome: "A more cohesive interface system with clearer navigation and stronger readability, supporting tactical preparation without pulling players out of the immersive experience.",
+    faq: [
+      { title: "About", items: [
+        { question: "What is Onward?", answer: "Onward is a tactical VR military shooter developed by Downpour Interactive, focused on realism, teamwork, communication, and coordinated combat." },
+        { question: "What was the UX focus?", answer: "The work focused on a cohesive visual language, clearer interaction design, stronger information architecture, and practical usability improvements within the Unity-based game experience." },
+      ] },
+      { title: "Project scope & role", items: [
+        { question: "What was Robert's role?", answer: "As a UX Designer, Robert conducted research and analysis, helped define visual and interaction frameworks, created UI assets, supported feature ideation, and implemented interface work in Unity." },
+        { question: "What did the project cover?", answer: "The scope included competitive analysis, heuristic evaluation, design principles, style-guide unification, information architecture, interface production, and implementation support." },
+      ] },
+      { title: "Key responsibilities", items: [
+        { question: "What were the primary contributions?", answer: "The work connected strategic UX direction to production:", bullets: ["Conduct competitive analysis and heuristic evaluation.", "Develop a unified visual style guide.", "Structure navigation and information architecture.", "Create and implement UI assets in Unity.", "Contribute interaction frameworks and new-feature ideas."] },
+        { question: "How did the work affect the experience?", answer: "The resulting system improved consistency, navigation, readability, and usability across preparation and content-discovery flows." },
+      ] },
+    ],
+    shots: [
+      { src: "/images/case-studies/onward-role.jpg", alt: "Role selection organized by rifleman, specialist, support, and marksman", caption: "Role selection" },
+      { src: "/images/case-studies/onward-loadout.jpg", alt: "Tactical loadout selection for mid-range and close-range equipment", caption: "Loadout selection" },
+      { src: "/images/case-studies/onward-customize.jpg", alt: "Loadout customization balancing equipment choices and available points", caption: "Loadout customization" },
+      { src: "/images/case-studies/onward-attachments.jpg", alt: "Weapon attachment selection for flashlights, suppressors, and foregrips", caption: "Attachment selection" },
+      { src: "/images/case-studies/onward-stats.jpg", alt: "Weapon detail interface with damage, accuracy, magazine, and penetration statistics", caption: "Weapon statistics" },
+      { src: "/images/case-studies/onward-tryout.jpg", alt: "Virtual weapon tryout interaction before deployment", caption: "Weapon tryout" },
+      { src: "/images/case-studies/onward-workshop.jpg", alt: "Community workshop browser with map and game-mode filters", caption: "Onward Workshop" },
     ],
   },
   {
@@ -467,8 +538,8 @@ export default function CaseStudiesPage() {
             Complex systems, made clear enough to play, work, and trust.
           </h1>
           <p>
-            Four engagements across console strategy, virtual reality training,
-            enterprise healthcare, and mobile franchise games — each one a
+            Six engagements across console strategy, virtual reality, tactical
+            RPGs, enterprise healthcare, and mobile franchise games — each one a
             problem of making dense systems legible under real constraints.
           </p>
           <div className="hero-actions">
@@ -486,6 +557,24 @@ export default function CaseStudiesPage() {
       </section>
 
       <div className="shell page-stack">
+        <nav aria-label="Case study index" className="panel p-5 sm:p-7">
+          <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <span className="kicker !text-[#ed00a8]">Portfolio index</span>
+              <h2 className="text-xl font-semibold">Choose a use case</h2>
+            </div>
+            <p className="m-0 max-w-xl text-sm text-[var(--muted)]">Jump directly to the product context most relevant to your team.</p>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {caseStudies.map((cs) => (
+              <a key={cs.slug} href={`#${cs.slug}`} className="group border border-[var(--border)] p-4 transition-colors hover:border-[var(--foreground)]">
+                <span className="mb-2 block text-[10px] font-bold uppercase tracking-[.1em]" style={{ color: accentHex[cs.accent] }}>{cs.years} / {cs.discipline}</span>
+                <span className="text-sm font-semibold group-hover:underline">{cs.title}</span>
+              </a>
+            ))}
+          </div>
+        </nav>
+
         {caseStudies.map((cs, index) => {
           const hex = accentHex[cs.accent];
           const imageFirst = index % 2 === 0;
@@ -539,12 +628,20 @@ export default function CaseStudiesPage() {
                 </div>
               </div>
 
-              <CaseStudyGallery
-                shots={cs.shots}
-                accent={cs.accent}
-                accentHex={hex}
-                studyTitle={cs.title}
-              />
+              <details className="panel group" open={index === 0}>
+                <summary className="cursor-pointer list-none p-5 sm:p-6">
+                  <div className="flex items-center justify-between gap-4">
+                    <div>
+                      <span className="kicker" style={{ color: hex }}>Project gallery</span>
+                      <h3 className="text-lg font-semibold">Explore {cs.shots.length} design views</h3>
+                    </div>
+                    <span aria-hidden="true" className="text-2xl transition-transform group-open:rotate-45" style={{ color: hex }}>+</span>
+                  </div>
+                </summary>
+                <div className="border-t border-[var(--border)] p-5 sm:p-6">
+                  <CaseStudyGallery shots={cs.shots} accent={cs.accent} accentHex={hex} studyTitle={cs.title} />
+                </div>
+              </details>
 
               {cs.faq && (
                 <section aria-labelledby={`${cs.slug}-faq-heading`} className="panel p-6 sm:p-8">

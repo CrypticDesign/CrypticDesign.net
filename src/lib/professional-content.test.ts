@@ -19,22 +19,24 @@ test("Professional publishes the approved eleven-article inventory with local he
   }
 });
 
-test("Professional publishes four case studies and maps all 42 proof images", () => {
+test("Professional publishes six case studies and maps all 55 proof images", () => {
   const source = readFileSync(path.join(root, "src/app/professional/case-studies/page.tsx"), "utf8");
   const studies = [...source.matchAll(/^\s+slug:\s*"([^"]+)"/gm)].map((match) => match[1]);
   const images = [...new Set([...source.matchAll(/src:\s*"(\/images\/case-studies\/[^"]+)"/g)].map((match) => match[1]))];
-  assert.equal(studies.length, 4);
-  assert.equal(new Set(studies).size, 4);
-  assert.equal(images.length, 42);
+  assert.equal(studies.length, 6);
+  assert.equal(new Set(studies).size, 6);
+  assert.equal(images.length, 55);
   for (const image of images) assert.ok(existsSync(path.join(root, "public", image.slice(1))), `missing ${image}`);
   assert.doesNotMatch(source, /alt:\s*"\s*"/);
   assert.doesNotMatch(source, /caption:\s*"\s*"/);
   assert.match(source, /question: "What is Humankind\?"/);
   assert.match(source, /question: "What were Cryptic Design's primary contributions\?"/);
   assert.match(source, /question: "What is WIN Reality\?"/);
+  assert.match(source, /question: "What was Project WIRE\?"/);
   assert.match(source, /question: "What is WellSky\?"/);
+  assert.match(source, /question: "What is Onward\?"/);
   assert.match(source, /question: "What was Star Wars: Rise to Power\?"/);
-  assert.equal([...source.matchAll(/\n\s+faq: \[/g)].length, 4);
+  assert.equal([...source.matchAll(/\n\s+faq: \[/g)].length, 6);
   assert.match(source, /<details key=\{item\.question\}/);
 });
 
