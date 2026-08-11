@@ -62,14 +62,14 @@ const summary = {
   missing: missing.map((entry) => entry.asset),
   unreferenced,
   duplicateReferences,
-  pass: articleSlugs.length === 11 && articleImages.length === 11 && caseStudySlugs.length === 4 && caseImages.length === 42 && missing.length === 0 && unreferenced.length === 0,
+  pass: articleSlugs.length === 11 && articleImages.length === 11 && caseStudySlugs.length === 6 && caseImages.length === 55 && missing.length === 0 && unreferenced.length === 0,
 };
 
 await mkdir("artifacts", { recursive: true });
 await writeFile("artifacts/CRY-454-professional-media-ledger.json", JSON.stringify({ summary, ledger }, null, 2));
 const csv = ["asset,destination,usage,rights,alt_text_state,bytes,state", ...ledger.map((e) => [e.asset, e.destination, e.usage, e.rights, e.altTextState, e.bytes ?? "", e.state].map((v) => `"${String(v).replaceAll('"', '""')}"`).join(","))].join("\n");
 await writeFile("artifacts/CRY-454-professional-media-ledger.csv", csv);
-const report = `# CRY-454 Professional completion evidence\n\nGenerated: ${summary.generated}\n\n- Articles: ${summary.articles}/11\n- Article hero images: ${summary.articleImages}/11\n- Case studies: ${summary.caseStudies}/4\n- Case-study proof images: ${summary.caseStudyImages}/42\n- Total Professional assets inventoried: ${summary.professionalAssets}\n- Missing referenced assets: ${summary.missing.length}\n- Unreferenced article/case-study assets: ${summary.unreferenced.length}\n- Result: **${summary.pass ? "PASS" : "FAIL"}**\n\nThe Jira baseline of 38 case-study images is superseded by the repository's 42 distinct, referenced proof assets. All 42 are retained and governed by this ledger.\n`;
+const report = `# CRY-454 Professional completion evidence\n\nGenerated: ${summary.generated}\n\n- Articles: ${summary.articles}/11\n- Article hero images: ${summary.articleImages}/11\n- Case studies: ${summary.caseStudies}/6\n- Case-study proof images: ${summary.caseStudyImages}/55\n- Total Professional assets inventoried: ${summary.professionalAssets}\n- Missing referenced assets: ${summary.missing.length}\n- Unreferenced article/case-study assets: ${summary.unreferenced.length}\n- Result: **${summary.pass ? "PASS" : "FAIL"}**\n\nThe Jira baseline of four studies and 38 images is superseded by the approved repository inventory of six studies and 55 distinct, referenced proof assets. All 55 are retained and governed by this ledger.\n`;
 await writeFile("artifacts/CRY-454-professional-completion-evidence.md", report);
 console.log(report);
 if (!summary.pass) process.exitCode = 1;
