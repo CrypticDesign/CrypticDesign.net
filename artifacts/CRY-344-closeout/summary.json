@@ -1,0 +1,22 @@
+{
+  "generatedAt": "2026-08-12T17:53:06.277Z",
+  "sourceRoutes": 168,
+  "sourceStatus": {
+    "200": 167,
+    "404": 1
+  },
+  "dispositions": {
+    "Migrate/Redirect": 13,
+    "Retire/Redirect": 125,
+    "Merge/Redirect": 24,
+    "Rewrite/Merge": 4,
+    "Archive/Redirect": 2
+  },
+  "mediaAssets": 156,
+  "referencedMedia": 106,
+  "unreferencedMedia": 50,
+  "rights": {
+    "owned": 101,
+    "client-approved": 55
+  }
+}
