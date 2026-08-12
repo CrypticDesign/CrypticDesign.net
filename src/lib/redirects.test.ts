@@ -35,6 +35,7 @@ const EXPECTED: Record<string, string> = {
   // CRY-344 — Squarespace legacy set (spot-check of key entries)
   "/soundwave": "/products/cryptic-signal",
   "/store": "/entertainment/store",
+  "/lifa-demo": "/products/lifa",
   "/portfolio/humankind": "/professional/case-studies",
   "/contact": "/professional/inquiry",
   "/professional/contact": "/professional/inquiry",
@@ -65,4 +66,10 @@ test("no redirect points at a retired route as its destination", async () => {
       );
     }
   }
+});
+
+test("the public sitemap excludes routes that immediately redirect", async () => {
+  const source = await import("node:fs/promises").then(({ readFile }) => readFile("src/app/sitemap.ts", "utf8"));
+  assert.doesNotMatch(source, /STATIC_ROUTES[\s\S]*"\/professional\/contact"/);
+  assert.match(source, /releaseDestination\(release\)/);
 });

@@ -1171,7 +1171,7 @@ export const articles: Article[] = [
       },
       {
         "type": "h2",
-        "text": "What is Artificial Intelligence?"
+        "text": "Hyper-Personalized Experiences"
       },
       {
         "type": "paragraph",

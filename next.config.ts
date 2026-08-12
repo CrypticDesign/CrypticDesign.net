@@ -37,6 +37,7 @@ const nextConfig: NextConfig = {
       { source: "/services", destination: "/professional", permanent: true },
       { source: "/singularis", destination: "/products/singularis", permanent: true },
       { source: "/lifa", destination: "/products/lifa", permanent: true },
+      { source: "/lifa-demo", destination: "/products/lifa", permanent: true },
       { source: "/lifa-progress-reports", destination: "/products/lifa", permanent: true },
       { source: "/lifa-progress-reports/:slug", destination: "/products/lifa", permanent: true },
       { source: "/soundwave", destination: "/products/cryptic-signal", permanent: true },

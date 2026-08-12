@@ -46,7 +46,9 @@ for (const [asset, governance] of [...usageByAsset].sort(([a], [b]) => a.localeC
 
 const diskFiles = [];
 for (const folder of ["articles", "case-studies"]) {
-  for (const file of await readdir(path.join(root, "public/images", folder))) diskFiles.push(`/images/${folder}/${file}`);
+  for (const entry of await readdir(path.join(root, "public/images", folder), { withFileTypes: true })) {
+    if (entry.isFile()) diskFiles.push(`/images/${folder}/${entry.name}`);
+  }
 }
 const unreferenced = diskFiles.filter((asset) => !usageByAsset.has(asset));
 const missing = ledger.filter((entry) => entry.state === "missing");

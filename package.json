@@ -12,7 +12,10 @@
     "test:e2e:membership": "node tests/membership-flow.e2e.mjs",
     "test:e2e:character": "node tests/character-flow.e2e.mjs",
     "audit:professional": "node scripts/audit-professional.mjs",
-    "qa:professional": "node scripts/qa-professional.mjs"
+    "qa:professional": "node scripts/qa-professional.mjs",
+    "qa:sitewide": "node scripts/qa-sitewide.mjs",
+    "preserve:squarespace": "node scripts/cry-344-preserve.mjs",
+    "evidence:cry344": "node scripts/generate-cry344-ledgers.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.3",
