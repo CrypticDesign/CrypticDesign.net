@@ -23,6 +23,7 @@ const MAP = {
   "visual-studies": "entertainment-feature.png",
   "store": "entertainment-feature.png",
   "products": "singularis.png",
+  "singularis": "singularis.png",
   "audio": "signal-systems.png",
   "privacy": "professional-hero.png",
   "terms": "professional-hero.png",

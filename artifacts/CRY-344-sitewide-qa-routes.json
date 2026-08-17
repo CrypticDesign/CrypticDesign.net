@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-12T17:15:58.009Z",
-  "base": "http://127.0.0.1:3105",
+  "generatedAt": "2026-08-17T03:47:50.525Z",
+  "base": "http://127.0.0.1:3200",
   "requestedEngine": "routes",
   "sitemapRoutes": 41,
   "routeResults": [
@@ -255,7 +255,7 @@
       "route": "/audio",
       "status": 200,
       "title": 22,
-      "description": 87,
+      "description": 154,
       "canonical": true,
       "openGraph": true,
       "twitter": true,
@@ -346,7 +346,7 @@
       "route": "/products/singularis",
       "status": 200,
       "title": 27,
-      "description": 83,
+      "description": 157,
       "canonical": true,
       "openGraph": true,
       "twitter": true,

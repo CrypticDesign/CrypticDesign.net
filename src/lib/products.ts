@@ -13,6 +13,7 @@ export interface Product extends PublicContentGovernance {
   title: string;
   summary: string;
   description: string;
+  shareImage?: string;
   status: "active" | "in-development" | "on-hold" | "reclassified" | "future";
   releaseSlugs: string[];
   /** Optional owned franchise destination outside the platform shell. */
@@ -23,9 +24,11 @@ export const PRODUCTS: Product[] = withReviewMetadata<Product>([
   {
     slug: "singularis",
     title: "Singularis",
-    summary: "A near-future transmedia universe about humanity during technological acceleration.",
+    summary:
+      "Singularis is a near-future transmedia universe exploring humanity's transition through technological acceleration, infrastructure, and systemic change.",
     description:
       "Singularis is a near-future science-fiction universe spanning games, animation, music, and interconnected worldbuilding systems. Set during humanity's transition into a multi-planetary civilization, it explores what happens when technology, infrastructure, automation, and planetary-scale systems begin moving faster than human institutions can coordinate or control—not after collapse, but during acceleration.",
+    shareImage: "/share/singularis.png",
     status: "in-development",
     releaseSlugs: [
       "singularis-vertical-slice",

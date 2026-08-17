@@ -19,10 +19,17 @@ export async function generateMetadata({
   const { slug } = await params;
   const product = getProduct(slug);
   if (!product) return {};
+  const shareImages = product.shareImage ? [product.shareImage] : undefined;
   return {
     title: product.title,
     description: product.summary,
     alternates: { canonical: `/products/${product.slug}` },
+    ...(shareImages
+      ? {
+          openGraph: { images: shareImages },
+          twitter: { card: "summary_large_image" as const, images: shareImages },
+        }
+      : {}),
   };
 }
 
