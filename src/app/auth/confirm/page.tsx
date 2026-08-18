@@ -63,7 +63,7 @@ export default async function ConfirmEmailPage({
           </form>
         ) : (
           <Link href="/account/create" className="button-primary inline-flex w-fit">
-            Create account
+            Account availability
           </Link>
         )}
       </section>

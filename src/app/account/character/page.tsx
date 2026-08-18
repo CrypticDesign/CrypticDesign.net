@@ -8,6 +8,7 @@ import type { RpgProjection } from "@/lib/rpg-experience-store";
 import { CORE_ATTRIBUTES } from "@/lib/rpg-experience";
 import type { RpgContentSnapshot } from "@/lib/rpg-content-store";
 import AvatarStudio from "@/components/AvatarStudio";
+import AccountFeatureIntro from "@/components/AccountFeatureIntro";
 
 export default function CharacterProfilePage() {
   const [character, setCharacter] = useState<CharacterProfile | null>(null);
@@ -92,7 +93,30 @@ export default function CharacterProfilePage() {
   }
 
   if (!loaded) return <main className="mx-auto max-w-6xl px-4 py-10 sm:px-6"><p className="ui-loading" aria-busy="true">Loading character…</p></main>;
-  if (!character) return <main className="mx-auto max-w-6xl px-4 py-10 sm:px-6"><h1 className="text-3xl font-semibold">Character Profile</h1><p className="ui-empty mt-6">{error === "Authentication required" ? <><Link href="/account/sign-in" className="text-accent-cyan hover:underline">Sign in</Link> to view your character.</> : <>No character belongs to this account. <Link href="/account/create-character" className="text-accent-cyan hover:underline">Create one</Link>.</>}</p></main>;
+  if (!character) {
+    const signedOut = error === "Authentication required";
+    return <main className="account-page account-feature-page"><AccountFeatureIntro
+      accent="gold"
+      eyebrow="Persistent identity · Character"
+      title="Become more than a login."
+      description="Your Character is a persistent identity that carries your presence, choices, discoveries, and creative journey across Cryptic Design experiences."
+      image="/images/my-home-hero.png"
+      imageAlt="A luminous geometric identity structure"
+      benefits={[
+        { title: "One identity across worlds", body: "Create a recognizable persona for releases, playable experiences, rooms, and future community spaces." },
+        { title: "Progress with context", body: "Keep an account-bound record of quests, achievements, discoveries, and meaningful activity." },
+        { title: "Privacy you control", body: "Begin private, control discoverability, and explicitly choose what can become public." },
+      ]}
+      steps={[
+        { title: "Create your identity", body: "Choose a name, archetype, presentation, and privacy defaults." },
+        { title: "Enter experiences", body: "Use the same Character across eligible Cryptic releases and interactive worlds." },
+        { title: "Build your history", body: "Return to a continuous record of what you explored, completed, and discovered." },
+      ]}
+      primaryAction={signedOut ? { href: "/account/sign-in", label: "Sign in" } : { href: "/account/create-character", label: "Create Character" }}
+      secondaryAction={{ href: "/account/subscription", label: "Explore membership" }}
+      note="Character persistence is part of the subscriber experience under evaluation. Public browsing remains open without an account, and no commercial access is currently active."
+    /></main>;
+  }
 
   const unavailable = character.status === "suspended";
   const progressionEvidence = [

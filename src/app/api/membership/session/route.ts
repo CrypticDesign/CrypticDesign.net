@@ -1,6 +1,11 @@
 import { randomUUID } from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
 
+import {
+  ACCOUNT_ADMISSION_CLOSED_MESSAGE,
+  PUBLIC_ACCOUNT_CREATION_AVAILABLE,
+  accountAdmissionMode,
+} from "@/lib/account-admission";
 import { membershipSandboxEnabled, membershipSandboxPreferred } from "@/lib/membership-store";
 import { createSandboxSession, requireSandboxMember, SANDBOX_SESSION_COOKIE } from "@/lib/sandbox-session";
 import { signOutSupabaseSession } from "@/lib/supabase/auth";
@@ -9,28 +14,49 @@ import { createRequestSupabaseClient, supabaseConfigured } from "@/lib/supabase/
 export async function GET(request: NextRequest) {
   if (membershipSandboxPreferred()) {
     const memberId = requireSandboxMember(request);
-    return NextResponse.json({ authenticated: Boolean(memberId), memberId, mode: "sandbox" });
+    return NextResponse.json({ authenticated: Boolean(memberId), memberId, mode: "sandbox", accountCreationAvailable: true });
   }
   if (supabaseConfigured()) {
     try {
       const session = createRequestSupabaseClient(request);
       const { data, error } = await session.client.auth.getUser();
-      return session.applyCookies(NextResponse.json({ authenticated: !error && Boolean(data.user), memberId: data.user?.id ?? null, mode: "supabase" }));
+      return session.applyCookies(NextResponse.json({
+        authenticated: !error && Boolean(data.user),
+        memberId: data.user?.id ?? null,
+        mode: "supabase",
+        accountAdmissionMode: accountAdmissionMode(),
+        accountCreationAvailable: PUBLIC_ACCOUNT_CREATION_AVAILABLE,
+      }));
     } catch {
-      return NextResponse.json({ authenticated: false, error: "Account services are temporarily unavailable", mode: "supabase" }, { status: 503 });
+      return NextResponse.json({ authenticated: false, error: "Account services are temporarily unavailable", mode: "supabase", accountCreationAvailable: false }, { status: 503 });
     }
   }
-  if (!membershipSandboxEnabled()) return NextResponse.json({ authenticated: false, error: "Membership sandbox is disabled" }, { status: 503 });
+  if (!membershipSandboxEnabled()) return NextResponse.json({ authenticated: false, error: "Membership sandbox is disabled", accountCreationAvailable: false }, { status: 503 });
   const memberId = requireSandboxMember(request);
-  return NextResponse.json({ authenticated: Boolean(memberId), memberId, mode: "sandbox" });
+  return NextResponse.json({ authenticated: Boolean(memberId), memberId, mode: "sandbox", accountCreationAvailable: true });
 }
 
 export async function POST(request: NextRequest) {
   if (membershipSandboxPreferred()) return createSandboxResponse();
   if (supabaseConfigured()) {
-    let body: { action?: string; email?: string; password?: string; displayName?: string; captchaToken?: string };
+    let body: { action?: string; email?: string; password?: string; captchaToken?: string };
     try { body = await request.json(); }
     catch { return NextResponse.json({ error: "Account details must be valid JSON", mode: "supabase" }, { status: 400 }); }
+
+    if (body.action === "create") {
+      return NextResponse.json({
+        error: ACCOUNT_ADMISSION_CLOSED_MESSAGE,
+        code: "ACCOUNT_ADMISSION_CLOSED",
+        mode: "supabase",
+        accountAdmissionMode: accountAdmissionMode(),
+        accountCreationAvailable: PUBLIC_ACCOUNT_CREATION_AVAILABLE,
+      }, { status: 403 });
+    }
+
+    if (body.action !== "sign-in") {
+      return NextResponse.json({ error: "Unknown account action", mode: "supabase" }, { status: 422 });
+    }
+
     const email = body.email?.trim().toLowerCase();
     const password = body.password ?? "";
     const captchaToken = body.captchaToken?.trim();
@@ -39,22 +65,9 @@ export async function POST(request: NextRequest) {
 
     try {
       const session = createRequestSupabaseClient(request);
-      if (body.action === "create") {
-        const displayName = body.displayName?.trim();
-        if (!displayName) return NextResponse.json({ error: "Display name is required", mode: "supabase" }, { status: 422 });
-        const { data, error } = await session.client.auth.signUp({ email, password, options: { captchaToken, data: { display_name: displayName }, emailRedirectTo: `${request.nextUrl.origin}/auth/confirm` } });
-        if (error) return session.applyCookies(NextResponse.json({ error: error.message, mode: "supabase" }, { status: 400 }));
-        const authenticated = Boolean(data.session && data.user);
-        return session.applyCookies(NextResponse.json({ authenticated, memberId: data.user?.id ?? null, mode: "supabase", message: authenticated ? "Your account is ready." : "Check your email to confirm your account, then sign in." }, { status: 201 }));
-      }
-
-      if (body.action === "sign-in") {
-        const { data, error } = await session.client.auth.signInWithPassword({ email, password, options: { captchaToken } });
-        if (error) return session.applyCookies(NextResponse.json({ error: "Email or password was not accepted", mode: "supabase" }, { status: 401 }));
-        return session.applyCookies(NextResponse.json({ authenticated: true, memberId: data.user.id, mode: "supabase", message: "You are signed in." }));
-      }
-
-      return NextResponse.json({ error: "Unknown account action", mode: "supabase" }, { status: 422 });
+      const { data, error } = await session.client.auth.signInWithPassword({ email, password, options: { captchaToken } });
+      if (error) return session.applyCookies(NextResponse.json({ error: "Email or password was not accepted", mode: "supabase" }, { status: 401 }));
+      return session.applyCookies(NextResponse.json({ authenticated: true, memberId: data.user.id, mode: "supabase", message: "You are signed in." }));
     } catch {
       return NextResponse.json({ error: "Account services are temporarily unavailable", mode: "supabase" }, { status: 503 });
     }
@@ -65,7 +78,7 @@ export async function POST(request: NextRequest) {
 
 function createSandboxResponse() {
   const memberId = `member_local_${randomUUID()}`;
-  const response = NextResponse.json({ authenticated: true, memberId, mode: "sandbox" });
+  const response = NextResponse.json({ authenticated: true, memberId, mode: "sandbox", accountCreationAvailable: true });
   response.cookies.set(SANDBOX_SESSION_COOKIE, createSandboxSession(memberId), {
     httpOnly: true,
     sameSite: "strict",

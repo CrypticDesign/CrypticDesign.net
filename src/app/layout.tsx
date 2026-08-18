@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
+import AccountNavigation from "@/components/AccountNavigation";
 import SubNavBreadcrumbs from "@/components/SubNavBreadcrumbs";
 import EntertainmentNavigation from "@/components/EntertainmentNavigation";
 import FabMediaPlayer from "@/components/player/FabMediaPlayer";
@@ -41,6 +42,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <PlayerProvider>
         <SiteHeader initialAuthenticated={initialAuthenticated} />
         <EntertainmentNavigation />
+        <AccountNavigation />
         <SubNavBreadcrumbs position="top" />
         <div id="main-content" className="flex-1" tabIndex={-1}>{children}</div>
         <SubNavBreadcrumbs position="bottom" />

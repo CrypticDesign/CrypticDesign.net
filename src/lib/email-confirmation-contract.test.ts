@@ -19,10 +19,9 @@ test("email confirmation requires an intentional POST before consuming the OTP",
   assert.match(completionRoute, /auth\.verifyOtp\(\{ token_hash: tokenHash, type \}\)/);
 });
 
-test("account creation directs confirmation emails to the deliberate confirmation page", async () => {
+test("public account creation cannot issue confirmation emails", async () => {
   const membershipRoute = await readFile(membershipRouteUrl, "utf8");
-  assert.match(
-    membershipRoute,
-    /emailRedirectTo: `\$\{request\.nextUrl\.origin\}\/auth\/confirm`/,
-  );
+  assert.doesNotMatch(membershipRoute, /auth\.signUp/);
+  assert.doesNotMatch(membershipRoute, /emailRedirectTo/);
+  assert.match(membershipRoute, /ACCOUNT_ADMISSION_CLOSED/);
 });
