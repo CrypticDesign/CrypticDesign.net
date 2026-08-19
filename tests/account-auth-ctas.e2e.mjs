@@ -38,7 +38,16 @@ try {
     assert.equal(await actions.getByRole("link", { name: "Check availability", exact: true }).count(), 0, `${testCase.path} must not show account availability to an authenticated visitor`);
   }
 
-  console.log("Account CTA E2E passed: authenticated subscription, settings, and notifications actions stay signed in");
+  await page.route("**/api/membership/subscriptions", async (route) => {
+    await route.fulfill({ status: 503, contentType: "application/json", body: JSON.stringify({ error: "Membership sandbox is disabled" }) });
+  });
+  await page.goto(`${baseUrl}/library`, { waitUntil: "networkidle" });
+  const libraryActions = page.locator(".account-feature-intro__copy .hero-actions");
+  await libraryActions.waitFor();
+  assert.equal(await libraryActions.getByRole("link", { name: "Explore membership", exact: true }).isVisible(), true, "Library must preserve authenticated actions when subscription services are unavailable");
+  assert.equal(await libraryActions.getByRole("link", { name: "Sign in", exact: true }).count(), 0, "Library must not infer sign-out from an unavailable subscription endpoint");
+
+  console.log("Account CTA E2E passed: authenticated feature actions stay signed in when subscription services are unavailable");
 } finally {
   await browser.close();
 }

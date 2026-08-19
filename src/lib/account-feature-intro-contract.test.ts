@@ -35,6 +35,8 @@ test("empty Character and Library states introduce their features instead of dea
   assert.match(library, /if \(saved\.length === 0\)/);
   assert.match(library, /Save what you want to come back to/);
   assert.match(library, /You can save items on this device without subscribing/);
+  assert.match(library, /fetch\("\/api\/membership\/session"/);
+  assert.match(library, /authenticated: Boolean\(session\?\.authenticated\)/);
 });
 
 test("Subscription, Settings, and Notifications explain value without claiming active services", async () => {
