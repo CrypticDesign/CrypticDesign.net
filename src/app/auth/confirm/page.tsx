@@ -33,6 +33,7 @@ export default async function ConfirmEmailPage({
     ? (requestedType as EmailOtpType)
     : null;
   const canConfirm = Boolean(tokenHash && type);
+  const recoveringPassword = type === "recovery";
 
   return (
     <main className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10 sm:px-6">
@@ -40,10 +41,12 @@ export default async function ConfirmEmailPage({
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent-cyan">
           Account security
         </p>
-        <h1 className="text-3xl font-semibold text-white">Confirm your email</h1>
+        <h1 className="text-3xl font-semibold text-white">{recoveringPassword ? "Continue password recovery" : "Confirm your email"}</h1>
         <p className="max-w-xl text-muted-foreground">
           {canConfirm
-            ? "Finish creating your Cryptic Design account. Your email is not confirmed until you press the button below."
+            ? recoveringPassword
+              ? "Continue to a secure page where you can choose a new password."
+              : "Finish creating your Cryptic Design account. Your email is not confirmed until you press the button below."
             : "This confirmation link is incomplete or invalid. Request a new confirmation email and try again."}
         </p>
       </header>
@@ -58,12 +61,12 @@ export default async function ConfirmEmailPage({
               after this deliberate action.
             </p>
             <button type="submit" className="button-primary w-fit">
-              Confirm email address
+              {recoveringPassword ? "Continue to reset password" : "Confirm email address"}
             </button>
           </form>
         ) : (
           <Link href="/account/create" className="button-primary inline-flex w-fit">
-            Create account
+            Account availability
           </Link>
         )}
       </section>

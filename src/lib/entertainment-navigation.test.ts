@@ -48,10 +48,10 @@ test("Arcade Singularis navigation resolves to the single franchise root", () =>
 });
 
 test("shows the shared bar across connected entertainment content only", () => {
-  for (const pathname of ["/entertainment/arcade", "/audio", "/products/singularis", "/releases/example", "/library"]) {
+  for (const pathname of ["/entertainment/arcade", "/audio", "/products/singularis", "/releases/example"]) {
     assert.equal(isEntertainmentNavigationRelevant(pathname), true, pathname);
   }
-  for (const pathname of ["/", "/professional", "/account"]) {
+  for (const pathname of ["/", "/professional", "/account", "/library"]) {
     assert.equal(isEntertainmentNavigationRelevant(pathname), false, pathname);
   }
 });

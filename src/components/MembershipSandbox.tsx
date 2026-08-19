@@ -70,7 +70,7 @@ export default function MembershipSandbox() {
   return (
     <>
       {authenticated === false ? (
-        <div className="ui-empty"><p>Membership history is account-bound.</p><Link href="/account/sign-in" className="text-accent-cyan hover:underline">Start a local preview session</Link></div>
+        <div className="ui-empty"><p>Sign in to see your subscription history.</p><Link href="/account/sign-in" className="text-accent-cyan hover:underline">Start a local test session</Link></div>
       ) : null}
       <section className="grid gap-4 sm:grid-cols-3" aria-label="Sandbox membership tiers">
         {catalog.tiers.map((tier) => {

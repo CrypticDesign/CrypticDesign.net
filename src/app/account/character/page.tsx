@@ -8,6 +8,7 @@ import type { RpgProjection } from "@/lib/rpg-experience-store";
 import { CORE_ATTRIBUTES } from "@/lib/rpg-experience";
 import type { RpgContentSnapshot } from "@/lib/rpg-content-store";
 import AvatarStudio from "@/components/AvatarStudio";
+import AccountFeatureIntro from "@/components/AccountFeatureIntro";
 
 export default function CharacterProfilePage() {
   const [character, setCharacter] = useState<CharacterProfile | null>(null);
@@ -92,7 +93,30 @@ export default function CharacterProfilePage() {
   }
 
   if (!loaded) return <main className="mx-auto max-w-6xl px-4 py-10 sm:px-6"><p className="ui-loading" aria-busy="true">Loading character…</p></main>;
-  if (!character) return <main className="mx-auto max-w-6xl px-4 py-10 sm:px-6"><h1 className="text-3xl font-semibold">Character Profile</h1><p className="ui-empty mt-6">{error === "Authentication required" ? <><Link href="/account/sign-in" className="text-accent-cyan hover:underline">Sign in</Link> to view your character.</> : <>No character belongs to this account. <Link href="/account/create-character" className="text-accent-cyan hover:underline">Create one</Link>.</>}</p></main>;
+  if (!character) {
+    const signedOut = error === "Authentication required";
+    return <main className="account-page account-feature-page"><AccountFeatureIntro
+      accent="gold"
+      eyebrow="Your character"
+      title="Make it yours."
+      description="Create one character to use across Cryptic Design. It keeps your name, progress, and discoveries together wherever you go."
+      image="/images/my-home-hero.png"
+      imageAlt="A luminous geometric identity structure"
+      benefits={[
+        { title: "Your character, everywhere", body: "Use the same name and look across games, releases, rooms, and future community spaces." },
+        { title: "Your progress, saved", body: "Keep your quests, achievements, and discoveries so you can pick up where you left off." },
+        { title: "You decide what others see", body: "Your character starts private. You choose if and when other people can find it." },
+      ]}
+      steps={[
+        { title: "Create your character", body: "Choose a name, style, archetype, and privacy settings." },
+        { title: "Use it as you explore", body: "Bring the same character into supported games, releases, and worlds." },
+        { title: "Come back anytime", body: "Find what you explored, completed, and discovered in one place." },
+      ]}
+      primaryAction={signedOut ? { href: "/account/sign-in", label: "Sign in" } : { href: "/account/create-character", label: "Create Character" }}
+      secondaryAction={{ href: "/account/subscription", label: "Explore membership" }}
+      note="Saved characters are still being tested and are not available as a paid feature yet. You can browse the public site without an account."
+    /></main>;
+  }
 
   const unavailable = character.status === "suspended";
   const progressionEvidence = [

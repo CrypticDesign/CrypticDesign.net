@@ -16,8 +16,16 @@ test("Supabase account forms fail closed until Turnstile supplies a token", asyn
   const source = await readFile(componentUrl, "utf8");
   assert.match(source, /NEXT_PUBLIC_TURNSTILE_SITE_KEY/);
   assert.match(source, /captchaToken/);
-  assert.match(source, /disabled=\{saving \|\| !captchaToken\}/);
+  assert.match(source, /disabled=\{saving \|\| !captchaToken \|\| serviceMode !== "supabase"\}/);
   assert.match(source, /Complete human verification before continuing/);
+});
+
+test("sign-in fields remain visible when local account services are disconnected", async () => {
+  const source = await readFile(componentUrl, "utf8");
+  assert.doesNotMatch(source, /if \(serviceMode === "disabled"\) return/);
+  assert.match(source, /Email and password fields are shown for layout review/);
+  assert.match(source, /Account services unavailable/);
+  assert.match(source, /Sign-in is not connected in this preview/);
 });
 
 test("local sandbox offers a credential-free test account", async () => {
@@ -25,4 +33,14 @@ test("local sandbox offers a credential-free test account", async () => {
   assert.match(component, /Continue with local test account/);
   assert.match(component, /startSandboxSession/);
   assert.match(component, /announceMembershipSession\(true\)/);
+  assert.doesNotMatch(component, /if \(serviceMode === "sandbox"\) return/);
+});
+
+test("password controls support visibility and route recovery honestly", async () => {
+  const source = await readFile(componentUrl, "utf8");
+  assert.match(source, /showPassword/);
+  assert.match(source, /Show password/);
+  assert.match(source, /Hide password/);
+  assert.match(source, /href="\/account\/recover"/);
+  assert.match(source, /Forgot password\?/);
 });

@@ -8,6 +8,8 @@ const accessFormUrl = new URL("../components/AccountAccessForm.tsx", import.meta
 const layoutUrl = new URL("../app/layout.tsx", import.meta.url);
 const globalsUrl = new URL("../app/globals.css", import.meta.url);
 const serverStateUrl = new URL("./server-account-state.ts", import.meta.url);
+const accountNavigationUrl = new URL("../components/AccountNavigation.tsx", import.meta.url);
+const accountPageUrl = new URL("../app/account/page.tsx", import.meta.url);
 
 test("global account navigation starts from server authentication state", async () => {
   const [header, layout, serverState] = await Promise.all([
@@ -21,7 +23,7 @@ test("global account navigation starts from server authentication state", async 
   assert.match(serverState, /client\.auth\.getUser\(\)/);
 });
 
-test("global account navigation synchronizes after navigation and auth mutations", async () => {
+test("global account navigation synchronizes authenticated Home and Account labels", async () => {
   const [header, accessForm] = await Promise.all([
     readFile(headerUrl, "utf8"),
     readFile(accessFormUrl, "utf8"),
@@ -29,34 +31,59 @@ test("global account navigation synchronizes after navigation and auth mutations
   assert.match(header, /fetch\("\/api\/membership\/session"/);
   assert.match(header, /MEMBERSHIP_SESSION_CHANGED_EVENT/);
   assert.match(header, /\[pathname\]/);
-  assert.match(header, /\{authenticated \? \(/);
-  assert.match(header, /aria-label="Open site menu"/);
-  assert.match(header, />Menu<\/button>/);
-  assert.match(header, /href="\/account\/create"/);
-  assert.match(header, />Create account<\/span>/);
+  assert.match(header, /primaryHomeLabel\(authenticated\)/);
+  assert.match(header, /authenticated \? "Account" : "Sign Up"/);
+  assert.match(header, /href="\/account"/);
+  assert.match(header, />\{accountLabel\}<\/Link>/);
   assert.match(accessForm, /announceMembershipSession\(nextAuthenticated\)/);
   assert.match(accessForm, /announceMembershipSession\(false\)/);
 });
 
-test("authenticated site menu exposes account controls and sign out", async () => {
+test("primary navigation exposes contextual Sign Up or Account directly without a dropdown", async () => {
   const header = await readFile(headerUrl, "utf8");
-  assert.match(header, /const ACCOUNT_ITEMS = \[\s*\{ href: "\/library", icon: "▣", label: "My Library" \}/);
-  assert.match(header, /aria-haspopup="menu"/);
-  assert.match(header, /aria-expanded=\{accountMenuOpen\}/);
-  assert.match(header, /role="menu"/);
-  assert.match(header, />\{signingOut \? "Signing out…" : "Sign out"\}</);
-  assert.match(header, /fetch\("\/api\/membership\/session", \{ method: "DELETE" \}\)/);
-  assert.match(header, /announceMembershipSession\(false\)/);
-  assert.match(header, /window\.location\.assign\("\/\?signedOut=1"\)/);
-  assert.match(header, /event\.key !== "Escape"/);
-  assert.match(header, /role="status" aria-live="polite"/);
+  assert.match(header, /<Link href="\/account" data-tone="blue"/);
+  assert.match(header, /aria-current=\{accountSectionActive \? "page" : undefined\}/);
+  assert.doesNotMatch(header, /aria-label="Open site menu"/);
+  assert.doesNotMatch(header, />Menu<\/button>/);
+  assert.doesNotMatch(header, /account-menu__panel/);
+  assert.doesNotMatch(header, /aria-haspopup="menu"/);
 });
 
-test("site menu consolidates global utilities without franchise links", async () => {
+test("account subnavigation is available only to authenticated visitors", async () => {
+  const [layout, navigation] = await Promise.all([
+    readFile(layoutUrl, "utf8"),
+    readFile(accountNavigationUrl, "utf8"),
+  ]);
+  assert.match(layout, /<AccountNavigation initialAuthenticated=\{initialAuthenticated\} \/>/);
+  assert.match(navigation, /initialAuthenticated/);
+  assert.match(navigation, /MEMBERSHIP_SESSION_CHANGED_EVENT/);
+  assert.match(navigation, /if \(!relevant \|\| !authenticated\) return null/);
+  assert.match(navigation, /label: "Overview"/);
+  assert.match(navigation, /label: "Character"/);
+  assert.match(navigation, /label: "Subscription"/);
+  assert.match(navigation, /label: "Library"/);
+  assert.match(navigation, /label: "Notifications"/);
+  assert.match(navigation, /label: "Settings"/);
+  assert.doesNotMatch(navigation, /label: "Availability"/);
+  assert.doesNotMatch(navigation, /label: "Sign In"/);
+});
+
+test("signed-out Account is a benefits and live availability overview", async () => {
+  const accountPage = await readFile(accountPageUrl, "utf8");
+  assert.match(accountPage, /getInitialAccountAuthenticated/);
+  assert.match(accountPage, /accountAdmissionMode/);
+  assert.match(accountPage, /if \(!authenticated\)/);
+  assert.match(accountPage, /What an account gives you/);
+  assert.match(accountPage, /New account availability/);
+  assert.match(accountPage, /invitationOnly \? "Invitation only" : "Closed"/);
+  assert.match(accountPage, /Already have an account\? Sign in/);
+});
+
+test("primary Account link does not duplicate utility or franchise destinations", async () => {
   const header = await readFile(headerUrl, "utf8");
-  assert.match(header, /const GLOBAL_MENU_ITEMS = \[/);
-  assert.match(header, /href: "\/search"/);
-  assert.match(header, /href: "\/entertainment\/store"/);
+  assert.doesNotMatch(header, /const GLOBAL_MENU_ITEMS = \[/);
+  assert.doesNotMatch(header, /href: "\/search"/);
+  assert.doesNotMatch(header, /href: "\/entertainment\/store"/);
   assert.doesNotMatch(header, /href: "\/products\/singularis"/);
   assert.doesNotMatch(header, /href: "\/products\/lifa"/);
 });
@@ -81,7 +108,6 @@ test("Entertainment and Arcade expose independent drawer controls", async () => 
   assert.match(header, /const changingSection = pathname !== item\.href/);
   assert.match(header, /const open = changingSection \|\| !entertainmentMenuOpen/);
   assert.match(header, /if \(changingSection\) router\.push\(item\.href\)/);
-  assert.match(header, /if \(event\.key !== "Escape"\) return/);
   assert.doesNotMatch(header, /target\.closest\("\.entertainment-navigation"\)/);
   assert.match(entertainmentNavigation, /const onRoute = pathname === item\.href \|\| pathname\.startsWith\(`\$\{item\.href\}\/`\)/);
   assert.match(entertainmentNavigation, /setArcadeMenuOpen\(true\)/);

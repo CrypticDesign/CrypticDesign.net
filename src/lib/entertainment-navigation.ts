@@ -68,7 +68,7 @@ export function entertainmentCategoryHref(destination: "arcade" | "music" | "vid
   return slug === "all" ? roots[destination] : `${roots[destination]}?${queries[destination]}=${slug}`;
 }
 
-const ENTERTAINMENT_NAV_ROOTS = ["/entertainment", "/audio", "/products", "/releases", "/library"] as const;
+const ENTERTAINMENT_NAV_ROOTS = ["/entertainment", "/audio", "/products", "/releases"] as const;
 
 export function isEntertainmentNavigationRelevant(pathname: string) {
   return ENTERTAINMENT_NAV_ROOTS.some(
