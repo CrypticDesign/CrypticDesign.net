@@ -33,7 +33,7 @@ export default function TurnstileWidget({
   resetCounter,
   siteKey,
 }: {
-  action: "account_create" | "account_signin";
+  action: "account_create" | "account_signin" | "password_recovery";
   onTokenChange: (token: string | null) => void;
   resetCounter: number;
   siteKey: string;

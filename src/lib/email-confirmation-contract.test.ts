@@ -17,6 +17,7 @@ test("email confirmation requires an intentional POST before consuming the OTP",
   assert.match(completionRoute, /export async function POST/);
   assert.match(completionRoute, /request\.formData\(\)/);
   assert.match(completionRoute, /auth\.verifyOtp\(\{ token_hash: tokenHash, type \}\)/);
+  assert.match(completionRoute, /type === "recovery" \? "\/account\/reset-password"/);
 });
 
 test("public account creation cannot issue confirmation emails", async () => {

@@ -58,6 +58,14 @@ test("account subnavigation is available only to authenticated visitors", async 
   assert.match(navigation, /initialAuthenticated/);
   assert.match(navigation, /MEMBERSHIP_SESSION_CHANGED_EVENT/);
   assert.match(navigation, /if \(!relevant \|\| !authenticated\) return null/);
+  assert.match(navigation, /label: "Overview"/);
+  assert.match(navigation, /label: "Character"/);
+  assert.match(navigation, /label: "Subscription"/);
+  assert.match(navigation, /label: "Library"/);
+  assert.match(navigation, /label: "Notifications"/);
+  assert.match(navigation, /label: "Settings"/);
+  assert.doesNotMatch(navigation, /label: "Availability"/);
+  assert.doesNotMatch(navigation, /label: "Sign In"/);
 });
 
 test("signed-out Account is a benefits and live availability overview", async () => {

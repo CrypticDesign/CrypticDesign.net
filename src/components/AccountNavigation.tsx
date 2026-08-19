@@ -7,11 +7,11 @@ import { MEMBERSHIP_SESSION_CHANGED_EVENT } from "@/lib/membership-session-event
 
 const ACCOUNT_NAV_ITEMS = [
   { href: "/account", label: "Overview" },
-  { href: "/account/create", label: "Availability" },
-  { href: "/account/sign-in", label: "Sign In" },
   { href: "/account/character", label: "Character" },
   { href: "/account/subscription", label: "Subscription" },
   { href: "/library", label: "Library" },
+  { href: "/account/notifications", label: "Notifications" },
+  { href: "/account/settings", label: "Settings" },
 ] as const;
 
 function isActive(pathname: string, href: string) {

@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
   const result = await session.client.auth.verifyOtp({ token_hash: tokenHash, type });
   const destination = result.error
     ? new URL("/account/sign-in?error=confirmation", request.url)
-    : new URL("/account/create-character", request.url);
+    : new URL(type === "recovery" ? "/account/reset-password" : "/account/create-character", request.url);
 
   return session.applyCookies(NextResponse.redirect(destination, 303));
 }
