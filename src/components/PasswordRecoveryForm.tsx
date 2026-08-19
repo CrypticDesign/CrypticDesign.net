@@ -26,7 +26,7 @@ export default function PasswordRecoveryForm() {
           ? "Enter the email connected to your account."
           : nextMode === "sandbox"
             ? "Local test accounts do not have email, so they cannot receive a reset link."
-            : "Recovery email is not connected in this local preview.");
+            : "Recovery email is not connected in this preview.");
       })
       .catch(() => setMessage("Account services could not be reached."))
       .finally(() => setLoaded(true));
@@ -64,7 +64,7 @@ export default function PasswordRecoveryForm() {
       <span className="eyebrow">Email a reset link</span>
       {mode !== "supabase" ? (
         <div className="border border-amber-400/35 bg-amber-400/5 p-4">
-          <strong className="text-sm text-amber-100">Local preview</strong>
+          <strong className="text-sm text-amber-100">Account services unavailable</strong>
           <p className="mt-2 text-sm text-muted-foreground">{message}</p>
         </div>
       ) : null}

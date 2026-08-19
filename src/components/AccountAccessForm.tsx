@@ -24,7 +24,7 @@ export default function AccountAccessForm({ mode }: { mode: "create" | "sign-in"
       setAuthenticated(Boolean(data.authenticated));
       setServiceMode(nextMode);
       setAccountCreationAvailable(Boolean(data.accountCreationAvailable));
-      setMessage(data.authenticated ? "You are signed in." : nextMode === "disabled" ? "Sign-in is unavailable in this local preview." : "Enter your account details.");
+      setMessage(data.authenticated ? "You are signed in." : nextMode === "disabled" ? "Sign-in is unavailable in this preview." : "Enter your account details.");
     }).catch(() => setMessage("Account status could not be checked.")).finally(() => setStatusLoaded(true));
   }, []);
 
@@ -126,8 +126,8 @@ export default function AccountAccessForm({ mode }: { mode: "create" | "sign-in"
       <span className="eyebrow">{mode === "create" ? "Create your account" : "Sign in to your account"}</span>
       {serviceMode === "disabled" ? (
         <div className="border border-amber-400/35 bg-amber-400/5 p-4">
-          <strong className="text-sm text-amber-100">Local preview</strong>
-          <p className="mt-2 text-sm text-muted-foreground">Email and password fields are shown for layout review. Sign-in is not connected in this local preview.</p>
+          <strong className="text-sm text-amber-100">Account services unavailable</strong>
+          <p className="mt-2 text-sm text-muted-foreground">Email and password fields are shown for layout review. Sign-in is not connected in this preview.</p>
         </div>
       ) : null}
       {serviceMode === "sandbox" ? (

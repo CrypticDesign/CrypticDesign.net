@@ -24,7 +24,8 @@ test("sign-in fields remain visible when local account services are disconnected
   const source = await readFile(componentUrl, "utf8");
   assert.doesNotMatch(source, /if \(serviceMode === "disabled"\) return/);
   assert.match(source, /Email and password fields are shown for layout review/);
-  assert.match(source, /Sign-in is not connected in this local preview/);
+  assert.match(source, /Account services unavailable/);
+  assert.match(source, /Sign-in is not connected in this preview/);
 });
 
 test("local sandbox offers a credential-free test account", async () => {
