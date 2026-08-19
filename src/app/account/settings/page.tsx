@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import AccountFeatureIntro from "@/components/AccountFeatureIntro";
+import { getInitialAccountAuthenticated } from "@/lib/server-account-state";
 
 export const metadata: Metadata = {
   title: "Settings",
@@ -7,7 +8,9 @@ export const metadata: Metadata = {
   description: "Control your Cryptic Design identity, privacy, communication, and account preferences.",
 };
 
-export default function SettingsPage() {
+export default async function SettingsPage() {
+  const initialAuthenticated = await getInitialAccountAuthenticated();
+
   return (
     <main className="account-page account-feature-page">
       <AccountFeatureIntro
@@ -29,6 +32,9 @@ export default function SettingsPage() {
         ]}
         primaryAction={{ href: "/account/sign-in", label: "Sign in" }}
         secondaryAction={{ href: "/account", label: "Account overview" }}
+        signedInPrimaryAction={{ href: "/account", label: "Account overview" }}
+        signedInSecondaryAction={{ href: "/account/subscription", label: "View subscription" }}
+        initialAuthenticated={initialAuthenticated}
         note="These settings are still being built. Nothing shown here will publish your information, start billing, or make your account public."
       />
     </main>

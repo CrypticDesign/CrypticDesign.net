@@ -14,10 +14,14 @@ export default function LibraryPage() {
   useEffect(() => {
     const slugs = getSavedSlugs();
     setSaved(publicReleases().filter((release) => slugs.includes(release.slug)));
-    fetch("/api/membership/subscriptions", { cache: "no-store" })
-      .then(async (response) => response.ok ? response.json() : null)
-      .then((data: { entitlements?: string[] } | null) => {
-        setViewer({ authenticated: Boolean(data), entitlements: data?.entitlements ?? [] });
+    Promise.all([
+      fetch("/api/membership/session", { cache: "no-store" })
+        .then(async (response) => response.ok ? response.json() : null),
+      fetch("/api/membership/subscriptions", { cache: "no-store" })
+        .then(async (response) => response.ok ? response.json() : null),
+    ])
+      .then(([session, membership]: [{ authenticated?: boolean } | null, { entitlements?: string[] } | null]) => {
+        setViewer({ authenticated: Boolean(session?.authenticated), entitlements: membership?.entitlements ?? [] });
       })
       .catch(() => setViewer({ authenticated: false, entitlements: [] }));
   }, []);

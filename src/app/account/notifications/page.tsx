@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import AccountFeatureIntro from "@/components/AccountFeatureIntro";
+import { getInitialAccountAuthenticated } from "@/lib/server-account-state";
 
 export const metadata: Metadata = {
   title: "Notifications",
@@ -7,7 +8,9 @@ export const metadata: Metadata = {
   description: "Follow release signals, account events, and relevant Cryptic Design platform updates.",
 };
 
-export default function NotificationsPage() {
+export default async function NotificationsPage() {
+  const initialAuthenticated = await getInitialAccountAuthenticated();
+
   return (
     <main className="account-page account-feature-page">
       <AccountFeatureIntro
@@ -29,6 +32,9 @@ export default function NotificationsPage() {
         ]}
         primaryAction={{ href: "/account/sign-in", label: "Sign in" }}
         secondaryAction={{ href: "/account", label: "Account overview" }}
+        signedInPrimaryAction={{ href: "/account", label: "Account overview" }}
+        signedInSecondaryAction={{ href: "/account/settings", label: "Account settings" }}
+        initialAuthenticated={initialAuthenticated}
         note="Notifications are not active yet. Important account and security notices will stay separate from optional updates. Direct messaging is not planned."
       />
     </main>
