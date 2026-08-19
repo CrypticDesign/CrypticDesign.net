@@ -2,24 +2,24 @@
 
 This repository is the implementation source of truth for the CrypticDesign.net platform (Jira epic CRY-242). Architecture lives in Confluence, executable work in Jira, and sitemap/IA in FigJam.
 
-## Locked platform model (SITEMAP v18 — Robert's current direction, 2026-07-17)
+## Locked platform model (Sitemap v19 and low-cost wave launch policy — current direction, confirmed 2026-08-16)
 
-- **The v18 "Three Front Doors" section on FigJam board `oen38yFKbFtgqx9LQKn38Y` is the canonical IA.** It preserves the release-platform model while defining clear personal, audience, and business entry points.
-- Global nav: **My Home · Entertainment · Professional · Account · Search**. Releases and products surface contextually rather than as primary navigation destinations.
-- **My Home** (`/`): personal member dashboard for character, progression, activity, library, interests, notifications, and settings. It is not a summary of Cryptic Design content.
-- **Entertainment Hub** (`/entertainment`): the complete audience front door for all releases, franchises, content categories, games, cinema, audio, rooms, visual studies, and experiments.
-- **Releases** (`/releases`) is an Entertainment Hub subpage and must show Entertainment Hub as its breadcrumb parent.
-- **Professional** (`/professional`): the Cryptic Design LLC front door for services, collaborations, capabilities, research, partnerships, and inquiries.
-- **Entertainment Channel** (`/entertainment`): Channel Home, Arcade, Cinema, Listening Rooms, Virtual Rooms, Creative Labs, My Library.
-- **Account** (`/account`): create account → required character creation (UI-preview only until backend approval), sign in, character profile, subscription tiers, notifications, and settings.
-- **Products & Franchises** (`/products`): Singularis, Lifa, Cryptic Signal, and Image of the Day reclassified into Creative Labs / Visual Studies. **Soundwave is tombstoned and is not a product, destination, or public brand surface.**
-- Franchise release flow: release selection → focused in-platform product view → optional owned franchise subdomain, such as `singularis.crypticdesign.net` or `lifa.crypticdesign.net`.
-- Nested routes show contextual breadcrumbs below the primary header and above the footer.
-- **Cryptic Signal** (`/audio` and its contextual product view): the public music and sonic-media division. All Cryptic Design audio is bundled through Cryptic Signal, including the shared player, catalog, artist profiles, playlists, releases, submissions, and analytics preview shells. Do not describe this capability as Soundwave-powered or Soundwave integration. Cryptic Design Audio is retired as a public brand; CDA catalog identifiers may remain internal.
-- **Professional Studio** (`/professional`): home, services and service detail, case studies, articles/research, contributing creators, contact, and inquiry.
+- The current model combines the v19 information architecture with `docs/CRY_LowCostWaveLaunchArchitecture_v1_2026-08-03.md` and the CRY-489 admission contract. The checked-in implementation and verified staging deployment are the current executable evidence while Figma access is unavailable.
+- Signed-out global navigation uses **Home · Entertainment · Professional · Sign Up**. Signed-in navigation uses **My Home · Entertainment · Professional · Account**. Search and Store remain planned/contextual destinations and must not be inserted into the primary navigation without an approved Jira scope.
+- **Home** (`/`) is the public Cryptic Design introduction for signed-out visitors. **My Home** (`/`) is the authenticated personal dashboard state.
+- **Entertainment Hub** (`/entertainment`) is the audience front door for releases, franchises, games, cinema, audio, rooms, visual studies, and experiments.
+- **Professional** (`/professional`) is the Cryptic Design LLC front door for services, collaborations, capabilities, research, partnerships, and inquiries.
+- **Sign Up / Account** (`/account`) is state-aware. A signed-out visitor first sees an account-benefits overview and the current open/closed admission status. Account-level subnavigation is shown only after authentication.
+- Public pages and static samples remain accountless. A waitlist entry is not an Auth identity and must never create an account automatically.
+- Initial production accounts are invite-only and require verified payment eligibility. Open registration remains disabled until Robert approves the financial, recovery, security, provider, and payment gates.
+- `ACCOUNT_ADMISSION_MODE` is an operational display/state flag and never enables browser signup. Future invitation admission must create Auth users through a server-only admin path after the CRY-489 provider and acceptance tests pass.
+- The initial subscription offer is **$5 USD per month**; displaying a preview does not authorize payment collection, vendor activation, spending, or public invitations.
+- Do not add breadcrumbs to the current global or account page system. Use the primary and contextual subnavigation patterns approved for the page family.
+- **Products & Franchises** (`/products`): Singularis, Lifa, Cryptic Signal, and Image of the Day are surfaced contextually through Entertainment and Creative Labs / Visual Studies. **Soundwave is tombstoned and is not a product, destination, or public brand surface.**
+- **Cryptic Signal** (`/audio` and contextual product views) is the public music and sonic-media division. Do not describe it as Soundwave-powered or as Soundwave integration. Cryptic Design Audio is retired as a public brand; CDA catalog identifiers may remain internal.
 - Rights and visibility governance is non-negotiable: nothing renders publicly without passing `isPubliclyRenderable`.
 - Backend-heavy systems remain frontend previews until Robert explicitly approves backend work.
-- Do not derive current direction from Gate 1–4 Confluence locks, the "Corrected IA," or v9–v17 sitemap sections. Those are historical references superseded by v18.
+- Treat v18 and earlier sitemap/Confluence models as historical reference where they conflict with v19, the low-cost launch architecture, CRY-446, CRY-489, current code, or verified deployment behavior.
 
 ## Deployment environments
 
@@ -40,7 +40,7 @@ Demo hosting runs on Netlify (`frabjous-frangipane-650548`, project `demo.crypti
 
 ## Sitemap sync rule
 
-Any change to routes, navigation, or IA must bump the FigJam sitemap version on board `oen38yFKbFtgqx9LQKn38Y` in the same working session (current: v18). A stale sitemap caused costly direction swings; do not skip this.
+Route, navigation, and IA changes must be reconciled with Sitemap v19. While the Figma subscription is unavailable, record approved drift in Jira and the repository's canonical architecture/account documents; keep Figma-dependent work in **Impediment** and do not block mixed documentation tickets that can proceed in Jira or Confluence. When Figma access is restored, synchronize the accumulated approved changes to board `oen38yFKbFtgqx9LQKn38Y` before treating the board as current again.
 
 ## Core doctrine
 
@@ -76,13 +76,15 @@ Apply this rule to every assistant and agent response in every session loop:
 
 - Use the approved CRY-271 vocabulary in `docs/CRY_271_PublicVocabularyProposal_2026-07-13.md` for all audience-facing copy.
 - Public copy names what a person can see, do, or expect. Keep implementation and governance terms such as `lane`, `surface`, `shell`, `placeholder`, `V1`, `review queue`, and field-level publication statuses internal.
-- Use **My Home**, **Entertainment Hub**, **Professional**, **Cryptic Signal**, **release**, **product**, **franchise**, **world**, **character**, and **My Library** consistently with their v18 meanings.
+- Use **Home**, **My Home**, **Entertainment Hub**, **Professional**, **Sign Up**, **Account**, **Cryptic Signal**, **release**, **product**, **franchise**, **world**, **character**, and **My Library** consistently with the current state-aware v19 model.
 - CTAs begin with a specific verb and name the outcome or destination. Preview forms must state clearly when data is saved only in the browser and is not submitted.
 - `platform`, `system`, `rights`, and `production` remain valid when they add specific meaning; do not use them as vague interface filler.
 
 ## Source-of-truth links
 
-- FigJam: CrypticDesign.net Sitemap v18 — `figma.com/board/oen38yFKbFtgqx9LQKn38Y`, section `82:3118`
+- Launch architecture: `docs/CRY_LowCostWaveLaunchArchitecture_v1_2026-08-03.md`
+- Account admission contract: `docs/CRY_489_SingleUseInvitationAdmissionContract_2026-08-16.md`
 - Visual direction: `docs/CRY_VisualDirection_IntegratedScreens_2026-07-12.md`
-- Jira: CRY-242 and children
-- Historical Confluence IA pages remain reference-only where they conflict with v18.
+- Jira: CRY-242 and children, especially CRY-446 and CRY-489 for current navigation/account policy
+- FigJam historical/reference board while access is unavailable: `figma.com/board/oen38yFKbFtgqx9LQKn38Y`
+- Historical v18 and earlier Confluence/FigJam IA material remains reference-only where it conflicts with the current policy, code, or verified deployment.
