@@ -97,24 +97,24 @@ export default function CharacterProfilePage() {
     const signedOut = error === "Authentication required";
     return <main className="account-page account-feature-page"><AccountFeatureIntro
       accent="gold"
-      eyebrow="Persistent identity · Character"
-      title="Become more than a login."
-      description="Your Character is a persistent identity that carries your presence, choices, discoveries, and creative journey across Cryptic Design experiences."
+      eyebrow="Your character"
+      title="Make it yours."
+      description="Create one character to use across Cryptic Design. It keeps your name, progress, and discoveries together wherever you go."
       image="/images/my-home-hero.png"
       imageAlt="A luminous geometric identity structure"
       benefits={[
-        { title: "One identity across worlds", body: "Create a recognizable persona for releases, playable experiences, rooms, and future community spaces." },
-        { title: "Progress with context", body: "Keep an account-bound record of quests, achievements, discoveries, and meaningful activity." },
-        { title: "Privacy you control", body: "Begin private, control discoverability, and explicitly choose what can become public." },
+        { title: "Your character, everywhere", body: "Use the same name and look across games, releases, rooms, and future community spaces." },
+        { title: "Your progress, saved", body: "Keep your quests, achievements, and discoveries so you can pick up where you left off." },
+        { title: "You decide what others see", body: "Your character starts private. You choose if and when other people can find it." },
       ]}
       steps={[
-        { title: "Create your identity", body: "Choose a name, archetype, presentation, and privacy defaults." },
-        { title: "Enter experiences", body: "Use the same Character across eligible Cryptic releases and interactive worlds." },
-        { title: "Build your history", body: "Return to a continuous record of what you explored, completed, and discovered." },
+        { title: "Create your character", body: "Choose a name, style, archetype, and privacy settings." },
+        { title: "Use it as you explore", body: "Bring the same character into supported games, releases, and worlds." },
+        { title: "Come back anytime", body: "Find what you explored, completed, and discovered in one place." },
       ]}
       primaryAction={signedOut ? { href: "/account/sign-in", label: "Sign in" } : { href: "/account/create-character", label: "Create Character" }}
       secondaryAction={{ href: "/account/subscription", label: "Explore membership" }}
-      note="Character persistence is part of the subscriber experience under evaluation. Public browsing remains open without an account, and no commercial access is currently active."
+      note="Saved characters are still being tested and are not available as a paid feature yet. You can browse the public site without an account."
     /></main>;
   }
 

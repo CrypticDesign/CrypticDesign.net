@@ -16,13 +16,15 @@ export default function AccountAccessForm({ mode }: { mode: "create" | "sign-in"
   const [statusLoaded, setStatusLoaded] = useState(false);
   const [message, setMessage] = useState("Checking account status…");
   const [saving, setSaving] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     fetch("/api/membership/session").then((response) => response.json()).then((data) => {
+      const nextMode = data.mode ?? "disabled";
       setAuthenticated(Boolean(data.authenticated));
-      setServiceMode(data.mode ?? "disabled");
+      setServiceMode(nextMode);
       setAccountCreationAvailable(Boolean(data.accountCreationAvailable));
-      setMessage(data.authenticated ? "You are signed in." : "Enter your account details.");
+      setMessage(data.authenticated ? "You are signed in." : nextMode === "disabled" ? "Sign-in is unavailable in this local preview." : "Enter your account details.");
     }).catch(() => setMessage("Account status could not be checked.")).finally(() => setStatusLoaded(true));
   }, []);
 
@@ -108,27 +110,12 @@ export default function AccountAccessForm({ mode }: { mode: "create" | "sign-in"
     </section>
   );
 
-  if (serviceMode === "sandbox") return (
-    <section className="panel account-access-card">
-      <span className="eyebrow">Local sandbox</span>
-      <p className="my-4 text-sm text-muted-foreground" aria-live="polite">Use a temporary local account to test authenticated features. No account is created and no credentials are sent.</p>
-      <button className="button" type="button" disabled={saving} onClick={startSandboxSession}>{saving ? "Starting…" : "Continue with local test account"}</button>
-    </section>
-  );
-
-  if (serviceMode === "disabled") return (
-    <section className="panel account-access-card">
-      <span className="eyebrow">Account services unavailable</span>
-      <p className="my-4 text-sm text-muted-foreground" aria-live="polite">Account services are not configured in this environment.</p>
-    </section>
-  );
-
   if (mode === "create" && !accountCreationAvailable) return (
     <section className="panel account-access-card flex flex-col items-start gap-4">
-      <div className="account-access-card__status"><span>Admission protocol</span><strong><i aria-hidden="true" /> Paused</strong></div>
-      <span className="eyebrow">Subscriber account access</span>
+      <div className="account-access-card__status"><span>New accounts</span><strong><i aria-hidden="true" /> Closed</strong></div>
+      <span className="eyebrow">Invitation required</span>
       <p className="text-sm text-muted-foreground" aria-live="polite">
-        Subscriber accounts are not open yet. Future access requires an approved invitation; public pages and samples remain available without an account.
+        New accounts are not open yet. You will need an invitation when they become available. Public pages and previews are still open to everyone.
       </p>
       <Link href="/entertainment" className="button secondary">Explore Entertainment</Link>
     </section>
@@ -136,22 +123,42 @@ export default function AccountAccessForm({ mode }: { mode: "create" | "sign-in"
 
   return (
     <form onSubmit={submit} className="panel account-access-card flex flex-col gap-4">
-      <span className="eyebrow">{mode === "create" ? "Subscriber account" : "Member access"}</span>
+      <span className="eyebrow">{mode === "create" ? "Create your account" : "Sign in to your account"}</span>
+      {serviceMode === "disabled" ? (
+        <div className="border border-amber-400/35 bg-amber-400/5 p-4">
+          <strong className="text-sm text-amber-100">Local preview</strong>
+          <p className="mt-2 text-sm text-muted-foreground">Email and password fields are shown for layout review. Sign-in is not connected in this local preview.</p>
+        </div>
+      ) : null}
+      {serviceMode === "sandbox" ? (
+        <div className="border border-cyan-400/35 bg-cyan-400/5 p-4">
+          <strong className="text-sm text-cyan-100">Local test account</strong>
+          <p className="mt-2 text-sm text-muted-foreground">Use a temporary account to test signed-in features. No account is created and no credentials are sent.</p>
+          <button className="button secondary mt-4" type="button" disabled={saving} onClick={startSandboxSession}>{saving ? "Starting…" : "Continue with local test account"}</button>
+        </div>
+      ) : null}
       {mode === "create" ? <label className="flex flex-col gap-2 text-sm">Display name<input className={inputClassName} name="displayName" required minLength={1} maxLength={80} autoComplete="name" /></label> : null}
       <label className="flex flex-col gap-2 text-sm">Email<input className={inputClassName} name="email" type="email" required autoComplete="email" /></label>
-      <label className="flex flex-col gap-2 text-sm">Password<input className={inputClassName} name="password" type="password" required minLength={8} autoComplete={mode === "create" ? "new-password" : "current-password"} /></label>
-      {turnstileSiteKey ? (
+      <div className="flex flex-col gap-2 text-sm">
+        <div className="flex items-center justify-between gap-4">
+          <label htmlFor="account-password">Password</label>
+          <button type="button" className="text-xs text-accent-cyan hover:underline" aria-controls="account-password" aria-pressed={showPassword} onClick={() => setShowPassword((visible) => !visible)}>{showPassword ? "Hide password" : "Show password"}</button>
+        </div>
+        <input id="account-password" className={inputClassName} name="password" type={showPassword ? "text" : "password"} required minLength={8} autoComplete={mode === "create" ? "new-password" : "current-password"} />
+      </div>
+      {mode === "sign-in" ? <Link href="/account/recover" className="self-start text-sm text-accent-cyan hover:underline">Forgot password?</Link> : null}
+      {serviceMode === "supabase" && turnstileSiteKey ? (
         <TurnstileWidget
           action={mode === "create" ? "account_create" : "account_signin"}
           onTokenChange={setCaptchaToken}
           resetCounter={captchaResetCounter}
           siteKey={turnstileSiteKey}
         />
-      ) : (
+      ) : serviceMode === "supabase" ? (
         <p role="alert" className="text-sm text-red-300">Human verification is not configured.</p>
-      )}
+      ) : null}
       <p className="text-sm text-muted-foreground" aria-live="polite">{message}</p>
-      <button className="button self-start" type="submit" disabled={saving || !captchaToken}>{saving ? "Working…" : mode === "create" ? "Create account" : "Sign in"}</button>
+      <button className="button self-start" type="submit" disabled={saving || !captchaToken || serviceMode !== "supabase"}>{saving ? "Working…" : mode === "create" ? "Create account" : "Sign in"}</button>
     </form>
   );
 }

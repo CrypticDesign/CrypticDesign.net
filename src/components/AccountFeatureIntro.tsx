@@ -35,7 +35,7 @@ export default function AccountFeatureIntro({ accent, eyebrow, title, descriptio
         </div>
       </div>
       <div className="account-feature-intro__value">
-        <header><span className="eyebrow">Subscriber value</span><h2>What membership is designed to unlock</h2></header>
+        <header><span className="eyebrow">Why subscribe</span><h2>What you get with a subscription</h2></header>
         <div className="account-feature-benefits">
           {benefits.map((benefit, index) => <article key={benefit.title}><span>{String(index + 1).padStart(2, "0")}</span><h3>{benefit.title}</h3><p>{benefit.body}</p></article>)}
         </div>

@@ -42,7 +42,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <PlayerProvider>
         <SiteHeader initialAuthenticated={initialAuthenticated} />
         <EntertainmentNavigation />
-        <AccountNavigation />
+        <AccountNavigation initialAuthenticated={initialAuthenticated} />
         <SubNavBreadcrumbs position="top" />
         <div id="main-content" className="flex-1" tabIndex={-1}>{children}</div>
         <SubNavBreadcrumbs position="bottom" />

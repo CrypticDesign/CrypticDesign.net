@@ -28,15 +28,15 @@ export default function LibraryPage() {
     <main className="account-page account-feature-page">
       <AccountFeatureIntro
         accent="cyan"
-        eyebrow="Personal collection · Library"
-        title="Keep the signals worth returning to."
-        description="Your Library is the personal layer of Cryptic Design—a focused collection of releases, research, worlds, sounds, and experiences you want to revisit."
+        eyebrow="My Library"
+        title="Save what you want to come back to."
+        description="My Library keeps your saved releases, articles, worlds, and music together so they are easy to find again."
         image="/images/entertainment-feature.png"
         imageAlt="A cinematic Cryptic Design entertainment scene"
         benefits={[
-          { title: "A collection with continuity", body: "Keep releases and references organized around your interests instead of losing them between visits." },
-          { title: "Member access in one place", body: "See which saved experiences are public, account-based, or available through your membership." },
-          { title: "Return where you left off", body: "Use your account as the foundation for future history, progress, and cross-device continuity." },
+          { title: "Everything you save, together", body: "Keep the releases and articles you care about in one personal collection." },
+          { title: "See what you can open", body: "Know which saved items are free and which are included with your subscription." },
+          { title: "Pick up where you left off", body: "Sign in to keep your history and progress available across your devices when syncing launches." },
         ]}
         steps={[
           { title: "Explore", body: "Browse Entertainment, articles, products, and original releases." },
@@ -45,7 +45,7 @@ export default function LibraryPage() {
         ]}
         primaryAction={{ href: "/entertainment", label: "Explore releases" }}
         secondaryAction={{ href: viewer.authenticated ? "/account/subscription" : "/account/sign-in", label: viewer.authenticated ? "Explore membership" : "Sign in" }}
-        note="Device saves work without a subscription. Account syncing, persistent history, and entitlement-based access are planned subscriber capabilities and are not active yet."
+        note="You can save items on this device without subscribing. Account syncing and saved history across devices are planned but are not active yet."
       />
     </main>
   );

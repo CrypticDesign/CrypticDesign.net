@@ -29,14 +29,14 @@ export default function EntertainmentDestinationPage({ eyebrow, title, descripti
         <section id="featured" aria-labelledby="featured-heading">
           <div className="section-heading">
             <div><span className="kicker">Featured</span><h2 id="featured-heading" className="section-title">Featured in {title}</h2></div>
-            <p>Current releases and experiences, presented with consistent state and destination context.</p>
+            <p>New and featured releases you can explore here.</p>
           </div>
           {releases.length > 0 ? <div className="media-grid">{releases.map((release) => <ReleaseCard key={release.slug} release={release} />)}</div> : <p className="ui-empty">{emptyMessage}</p>}
         </section>
         <section className="destination-state panel" aria-labelledby="destination-state-heading">
-          <span className="kicker">Every state</span>
-          <h2 id="destination-state-heading" className="section-title">Designed for continuity</h2>
-          <p>Loading, empty, unavailable, and saved states preserve this destination and its place in Entertainment.</p>
+          <span className="kicker">Come back anytime</span>
+          <h2 id="destination-state-heading" className="section-title">Your place is saved</h2>
+          <p>When something is unavailable or still loading, you will always know what happened and what you can do next.</p>
           {secondaryLink ? <Link className="text-link" href={secondaryLink.href}>{secondaryLink.label} →</Link> : null}
         </section>
       </div>

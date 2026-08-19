@@ -6,7 +6,7 @@ import AccountAccessForm from "@/components/AccountAccessForm";
 export const metadata: Metadata = {
   title: "Account Availability",
   alternates: { canonical: "/account/create" }, openGraph: { images: ["/share/account-create.png"] }, twitter: { card: "summary_large_image", images: ["/share/account-create.png"] }, 
-  description: "Review subscriber account availability for CrypticDesign.net.",
+  description: "See when new Cryptic Design accounts will become available.",
 };
 
 export default function CreateAccountPage() {
@@ -18,20 +18,20 @@ export default function CreateAccountPage() {
         </div>
         <div className="account-hero__copy">
           <div className="signal-rail" />
-          <span className="eyebrow">Cryptic Design · Access protocol</span>
+          <span className="eyebrow">New accounts</span>
           <h1 className="display-title">Account<br />Availability</h1>
           <p>
-            Public pages and samples are open without an account. Subscriber accounts
-            are not open yet and will require an approved invitation after the launch gates pass.
+            New accounts are not open yet. When invitations begin, you will need one
+            to create an account. You can still explore the public site without signing in.
           </p>
         </div>
         <aside className="account-telemetry" aria-label="Account availability status">
-          <span className="account-telemetry__label">Admission state</span>
+          <span className="account-telemetry__label">Availability</span>
           <strong><i aria-hidden="true" /> Closed</strong>
           <dl>
             <div><dt>Public site</dt><dd>Open</dd></div>
-            <div><dt>Subscriber access</dt><dd>Invitation only</dd></div>
-            <div><dt>Payment</dt><dd>Inactive</dd></div>
+            <div><dt>New accounts</dt><dd>Invitation only</dd></div>
+            <div><dt>Payments</dt><dd>Off</dd></div>
           </dl>
         </aside>
       </header>
@@ -40,7 +40,7 @@ export default function CreateAccountPage() {
         <aside className="account-context-panel">
           <span className="eyebrow">What remains open</span>
           <h2>Explore without an account.</h2>
-          <p>The public experience remains available while account economics and launch controls are evaluated.</p>
+          <p>You do not need an account to explore public releases, articles, and previews.</p>
           <ul>
             <li><span>01</span> Original worlds and releases</li>
             <li><span>02</span> Articles and visual studies</li>

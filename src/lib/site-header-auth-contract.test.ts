@@ -8,6 +8,8 @@ const accessFormUrl = new URL("../components/AccountAccessForm.tsx", import.meta
 const layoutUrl = new URL("../app/layout.tsx", import.meta.url);
 const globalsUrl = new URL("../app/globals.css", import.meta.url);
 const serverStateUrl = new URL("./server-account-state.ts", import.meta.url);
+const accountNavigationUrl = new URL("../components/AccountNavigation.tsx", import.meta.url);
+const accountPageUrl = new URL("../app/account/page.tsx", import.meta.url);
 
 test("global account navigation starts from server authentication state", async () => {
   const [header, layout, serverState] = await Promise.all([
@@ -21,7 +23,7 @@ test("global account navigation starts from server authentication state", async 
   assert.match(serverState, /client\.auth\.getUser\(\)/);
 });
 
-test("global account navigation synchronizes its authenticated Home label", async () => {
+test("global account navigation synchronizes authenticated Home and Account labels", async () => {
   const [header, accessForm] = await Promise.all([
     readFile(headerUrl, "utf8"),
     readFile(accessFormUrl, "utf8"),
@@ -30,13 +32,14 @@ test("global account navigation synchronizes its authenticated Home label", asyn
   assert.match(header, /MEMBERSHIP_SESSION_CHANGED_EVENT/);
   assert.match(header, /\[pathname\]/);
   assert.match(header, /primaryHomeLabel\(authenticated\)/);
+  assert.match(header, /authenticated \? "Account" : "Sign Up"/);
   assert.match(header, /href="\/account"/);
-  assert.match(header, />Account<\/Link>/);
+  assert.match(header, />\{accountLabel\}<\/Link>/);
   assert.match(accessForm, /announceMembershipSession\(nextAuthenticated\)/);
   assert.match(accessForm, /announceMembershipSession\(false\)/);
 });
 
-test("primary navigation exposes Account directly without a dropdown", async () => {
+test("primary navigation exposes contextual Sign Up or Account directly without a dropdown", async () => {
   const header = await readFile(headerUrl, "utf8");
   assert.match(header, /<Link href="\/account" data-tone="blue"/);
   assert.match(header, /aria-current=\{accountSectionActive \? "page" : undefined\}/);
@@ -44,6 +47,28 @@ test("primary navigation exposes Account directly without a dropdown", async () 
   assert.doesNotMatch(header, />Menu<\/button>/);
   assert.doesNotMatch(header, /account-menu__panel/);
   assert.doesNotMatch(header, /aria-haspopup="menu"/);
+});
+
+test("account subnavigation is available only to authenticated visitors", async () => {
+  const [layout, navigation] = await Promise.all([
+    readFile(layoutUrl, "utf8"),
+    readFile(accountNavigationUrl, "utf8"),
+  ]);
+  assert.match(layout, /<AccountNavigation initialAuthenticated=\{initialAuthenticated\} \/>/);
+  assert.match(navigation, /initialAuthenticated/);
+  assert.match(navigation, /MEMBERSHIP_SESSION_CHANGED_EVENT/);
+  assert.match(navigation, /if \(!relevant \|\| !authenticated\) return null/);
+});
+
+test("signed-out Account is a benefits and live availability overview", async () => {
+  const accountPage = await readFile(accountPageUrl, "utf8");
+  assert.match(accountPage, /getInitialAccountAuthenticated/);
+  assert.match(accountPage, /accountAdmissionMode/);
+  assert.match(accountPage, /if \(!authenticated\)/);
+  assert.match(accountPage, /What an account gives you/);
+  assert.match(accountPage, /New account availability/);
+  assert.match(accountPage, /invitationOnly \? "Invitation only" : "Closed"/);
+  assert.match(accountPage, /Already have an account\? Sign in/);
 });
 
 test("primary Account link does not duplicate utility or franchise destinations", async () => {

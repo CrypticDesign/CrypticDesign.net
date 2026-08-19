@@ -20,6 +20,7 @@ export default function SiteHeader({ initialAuthenticated = false }: { initialAu
   const [authenticated, setAuthenticated] = useState(initialAuthenticated);
   const [entertainmentMenuOpen, setEntertainmentMenuOpen] = useState(() => isPrimaryNavigationActive(pathname, "/entertainment"));
   const accountSectionActive = pathname === "/account" || pathname.startsWith("/account/") || pathname === "/library";
+  const accountLabel = authenticated ? "Account" : "Sign Up";
 
   useEffect(() => {
     let active = true;
@@ -72,7 +73,7 @@ export default function SiteHeader({ initialAuthenticated = false }: { initialAu
               return <Link key={item.href} href={item.href} data-tone={item.tone} aria-current={active ? "page" : undefined} className="site-primary-link"><span>{label}</span></Link>;
             })}
             <div className="account-menu">
-              <Link href="/account" data-tone="blue" aria-current={accountSectionActive ? "page" : undefined} className="utility-nav site-utility-link account-menu__trigger">Account</Link>
+              <Link href="/account" data-tone="blue" aria-current={accountSectionActive ? "page" : undefined} className="utility-nav site-utility-link account-menu__trigger">{accountLabel}</Link>
             </div>
           </nav>
         </div>

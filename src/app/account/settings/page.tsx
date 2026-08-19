@@ -12,24 +12,24 @@ export default function SettingsPage() {
     <main className="account-page account-feature-page">
       <AccountFeatureIntro
         accent="blue"
-        eyebrow="Control center · Settings"
-        title="Your account. Your boundaries."
-        description="Settings is where you shape how Cryptic Design recognizes you, protects your information, and communicates with you across connected experiences."
+        eyebrow="Account settings"
+        title="Make your account work for you."
+        description="Choose what you share, which updates you receive, and how Cryptic Design works for you."
         image="/images/service-interface.png"
         imageAlt="A blue interface system visualization"
         benefits={[
-          { title: "Privacy by default", body: "Keep identity and activity private until you explicitly choose a different visibility level." },
-          { title: "One place for preferences", body: "Manage presentation, accessibility, communication, and future personalization controls together." },
-          { title: "Visible account control", body: "Review sign-in, subscription, data, and lifecycle settings without hidden commercial states." },
+          { title: "Private until you say otherwise", body: "Your identity and activity stay private unless you choose to share them." },
+          { title: "Your preferences in one place", body: "Manage display, accessibility, communication, and personalization settings together." },
+          { title: "Clear account controls", body: "Review your sign-in, subscription, personal data, and account status whenever you need to." },
         ]}
         steps={[
-          { title: "Choose defaults", body: "Set privacy, communication, display, and accessibility preferences." },
-          { title: "Review changes", body: "Understand what each setting affects before it changes your account experience." },
-          { title: "Stay in control", body: "Return whenever your boundaries, needs, or subscription status change." },
+          { title: "Choose your settings", body: "Set your privacy, communication, display, and accessibility preferences." },
+          { title: "See what will change", body: "We explain what each setting does before you save it." },
+          { title: "Update them anytime", body: "Come back whenever your needs or subscription change." },
         ]}
         primaryAction={{ href: "/account/sign-in", label: "Sign in" }}
         secondaryAction={{ href: "/account", label: "Account overview" }}
-        note="Account controls are being completed with the production identity backend. No preference shown here should silently publish data, activate billing, or expand account visibility."
+        note="These settings are still being built. Nothing shown here will publish your information, start billing, or make your account public."
       />
     </main>
   );
