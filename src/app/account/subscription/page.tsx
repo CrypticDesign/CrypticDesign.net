@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import MembershipSandbox from "@/components/MembershipSandbox";
 import AccountFeatureIntro from "@/components/AccountFeatureIntro";
+import { getInitialAccountAuthenticated } from "@/lib/server-account-state";
 
 export const metadata: Metadata = {
   title: "Subscription",
@@ -10,7 +11,9 @@ export const metadata: Metadata = {
   description: "Preview CrypticDesign.net membership tiers in the local sandbox.",
 };
 
-export default function SubscriptionPage() {
+export default async function SubscriptionPage() {
+  const initialAuthenticated = await getInitialAccountAuthenticated();
+
   return (
     <main className="account-page account-feature-page">
       <AccountFeatureIntro
@@ -32,6 +35,9 @@ export default function SubscriptionPage() {
         ]}
         primaryAction={{ href: "/account/create", label: "Check availability" }}
         secondaryAction={{ href: "/account/sign-in", label: "Sign in" }}
+        signedInPrimaryAction={{ href: "#membership-preview-title", label: "View plan preview" }}
+        signedInSecondaryAction={{ href: "/account", label: "Account overview" }}
+        initialAuthenticated={initialAuthenticated}
         note="Subscriptions and payments are not open yet. The plans and prices below are previews only, and no payment will be taken."
       />
       <section className="account-feature-preview" aria-labelledby="membership-preview-title">

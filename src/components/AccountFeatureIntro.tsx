@@ -1,11 +1,10 @@
 import Image from "next/image";
-import Link from "next/link";
+import AccountFeatureActions, { type AccountFeatureAction } from "@/components/AccountFeatureActions";
 
 type FeatureAccent = "blue" | "cyan" | "gold" | "magenta";
 type FeatureItem = { title: string; body: string };
-type FeatureAction = { href: string; label: string };
 
-export default function AccountFeatureIntro({ accent, eyebrow, title, description, image, imageAlt, benefits, steps, primaryAction, secondaryAction, note }: {
+export default function AccountFeatureIntro({ accent, eyebrow, title, description, image, imageAlt, benefits, steps, primaryAction, secondaryAction, signedInPrimaryAction, signedInSecondaryAction, initialAuthenticated = false, note }: {
   accent: FeatureAccent;
   eyebrow: string;
   title: string;
@@ -14,8 +13,11 @@ export default function AccountFeatureIntro({ accent, eyebrow, title, descriptio
   imageAlt: string;
   benefits: readonly FeatureItem[];
   steps: readonly FeatureItem[];
-  primaryAction: FeatureAction;
-  secondaryAction?: FeatureAction;
+  primaryAction: AccountFeatureAction;
+  secondaryAction?: AccountFeatureAction;
+  signedInPrimaryAction?: AccountFeatureAction;
+  signedInSecondaryAction?: AccountFeatureAction;
+  initialAuthenticated?: boolean;
   note: string;
 }) {
   return (
@@ -28,10 +30,13 @@ export default function AccountFeatureIntro({ accent, eyebrow, title, descriptio
           <span className="eyebrow">{eyebrow}</span>
           <h1>{title}</h1>
           <p>{description}</p>
-          <div className="hero-actions">
-            <Link href={primaryAction.href} className="button">{primaryAction.label}</Link>
-            {secondaryAction ? <Link href={secondaryAction.href} className="button secondary">{secondaryAction.label}</Link> : null}
-          </div>
+          <AccountFeatureActions
+            initialAuthenticated={initialAuthenticated}
+            signedOutPrimary={primaryAction}
+            signedOutSecondary={secondaryAction}
+            signedInPrimary={signedInPrimaryAction}
+            signedInSecondary={signedInSecondaryAction}
+          />
         </div>
       </div>
       <div className="account-feature-intro__value">

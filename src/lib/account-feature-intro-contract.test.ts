@@ -45,6 +45,13 @@ test("Subscription, Settings, and Notifications explain value without claiming a
   ]);
   assert.match(subscription, /Get more from Cryptic Design/);
   assert.match(subscription, /Subscriptions and payments are not open/);
+  assert.match(subscription, /getInitialAccountAuthenticated/);
+  assert.match(subscription, /signedInPrimaryAction=\{\{ href: "#membership-preview-title", label: "View plan preview" \}\}/);
+  assert.match(subscription, /signedInSecondaryAction=\{\{ href: "\/account", label: "Account overview" \}\}/);
+  assert.match(settings, /getInitialAccountAuthenticated/);
+  assert.match(settings, /signedInSecondaryAction=\{\{ href: "\/account\/subscription", label: "View subscription" \}\}/);
+  assert.match(notifications, /getInitialAccountAuthenticated/);
+  assert.match(notifications, /signedInSecondaryAction=\{\{ href: "\/account\/settings", label: "Account settings" \}\}/);
   assert.match(settings, /Make your account work for you/);
   assert.match(settings, /Nothing shown here will publish your information/);
   assert.match(notifications, /Get the updates you actually want/);
