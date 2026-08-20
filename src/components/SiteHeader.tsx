@@ -61,7 +61,7 @@ export default function SiteHeader({ initialAuthenticated = false }: { initialAu
     <>
       <header className="site-header sticky top-0 z-50 border-b border-[#173049]/70 bg-[#05070df5] backdrop-blur-xl">
         <div className="shell site-header__inner flex items-center justify-between">
-          <Link href="/" className="site-brand flex items-center gap-3 font-['IBM_Plex_Sans'] text-[12px] font-bold uppercase tracking-[.18em]">
+          <Link href="/" className="site-brand flex items-center gap-3 text-[12px] font-bold uppercase tracking-[.18em]">
             <Image src="/brand/cryptic-design-logo.svg" alt="" width={44} height={44} className="size-8 shrink-0 object-contain sm:size-11" priority />
             <span>Cryptic Design</span>
           </Link>

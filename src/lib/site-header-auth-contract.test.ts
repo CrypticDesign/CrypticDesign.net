@@ -41,6 +41,15 @@ test("global account navigation synchronizes authenticated Home and Account labe
   assert.match(accessForm, /announceMembershipSession\(false\)/);
 });
 
+test("brand wordmark uses the Cryptic VDS sans-serif type stack", async () => {
+  const [header, globals] = await Promise.all([
+    readFile(headerUrl, "utf8"),
+    readFile(globalsUrl, "utf8"),
+  ]);
+  assert.doesNotMatch(header, /font-\['IBM_Plex_Sans'\]/);
+  assert.match(globals, /\.site-brand\{[^}]*font-family:Roboto,Arial,sans-serif/);
+});
+
 test("primary navigation exposes contextual Sign In or Account directly without a dropdown", async () => {
   const header = await readFile(headerUrl, "utf8");
   assert.match(header, /<Link href=\{accountHref\} data-tone="blue"/);
