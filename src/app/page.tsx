@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import MyHomeDashboard from "@/components/MyHomeDashboard";
+import { accountAdmissionMode } from "@/lib/account-admission";
 
 export const metadata: Metadata = {
   title: "My Home",
@@ -8,5 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function MyHomePage() {
-  return <MyHomeDashboard />;
+  return <MyHomeDashboard accountAdmissionMode={accountAdmissionMode()} />;
 }

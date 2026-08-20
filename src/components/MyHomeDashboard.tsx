@@ -4,10 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import MediaCard from "@/components/MediaCard";
+import type { AccountAdmissionMode } from "@/lib/account-admission";
 import type { PublicCharacterIdentity } from "@/lib/characters";
 import { getSavedSlugs } from "@/lib/library";
 
-export default function MyHomeDashboard() {
+export default function MyHomeDashboard({ accountAdmissionMode }: { accountAdmissionMode: AccountAdmissionMode }) {
   const [character, setCharacter] = useState<PublicCharacterIdentity | null>(null);
   const [authenticated, setAuthenticated] = useState(false);
   const [sessionLoaded, setSessionLoaded] = useState(false);
@@ -47,13 +48,46 @@ export default function MyHomeDashboard() {
     : authenticated
       ? `Welcome back${character ? `, ${character.name}` : ""}.`
       : "Welcome to Cryptic Design.";
+  const invitationOnly = accountAdmissionMode === "invitation";
 
   return (
     <main>
-      <section className="visual-hero">
+      <section className="visual-hero home-hero">
         <div className="visual-hero__image"><Image src="/images/my-home-hero.png" alt="" fill priority sizes="100vw" /></div>
         <div className="visual-hero__wash" />
-        <div className="visual-hero__content"><div className="signal-rail text-[#ffd400]" /><span className="kicker !text-[#ffd400]">{authenticated ? "Your space" : "Entertainment · creativity · connection"}</span><h1 className="display-title">{greeting}</h1><p>{authenticated ? "Your character, activity, saved releases, interests, and progress are all here." : "Sign in to return to your character, library, and activity."}</p><div className="hero-actions">{authenticated ? <><Link href="/account/character" className="button">♙ &nbsp; View profile</Link><Link href="/account/settings" className="button secondary">⚙ &nbsp; Account settings</Link></> : <><Link href="/account" className="button">Sign up</Link><Link href="/account/create" className="button secondary">Account availability</Link></>}</div></div>
+        <div className="visual-hero__content home-hero__content">
+          <div className="home-hero__copy">
+            <div className="signal-rail text-[#ffd400]" />
+            <span className="kicker !text-[#ffd400]">{authenticated ? "Your space" : "Entertainment · creativity · connection"}</span>
+            <h1 className="display-title">{greeting}</h1>
+            <p>{authenticated ? "Your character, activity, saved releases, interests, and progress are all here." : "Sign in to return to your character, library, and activity."}</p>
+            <div className="hero-actions">
+              {authenticated ? (
+                <>
+                  <Link href="/account/character" className="button">♙ &nbsp; View profile</Link>
+                  <Link href="/account/settings" className="button secondary">⚙ &nbsp; Account settings</Link>
+                </>
+              ) : (
+                <>
+                  <Link href="/account" className="button home-primary-cta">Sign up</Link>
+                  <Link href="/account/create" className="button home-secondary-cta">Account availability</Link>
+                </>
+              )}
+            </div>
+          </div>
+          {sessionLoaded && !authenticated ? (
+            <aside className="account-telemetry home-ecosystem-status" aria-label="Current ecosystem status">
+              <span className="account-telemetry__label">Current ecosystem status</span>
+              <strong data-status="closed"><i aria-hidden="true" /> {invitationOnly ? "Invitation only" : "Accounts closed"}</strong>
+              <dl>
+                <div><dt>Public site</dt><dd data-status="open">Open</dd></div>
+                <div><dt>New accounts</dt><dd data-status="closed">{invitationOnly ? "Invitation only" : "Not available"}</dd></div>
+                <div><dt>Subscriptions</dt><dd data-status="closed">Not available</dd></div>
+              </dl>
+              <Link href="/account/create" className="home-ecosystem-status__link">View availability details <span aria-hidden="true">→</span></Link>
+            </aside>
+          ) : null}
+        </div>
       </section>
       <div className="shell page-stack">
         <section>

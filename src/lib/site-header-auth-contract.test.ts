@@ -61,10 +61,18 @@ test("primary navigation exposes contextual Sign In or Account directly without 
 });
 
 test("signed-out Home pairs Sign Up with Account availability", async () => {
-  const dashboard = await readFile(myHomeDashboardUrl, "utf8");
-  assert.match(dashboard, /href="\/account" className="button">Sign up<\/Link>/);
-  assert.match(dashboard, /href="\/account\/create" className="button secondary">Account availability<\/Link>/);
+  const [dashboard, homePage] = await Promise.all([
+    readFile(myHomeDashboardUrl, "utf8"),
+    readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+  ]);
+  assert.match(homePage, /accountAdmissionMode\(\)/);
+  assert.match(homePage, /<MyHomeDashboard accountAdmissionMode=/);
+  assert.match(dashboard, /href="\/account" className="button home-primary-cta">Sign up<\/Link>/);
+  assert.match(dashboard, /href="\/account\/create" className="button home-secondary-cta">Account availability<\/Link>/);
   assert.doesNotMatch(dashboard, /href="\/account\/sign-in" className="button">Sign in<\/Link>/);
+  assert.match(dashboard, /aria-label="Current ecosystem status"/);
+  assert.match(dashboard, /<dd data-status="open">Open<\/dd>/);
+  assert.match(dashboard, /<dt>Subscriptions<\/dt><dd data-status="closed">Not available<\/dd>/);
 });
 
 test("account subnavigation is available only to authenticated visitors", async () => {
