@@ -61,9 +61,10 @@ test("primary navigation exposes contextual Sign In or Account directly without 
 });
 
 test("signed-out Home pairs Sign Up with Account availability", async () => {
-  const [dashboard, homePage] = await Promise.all([
+  const [dashboard, homePage, globals] = await Promise.all([
     readFile(myHomeDashboardUrl, "utf8"),
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+    readFile(globalsUrl, "utf8"),
   ]);
   assert.match(homePage, /accountAdmissionMode\(\)/);
   assert.match(homePage, /<MyHomeDashboard accountAdmissionMode=/);
@@ -75,6 +76,8 @@ test("signed-out Home pairs Sign Up with Account availability", async () => {
   assert.match(dashboard, /<dd data-status="open">Open<\/dd>/);
   assert.match(dashboard, /<dt>Subscriptions<\/dt><dd data-status="closed">Not available<\/dd>/);
   assert.match(dashboard, /New accounts are temporarily closed while we finish the account and subscription model for launch\./);
+  assert.match(globals, /\.visual-hero \.home-ecosystem-status__note\{[^}]*max-width:none[^}]*font:400 11px\/1\.55/);
+  assert.match(globals, /\.visual-hero \.home-ecosystem-status__cta\{[^}]*display:flex[^}]*width:100%/);
 });
 
 test("account subnavigation is available only to authenticated visitors", async () => {
