@@ -68,6 +68,7 @@ test("account entry pages share the VDS ecosystem panel and sign-in hero is full
     readFile(globalsUrl, "utf8"),
   ]);
   assert.match(signIn, /account-hero--full-bleed account-hero--sign-in/);
+  assert.match(create, /account-hero account-hero--full-bleed/);
   assert.match(signIn, /<AccountEcosystemStatus admissionMode=\{accountAdmissionMode\(\)\} \/>/);
   assert.match(create, /<AccountEcosystemStatus admissionMode=\{accountAdmissionMode\(\)\} showAvailabilityAction=\{false\} \/>/);
   assert.match(ecosystemStatus, /showAvailabilityAction/);

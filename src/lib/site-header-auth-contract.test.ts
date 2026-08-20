@@ -109,6 +109,8 @@ test("signed-out Account is a benefits and live availability overview", async ()
   assert.match(accountPage, /accountAdmissionMode/);
   assert.match(accountPage, /if \(!authenticated\)/);
   assert.match(accountPage, /What an account gives you/);
+  assert.match(accountPage, /account-hero account-hero--full-bleed account-hero--signup/);
+  assert.match(accountPage, /account-hero account-hero--full-bleed account-hero--hub/);
   assert.match(accountPage, /<AccountEcosystemStatus admissionMode=\{admissionMode\}/);
   assert.match(accountPage, /Already have an account\? Sign in/);
   assert.match(accountPage, /Check account availability/);

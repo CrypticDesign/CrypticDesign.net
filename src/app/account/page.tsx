@@ -34,7 +34,7 @@ export default async function AccountHub() {
     const invitationOnly = admissionMode === "invitation";
     return (
       <main className="account-page account-signup-overview">
-        <header className="account-hero account-hero--signup">
+        <header className="account-hero account-hero--full-bleed account-hero--signup">
           <div className="account-hero__image" aria-hidden="true">
             <Image src="/images/my-home-hero.png" alt="" fill sizes="(max-width: 900px) 100vw, 70vw" priority />
           </div>
@@ -83,7 +83,7 @@ export default async function AccountHub() {
 
   return (
     <main className="account-page account-hub">
-      <header className="account-hero account-hero--hub">
+      <header className="account-hero account-hero--full-bleed account-hero--hub">
         <div className="account-hero__image" aria-hidden="true">
           <Image src="/images/my-home-hero.png" alt="" fill sizes="(max-width: 900px) 100vw, 70vw" priority />
         </div>

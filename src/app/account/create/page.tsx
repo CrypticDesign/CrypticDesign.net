@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function CreateAccountPage() {
   return (
     <main className="account-page">
-      <header className="account-hero">
+      <header className="account-hero account-hero--full-bleed">
         <div className="account-hero__image account-hero__image--contain" aria-hidden="true">
           <Image src="/images/human-machine.png" alt="" fill sizes="(max-width: 900px) 100vw, 55vw" priority />
         </div>
