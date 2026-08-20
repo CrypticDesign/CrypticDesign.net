@@ -68,11 +68,13 @@ test("signed-out Home pairs Sign Up with Account availability", async () => {
   assert.match(homePage, /accountAdmissionMode\(\)/);
   assert.match(homePage, /<MyHomeDashboard accountAdmissionMode=/);
   assert.match(dashboard, /href="\/account" className="button home-primary-cta">Sign up<\/Link>/);
-  assert.match(dashboard, /href="\/account\/create" className="button home-secondary-cta">Account availability<\/Link>/);
+  assert.doesNotMatch(dashboard, /href="\/account\/create" className="button home-secondary-cta">/);
+  assert.match(dashboard, /href="\/account\/create" className="button home-secondary-cta home-ecosystem-status__cta">Account availability<\/Link>/);
   assert.doesNotMatch(dashboard, /href="\/account\/sign-in" className="button">Sign in<\/Link>/);
   assert.match(dashboard, /aria-label="Current ecosystem status"/);
   assert.match(dashboard, /<dd data-status="open">Open<\/dd>/);
   assert.match(dashboard, /<dt>Subscriptions<\/dt><dd data-status="closed">Not available<\/dd>/);
+  assert.match(dashboard, /New accounts are temporarily closed while we finish the account and subscription model for launch\./);
 });
 
 test("account subnavigation is available only to authenticated visitors", async () => {

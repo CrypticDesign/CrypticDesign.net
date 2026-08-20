@@ -68,10 +68,7 @@ export default function MyHomeDashboard({ accountAdmissionMode }: { accountAdmis
                   <Link href="/account/settings" className="button secondary">⚙ &nbsp; Account settings</Link>
                 </>
               ) : (
-                <>
-                  <Link href="/account" className="button home-primary-cta">Sign up</Link>
-                  <Link href="/account/create" className="button home-secondary-cta">Account availability</Link>
-                </>
+                <Link href="/account" className="button home-primary-cta">Sign up</Link>
               )}
             </div>
           </div>
@@ -84,7 +81,12 @@ export default function MyHomeDashboard({ accountAdmissionMode }: { accountAdmis
                 <div><dt>New accounts</dt><dd data-status="closed">{invitationOnly ? "Invitation only" : "Not available"}</dd></div>
                 <div><dt>Subscriptions</dt><dd data-status="closed">Not available</dd></div>
               </dl>
-              <Link href="/account/create" className="home-ecosystem-status__link">View availability details <span aria-hidden="true">→</span></Link>
+              <p className="home-ecosystem-status__note">
+                {invitationOnly
+                  ? "New accounts are currently limited to invited users while we finish the account and subscription model for launch."
+                  : "New accounts are temporarily closed while we finish the account and subscription model for launch."}
+              </p>
+              <Link href="/account/create" className="button home-secondary-cta home-ecosystem-status__cta">Account availability</Link>
             </aside>
           ) : null}
         </div>
