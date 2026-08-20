@@ -8,8 +8,14 @@ try {
   const context = await browser.newContext();
   const page = await context.newPage();
 
+  await page.goto(`${baseUrl}/`, { waitUntil: "networkidle" });
+  const signedOutHomeActions = page.locator(".visual-hero__content .hero-actions");
+  assert.equal(await page.getByRole("navigation", { name: "Primary", exact: true }).getByRole("link", { name: "Sign In", exact: true }).isVisible(), true, "Signed-out primary navigation must expose Sign In");
+  assert.equal(await signedOutHomeActions.getByRole("link", { name: "Sign up", exact: true }).isVisible(), true, "Signed-out Home must place Sign up in the hero");
+  assert.equal(await signedOutHomeActions.getByRole("link", { name: "Account availability", exact: true }).isVisible(), true, "Signed-out Home must place Sign up beside Account availability");
+
   await page.goto(`${baseUrl}/account`, { waitUntil: "networkidle" });
-  assert.equal(await page.getByRole("link", { name: "Sign Up", exact: true }).isVisible(), true, "Signed-out Account must label the primary destination Sign Up");
+  assert.equal(await page.getByRole("navigation", { name: "Primary", exact: true }).getByRole("link", { name: "Sign In", exact: true }).isVisible(), true, "Signed-out Account must keep Sign In in primary navigation");
   assert.equal(await page.getByRole("navigation", { name: "Account", exact: true }).count(), 0, "Signed-out visitors must not see account-level subnavigation");
   assert.equal(await page.getByRole("heading", { name: "Make this place yours.", exact: true }).isVisible(), true, "Signed-out Account must introduce the account benefits");
   assert.equal(await page.getByLabel("New account availability").getByText("Closed", { exact: true }).isVisible(), true, "Signed-out Account must show the current closed admission state");
@@ -34,7 +40,7 @@ try {
   ];
   for (const path of remainingAccountPaths) {
     await page.goto(`${baseUrl}${path}`, { waitUntil: "domcontentloaded" });
-    assert.equal(await page.getByRole("navigation", { name: "Primary", exact: true }).getByRole("link", { name: "Sign Up", exact: true }).isVisible(), true, `${path} must show Sign Up while signed out`);
+    assert.equal(await page.getByRole("navigation", { name: "Primary", exact: true }).getByRole("link", { name: "Sign In", exact: true }).isVisible(), true, `${path} must show Sign In while signed out`);
     assert.equal(await page.getByRole("navigation", { name: "Account", exact: true }).count(), 0, `${path} must hide account-level subnavigation while signed out`);
   }
 
@@ -95,7 +101,7 @@ try {
   assert.equal(await libraryActions.getByRole("link", { name: "Explore membership", exact: true }).isVisible(), true, "Library must preserve authenticated actions when subscription services are unavailable");
   assert.equal(await libraryActions.getByRole("link", { name: "Sign in", exact: true }).count(), 0, "Library must not infer sign-out from an unavailable subscription endpoint");
 
-  console.log("Account CTA E2E passed: Account, Sign In, feature actions, and Library preserve the correct session state");
+  console.log("Account CTA E2E passed: top-level Sign In, Home Sign up, Account, feature actions, and Library preserve the correct session state");
 } finally {
   await browser.close();
 }

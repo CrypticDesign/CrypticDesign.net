@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import AccountEcosystemStatus from "@/components/AccountEcosystemStatus";
 import { accountAdmissionMode } from "@/lib/account-admission";
 import { getInitialAccountAuthenticated } from "@/lib/server-account-state";
 
@@ -33,7 +34,7 @@ export default async function AccountHub() {
     const invitationOnly = admissionMode === "invitation";
     return (
       <main className="account-page account-signup-overview">
-        <header className="account-hero account-hero--signup">
+        <header className="account-hero account-hero--full-bleed account-hero--signup">
           <div className="account-hero__image" aria-hidden="true">
             <Image src="/images/my-home-hero.png" alt="" fill sizes="(max-width: 900px) 100vw, 70vw" priority />
           </div>
@@ -46,19 +47,11 @@ export default async function AccountHub() {
               together so you can pick up where you left off.
             </p>
             <div className="hero-actions">
-              <Link href="/account/create" className="button">Check availability</Link>
+              <Link href="/account/create" className="button account-availability-cta">Check account availability</Link>
               <Link href="/account/sign-in" className="button secondary">Already have an account? Sign in</Link>
             </div>
           </div>
-          <aside className="account-telemetry" aria-label="New account availability">
-            <span className="account-telemetry__label">New account availability</span>
-            <strong><i aria-hidden="true" /> {invitationOnly ? "Invitation only" : "Closed"}</strong>
-            <dl>
-              <div><dt>Public site</dt><dd>Open</dd></div>
-              <div><dt>New accounts</dt><dd>{invitationOnly ? "Approved invitations" : "Not available"}</dd></div>
-              <div><dt>Payments</dt><dd>Off</dd></div>
-            </dl>
-          </aside>
+          <AccountEcosystemStatus admissionMode={admissionMode} showAvailabilityAction={false} />
         </header>
         <section className="account-benefit-section" aria-labelledby="account-benefits-title">
           <header>
@@ -76,7 +69,7 @@ export default async function AccountHub() {
             ))}
           </div>
         </section>
-        <section className="account-signup-status" aria-labelledby="signup-status-title">
+        <section className="account-signup-status" data-status="closed" aria-labelledby="signup-status-title">
           <div>
             <span className="eyebrow">Current status</span>
             <h2 id="signup-status-title">{invitationOnly ? "Accounts are invitation-only." : "New accounts are currently closed."}</h2>
@@ -90,7 +83,7 @@ export default async function AccountHub() {
 
   return (
     <main className="account-page account-hub">
-      <header className="account-hero account-hero--hub">
+      <header className="account-hero account-hero--full-bleed account-hero--hub">
         <div className="account-hero__image" aria-hidden="true">
           <Image src="/images/my-home-hero.png" alt="" fill sizes="(max-width: 900px) 100vw, 70vw" priority />
         </div>
@@ -105,11 +98,11 @@ export default async function AccountHub() {
         </div>
         <aside className="account-telemetry" aria-label="Account status">
           <span className="account-telemetry__label">Account status</span>
-          <strong><i aria-hidden="true" /> Preview</strong>
+          <strong data-status="preview"><i aria-hidden="true" /> Preview</strong>
           <dl>
-            <div><dt>Characters</dt><dd>In testing</dd></div>
-            <div><dt>New accounts</dt><dd>Closed</dd></div>
-            <div><dt>Payments</dt><dd>Off</dd></div>
+            <div><dt>Characters</dt><dd data-status="preview">In testing</dd></div>
+            <div><dt>New accounts</dt><dd data-status="closed">Closed</dd></div>
+            <div><dt>Subscriptions</dt><dd data-status="closed">Not available</dd></div>
           </dl>
         </aside>
       </header>

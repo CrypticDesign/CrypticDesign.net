@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import AccountAccessForm from "@/components/AccountAccessForm";
+import AccountEcosystemStatus from "@/components/AccountEcosystemStatus";
+import { accountAdmissionMode } from "@/lib/account-admission";
 
 export const metadata: Metadata = {
   title: "Account Availability",
@@ -12,7 +14,7 @@ export const metadata: Metadata = {
 export default function CreateAccountPage() {
   return (
     <main className="account-page">
-      <header className="account-hero">
+      <header className="account-hero account-hero--full-bleed">
         <div className="account-hero__image account-hero__image--contain" aria-hidden="true">
           <Image src="/images/human-machine.png" alt="" fill sizes="(max-width: 900px) 100vw, 55vw" priority />
         </div>
@@ -25,15 +27,7 @@ export default function CreateAccountPage() {
             to create an account. You can still explore the public site without signing in.
           </p>
         </div>
-        <aside className="account-telemetry" aria-label="Account availability status">
-          <span className="account-telemetry__label">Availability</span>
-          <strong><i aria-hidden="true" /> Closed</strong>
-          <dl>
-            <div><dt>Public site</dt><dd>Open</dd></div>
-            <div><dt>New accounts</dt><dd>Invitation only</dd></div>
-            <div><dt>Payments</dt><dd>Off</dd></div>
-          </dl>
-        </aside>
+        <AccountEcosystemStatus admissionMode={accountAdmissionMode()} showAvailabilityAction={false} />
       </header>
       <section className="account-content-grid">
         <AccountAccessForm mode="create" />

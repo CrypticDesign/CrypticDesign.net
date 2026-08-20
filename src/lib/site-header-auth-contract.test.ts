@@ -10,6 +10,8 @@ const globalsUrl = new URL("../app/globals.css", import.meta.url);
 const serverStateUrl = new URL("./server-account-state.ts", import.meta.url);
 const accountNavigationUrl = new URL("../components/AccountNavigation.tsx", import.meta.url);
 const accountPageUrl = new URL("../app/account/page.tsx", import.meta.url);
+const myHomeDashboardUrl = new URL("../components/MyHomeDashboard.tsx", import.meta.url);
+const ecosystemStatusUrl = new URL("../components/AccountEcosystemStatus.tsx", import.meta.url);
 
 test("global account navigation starts from server authentication state", async () => {
   const [header, layout, serverState] = await Promise.all([
@@ -32,21 +34,51 @@ test("global account navigation synchronizes authenticated Home and Account labe
   assert.match(header, /MEMBERSHIP_SESSION_CHANGED_EVENT/);
   assert.match(header, /\[pathname\]/);
   assert.match(header, /primaryHomeLabel\(authenticated\)/);
-  assert.match(header, /authenticated \? "Account" : "Sign Up"/);
-  assert.match(header, /href="\/account"/);
+  assert.match(header, /authenticated \? "Account" : "Sign In"/);
+  assert.match(header, /authenticated \? "\/account" : "\/account\/sign-in"/);
+  assert.match(header, /href=\{accountHref\}/);
   assert.match(header, />\{accountLabel\}<\/Link>/);
   assert.match(accessForm, /announceMembershipSession\(nextAuthenticated\)/);
   assert.match(accessForm, /announceMembershipSession\(false\)/);
 });
 
-test("primary navigation exposes contextual Sign Up or Account directly without a dropdown", async () => {
+test("brand wordmark uses the Cryptic VDS sans-serif type stack", async () => {
+  const [header, globals] = await Promise.all([
+    readFile(headerUrl, "utf8"),
+    readFile(globalsUrl, "utf8"),
+  ]);
+  assert.doesNotMatch(header, /font-\['IBM_Plex_Sans'\]/);
+  assert.match(globals, /\.site-brand\{[^}]*font-family:Roboto,Arial,sans-serif/);
+});
+
+test("primary navigation exposes contextual Sign In or Account directly without a dropdown", async () => {
   const header = await readFile(headerUrl, "utf8");
-  assert.match(header, /<Link href="\/account" data-tone="blue"/);
+  assert.match(header, /<Link href=\{accountHref\} data-tone="blue"/);
   assert.match(header, /aria-current=\{accountSectionActive \? "page" : undefined\}/);
   assert.doesNotMatch(header, /aria-label="Open site menu"/);
   assert.doesNotMatch(header, />Menu<\/button>/);
   assert.doesNotMatch(header, /account-menu__panel/);
   assert.doesNotMatch(header, /aria-haspopup="menu"/);
+});
+
+test("signed-out Home pairs Sign Up with reusable ecosystem status", async () => {
+  const [dashboard, homePage, ecosystemStatus, globals] = await Promise.all([
+    readFile(myHomeDashboardUrl, "utf8"),
+    readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+    readFile(ecosystemStatusUrl, "utf8"),
+    readFile(globalsUrl, "utf8"),
+  ]);
+  assert.match(homePage, /accountAdmissionMode\(\)/);
+  assert.match(homePage, /<MyHomeDashboard accountAdmissionMode=/);
+  assert.match(dashboard, /href="\/account" className="button home-primary-cta">Sign up<\/Link>/);
+  assert.match(dashboard, /<AccountEcosystemStatus admissionMode=\{accountAdmissionMode\} \/>/);
+  assert.doesNotMatch(dashboard, /href="\/account\/sign-in" className="button">Sign in<\/Link>/);
+  assert.match(ecosystemStatus, /aria-label="Current ecosystem status"/);
+  assert.match(ecosystemStatus, /<dd data-status="open">Open<\/dd>/);
+  assert.match(ecosystemStatus, /<dt>Subscriptions<\/dt><dd data-status="closed">Not available<\/dd>/);
+  assert.match(ecosystemStatus, /New accounts are temporarily closed while we finish the account and subscription model for launch\./);
+  assert.match(globals, /\.account-ecosystem-status \.account-ecosystem-status__note\{[^}]*max-width:none[^}]*font:400 11px\/1\.55/);
+  assert.match(globals, /\.account-ecosystem-status \.account-ecosystem-status__cta\{[^}]*display:flex[^}]*width:100%/);
 });
 
 test("account subnavigation is available only to authenticated visitors", async () => {
@@ -69,14 +101,24 @@ test("account subnavigation is available only to authenticated visitors", async 
 });
 
 test("signed-out Account is a benefits and live availability overview", async () => {
-  const accountPage = await readFile(accountPageUrl, "utf8");
+  const [accountPage, ecosystemStatus] = await Promise.all([
+    readFile(accountPageUrl, "utf8"),
+    readFile(ecosystemStatusUrl, "utf8"),
+  ]);
   assert.match(accountPage, /getInitialAccountAuthenticated/);
   assert.match(accountPage, /accountAdmissionMode/);
   assert.match(accountPage, /if \(!authenticated\)/);
   assert.match(accountPage, /What an account gives you/);
-  assert.match(accountPage, /New account availability/);
-  assert.match(accountPage, /invitationOnly \? "Invitation only" : "Closed"/);
+  assert.match(accountPage, /account-hero account-hero--full-bleed account-hero--signup/);
+  assert.match(accountPage, /account-hero account-hero--full-bleed account-hero--hub/);
+  assert.match(accountPage, /<AccountEcosystemStatus admissionMode=\{admissionMode\}/);
   assert.match(accountPage, /Already have an account\? Sign in/);
+  assert.match(accountPage, /Check account availability/);
+  assert.match(ecosystemStatus, /invitationOnly \? "Invitation only" : "Accounts closed"/);
+  assert.match(ecosystemStatus, /<dt>Subscriptions<\/dt><dd data-status="closed">Not available<\/dd>/);
+  assert.doesNotMatch(ecosystemStatus, /<dt>Payments<\/dt>/);
+  assert.match(ecosystemStatus, /<dd data-status="open">Open<\/dd>/);
+  assert.match(ecosystemStatus, /<strong data-status="closed">/);
 });
 
 test("primary Account link does not duplicate utility or franchise destinations", async () => {

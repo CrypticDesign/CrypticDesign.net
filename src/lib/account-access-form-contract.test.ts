@@ -3,6 +3,10 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 const componentUrl = new URL("../components/AccountAccessForm.tsx", import.meta.url);
+const signInPageUrl = new URL("../app/account/sign-in/page.tsx", import.meta.url);
+const createPageUrl = new URL("../app/account/create/page.tsx", import.meta.url);
+const ecosystemStatusUrl = new URL("../components/AccountEcosystemStatus.tsx", import.meta.url);
+const globalsUrl = new URL("../app/globals.css", import.meta.url);
 
 test("account inputs retain a visible, minimum-size control treatment", async () => {
   const source = await readFile(componentUrl, "utf8");
@@ -43,4 +47,30 @@ test("password controls support visibility and route recovery honestly", async (
   assert.match(source, /Hide password/);
   assert.match(source, /href="\/account\/recover"/);
   assert.match(source, /Forgot password\?/);
+});
+
+test("sign-in explains the account and subscription relationship without redundant navigation", async () => {
+  const source = await readFile(signInPageUrl, "utf8");
+  assert.match(source, /Your account keeps everything connected/);
+  assert.match(source, /A subscription is connected to your account/);
+  assert.match(source, /signing in does not start, renew, or change a subscription/);
+  assert.doesNotMatch(source, /account-link-rail/);
+  assert.doesNotMatch(source, /View subscription plans/);
+  assert.doesNotMatch(source, /My Library/);
+  assert.doesNotMatch(source, /Return to Account/);
+});
+
+test("account entry pages share the VDS ecosystem panel and sign-in hero is full bleed", async () => {
+  const [signIn, create, ecosystemStatus, globals] = await Promise.all([
+    readFile(signInPageUrl, "utf8"),
+    readFile(createPageUrl, "utf8"),
+    readFile(ecosystemStatusUrl, "utf8"),
+    readFile(globalsUrl, "utf8"),
+  ]);
+  assert.match(signIn, /account-hero--full-bleed account-hero--sign-in/);
+  assert.match(create, /account-hero account-hero--full-bleed/);
+  assert.match(signIn, /<AccountEcosystemStatus admissionMode=\{accountAdmissionMode\(\)\} \/>/);
+  assert.match(create, /<AccountEcosystemStatus admissionMode=\{accountAdmissionMode\(\)\} showAvailabilityAction=\{false\} \/>/);
+  assert.match(ecosystemStatus, /showAvailabilityAction/);
+  assert.match(globals, /\.account-hero--full-bleed\{[^}]*width:100vw[^}]*margin-left:calc\(50% - 50vw\)/);
 });
