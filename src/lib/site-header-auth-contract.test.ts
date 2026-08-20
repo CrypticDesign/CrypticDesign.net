@@ -86,6 +86,11 @@ test("signed-out Account is a benefits and live availability overview", async ()
   assert.match(accountPage, /New account availability/);
   assert.match(accountPage, /invitationOnly \? "Invitation only" : "Closed"/);
   assert.match(accountPage, /Already have an account\? Sign in/);
+  assert.match(accountPage, /Check account availability/);
+  assert.match(accountPage, /<dt>Subscriptions<\/dt><dd data-status="closed">Not available<\/dd>/);
+  assert.doesNotMatch(accountPage, /<dt>Payments<\/dt>/);
+  assert.match(accountPage, /<dd data-status="open">Open<\/dd>/);
+  assert.match(accountPage, /<strong data-status="closed">/);
 });
 
 test("primary Account link does not duplicate utility or franchise destinations", async () => {

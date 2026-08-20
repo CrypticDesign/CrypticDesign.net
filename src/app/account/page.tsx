@@ -46,17 +46,17 @@ export default async function AccountHub() {
               together so you can pick up where you left off.
             </p>
             <div className="hero-actions">
-              <Link href="/account/create" className="button">Check availability</Link>
+              <Link href="/account/create" className="button account-availability-cta">Check account availability</Link>
               <Link href="/account/sign-in" className="button secondary">Already have an account? Sign in</Link>
             </div>
           </div>
           <aside className="account-telemetry" aria-label="New account availability">
             <span className="account-telemetry__label">New account availability</span>
-            <strong><i aria-hidden="true" /> {invitationOnly ? "Invitation only" : "Closed"}</strong>
+            <strong data-status="closed"><i aria-hidden="true" /> {invitationOnly ? "Invitation only" : "Closed"}</strong>
             <dl>
-              <div><dt>Public site</dt><dd>Open</dd></div>
-              <div><dt>New accounts</dt><dd>{invitationOnly ? "Approved invitations" : "Not available"}</dd></div>
-              <div><dt>Payments</dt><dd>Off</dd></div>
+              <div><dt>Public site</dt><dd data-status="open">Open</dd></div>
+              <div><dt>New accounts</dt><dd data-status="closed">{invitationOnly ? "Approved invitations only" : "Not available"}</dd></div>
+              <div><dt>Subscriptions</dt><dd data-status="closed">Not available</dd></div>
             </dl>
           </aside>
         </header>
@@ -76,7 +76,7 @@ export default async function AccountHub() {
             ))}
           </div>
         </section>
-        <section className="account-signup-status" aria-labelledby="signup-status-title">
+        <section className="account-signup-status" data-status="closed" aria-labelledby="signup-status-title">
           <div>
             <span className="eyebrow">Current status</span>
             <h2 id="signup-status-title">{invitationOnly ? "Accounts are invitation-only." : "New accounts are currently closed."}</h2>
@@ -105,11 +105,11 @@ export default async function AccountHub() {
         </div>
         <aside className="account-telemetry" aria-label="Account status">
           <span className="account-telemetry__label">Account status</span>
-          <strong><i aria-hidden="true" /> Preview</strong>
+          <strong data-status="preview"><i aria-hidden="true" /> Preview</strong>
           <dl>
-            <div><dt>Characters</dt><dd>In testing</dd></div>
-            <div><dt>New accounts</dt><dd>Closed</dd></div>
-            <div><dt>Payments</dt><dd>Off</dd></div>
+            <div><dt>Characters</dt><dd data-status="preview">In testing</dd></div>
+            <div><dt>New accounts</dt><dd data-status="closed">Closed</dd></div>
+            <div><dt>Subscriptions</dt><dd data-status="closed">Not available</dd></div>
           </dl>
         </aside>
       </header>

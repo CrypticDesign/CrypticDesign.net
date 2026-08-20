@@ -27,11 +27,11 @@ export default function CreateAccountPage() {
         </div>
         <aside className="account-telemetry" aria-label="Account availability status">
           <span className="account-telemetry__label">Availability</span>
-          <strong><i aria-hidden="true" /> Closed</strong>
+          <strong data-status="closed"><i aria-hidden="true" /> Closed</strong>
           <dl>
-            <div><dt>Public site</dt><dd>Open</dd></div>
-            <div><dt>New accounts</dt><dd>Invitation only</dd></div>
-            <div><dt>Payments</dt><dd>Off</dd></div>
+            <div><dt>Public site</dt><dd data-status="open">Open</dd></div>
+            <div><dt>New accounts</dt><dd data-status="closed">Invitation only</dd></div>
+            <div><dt>Subscriptions</dt><dd data-status="closed">Not available</dd></div>
           </dl>
         </aside>
       </header>
