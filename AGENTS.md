@@ -5,11 +5,11 @@ This repository is the implementation source of truth for the CrypticDesign.net 
 ## Locked platform model (Sitemap v19 and low-cost wave launch policy — current direction, confirmed 2026-08-16)
 
 - The current model combines the v19 information architecture with `docs/CRY_LowCostWaveLaunchArchitecture_v1_2026-08-03.md` and the CRY-489 admission contract. The checked-in implementation and verified staging deployment are the current executable evidence while Figma access is unavailable.
-- Signed-out global navigation uses **Home · Entertainment · Professional · Sign Up**. Signed-in navigation uses **My Home · Entertainment · Professional · Account**. Search and Store remain planned/contextual destinations and must not be inserted into the primary navigation without an approved Jira scope.
+- Signed-out global navigation uses **Home · Entertainment · Professional · Sign In**. Signed-in navigation uses **My Home · Entertainment · Professional · Account**. The signed-out Home hero places **Sign Up** beside **Account Availability**. Search and Store remain planned/contextual destinations and must not be inserted into the primary navigation without an approved Jira scope.
 - **Home** (`/`) is the public Cryptic Design introduction for signed-out visitors. **My Home** (`/`) is the authenticated personal dashboard state.
 - **Entertainment Hub** (`/entertainment`) is the audience front door for releases, franchises, games, cinema, audio, rooms, visual studies, and experiments.
 - **Professional** (`/professional`) is the Cryptic Design LLC front door for services, collaborations, capabilities, research, partnerships, and inquiries.
-- **Sign Up / Account** (`/account`) is state-aware. A signed-out visitor first sees an account-benefits overview and the current open/closed admission status. Account-level subnavigation is shown only after authentication.
+- **Sign In / Account** is state-aware in the global navigation. **Sign Up** routes to the signed-out account-benefits overview at `/account`, while **Account Availability** routes to `/account/create`. Account-level subnavigation is shown only after authentication.
 - Public pages and static samples remain accountless. A waitlist entry is not an Auth identity and must never create an account automatically.
 - Initial production accounts are invite-only and require verified payment eligibility. Open registration remains disabled until Robert approves the financial, recovery, security, provider, and payment gates.
 - `ACCOUNT_ADMISSION_MODE` is an operational display/state flag and never enables browser signup. Future invitation admission must create Auth users through a server-only admin path after the CRY-489 provider and acceptance tests pass.
@@ -76,7 +76,7 @@ Apply this rule to every assistant and agent response in every session loop:
 
 - Use the approved CRY-271 vocabulary in `docs/CRY_271_PublicVocabularyProposal_2026-07-13.md` for all audience-facing copy.
 - Public copy names what a person can see, do, or expect. Keep implementation and governance terms such as `lane`, `surface`, `shell`, `placeholder`, `V1`, `review queue`, and field-level publication statuses internal.
-- Use **Home**, **My Home**, **Entertainment Hub**, **Professional**, **Sign Up**, **Account**, **Cryptic Signal**, **release**, **product**, **franchise**, **world**, **character**, and **My Library** consistently with the current state-aware v19 model.
+- Use **Home**, **My Home**, **Entertainment Hub**, **Professional**, **Sign In**, **Sign Up**, **Account Availability**, **Account**, **Cryptic Signal**, **release**, **product**, **franchise**, **world**, **character**, and **My Library** consistently with the current state-aware v19 model.
 - CTAs begin with a specific verb and name the outcome or destination. Preview forms must state clearly when data is saved only in the browser and is not submitted.
 - `platform`, `system`, `rights`, and `production` remain valid when they add specific meaning; do not use them as vague interface filler.
 
