@@ -11,6 +11,7 @@ const serverStateUrl = new URL("./server-account-state.ts", import.meta.url);
 const accountNavigationUrl = new URL("../components/AccountNavigation.tsx", import.meta.url);
 const accountPageUrl = new URL("../app/account/page.tsx", import.meta.url);
 const myHomeDashboardUrl = new URL("../components/MyHomeDashboard.tsx", import.meta.url);
+const ecosystemStatusUrl = new URL("../components/AccountEcosystemStatus.tsx", import.meta.url);
 
 test("global account navigation starts from server authentication state", async () => {
   const [header, layout, serverState] = await Promise.all([
@@ -60,24 +61,24 @@ test("primary navigation exposes contextual Sign In or Account directly without 
   assert.doesNotMatch(header, /aria-haspopup="menu"/);
 });
 
-test("signed-out Home pairs Sign Up with Account availability", async () => {
-  const [dashboard, homePage, globals] = await Promise.all([
+test("signed-out Home pairs Sign Up with reusable ecosystem status", async () => {
+  const [dashboard, homePage, ecosystemStatus, globals] = await Promise.all([
     readFile(myHomeDashboardUrl, "utf8"),
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+    readFile(ecosystemStatusUrl, "utf8"),
     readFile(globalsUrl, "utf8"),
   ]);
   assert.match(homePage, /accountAdmissionMode\(\)/);
   assert.match(homePage, /<MyHomeDashboard accountAdmissionMode=/);
   assert.match(dashboard, /href="\/account" className="button home-primary-cta">Sign up<\/Link>/);
-  assert.doesNotMatch(dashboard, /href="\/account\/create" className="button home-secondary-cta">/);
-  assert.match(dashboard, /href="\/account\/create" className="button home-secondary-cta home-ecosystem-status__cta">Account availability<\/Link>/);
+  assert.match(dashboard, /<AccountEcosystemStatus admissionMode=\{accountAdmissionMode\} \/>/);
   assert.doesNotMatch(dashboard, /href="\/account\/sign-in" className="button">Sign in<\/Link>/);
-  assert.match(dashboard, /aria-label="Current ecosystem status"/);
-  assert.match(dashboard, /<dd data-status="open">Open<\/dd>/);
-  assert.match(dashboard, /<dt>Subscriptions<\/dt><dd data-status="closed">Not available<\/dd>/);
-  assert.match(dashboard, /New accounts are temporarily closed while we finish the account and subscription model for launch\./);
-  assert.match(globals, /\.visual-hero \.home-ecosystem-status__note\{[^}]*max-width:none[^}]*font:400 11px\/1\.55/);
-  assert.match(globals, /\.visual-hero \.home-ecosystem-status__cta\{[^}]*display:flex[^}]*width:100%/);
+  assert.match(ecosystemStatus, /aria-label="Current ecosystem status"/);
+  assert.match(ecosystemStatus, /<dd data-status="open">Open<\/dd>/);
+  assert.match(ecosystemStatus, /<dt>Subscriptions<\/dt><dd data-status="closed">Not available<\/dd>/);
+  assert.match(ecosystemStatus, /New accounts are temporarily closed while we finish the account and subscription model for launch\./);
+  assert.match(globals, /\.account-ecosystem-status \.account-ecosystem-status__note\{[^}]*max-width:none[^}]*font:400 11px\/1\.55/);
+  assert.match(globals, /\.account-ecosystem-status \.account-ecosystem-status__cta\{[^}]*display:flex[^}]*width:100%/);
 });
 
 test("account subnavigation is available only to authenticated visitors", async () => {
@@ -100,19 +101,22 @@ test("account subnavigation is available only to authenticated visitors", async 
 });
 
 test("signed-out Account is a benefits and live availability overview", async () => {
-  const accountPage = await readFile(accountPageUrl, "utf8");
+  const [accountPage, ecosystemStatus] = await Promise.all([
+    readFile(accountPageUrl, "utf8"),
+    readFile(ecosystemStatusUrl, "utf8"),
+  ]);
   assert.match(accountPage, /getInitialAccountAuthenticated/);
   assert.match(accountPage, /accountAdmissionMode/);
   assert.match(accountPage, /if \(!authenticated\)/);
   assert.match(accountPage, /What an account gives you/);
-  assert.match(accountPage, /New account availability/);
-  assert.match(accountPage, /invitationOnly \? "Invitation only" : "Closed"/);
+  assert.match(accountPage, /<AccountEcosystemStatus admissionMode=\{admissionMode\}/);
   assert.match(accountPage, /Already have an account\? Sign in/);
   assert.match(accountPage, /Check account availability/);
-  assert.match(accountPage, /<dt>Subscriptions<\/dt><dd data-status="closed">Not available<\/dd>/);
-  assert.doesNotMatch(accountPage, /<dt>Payments<\/dt>/);
-  assert.match(accountPage, /<dd data-status="open">Open<\/dd>/);
-  assert.match(accountPage, /<strong data-status="closed">/);
+  assert.match(ecosystemStatus, /invitationOnly \? "Invitation only" : "Accounts closed"/);
+  assert.match(ecosystemStatus, /<dt>Subscriptions<\/dt><dd data-status="closed">Not available<\/dd>/);
+  assert.doesNotMatch(ecosystemStatus, /<dt>Payments<\/dt>/);
+  assert.match(ecosystemStatus, /<dd data-status="open">Open<\/dd>/);
+  assert.match(ecosystemStatus, /<strong data-status="closed">/);
 });
 
 test("primary Account link does not duplicate utility or franchise destinations", async () => {

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 
 import AccountAccessForm from "@/components/AccountAccessForm";
+import AccountEcosystemStatus from "@/components/AccountEcosystemStatus";
+import { accountAdmissionMode } from "@/lib/account-admission";
 
 export const metadata: Metadata = {
   title: "Sign In",
@@ -12,7 +14,7 @@ export const metadata: Metadata = {
 export default function SignInPage() {
   return (
     <main className="account-page">
-      <header className="account-hero account-hero--compact">
+      <header className="account-hero account-hero--full-bleed account-hero--sign-in">
         <div className="account-hero__image" aria-hidden="true">
           <Image src="/images/current-focus.png" alt="" fill sizes="(max-width: 900px) 100vw, 70vw" priority />
         </div>
@@ -22,6 +24,7 @@ export default function SignInPage() {
           <h1 className="display-title">Sign In</h1>
           <p>Sign in to access your account, including your character, library, activity, settings, and subscription status.</p>
         </div>
+        <AccountEcosystemStatus admissionMode={accountAdmissionMode()} />
       </header>
       <section className="account-content-grid">
         <AccountAccessForm mode="sign-in" />

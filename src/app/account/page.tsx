@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import AccountEcosystemStatus from "@/components/AccountEcosystemStatus";
 import { accountAdmissionMode } from "@/lib/account-admission";
 import { getInitialAccountAuthenticated } from "@/lib/server-account-state";
 
@@ -50,15 +51,7 @@ export default async function AccountHub() {
               <Link href="/account/sign-in" className="button secondary">Already have an account? Sign in</Link>
             </div>
           </div>
-          <aside className="account-telemetry" aria-label="New account availability">
-            <span className="account-telemetry__label">New account availability</span>
-            <strong data-status="closed"><i aria-hidden="true" /> {invitationOnly ? "Invitation only" : "Closed"}</strong>
-            <dl>
-              <div><dt>Public site</dt><dd data-status="open">Open</dd></div>
-              <div><dt>New accounts</dt><dd data-status="closed">{invitationOnly ? "Approved invitations only" : "Not available"}</dd></div>
-              <div><dt>Subscriptions</dt><dd data-status="closed">Not available</dd></div>
-            </dl>
-          </aside>
+          <AccountEcosystemStatus admissionMode={admissionMode} showAvailabilityAction={false} />
         </header>
         <section className="account-benefit-section" aria-labelledby="account-benefits-title">
           <header>

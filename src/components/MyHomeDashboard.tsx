@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import AccountEcosystemStatus from "@/components/AccountEcosystemStatus";
 import MediaCard from "@/components/MediaCard";
 import type { AccountAdmissionMode } from "@/lib/account-admission";
 import type { PublicCharacterIdentity } from "@/lib/characters";
@@ -48,8 +49,6 @@ export default function MyHomeDashboard({ accountAdmissionMode }: { accountAdmis
     : authenticated
       ? `Welcome back${character ? `, ${character.name}` : ""}.`
       : "Welcome to Cryptic Design.";
-  const invitationOnly = accountAdmissionMode === "invitation";
-
   return (
     <main>
       <section className="visual-hero home-hero">
@@ -73,21 +72,7 @@ export default function MyHomeDashboard({ accountAdmissionMode }: { accountAdmis
             </div>
           </div>
           {sessionLoaded && !authenticated ? (
-            <aside className="account-telemetry home-ecosystem-status" aria-label="Current ecosystem status">
-              <span className="account-telemetry__label">Current ecosystem status</span>
-              <strong data-status="closed"><i aria-hidden="true" /> {invitationOnly ? "Invitation only" : "Accounts closed"}</strong>
-              <dl>
-                <div><dt>Public site</dt><dd data-status="open">Open</dd></div>
-                <div><dt>New accounts</dt><dd data-status="closed">{invitationOnly ? "Invitation only" : "Not available"}</dd></div>
-                <div><dt>Subscriptions</dt><dd data-status="closed">Not available</dd></div>
-              </dl>
-              <p className="home-ecosystem-status__note">
-                {invitationOnly
-                  ? "New accounts are currently limited to invited users while we finish the account and subscription model for launch."
-                  : "New accounts are temporarily closed while we finish the account and subscription model for launch."}
-              </p>
-              <Link href="/account/create" className="button home-secondary-cta home-ecosystem-status__cta">Account availability</Link>
-            </aside>
+            <AccountEcosystemStatus admissionMode={accountAdmissionMode} />
           ) : null}
         </div>
       </section>

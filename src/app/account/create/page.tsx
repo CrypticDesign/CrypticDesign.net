@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import AccountAccessForm from "@/components/AccountAccessForm";
+import AccountEcosystemStatus from "@/components/AccountEcosystemStatus";
+import { accountAdmissionMode } from "@/lib/account-admission";
 
 export const metadata: Metadata = {
   title: "Account Availability",
@@ -25,15 +27,7 @@ export default function CreateAccountPage() {
             to create an account. You can still explore the public site without signing in.
           </p>
         </div>
-        <aside className="account-telemetry" aria-label="Account availability status">
-          <span className="account-telemetry__label">Availability</span>
-          <strong data-status="closed"><i aria-hidden="true" /> Closed</strong>
-          <dl>
-            <div><dt>Public site</dt><dd data-status="open">Open</dd></div>
-            <div><dt>New accounts</dt><dd data-status="closed">Invitation only</dd></div>
-            <div><dt>Subscriptions</dt><dd data-status="closed">Not available</dd></div>
-          </dl>
-        </aside>
+        <AccountEcosystemStatus admissionMode={accountAdmissionMode()} showAvailabilityAction={false} />
       </header>
       <section className="account-content-grid">
         <AccountAccessForm mode="create" />
