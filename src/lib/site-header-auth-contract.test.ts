@@ -91,11 +91,12 @@ test("account subnavigation is available only to authenticated visitors", async 
   assert.match(navigation, /MEMBERSHIP_SESSION_CHANGED_EVENT/);
   assert.match(navigation, /if \(!relevant \|\| !authenticated\) return null/);
   assert.match(navigation, /label: "Overview"/);
-  assert.match(navigation, /label: "Character"/);
-  assert.match(navigation, /label: "Subscription"/);
-  assert.match(navigation, /label: "Library"/);
-  assert.match(navigation, /label: "Notifications"/);
+  assert.match(navigation, /label: "Security"/);
+  assert.match(navigation, /label: "My Library"/);
+  assert.match(navigation, /label: "Access"/);
   assert.match(navigation, /label: "Settings"/);
+  assert.match(navigation, /entertainment-navigation account-section-navigation/);
+  assert.match(navigation, /entertainment-navigation__icon/);
   assert.doesNotMatch(navigation, /label: "Availability"/);
   assert.doesNotMatch(navigation, /label: "Sign In"/);
 });
@@ -105,12 +106,13 @@ test("signed-out Account is a benefits and live availability overview", async ()
     readFile(accountPageUrl, "utf8"),
     readFile(ecosystemStatusUrl, "utf8"),
   ]);
-  assert.match(accountPage, /getInitialAccountAuthenticated/);
+  assert.match(accountPage, /getInitialAccountIdentity/);
   assert.match(accountPage, /accountAdmissionMode/);
-  assert.match(accountPage, /if \(!authenticated\)/);
+  assert.match(accountPage, /if \(!identity\.authenticated\)/);
   assert.match(accountPage, /What an account gives you/);
   assert.match(accountPage, /account-hero account-hero--full-bleed account-hero--signup/);
-  assert.match(accountPage, /account-hero account-hero--full-bleed account-hero--hub/);
+  assert.match(accountPage, /<AccountOverview identity=\{identity\} \/>/);
+  assert.doesNotMatch(accountPage, /account-hero account-hero--full-bleed account-hero--hub/);
   assert.match(accountPage, /<AccountEcosystemStatus admissionMode=\{admissionMode\}/);
   assert.match(accountPage, /Already have an account\? Sign in/);
   assert.match(accountPage, /Check account availability/);

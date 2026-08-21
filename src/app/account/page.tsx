@@ -2,23 +2,15 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import AccountEcosystemStatus from "@/components/AccountEcosystemStatus";
+import AccountOverview from "@/components/AccountOverview";
 import { accountAdmissionMode } from "@/lib/account-admission";
-import { getInitialAccountAuthenticated } from "@/lib/server-account-state";
+import { getInitialAccountIdentity } from "@/lib/server-account-state";
 
 export const metadata: Metadata = {
   title: "Account",
   alternates: { canonical: "/account" },
   description: "Your Cryptic Design account, character, and settings.",
 };
-
-const ITEMS = [
-  { href: "/account/create", code: "01", accent: "cyan", title: "Account Availability", body: "See when new accounts will open and how invitations will work." },
-  { href: "/account/sign-in", code: "02", accent: "blue", title: "Sign In", body: "Return to your character, library, and activity." },
-  { href: "/account/character", code: "03", accent: "gold", title: "Character", body: "Create your identity and keep your progress together." },
-  { href: "/account/subscription", code: "04", accent: "magenta", title: "Subscription", body: "See what a subscription will include when plans open." },
-  { href: "/account/notifications", code: "05", accent: "green", title: "Notifications", body: "Choose the releases and account updates you want to receive." },
-  { href: "/account/settings", code: "06", accent: "cyan", title: "Settings", body: "Manage your privacy, preferences, and account." },
-] as const;
 
 const BENEFITS = [
   { code: "01", title: "Save what matters", body: "Keep releases, articles, music, and worlds together in My Library." },
@@ -27,10 +19,10 @@ const BENEFITS = [
 ] as const;
 
 export default async function AccountHub() {
-  const authenticated = await getInitialAccountAuthenticated();
+  const identity = await getInitialAccountIdentity();
   const admissionMode = accountAdmissionMode();
 
-  if (!authenticated) {
+  if (!identity.authenticated) {
     const invitationOnly = admissionMode === "invitation";
     return (
       <main className="account-page account-signup-overview">
@@ -81,41 +73,5 @@ export default async function AccountHub() {
     );
   }
 
-  return (
-    <main className="account-page account-hub">
-      <header className="account-hero account-hero--full-bleed account-hero--hub">
-        <div className="account-hero__image" aria-hidden="true">
-          <Image src="/images/my-home-hero.png" alt="" fill sizes="(max-width: 900px) 100vw, 70vw" priority />
-        </div>
-        <div className="account-hero__copy">
-          <div className="signal-rail" />
-          <span className="eyebrow">Your Cryptic Design account</span>
-          <h1 className="display-title">Account</h1>
-          <p>
-            Keep your character, saved releases, activity, and settings together.
-            New accounts are not open yet, but you can explore what is planned.
-          </p>
-        </div>
-        <aside className="account-telemetry" aria-label="Account status">
-          <span className="account-telemetry__label">Account status</span>
-          <strong data-status="preview"><i aria-hidden="true" /> Preview</strong>
-          <dl>
-            <div><dt>Characters</dt><dd data-status="preview">In testing</dd></div>
-            <div><dt>New accounts</dt><dd data-status="closed">Closed</dd></div>
-            <div><dt>Subscriptions</dt><dd data-status="closed">Not available</dd></div>
-          </dl>
-        </aside>
-      </header>
-      <section className="account-command-grid" aria-label="Account destinations">
-        {ITEMS.map((i) => (
-          <Link key={i.href} href={i.href} className="account-command-card" data-accent={i.accent}>
-            <span className="account-command-card__code">CRY / {i.code}</span>
-            <h2>{i.title}</h2>
-            <p>{i.body}</p>
-            <span className="account-command-card__action">View details <b aria-hidden="true">→</b></span>
-          </Link>
-        ))}
-      </section>
-    </main>
-  );
+  return <AccountOverview identity={identity} />;
 }
