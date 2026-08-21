@@ -1,11 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 import TurnstileWidget from "@/components/TurnstileWidget";
 import { announceMembershipSession } from "@/lib/membership-session-events";
 
 export default function AccountAccessForm({ mode }: { mode: "create" | "sign-in" }) {
+  const router = useRouter();
   const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? "";
   const inputClassName = "min-h-11 w-full border border-[var(--line)] bg-[var(--canvas)] px-3 py-3 text-[var(--text)]";
   const [authenticated, setAuthenticated] = useState(false);
@@ -53,6 +55,9 @@ export default function AccountAccessForm({ mode }: { mode: "create" | "sign-in"
       announceMembershipSession(nextAuthenticated);
       setServiceMode(payload.mode ?? serviceMode);
       setMessage(payload.message ?? payload.error ?? (payload.authenticated ? "You are signed in." : "Check your email to confirm your account."));
+      if (mode === "sign-in" && response.ok && nextAuthenticated) {
+        router.replace("/");
+      }
     } catch {
       setMessage("Account services could not be reached. Please try again.");
     } finally {
@@ -90,6 +95,7 @@ export default function AccountAccessForm({ mode }: { mode: "create" | "sign-in"
       setAuthenticated(true);
       announceMembershipSession(true);
       setMessage("Local test account active.");
+      router.replace("/");
     } catch {
       setMessage("The local test session could not be started.");
     } finally {

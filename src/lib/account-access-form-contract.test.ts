@@ -40,6 +40,13 @@ test("local sandbox offers a credential-free test account", async () => {
   assert.doesNotMatch(component, /if \(serviceMode === "sandbox"\) return/);
 });
 
+test("successful sign-in continues directly to My Home", async () => {
+  const source = await readFile(componentUrl, "utf8");
+  assert.match(source, /const router = useRouter\(\)/);
+  assert.match(source, /mode === "sign-in" && response\.ok && nextAuthenticated/);
+  assert.equal((source.match(/router\.replace\("\/"\)/g) ?? []).length, 2);
+});
+
 test("password controls support visibility and route recovery honestly", async () => {
   const source = await readFile(componentUrl, "utf8");
   assert.match(source, /showPassword/);

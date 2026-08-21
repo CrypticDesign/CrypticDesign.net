@@ -1,42 +1,58 @@
 import type { Metadata } from "next";
-import AccountFeatureIntro from "@/components/AccountFeatureIntro";
-import { getInitialAccountAuthenticated } from "@/lib/server-account-state";
+import Link from "next/link";
+import AccountSectionHero from "@/components/AccountSectionHero";
+import { getInitialAccountIdentity } from "@/lib/server-account-state";
 
 export const metadata: Metadata = {
-  title: "Settings",
+  title: "Settings & Privacy",
   alternates: { canonical: "/account/settings" },
-  description: "Control your Cryptic Design identity, privacy, communication, and account preferences.",
+  description: "Review supported Cryptic Design preferences, privacy, security, and account lifecycle controls.",
 };
 
 export default async function SettingsPage() {
-  const initialAuthenticated = await getInitialAccountAuthenticated();
+  const identity = await getInitialAccountIdentity();
+  if (!identity.authenticated) return (
+    <main className="account-page account-operational-page"><section className="account-state-message"><span className="eyebrow">Settings &amp; Privacy</span><h1>Sign in to manage settings</h1><p>Account and privacy settings are private.</p><Link href="/account/sign-in" className="button">Sign in</Link></section></main>
+  );
 
   return (
-    <main className="account-page account-feature-page">
-      <AccountFeatureIntro
-        accent="blue"
-        eyebrow="Account settings"
-        title="Make your account work for you."
-        description="Choose what you share, which updates you receive, and how Cryptic Design works for you."
-        image="/images/service-interface.png"
-        imageAlt="A blue interface system visualization"
-        benefits={[
-          { title: "Private until you say otherwise", body: "Your identity and activity stay private unless you choose to share them." },
-          { title: "Your preferences in one place", body: "Manage display, accessibility, communication, and personalization settings together." },
-          { title: "Clear account controls", body: "Review your sign-in, subscription, personal data, and account status whenever you need to." },
-        ]}
-        steps={[
-          { title: "Choose your settings", body: "Set your privacy, communication, display, and accessibility preferences." },
-          { title: "See what will change", body: "We explain what each setting does before you save it." },
-          { title: "Update them anytime", body: "Come back whenever your needs or subscription change." },
-        ]}
-        primaryAction={{ href: "/account/sign-in", label: "Sign in" }}
-        secondaryAction={{ href: "/account", label: "Account overview" }}
-        signedInPrimaryAction={{ href: "/account", label: "Account overview" }}
-        signedInSecondaryAction={{ href: "/account/subscription", label: "View subscription" }}
-        initialAuthenticated={initialAuthenticated}
-        note="These settings are still being built. Nothing shown here will publish your information, start billing, or make your account public."
+    <main className="account-section-page">
+      <AccountSectionHero
+        eyebrow="Account / settings / privacy"
+        title="Settings & Privacy"
+        description="Manage supported display and privacy behavior while seeing honest availability states for controls still in development."
+        image="/images/human-machine.png"
+        imageAlt="An abstract digital iris representing personal controls"
       />
+      <div className="shell page-stack account-section-page__body">
+      <section className="account-control-section" aria-labelledby="general-settings-title">
+        <header className="account-section-heading"><div><span className="eyebrow">General</span><h2 id="general-settings-title">Display &amp; accessibility</h2></div></header>
+        <dl className="account-setting-list">
+          <div><dt>Display preferences</dt><dd>Uses your browser and operating-system settings</dd></div>
+          <div><dt>Reduced motion</dt><dd>Respects your operating-system preference</dd></div>
+          <div><dt>Language</dt><dd>English · additional languages are not supported</dd></div>
+        </dl>
+      </section>
+      <section id="privacy" className="account-control-section" aria-labelledby="privacy-settings-title">
+        <header className="account-section-heading"><div><span className="eyebrow">Privacy</span><h2 id="privacy-settings-title">Character &amp; activity</h2></div><p>Characters remain private unless eligible owners separately authorize publication.</p></header>
+        <dl className="account-setting-list">
+          <div><dt>Character profile visibility</dt><dd>Managed with your Character</dd></div>
+          <div><dt>Discoverability</dt><dd>Off by default · managed with your Character</dd></div>
+          <div><dt>Activity visibility</dt><dd>Not published</dd></div>
+          <div><dt>Mission history visibility</dt><dd>Not implemented</dd></div>
+        </dl>
+        <Link href="/account/character#identity-settings" className="button secondary">Manage character privacy</Link>
+      </section>
+      <section className="account-control-section" aria-labelledby="account-settings-title">
+        <header className="account-section-heading"><div><span className="eyebrow">Account</span><h2 id="account-settings-title">Account lifecycle</h2></div><p>Security and recovery controls have their own Account section.</p></header>
+        <div className="account-lifecycle-grid">
+          <Link href="/account/security"><strong>Security &amp; recovery</strong><span>Review verification, sessions, password recovery, and sign-out.</span></Link>
+          <article><strong>Export account data</strong><span>Not available yet.</span></article>
+          <article><strong>Delete account</strong><span>Not available until governed deletion and retention handling is implemented.</span></article>
+        </div>
+      </section>
+      <Link href="/account" className="account-return-link">← Account overview</Link>
+      </div>
     </main>
   );
 }

@@ -34,28 +34,30 @@ test("empty Character and Library states introduce their features instead of dea
   assert.match(character, /Your character, everywhere/);
   assert.match(library, /if \(saved\.length === 0\)/);
   assert.match(library, /Save what you want to come back to/);
-  assert.match(library, /You can save items on this device without subscribing/);
+  assert.match(library, /Saved items currently stay on this device/);
+  assert.match(library, /Remove saved release/);
+  assert.match(library, /Recently saved/);
   assert.match(library, /fetch\("\/api\/membership\/session"/);
   assert.match(library, /authenticated: Boolean\(session\?\.authenticated\)/);
 });
 
-test("Subscription, Settings, and Notifications explain value without claiming active services", async () => {
+test("Subscription, Settings, and Notifications expose only working or honestly gated account states", async () => {
   const [subscription, settings, notifications] = await Promise.all([
     source("app/account/subscription/page.tsx"),
     source("app/account/settings/page.tsx"),
     source("app/account/notifications/page.tsx"),
   ]);
-  assert.match(subscription, /Get more from Cryptic Design/);
-  assert.match(subscription, /Subscriptions and payments are not open/);
-  assert.match(subscription, /getInitialAccountAuthenticated/);
-  assert.match(subscription, /signedInPrimaryAction=\{\{ href: "#membership-preview-title", label: "View plan preview" \}\}/);
-  assert.match(subscription, /signedInSecondaryAction=\{\{ href: "\/account", label: "Account overview" \}\}/);
-  assert.match(settings, /getInitialAccountAuthenticated/);
-  assert.match(settings, /signedInSecondaryAction=\{\{ href: "\/account\/subscription", label: "View subscription" \}\}/);
-  assert.match(notifications, /getInitialAccountAuthenticated/);
-  assert.match(notifications, /signedInSecondaryAction=\{\{ href: "\/account\/settings", label: "Account settings" \}\}/);
-  assert.match(settings, /Make your account work for you/);
-  assert.match(settings, /Nothing shown here will publish your information/);
-  assert.match(notifications, /Get the updates you actually want/);
-  assert.match(notifications, /Notifications are not active yet/);
+  assert.match(subscription, /getInitialAccountIdentity/);
+  assert.match(subscription, /Site account/);
+  assert.match(subscription, /Paid subscription/);
+  assert.match(subscription, /No tier, price, trial, payment method, invoice, or billing workflow is active/);
+  assert.doesNotMatch(subscription, /MembershipSandbox/);
+  assert.match(settings, /getInitialAccountIdentity/);
+  assert.match(settings, /Uses your browser and operating-system settings/);
+  assert.match(settings, /Export account data/);
+  assert.match(settings, /Not available yet/);
+  assert.match(notifications, /getInitialAccountIdentity/);
+  assert.match(notifications, /No notifications/);
+  assert.match(notifications, /Notification controls/);
+  assert.match(notifications, /invitations/i);
 });
