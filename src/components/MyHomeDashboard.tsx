@@ -2,92 +2,272 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import AccountEcosystemStatus from "@/components/AccountEcosystemStatus";
-import MediaCard from "@/components/MediaCard";
+import MissionControlSummary from "@/components/my-home/MissionControlSummary";
+import PersonalSpacePanel from "@/components/my-home/PersonalSpacePanel";
 import type { AccountAdmissionMode } from "@/lib/account-admission";
 import type { PublicCharacterIdentity } from "@/lib/characters";
 import { getSavedSlugs } from "@/lib/library";
+import type { ProgressionSnapshot } from "@/lib/progression";
+import {
+  publicReleases,
+  releaseDestination,
+  releaseImage,
+  type Release,
+} from "@/lib/releases";
+import type { RpgContentSnapshot } from "@/lib/rpg-content-store";
+import type { RpgProjection } from "@/lib/rpg-experience-store";
+
+type DashboardState = {
+  character: PublicCharacterIdentity | null;
+  progression: ProgressionSnapshot | null;
+  rpg: RpgProjection | null;
+  rpgContent: RpgContentSnapshot | null;
+};
+
+const EMPTY_DASHBOARD_STATE: DashboardState = {
+  character: null,
+  progression: null,
+  rpg: null,
+  rpgContent: null,
+};
+
+const CONTINUE_LABEL: Record<Release["kind"], string> = {
+  game: "Play",
+  video: "Watch",
+  audio: "Listen",
+  article: "Read",
+  lab: "Explore",
+};
+
+async function optionalJson<T>(url: string, signal: AbortSignal): Promise<T | null> {
+  try {
+    const response = await fetch(url, { cache: "no-store", signal });
+    return response.ok ? await response.json() as T : null;
+  } catch {
+    return null;
+  }
+}
+
+function formatActivityDate(value: string): string {
+  const date = new Date(value);
+  if (Number.isNaN(date.valueOf())) return "Recorded activity";
+  return new Intl.DateTimeFormat(undefined, { month: "short", day: "numeric", year: "numeric" }).format(date);
+}
 
 export default function MyHomeDashboard({ accountAdmissionMode }: { accountAdmissionMode: AccountAdmissionMode }) {
-  const [character, setCharacter] = useState<PublicCharacterIdentity | null>(null);
   const [authenticated, setAuthenticated] = useState(false);
   const [sessionLoaded, setSessionLoaded] = useState(false);
-  const [savedCount, setSavedCount] = useState(0);
+  const [dashboard, setDashboard] = useState<DashboardState>(EMPTY_DASHBOARD_STATE);
+  const [savedReleases, setSavedReleases] = useState<Release[]>([]);
 
   useEffect(() => {
-    // Resolve the session first, then only request the character when signed in.
-    // /api/characters returns 401 for anonymous visitors by design (CRY-335);
-    // calling it eagerly on this public page logged a 401 to the console for
-    // every signed-out visitor. Gating the call removes that without changing
-    // the auth API.
-    (async () => {
-      try {
-        const session = await fetch("/api/membership/session").then((r) => r.json());
-        const isAuthed = Boolean(session.authenticated);
-        setAuthenticated(isAuthed);
-        if (isAuthed) {
-          const payload = await fetch("/api/characters").then((r) =>
-            r.ok ? r.json() : { character: null },
-          );
-          setCharacter(payload.character ?? null);
-        } else {
-          setCharacter(null);
-        }
-      } catch {
-        setAuthenticated(false);
-        setCharacter(null);
-      } finally {
+    const controller = new AbortController();
+    const savedSlugs = getSavedSlugs();
+    setSavedReleases(publicReleases().filter((release) => savedSlugs.includes(release.slug)));
+
+    async function loadDashboard() {
+      const sessionPayload = await optionalJson<{ authenticated?: boolean }>("/api/membership/session", controller.signal);
+      if (controller.signal.aborted) return;
+      const isAuthenticated = Boolean(sessionPayload?.authenticated);
+      setAuthenticated(isAuthenticated);
+      if (!isAuthenticated) {
+        setDashboard(EMPTY_DASHBOARD_STATE);
         setSessionLoaded(true);
+        return;
       }
-    })();
-    setSavedCount(getSavedSlugs().length);
+
+      const characterPayload = await optionalJson<{ character?: PublicCharacterIdentity | null }>("/api/characters", controller.signal);
+      const character = characterPayload?.character ?? null;
+      if (!character || controller.signal.aborted) {
+        setDashboard({ ...EMPTY_DASHBOARD_STATE, character });
+        setSessionLoaded(true);
+        return;
+      }
+
+      const [progressionPayload, rpgPayload, contentPayload] = await Promise.all([
+        optionalJson<{ progression?: ProgressionSnapshot }>(`/api/characters/${character.id}/progression`, controller.signal),
+        optionalJson<{ rpg?: RpgProjection }>(`/api/characters/${character.id}/rpg`, controller.signal),
+        optionalJson<{ content?: RpgContentSnapshot }>(`/api/characters/${character.id}/rpg-content`, controller.signal),
+      ]);
+      if (controller.signal.aborted) return;
+      setDashboard({
+        character,
+        progression: progressionPayload?.progression ?? null,
+        rpg: rpgPayload?.rpg ?? null,
+        rpgContent: contentPayload?.content ?? null,
+      });
+      setSessionLoaded(true);
+    }
+
+    void loadDashboard();
+    return () => controller.abort();
   }, []);
 
+  const activity = useMemo(() => {
+    const progressionEvents = dashboard.progression?.events.map((event) => ({
+      id: event.id,
+      title: event.type.replaceAll("_", " "),
+      detail: "Recorded in the current progression sandbox.",
+      occurredAt: event.occurredAt,
+    })) ?? [];
+    const contentEvents = dashboard.rpgContent?.evidence.map((event) => ({
+      id: event.id,
+      title: event.title,
+      detail: event.detail,
+      occurredAt: event.occurredAt,
+    })) ?? [];
+    return [...progressionEvents, ...contentEvents]
+      .sort((left, right) => Date.parse(right.occurredAt) - Date.parse(left.occurredAt))
+      .slice(0, 4);
+  }, [dashboard.progression, dashboard.rpgContent]);
+
+  const character = dashboard.character;
   const greeting = !sessionLoaded
-    ? "Loading your space…"
+    ? "Preparing My Home..."
     : authenticated
       ? `Welcome back${character ? `, ${character.name}` : ""}.`
-      : "Welcome to Cryptic Design.";
+      : "Your place in Cryptic Design.";
+
   return (
-    <main>
-      <section className="visual-hero home-hero">
-        <div className="visual-hero__image"><Image src="/images/my-home-hero.png" alt="" fill priority sizes="100vw" /></div>
+    <main className="my-home">
+      <section className="visual-hero home-hero" aria-labelledby="my-home-title">
+        <PersonalSpacePanel
+          status={authenticated && character ? "ready" : "unavailable"}
+          character={authenticated && character ? { label: character.name, recipe: character.avatarRecipe } : null}
+        />
         <div className="visual-hero__wash" />
         <div className="visual-hero__content home-hero__content">
           <div className="home-hero__copy">
             <div className="signal-rail text-[#ffd400]" />
-            <span className="kicker !text-[#ffd400]">{authenticated ? "Your space" : "Entertainment · creativity · connection"}</span>
-            <h1 className="display-title">{greeting}</h1>
-            <p>{authenticated ? "Your character, activity, saved releases, interests, and progress are all here." : "Sign in to return to your character, library, and activity."}</p>
+            <span className="kicker !text-[#ffd400]">My Home</span>
+            <h1 id="my-home-title" className="display-title">{greeting}</h1>
+            <p>{authenticated
+              ? "See your identity, what you can continue, and what needs your attention right now."
+              : "My Home is the private dashboard for your Character, Library, activity, and future personal space."}</p>
             <div className="hero-actions">
               {authenticated ? (
                 <>
-                  <Link href="/account/character" className="button">♙ &nbsp; View profile</Link>
-                  <Link href="/account/settings" className="button secondary">⚙ &nbsp; Account settings</Link>
+                  <Link href={character ? "/account/character" : "/account/create-character"} className="button home-primary-cta">
+                    {character ? "View Character" : "Create Character"}
+                  </Link>
+                  <Link href="/library" className="button secondary">Open My Library</Link>
                 </>
               ) : (
-                <Link href="/account" className="button home-primary-cta">Sign up</Link>
+                <>
+                  <Link href="/account/sign-in" className="button home-primary-cta">Sign in to My Home</Link>
+                  <Link href="/account/create" className="button home-secondary-cta">Check account availability</Link>
+                </>
               )}
             </div>
           </div>
           {sessionLoaded && !authenticated ? (
-            <AccountEcosystemStatus admissionMode={accountAdmissionMode} />
-          ) : null}
+            <AccountEcosystemStatus admissionMode={accountAdmissionMode} showAvailabilityAction={false} />
+          ) : (
+            !sessionLoaded ? <aside className="my-home-loading panel" aria-live="polite" aria-busy="true">Loading private dashboard status...</aside> : null
+          )}
         </div>
       </section>
-      <div className="shell page-stack">
-        <section>
-          <div className="section-heading"><div><span className="kicker !text-[#ffd400]">Your activity</span><h2 className="section-title">Everything you are exploring, in one place.</h2></div><p>Continue where you left off and return to saved experiences.</p></div>
-          <div className="feature-split"><div className="feature-split__image"><Image src="/images/current-focus.png" alt="Abstract blue system visualization" fill sizes="(max-width:900px) 100vw, 65vw" /></div><div className="feature-split__content"><span className="kicker !text-[#ffd400]">Current focus</span><h2>Cryptic Design website production</h2><p>Continue translating the visual foundation into production-ready screens and interaction patterns.</p><Link href="/professional" className="button self-start">Resume work</Link></div></div>
-          <div className="mini-stats mt-4"><div className="mini-stat"><span>Today</span><strong>03</strong><span>Items awaiting review across active projects.</span></div><div className="mini-stat cyan"><span>This week</span><strong>68%</strong><span>Website production direction completed.</span></div></div>
+
+      {authenticated ? (
+        <div className="shell my-home-stack">
+          <section className="my-home-priority-grid" aria-label="Identity and next actions">
+            <article className="my-home-module my-home-identity" aria-labelledby="identity-summary-title">
+              <span className="kicker !text-[#ffd400]">Persistent identity</span>
+              {character ? (
+                <>
+                  <div className="my-home-identity__header">
+                    <div className="my-home-identity__mark" aria-hidden="true">{character.name.slice(0, 1).toUpperCase()}</div>
+                    <div><h2 id="identity-summary-title">{character.name}</h2><p>@{character.handle} · {character.archetype}</p></div>
+                  </div>
+                  <dl className="my-home-inline-facts">
+                    <div><dt>Status</dt><dd>{character.status}</dd></div>
+                    <div><dt>Privacy</dt><dd>{character.visibility === "private" ? "Private" : "Visibility managed in Character"}</dd></div>
+                    <div><dt>Journey</dt><dd>{dashboard.rpg?.journey.eraTitle ?? "No current journey data"}</dd></div>
+                  </dl>
+                  <Link href="/account/character" className="text-link">Open Character</Link>
+                </>
+              ) : (
+                <div className="my-home-empty">
+                  <h2 id="identity-summary-title">Create your persistent Character</h2>
+                  <p>Your account is active, but no Character is connected yet. Character details remain private unless you explicitly change their visibility.</p>
+                  <Link href="/account/create-character" className="button">Create Character</Link>
+                </div>
+              )}
+            </article>
+            <MissionControlSummary mission={null} />
+          </section>
+
+          <section aria-labelledby="continue-title">
+            <div className="section-heading"><div><span className="kicker !text-[#ffd400]">Continue</span><h2 id="continue-title" className="section-title">Pick up what matters.</h2></div><p>Until cross-device history is available, this uses releases saved to My Library on this device.</p></div>
+            {savedReleases.length ? (
+              <div className="my-home-continue-grid">
+                {savedReleases.slice(0, 4).map((release) => (
+                  <Link key={release.slug} href={releaseDestination(release)} className="my-home-continue-card panel-interactive">
+                    <div className="my-home-continue-card__image"><Image src={releaseImage(release)} alt="" fill sizes="(max-width: 640px) 100vw, 25vw" /></div>
+                    <div><span className="kicker">{CONTINUE_LABEL[release.kind]} · Saved on this device</span><h3>{release.title}</h3><p>{release.tagline}</p></div>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <div className="my-home-empty panel"><h3>Nothing is waiting yet.</h3><p>Save a public release and it will appear here. Viewing history and cross-device continuation are not active.</p><Link href="/entertainment" className="button secondary">Explore Entertainment</Link></div>
+            )}
+          </section>
+
+          <section className="my-home-detail-grid" aria-label="Library and progress">
+            <article className="my-home-module" aria-labelledby="library-summary-title">
+              <span className="kicker">My Library</span>
+              <h2 id="library-summary-title">{savedReleases.length ? `${savedReleases.length} saved on this device` : "Your saved releases"}</h2>
+              <p>My Home only summarizes your Library. Saving remains browser-local and does not imply account, subscription, or content access.</p>
+              {savedReleases.length ? <ul className="my-home-compact-list">{savedReleases.slice(0, 3).map((release) => <li key={release.slug}><Link href={releaseDestination(release)}>{release.title}<span>{CONTINUE_LABEL[release.kind]}</span></Link></li>)}</ul> : null}
+              <Link href="/library" className="text-link">Open My Library</Link>
+            </article>
+            <article className="my-home-module" aria-labelledby="activity-summary-title">
+              <span className="kicker !text-[#00f0a8]">Activity and progress</span>
+              <h2 id="activity-summary-title">What changed</h2>
+              {activity.length ? (
+                <ol className="my-home-activity-list">{activity.map((event) => <li key={event.id}><span aria-hidden="true" /><div><strong>{event.title}</strong><p>{event.detail}</p><time dateTime={event.occurredAt}>{formatActivityDate(event.occurredAt)}</time></div></li>)}</ol>
+              ) : <div className="my-home-empty"><p>No governed activity is available for this account yet. My Home will not manufacture usage history.</p></div>}
+              {dashboard.progression ? <p className="my-home-boundary-note">Sandbox balance: {dashboard.progression.internalBalance} internal units. This does not grant access, rewards, purchases, or public status.</p> : null}
+            </article>
+          </section>
+
+          <section className="my-home-detail-grid" aria-label="Collections and participation">
+            <article className="my-home-module" aria-labelledby="collection-summary-title">
+              <span className="kicker !text-[#ed00a8]">Achievements and collections</span>
+              <h2 id="collection-summary-title">What you have discovered</h2>
+              {dashboard.rpgContent?.achievements.length || dashboard.rpgContent?.collectibles.length ? (
+                <dl className="my-home-counts"><div><dt>Achievements</dt><dd>{dashboard.rpgContent.achievements.length}</dd></div><div><dt>Collectibles</dt><dd>{dashboard.rpgContent.collectibles.length}</dd></div></dl>
+              ) : <div className="my-home-empty"><p>No governed achievements or collectibles are connected yet.</p></div>}
+              <Link href="/account/character" className="text-link">View Character progress</Link>
+            </article>
+            <article className="my-home-module" aria-labelledby="participation-summary-title">
+              <span className="kicker">Connections and participation</span>
+              <h2 id="participation-summary-title">No participation updates</h2>
+              <p>Connections, invitations, groups, and messages are not active platform capabilities. Connecting will never grant access to another member&apos;s Home or private work.</p>
+            </article>
+          </section>
+
+          <section aria-labelledby="account-utilities-title">
+            <div className="section-heading"><div><span className="kicker !text-[#ffd400]">Account utilities</span><h2 id="account-utilities-title" className="section-title">Manage the practical details.</h2></div><p>Routine account tasks stay in conventional, accessible web interfaces.</p></div>
+            <nav className="my-home-utility-grid" aria-label="Account utilities">
+              <Link href="/account"><strong>Profile and account</strong><span>Overview, session, and sign out</span></Link>
+              <Link href="/library"><strong>My Library</strong><span>Saved releases on this device</span></Link>
+              <Link href="/account/notifications"><strong>Notifications</strong><span>Preview preferences and availability</span></Link>
+              <Link href="/account/subscription"><strong>Subscription</strong><span>Membership status and access</span></Link>
+              <Link href="/account/settings"><strong>Settings</strong><span>Security and privacy controls</span></Link>
+            </nav>
+          </section>
+        </div>
+      ) : sessionLoaded ? (
+        <section className="shell my-home-signed-out" aria-labelledby="signed-out-title">
+          <span className="kicker !text-[#ffd400]">Private by default</span>
+          <h2 id="signed-out-title" className="section-title">Sign in to see personal state.</h2>
+          <p>Public browsing remains available without an account. My Home only requests private Character and account data after an authenticated session is confirmed.</p>
+          <div className="hero-actions"><Link href="/entertainment" className="button secondary">Browse the public site</Link><Link href="/account/sign-in" className="button">Sign in</Link></div>
         </section>
-        <section>
-          <div className="section-heading"><div><span className="kicker !text-[#ffd400]">Your account</span><h2 className="section-title">Your activity and interests</h2></div><p>See what you saved, what changed, and what needs your attention.</p></div>
-          <div className="metric-grid"><Link href="/library" className="metric-card gold"><span className="kicker !text-[#ffd400]">Library</span><strong>{savedCount || 47}</strong><p>Saved releases, articles, projects, and references.</p></Link><Link href="/account/notifications" className="metric-card"><span className="kicker">Activity</span><strong>12</strong><p>Recent sessions, decisions, comments, and changes.</p></Link><div className="metric-card green"><span className="kicker !text-[#00f0a8]">Interests</span><strong>09</strong><p>Topics and creative signals shaping recommendations.</p></div><Link href="/account/notifications" className="metric-card magenta"><span className="kicker !text-[#ed00a8]">Notifications</span><strong>03</strong><p>Reviews, messages, and account events needing attention.</p></Link></div>
-        </section>
-        <section><div className="section-heading"><div><span className="kicker !text-[#ffd400]">Saved &amp; recent</span><h2 className="section-title">Return to what matters</h2></div><p>Recently viewed and personally saved experiences.</p></div><div className="media-grid"><MediaCard href="/audio" image="/images/signal-systems.png" eyebrow="Night release" title="Signal & Systems" body="Viewed 2 hours ago" accent="gold" /><MediaCard href="/professional/articles" image="/images/human-machine.png" eyebrow="Human capability" title="Human & Machine" body="Saved to research library" /><MediaCard href="/products/singularis" image="/images/singularis.png" eyebrow="Franchise development" title="Singularis" body="Episode 01 production notes" accent="magenta" /></div></section>
-      </div>
+      ) : null}
     </main>
   );
 }

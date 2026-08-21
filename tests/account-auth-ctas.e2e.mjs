@@ -11,15 +11,16 @@ try {
   await page.goto(`${baseUrl}/`, { waitUntil: "networkidle" });
   const signedOutHomeActions = page.locator(".visual-hero__content .hero-actions");
   assert.equal(await page.getByRole("navigation", { name: "Primary", exact: true }).getByRole("link", { name: "Sign In", exact: true }).isVisible(), true, "Signed-out primary navigation must expose Sign In");
-  assert.equal(await signedOutHomeActions.getByRole("link", { name: "Sign up", exact: true }).isVisible(), true, "Signed-out Home must place Sign up in the hero");
-  assert.equal(await signedOutHomeActions.getByRole("link", { name: "Account availability", exact: true }).isVisible(), true, "Signed-out Home must place Sign up beside Account availability");
+  assert.equal(await signedOutHomeActions.getByRole("link", { name: "Sign in to My Home", exact: true }).isVisible(), true, "Signed-out My Home must use the governed sign-in flow");
+  assert.equal(await signedOutHomeActions.getByRole("link", { name: "Check account availability", exact: true }).isVisible(), true, "Signed-out My Home must keep admission availability separate from sign-in");
+  assert.equal(await signedOutHomeActions.getByRole("link", { name: "Sign up", exact: true }).count(), 0, "Signed-out My Home must not advertise unrestricted registration");
 
   await page.goto(`${baseUrl}/account`, { waitUntil: "networkidle" });
   assert.equal(await page.getByRole("navigation", { name: "Primary", exact: true }).getByRole("link", { name: "Sign In", exact: true }).isVisible(), true, "Signed-out Account must keep Sign In in primary navigation");
   assert.equal(await page.getByRole("navigation", { name: "Account", exact: true }).count(), 0, "Signed-out visitors must not see account-level subnavigation");
   assert.equal(await page.getByRole("heading", { name: "Make this place yours.", exact: true }).isVisible(), true, "Signed-out Account must introduce the account benefits");
-  assert.equal(await page.getByLabel("New account availability").getByText("Closed", { exact: true }).isVisible(), true, "Signed-out Account must show the current closed admission state");
-  assert.equal(await page.getByRole("link", { name: "Check availability", exact: true }).isVisible(), true, "Signed-out Account must link to account availability");
+  assert.equal(await page.getByLabel("Current ecosystem status").getByText("Accounts closed", { exact: true }).isVisible(), true, "Signed-out Account must show the current closed admission state");
+  assert.equal(await page.getByRole("link", { name: "Check account availability", exact: true }).isVisible(), true, "Signed-out Account must link to account availability");
 
   await page.goto(`${baseUrl}/account/sign-in`, { waitUntil: "networkidle" });
   assert.equal(await page.getByRole("textbox", { name: "Email", exact: true }).isVisible(), true, "Signed-out Sign In must show the email input");
@@ -48,6 +49,11 @@ try {
     data: { action: "sign-in" },
   });
   assert.equal(signIn.status(), 200, "Local account sign-in must succeed");
+
+  await page.goto(`${baseUrl}/`, { waitUntil: "networkidle" });
+  assert.equal(await page.getByRole("heading", { name: "Mission Control", exact: true }).isVisible(), true, "Signed-in My Home must expose the Mission Control integration boundary");
+  assert.equal(await page.getByRole("heading", { name: /Character view active|Character required/ }).isVisible(), true, "Signed-in My Home must expose the interim Character runtime or its honest prerequisite state");
+  assert.equal(await page.getByRole("navigation", { name: "Account utilities", exact: true }).isVisible(), true, "Signed-in My Home must expose conventional account utilities");
 
   await page.goto(`${baseUrl}/account`, { waitUntil: "networkidle" });
   assert.equal(await page.getByRole("navigation", { name: "Primary", exact: true }).getByRole("link", { name: "Account", exact: true }).isVisible(), true, "Signed-in Account must use the authenticated primary label");
@@ -101,7 +107,7 @@ try {
   assert.equal(await libraryActions.getByRole("link", { name: "Explore membership", exact: true }).isVisible(), true, "Library must preserve authenticated actions when subscription services are unavailable");
   assert.equal(await libraryActions.getByRole("link", { name: "Sign in", exact: true }).count(), 0, "Library must not infer sign-out from an unavailable subscription endpoint");
 
-  console.log("Account CTA E2E passed: top-level Sign In, Home Sign up, Account, feature actions, and Library preserve the correct session state");
+  console.log("Account CTA E2E passed: governed My Home sign-in, authenticated dashboard boundaries, Account actions, and Library preserve the correct session state");
 } finally {
   await browser.close();
 }
