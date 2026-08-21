@@ -61,7 +61,7 @@ test("primary navigation exposes contextual Sign In or Account directly without 
   assert.doesNotMatch(header, /aria-haspopup="menu"/);
 });
 
-test("signed-out Home pairs Sign Up with reusable ecosystem status", async () => {
+test("signed-out My Home pairs governed sign-in with reusable ecosystem status", async () => {
   const [dashboard, homePage, ecosystemStatus, globals] = await Promise.all([
     readFile(myHomeDashboardUrl, "utf8"),
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
@@ -70,9 +70,9 @@ test("signed-out Home pairs Sign Up with reusable ecosystem status", async () =>
   ]);
   assert.match(homePage, /accountAdmissionMode\(\)/);
   assert.match(homePage, /<MyHomeDashboard accountAdmissionMode=/);
-  assert.match(dashboard, /href="\/account" className="button home-primary-cta">Sign up<\/Link>/);
-  assert.match(dashboard, /<AccountEcosystemStatus admissionMode=\{accountAdmissionMode\} \/>/);
-  assert.doesNotMatch(dashboard, /href="\/account\/sign-in" className="button">Sign in<\/Link>/);
+  assert.match(dashboard, /href="\/account\/sign-in" className="button home-primary-cta">Sign in to My Home<\/Link>/);
+  assert.match(dashboard, /<AccountEcosystemStatus admissionMode=\{accountAdmissionMode\} showAvailabilityAction=\{false\} \/>/);
+  assert.doesNotMatch(dashboard, />Sign up<\/Link>/);
   assert.match(ecosystemStatus, /aria-label="Current ecosystem status"/);
   assert.match(ecosystemStatus, /<dd data-status="open">Open<\/dd>/);
   assert.match(ecosystemStatus, /<dt>Subscriptions<\/dt><dd data-status="closed">Not available<\/dd>/);
