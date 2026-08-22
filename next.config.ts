@@ -24,6 +24,9 @@ const nextConfig: NextConfig = {
       { source: "/creative-works/crypticdesign-net", destination: "/professional", permanent: false },
       // Safety net for any unmapped legacy slug:
       { source: "/creative-works/:slug*", destination: "/entertainment", permanent: false },
+      // Arcade has grown into the broader Explore destination. Keep existing
+      // inbound links working while making Explore the canonical public route.
+      { source: "/entertainment/arcade", destination: "/entertainment/explore", permanent: true },
       // Singularis has one continuous playable destination. Preserve the old
       // release URL as an inbound link without keeping a duplicate page.
       {

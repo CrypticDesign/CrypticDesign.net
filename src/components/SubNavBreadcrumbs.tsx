@@ -17,6 +17,7 @@ const LABELS: Record<string, string> = {
   creators: "Contributing Creators",
   "creator-tools": "Creator Tools",
   entertainment: "Entertainment Hub",
+  explore: "Explore",
   inquiry: "Inquiry",
   library: "My Library",
   "listening-rooms": "Listening Rooms",
@@ -66,6 +67,7 @@ export default function SubNavBreadcrumbs({ position }: { position: "top" | "bot
 
   if (pathname === "/account" || pathname.startsWith("/account/") || pathname === "/library") return null;
   if (pathname === "/professional" || pathname.startsWith("/professional/")) return null;
+  if (pathname === "/community" || pathname.startsWith("/community/")) return null;
   if (position === "top" && !shouldShowTopBreadcrumb(pathname)) return null;
   if (crumbs.length < 2) return null;
 

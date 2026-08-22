@@ -5,6 +5,7 @@ import { chromium } from "playwright";
 const baseUrl = (process.argv[2] || "http://127.0.0.1:3100").replace(/\/$/, "");
 const outputDirectory = "qa-screens/my-home";
 const viewports = [
+  { name: "desktop-wide-1920", width: 1920, height: 1080 },
   { name: "desktop-1440", width: 1440, height: 900 },
   { name: "laptop-1024", width: 1024, height: 768 },
   { name: "tablet-768", width: 768, height: 1024 },
@@ -18,23 +19,111 @@ const results = [];
 for (const viewport of viewports) {
   const context = await browser.newContext({ viewport });
   const page = await context.newPage();
+  page.setDefaultTimeout(90_000);
+  page.setDefaultNavigationTimeout(90_000);
   const consoleErrors = [];
   page.on("console", (message) => { if (message.type() === "error") consoleErrors.push(message.text()); });
 
-  const response = await page.goto(`${baseUrl}/`, { waitUntil: "networkidle" });
+  const response = await page.goto(`${baseUrl}/`, { waitUntil: "domcontentloaded" });
   assert.equal(response?.status(), 200);
+  await page.getByRole("heading", { name: "Worlds to explore. Stories to experience. Systems that connect them." }).waitFor();
+  await page.getByRole("link", { name: "Explore entertainment", exact: true }).waitFor();
+  await page.getByRole("link", { name: "Discover the studio", exact: true }).waitFor();
+  await page.getByRole("heading", { name: "Featured now", exact: true }).waitFor();
+  await page.getByRole("heading", { name: "One ecosystem. Three ways in.", exact: true }).waitFor();
   await page.getByRole("link", { name: "Sign in to My Home" }).waitFor();
   assert.equal(await page.getByText("Sign up", { exact: true }).count(), 0);
   const signedOutLayout = await page.evaluate(() => ({
     documentWidth: document.documentElement.scrollWidth,
     viewportWidth: document.documentElement.clientWidth,
     h1Count: document.querySelectorAll("h1").length,
+    clippedControls: [...document.querySelectorAll("a,button")].filter((control) => {
+      const rect = control.getBoundingClientRect();
+      return rect.right > document.documentElement.clientWidth + 1 || rect.left < -1;
+    }).length,
+    heroHeight: document.querySelector(".public-home-portal__hero")?.getBoundingClientRect().height ?? 0,
+    heroBottom: document.querySelector(".public-home-portal__hero")?.getBoundingClientRect().bottom ?? 0,
+    heroContentLeft: document.querySelector(".public-home-portal__hero-content")?.getBoundingClientRect().left ?? 0,
+    portalStackLeft: document.querySelector(".public-home-portal__stack")?.getBoundingClientRect().left ?? 0,
+    featuredLabelTop: document.querySelector("#featured-now-title")?.getBoundingClientRect().top ?? 0,
+    titleRight: document.querySelector("#public-home-title")?.getBoundingClientRect().right ?? 0,
+    memberLeft: document.querySelector(".public-home-portal__member")?.getBoundingClientRect().left ?? 0,
   }));
   assert.ok(signedOutLayout.documentWidth <= signedOutLayout.viewportWidth + 1, `${viewport.name} signed-out page overflows horizontally`);
   assert.equal(signedOutLayout.h1Count, 1);
+  assert.equal(signedOutLayout.clippedControls, 0, `${viewport.name} signed-out Home has clipped controls`);
+  assert.ok(Math.abs(signedOutLayout.heroContentLeft - signedOutLayout.portalStackLeft) <= 1, `${viewport.name} public hero and content stack use different left rails`);
+  if (viewport.width > 1100) {
+    assert.ok(signedOutLayout.heroHeight <= 530, `${viewport.name} public hero is too tall (${signedOutLayout.heroHeight}px)`);
+    assert.ok(signedOutLayout.featuredLabelTop >= signedOutLayout.heroBottom + 20, `${viewport.name} Featured now overlaps the hero boundary`);
+    assert.ok(signedOutLayout.titleRight + 32 <= signedOutLayout.memberLeft, `${viewport.name} public hero title collides with the member panel`);
+  }
+
+  const communityResponse = await page.goto(`${baseUrl}/community`, { waitUntil: "domcontentloaded" });
+  assert.equal(communityResponse?.status(), 200);
+  await page.getByRole("heading", { name: "Find the signal. Share the journey." }).waitFor();
+  await page.getByRole("heading", { name: "Happening now / Featured", exact: true }).waitFor();
+  await page.getByRole("heading", { name: "No governed activity stream is connected.", exact: true }).waitFor();
+  await page.getByLabel("Current community status").getByText("Community features not available yet", { exact: true }).waitFor();
+  const communityNavigation = page.getByRole("navigation", { name: "Community sections" });
+  for (const label of ["Explore", "Groups", "Events", "Creators"]) await communityNavigation.getByRole("link", { name: new RegExp(`^${label}`) }).waitFor();
+  assert.equal(await communityNavigation.getByText("Spaces", { exact: true }).count(), 0);
+  assert.equal(await page.getByText("Join the community", { exact: true }).count(), 0);
+  const communityLayout = await page.evaluate(() => ({
+    documentWidth: document.documentElement.scrollWidth,
+    viewportWidth: document.documentElement.clientWidth,
+    h1Count: document.querySelectorAll("h1").length,
+    clippedControls: [...document.querySelectorAll("a,button")].filter((control) => {
+      const rect = control.getBoundingClientRect();
+      return rect.right > document.documentElement.clientWidth + 1 || rect.left < -1;
+    }).length,
+  }));
+  assert.ok(communityLayout.documentWidth <= communityLayout.viewportWidth + 1, `${viewport.name} Community page overflows horizontally`);
+  assert.equal(communityLayout.h1Count, 1);
+  assert.equal(communityLayout.clippedControls, 0, `${viewport.name} Community has clipped controls`);
+
+  for (const destination of [
+    { path: "/community/groups", heading: "Groups with governed membership.", active: "Groups" },
+    { path: "/community/events", heading: "Scheduled participation, clearly governed.", active: "Events" },
+    { path: "/community/creators", heading: "Discover people through their work.", active: "Creators" },
+  ]) {
+    const destinationResponse = await page.goto(`${baseUrl}${destination.path}`, { waitUntil: "domcontentloaded" });
+    assert.equal(destinationResponse?.status(), 200);
+    await page.getByRole("heading", { name: destination.heading, exact: true }).waitFor();
+    const activeState = await page.getByRole("navigation", { name: "Community sections" }).getByRole("link", { name: new RegExp(`^${destination.active}`) }).getAttribute("aria-current");
+    assert.equal(activeState, "page", `${viewport.name} ${destination.active} navigation state is not active`);
+  }
+
+  const exploreResponse = await page.goto(`${baseUrl}/entertainment/explore`, { waitUntil: "domcontentloaded" });
+  assert.equal(exploreResponse?.status(), 200);
+  await page.getByRole("heading", { name: "Explore the Cryptic universe." }).waitFor();
+  await page.getByRole("heading", { name: "Featured experiences", exact: true }).waitFor();
+  await page.getByRole("heading", { name: "Browse categories", exact: true }).waitFor();
+  await page.getByRole("heading", { name: "Playable catalog", exact: true }).waitFor();
+  await page.getByText("Public discovery is open.", { exact: true }).waitFor();
+  assert.equal(await page.getByText(/Join now|Join the community/i).count(), 0);
+  const exploreLayout = await page.evaluate(() => ({
+    documentWidth: document.documentElement.scrollWidth,
+    viewportWidth: document.documentElement.clientWidth,
+    h1Count: document.querySelectorAll("h1").length,
+    clippedControls: [...document.querySelectorAll("a,button")].filter((control) => {
+      const rect = control.getBoundingClientRect();
+      return rect.right > document.documentElement.clientWidth + 1 || rect.left < -1;
+    }).length,
+  }));
+  assert.ok(exploreLayout.documentWidth <= exploreLayout.viewportWidth + 1, `${viewport.name} Explore page overflows horizontally`);
+  assert.equal(exploreLayout.h1Count, 1);
+  assert.equal(exploreLayout.clippedControls, 0, `${viewport.name} Explore has clipped controls`);
 
   const signInResponse = await context.request.post(`${baseUrl}/api/membership/session`);
   assert.equal(signInResponse.status(), 200, "Local sandbox sign-in must be available for authenticated QA");
+  await page.goto(`${baseUrl}/community`, { waitUntil: "domcontentloaded" });
+  await page.getByRole("heading", { name: "Continue from your private platform state.", exact: true }).waitFor();
+  await page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "Account", exact: true }).waitFor();
+  await page.goto(`${baseUrl}/community/groups`, { waitUntil: "domcontentloaded" });
+  const communitySessionResponse = await context.request.get(`${baseUrl}/api/membership/session`);
+  assert.equal(communitySessionResponse.status(), 200);
+  assert.equal((await communitySessionResponse.json()).authenticated, true, `${viewport.name} Community navigation lost authenticated identity`);
   await page.route(`${baseUrl}/api/characters`, async (route) => {
     await route.fulfill({
       status: 200,
@@ -58,7 +147,7 @@ for (const viewport of viewports) {
   await page.route(`${baseUrl}/api/characters/qa-home-character/*`, async (route) => {
     await route.fulfill({ status: 200, contentType: "application/json", body: "{}" });
   });
-  await page.goto(`${baseUrl}/`, { waitUntil: "networkidle" });
+  await page.goto(`${baseUrl}/`, { waitUntil: "domcontentloaded" });
   await page.getByRole("heading", { name: "Mission Control" }).waitFor();
   const runtimeHeading = page.getByRole("heading", { name: /Character view active|Character required/ });
   await runtimeHeading.waitFor();
@@ -97,7 +186,7 @@ for (const viewport of viewports) {
   assert.deepEqual(consoleErrors, [], `${viewport.name} emitted console errors`);
 
   await page.screenshot({ path: `${outputDirectory}/${viewport.name}.png`, fullPage: true });
-  results.push({ viewport: viewport.name, signedOutLayout, signedInLayout, focused });
+  results.push({ viewport: viewport.name, signedOutLayout, communityLayout, exploreLayout, signedInLayout, focused });
   await context.close();
 }
 

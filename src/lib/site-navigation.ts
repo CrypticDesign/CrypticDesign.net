@@ -1,4 +1,4 @@
-export type PrimaryNavigationHref = "/" | "/entertainment" | "/professional";
+export type PrimaryNavigationHref = "/" | "/entertainment" | "/community" | "/professional";
 
 const ENTERTAINMENT_PREFIXES = [
   "/entertainment",

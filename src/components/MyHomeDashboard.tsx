@@ -56,9 +56,9 @@ function formatActivityDate(value: string): string {
   return new Intl.DateTimeFormat(undefined, { month: "short", day: "numeric", year: "numeric" }).format(date);
 }
 
-export default function MyHomeDashboard({ accountAdmissionMode }: { accountAdmissionMode: AccountAdmissionMode }) {
-  const [authenticated, setAuthenticated] = useState(false);
-  const [sessionLoaded, setSessionLoaded] = useState(false);
+export default function MyHomeDashboard({ initialAuthenticated = true, accountAdmissionMode = "closed" }: { initialAuthenticated?: boolean; accountAdmissionMode?: AccountAdmissionMode }) {
+  const [authenticated, setAuthenticated] = useState(initialAuthenticated);
+  const [sessionLoaded, setSessionLoaded] = useState(initialAuthenticated);
   const [dashboard, setDashboard] = useState<DashboardState>(EMPTY_DASHBOARD_STATE);
   const [savedReleases, setSavedReleases] = useState<Release[]>([]);
 

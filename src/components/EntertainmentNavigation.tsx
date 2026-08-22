@@ -40,7 +40,7 @@ export default function EntertainmentNavigation() {
   }, []);
 
   useEffect(() => {
-    const open = arcadeFranchiseRoute || pathname === "/entertainment/arcade" || pathname.startsWith("/entertainment/arcade/");
+    const open = arcadeFranchiseRoute || pathname === "/entertainment/explore" || pathname.startsWith("/entertainment/explore/");
     setArcadeMenuOpen(open);
     setOpenDestination(open ? "arcade" : pathname === "/audio" || pathname.startsWith("/audio/") ? "music" : pathname === "/entertainment/cinema" || pathname.startsWith("/entertainment/cinema/") ? "video" : null);
     window.dispatchEvent(new CustomEvent("cryptic:arcade-drawer", { detail: { open } }));

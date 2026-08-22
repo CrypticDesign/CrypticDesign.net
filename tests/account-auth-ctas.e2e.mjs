@@ -10,11 +10,16 @@ try {
   page.setDefaultNavigationTimeout(90_000);
 
   await page.goto(`${baseUrl}/`, { waitUntil: "networkidle" });
-  const signedOutHomeHero = page.locator(".home-hero");
+  const signedOutHomeHero = page.locator(".public-home-hero");
   assert.equal(await page.getByRole("navigation", { name: "Primary", exact: true }).getByRole("link", { name: "Sign In", exact: true }).isVisible(), true, "Signed-out primary navigation must expose Sign In");
-  assert.equal(await signedOutHomeHero.getByRole("link", { name: "Sign in to My Home", exact: true }).isVisible(), true, "Signed-out My Home must use the governed sign-in flow");
-  assert.equal(await signedOutHomeHero.getByRole("link", { name: "Check account availability", exact: true }).isVisible(), true, "Signed-out My Home must keep admission availability separate from sign-in");
-  assert.equal(await signedOutHomeHero.getByRole("link", { name: "Sign up", exact: true }).count(), 0, "Signed-out My Home must not advertise unrestricted registration");
+  assert.equal(await page.getByRole("navigation", { name: "Primary", exact: true }).getByRole("link", { name: "Home", exact: true }).isVisible(), true, "Signed-out primary navigation must identify the public Home");
+  assert.equal(await signedOutHomeHero.getByRole("heading", { name: "Worlds to explore. Stories to experience. Systems that connect them.", exact: true }).isVisible(), true, "Signed-out Home must introduce the Cryptic Design ecosystem");
+  assert.equal(await signedOutHomeHero.getByRole("link", { name: "Explore entertainment", exact: true }).isVisible(), true, "Public Home must lead into Entertainment");
+  assert.equal(await signedOutHomeHero.getByRole("link", { name: "Discover the studio", exact: true }).isVisible(), true, "Public Home must lead into Professional");
+  assert.equal(await page.getByRole("heading", { name: "Featured now", exact: true }).isVisible(), true, "Public Home must expose the featured ecosystem destinations");
+  assert.equal(await page.getByRole("heading", { name: "One ecosystem. Three ways in.", exact: true }).isVisible(), true, "Public Home must explain the platform entry modes");
+  assert.equal(await page.getByRole("link", { name: /Sign in to My Home/ }).isVisible(), true, "Public Home must keep the governed private-dashboard entry available");
+  assert.equal(await page.getByRole("link", { name: "Sign up", exact: true }).count(), 0, "Public Home must not advertise unrestricted registration");
 
   await page.goto(`${baseUrl}/account`, { waitUntil: "networkidle" });
   assert.equal(await page.getByRole("navigation", { name: "Primary", exact: true }).getByRole("link", { name: "Sign In", exact: true }).isVisible(), true, "Signed-out Account must keep Sign In in primary navigation");

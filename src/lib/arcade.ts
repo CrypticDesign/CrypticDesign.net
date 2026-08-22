@@ -55,7 +55,7 @@ export const ARCADE_ENTRIES: readonly ArcadeEntry[] = [
     slug: "cross-media-missions",
     title: "Cross-Media Missions",
     franchise: "Connected experiences",
-    premise: "Playable narrative assignments connecting Arcade with video, music, communications, and visual content.",
+    premise: "Playable narrative assignments connecting Explore with video, music, communications, and visual content.",
     status: "Construction",
     platform: "Web browser",
     access: "Subscriber access planned; samples may be public",
