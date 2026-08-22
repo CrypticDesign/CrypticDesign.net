@@ -15,7 +15,7 @@ test("uses a public Home label until the viewer is authenticated", () => {
 test("keeps Entertainment active across its legacy and current destinations", () => {
   for (const pathname of [
     "/entertainment",
-    "/entertainment/arcade",
+    "/entertainment/explore",
     "/products/singularis",
     "/releases/singularis-overture",
     "/audio",
@@ -27,13 +27,19 @@ test("keeps Entertainment active across its legacy and current destinations", ()
   assert.equal(isPrimaryNavigationActive("/", "/entertainment"), false);
 });
 
+test("treats Community as an independent primary section", () => {
+  assert.equal(isPrimaryNavigationActive("/community", "/community"), true);
+  assert.equal(isPrimaryNavigationActive("/community/guidelines", "/community"), true);
+  assert.equal(isPrimaryNavigationActive("/entertainment", "/community"), false);
+});
+
 test("suppresses the redundant top breadcrumb on franchise roots", () => {
   assert.equal(shouldShowTopBreadcrumb("/products/singularis"), false);
   assert.equal(shouldShowTopBreadcrumb("/products/lifa/"), false);
   assert.equal(shouldShowTopBreadcrumb("/entertainment/singularis"), false);
   assert.equal(shouldShowTopBreadcrumb("/entertainment/lifa"), false);
   assert.equal(shouldShowTopBreadcrumb("/products/singularis/archive"), false);
-  assert.equal(shouldShowTopBreadcrumb("/entertainment/arcade"), false);
+  assert.equal(shouldShowTopBreadcrumb("/entertainment/explore"), false);
   assert.equal(shouldShowTopBreadcrumb("/audio"), false);
   assert.equal(shouldShowTopBreadcrumb("/professional/articles"), true);
 });

@@ -10,7 +10,6 @@ const globalsUrl = new URL("../app/globals.css", import.meta.url);
 const serverStateUrl = new URL("./server-account-state.ts", import.meta.url);
 const accountNavigationUrl = new URL("../components/AccountNavigation.tsx", import.meta.url);
 const accountPageUrl = new URL("../app/account/page.tsx", import.meta.url);
-const myHomeDashboardUrl = new URL("../components/MyHomeDashboard.tsx", import.meta.url);
 const ecosystemStatusUrl = new URL("../components/AccountEcosystemStatus.tsx", import.meta.url);
 
 test("global account navigation starts from server authentication state", async () => {
@@ -25,7 +24,7 @@ test("global account navigation starts from server authentication state", async 
   assert.match(serverState, /client\.auth\.getUser\(\)/);
 });
 
-test("global account navigation synchronizes authenticated Home and Account labels", async () => {
+test("global account navigation synchronizes authenticated My Home and Account destinations", async () => {
   const [header, accessForm] = await Promise.all([
     readFile(headerUrl, "utf8"),
     readFile(accessFormUrl, "utf8"),
@@ -33,7 +32,8 @@ test("global account navigation synchronizes authenticated Home and Account labe
   assert.match(header, /fetch\("\/api\/membership\/session"/);
   assert.match(header, /MEMBERSHIP_SESSION_CHANGED_EVENT/);
   assert.match(header, /\[pathname\]/);
-  assert.match(header, /primaryHomeLabel\(authenticated\)/);
+  assert.match(header, /authenticated \? "\/" : "\/account\/sign-in"/);
+  assert.match(header, />My Home<\/span>/);
   assert.match(header, /authenticated \? "Account" : "Sign In"/);
   assert.match(header, /authenticated \? "\/account" : "\/account\/sign-in"/);
   assert.match(header, /href=\{accountHref\}/);
@@ -53,6 +53,11 @@ test("brand wordmark uses the Cryptic VDS sans-serif type stack", async () => {
 
 test("primary navigation exposes contextual Sign In or Account directly without a dropdown", async () => {
   const header = await readFile(headerUrl, "utf8");
+  assert.match(header, /href: "\/", label: "Home", tone: "gold"/);
+  assert.match(header, /href: "\/entertainment", label: "Explore", tone: "cyan"/);
+  assert.match(header, /href: "\/community", label: "Community", tone: "violet"/);
+  assert.doesNotMatch(header, /href: "\/professional", label: "Professional"/);
+  assert.match(header, /href="\/search" aria-label="Search"/);
   assert.match(header, /<Link href=\{accountHref\} data-tone="blue"/);
   assert.match(header, /aria-current=\{accountSectionActive \? "page" : undefined\}/);
   assert.doesNotMatch(header, /aria-label="Open site menu"/);
@@ -61,18 +66,23 @@ test("primary navigation exposes contextual Sign In or Account directly without 
   assert.doesNotMatch(header, /aria-haspopup="menu"/);
 });
 
-test("signed-out My Home pairs governed sign-in with reusable ecosystem status", async () => {
-  const [dashboard, homePage, ecosystemStatus, globals] = await Promise.all([
-    readFile(myHomeDashboardUrl, "utf8"),
+test("signed-out Home is a public ecosystem front door with governed account status", async () => {
+  const [publicHome, homePage, ecosystemStatus, globals] = await Promise.all([
+    readFile(new URL("../components/PublicHome.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(ecosystemStatusUrl, "utf8"),
     readFile(globalsUrl, "utf8"),
   ]);
-  assert.match(homePage, /accountAdmissionMode\(\)/);
-  assert.match(homePage, /<MyHomeDashboard accountAdmissionMode=/);
-  assert.match(dashboard, /href="\/account\/sign-in" className="button home-primary-cta">Sign in to My Home<\/Link>/);
-  assert.match(dashboard, /<AccountEcosystemStatus admissionMode=\{accountAdmissionMode\} showAvailabilityAction=\{false\} \/>/);
-  assert.doesNotMatch(dashboard, />Sign up<\/Link>/);
+  assert.match(homePage, /getInitialAccountAuthenticated/);
+  assert.match(homePage, /<PublicHome accountAdmissionMode=\{accountAdmissionMode\(\)\} \/>/);
+  assert.match(publicHome, /href="\/entertainment" className="button home-primary-cta">Explore entertainment<\/Link>/);
+  assert.match(publicHome, /href="\/professional" className="button home-secondary-cta">Discover the studio<\/Link>/);
+  assert.match(publicHome, /Featured now/);
+  assert.match(publicHome, /One ecosystem\. Three ways in\./);
+  assert.match(publicHome, /Public by default/);
+  assert.match(publicHome, /Sign in to My Home/);
+  assert.match(publicHome, /<AccountEcosystemStatus admissionMode=\{accountAdmissionMode\} showAvailabilityAction=\{false\}/);
+  assert.doesNotMatch(publicHome, />Sign up<\/Link>/);
   assert.match(ecosystemStatus, /aria-label="Current ecosystem status"/);
   assert.match(ecosystemStatus, /<dd data-status="open">Open<\/dd>/);
   assert.match(ecosystemStatus, /<dt>Subscriptions<\/dt><dd data-status="closed">Not available<\/dd>/);
@@ -132,12 +142,14 @@ test("primary Account link does not duplicate utility or franchise destinations"
   assert.doesNotMatch(header, /href: "\/products\/lifa"/);
 });
 
-test("Entertainment and Arcade expose independent drawer controls", async () => {
+test("primary Explore and its destination drawer expose independent controls", async () => {
   const [header, entertainmentNavigation, globals] = await Promise.all([
     readFile(headerUrl, "utf8"),
     readFile(entertainmentNavigationUrl, "utf8"),
     readFile(globalsUrl, "utf8"),
   ]);
+  assert.match(header, /href: "\/entertainment", label: "Explore", tone: "cyan"/);
+  assert.match(header, /href: "\/community", label: "Community", tone: "violet"/);
   assert.match(header, /className="site-primary-drawer"/);
   assert.doesNotMatch(header, /className="site-primary-link__arrow"/);
   assert.match(entertainmentNavigation, /className="entertainment-navigation__item-drawer"/);

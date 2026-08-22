@@ -53,7 +53,7 @@
 .sin-cgs__workspace,.sin-cgs--immersive .sin-cgs__workspace{grid-template-columns:minmax(0,930px) minmax(330px,430px);gap:24px}
 @media(max-width:900px){.sin-cgs__workspace,.sin-cgs--immersive .sin-cgs__workspace{grid-template-columns:1fr}}
 
-/* Arcade controls the existing franchise tier as a collapsible navigation drawer. Recompiled 2026-08-04. */
+/* Explore controls the existing franchise tier as a collapsible navigation drawer. Recompiled 2026-08-04. */
 .sin-cgs__nav{max-height:48px;opacity:1;transition:max-height .18s ease,opacity .18s ease}
 .sin-cgs__nav[data-open="false"]{max-height:0;overflow:hidden;opacity:0}
 

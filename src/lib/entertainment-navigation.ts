@@ -10,7 +10,7 @@ export type EntertainmentNavItem = {
 
 export const ENTERTAINMENT_NAV_ITEMS: readonly EntertainmentNavItem[] = [
   { href: "/entertainment", label: "Overview", description: "Entertainment", icon: "all", theme: "cyan" },
-  { href: "/entertainment/arcade", label: "Arcade", description: "Games & challenges", icon: "arcade", theme: "violet" },
+  { href: "/entertainment/explore", label: "Explore", description: "Games, worlds & more", icon: "arcade", theme: "violet" },
   { href: "/audio", label: "Music", description: "Sound & signal", icon: "music", theme: "gold" },
   { href: "/entertainment/cinema", label: "Video", description: "Watch & listen", icon: "video", theme: "blue" },
 ] as const;
@@ -63,7 +63,7 @@ export function videoCategory(slug: string | undefined) {
 export function entertainmentCategoryHref(destination: "arcade" | "music" | "video", slug: string) {
   if (destination === "arcade" && slug === "singularis") return "/products/singularis";
   if (destination === "arcade" && slug === "lifa") return "/products/lifa";
-  const roots = { arcade: "/entertainment/arcade", music: "/audio", video: "/entertainment/cinema" } as const;
+  const roots = { arcade: "/entertainment/explore", music: "/audio", video: "/entertainment/cinema" } as const;
   const queries = { arcade: "genre", music: "filter", video: "filter" } as const;
   return slug === "all" ? roots[destination] : `${roots[destination]}?${queries[destination]}=${slug}`;
 }
@@ -81,6 +81,6 @@ export function isEntertainmentDestinationActive(pathname: string, href: string)
     const arcadeFranchise = pathname.includes("singularis") || pathname === "/products/lifa" || pathname.startsWith("/products/lifa/");
     return pathname === href || ((pathname.startsWith("/products/") || pathname.startsWith("/releases/")) && !arcadeFranchise);
   }
-  if (href === "/entertainment/arcade" && (pathname.includes("singularis") || pathname === "/products/lifa" || pathname.startsWith("/products/lifa/"))) return true;
+  if (href === "/entertainment/explore" && (pathname.includes("singularis") || pathname === "/products/lifa" || pathname.startsWith("/products/lifa/"))) return true;
   return pathname === href || pathname.startsWith(`${href}/`);
 }

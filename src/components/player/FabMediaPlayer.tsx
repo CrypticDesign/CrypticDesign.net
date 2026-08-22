@@ -13,7 +13,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useId, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { formatTime } from "@/lib/player";
 import { usePlayer } from "./PlayerProvider";
 import {
@@ -54,6 +54,7 @@ function buildBars(count: number): Bar[] {
 }
 
 const PANEL_BARS = buildBars(40);
+const PANEL_ID = "cryptic-signal-player-panel";
 
 /** The orb gets a hand-tuned symmetric profile so it reads as a mark, not noise. */
 const ORB_BARS: Bar[] = [12, 48, 72, 100, 68, 44, 14].map((height, i) => ({
@@ -148,7 +149,7 @@ export default function FabMediaPlayer() {
     playTrackAt,
   } = usePlayer();
 
-  const panelId = useId();
+  const panelId = PANEL_ID;
   const orbRef = useRef<HTMLButtonElement | null>(null);
   const playRef = useRef<HTMLButtonElement | null>(null);
   const interacted = useRef(false);

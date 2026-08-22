@@ -4,6 +4,7 @@ import SiteHeader from "@/components/SiteHeader";
 import AccountNavigation from "@/components/AccountNavigation";
 import SubNavBreadcrumbs from "@/components/SubNavBreadcrumbs";
 import EntertainmentNavigation from "@/components/EntertainmentNavigation";
+import CommunityNavigation from "@/components/CommunityNavigation";
 import FabMediaPlayer from "@/components/player/FabMediaPlayer";
 import { PlayerProvider } from "@/components/player/PlayerProvider";
 import { getInitialAccountAuthenticated } from "@/lib/server-account-state";
@@ -42,6 +43,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <PlayerProvider>
         <SiteHeader initialAuthenticated={initialAuthenticated} />
         <EntertainmentNavigation />
+        <CommunityNavigation />
         <AccountNavigation initialAuthenticated={initialAuthenticated} />
         <SubNavBreadcrumbs position="top" />
         <div id="main-content" className="flex-1" tabIndex={-1}>{children}</div>
@@ -51,7 +53,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <div className="site-footer__top">
               <div><h2>CRYPTIC DESIGN</h2><p>Independent research, design, development, and media production.</p></div>
               <div className="footer-columns">
-                <div className="footer-column"><strong>PLATFORM</strong><Link href="/">My Home</Link><Link href="/entertainment">Entertainment</Link><Link href="/professional">Professional</Link></div>
+                <div className="footer-column"><strong>PLATFORM</strong><Link href="/">My Home</Link><Link href="/entertainment">Entertainment</Link><Link href="/community">Community</Link><Link href="/professional">Professional</Link></div>
                 <div className="footer-column"><strong>STUDIO</strong><Link href="/products">Projects</Link><Link href="/professional/articles">Articles</Link><Link href="/entertainment/creative-labs">Creative Labs</Link><Link href="/entertainment/store">Store</Link></div>
                 <div className="footer-column"><strong>CONNECT</strong><Link href="/professional/contact">Contact</Link><Link href="/creator-tools">Creators</Link><Link href="/account">Account</Link></div>
               </div>

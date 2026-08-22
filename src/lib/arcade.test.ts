@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { ARCADE_ENTRIES, arcadeEntriesFor } from "./arcade.ts";
 
-test("Arcade MVP exposes the approved Cryptic-specific discovery groups", () => {
+test("Explore exposes the approved Cryptic-specific playable groups", () => {
   assert.ok(arcadeEntriesFor("lifa").some((entry) => entry.slug === "lifa-genesis"));
 });
 
@@ -13,7 +13,7 @@ test("Arcade MVP exposes the approved Cryptic-specific discovery groups", () => 
  */
 const RETIRED_CATEGORY_SLUGS: readonly string[] = ["featured", "cryptic-originals"];
 
-test("Arcade does not duplicate Featured or Cryptic Originals as catalog buckets", () => {
+test("Explore does not duplicate Featured or Cryptic Originals as catalog buckets", () => {
   assert.equal(ARCADE_ENTRIES.some((entry) => entry.slug === "cryptic-originals-program"), false);
   assert.equal(
     ARCADE_ENTRIES.some((entry) =>
