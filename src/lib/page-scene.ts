@@ -1,6 +1,15 @@
 export type PageSceneId = "public-home" | "entertainment" | "community" | "professional";
 export type PageSceneQuality = "auto" | "high" | "mid" | "low";
 export type ResolvedPageSceneQuality = Exclude<PageSceneQuality, "auto">;
+export type PageScenePerformanceState = "nominal" | "constrained" | "critical";
+
+export interface PageSceneTextureAsset {
+  id: string;
+  type: "texture";
+  src: string;
+  usage: "backdrop";
+  opacity: number;
+}
 
 export interface PageSceneCapabilityInput {
   requested?: PageSceneQuality;
@@ -18,6 +27,7 @@ export interface PageSceneDefinition {
   primary: number;
   secondary: number;
   particleCount: Record<Exclude<ResolvedPageSceneQuality, "low">, number>;
+  assets: PageSceneTextureAsset[];
 }
 
 export const PAGE_SCENES: Record<PageSceneId, PageSceneDefinition> = {
@@ -27,6 +37,7 @@ export const PAGE_SCENES: Record<PageSceneId, PageSceneDefinition> = {
     primary: 0x1e90ff,
     secondary: 0x1e90ff,
     particleCount: { high: 420, mid: 180 },
+    assets: [{ id: "home-signal", type: "texture", src: "/images/entertainment-hero.png", usage: "backdrop", opacity: 0.1 }],
   },
   entertainment: {
     id: "entertainment",
@@ -34,6 +45,7 @@ export const PAGE_SCENES: Record<PageSceneId, PageSceneDefinition> = {
     primary: 0x00ffff,
     secondary: 0x00ffff,
     particleCount: { high: 380, mid: 160 },
+    assets: [{ id: "entertainment-signal", type: "texture", src: "/images/entertainment-hero.png", usage: "backdrop", opacity: 0.1 }],
   },
   community: {
     id: "community",
@@ -41,6 +53,7 @@ export const PAGE_SCENES: Record<PageSceneId, PageSceneDefinition> = {
     primary: 0x00ff7f,
     secondary: 0x00ff7f,
     particleCount: { high: 320, mid: 130 },
+    assets: [{ id: "community-signal", type: "texture", src: "/images/current-focus.png", usage: "backdrop", opacity: 0.08 }],
   },
   professional: {
     id: "professional",
@@ -48,6 +61,7 @@ export const PAGE_SCENES: Record<PageSceneId, PageSceneDefinition> = {
     primary: 0xffff33,
     secondary: 0xffff33,
     particleCount: { high: 260, mid: 100 },
+    assets: [{ id: "professional-signal", type: "texture", src: "/images/professional-hero.png", usage: "backdrop", opacity: 0.08 }],
   },
 };
 
@@ -59,4 +73,24 @@ export function resolvePageSceneQuality(input: PageSceneCapabilityInput): Resolv
   const constrainedCpu = input.hardwareConcurrency !== undefined && input.hardwareConcurrency <= 4;
   if (input.viewportWidth < 1024 || constrainedMemory || constrainedCpu) return "mid";
   return "high";
+}
+
+export function classifyPageScenePerformance(fps: number): PageScenePerformanceState {
+  if (fps < 28) return "critical";
+  if (fps < 48) return "constrained";
+  return "nominal";
+}
+
+export function shouldDowngradePageSceneQuality({
+  requested,
+  quality,
+  fps,
+  consecutiveConstrainedSamples,
+}: {
+  requested: PageSceneQuality;
+  quality: ResolvedPageSceneQuality;
+  fps: number;
+  consecutiveConstrainedSamples: number;
+}): boolean {
+  return requested === "auto" && quality === "high" && fps < 42 && consecutiveConstrainedSamples >= 2;
 }

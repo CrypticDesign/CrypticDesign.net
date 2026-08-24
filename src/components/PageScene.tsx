@@ -6,7 +6,9 @@ import * as THREE from "three";
 
 import {
   PAGE_SCENES,
+  classifyPageScenePerformance,
   resolvePageSceneQuality,
+  shouldDowngradePageSceneQuality,
   type PageSceneId,
   type PageSceneQuality,
 } from "@/lib/page-scene";
@@ -84,6 +86,8 @@ export default function PageScene({
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.setClearColor(definition.background, 0);
     host.dataset.renderer = "active";
+    host.dataset.performance = "measuring";
+    host.dataset.assets = definition.assets.length ? "loading" : "none";
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 80);
@@ -91,6 +95,8 @@ export default function PageScene({
 
     const system = new THREE.Group();
     scene.add(system);
+    const assetLayer = new THREE.Group();
+    scene.add(assetLayer);
 
     const coreMaterial = new THREE.MeshStandardMaterial({
       color: definition.primary,
@@ -145,11 +151,51 @@ export default function PageScene({
     key.position.set(3, 4, 5);
     scene.add(key);
 
+    let disposed = false;
+    const loadedTextures = new Set<THREE.Texture>();
+    const textureLoader = new THREE.TextureLoader();
+    const assetLoads = definition.assets.map((asset) => new Promise<void>((resolve, reject) => {
+      textureLoader.load(asset.src, (texture) => {
+        if (disposed) {
+          texture.dispose();
+          resolve();
+          return;
+        }
+        texture.colorSpace = THREE.SRGBColorSpace;
+        loadedTextures.add(texture);
+        const image = texture.image as { width?: number; height?: number } | undefined;
+        const aspect = image?.width && image?.height ? image.width / image.height : 16 / 9;
+        const backdrop = new THREE.Mesh(
+          new THREE.PlaneGeometry(14, 14 / aspect),
+          new THREE.MeshBasicMaterial({
+            map: texture,
+            transparent: true,
+            opacity: asset.opacity,
+            depthWrite: false,
+            toneMapped: false,
+          }),
+        );
+        backdrop.name = asset.id;
+        backdrop.position.set(1.8, 0, -4.5);
+        assetLayer.add(backdrop);
+        resolve();
+      }, undefined, reject);
+    }));
+    void Promise.allSettled(assetLoads).then((results) => {
+      if (disposed) return;
+      const readyCount = results.filter((result) => result.status === "fulfilled").length;
+      host.dataset.assets = readyCount === definition.assets.length ? "ready" : readyCount ? "partial" : "fallback";
+    });
+
     let frame = 0;
     let visible = true;
     let contextAvailable = true;
     let pointerX = 0;
     let pointerY = 0;
+    let activeQuality = resolvedQuality;
+    let sampleStartedAt = performance.now();
+    let sampledFrames = 0;
+    let consecutiveConstrainedSamples = 0;
     const clock = new THREE.Clock();
 
     const resize = () => {
@@ -170,6 +216,35 @@ export default function PageScene({
       camera.position.y += (0.25 - pointerY * 0.12 - camera.position.y) * 0.025;
       camera.lookAt(0, 0, 0);
       renderer.render(scene, camera);
+      sampledFrames += 1;
+      const sampledAt = performance.now();
+      const sampleDuration = sampledAt - sampleStartedAt;
+      if (sampleDuration >= 2000) {
+        const fps = Math.round((sampledFrames * 1000) / sampleDuration);
+        const performanceState = classifyPageScenePerformance(fps);
+        host.dataset.fps = String(fps);
+        host.dataset.performance = performanceState;
+        consecutiveConstrainedSamples = performanceState === "nominal" ? 0 : consecutiveConstrainedSamples + 1;
+        if (shouldDowngradePageSceneQuality({
+          requested: quality,
+          quality: activeQuality,
+          fps,
+          consecutiveConstrainedSamples,
+        })) {
+          activeQuality = "mid";
+          host.dataset.quality = activeQuality;
+          host.dataset.adaptive = "downgraded";
+          renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.25));
+          particles.geometry.setDrawRange(0, definition.particleCount.mid);
+          resize();
+          host.dispatchEvent(new CustomEvent("cryptic:page-scene-performance", {
+            bubbles: true,
+            detail: { sceneId, fps, quality: activeQuality, state: performanceState },
+          }));
+        }
+        sampleStartedAt = sampledAt;
+        sampledFrames = 0;
+      }
       frame = requestAnimationFrame(render);
     };
 
@@ -177,6 +252,8 @@ export default function PageScene({
       if (frame || !visible || document.hidden || !contextAvailable) return;
       host.dataset.lifecycle = "running";
       clock.start();
+      sampleStartedAt = performance.now();
+      sampledFrames = 0;
       frame = requestAnimationFrame(render);
     };
     const stop = () => {
@@ -225,6 +302,7 @@ export default function PageScene({
     start();
 
     return () => {
+      disposed = true;
       stop();
       intersectionObserver.disconnect();
       resizeObserver.disconnect();
@@ -238,6 +316,7 @@ export default function PageScene({
         const materials = Array.isArray(object.material) ? object.material : [object.material];
         materials.forEach((material) => material.dispose());
       });
+      loadedTextures.forEach((texture) => texture.dispose());
       renderer.dispose();
       renderer.forceContextLoss();
       host.dataset.lifecycle = "disposed";

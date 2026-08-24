@@ -1,7 +1,12 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { PAGE_SCENES, resolvePageSceneQuality } from "./page-scene.ts";
+import {
+  PAGE_SCENES,
+  classifyPageScenePerformance,
+  resolvePageSceneQuality,
+  shouldDowngradePageSceneQuality,
+} from "./page-scene.ts";
 
 const capable = {
   reducedMotion: false,
@@ -31,6 +36,15 @@ test("uses one canonical destination accent for every WebGL material", () => {
   }
 });
 
+test("declares governed backdrop assets for every scene", () => {
+  for (const scene of Object.values(PAGE_SCENES)) {
+    assert.equal(scene.assets.length, 1);
+    assert.equal(scene.assets[0].type, "texture");
+    assert.equal(scene.assets[0].usage, "backdrop");
+    assert.match(scene.assets[0].src, /^\/images\//);
+  }
+});
+
 test("uses a static low tier for reduced motion, constrained mobile, save-data, or missing WebGL", () => {
   assert.equal(resolvePageSceneQuality({ ...capable, reducedMotion: true }), "low");
   assert.equal(resolvePageSceneQuality({ ...capable, viewportWidth: 480 }), "low");
@@ -43,4 +57,13 @@ test("selects conservative automatic tiers and honors explicit quality after har
   assert.equal(resolvePageSceneQuality({ ...capable, deviceMemory: 4 }), "mid");
   assert.equal(resolvePageSceneQuality({ ...capable, requested: "mid" }), "mid");
   assert.equal(resolvePageSceneQuality({ ...capable, requested: "high", reducedMotion: true }), "low");
+});
+
+test("classifies measured frame rate and only auto-downgrades sustained high-tier pressure", () => {
+  assert.equal(classifyPageScenePerformance(60), "nominal");
+  assert.equal(classifyPageScenePerformance(40), "constrained");
+  assert.equal(classifyPageScenePerformance(20), "critical");
+  assert.equal(shouldDowngradePageSceneQuality({ requested: "auto", quality: "high", fps: 38, consecutiveConstrainedSamples: 2 }), true);
+  assert.equal(shouldDowngradePageSceneQuality({ requested: "high", quality: "high", fps: 20, consecutiveConstrainedSamples: 5 }), false);
+  assert.equal(shouldDowngradePageSceneQuality({ requested: "auto", quality: "mid", fps: 20, consecutiveConstrainedSamples: 5 }), false);
 });
