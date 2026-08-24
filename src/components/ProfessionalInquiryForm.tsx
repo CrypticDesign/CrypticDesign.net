@@ -15,7 +15,7 @@ export default function ProfessionalInquiryForm() {
     window.location.href = `mailto:robert.croft@crypticdesign.net?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   }
 
-  const control = "min-h-12 rounded-control border border-[var(--border)] bg-[#07111a] px-4 py-3 text-[var(--foreground)] outline-none transition focus:border-[var(--cry-spectrum-magenta)] focus:shadow-[0_0_0_2px_rgba(237,0,168,.15)]";
+  const control = "min-h-12 rounded-control border border-[var(--border)] bg-[#07111a] px-4 py-3 text-[var(--foreground)] outline-none transition focus:border-[var(--cry-spectrum-violet)] focus:shadow-[0_0_0_2px_rgba(177,122,200,.15)]";
   return (
     <form onSubmit={submit} className="grid gap-5" aria-describedby="inquiry-handoff-note">
       <div className="grid gap-5 sm:grid-cols-2">

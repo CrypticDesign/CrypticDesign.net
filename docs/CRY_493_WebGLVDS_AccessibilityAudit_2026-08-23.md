@@ -2,7 +2,7 @@
 
 **Standard:** WCAG 2.1 AA
 
-**Date:** 2026-08-23 (America/Chicago)
+**Date:** 2026-08-23; palette amendment 2026-08-24 (America/Chicago)
 
 **Scope:** Home, Entertainment, Community, Professional, Account Availability, and Sign In
 
@@ -12,7 +12,7 @@
 
 ## Summary
 
-The live visual baseline is coherent and the destination colors match their menus and WebGL scenes. The initial automated and keyboard review found one serious contrast violation, one missing focus treatment affecting native `summary` controls, and several undersized inline targets. The hardened candidate resolves those findings.
+The live baseline still uses the original high-saturation destination colors. The local hardened candidate now uses a calmer cool spectrum and matches each destination color across menus, page sections, and WebGL scenes. Green, yellow, and red are reserved exclusively for success, warning, and error/status semantics. The initial automated and keyboard review found one serious contrast violation, one missing focus treatment affecting native `summary` controls, and several undersized inline targets; the local candidate resolves those findings.
 
 Final local candidate result:
 
@@ -30,7 +30,7 @@ Final local candidate result:
 
 | # | Issue | WCAG criterion | Baseline severity | Resolution |
 |---|---|---|---|---|
-| 1 | Deep Violet was used directly for six small Professional text elements against dark surfaces. | 1.4.3 Contrast | Major | Added a text-only violet companion (`#C77DFF`) while preserving canonical `#9400D3` for section geometry and structural accents. |
+| 1 | Deep Violet was used directly for six small Professional text elements against dark surfaces. | 1.4.3 Contrast | Major | Replaced the high-saturation palette with six calm section tokens that all exceed 4.5:1 against the standard dark surface. |
 
 ### Operable
 
@@ -51,8 +51,12 @@ No automated name/role/value violations were reported. Decorative WebGL canvases
 
 | Element | Foreground | Background | Ratio | Required | Result |
 |---|---:|---:|---:|---:|---|
-| Baseline small violet text | `#9400D3` | `#07111B` | 2.90:1 | 4.5:1 | Fail |
-| Hardened small violet text | `#C77DFF` | `#07111B` | 7.06:1 | 4.5:1 | Pass |
+| Calm Blue / Home | `#4F8FEA` | `#07111B` | 5.84:1 | 4.5:1 | Pass |
+| Calm Cyan / Entertainment | `#4CC9D8` | `#07111B` | 9.64:1 | 4.5:1 | Pass |
+| Periwinkle / Community | `#7C8CE8` | `#07111B` | 6.13:1 | 4.5:1 | Pass |
+| Lavender / Professional | `#9A86D8` | `#07111B` | 6.13:1 | 4.5:1 | Pass |
+| Violet / supporting sections | `#B17AC8` | `#07111B` | 5.87:1 | 4.5:1 | Pass |
+| Orchid / supporting sections | `#C978B4` | `#07111B` | 6.18:1 | 4.5:1 | Pass |
 | Muted body text | `#8FA0AF` | `#03080F` | 7.48:1 | 4.5:1 | Pass |
 | Primary text | `#F5F7FA` | `#03080F` | 18.72:1 | 4.5:1 | Pass |
 
@@ -67,8 +71,9 @@ No automated name/role/value violations were reported. Decorative WebGL canvases
 
 ## Visual review
 
-- Home, Entertainment, Community, and Professional use one coherent structural system.
-- Menu, hero, and WebGL colors match their destination tokens.
+- Home, Entertainment, Community, and Professional use one coherent calm-spectrum system.
+- Menu, hero, and WebGL colors share the exact same destination tokens: blue, cyan, periwinkle, and lavender respectively.
+- Green (`#34D399`), yellow (`#F6C453`), and red (`#FF6B7A`) are semantic status tokens only and are not section accents.
 - The new asset-backed scene layer remains restrained and does not reduce hero copy readability.
 - No horizontal page overflow was observed at the audited desktop or 720 px reflow-equivalent viewport.
 

@@ -35,22 +35,22 @@ export default function PublicHome({ accountAdmissionMode }: { accountAdmissionM
           <div className="public-home-portal__section-label"><h2 id="featured-now-title">Featured now</h2><Link href="/entertainment">View entertainment</Link></div>
           <div className="public-home-portal__featured-grid">
             <Link href="/products/singularis" className="portal-feature portal-feature--cyan"><Image src="/images/singularis-marketing-02.jpg" alt="" fill sizes="(max-width: 760px) 100vw, 25vw" /><span className="portal-feature__wash" /><span className="portal-feature__icon"><PortalIcon name="worlds" /></span><span className="portal-feature__copy"><strong>Singularis</strong><small>Science-fiction universe</small></span><i aria-hidden="true">→</i></Link>
-            <Link href="/entertainment/explore" className="portal-feature portal-feature--magenta"><Image src="/images/entertainment-feature.png" alt="" fill sizes="(max-width: 760px) 100vw, 25vw" /><span className="portal-feature__wash" /><span className="portal-feature__icon"><PortalIcon name="arcade" /></span><span className="portal-feature__copy"><strong>Explore</strong><small>Games, worlds &amp; discovery</small></span><i aria-hidden="true">→</i></Link>
-            <Link href="/entertainment/listening-rooms" className="portal-feature portal-feature--gold"><Image src="/images/signal-systems.png" alt="" fill sizes="(max-width: 760px) 100vw, 25vw" /><span className="portal-feature__wash" /><span className="portal-feature__icon"><PortalIcon name="media" /></span><span className="portal-feature__copy"><strong>Music &amp; media</strong><small>Listen, watch, immerse</small></span><i aria-hidden="true">→</i></Link>
-            <Link href="/community" className="portal-feature portal-feature--violet"><Image src="/images/current-focus.png" alt="" fill sizes="(max-width: 760px) 100vw, 25vw" /><span className="portal-feature__wash" /><span className="portal-feature__icon"><PortalIcon name="crew" /></span><span className="portal-feature__copy"><strong>Community</strong><small>Public paths &amp; future participation</small></span><i aria-hidden="true">→</i></Link>
+            <Link href="/entertainment/explore" className="portal-feature portal-feature--violet"><Image src="/images/entertainment-feature.png" alt="" fill sizes="(max-width: 760px) 100vw, 25vw" /><span className="portal-feature__wash" /><span className="portal-feature__icon"><PortalIcon name="arcade" /></span><span className="portal-feature__copy"><strong>Explore</strong><small>Games, worlds &amp; discovery</small></span><i aria-hidden="true">→</i></Link>
+            <Link href="/entertainment/listening-rooms" className="portal-feature portal-feature--lavender"><Image src="/images/signal-systems.png" alt="" fill sizes="(max-width: 760px) 100vw, 25vw" /><span className="portal-feature__wash" /><span className="portal-feature__icon"><PortalIcon name="media" /></span><span className="portal-feature__copy"><strong>Music &amp; media</strong><small>Listen, watch, immerse</small></span><i aria-hidden="true">→</i></Link>
+            <Link href="/community" className="portal-feature portal-feature--orchid"><Image src="/images/current-focus.png" alt="" fill sizes="(max-width: 760px) 100vw, 25vw" /><span className="portal-feature__wash" /><span className="portal-feature__icon"><PortalIcon name="crew" /></span><span className="portal-feature__copy"><strong>Community</strong><small>Public paths &amp; future participation</small></span><i aria-hidden="true">→</i></Link>
           </div>
         </section>
 
-        <section className="public-home-portal__entries" data-section-accent="green" aria-labelledby="ways-in-title">
+        <section className="public-home-portal__entries" data-section-accent="periwinkle" aria-labelledby="ways-in-title">
           <div className="public-home-portal__section-label"><h2 id="ways-in-title">One ecosystem. Three ways in.</h2></div>
           <div className="public-home-portal__entry-grid">
-            <Link href="/entertainment/explore" className="portal-entry portal-entry--gold"><span className="portal-entry__icon"><PortalIcon name="play" /></span><span><strong>Play</strong><small>Explore games, interactive experiments, and worlds in development.</small></span><i aria-hidden="true">→</i></Link>
+            <Link href="/entertainment/explore" className="portal-entry portal-entry--lavender"><span className="portal-entry__icon"><PortalIcon name="play" /></span><span><strong>Play</strong><small>Explore games, interactive experiments, and worlds in development.</small></span><i aria-hidden="true">→</i></Link>
             <Link href="/entertainment/listening-rooms" className="portal-entry portal-entry--cyan"><span className="portal-entry__icon"><PortalIcon name="listen" /></span><span><strong>Watch &amp; listen</strong><small>Enter original stories, music, video, and cinematic experiences.</small></span><i aria-hidden="true">→</i></Link>
-            <Link href="/professional" className="portal-entry portal-entry--magenta"><span className="portal-entry__icon"><PortalIcon name="discover" /></span><span><strong>Discover &amp; build</strong><small>See the design systems, research, and studio practice behind the work.</small></span><i aria-hidden="true">→</i></Link>
+            <Link href="/professional" className="portal-entry portal-entry--violet"><span className="portal-entry__icon"><PortalIcon name="discover" /></span><span><strong>Discover &amp; build</strong><small>See the design systems, research, and studio practice behind the work.</small></span><i aria-hidden="true">→</i></Link>
           </div>
         </section>
 
-        <section className="public-home-portal__utility-grid" data-section-accent="yellow" aria-label="Platform access and status">
+        <section className="public-home-portal__utility-grid" data-section-accent="lavender" aria-label="Platform access and status">
           <article className="portal-utility portal-utility--identity"><span className="kicker">Public by default</span><h2>Explore without an account.</h2><p>Entertainment, studio work, articles, and approved releases remain available through the public platform.</p><Link href="/entertainment">Start exploring <span aria-hidden="true">→</span></Link></article>
           <AccountEcosystemStatus admissionMode={accountAdmissionMode} showAvailabilityAction={false} className="portal-utility portal-utility--status" />
           <article className="portal-utility portal-utility--home">
@@ -61,7 +61,7 @@ export default function PublicHome({ accountAdmissionMode }: { accountAdmissionM
           </article>
         </section>
 
-        <section className="public-home-portal__studio" data-section-accent="magenta" aria-labelledby="studio-strip-title">
+        <section className="public-home-portal__studio" data-section-accent="violet" aria-labelledby="studio-strip-title">
           <div><span className="kicker">From the studio behind the platform</span><h2 id="studio-strip-title">Independent worlds, experiences, and systems.</h2><p>Cryptic Design combines original entertainment with product thinking, interaction design, interface systems, and creative technology.</p></div>
           <ul aria-label="Studio disciplines"><li>World-building</li><li>Experience design</li><li>Creative technology</li><li>Research &amp; systems</li></ul>
           <Link href="/professional" className="button secondary">About the studio</Link>

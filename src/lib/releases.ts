@@ -16,7 +16,7 @@ export type LaneSlug =
 
 export type ReleaseKind = "video" | "audio" | "game" | "article" | "lab";
 
-export type Accent = "blue" | "cyan" | "magenta" | "gold";
+export type Accent = "blue" | "cyan" | "violet" | "lavender";
 
 /** Asset-rights state. Restricted states always override public visibility. */
 export type RightsStatus =
@@ -124,7 +124,7 @@ export const RELEASES: Release[] = withReviewMetadata<Release>([
     rights_status: "owned",
     visibility_status: "public",
     publication_status: "scheduled",
-    accent: "magenta",
+    accent: "violet",
   },
   {
     slug: "singularis-overture",
@@ -158,7 +158,7 @@ export const RELEASES: Release[] = withReviewMetadata<Release>([
     rights_status: "owned",
     visibility_status: "public",
     publication_status: "scheduled",
-    accent: "gold",
+    accent: "lavender",
   },
   {
     slug: "visual-study-01",

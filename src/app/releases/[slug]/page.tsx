@@ -54,7 +54,7 @@ export default async function ReleasePage({ params }: { params: Promise<{ slug: 
         <div className="visual-hero__image"><Image src={releaseImage(release)} alt="" fill priority sizes="100vw" /></div>
         <div className="visual-hero__wash" />
         <div className="visual-hero__content">
-          <div className="signal-rail text-[var(--cry-spectrum-magenta)]" />
+          <div className="signal-rail text-[var(--cry-spectrum-violet)]" />
           <span className="kicker">{release.kind} / {release.status.replace("-", " ")}</span>
           <h1 className="display-title">{release.title}</h1>
           <p>{release.tagline}</p>
@@ -87,7 +87,7 @@ export default async function ReleasePage({ params }: { params: Promise<{ slug: 
         </section>
 
         {product && <section className="panel grid gap-6 p-6 sm:p-8 lg:grid-cols-[1fr_auto] lg:items-center">
-          <div><span className="kicker !text-[var(--cry-spectrum-magenta)]">Part of the {product.title} franchise</span><h2 className="section-title mt-2">Continue into the wider universe.</h2><p className="max-w-2xl text-muted-foreground">{product.summary}</p></div>
+          <div><span className="kicker !text-[var(--cry-spectrum-violet)]">Part of the {product.title} franchise</span><h2 className="section-title mt-2">Continue into the wider universe.</h2><p className="max-w-2xl text-muted-foreground">{product.summary}</p></div>
           <Link href={`/products/${product.slug}?release=${release.slug}`} className="button">View {product.title}</Link>
         </section>}
 

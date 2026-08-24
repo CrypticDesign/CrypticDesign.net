@@ -6,7 +6,7 @@ import { getService, publicServices } from "@/lib/services";
 
 const details: Record<string, { image: string; accent: string; promise: string; process: string[]; deliverables: string[]; proof: { label: string; href: string }[] }> = {
   "product-strategy": {
-    image: "/images/service-strategy.png", accent: "var(--cry-spectrum-magenta)",
+    image: "/images/service-strategy.png", accent: "var(--cry-spectrum-violet)",
     promise: "Turn uncertainty into a shared product direction your team can explain, test, and deliver.",
     process: ["Frame the decision, constraints, and evidence gaps.", "Study users, stakeholders, competitors, and the existing product.", "Model journeys, services, risks, and opportunity areas.", "Prioritize a practical roadmap with measurable decision points."],
     deliverables: ["Research plan and synthesis", "Experience or service audit", "Journey and ecosystem maps", "Product principles", "Opportunity backlog", "Prioritized roadmap and decision brief"],
@@ -20,14 +20,14 @@ const details: Record<string, { image: string; accent: string; promise: string; 
     proof: [{ label: "Humankind console editions", href: "/professional/case-studies#humankind-console" }, { label: "Onward tactical VR", href: "/professional/case-studies#onward-vr" }],
   },
   "interface-systems": {
-    image: "/images/service-interface.png", accent: "var(--cry-spectrum-yellow)",
+    image: "/images/service-interface.png", accent: "var(--cry-spectrum-lavender)",
     promise: "Create an interface language that stays coherent as products, teams, and platforms grow.",
     process: ["Audit existing patterns, inconsistencies, and implementation constraints.", "Define foundations for hierarchy, color, type, spacing, states, and motion.", "Build reusable components around real product workflows.", "Document governance and partner with engineering through adoption."],
     deliverables: ["Interface inventory and audit", "Design foundations", "Component architecture", "Responsive patterns", "Accessibility specifications", "Documentation and adoption plan"],
     proof: [{ label: "WellSky design language system", href: "/professional/case-studies#wellsky" }, { label: "WIN Reality component system", href: "/professional/case-studies#win-reality" }],
   },
   "creative-technology": {
-    image: "/images/service-creative-tech.png", accent: "#00f0a8",
+    image: "/images/service-creative-tech.png", accent: "#7C8CE8",
     promise: "Use emerging technology to prove meaningful experiences—not novelty without a product purpose.",
     process: ["Define the audience value and the question a prototype must answer.", "Select the smallest credible technical approach.", "Build and test an experiential prototype under real constraints.", "Document feasibility, risks, production requirements, and next decisions."],
     deliverables: ["Experience concept and technical framing", "Real-time or immersive prototype", "Interaction and content model", "Feasibility assessment", "Production pipeline guidance", "Experiment findings and recommended next step"],

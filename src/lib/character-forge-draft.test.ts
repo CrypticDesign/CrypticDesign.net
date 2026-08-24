@@ -9,8 +9,8 @@ const now = "2026-07-14T00:00:00Z";
 test("keeps up to three recoverable variants without creating a character", () => {
   const store = new CharacterForgeDraftStore();
   let draft = store.createDraft({ ownerAccountId: "account_1", recipe: DEFAULT_AVATAR_RECIPE, occurredAt: now });
-  draft = store.addVariant({ draftId: draft.id, ownerAccountId: "account_1", expectedRevision: draft.revision, label: "Variant 2", recipe: { ...DEFAULT_AVATAR_RECIPE, accent: "gold" }, occurredAt: now });
-  draft = store.addVariant({ draftId: draft.id, ownerAccountId: "account_1", expectedRevision: draft.revision, label: "Variant 3", recipe: { ...DEFAULT_AVATAR_RECIPE, accent: "green" }, occurredAt: now });
+  draft = store.addVariant({ draftId: draft.id, ownerAccountId: "account_1", expectedRevision: draft.revision, label: "Variant 2", recipe: { ...DEFAULT_AVATAR_RECIPE, accent: "lavender" }, occurredAt: now });
+  draft = store.addVariant({ draftId: draft.id, ownerAccountId: "account_1", expectedRevision: draft.revision, label: "Variant 3", recipe: { ...DEFAULT_AVATAR_RECIPE, accent: "periwinkle" }, occurredAt: now });
   assert.equal(draft.variants.length, 3);
   assert.equal(store.findCharacterByOwner("account_1"), null);
   assert.throws(() => store.addVariant({ draftId: draft.id, ownerAccountId: "account_1", expectedRevision: draft.revision, label: "Variant 4", recipe: DEFAULT_AVATAR_RECIPE, occurredAt: now }), ForgeValidationError);

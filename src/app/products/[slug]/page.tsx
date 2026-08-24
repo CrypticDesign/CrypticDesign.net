@@ -93,7 +93,7 @@ export default async function ProductHome({
             <p>Lifa combines simulation, strategy, discovery, and planetary-scale experimentation in one evolving universe.</p>
           </section>
           <div className="flex flex-wrap gap-4 text-sm">
-            {product.franchiseUrl && <a href={product.franchiseUrl} className="text-accent-magenta hover:underline">Visit {product.title} franchise home ↗</a>}
+            {product.franchiseUrl && <a href={product.franchiseUrl} className="text-accent-violet hover:underline">Visit {product.title} franchise home ↗</a>}
             <Link href="/products" className="text-accent-cyan hover:underline">← All products</Link>
           </div>
         </div>
@@ -114,8 +114,8 @@ export default async function ProductHome({
       </header>
 
       {selectedRelease && (
-        <section className="panel flex flex-col gap-4 border-accent-magenta p-6 sm:p-8">
-          <span className="text-xs uppercase tracking-widest text-accent-magenta">
+        <section className="panel flex flex-col gap-4 border-accent-violet p-6 sm:p-8">
+          <span className="text-xs uppercase tracking-widest text-accent-violet">
             Selected release · {selectedRelease.kind}
           </span>
           <div className="flex flex-col gap-2">
@@ -124,7 +124,7 @@ export default async function ProductHome({
             <p className="max-w-2xl text-sm text-neutral-300">{selectedRelease.description}</p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <Link href={`/releases/${selectedRelease.slug}`} className="rounded-control bg-accent-magenta px-4 py-2 text-sm font-medium text-black hover:opacity-90">
+            <Link href={`/releases/${selectedRelease.slug}`} className="rounded-control bg-accent-violet px-4 py-2 text-sm font-medium text-black hover:opacity-90">
               Open release page
             </Link>
             <Link href={`/products/${product.slug}`} className="rounded-control border border-border px-4 py-2 text-sm text-foreground hover:border-accent-cyan">
@@ -149,7 +149,7 @@ export default async function ProductHome({
 
       <div className="flex flex-wrap gap-4 text-sm">
         {product.franchiseUrl && (
-          <a href={product.franchiseUrl} className="text-accent-magenta hover:underline">
+          <a href={product.franchiseUrl} className="text-accent-violet hover:underline">
             Visit {product.title} franchise home ↗
           </a>
         )}

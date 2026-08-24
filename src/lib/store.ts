@@ -115,8 +115,8 @@ export const collections = [
     id: "merchandise" as const,
     title: "Studio Merchandise",
     blurb: "Headwear, apparel, and stickers carrying the Cryptic Design mark.",
-    accent: "var(--cry-spectrum-yellow)",
-    accentClass: "accent-gold",
+    accent: "var(--cry-spectrum-lavender)",
+    accentClass: "accent-lavender",
   },
 ];
 

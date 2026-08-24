@@ -108,8 +108,8 @@ export default async function ArticlePage({ params }: Params) {
       )}
 
       <div className="grid gap-10 lg:grid-cols-[220px_minmax(0,720px)] lg:justify-center">
-        <aside className="h-fit border-t-2 border-[var(--cry-spectrum-magenta)] pt-5 lg:sticky lg:top-32">
-          <span className="kicker !text-[var(--cry-spectrum-magenta)]">Article</span>
+        <aside className="h-fit border-t-2 border-[var(--cry-spectrum-violet)] pt-5 lg:sticky lg:top-32">
+          <span className="kicker !text-[var(--cry-spectrum-violet)]">Article</span>
           <p className="mt-3 text-sm leading-relaxed text-neutral-400">{article.description}</p>
           <Link href="/professional/articles" className="text-link">All articles +</Link>
         </aside>

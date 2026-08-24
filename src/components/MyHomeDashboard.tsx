@@ -199,7 +199,7 @@ export default function MyHomeDashboard({ initialAuthenticated = true, accountAd
             <MissionControlSummary mission={null} />
           </section>
 
-          <section data-section-accent="green" aria-labelledby="continue-title">
+          <section data-section-accent="periwinkle" aria-labelledby="continue-title">
             <div className="section-heading"><div><span className="kicker">Continue</span><h2 id="continue-title" className="section-title">Pick up what matters.</h2></div><p>Until cross-device history is available, this uses releases saved to My Library on this device.</p></div>
             {savedReleases.length ? (
               <div className="my-home-continue-grid">
@@ -215,7 +215,7 @@ export default function MyHomeDashboard({ initialAuthenticated = true, accountAd
             )}
           </section>
 
-          <section className="my-home-detail-grid" data-section-accent="yellow" aria-label="Library and progress">
+          <section className="my-home-detail-grid" data-section-accent="lavender" aria-label="Library and progress">
             <article className="my-home-module" aria-labelledby="library-summary-title">
               <span className="kicker">My Library</span>
               <h2 id="library-summary-title">{savedReleases.length ? `${savedReleases.length} saved on this device` : "Your saved releases"}</h2>
@@ -233,7 +233,7 @@ export default function MyHomeDashboard({ initialAuthenticated = true, accountAd
             </article>
           </section>
 
-          <section className="my-home-detail-grid" data-section-accent="magenta" aria-label="Collections and participation">
+          <section className="my-home-detail-grid" data-section-accent="violet" aria-label="Collections and participation">
             <article className="my-home-module" aria-labelledby="collection-summary-title">
               <span className="kicker">Achievements and collections</span>
               <h2 id="collection-summary-title">What you have discovered</h2>
@@ -249,7 +249,7 @@ export default function MyHomeDashboard({ initialAuthenticated = true, accountAd
             </article>
           </section>
 
-          <section data-section-accent="violet" aria-labelledby="account-utilities-title">
+          <section data-section-accent="orchid" aria-labelledby="account-utilities-title">
             <div className="section-heading"><div><span className="kicker">Account utilities</span><h2 id="account-utilities-title" className="section-title">Manage the practical details.</h2></div><p>Routine account tasks stay in conventional, accessible web interfaces.</p></div>
             <nav className="my-home-utility-grid" aria-label="Account utilities">
               <Link href="/account"><strong>Profile and account</strong><span>Overview, session, and sign out</span></Link>

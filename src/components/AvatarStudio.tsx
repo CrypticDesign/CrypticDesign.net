@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import type { AvatarRecipe } from "@/lib/avatar";
 
-const colors = { cyan: 0x00e5ff, gold: 0xffd400, magenta: 0xed00a8, green: 0x00f0a8 };
+const colors = { cyan: 0x4cc9d8, lavender: 0x9a86d8, violet: 0xb17ac8, periwinkle: 0x7c8ce8 };
 const skins = { umber: 0x5b3427, copper: 0x9a5f45, sand: 0xc58f68, moon: 0xc8d1d7 };
 const outfits = { signal: 0x101f2f, archive: 0x292339, drift: 0x26332f };
 

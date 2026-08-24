@@ -15,7 +15,7 @@ export default function StorePreviewPage() {
   return (
     <main className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-12 sm:px-6">
       <header className="flex flex-col gap-3">
-        <span className="text-[10px] font-bold uppercase tracking-[.1em] text-accent-gold">
+        <span className="text-[10px] font-bold uppercase tracking-[.1em] text-accent-lavender">
           Store / preview
         </span>
         <h1 className="text-3xl font-semibold text-white sm:text-[40px]">
@@ -71,7 +71,7 @@ export default function StorePreviewPage() {
       ))}
 
       <section className="panel flex flex-col gap-4 p-7 sm:p-10">
-        <span className="kicker !text-[var(--cry-spectrum-yellow)]">Want to be told when it opens?</span>
+        <span className="kicker !text-[var(--cry-spectrum-lavender)]">Want to be told when it opens?</span>
         <h2 className="section-title !mb-0">
           The store reopens with the new platform.
         </h2>
@@ -85,7 +85,7 @@ export default function StorePreviewPage() {
           </Link>
           <Link
             href="/products/lifa"
-            className="button secondary !border-[var(--cry-spectrum-yellow)]"
+            className="button secondary !border-[var(--cry-spectrum-lavender)]"
           >
             Explore Lifa
           </Link>

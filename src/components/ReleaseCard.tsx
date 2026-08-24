@@ -6,8 +6,8 @@ import { releaseDestination, releaseImage } from "@/lib/releases";
 const ACCENT_BORDER: Record<Release["accent"], string> = {
   blue: "after:bg-accent-blue",
   cyan: "after:bg-accent-cyan",
-  magenta: "after:bg-accent-magenta",
-  gold: "after:bg-accent-gold",
+  violet: "after:bg-accent-violet",
+  lavender: "after:bg-accent-lavender",
 };
 
 const KIND_LABEL: Record<Release["kind"], string> = {
@@ -40,7 +40,7 @@ export default function ReleaseCard({ release, accessDecision }: { release: Rele
           </span>
         )}
         {release.visibility_status === "entitlement-required" && (
-          <span className="border border-accent-gold/60 px-2 py-0.5 text-accent-gold">
+          <span className="border border-accent-lavender/60 px-2 py-0.5 text-accent-lavender">
             {accessDecision === "granted" ? "Unlocked" : accessDecision === "account-required" ? "Sign in" : accessDecision === "entitlement-required" ? "Membership required" : "Member access"}
           </span>
         )}

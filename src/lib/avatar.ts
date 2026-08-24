@@ -7,7 +7,7 @@ export interface AvatarRecipe {
   rigId: "cryptic-humanoid-v1";
   skinTone: (typeof AVATAR_SKIN_TONES)[number];
   outfit: (typeof AVATAR_OUTFITS)[number];
-  accent: "cyan" | "gold" | "magenta" | "green";
+  accent: "cyan" | "lavender" | "violet" | "periwinkle";
   trait: (typeof AVATAR_TRAITS)[number];
 }
 
@@ -18,7 +18,7 @@ export function validateAvatarRecipe(value: unknown): AvatarRecipe {
   if (recipe.schemaVersion !== 1 || recipe.rigId !== "cryptic-humanoid-v1") throw new Error("Unsupported avatar recipe version");
   if (!AVATAR_SKIN_TONES.includes(recipe.skinTone as AvatarRecipe["skinTone"])) throw new Error("Unknown avatar skin material");
   if (!AVATAR_OUTFITS.includes(recipe.outfit as AvatarRecipe["outfit"])) throw new Error("Unknown avatar outfit");
-  if (!["cyan", "gold", "magenta", "green"].includes(recipe.accent ?? "")) throw new Error("Unknown avatar accent");
+  if (!["cyan", "lavender", "violet", "periwinkle"].includes(recipe.accent ?? "")) throw new Error("Unknown avatar accent");
   if (!AVATAR_TRAITS.includes(recipe.trait as AvatarRecipe["trait"])) throw new Error("Unknown avatar trait");
   return recipe as AvatarRecipe;
 }

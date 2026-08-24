@@ -23,10 +23,10 @@ test("keeps every public scene in one governed registry", () => {
 
 test("uses one canonical destination accent for every WebGL material", () => {
   const expectedAccents = {
-    "public-home": 0x1e90ff,
-    entertainment: 0x00ffff,
-    community: 0x00ff7f,
-    professional: 0xffff33,
+    "public-home": 0x4f8fea,
+    entertainment: 0x4cc9d8,
+    community: 0x7c8ce8,
+    professional: 0x9a86d8,
   } as const;
 
   for (const [sceneId, accent] of Object.entries(expectedAccents)) {
