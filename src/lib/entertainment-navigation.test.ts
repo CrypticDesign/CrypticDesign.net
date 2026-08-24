@@ -12,6 +12,7 @@ const canonicalDestinations = [
 test("Entertainment navigation exposes only scalable media destinations", () => {
   assert.deepEqual(ENTERTAINMENT_NAV_ITEMS.map((item) => item.href), canonicalDestinations);
   assert.equal(ENTERTAINMENT_NAV_ITEMS.some((item) => item.href.startsWith("/products/")), false);
+  assert.deepEqual(new Set(ENTERTAINMENT_NAV_ITEMS.map((item) => item.theme)), new Set(["cyan"]));
 });
 
 test("Entertainment navigation never targets a retired route", () => {

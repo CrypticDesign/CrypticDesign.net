@@ -5,14 +5,14 @@ export type EntertainmentNavItem = {
   label: string;
   description: string;
   icon: EntertainmentNavIcon;
-  theme: "cyan" | "violet" | "gold" | "blue";
+  theme: "blue" | "cyan" | "green" | "yellow" | "magenta" | "violet";
 };
 
 export const ENTERTAINMENT_NAV_ITEMS: readonly EntertainmentNavItem[] = [
   { href: "/entertainment", label: "Overview", description: "Entertainment", icon: "all", theme: "cyan" },
-  { href: "/entertainment/explore", label: "Explore", description: "Games, worlds & more", icon: "arcade", theme: "violet" },
-  { href: "/audio", label: "Music", description: "Sound & signal", icon: "music", theme: "gold" },
-  { href: "/entertainment/cinema", label: "Video", description: "Watch & listen", icon: "video", theme: "blue" },
+  { href: "/entertainment/explore", label: "Explore", description: "Games, worlds & more", icon: "arcade", theme: "cyan" },
+  { href: "/audio", label: "Music", description: "Sound & signal", icon: "music", theme: "cyan" },
+  { href: "/entertainment/cinema", label: "Video", description: "Watch & listen", icon: "video", theme: "cyan" },
 ] as const;
 
 export const ARCADE_CATEGORIES = [

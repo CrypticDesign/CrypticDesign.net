@@ -132,7 +132,7 @@ export default function MyHomeDashboard({ initialAuthenticated = true, accountAd
 
   return (
     <main className="my-home">
-      <section className="visual-hero home-hero" aria-labelledby="my-home-title">
+      <section className="visual-hero home-hero" data-section-accent="blue" aria-labelledby="my-home-title">
         <PersonalSpacePanel
           status={authenticated && character ? "ready" : "unavailable"}
           character={authenticated && character ? { label: character.name, recipe: character.avatarRecipe } : null}
@@ -140,8 +140,8 @@ export default function MyHomeDashboard({ initialAuthenticated = true, accountAd
         <div className="visual-hero__wash" />
         <div className="visual-hero__content home-hero__content">
           <div className="home-hero__copy">
-            <div className="signal-rail text-[#ffd400]" />
-            <span className="kicker !text-[#ffd400]">My Home</span>
+            <div className="signal-rail" />
+            <span className="kicker">My Home</span>
             <h1 id="my-home-title" className="display-title">{greeting}</h1>
             <p>{authenticated
               ? "See your identity, what you can continue, and what needs your attention right now."
@@ -172,9 +172,9 @@ export default function MyHomeDashboard({ initialAuthenticated = true, accountAd
 
       {authenticated ? (
         <div className="shell my-home-stack">
-          <section className="my-home-priority-grid" aria-label="Identity and next actions">
+          <section className="my-home-priority-grid" data-section-accent="cyan" aria-label="Identity and next actions">
             <article className="my-home-module my-home-identity" aria-labelledby="identity-summary-title">
-              <span className="kicker !text-[#ffd400]">Persistent identity</span>
+              <span className="kicker">Persistent identity</span>
               {character ? (
                 <>
                   <div className="my-home-identity__header">
@@ -199,8 +199,8 @@ export default function MyHomeDashboard({ initialAuthenticated = true, accountAd
             <MissionControlSummary mission={null} />
           </section>
 
-          <section aria-labelledby="continue-title">
-            <div className="section-heading"><div><span className="kicker !text-[#ffd400]">Continue</span><h2 id="continue-title" className="section-title">Pick up what matters.</h2></div><p>Until cross-device history is available, this uses releases saved to My Library on this device.</p></div>
+          <section data-section-accent="green" aria-labelledby="continue-title">
+            <div className="section-heading"><div><span className="kicker">Continue</span><h2 id="continue-title" className="section-title">Pick up what matters.</h2></div><p>Until cross-device history is available, this uses releases saved to My Library on this device.</p></div>
             {savedReleases.length ? (
               <div className="my-home-continue-grid">
                 {savedReleases.slice(0, 4).map((release) => (
@@ -215,7 +215,7 @@ export default function MyHomeDashboard({ initialAuthenticated = true, accountAd
             )}
           </section>
 
-          <section className="my-home-detail-grid" aria-label="Library and progress">
+          <section className="my-home-detail-grid" data-section-accent="yellow" aria-label="Library and progress">
             <article className="my-home-module" aria-labelledby="library-summary-title">
               <span className="kicker">My Library</span>
               <h2 id="library-summary-title">{savedReleases.length ? `${savedReleases.length} saved on this device` : "Your saved releases"}</h2>
@@ -224,7 +224,7 @@ export default function MyHomeDashboard({ initialAuthenticated = true, accountAd
               <Link href="/library" className="text-link">Open My Library</Link>
             </article>
             <article className="my-home-module" aria-labelledby="activity-summary-title">
-              <span className="kicker !text-[#00f0a8]">Activity and progress</span>
+              <span className="kicker">Activity and progress</span>
               <h2 id="activity-summary-title">What changed</h2>
               {activity.length ? (
                 <ol className="my-home-activity-list">{activity.map((event) => <li key={event.id}><span aria-hidden="true" /><div><strong>{event.title}</strong><p>{event.detail}</p><time dateTime={event.occurredAt}>{formatActivityDate(event.occurredAt)}</time></div></li>)}</ol>
@@ -233,9 +233,9 @@ export default function MyHomeDashboard({ initialAuthenticated = true, accountAd
             </article>
           </section>
 
-          <section className="my-home-detail-grid" aria-label="Collections and participation">
+          <section className="my-home-detail-grid" data-section-accent="magenta" aria-label="Collections and participation">
             <article className="my-home-module" aria-labelledby="collection-summary-title">
-              <span className="kicker !text-[#ed00a8]">Achievements and collections</span>
+              <span className="kicker">Achievements and collections</span>
               <h2 id="collection-summary-title">What you have discovered</h2>
               {dashboard.rpgContent?.achievements.length || dashboard.rpgContent?.collectibles.length ? (
                 <dl className="my-home-counts"><div><dt>Achievements</dt><dd>{dashboard.rpgContent.achievements.length}</dd></div><div><dt>Collectibles</dt><dd>{dashboard.rpgContent.collectibles.length}</dd></div></dl>
@@ -249,8 +249,8 @@ export default function MyHomeDashboard({ initialAuthenticated = true, accountAd
             </article>
           </section>
 
-          <section aria-labelledby="account-utilities-title">
-            <div className="section-heading"><div><span className="kicker !text-[#ffd400]">Account utilities</span><h2 id="account-utilities-title" className="section-title">Manage the practical details.</h2></div><p>Routine account tasks stay in conventional, accessible web interfaces.</p></div>
+          <section data-section-accent="violet" aria-labelledby="account-utilities-title">
+            <div className="section-heading"><div><span className="kicker">Account utilities</span><h2 id="account-utilities-title" className="section-title">Manage the practical details.</h2></div><p>Routine account tasks stay in conventional, accessible web interfaces.</p></div>
             <nav className="my-home-utility-grid" aria-label="Account utilities">
               <Link href="/account"><strong>Profile and account</strong><span>Overview, session, and sign out</span></Link>
               <Link href="/library"><strong>My Library</strong><span>Saved releases on this device</span></Link>
@@ -261,8 +261,8 @@ export default function MyHomeDashboard({ initialAuthenticated = true, accountAd
           </section>
         </div>
       ) : sessionLoaded ? (
-        <section className="shell my-home-signed-out" aria-labelledby="signed-out-title">
-          <span className="kicker !text-[#ffd400]">Private by default</span>
+        <section className="shell my-home-signed-out" data-section-accent="blue" aria-labelledby="signed-out-title">
+          <span className="kicker">Private by default</span>
           <h2 id="signed-out-title" className="section-title">Sign in to see personal state.</h2>
           <p>Public browsing remains available without an account. My Home only requests private Character and account data after an authenticated session is confirmed.</p>
           <div className="hero-actions"><Link href="/entertainment" className="button secondary">Browse the public site</Link><Link href="/account/sign-in" className="button">Sign in</Link></div>

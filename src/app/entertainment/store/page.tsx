@@ -71,7 +71,7 @@ export default function StorePreviewPage() {
       ))}
 
       <section className="panel flex flex-col gap-4 p-7 sm:p-10">
-        <span className="kicker !text-[#ffd400]">Want to be told when it opens?</span>
+        <span className="kicker !text-[var(--cry-spectrum-yellow)]">Want to be told when it opens?</span>
         <h2 className="section-title !mb-0">
           The store reopens with the new platform.
         </h2>
@@ -85,7 +85,7 @@ export default function StorePreviewPage() {
           </Link>
           <Link
             href="/products/lifa"
-            className="button secondary !border-[#ffd400]"
+            className="button secondary !border-[var(--cry-spectrum-yellow)]"
           >
             Explore Lifa
           </Link>

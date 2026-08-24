@@ -96,7 +96,7 @@ export default function EntertainmentNavigation() {
   </details> : null;
 
   return (
-    <section id="entertainment-category-drawer" className="entertainment-navigation" data-open={categoryDrawerOpen} data-franchise={arcadeFranchiseRoute || undefined} data-section-theme={activeItem?.theme ?? "cyan"} aria-label="Explore Entertainment">
+    <section id="entertainment-category-drawer" className="entertainment-navigation" data-open={categoryDrawerOpen} data-franchise={arcadeFranchiseRoute || undefined} data-section-theme={activeItem?.theme ?? "blue"} aria-label="Explore Entertainment">
       <div className="shell entertainment-navigation__viewport">
         <nav className="entertainment-navigation__bar entertainment-navigation__desktop" aria-label="Entertainment destinations">{renderDestinations("desktop")}</nav>
         <details className="entertainment-navigation__menu">

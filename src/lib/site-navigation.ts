@@ -12,10 +12,6 @@ const FRANCHISE_ROOTS = new Set([
   "/entertainment/singularis",
 ]);
 
-export function primaryHomeLabel(authenticated: boolean): "Home" | "My Home" {
-  return authenticated ? "My Home" : "Home";
-}
-
 export function isPrimaryNavigationActive(
   pathname: string,
   href: PrimaryNavigationHref,

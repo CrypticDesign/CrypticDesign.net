@@ -24,7 +24,7 @@ test("global account navigation starts from server authentication state", async 
   assert.match(serverState, /client\.auth\.getUser\(\)/);
 });
 
-test("global account navigation synchronizes authenticated My Home and Account destinations", async () => {
+test("global account navigation synchronizes Account without duplicating Home", async () => {
   const [header, accessForm] = await Promise.all([
     readFile(headerUrl, "utf8"),
     readFile(accessFormUrl, "utf8"),
@@ -32,8 +32,9 @@ test("global account navigation synchronizes authenticated My Home and Account d
   assert.match(header, /fetch\("\/api\/membership\/session"/);
   assert.match(header, /MEMBERSHIP_SESSION_CHANGED_EVENT/);
   assert.match(header, /\[pathname\]/);
-  assert.match(header, /authenticated \? "\/" : "\/account\/sign-in"/);
-  assert.match(header, />My Home<\/span>/);
+  assert.doesNotMatch(header, /myHomeHref/);
+  assert.doesNotMatch(header, />My Home<\/span>/);
+  assert.doesNotMatch(header, /site-primary-link--my-home/);
   assert.match(header, /authenticated \? "Account" : "Sign In"/);
   assert.match(header, /authenticated \? "\/account" : "\/account\/sign-in"/);
   assert.match(header, /href=\{accountHref\}/);
@@ -53,10 +54,15 @@ test("brand wordmark uses the Cryptic VDS sans-serif type stack", async () => {
 
 test("primary navigation exposes contextual Sign In or Account directly without a dropdown", async () => {
   const header = await readFile(headerUrl, "utf8");
-  assert.match(header, /href: "\/", label: "Home", tone: "gold"/);
+  assert.match(header, /href: "\/", label: "Home", tone: "blue"/);
   assert.match(header, /href: "\/entertainment", label: "Explore", tone: "cyan"/);
-  assert.match(header, /href: "\/community", label: "Community", tone: "violet"/);
-  assert.doesNotMatch(header, /href: "\/professional", label: "Professional"/);
+  assert.match(header, /href: "\/community", label: "Community", tone: "green"/);
+  assert.match(header, /href: "\/professional", label: "Professional", tone: "yellow"/);
+  const primaryLabels = ["Home", "Explore", "Community", "Professional"];
+  const labelIndexes = primaryLabels.map((label) => header.indexOf(`label: "${label}"`));
+  assert.ok(labelIndexes.every((index) => index >= 0));
+  assert.deepEqual([...labelIndexes].sort((a, b) => a - b), labelIndexes);
+  assert.equal(header.match(/label: "Home"/g)?.length, 1);
   assert.match(header, /href="\/search" aria-label="Search"/);
   assert.match(header, /<Link href=\{accountHref\} data-tone="blue"/);
   assert.match(header, /aria-current=\{accountSectionActive \? "page" : undefined\}/);
@@ -149,7 +155,7 @@ test("primary Explore and its destination drawer expose independent controls", a
     readFile(globalsUrl, "utf8"),
   ]);
   assert.match(header, /href: "\/entertainment", label: "Explore", tone: "cyan"/);
-  assert.match(header, /href: "\/community", label: "Community", tone: "violet"/);
+  assert.match(header, /href: "\/community", label: "Community", tone: "green"/);
   assert.match(header, /className="site-primary-drawer"/);
   assert.doesNotMatch(header, /className="site-primary-link__arrow"/);
   assert.match(entertainmentNavigation, /className="entertainment-navigation__item-drawer"/);
@@ -180,16 +186,19 @@ test("primary Explore and its destination drawer expose independent controls", a
   assert.match(globals, /Full-width tier drawers expand in flow and push page content down/);
   assert.match(globals, /\.entertainment-navigation__item-drawer\[data-open="true"\]>summary:not\(\[aria-current="page"\]\)/);
   assert.match(globals, /summary:not\(\[aria-current="page"\]\)::after\{background:transparent;box-shadow:none\}/);
-  assert.match(globals, /\.entertainment-navigation__item-drawer>\.entertainment-navigation__item\{--nav-accent:#9b5cff\}/);
+  assert.match(globals, /\.entertainment-navigation__item-drawer>\.entertainment-navigation__item\{--nav-accent:var\(--cry-accent-default\)\}/);
+  assert.match(globals, /\.entertainment-navigation__item-drawer\[data-theme="cyan"\]>\.entertainment-navigation__item\{--nav-accent:var\(--cry-spectrum-cyan\)\}/);
+  assert.match(globals, /\.entertainment-navigation__item-drawer\[data-theme="green"\]>\.entertainment-navigation__item\{--nav-accent:var\(--cry-spectrum-green\)\}/);
+  assert.match(globals, /\.entertainment-navigation__item-drawer\[data-theme="yellow"\]>\.entertainment-navigation__item,[^{]*\{--nav-accent:var\(--cry-spectrum-yellow\)\}/);
   assert.match(globals, /\.entertainment-navigation__item-options\[data-open="false"\]\{max-height:0/);
   assert.match(globals, /\.entertainment-navigation__item-options a\[aria-current="page"\]/);
   assert.match(entertainmentNavigation, /className="arcade-filter-menu"/);
-  assert.match(entertainmentNavigation, /data-section-theme=\{activeItem\?\.theme \?\? "cyan"\}/);
+  assert.match(entertainmentNavigation, /data-section-theme=\{activeItem\?\.theme \?\? "blue"\}/);
   assert.match(globals, /data-section-theme="violet"/);
   assert.match(entertainmentNavigation, /aria-label=\{`Compact \$\{compactItem\.label\} navigation`\}/);
   assert.match(globals, /\.entertainment-navigation__item-options\{display:none!important\}/);
   assert.match(globals, /\.arcade-filter-menu\{display:block/);
-  assert.match(globals, /\.entertainment-navigation\{--section-accent:var\(--cyan\);overflow:visible;margin-bottom:0/);
+  assert.match(globals, /\.entertainment-navigation\{--section-accent:var\(--cry-accent-default\);overflow:visible;margin-bottom:0/);
   assert.match(globals, /\.entertainment-navigation__item\[aria-current="page"\]:after\{background:transparent;box-shadow:none\}/);
   assert.match(globals, /\.entertainment-navigation__item-drawer>\.entertainment-navigation__item\[aria-current="page"\]\{background:linear-gradient/);
   assert.match(globals, /@media\(prefers-reduced-motion:reduce\)/);

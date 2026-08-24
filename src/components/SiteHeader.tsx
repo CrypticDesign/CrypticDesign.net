@@ -8,9 +8,10 @@ import { MEMBERSHIP_SESSION_CHANGED_EVENT } from "@/lib/membership-session-event
 import { isPrimaryNavigationActive } from "@/lib/site-navigation";
 
 const NAV = [
-  { href: "/", label: "Home", tone: "gold" },
+  { href: "/", label: "Home", tone: "blue" },
   { href: "/entertainment", label: "Explore", tone: "cyan" },
-  { href: "/community", label: "Community", tone: "violet" },
+  { href: "/community", label: "Community", tone: "green" },
+  { href: "/professional", label: "Professional", tone: "yellow" },
 ] as const;
 
 export default function SiteHeader({ initialAuthenticated = false }: { initialAuthenticated?: boolean }) {
@@ -22,8 +23,6 @@ export default function SiteHeader({ initialAuthenticated = false }: { initialAu
   const accountSectionActive = pathname === "/account" || pathname.startsWith("/account/") || pathname === "/library";
   const accountLabel = authenticated ? "Account" : "Sign In";
   const accountHref = authenticated ? "/account" : "/account/sign-in";
-  const myHomeHref = authenticated ? "/" : "/account/sign-in";
-  const myHomeActive = authenticated ? pathname === "/" : pathname === "/account/sign-in";
 
   useEffect(() => {
     let active = true;
@@ -74,7 +73,6 @@ export default function SiteHeader({ initialAuthenticated = false }: { initialAu
               if (hasSubmenu) return <details key={item.href} ref={entertainmentMenuRef} className="site-primary-drawer" open={entertainmentMenuOpen}><summary data-tone={item.tone} aria-current={active ? "page" : undefined} aria-expanded={entertainmentMenuOpen} aria-controls="entertainment-category-drawer" className="site-primary-link" onClick={(event) => { event.preventDefault(); const changingSection = pathname !== item.href; const open = changingSection || !entertainmentMenuOpen; setEntertainmentMenuOpen(open); window.dispatchEvent(new CustomEvent("cryptic:entertainment-drawer", { detail: { open } })); if (changingSection) router.push(item.href); }}><span>{item.label}</span></summary></details>;
               return <Link key={item.href} href={item.href} data-tone={item.tone} aria-current={active ? "page" : undefined} className="site-primary-link"><span>{item.label}</span></Link>;
             })}
-            <Link href={myHomeHref} data-tone="gold" aria-current={myHomeActive ? "page" : undefined} className="site-primary-link site-primary-link--my-home"><span>My Home</span></Link>
             <Link href="/search" aria-label="Search" aria-current={pathname === "/search" ? "page" : undefined} className="site-header__search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg></Link>
             <div className="account-menu">
               <Link href={accountHref} data-tone="blue" aria-current={accountSectionActive ? "page" : undefined} className="utility-nav site-utility-link account-menu__trigger">{accountLabel}</Link>
