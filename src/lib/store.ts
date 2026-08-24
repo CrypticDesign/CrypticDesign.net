@@ -108,14 +108,14 @@ export const collections = [
     title: "Lifa — Cosmic Series",
     blurb:
       "Formation, stellar birth, and supernova studies from the Lifa universe, printed on canvas.",
-    accent: "#00e5ff",
+    accent: "var(--cry-spectrum-cyan)",
     accentClass: "accent-cyan",
   },
   {
     id: "merchandise" as const,
     title: "Studio Merchandise",
     blurb: "Headwear, apparel, and stickers carrying the Cryptic Design mark.",
-    accent: "#ffd400",
+    accent: "var(--cry-spectrum-yellow)",
     accentClass: "accent-gold",
   },
 ];

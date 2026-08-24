@@ -26,19 +26,34 @@ for (const vp of viewports) {
   await page.goto(base + path, { waitUntil: "networkidle" });
 
   // Measure CRY-413 navigation: destinations must not depend on horizontal scrolling.
-  const trigger = page.locator(".entertainment-navigation__trigger");
+  const trigger = page.locator(".entertainment-navigation__menu > summary");
   const triggerVisible = await trigger.isVisible();
   if (triggerVisible) {
     await trigger.focus();
     await trigger.press("Enter");
   }
-  const keyboardOpened = triggerVisible ? await trigger.getAttribute("aria-expanded") === "true" : null;
-  await page.locator(".entertainment-navigation__panel").scrollIntoViewIfNeeded();
+  const keyboardOpened = triggerVisible
+    ? await page.locator(".entertainment-navigation__menu").evaluate((menu) => menu.open)
+    : null;
+  const navigationSelector = triggerVisible
+    ? ".entertainment-navigation__menu-panel"
+    : ".entertainment-navigation__bar";
+  await page.locator(navigationSelector).scrollIntoViewIfNeeded();
   const navigation = await page.evaluate(() => {
-    const el = document.querySelector(".entertainment-navigation__panel");
+    const mobileMenu = document.querySelector(".entertainment-navigation__menu");
+    const mobileVisible = mobileMenu && getComputedStyle(mobileMenu).display !== "none";
+    const el = document.querySelector(
+      mobileVisible
+        ? ".entertainment-navigation__menu-panel"
+        : ".entertainment-navigation__bar",
+    );
     if (!el) return null;
-    const links = [...el.querySelectorAll("a")];
-    const tops = new Set(links.map((a) => Math.round(a.getBoundingClientRect().top)));
+    const links = [
+      ...el.querySelectorAll(
+        ":scope > .entertainment-navigation__item, :scope > details > summary.entertainment-navigation__item",
+      ),
+    ];
+    const tops = new Set(links.map((item) => Math.round(item.getBoundingClientRect().top)));
     return {
       rows: tops.size,
       itemCount: links.length,
@@ -50,7 +65,7 @@ for (const vp of viewports) {
         const rect = link.getBoundingClientRect();
         return rect.width > 0 && rect.height > 0;
       }),
-      currentLabel: el.querySelector('[aria-current="page"]')?.textContent?.trim() ?? null,
+      currentLabel: el.querySelector('.entertainment-navigation__item[aria-current="page"] strong')?.textContent?.trim() ?? null,
     };
   });
 

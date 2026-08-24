@@ -509,9 +509,9 @@ const caseStudies: CaseStudy[] = [
 ];
 
 const accentHex = {
-  magenta: "#ed00a8",
-  cyan: "#00e5ff",
-  gold: "#ffd400",
+  magenta: "var(--cry-spectrum-magenta)",
+  cyan: "var(--cry-spectrum-cyan)",
+  gold: "var(--cry-spectrum-yellow)",
   green: "#00f0a8",
 } as const;
 
@@ -530,8 +530,8 @@ export default function CaseStudiesPage() {
         </div>
         <div className="visual-hero__wash" />
         <div className="visual-hero__content">
-          <div className="signal-rail text-[#ed00a8]" />
-          <span className="kicker !text-[#ed00a8]">
+          <div className="signal-rail text-[var(--cry-spectrum-magenta)]" />
+          <span className="kicker !text-[var(--cry-spectrum-magenta)]">
             Selected work / problem → approach → craft → outcome
           </span>
           <h1 className="display-title">
@@ -548,7 +548,7 @@ export default function CaseStudiesPage() {
             </Link>
             <Link
               href="/professional"
-              className="button secondary !border-[#ed00a8]"
+              className="button secondary !border-[var(--cry-spectrum-magenta)]"
             >
               Professional Studio
             </Link>
@@ -560,7 +560,7 @@ export default function CaseStudiesPage() {
         <nav aria-label="Case study index" className="panel p-5 sm:p-7">
           <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
             <div>
-              <span className="kicker !text-[#ed00a8]">Portfolio index</span>
+              <span className="kicker !text-[var(--cry-spectrum-magenta)]">Portfolio index</span>
               <h2 className="text-xl font-semibold">Choose a use case</h2>
             </div>
             <p className="m-0 max-w-xl text-sm text-[var(--muted)]">Jump directly to the product context most relevant to your team.</p>
@@ -698,7 +698,7 @@ export default function CaseStudiesPage() {
         <section className="panel p-7 sm:p-10">
           <div className="section-heading !mb-0">
             <div>
-              <span className="kicker !text-[#ed00a8]">Working together</span>
+              <span className="kicker !text-[var(--cry-spectrum-magenta)]">Working together</span>
               <h2 className="section-title">
                 Have a system that needs to make sense to real people?
               </h2>
@@ -714,7 +714,7 @@ export default function CaseStudiesPage() {
             </Link>
             <Link
               href="/professional/contact"
-              className="button secondary !border-[#ed00a8]"
+              className="button secondary !border-[var(--cry-spectrum-magenta)]"
             >
               Contact the studio
             </Link>

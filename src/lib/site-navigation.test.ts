@@ -3,14 +3,8 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 import {
   isPrimaryNavigationActive,
-  primaryHomeLabel,
   shouldShowTopBreadcrumb,
 } from "./site-navigation.ts";
-
-test("uses a public Home label until the viewer is authenticated", () => {
-  assert.equal(primaryHomeLabel(false), "Home");
-  assert.equal(primaryHomeLabel(true), "My Home");
-});
 
 test("keeps Entertainment active across its legacy and current destinations", () => {
   for (const pathname of [

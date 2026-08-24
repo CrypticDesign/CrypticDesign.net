@@ -6,21 +6,21 @@ import { getService, publicServices } from "@/lib/services";
 
 const details: Record<string, { image: string; accent: string; promise: string; process: string[]; deliverables: string[]; proof: { label: string; href: string }[] }> = {
   "product-strategy": {
-    image: "/images/service-strategy.png", accent: "#ed00a8",
+    image: "/images/service-strategy.png", accent: "var(--cry-spectrum-magenta)",
     promise: "Turn uncertainty into a shared product direction your team can explain, test, and deliver.",
     process: ["Frame the decision, constraints, and evidence gaps.", "Study users, stakeholders, competitors, and the existing product.", "Model journeys, services, risks, and opportunity areas.", "Prioritize a practical roadmap with measurable decision points."],
     deliverables: ["Research plan and synthesis", "Experience or service audit", "Journey and ecosystem maps", "Product principles", "Opportunity backlog", "Prioritized roadmap and decision brief"],
     proof: [{ label: "WellSky enterprise portfolio", href: "/professional/case-studies#wellsky" }, { label: "WIN Reality product experience", href: "/professional/case-studies#win-reality" }],
   },
   "ux-interaction": {
-    image: "/images/service-ux.png", accent: "#00e5ff",
+    image: "/images/service-ux.png", accent: "var(--cry-spectrum-cyan)",
     promise: "Make complex workflows feel direct, learnable, and dependable across screens, controllers, and immersive environments.",
     process: ["Understand user goals, contexts, failure points, and system constraints.", "Map information architecture and critical end-to-end workflows.", "Prototype interaction models at the right fidelity for each decision.", "Evaluate, iterate, and support implementation with the delivery team."],
     deliverables: ["Information architecture", "Task and user flows", "Wireframes and interaction models", "Interactive prototypes", "Usability findings", "Accessibility and implementation guidance"],
     proof: [{ label: "Humankind console editions", href: "/professional/case-studies#humankind-console" }, { label: "Onward tactical VR", href: "/professional/case-studies#onward-vr" }],
   },
   "interface-systems": {
-    image: "/images/service-interface.png", accent: "#ffd400",
+    image: "/images/service-interface.png", accent: "var(--cry-spectrum-yellow)",
     promise: "Create an interface language that stays coherent as products, teams, and platforms grow.",
     process: ["Audit existing patterns, inconsistencies, and implementation constraints.", "Define foundations for hierarchy, color, type, spacing, states, and motion.", "Build reusable components around real product workflows.", "Document governance and partner with engineering through adoption."],
     deliverables: ["Interface inventory and audit", "Design foundations", "Component architecture", "Responsive patterns", "Accessibility specifications", "Documentation and adoption plan"],
