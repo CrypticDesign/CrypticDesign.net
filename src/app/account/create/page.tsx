@@ -8,7 +8,7 @@ import { accountAdmissionMode } from "@/lib/account-admission";
 export const metadata: Metadata = {
   title: "Account Availability",
   alternates: { canonical: "/account/create" }, openGraph: { images: ["/share/account-create.png"] }, twitter: { card: "summary_large_image", images: ["/share/account-create.png"] }, 
-  description: "See when new Cryptic Design accounts will become available.",
+  description: "Review Cryptic Design account availability, invitation requirements, and the public entertainment experiences you can explore without signing in.",
 };
 
 export default function CreateAccountPage() {

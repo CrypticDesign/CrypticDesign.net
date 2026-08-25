@@ -5,7 +5,7 @@ export type EntertainmentNavItem = {
   label: string;
   description: string;
   icon: EntertainmentNavIcon;
-  theme: "blue" | "cyan" | "green" | "yellow" | "magenta" | "violet";
+  theme: "blue" | "cyan" | "indigo" | "violet" | "magenta" | "blue";
 };
 
 export const ENTERTAINMENT_NAV_ITEMS: readonly EntertainmentNavItem[] = [

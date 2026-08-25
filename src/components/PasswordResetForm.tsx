@@ -50,7 +50,7 @@ export default function PasswordResetForm() {
       <div className="flex flex-col gap-2 text-sm">
         <div className="flex items-center justify-between gap-4">
           <label htmlFor="new-password">New password</label>
-          <button type="button" className="text-xs text-accent-cyan hover:underline" aria-controls="new-password password-confirmation" aria-pressed={showPassword} onClick={() => setShowPassword((visible) => !visible)}>{showPassword ? "Hide passwords" : "Show passwords"}</button>
+          <button type="button" className="inline-flex min-h-11 items-center text-xs text-accent-cyan hover:underline" aria-controls="new-password password-confirmation" aria-pressed={showPassword} onClick={() => setShowPassword((visible) => !visible)}>{showPassword ? "Hide passwords" : "Show passwords"}</button>
         </div>
         <input id="new-password" className={inputClassName} name="password" type={showPassword ? "text" : "password"} required minLength={8} autoComplete="new-password" />
       </div>

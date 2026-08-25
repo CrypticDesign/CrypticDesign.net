@@ -1,7 +1,7 @@
 import Image from "next/image";
 import AccountFeatureActions, { type AccountFeatureAction } from "@/components/AccountFeatureActions";
 
-type FeatureAccent = "blue" | "cyan" | "gold" | "magenta";
+type FeatureAccent = "blue" | "cyan" | "violet" | "magenta";
 type FeatureItem = { title: string; body: string };
 
 export default function AccountFeatureIntro({ accent, eyebrow, title, description, image, imageAlt, benefits, steps, primaryAction, secondaryAction, signedInPrimaryAction, signedInSecondaryAction, initialAuthenticated = false, note }: {

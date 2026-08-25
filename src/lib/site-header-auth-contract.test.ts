@@ -56,8 +56,8 @@ test("primary navigation exposes contextual Sign In or Account directly without 
   const header = await readFile(headerUrl, "utf8");
   assert.match(header, /href: "\/", label: "Home", tone: "blue"/);
   assert.match(header, /href: "\/entertainment", label: "Explore", tone: "cyan"/);
-  assert.match(header, /href: "\/community", label: "Community", tone: "green"/);
-  assert.match(header, /href: "\/professional", label: "Professional", tone: "yellow"/);
+  assert.match(header, /href: "\/community", label: "Community", tone: "indigo"/);
+  assert.match(header, /href: "\/professional", label: "Professional", tone: "violet"/);
   const primaryLabels = ["Home", "Explore", "Community", "Professional"];
   const labelIndexes = primaryLabels.map((label) => header.indexOf(`label: "${label}"`));
   assert.ok(labelIndexes.every((index) => index >= 0));
@@ -155,7 +155,7 @@ test("primary Explore and its destination drawer expose independent controls", a
     readFile(globalsUrl, "utf8"),
   ]);
   assert.match(header, /href: "\/entertainment", label: "Explore", tone: "cyan"/);
-  assert.match(header, /href: "\/community", label: "Community", tone: "green"/);
+  assert.match(header, /href: "\/community", label: "Community", tone: "indigo"/);
   assert.match(header, /className="site-primary-drawer"/);
   assert.doesNotMatch(header, /className="site-primary-link__arrow"/);
   assert.match(entertainmentNavigation, /className="entertainment-navigation__item-drawer"/);
@@ -187,14 +187,14 @@ test("primary Explore and its destination drawer expose independent controls", a
   assert.match(globals, /\.entertainment-navigation__item-drawer\[data-open="true"\]>summary:not\(\[aria-current="page"\]\)/);
   assert.match(globals, /summary:not\(\[aria-current="page"\]\)::after\{background:transparent;box-shadow:none\}/);
   assert.match(globals, /\.entertainment-navigation__item-drawer>\.entertainment-navigation__item\{--nav-accent:var\(--cry-accent-default\)\}/);
-  assert.match(globals, /\.entertainment-navigation__item-drawer\[data-theme="cyan"\]>\.entertainment-navigation__item\{--nav-accent:var\(--cry-spectrum-cyan\)\}/);
-  assert.match(globals, /\.entertainment-navigation__item-drawer\[data-theme="green"\]>\.entertainment-navigation__item\{--nav-accent:var\(--cry-spectrum-green\)\}/);
-  assert.match(globals, /\.entertainment-navigation__item-drawer\[data-theme="yellow"\]>\.entertainment-navigation__item,[^{]*\{--nav-accent:var\(--cry-spectrum-yellow\)\}/);
+  assert.match(globals, /\.entertainment-navigation__item-drawer\[data-theme="cyan"\]>\.entertainment-navigation__item\{--nav-accent:var\(--cry-accent-cyan\)\}/);
+  assert.match(globals, /\.entertainment-navigation__item-drawer\[data-theme="indigo"\]>\.entertainment-navigation__item\{--nav-accent:var\(--cry-accent-indigo\)\}/);
+  assert.match(globals, /\.entertainment-navigation__item-drawer\[data-theme="violet"\]>\.entertainment-navigation__item\{--nav-accent:var\(--cry-accent-violet\)/);
   assert.match(globals, /\.entertainment-navigation__item-options\[data-open="false"\]\{max-height:0/);
   assert.match(globals, /\.entertainment-navigation__item-options a\[aria-current="page"\]/);
   assert.match(entertainmentNavigation, /className="arcade-filter-menu"/);
   assert.match(entertainmentNavigation, /data-section-theme=\{activeItem\?\.theme \?\? "blue"\}/);
-  assert.match(globals, /data-section-theme="violet"/);
+  assert.match(globals, /data-section-theme="blue"/);
   assert.match(entertainmentNavigation, /aria-label=\{`Compact \$\{compactItem\.label\} navigation`\}/);
   assert.match(globals, /\.entertainment-navigation__item-options\{display:none!important\}/);
   assert.match(globals, /\.arcade-filter-menu\{display:block/);

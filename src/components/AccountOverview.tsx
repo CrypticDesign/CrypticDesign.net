@@ -100,8 +100,8 @@ export default function AccountOverview({ identity }: { identity: ServerAccountI
         <div className="visual-hero__wash" />
         <div className="visual-hero__content account-overview-hero__content">
           <div className="account-overview-hero__copy">
-            <div className="signal-rail text-[var(--cry-spectrum-blue)]" />
-            <span className="kicker !text-[var(--cry-spectrum-blue)]">Account / identity / access</span>
+            <div className="signal-rail text-[var(--cry-accent-blue)]" />
+            <span className="kicker !text-[var(--cry-accent-blue)]">Account / identity / access</span>
             <h1 className="display-title">Your account, clearly connected.</h1>
             <p>Manage identity, security, privacy, access, and account utilities. Activity and personal recommendations remain in My Home.</p>
           </div>

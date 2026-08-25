@@ -1,7 +1,12 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { PAGE_SCENES, resolvePageSceneQuality } from "./page-scene.ts";
+import {
+  PAGE_SCENES,
+  classifyPageScenePerformance,
+  resolvePageSceneQuality,
+  shouldDowngradePageSceneQuality,
+} from "./page-scene.ts";
 
 const capable = {
   reducedMotion: false,
@@ -16,18 +21,27 @@ test("keeps every public scene in one governed registry", () => {
   assert.ok(PAGE_SCENES["public-home"].particleCount.high > PAGE_SCENES["public-home"].particleCount.mid);
 });
 
-test("uses one canonical destination accent for every WebGL material", () => {
+test("uses canonical destination accents with a restrained Community social accent", () => {
   const expectedAccents = {
-    "public-home": 0x1e90ff,
-    entertainment: 0x00ffff,
-    community: 0x00ff7f,
-    professional: 0xffff33,
+    "public-home": { primary: 0x1e90ff, secondary: 0x1e90ff },
+    entertainment: { primary: 0x00dfff, secondary: 0x00dfff },
+    community: { primary: 0x6f7bff, secondary: 0xff33cc },
+    professional: { primary: 0x9400d3, secondary: 0x9400d3 },
   } as const;
 
-  for (const [sceneId, accent] of Object.entries(expectedAccents)) {
+  for (const [sceneId, accents] of Object.entries(expectedAccents)) {
     const scene = PAGE_SCENES[sceneId as keyof typeof PAGE_SCENES];
-    assert.equal(scene.primary, accent);
-    assert.equal(scene.secondary, accent);
+    assert.equal(scene.primary, accents.primary);
+    assert.equal(scene.secondary, accents.secondary);
+  }
+});
+
+test("declares governed backdrop assets for every scene", () => {
+  for (const scene of Object.values(PAGE_SCENES)) {
+    assert.equal(scene.assets.length, 1);
+    assert.equal(scene.assets[0].type, "texture");
+    assert.equal(scene.assets[0].usage, "backdrop");
+    assert.match(scene.assets[0].src, /^\/images\//);
   }
 });
 
@@ -43,4 +57,13 @@ test("selects conservative automatic tiers and honors explicit quality after har
   assert.equal(resolvePageSceneQuality({ ...capable, deviceMemory: 4 }), "mid");
   assert.equal(resolvePageSceneQuality({ ...capable, requested: "mid" }), "mid");
   assert.equal(resolvePageSceneQuality({ ...capable, requested: "high", reducedMotion: true }), "low");
+});
+
+test("classifies measured frame rate and only auto-downgrades sustained high-tier pressure", () => {
+  assert.equal(classifyPageScenePerformance(60), "nominal");
+  assert.equal(classifyPageScenePerformance(40), "constrained");
+  assert.equal(classifyPageScenePerformance(20), "critical");
+  assert.equal(shouldDowngradePageSceneQuality({ requested: "auto", quality: "high", fps: 38, consecutiveConstrainedSamples: 2 }), true);
+  assert.equal(shouldDowngradePageSceneQuality({ requested: "high", quality: "high", fps: 20, consecutiveConstrainedSamples: 5 }), false);
+  assert.equal(shouldDowngradePageSceneQuality({ requested: "auto", quality: "mid", fps: 20, consecutiveConstrainedSamples: 5 }), false);
 });

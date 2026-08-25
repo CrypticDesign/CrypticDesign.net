@@ -20,7 +20,7 @@ type CaseStudy = {
   years: string;
   engagement: string;
   discipline: string;
-  accent: "magenta" | "cyan" | "gold" | "green";
+  accent: "magenta" | "cyan" | "violet" | "indigo";
   hero: { src: string; alt: string };
   problem: string;
   approach: string;
@@ -251,7 +251,7 @@ const caseStudies: CaseStudy[] = [
     years: "2021",
     engagement: "UX/UI design contribution while working with Digimancy Entertainment",
     discipline: "Tactical RPG UX / interaction systems",
-    accent: "gold",
+    accent: "violet",
     hero: { src: "/images/case-studies/digimancy-hazard.png", alt: "Project WIRE narrative encounter interface for an environmental hazard" },
     problem: "Create a readable interaction framework for a new narrative-driven science-fiction RPG where dense tactical information and consequential choices had to coexist.",
     approach: "Combined competitive research and stakeholder input into a UX strategy, then moved from low- and high-fidelity mockups to a functional Figma prototype.",
@@ -286,7 +286,7 @@ const caseStudies: CaseStudy[] = [
     years: "2019–2020",
     engagement: "Senior User Experience Designer within WellSky's engineering organization",
     discipline: "Enterprise UX / design systems",
-    accent: "green",
+    accent: "indigo",
     hero: {
       src: "/images/case-studies/wellsky-hero.jpg",
       alt: "WellSky enterprise healthcare software UX case study cover",
@@ -417,7 +417,7 @@ const caseStudies: CaseStudy[] = [
     years: "2018",
     engagement: "UI/UX design at Electronic Arts, in collaboration with Lucasfilm",
     discipline: "Mobile strategy UI / franchise systems",
-    accent: "gold",
+    accent: "violet",
     hero: {
       src: "/images/case-studies/risetopower-hero.jpg",
       alt: "Star Wars: Rise to Power faction interface artwork comparing New Republic and Galactic Empire",
@@ -509,10 +509,10 @@ const caseStudies: CaseStudy[] = [
 ];
 
 const accentHex = {
-  magenta: "var(--cry-spectrum-magenta)",
-  cyan: "var(--cry-spectrum-cyan)",
-  gold: "var(--cry-spectrum-yellow)",
-  green: "#00f0a8",
+  magenta: "var(--cry-accent-magenta)",
+  cyan: "var(--cry-accent-cyan)",
+  violet: "var(--cry-accent-magenta)",
+  indigo: "#6F7BFF",
 } as const;
 
 export default function CaseStudiesPage() {
@@ -530,8 +530,8 @@ export default function CaseStudiesPage() {
         </div>
         <div className="visual-hero__wash" />
         <div className="visual-hero__content">
-          <div className="signal-rail text-[var(--cry-spectrum-magenta)]" />
-          <span className="kicker !text-[var(--cry-spectrum-magenta)]">
+          <div className="signal-rail text-[var(--cry-accent-magenta)]" />
+          <span className="kicker !text-[var(--cry-accent-magenta)]">
             Selected work / problem → approach → craft → outcome
           </span>
           <h1 className="display-title">
@@ -548,7 +548,7 @@ export default function CaseStudiesPage() {
             </Link>
             <Link
               href="/professional"
-              className="button secondary !border-[var(--cry-spectrum-magenta)]"
+              className="button secondary !border-[var(--cry-accent-magenta)]"
             >
               Professional Studio
             </Link>
@@ -560,7 +560,7 @@ export default function CaseStudiesPage() {
         <nav aria-label="Case study index" className="panel p-5 sm:p-7">
           <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
             <div>
-              <span className="kicker !text-[var(--cry-spectrum-magenta)]">Portfolio index</span>
+              <span className="kicker !text-[var(--cry-accent-magenta)]">Portfolio index</span>
               <h2 className="text-xl font-semibold">Choose a use case</h2>
             </div>
             <p className="m-0 max-w-xl text-sm text-[var(--muted)]">Jump directly to the product context most relevant to your team.</p>
@@ -698,7 +698,7 @@ export default function CaseStudiesPage() {
         <section className="panel p-7 sm:p-10">
           <div className="section-heading !mb-0">
             <div>
-              <span className="kicker !text-[var(--cry-spectrum-magenta)]">Working together</span>
+              <span className="kicker !text-[var(--cry-accent-magenta)]">Working together</span>
               <h2 className="section-title">
                 Have a system that needs to make sense to real people?
               </h2>
@@ -714,7 +714,7 @@ export default function CaseStudiesPage() {
             </Link>
             <Link
               href="/professional/contact"
-              className="button secondary !border-[var(--cry-spectrum-magenta)]"
+              className="button secondary !border-[var(--cry-accent-magenta)]"
             >
               Contact the studio
             </Link>

@@ -146,11 +146,11 @@ export default function AccountAccessForm({ mode }: { mode: "create" | "sign-in"
       <div className="flex flex-col gap-2 text-sm">
         <div className="flex items-center justify-between gap-4">
           <label htmlFor="account-password">Password</label>
-          <button type="button" className="text-xs text-accent-cyan hover:underline" aria-controls="account-password" aria-pressed={showPassword} onClick={() => setShowPassword((visible) => !visible)}>{showPassword ? "Hide password" : "Show password"}</button>
+          <button type="button" className="inline-flex min-h-11 items-center text-xs text-accent-cyan hover:underline" aria-controls="account-password" aria-pressed={showPassword} onClick={() => setShowPassword((visible) => !visible)}>{showPassword ? "Hide password" : "Show password"}</button>
         </div>
         <input id="account-password" className={inputClassName} name="password" type={showPassword ? "text" : "password"} required minLength={8} autoComplete={mode === "create" ? "new-password" : "current-password"} />
       </div>
-      {mode === "sign-in" ? <Link href="/account/recover" className="self-start text-sm text-accent-cyan hover:underline">Forgot password?</Link> : null}
+      {mode === "sign-in" ? <Link href="/account/recover" className="inline-flex min-h-11 items-center self-start text-sm text-accent-cyan hover:underline">Forgot password?</Link> : null}
       {serviceMode === "supabase" && turnstileSiteKey ? (
         <TurnstileWidget
           action={mode === "create" ? "account_create" : "account_signin"}

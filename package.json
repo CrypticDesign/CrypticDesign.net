@@ -15,6 +15,8 @@
     "audit:professional": "node scripts/audit-professional.mjs",
     "qa:professional": "node scripts/qa-professional.mjs",
     "qa:sitewide": "node scripts/qa-sitewide.mjs",
+    "qa:a11y": "node scripts/qa-live-a11y.mjs",
+    "qa:page-scene": "node scripts/qa-page-scene-runtime.mjs",
     "preserve:squarespace": "node scripts/cry-344-preserve.mjs",
     "evidence:cry344": "node scripts/generate-cry344-ledgers.mjs"
   },
@@ -33,6 +35,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/three": "^0.185.1",
+    "axe-core": "^4.12.1",
     "cheerio": "^1.2.0",
     "eslint": "^9",
     "eslint-config-next": "^15.5.21",
