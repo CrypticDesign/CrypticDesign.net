@@ -16,3 +16,8 @@ test("route scene cleanup releases renderer resources and its live context", () 
   assert.match(component, /renderer\.dispose\(\)/);
   assert.match(component, /renderer\.forceContextLoss\(\)/);
 });
+
+test("the scene reserves its secondary accent for one lower-opacity orbital ring", () => {
+  assert.match(component, /color: index === 1 \? definition\.secondary : definition\.primary/);
+  assert.match(component, /opacity: index === 1 \? 0\.48 : 0\.7/);
+});

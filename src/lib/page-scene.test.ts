@@ -21,18 +21,18 @@ test("keeps every public scene in one governed registry", () => {
   assert.ok(PAGE_SCENES["public-home"].particleCount.high > PAGE_SCENES["public-home"].particleCount.mid);
 });
 
-test("uses one canonical destination accent for every WebGL material", () => {
+test("uses canonical destination accents with a restrained Community social accent", () => {
   const expectedAccents = {
-    "public-home": 0x1e90ff,
-    entertainment: 0x00dfff,
-    community: 0xff33cc,
-    professional: 0x9400d3,
+    "public-home": { primary: 0x1e90ff, secondary: 0x1e90ff },
+    entertainment: { primary: 0x00dfff, secondary: 0x00dfff },
+    community: { primary: 0x6f7bff, secondary: 0xff33cc },
+    professional: { primary: 0x9400d3, secondary: 0x9400d3 },
   } as const;
 
-  for (const [sceneId, accent] of Object.entries(expectedAccents)) {
+  for (const [sceneId, accents] of Object.entries(expectedAccents)) {
     const scene = PAGE_SCENES[sceneId as keyof typeof PAGE_SCENES];
-    assert.equal(scene.primary, accent);
-    assert.equal(scene.secondary, accent);
+    assert.equal(scene.primary, accents.primary);
+    assert.equal(scene.secondary, accents.secondary);
   }
 });
 

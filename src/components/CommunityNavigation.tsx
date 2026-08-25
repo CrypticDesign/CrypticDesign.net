@@ -11,7 +11,7 @@ export default function CommunityNavigation() {
   if (!(pathname === "/community" || pathname.startsWith("/community/"))) return null;
 
   return (
-    <section className="entertainment-navigation community-navigation" data-section-theme="magenta" aria-label="Explore Community">
+    <section className="entertainment-navigation community-navigation" data-section-theme="indigo" aria-label="Explore Community">
       <div className="shell entertainment-navigation__viewport">
         <nav className="entertainment-navigation__bar community-navigation__bar" aria-label="Community sections">
           {visibleCommunityNavigationItems().map((item) => (

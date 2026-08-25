@@ -119,15 +119,14 @@ export default function PageScene({
     );
     system.add(core);
 
-    const ringMaterial = new THREE.MeshBasicMaterial({
-      color: definition.secondary,
-      transparent: true,
-      opacity: 0.7,
-    });
     for (const [index, scale] of [2.2, 2.9, 3.65].entries()) {
       const ring = new THREE.Mesh(
         new THREE.TorusGeometry(scale, 0.018 + index * 0.006, 6, resolvedQuality === "high" ? 160 : 80),
-        ringMaterial.clone(),
+        new THREE.MeshBasicMaterial({
+          color: index === 1 ? definition.secondary : definition.primary,
+          transparent: true,
+          opacity: index === 1 ? 0.48 : 0.7,
+        }),
       );
       ring.rotation.set(Math.PI * (0.18 + index * 0.13), Math.PI * (0.08 + index * 0.19), index * 0.42);
       system.add(ring);

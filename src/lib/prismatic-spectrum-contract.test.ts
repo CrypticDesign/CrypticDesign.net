@@ -11,6 +11,7 @@ const entertainment = readFileSync(new URL("../app/entertainment/page.tsx", impo
 const explore = readFileSync(new URL("../app/entertainment/explore/page.tsx", import.meta.url), "utf8");
 const professional = readFileSync(new URL("../app/professional/page.tsx", import.meta.url), "utf8");
 const professionalNavigation = readFileSync(new URL("../components/ProfessionalNavigation.tsx", import.meta.url), "utf8");
+const communityNavigation = readFileSync(new URL("../components/CommunityNavigation.tsx", import.meta.url), "utf8");
 
 const spectrum = [
   ["blue", "#1E90FF"],
@@ -54,7 +55,7 @@ test("major page sections use explicit governed accents", () => {
   assertAccentOrder(publicHome, ["blue", "cyan", "indigo", "violet", "magenta"]);
   assertAccentOrder(myHome, ["indigo", "violet", "magenta", "blue", "cyan", "indigo", "indigo"]);
   assertAccentOrder(entertainment, ["cyan", "indigo", "violet", "magenta"]);
-  assertAccentOrder(community, ["magenta", "blue", "cyan", "indigo", "violet", "magenta"]);
+  assertAccentOrder(community, ["indigo", "blue", "cyan", "magenta", "indigo", "blue"]);
   assertAccentOrder(explore, ["cyan", "indigo", "violet", "magenta", "blue"]);
   assertAccentOrder(professional, ["violet", "magenta", "blue", "cyan", "indigo", "violet", "magenta"]);
 });
@@ -63,7 +64,7 @@ test("top-level destination accents follow the canonical progression", () => {
   for (const entry of [
     '{ href: "/", label: "Home", tone: "blue" }',
     '{ href: "/entertainment", label: "Explore", tone: "cyan" }',
-    '{ href: "/community", label: "Community", tone: "magenta" }',
+    '{ href: "/community", label: "Community", tone: "indigo" }',
     '{ href: "/professional", label: "Professional", tone: "violet" }',
   ]) assert.match(header, new RegExp(entry.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
 });
@@ -73,7 +74,18 @@ test("destination subnavigation inherits the same canonical accent as its primar
   assert.match(professionalNavigation, /data-theme="violet"/);
   assert.match(globals, /\.professional-navigation \.entertainment-navigation__item\{--nav-accent:var\(--section-accent\)\}/);
   assert.match(globals, /\.professional-navigation\{--section-accent:var\(--cry-accent-violet\)/);
-  assert.match(globals, /\.community-navigation\{--section-accent:var\(--cry-accent-magenta\);border-bottom-color:var\(--section-accent\)/);
+  assert.match(globals, /\.community-navigation\{--section-accent:var\(--cry-accent-indigo\);border-bottom-color:var\(--section-accent\)/);
+  assert.match(communityNavigation, /data-section-theme="indigo"/);
+  assert.doesNotMatch(communityNavigation, /magenta|data-social-accent/);
+});
+
+test("Community uses Indigo for identity and Magenta only for social emphasis", () => {
+  assert.match(community, /community-portal__hero" data-section-accent="indigo"/);
+  assert.match(community, /community-explore__activity" data-section-accent="magenta"/);
+  assert.match(community, /community-explore-card community-explore-card--social/);
+  assert.match(globals, /\.community-portal__hero-content \.display-title em\{color:var\(--cry-accent-magenta\)\}/);
+  assert.match(globals, /\.community-primary-cta\{border-color:var\(--cry-accent-blue\);background:var\(--cry-accent-blue\)/);
+  assert.match(globals, /\.community-navigation \.entertainment-navigation__item\{--nav-accent:var\(--cry-accent-indigo\)\}/);
 });
 
 test("Explore navigation and portal iconography preserve the canonical VDS", () => {

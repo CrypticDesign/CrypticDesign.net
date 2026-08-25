@@ -56,7 +56,7 @@ test("primary navigation exposes contextual Sign In or Account directly without 
   const header = await readFile(headerUrl, "utf8");
   assert.match(header, /href: "\/", label: "Home", tone: "blue"/);
   assert.match(header, /href: "\/entertainment", label: "Explore", tone: "cyan"/);
-  assert.match(header, /href: "\/community", label: "Community", tone: "magenta"/);
+  assert.match(header, /href: "\/community", label: "Community", tone: "indigo"/);
   assert.match(header, /href: "\/professional", label: "Professional", tone: "violet"/);
   const primaryLabels = ["Home", "Explore", "Community", "Professional"];
   const labelIndexes = primaryLabels.map((label) => header.indexOf(`label: "${label}"`));
@@ -155,7 +155,7 @@ test("primary Explore and its destination drawer expose independent controls", a
     readFile(globalsUrl, "utf8"),
   ]);
   assert.match(header, /href: "\/entertainment", label: "Explore", tone: "cyan"/);
-  assert.match(header, /href: "\/community", label: "Community", tone: "magenta"/);
+  assert.match(header, /href: "\/community", label: "Community", tone: "indigo"/);
   assert.match(header, /className="site-primary-drawer"/);
   assert.doesNotMatch(header, /className="site-primary-link__arrow"/);
   assert.match(entertainmentNavigation, /className="entertainment-navigation__item-drawer"/);

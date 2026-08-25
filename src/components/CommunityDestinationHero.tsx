@@ -13,7 +13,7 @@ type CommunityDestinationHeroProps = {
 
 export default function CommunityDestinationHero({ eyebrow, title, body, icon, status, image = "/images/current-focus.png" }: CommunityDestinationHeroProps) {
   return (
-    <section className="visual-hero community-destination__hero" data-section-accent="magenta" aria-labelledby="community-destination-title">
+    <section className="visual-hero community-destination__hero" data-section-accent="indigo" aria-labelledby="community-destination-title">
       <PageScene sceneId="community" fallbackPoster={image} />
       <div className="visual-hero__wash" />
       <div className="visual-hero__content community-destination__hero-content">

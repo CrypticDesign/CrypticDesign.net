@@ -50,7 +50,7 @@ export const PAGE_SCENES: Record<PageSceneId, PageSceneDefinition> = {
   community: {
     id: "community",
     background: 0x03080f,
-    primary: 0xff33cc,
+    primary: 0x6f7bff,
     secondary: 0xff33cc,
     particleCount: { high: 320, mid: 130 },
     assets: [{ id: "community-signal", type: "texture", src: "/images/current-focus.png", usage: "backdrop", opacity: 0.08 }],

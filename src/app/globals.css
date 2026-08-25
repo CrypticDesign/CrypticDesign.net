@@ -627,3 +627,31 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 [data-section-accent].feature-split,[data-section-accent].my-home-priority-grid,[data-section-accent].my-home-detail-grid{border-top:2px solid var(--section-accent-border)}
 [data-section-accent].community-explore__participation-grid .community-explore-card{border-top-color:var(--section-accent-border)}
 [data-section-accent].community-explore__activity,[data-section-accent].community-explore__continue{border-left-color:var(--section-accent-border)}
+
+/* Community identity: Signal Indigo leads; Magenta is reserved for social energy and activity. */
+.community-navigation{--section-accent:var(--cry-accent-indigo);border-bottom-color:var(--section-accent)}
+.community-navigation .entertainment-navigation__item{--nav-accent:var(--cry-accent-indigo)}
+.portal-feature--indigo{border-bottom:2px solid var(--cry-accent-indigo)}
+.portal-feature--indigo .portal-feature__icon,.portal-feature--indigo>i{color:var(--cry-accent-indigo)}
+.community-portal,.community-destination{background:radial-gradient(circle at 50% 10%,rgb(111 123 255 / 9%),transparent 34%),#03080f}
+.community-portal__hero-content .display-title em{color:var(--cry-accent-magenta)}
+.community-primary-cta{border-color:var(--cry-accent-blue);background:var(--cry-accent-blue);color:#020811}
+.community-primary-cta:hover,.community-primary-cta:focus-visible{border-color:#66b4ff;background:#66b4ff;color:#020811;box-shadow:0 0 24px rgb(30 144 255 / 28%)}
+.community-secondary-cta{border-color:rgb(111 123 255 / 72%);background:rgb(3 8 15 / 72%);color:#cbd0ff}
+.community-secondary-cta:hover,.community-secondary-cta:focus-visible{border-color:var(--cry-accent-indigo);background:rgb(111 123 255 / 12%);color:#fff}
+.community-capability,.community-architecture-card{border-top-color:rgb(111 123 255 / 72%);background:linear-gradient(135deg,rgb(111 123 255 / 9%),#050b12 48%)}
+.community-capability .portal-entry__icon,.community-explore-card .portal-entry__icon{color:var(--cry-accent-indigo);box-shadow:none}
+.community-information--identity,.community-creator-card{border-top-color:var(--cry-accent-indigo)}
+.community-portal__code{border-color:rgb(30 144 255 / 28%);background:linear-gradient(100deg,rgb(30 144 255 / 7%),rgb(111 123 255 / 4%))}
+.community-portal__code li:before{color:var(--section-accent)}
+.community-explore-card{background:linear-gradient(135deg,rgb(111 123 255 / 8%),#050b12 48%)}
+.community-explore-card a{color:#b7bdff}
+.community-explore-card--social .portal-entry__icon,.community-explore-card--social .kicker,.community-explore-card--social a{color:var(--cry-accent-magenta)}
+.community-explore__activity{background:linear-gradient(100deg,var(--section-accent-surface),#050b12)}
+.community-explore__continue{border-color:rgb(111 123 255 / 34%);background:linear-gradient(100deg,rgb(111 123 255 / 8%),#050b12)}
+.community-explore__continue nav a{color:#b7bdff}
+.community-destination__state{border-color:rgb(111 123 255 / 46%);color:#cbd0ff}
+.community-destination__state .portal-entry__icon{color:var(--cry-accent-magenta)}
+.community-empty-state dt{color:#b7bdff}
+.community-event-types span{border-left-color:var(--cry-accent-indigo)}
+@media(max-width:540px){.community-portal__hero{min-height:1125px}.community-portal__hero-status{bottom:28px}}

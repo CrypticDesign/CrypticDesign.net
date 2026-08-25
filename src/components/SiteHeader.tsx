@@ -10,7 +10,7 @@ import { isPrimaryNavigationActive } from "@/lib/site-navigation";
 const NAV = [
   { href: "/", label: "Home", tone: "blue" },
   { href: "/entertainment", label: "Explore", tone: "cyan" },
-  { href: "/community", label: "Community", tone: "magenta" },
+  { href: "/community", label: "Community", tone: "indigo" },
   { href: "/professional", label: "Professional", tone: "violet" },
 ] as const;
 
