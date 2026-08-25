@@ -53,8 +53,8 @@ export default function ArticlesPage() {
               />
             )}
           </div>
-          <div className="feature-split__content !border-l-2 !border-[var(--cry-spectrum-cyan)]">
-            <span className="kicker !text-[var(--cry-spectrum-cyan)]">
+          <div className="feature-split__content !border-l-2 !border-[var(--cry-accent-cyan)]">
+            <span className="kicker !text-[var(--cry-accent-cyan)]">
               Latest{lead.categories[0] ? ` / ${lead.categories[0]}` : ""}
             </span>
             <h2 className="group-hover:text-white">{lead.title}</h2>
@@ -84,7 +84,7 @@ export default function ArticlesPage() {
               )}
             </div>
             <div className="media-card__body">
-              <span className="kicker !text-[var(--cry-spectrum-cyan)]">
+              <span className="kicker !text-[var(--cry-accent-cyan)]">
                 {a.categories[0] || "Article"}
               </span>
               <h3>{a.title}</h3>

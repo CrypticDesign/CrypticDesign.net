@@ -18,11 +18,18 @@ type NavigatorWithCapabilities = Navigator & {
   connection?: { saveData?: boolean };
 };
 
+let cachedWebGLSupport: boolean | undefined;
+
 function supportsWebGL(): boolean {
+  if (cachedWebGLSupport !== undefined) return cachedWebGLSupport;
   try {
     const canvas = document.createElement("canvas");
-    return Boolean(canvas.getContext("webgl2") || canvas.getContext("webgl"));
+    const context = canvas.getContext("webgl2") || canvas.getContext("webgl");
+    cachedWebGLSupport = Boolean(context);
+    context?.getExtension("WEBGL_lose_context")?.loseContext();
+    return cachedWebGLSupport;
   } catch {
+    cachedWebGLSupport = false;
     return false;
   }
 }

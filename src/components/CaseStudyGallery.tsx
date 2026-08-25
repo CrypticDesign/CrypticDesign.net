@@ -8,7 +8,7 @@ export type GalleryShot = { src: string; alt: string; caption: string };
 
 type Props = {
   shots: GalleryShot[];
-  accent: "violet" | "cyan" | "lavender" | "periwinkle";
+  accent: "magenta" | "cyan" | "violet" | "indigo";
   accentHex: string;
   studyTitle: string;
 };

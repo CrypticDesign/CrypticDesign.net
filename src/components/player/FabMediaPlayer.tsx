@@ -4,7 +4,7 @@
  * Cryptic Signal floating player.
  *
  * Collapsed it is an always-accessible orb pinned to the viewport, with an
- * amber arc tracking progress on a dark ring. Expanded it becomes the HUD
+ * magenta arc tracking progress on a dark ring. Expanded it becomes the HUD
  * chassis: corner brackets, notched panel, artwork, track identity, spectrum,
  * full transport and a queue.
  *
@@ -86,7 +86,7 @@ function Waveform({ bars }: { bars: Bar[] }) {
 
 /**
  * The HUD chassis. Real vector geometry — stepped edges, corner brackets,
- * rungs and amber service marks — authored at 560x336 and stretched to the
+ * rungs and magenta service marks — authored at 560x336 and stretched to the
  * panel box. Strokes stay constant via non-scaling-stroke.
  */
 const HUD_SILHOUETTE =
@@ -103,7 +103,7 @@ const HUD_BRACKETS = [
 ];
 const HUD_RUNGS = ["M4 176 H16", "M4 190 H16", "M4 204 H16", "M544 176 H556", "M544 190 H556", "M544 204 H556"];
 const HUD_MIDBARS = ["M4 150 V132", "M556 150 V132"];
-const HUD_AMBER = ["M108 332 H150", "M4 236 V262"];
+const HUD_MAGENTA = ["M108 332 H150", "M4 236 V262"];
 const HUD_VENTS = ["M243 4 V15", "M252 4 V15", "M261 4 V15"];
 
 function ChassisFrame() {
@@ -115,7 +115,7 @@ function ChassisFrame() {
       {HUD_BRACKETS.map((d) => <path key={d} className="cs-hud__bracket" d={d} />)}
       {HUD_RUNGS.map((d) => <path key={d} className="cs-hud__rung" d={d} />)}
       {HUD_MIDBARS.map((d) => <path key={d} className="cs-hud__midbar" d={d} />)}
-      {HUD_AMBER.map((d) => <path key={d} className="cs-hud__amber" d={d} />)}
+      {HUD_MAGENTA.map((d) => <path key={d} className="cs-hud__magenta" d={d} />)}
       {HUD_VENTS.map((d) => <path key={d} className="cs-hud__vent" d={d} />)}
     </svg>
   );

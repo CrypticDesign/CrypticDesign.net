@@ -15,8 +15,8 @@ export default function AccountSectionHero({ eyebrow, title, description, image,
       <div className="visual-hero__wash" />
       <div className="visual-hero__content account-section-hero__content">
         <div className="account-section-hero__copy">
-          <div className="signal-rail text-[var(--cry-spectrum-blue)]" />
-          <span className="kicker !text-[var(--cry-spectrum-blue)]">{eyebrow}</span>
+          <div className="signal-rail text-[var(--cry-accent-blue)]" />
+          <span className="kicker !text-[var(--cry-accent-blue)]">{eyebrow}</span>
           <h1 className="display-title">{title}</h1>
           <p>{description}</p>
         </div>

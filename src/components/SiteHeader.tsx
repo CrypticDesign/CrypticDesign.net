@@ -10,8 +10,8 @@ import { isPrimaryNavigationActive } from "@/lib/site-navigation";
 const NAV = [
   { href: "/", label: "Home", tone: "blue" },
   { href: "/entertainment", label: "Explore", tone: "cyan" },
-  { href: "/community", label: "Community", tone: "periwinkle" },
-  { href: "/professional", label: "Professional", tone: "lavender" },
+  { href: "/community", label: "Community", tone: "magenta" },
+  { href: "/professional", label: "Professional", tone: "violet" },
 ] as const;
 
 export default function SiteHeader({ initialAuthenticated = false }: { initialAuthenticated?: boolean }) {

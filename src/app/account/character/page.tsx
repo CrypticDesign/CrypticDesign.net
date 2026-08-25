@@ -96,7 +96,7 @@ export default function CharacterProfilePage() {
   if (!character) {
     const signedOut = error === "Authentication required";
     return <main className="account-page account-feature-page"><AccountFeatureIntro
-      accent="lavender"
+      accent="violet"
       eyebrow="Your character"
       title="Make it yours."
       description="Create one character to use across Cryptic Design. It keeps your name, progress, and discoveries together wherever you go."

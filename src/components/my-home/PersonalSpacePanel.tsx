@@ -28,7 +28,7 @@ export default function PersonalSpacePanel({ status, character }: { status: Pers
         <div className="personal-space-panel__empty" aria-hidden="true"><span /><span /><span /></div>
       )}
       <aside className="personal-space-panel__status" aria-live="polite">
-        <span className="kicker !text-[var(--cry-spectrum-lavender)]">Interim Home runtime</span>
+        <span className="kicker !text-[var(--cry-accent-indigo)]">Interim Home runtime</span>
         <h2>{characterReady ? "Character view active" : status === "loading" ? "Loading Character view" : "Character required"}</h2>
         <p>{characterReady
           ? "This embedded Three.js Character instance temporarily holds the place of the future personal Home environment. Drag the Character to rotate."

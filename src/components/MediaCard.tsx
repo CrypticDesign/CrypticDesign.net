@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-type Props = { href: string; image: string; eyebrow: string; title: string; body?: string; accent?: "cyan" | "lavender" | "violet" | "periwinkle" };
+type Props = { href: string; image: string; eyebrow: string; title: string; body?: string; accent?: "cyan" | "violet" | "magenta" | "indigo" };
 
 export default function MediaCard({ href, image, eyebrow, title, body, accent = "cyan" }: Props) {
   return <Link href={href} className={`media-card accent-${accent}`}>
