@@ -10,6 +10,7 @@ import { PlayerProvider } from "@/components/player/PlayerProvider";
 import { getInitialAccountAuthenticated } from "@/lib/server-account-state";
 import "./globals.css";
 import "./singularis.css";
+import "./responsive.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://crypticdesign.net"),

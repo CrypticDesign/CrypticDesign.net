@@ -9,7 +9,8 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#04050c;color:#cfe6ff;font-family:'Segoe UI',system-ui,sans-serif;overflow:hidden}
 #game{position:fixed;inset:0}
-.screen{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(2,3,10,.92);z-index:10;text-align:center;padding:24px}
+.screen{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:safe center;overflow-y:auto;overscroll-behavior:contain;background:rgba(2,3,10,.92);z-index:10;text-align:center;padding:24px}
+.screen>*{flex-shrink:0;max-width:100%}
 .screen.hidden{display:none}
 h1{font-size:clamp(28px,6vw,64px);letter-spacing:.35em;font-weight:200;color:#eaf6ff;text-shadow:0 0 30px var(--accent)}
 h2{font-size:clamp(16px,3vw,28px);letter-spacing:.25em;font-weight:300;color:#9fd4ff;margin-bottom:18px}
@@ -63,6 +64,21 @@ input#init{background:#0a1626;border:1px solid #1d3a5b;color:#eaf6ff;font-family
 #legend .lg b{color:#cfe6ff;letter-spacing:.1em;font-weight:400}
 #legend svg{width:26px;height:26px;flex:none;filter:drop-shadow(0 0 4px currentColor)}
 .lghead{width:100%;text-align:center;font-size:11px;letter-spacing:.3em;color:#5f86b0;margin-top:8px}
+/* Short embedded viewports must scroll from the top, never clip centered menus. */
+@media(max-width:600px),(max-height:500px){
+ .screen{padding:20px 16px}
+ h1{font-size:clamp(24px,6vw,40px);letter-spacing:.18em}
+ h2{font-size:18px;letter-spacing:.12em}
+ .sub{font-size:10px;letter-spacing:.16em;line-height:1.6}
+ .hint{margin-top:20px;font-size:12px;letter-spacing:.1em;line-height:1.6}
+ #factions{width:100%;gap:12px;margin-top:18px}
+ .crest{display:grid;grid-template-columns:48px minmax(0,1fr);column-gap:14px;align-items:center;width:100%;max-width:460px;padding:14px;text-align:left}
+ .crest svg{grid-row:span 2;width:48px;height:48px;margin:0}
+ .crest .nm{font-size:12px;letter-spacing:.1em}
+ .crest .cr{margin-top:4px}
+ .crest:hover,.crest.sel{transform:none;box-shadow:0 0 12px var(--c)}
+ #tips{gap:10px}.tip{width:100%;max-width:300px}
+}
 </style>
 </head>
 <body>
@@ -593,8 +609,10 @@ console.log('[PLAYTEST] SINGULARIS v05 — Leviathan Protocol slice + SOS Conduc
   const originalToDebrief=toDebrief;
   toDebrief=function(skip){originalToDebrief(skip);emit('debrief-ready',snapshot())};
   document.getElementById('s-gate').addEventListener('pointerdown',()=>{if(state==='gate')engage()});
-  document.getElementById('s-title').addEventListener('pointerdown',()=>{if(state==='title')toFaction()});
-  document.getElementById('s-brief').addEventListener('pointerdown',()=>{if(state==='brief')launch()});
+  // Complete the gesture before changing screens, so its click cannot select
+  // the faction underneath the title prompt on a touch device.
+  document.getElementById('s-title').addEventListener('click',()=>{if(state==='title')toFaction()});
+  document.getElementById('s-brief').addEventListener('click',()=>{if(state==='brief')launch()});
   emit('runtime-ready',snapshot());
 })();
 </script>

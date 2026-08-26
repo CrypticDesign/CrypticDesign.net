@@ -18,7 +18,7 @@ test("Community implements the approved IA while withholding Spaces", () => {
   assert.match(navigation, /key: "spaces"[\s\S]*?href: "\/community\/spaces"[\s\S]*?visible: false/);
   assert.equal(existsSync(new URL("../app/community/spaces/page.tsx", import.meta.url)), false);
   assert.match(navigationComponent, /visibleCommunityNavigationItems/);
-  assert.match(navigationComponent, /aria-label="Community sections"/);
+  assert.match(navigationComponent, /ariaLabel="Community sections"/);
   assert.match(navigationComponent, /aria-current=/);
   assert.match(layout, /<CommunityNavigation \/>/);
 });

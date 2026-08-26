@@ -133,6 +133,9 @@ export default function SingularisGamespace() {
   const toggleFullscreen = async () => {
     if (document.fullscreenElement) await document.exitFullscreen();
     else if (expanded) setExpanded(false);
+    // Mobile browsers differ on element fullscreen support. The in-page mode
+    // follows the dynamic viewport and keeps the same reachable exit control.
+    else if (window.matchMedia("(max-width: 780px), (pointer: coarse)").matches) setExpanded(true);
     else {
       try { await stageRef.current?.requestFullscreen(); if (document.fullscreenElement !== stageRef.current) setExpanded(true); }
       catch { setExpanded(true); }
@@ -170,8 +173,8 @@ export default function SingularisGamespace() {
   // runtime telemetry updates, causing React to reload the embedded game.
   const renderUniverse = (active = false) => (
     <div ref={stageRef} className={`sin-cgs__runtime ${active ? "sin-cgs__runtime--active" : ""} ${expanded ? "sin-cgs__runtime--expanded" : ""}`}>
-      <div className="sin-cgs__runtime-head"><span>{active ? state.session.simulationId : "Live universe"}</span><span>{active ? "Runtime active" : "World status"} <i /></span></div>
-      <div className="sin-cgs__viewport">{state.phase === "operation" ? <iframe className="sin-cgs__game-frame" src="/games/singularis/v05/index.html" title="Singularis Leviathan Protocol v05 game runtime" allow="autoplay; fullscreen; gamepad" onLoad={() => setEmbeddedRuntime((current) => ({ ...current, ready: true, lifecycle: current.lifecycle === "loading" ? "ready" : current.lifecycle }))} /> : workspaceSection !== "mission-control" ? <iframe className="sin-cgs__game-frame" src={`/games/singularis/workspaces/${workspaceSection}/index.html`} title={`Singularis ${singularisWorkspaceSections.find((section) => section.id === workspaceSection)?.label} workspace`} /> : <SingularisUniverseViewport session={state.session} onCheckpoint={() => dispatch({ type: "ADVANCE_CHECKPOINT" })} />}{fullscreenButton}
+      <div className="sin-cgs__runtime-head"><span>{active ? state.session.simulationId : "Live universe"}</span><span>{active ? "Runtime active" : "World status"} <i /></span>{fullscreenButton}</div>
+      <div className="sin-cgs__viewport">{state.phase === "operation" ? <iframe className="sin-cgs__game-frame" src="/games/singularis/v05/index.html" title="Singularis Leviathan Protocol v05 game runtime" allow="autoplay; fullscreen; gamepad" onLoad={() => setEmbeddedRuntime((current) => ({ ...current, ready: true, lifecycle: current.lifecycle === "loading" ? "ready" : current.lifecycle }))} /> : workspaceSection !== "mission-control" ? <iframe className="sin-cgs__game-frame" src={`/games/singularis/workspaces/${workspaceSection}/index.html`} title={`Singularis ${singularisWorkspaceSections.find((section) => section.id === workspaceSection)?.label} workspace`} /> : <SingularisUniverseViewport session={state.session} onCheckpoint={() => dispatch({ type: "ADVANCE_CHECKPOINT" })} />}
         {active && state.phase !== "operation" && <div className="sin-cgs__score"><strong>Score {state.session.score.toLocaleString()}</strong><strong>Wave {String(state.session.wave).padStart(2, "0")} / {String(state.session.waveCount).padStart(2, "0")}</strong></div>}
         {state.phase === "entering" && <div className="sin-cgs__center-card"><span>Training Simulation 01</span><h2>Synchronizing controls</h2><p>Input remains locked until runtime readiness is confirmed.</p></div>}
         {state.phase === "interrupted" && <div className="sin-cgs__center-card"><span>Flight control</span><h2>Your flight is paused</h2><p>Return when ready, or end the simulation. The living universe continues outside this training instance.</p><div><button onClick={() => act("RESUME", "training_simulation_resumed")}>Return to flight</button><button className="secondary" onClick={() => act("END_SIMULATION", "training_simulation_ended")}>End simulation</button></div></div>}
