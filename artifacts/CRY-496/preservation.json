@@ -1,0 +1,389 @@
+{
+  "generated": "2026-08-26T18:27:57.145Z",
+  "baseline": "b5a240e",
+  "intentionalMetadataCorrection": "src/app/sitemap.ts now includes the four existing governed service-detail routes; existing entries retained.",
+  "caseStudyDataExact": true,
+  "governedAssets": 69,
+  "assets": [
+    {
+      "asset": "/images/articles/2026-game-design-benchmarks.png",
+      "bytes": 1746824,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/articles/ai-in-ux-design.png",
+      "bytes": 1734756,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/articles/arc-raiders-a-player-experience-review.jpg",
+      "bytes": 93800,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/articles/artificial-intelligence-2023-q1-cryptic-insights.png",
+      "bytes": 1024130,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/articles/holistic-ux-design-systems-thinking.png",
+      "bytes": 1897004,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/articles/how-to-conduct-a-ux-audit.png",
+      "bytes": 1753798,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/articles/owning-the-stack-post-generative-creative-economy.png",
+      "bytes": 2366406,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/articles/scalable-ui-systems-design-tokens-components.png",
+      "bytes": 1964292,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/articles/shaping-the-universe.png",
+      "bytes": 1374620,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/articles/video-games-2023-q1-cryptic-insights.png",
+      "bytes": 1822950,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/articles/when-tools-begin-to-decide.png",
+      "bytes": 765072,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/digimancy-breather-expanded.png",
+      "bytes": 3970094,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/digimancy-breather.png",
+      "bytes": 5964800,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/digimancy-combat.png",
+      "bytes": 5047728,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/digimancy-hazard.png",
+      "bytes": 1604456,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/digimancy-negotiation.png",
+      "bytes": 1775666,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/digimancy-pirate.png",
+      "bytes": 1688194,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/humankind-attack.jpg",
+      "bytes": 278502,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/humankind-battle.jpg",
+      "bytes": 275033,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/humankind-contender.jpg",
+      "bytes": 268528,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/humankind-deployment.jpg",
+      "bytes": 265387,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/humankind-hero.jpg",
+      "bytes": 90874,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/humankind-opponent.jpg",
+      "bytes": 269650,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/humankind-turnend.jpg",
+      "bytes": 250186,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/humankind-turnstart.jpg",
+      "bytes": 261642,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/humankind-unitresults.jpg",
+      "bytes": 264567,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/humankind-unitturn.jpg",
+      "bytes": 273464,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/humankind-wire-city.jpg",
+      "bytes": 64462,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/humankind-wire-pop.jpg",
+      "bytes": 67815,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/onward-attachments.jpg",
+      "bytes": 92042,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/onward-customize.jpg",
+      "bytes": 109846,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/onward-loadout.jpg",
+      "bytes": 68108,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/onward-role.jpg",
+      "bytes": 67222,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/onward-stats.jpg",
+      "bytes": 152754,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/onward-tryout.jpg",
+      "bytes": 99488,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/onward-workshop.jpg",
+      "bytes": 189216,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/risetopower-base.jpg",
+      "bytes": 311630,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/risetopower-buildmenu.jpg",
+      "bytes": 272541,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/risetopower-city.jpg",
+      "bytes": 289807,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/risetopower-destroyer.jpg",
+      "bytes": 263982,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/risetopower-guild.jpg",
+      "bytes": 250965,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/risetopower-hero.jpg",
+      "bytes": 304250,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/risetopower-popup.jpg",
+      "bytes": 145899,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/risetopower-sector.jpg",
+      "bytes": 173109,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/risetopower-shipyard.jpg",
+      "bytes": 252071,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/risetopower-shipyard2.jpg",
+      "bytes": 275891,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/risetopower-terrain.jpg",
+      "bytes": 293475,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/wellsky-buttons.jpg",
+      "bytes": 77807,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/wellsky-color.jpg",
+      "bytes": 126700,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/wellsky-dashboard.jpg",
+      "bytes": 56898,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/wellsky-foundations.jpg",
+      "bytes": 72390,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/wellsky-hero.jpg",
+      "bytes": 76825,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/wellsky-material.jpg",
+      "bytes": 84067,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/wellsky-nav-menu.jpg",
+      "bytes": 67081,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/wellsky-navdesktop.jpg",
+      "bytes": 93460,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/wellsky-navigation.jpg",
+      "bytes": 83048,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/wellsky-search.jpg",
+      "bytes": 70871,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/wellsky-testing.jpg",
+      "bytes": 64069,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/winreality-cards.png",
+      "bytes": 170278,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/winreality-components.png",
+      "bytes": 252521,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/winreality-drills.png",
+      "bytes": 395539,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/winreality-grid.png",
+      "bytes": 12430,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/winreality-hero.jpg",
+      "bytes": 79696,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/winreality-login.png",
+      "bytes": 318163,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/winreality-logo.jpg",
+      "bytes": 3968,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/case-studies/winreality-profile.png",
+      "bytes": 365972,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/professional-case.png",
+      "bytes": 708768,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/professional-hero.png",
+      "bytes": 729481,
+      "unchanged": true
+    },
+    {
+      "asset": "/images/singularis.png",
+      "bytes": 72422,
+      "unchanged": true
+    }
+  ],
+  "files": [
+    {
+      "file": "src/lib/articles.ts",
+      "unchanged": true
+    },
+    {
+      "file": "src/lib/article-images.json",
+      "unchanged": true
+    },
+    {
+      "file": "src/components/ArticleBody.tsx",
+      "unchanged": true
+    },
+    {
+      "file": "src/components/CaseStudyGallery.tsx",
+      "unchanged": true
+    },
+    {
+      "file": "next.config.ts",
+      "unchanged": true
+    },
+    {
+      "file": "src/app/robots.ts",
+      "unchanged": true
+    },
+    {
+      "file": "package.json",
+      "unchanged": true
+    },
+    {
+      "file": "package-lock.json",
+      "unchanged": true
+    }
+  ],
+  "pass": true
+}

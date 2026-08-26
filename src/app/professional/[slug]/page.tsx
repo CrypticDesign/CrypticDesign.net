@@ -4,31 +4,27 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getService, publicServices } from "@/lib/services";
 
-const details: Record<string, { image: string; accent: string; promise: string; process: string[]; deliverables: string[]; proof: { label: string; href: string }[] }> = {
+const details: Record<string, { image: string; accent: string; process: string[]; deliverables: string[]; proof: { label: string; href: string }[] }> = {
   "product-strategy": {
-    image: "/images/service-strategy.png", accent: "var(--cry-accent-magenta)",
-    promise: "Turn uncertainty into a shared product direction your team can explain, test, and deliver.",
+    image: "/images/service-strategy.png", accent: "var(--section-accent-text)",
     process: ["Frame the decision, constraints, and evidence gaps.", "Study users, stakeholders, competitors, and the existing product.", "Model journeys, services, risks, and opportunity areas.", "Prioritize a practical roadmap with measurable decision points."],
     deliverables: ["Research plan and synthesis", "Experience or service audit", "Journey and ecosystem maps", "Product principles", "Opportunity backlog", "Prioritized roadmap and decision brief"],
     proof: [{ label: "WellSky enterprise portfolio", href: "/professional/case-studies#wellsky" }, { label: "WIN Reality product experience", href: "/professional/case-studies#win-reality" }],
   },
   "ux-interaction": {
-    image: "/images/service-ux.png", accent: "var(--cry-accent-cyan)",
-    promise: "Make complex workflows feel direct, learnable, and dependable across screens, controllers, and immersive environments.",
+    image: "/images/service-ux.png", accent: "var(--section-accent-text)",
     process: ["Understand user goals, contexts, failure points, and system constraints.", "Map information architecture and critical end-to-end workflows.", "Prototype interaction models at the right fidelity for each decision.", "Evaluate, iterate, and support implementation with the delivery team."],
     deliverables: ["Information architecture", "Task and user flows", "Wireframes and interaction models", "Interactive prototypes", "Usability findings", "Accessibility and implementation guidance"],
     proof: [{ label: "Humankind console editions", href: "/professional/case-studies#humankind-console" }, { label: "Onward tactical VR", href: "/professional/case-studies#onward-vr" }],
   },
   "interface-systems": {
-    image: "/images/service-interface.png", accent: "var(--cry-accent-magenta)",
-    promise: "Create an interface language that stays coherent as products, teams, and platforms grow.",
+    image: "/images/service-interface.png", accent: "var(--section-accent-text)",
     process: ["Audit existing patterns, inconsistencies, and implementation constraints.", "Define foundations for hierarchy, color, type, spacing, states, and motion.", "Build reusable components around real product workflows.", "Document governance and partner with engineering through adoption."],
     deliverables: ["Interface inventory and audit", "Design foundations", "Component architecture", "Responsive patterns", "Accessibility specifications", "Documentation and adoption plan"],
     proof: [{ label: "WellSky design language system", href: "/professional/case-studies#wellsky" }, { label: "WIN Reality component system", href: "/professional/case-studies#win-reality" }],
   },
   "creative-technology": {
-    image: "/images/service-creative-tech.png", accent: "#6F7BFF",
-    promise: "Use emerging technology to prove meaningful experiences—not novelty without a product purpose.",
+    image: "/images/service-creative-tech.png", accent: "var(--section-accent-text)",
     process: ["Define the audience value and the question a prototype must answer.", "Select the smallest credible technical approach.", "Build and test an experiential prototype under real constraints.", "Document feasibility, risks, production requirements, and next decisions."],
     deliverables: ["Experience concept and technical framing", "Real-time or immersive prototype", "Interaction and content model", "Feasibility assessment", "Production pipeline guidance", "Experiment findings and recommended next step"],
     proof: [{ label: "Digimancy Project WIRE", href: "/professional/case-studies#digimancy-wire" }, { label: "Onward tactical VR", href: "/professional/case-studies#onward-vr" }],
@@ -57,19 +53,21 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
           <div className="signal-rail" style={{ color: detail.accent }} />
           <span className="kicker" style={{ color: detail.accent }}>Professional capability</span>
           <h1 className="display-title">{service.title}</h1>
-          <p>{detail.promise}</p>
-          <div className="hero-actions"><Link href="/professional/inquiry" className="button">Start a project</Link><Link href="/professional/services" className="button secondary" style={{ borderColor: detail.accent }}>All services</Link></div>
+          <p>{service.description}</p>
+          <div className="hero-actions"><Link href="/professional/inquiry" className="button">Start a Project</Link><Link href="/professional/services" className="button secondary" style={{ borderColor: detail.accent }}>All services</Link></div>
         </div>
       </section>
 
       <div className="shell page-stack">
+        <section aria-labelledby="capability-groups"><h2 id="capability-groups" className="section-title mb-6">Capabilities</h2><div className="grid gap-5 md:grid-cols-2">{service.groups.map(group => <div key={group.title} className="panel p-7"><h3 className="text-xl font-semibold">{group.title}</h3><ul className="mt-4 list-disc space-y-2 pl-5 text-[var(--muted)]">{group.items.map(item => <li key={item}>{item}</li>)}</ul></div>)}</div></section>
+        <section className="panel p-7"><span className="kicker">Ways to Engage</span><h2 className="section-title mt-3">Choose the shape of the work.</h2><ul className="mt-5 space-y-3">{service.engagements.map(engagement => <li key={engagement}>{engagement}</li>)}</ul></section>
         <section className="feature-split">
           <div className="feature-split__image"><Image src={detail.image} alt={`${service.title} capability illustration`} fill sizes="(max-width:900px) 100vw, 58vw" /></div>
           <div className="feature-split__content !border-l-2" style={{ borderLeftColor: detail.accent }}>
             <span className="kicker" style={{ color: detail.accent }}>The engagement</span>
             <h2>{service.summary}</h2>
             <p>{service.description}</p>
-            <p><strong className="text-[var(--foreground)]">Best suited for:</strong> {service.audience}</p>
+            <p><strong className="text-[var(--foreground)]">Capabilities:</strong> {service.capabilities.join(" · ")}</p>
           </div>
         </section>
 
@@ -83,7 +81,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
           <div className="panel p-7"><span className="kicker" style={{ color: detail.accent }}>Selected proof</span><h2 className="section-title">See the capability in context.</h2><div className="mt-6 flex flex-col">{detail.proof.map((item) => <Link key={item.href} href={item.href} className="border-t border-[var(--border)] py-4 text-sm font-semibold transition hover:pl-2" style={{ color: detail.accent }}>{item.label} <span aria-hidden>→</span></Link>)}</div></div>
         </section>
 
-        <section className="panel p-8 sm:p-10"><span className="kicker" style={{ color: detail.accent }}>Start with the problem</span><div className="section-heading !mb-0"><h2 className="section-title">Not sure which capability fits?</h2><p>Describe the decision, workflow, or system that is creating friction. We can shape the right engagement from there.</p></div><div className="hero-actions"><Link href="/professional/inquiry" className="button">Start a project inquiry</Link></div></section>
+        <section className="panel p-8 sm:p-10"><span className="kicker" style={{ color: detail.accent }}>Start with the problem</span><div className="section-heading !mb-0"><h2 className="section-title">Not sure which capability fits?</h2><p>Describe the decision, workflow, or system that is creating friction. We can shape the right engagement from there.</p></div><div className="hero-actions"><Link href="/professional/inquiry" className="button">Start a Project</Link></div></section>
       </div>
     </main>
   );

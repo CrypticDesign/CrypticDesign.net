@@ -1,0 +1,176 @@
+{
+  "generated": "2026-08-26T18:31:41.022Z",
+  "base": "http://127.0.0.1:3100",
+  "routeChecks": [
+    {
+      "route": "/professional/services",
+      "status": 200,
+      "failures": []
+    },
+    {
+      "route": "/professional",
+      "status": 200,
+      "failures": []
+    },
+    {
+      "route": "/professional/case-studies",
+      "status": 200,
+      "failures": []
+    },
+    {
+      "route": "/professional/articles",
+      "status": 200,
+      "failures": []
+    },
+    {
+      "route": "/professional/articles/holistic-ux-design-systems-thinking",
+      "status": 200,
+      "failures": []
+    },
+    {
+      "route": "/professional/ux-interaction",
+      "status": 200,
+      "failures": []
+    },
+    {
+      "route": "/professional/interface-systems",
+      "status": 200,
+      "failures": []
+    },
+    {
+      "route": "/professional/creative-technology",
+      "status": 200,
+      "failures": []
+    },
+    {
+      "route": "/professional/product-strategy",
+      "status": 200,
+      "failures": []
+    },
+    {
+      "route": "/professional/inquiry",
+      "status": 200,
+      "failures": []
+    },
+    {
+      "route": "/professional/articles/owning-the-stack-post-generative-creative-economy",
+      "status": 200,
+      "failures": []
+    },
+    {
+      "route": "/professional/articles/2026-game-design-benchmarks",
+      "status": 200,
+      "failures": []
+    },
+    {
+      "route": "/professional/articles/arc-raiders-a-player-experience-review",
+      "status": 200,
+      "failures": []
+    },
+    {
+      "route": "/professional/articles/when-tools-begin-to-decide",
+      "status": 200,
+      "failures": []
+    },
+    {
+      "route": "/professional/articles/ai-in-ux-design",
+      "status": 200,
+      "failures": []
+    },
+    {
+      "route": "/professional/articles/scalable-ui-systems-design-tokens-components",
+      "status": 200,
+      "failures": []
+    },
+    {
+      "route": "/professional/articles/how-to-conduct-a-ux-audit",
+      "status": 200,
+      "failures": []
+    },
+    {
+      "route": "/professional/articles/shaping-the-universe",
+      "status": 200,
+      "failures": []
+    },
+    {
+      "route": "/professional/articles/video-games-2023-q1-cryptic-insights",
+      "status": 200,
+      "failures": []
+    },
+    {
+      "route": "/professional/articles/artificial-intelligence-2023-q1-cryptic-insights",
+      "status": 200,
+      "failures": []
+    }
+  ],
+  "redirectChecks": [
+    {
+      "source": "/articles/holistic-ux-design-systems-thinking",
+      "status": 308,
+      "location": "/professional/articles/holistic-ux-design-systems-thinking",
+      "pass": true
+    },
+    {
+      "source": "/articles/owning-the-stack-post-generative-creative-economy",
+      "status": 308,
+      "location": "/professional/articles/owning-the-stack-post-generative-creative-economy",
+      "pass": true
+    },
+    {
+      "source": "/articles/2026-game-design-benchmarks",
+      "status": 308,
+      "location": "/professional/articles/2026-game-design-benchmarks",
+      "pass": true
+    },
+    {
+      "source": "/articles/arc-raiders-a-player-experience-review",
+      "status": 308,
+      "location": "/professional/articles/arc-raiders-a-player-experience-review",
+      "pass": true
+    },
+    {
+      "source": "/articles/when-tools-begin-to-decide",
+      "status": 308,
+      "location": "/professional/articles/when-tools-begin-to-decide",
+      "pass": true
+    },
+    {
+      "source": "/articles/ai-in-ux-design",
+      "status": 308,
+      "location": "/professional/articles/ai-in-ux-design",
+      "pass": true
+    },
+    {
+      "source": "/articles/scalable-ui-systems-design-tokens-components",
+      "status": 308,
+      "location": "/professional/articles/scalable-ui-systems-design-tokens-components",
+      "pass": true
+    },
+    {
+      "source": "/articles/how-to-conduct-a-ux-audit",
+      "status": 308,
+      "location": "/professional/articles/how-to-conduct-a-ux-audit",
+      "pass": true
+    },
+    {
+      "source": "/articles/shaping-the-universe",
+      "status": 308,
+      "location": "/professional/articles/shaping-the-universe",
+      "pass": true
+    },
+    {
+      "source": "/articles/video-games-2023-q1-cryptic-insights",
+      "status": 308,
+      "location": "/professional/articles/video-games-2023-q1-cryptic-insights",
+      "pass": true
+    },
+    {
+      "source": "/articles/artificial-intelligence-2023-q1-cryptic-insights",
+      "status": 308,
+      "location": "/professional/articles/artificial-intelligence-2023-q1-cryptic-insights",
+      "pass": true
+    }
+  ],
+  "problems": [],
+  "pass": true
+}

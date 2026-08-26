@@ -88,7 +88,7 @@ export default async function ArticlePage({ params }: Params) {
         <h1 className="text-[38px] font-semibold leading-[1.08] text-white sm:text-[56px]">
           {article.title}
         </h1>
-        <p className="m-0 text-sm text-neutral-500">
+        <p className="m-0 text-sm text-[var(--muted)]">
           {formatDate(article.published)}
           {article.published && " · "}Robert K. Croft
         </p>
@@ -108,8 +108,8 @@ export default async function ArticlePage({ params }: Params) {
       )}
 
       <div className="grid gap-10 lg:grid-cols-[220px_minmax(0,720px)] lg:justify-center">
-        <aside className="h-fit border-t-2 border-[var(--cry-accent-magenta)] pt-5 lg:sticky lg:top-32">
-          <span className="kicker !text-[var(--cry-accent-magenta)]">Article</span>
+        <aside className="h-fit border-t-2 border-[var(--section-accent)] pt-5 lg:sticky lg:top-32">
+          <span className="kicker">Article</span>
           <p className="mt-3 text-sm leading-relaxed text-neutral-400">{article.description}</p>
           <Link href="/professional/articles" className="text-link">All articles +</Link>
         </aside>
@@ -121,7 +121,7 @@ export default async function ArticlePage({ params }: Params) {
           {article.tags.map((tag) => (
             <li
               key={tag}
-              className="border border-[#173049] px-2.5 py-1 text-[10px] uppercase tracking-[.06em] text-neutral-500"
+              className="border border-[#173049] px-2.5 py-1 text-[10px] uppercase tracking-[.06em] text-[var(--muted)]"
             >
               {tag}
             </li>
@@ -149,8 +149,10 @@ export default async function ArticlePage({ params }: Params) {
           href="/professional/articles"
           className="text-sm text-accent-cyan hover:underline"
         >
-          ← All articles
+          Back to Articles
         </Link>
+        <Link href="/professional/services" className="text-link">Explore related capabilities</Link>
+        <Link href="/professional/inquiry" className="text-link">Start a Project</Link>
       </section>
     </main>
   );

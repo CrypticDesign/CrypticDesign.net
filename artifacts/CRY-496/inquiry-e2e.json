@@ -1,0 +1,92 @@
+{
+  "base": "http://127.0.0.1:3100",
+  "browser": "chromium",
+  "version": "149.0.7827.55",
+  "width": 390,
+  "generated": "2026-08-26T18:20:17.897Z",
+  "requiredValidation": true,
+  "encodedFields": [
+    "name",
+    "email",
+    "organization",
+    "message",
+    "stage",
+    "support",
+    "timing",
+    "budget",
+    "link"
+  ],
+  "mailClientNavigation": true,
+  "falseSuccessAbsent": true,
+  "fallbackVisible": true,
+  "formRetained": true,
+  "keyboard": [
+    {
+      "name": "name",
+      "outline": "solid",
+      "width": 300,
+      "height": 48
+    },
+    {
+      "name": "email",
+      "outline": "solid",
+      "width": 300,
+      "height": 48
+    },
+    {
+      "name": "organization",
+      "outline": "solid",
+      "width": 300,
+      "height": 48
+    },
+    {
+      "name": "message",
+      "outline": "solid",
+      "width": 300,
+      "height": 146
+    },
+    {
+      "name": "stage",
+      "outline": "solid",
+      "width": 300,
+      "height": 48
+    },
+    {
+      "name": "support",
+      "outline": "solid",
+      "width": 300,
+      "height": 48
+    },
+    {
+      "name": "timing",
+      "outline": "solid",
+      "width": 300,
+      "height": 48
+    },
+    {
+      "name": "budget",
+      "outline": "solid",
+      "width": 300,
+      "height": 48
+    },
+    {
+      "name": "link",
+      "outline": "solid",
+      "width": 300,
+      "height": 48
+    },
+    {
+      "name": "Continue to email",
+      "outline": "solid",
+      "width": 162.34375,
+      "height": 46
+    },
+    {
+      "name": "robert.croft@crypticdesign.net",
+      "outline": "solid",
+      "width": 216.734375,
+      "height": 44
+    }
+  ],
+  "pass": true
+}

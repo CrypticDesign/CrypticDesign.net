@@ -655,3 +655,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .community-empty-state dt{color:#b7bdff}
 .community-event-types span{border-left-color:var(--cry-accent-indigo)}
 @media(max-width:540px){.community-portal__hero{min-height:1125px}.community-portal__hero-status{bottom:28px}}
+
+/* CRY-496 consumes the shared CRY-495 route and accessible-text tokens. */
+.professional-experience .text-link{color:var(--section-accent-text,var(--section-accent))}
+.professional-experience .service-card{border-bottom:2px solid var(--section-accent)}
+.professional-experience .button.secondary{border-color:var(--section-accent)}
+.professional-inquiry-control{min-height:48px;border:1px solid var(--line);border-radius:var(--radius-control);background:var(--surface);padding:12px 16px;color:var(--text);width:100%;min-width:0}
+.professional-inquiry-control:focus-visible{outline:2px solid var(--section-accent-text);outline-offset:3px;border-color:var(--section-accent)}
