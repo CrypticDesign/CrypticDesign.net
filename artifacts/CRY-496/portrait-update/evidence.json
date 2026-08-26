@@ -1,0 +1,45 @@
+{
+  "generated": "2026-08-26T18:44:07.438Z",
+  "authorization": "Robert supplied and explicitly authorized this portrait for relevant Robert Croft presentation on 2026-08-26.",
+  "placement": "/professional — Founder / Senior Practice",
+  "asset": "/images/team/robert-croft.png",
+  "sourceFilename": "RKC_IMG_PersonalProfile_002.png",
+  "bytes": 6411334,
+  "sha256": "6DFE3745C0C94855721995121B32399BD235DD2497137714E591D2F9E2D3A16D",
+  "sourceCopyHashMatched": true,
+  "altText": "Portrait of Robert Croft, founder of Cryptic Design",
+  "inventory": {
+    "preservedBaselineAssets": 69,
+    "newAuthorizedPortraits": 1,
+    "currentGovernedProfessionalAssets": 70,
+    "missing": 0
+  },
+  "verification": {
+    "focusedProfessionalAndVDSTests": 15,
+    "fullUnitTests": 231,
+    "lint": true,
+    "typescript": true,
+    "productionBuild": {
+      "pass": true,
+      "pages": 75
+    },
+    "browserChecks": 6,
+    "engines": [
+      "chromium 149.0.7827.55",
+      "firefox 151.0",
+      "webkit 26.5"
+    ],
+    "viewports": [
+      "390x844",
+      "1440x900"
+    ],
+    "chromiumAxeScans": 2,
+    "axeViolations": 0,
+    "visualInspection": [
+      "portrait remains centered at 390x844",
+      "portrait and senior-practice copy remain balanced at 1440x900"
+    ],
+    "pass": true
+  },
+  "deployment": "This record covers local acceptance. The commit deploy is verified on PR #59 after push and recorded in the PR review packet."
+}

@@ -1,11 +1,11 @@
 {
   "summary": {
-    "generated": "2026-08-26T18:32:56.049Z",
+    "generated": "2026-08-26T18:40:56.677Z",
     "articles": 11,
     "articleImages": 11,
     "caseStudies": 6,
     "caseStudyImages": 55,
-    "professionalAssets": 69,
+    "professionalAssets": 70,
     "missing": [],
     "unreferenced": [],
     "duplicateReferences": [
@@ -633,6 +633,15 @@
       "rights": "Owned brand content",
       "altTextState": "authored in route/content model",
       "bytes": 72422,
+      "state": "present"
+    },
+    {
+      "asset": "/images/team/robert-croft.png",
+      "destination": "/professional",
+      "usage": "Professional landing/supporting art",
+      "rights": "Owned brand content",
+      "altTextState": "authored in route/content model",
+      "bytes": 6411334,
       "state": "present"
     }
   ]

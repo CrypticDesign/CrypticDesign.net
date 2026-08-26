@@ -128,4 +128,6 @@ test("Professional overview has the approved hierarchy and governed selected pro
     assert.ok(study?.hero.src);
   }
   assert.deepEqual(Object.keys(professionalCopy.proof.summaries),["humankind-console","win-reality","wellsky"]);
+  assert.match(source, /src="\/images\/team\/robert-croft\.png"/);
+  assert.match(source, /alt="Portrait of Robert Croft, founder of Cryptic Design"/);
 });

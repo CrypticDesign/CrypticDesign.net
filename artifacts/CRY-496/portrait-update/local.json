@@ -1,0 +1,121 @@
+{
+  "generated": "2026-08-26T18:43:11.743Z",
+  "base": "http://127.0.0.1:3100",
+  "checks": [
+    {
+      "engine": "chromium",
+      "version": "149.0.7827.55",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": 200,
+      "portrait": {
+        "src": "http://127.0.0.1:3100/_next/image?url=%2Fimages%2Fteam%2Frobert-croft.png&w=640&q=75",
+        "complete": true,
+        "naturalWidth": 390,
+        "naturalHeight": 390,
+        "renderedWidth": 348,
+        "renderedHeight": 260
+      },
+      "violations": [],
+      "pass": true
+    },
+    {
+      "engine": "chromium",
+      "version": "149.0.7827.55",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "status": 200,
+      "portrait": {
+        "src": "http://127.0.0.1:3100/_next/image?url=%2Fimages%2Fteam%2Frobert-croft.png&w=640&q=75",
+        "complete": true,
+        "naturalWidth": 576,
+        "naturalHeight": 576,
+        "renderedWidth": 463.953125,
+        "renderedHeight": 410
+      },
+      "violations": [],
+      "pass": true
+    },
+    {
+      "engine": "firefox",
+      "version": "151.0",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": 200,
+      "portrait": {
+        "src": "http://127.0.0.1:3100/_next/image?url=%2Fimages%2Fteam%2Frobert-croft.png&w=640&q=75",
+        "complete": true,
+        "naturalWidth": 390,
+        "naturalHeight": 390,
+        "renderedWidth": 348,
+        "renderedHeight": 260
+      },
+      "violations": [],
+      "pass": true
+    },
+    {
+      "engine": "firefox",
+      "version": "151.0",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "status": 200,
+      "portrait": {
+        "src": "http://127.0.0.1:3100/_next/image?url=%2Fimages%2Fteam%2Frobert-croft.png&w=640&q=75",
+        "complete": true,
+        "naturalWidth": 576,
+        "naturalHeight": 576,
+        "renderedWidth": 463.9666748046875,
+        "renderedHeight": 410
+      },
+      "violations": [],
+      "pass": true
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "status": 200,
+      "portrait": {
+        "src": "http://127.0.0.1:3100/_next/image?url=%2Fimages%2Fteam%2Frobert-croft.png&w=640&q=75",
+        "complete": true,
+        "naturalWidth": 390,
+        "naturalHeight": 390,
+        "renderedWidth": 348,
+        "renderedHeight": 260
+      },
+      "violations": [],
+      "pass": true
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "status": 200,
+      "portrait": {
+        "src": "http://127.0.0.1:3100/_next/image?url=%2Fimages%2Fteam%2Frobert-croft.png&w=640&q=75",
+        "complete": true,
+        "naturalWidth": 576,
+        "naturalHeight": 576,
+        "renderedWidth": 463.96875,
+        "renderedHeight": 410
+      },
+      "violations": [],
+      "pass": true
+    }
+  ],
+  "pass": true
+}

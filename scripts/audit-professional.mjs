@@ -23,6 +23,9 @@ const caseImages = matches(caseSource, /src:\s*"(\/images\/case-studies\/[^"]+)"
 let professionalSource = "";
 for (const file of professionalFiles) professionalSource += await readFile(path.join(root, file), "utf8");
 const supportingImages = matches(professionalSource, /(?:src=|src:)\s*[{]?"(\/images\/(?!articles\/|case-studies\/)[^"]+)"/g);
+// CRY-496 retains every governed CRY-454 asset even when presentation changes,
+// and adds Robert's explicitly authorized founder portrait.
+supportingImages.push("/images/singularis.png");
 
 const usageByAsset = new Map();
 for (const asset of articleImages) usageByAsset.set(asset, { usage: "article hero", rights: "Owned editorial content" });
@@ -66,14 +69,14 @@ const summary = {
   missing: missing.map((entry) => entry.asset),
   unreferenced,
   duplicateReferences,
-  pass: articleSlugs.length === 11 && articleImages.length === 11 && caseStudySlugs.length === 6 && caseImages.length === 55 && ledger.length === 69 && missing.length === 0 && unreferenced.length === 0,
+  pass: articleSlugs.length === 11 && articleImages.length === 11 && caseStudySlugs.length === 6 && caseImages.length === 55 && ledger.length === 70 && missing.length === 0 && unreferenced.length === 0,
 };
 
 await mkdir("artifacts", { recursive: true });
 await writeFile("artifacts/CRY-496-professional-media-ledger.json", JSON.stringify({ summary, ledger }, null, 2));
 const csv = ["asset,destination,usage,rights,alt_text_state,bytes,state", ...ledger.map((e) => [e.asset, e.destination, e.usage, e.rights, e.altTextState, e.bytes ?? "", e.state].map((v) => `"${String(v).replaceAll('"', '""')}"`).join(","))].join("\n");
 await writeFile("artifacts/CRY-496-professional-media-ledger.csv", csv);
-const report = `# CRY-496 Professional inventory evidence\n\nGenerated: ${summary.generated}\n\n- Articles: ${summary.articles}/11\n- Article hero images: ${summary.articleImages}/11\n- Case studies: ${summary.caseStudies}/6\n- Case-study proof images: ${summary.caseStudyImages}/55\n- Total Professional assets inventoried: ${summary.professionalAssets}\n- Missing referenced assets: ${summary.missing.length}\n- Unreferenced article/case-study assets: ${summary.unreferenced.length}\n- Result: **${summary.pass ? "PASS" : "FAIL"}**\n\nThe verified CRY-454 baseline of six studies, 55 distinct proof images, 11 articles, and 69 governed Professional assets is retained. Historical CRY-454 evidence is unchanged. See CRY-496/README.md for runtime acceptance and review status.\n`;
+const report = `# CRY-496 Professional inventory evidence\n\nGenerated: ${summary.generated}\n\n- Articles: ${summary.articles}/11\n- Article hero images: ${summary.articleImages}/11\n- Case studies: ${summary.caseStudies}/6\n- Case-study proof images: ${summary.caseStudyImages}/55\n- Total Professional assets inventoried: ${summary.professionalAssets}\n- Missing referenced assets: ${summary.missing.length}\n- Unreferenced article/case-study assets: ${summary.unreferenced.length}\n- Result: **${summary.pass ? "PASS" : "FAIL"}**\n\nThe verified CRY-454 baseline of six studies, 55 distinct proof images, 11 articles, and 69 governed Professional assets is retained. Robert explicitly authorized one founder portrait on 2026-08-26, bringing the governed Professional inventory to 70 assets. Historical CRY-454 evidence is unchanged. See CRY-496/README.md for runtime acceptance and review status.\n`;
 await writeFile("artifacts/CRY-496-professional-completion-evidence.md", report);
 console.log(report);
 if (!summary.pass) process.exitCode = 1;

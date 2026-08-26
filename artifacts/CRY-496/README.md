@@ -31,6 +31,10 @@ Inquiry remains a mail-client handoff. Name, email, organization/project, and pr
 
 Professional layout and components consume the existing `data-section-accent="violet"` / `--cry-accent-violet` and accessible-text tokens. No palette or color literal was introduced. Existing secondary study accents and global FAB media behavior are preserved. The old Professional full-spectrum cadence test was updated to reflect the newer CRY-496 authority; other shared VDS tests remain intact.
 
+## Authorized founder portrait follow-up
+
+Robert supplied and explicitly authorized one portrait on 2026-08-26. It replaces the abstract artwork in the Founder / Senior Practice module without changing approved copy or IA. The 69-asset CRY-454 baseline remains unchanged; the current governed inventory is 70. Local evidence and responsive screenshots are in `portrait-update/`. PR #59 records deployed verification.
+
 ## Preservation
 
 `preservation.json` compares the extracted case-study data and protected files with base `b5a240e`, and Git blob hashes for each of the 69 baseline-ledger assets.
@@ -52,7 +56,7 @@ Local production build served at http://127.0.0.1:3100 on 2026-08-26. See local-
 | Focused Professional / VDS tests | 15 passed |
 | npm run lint; tsc --noEmit | PASS |
 | npm run build | PASS; 75/75 generated pages |
-| Asset inventory and preservation | PASS; 6 studies / 55 proof images / 11 articles / 69 assets |
+| Asset inventory and preservation | PASS; 6 studies / 55 proof images / 11 articles / 69 baseline assets preserved + 1 authorized founder portrait |
 | Chromium 149.0.7827.55 | 63 route/viewport UI checks PASS |
 | Firefox 151.0 | 63 route/viewport UI checks PASS |
 | WebKit 26.5 | 63 route/viewport UI checks PASS |
