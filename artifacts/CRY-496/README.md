@@ -72,7 +72,19 @@ Commands: npm test; node --experimental-strip-types --test src/lib/professional-
 
 ## PR and preview
 
-Pending PR creation and deployed verification. No merge performed. This section will be completed with observed GitHub/Netlify evidence.
+- [PR #59 — CRY-496 Refine Professional experience and services positioning](https://github.com/CrypticDesign/CrypticDesign.net/pull/59)
+- Branch: agent/cry-496-professional-refinement; implementation commit: 27aa472acf55d1f31d414f608403609e1987e95b.
+- [Verified deploy preview](https://deploy-preview-59--frabjous-frangipane-650548.netlify.app/professional)
+- [Netlify deployment log](https://app.netlify.com/projects/frabjous-frangipane-650548/deploys/6a8f319e567ff60008895081)
+- Netlify deploy-preview status: SUCCESS. Header and redirect checks: SUCCESS. Pages-changed check: SKIPPED (not a pass claim).
+- Deployed Chromium 149.0.7827.55: five primary pages × 390×844 and 1440×900 = ten checks PASS. Ten additional axe scans: zero violations. Approved overview heading, five navigation labels, shared violet, decoded visible images, H1, overflow, and page errors verified.
+- Deployed canonical metadata, internal links/anchors, sitemap and robots: all 20 canonical pages PASS. All 11 legacy article redirects PASS.
+- Deployed inquiry at 390×844: native validation, nine encoded fields, actual mail-client navigation, eleven keyboard targets, visible fallback, retained values, and no false success: PASS. No email sent.
+- Detailed deployed evidence: preview/smoke.json, preview/routes-final.json, preview/inquiry-e2e.json, preview/github-deployment.json.
+- acceptance.json records the review-ready decision. This evidence-only follow-up commit does not alter runtime source; the verified implementation remains 27aa472acf55d1f31d414f608403609e1987e95b.
+- **Awaiting Robert review. No merge or production deployment performed.** Jira and Confluence were read only.
+
+Re-run comprehensive deployed checks with node scripts/qa-professional.mjs https://deploy-preview-59--frabjous-frangipane-650548.netlify.app chromium artifacts/CRY-496/recheck (63 checks, broader than the ten-page/width preview smoke); use engine routes for the route-only check. Re-run deployed inquiry with node tests/professional-inquiry.e2e.mjs https://deploy-preview-59--frabjous-frangipane-650548.netlify.app artifacts/CRY-496/recheck.
 
 ## Known boundaries
 

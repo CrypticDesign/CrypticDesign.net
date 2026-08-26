@@ -80,5 +80,5 @@
   "inquiry": true,
   "preservation": true,
   "remediation": "Original combined browser runs failed only four missing sitemap entries. UI code is unchanged after those runs. src/app/sitemap.ts was corrected, production build repeated, and routes-final.json records the targeted passing recheck. Browser reports are retained without rewriting their failed combined status.",
-  "review": "PR and deploy preview pending; Robert review required before merge."
+  "review": "PR #59 deployed and verified; see acceptance.json. Robert review required before merge."
 }
