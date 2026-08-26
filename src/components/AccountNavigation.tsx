@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import ResponsiveSectionNavigation from "@/components/ResponsiveSectionNavigation";
 import { useEffect, useState } from "react";
 import { MEMBERSHIP_SESSION_CHANGED_EVENT } from "@/lib/membership-session-events";
 
@@ -64,7 +65,7 @@ export default function AccountNavigation({ initialAuthenticated = false }: { in
   return (
     <section className="entertainment-navigation account-section-navigation" data-section-theme="blue" aria-label="Explore Account">
       <div className="shell entertainment-navigation__viewport">
-        <nav className="entertainment-navigation__bar account-section-navigation__bar" aria-label="Account sections">
+        <ResponsiveSectionNavigation label="Account" current={ACCOUNT_NAV_ITEMS.find((item) => isActive(pathname, item.href))?.label ?? "Overview"} className="account-section-navigation__bar" ariaLabel="Account sections">
           {ACCOUNT_NAV_ITEMS.map((item) => (
             <Link
               href={item.href}
@@ -77,7 +78,7 @@ export default function AccountNavigation({ initialAuthenticated = false }: { in
               <span className="entertainment-navigation__copy"><strong>{item.label}</strong><small>{item.description}</small></span>
             </Link>
           ))}
-        </nav>
+        </ResponsiveSectionNavigation>
       </div>
     </section>
   );

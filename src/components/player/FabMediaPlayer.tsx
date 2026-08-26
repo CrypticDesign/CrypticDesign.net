@@ -175,6 +175,7 @@ export default function FabMediaPlayer() {
 
   return (
     <div className="cs-root" data-playing={playing} data-expanded={expanded}>
+      <div className="cs-mobile-label" hidden={expanded} aria-hidden="true"><strong>Cryptic Signal</strong><span>{track.title} · {track.artist}</span></div>
       <button
         ref={orbRef}
         type="button"

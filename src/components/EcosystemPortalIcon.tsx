@@ -1,6 +1,8 @@
-export type EcosystemPortalIconName = "worlds" | "arcade" | "media" | "studio" | "play" | "listen" | "discover" | "home" | "crew" | "events" | "discussion";
+export type EcosystemPortalIconName = "worlds" | "arcade" | "media" | "studio" | "play" | "listen" | "discover" | "home" | "crew" | "events" | "discussion" | "menu" | "close";
 
 export default function EcosystemPortalIcon({ name }: { name: EcosystemPortalIconName }) {
+  if (name === "menu") return <svg viewBox="0 0 32 32" aria-hidden><path d="M5 8h22M5 16h22M5 24h22"/></svg>;
+  if (name === "close") return <svg viewBox="0 0 32 32" aria-hidden><path d="m7 7 18 18M7 25 25 7"/></svg>;
   if (name === "arcade" || name === "play") return <svg viewBox="0 0 32 32" aria-hidden><path d="M9 11h14l5 12-3 3-6-5h-6l-6 5-3-3 5-12Z"/><path d="M10 16h6M13 13v6M22 15v.1M25 18v.1"/></svg>;
   if (name === "media" || name === "listen") return <svg viewBox="0 0 32 32" aria-hidden><path d="M12 24V9l14-3v15M12 13l14-3"/><circle cx="8.5" cy="24.5" r="3.5"/><circle cx="22.5" cy="21.5" r="3.5"/></svg>;
   if (name === "studio" || name === "discover") return <svg viewBox="0 0 32 32" aria-hidden><path d="M5 9h22M5 16h22M5 23h22"/><circle cx="11" cy="9" r="2"/><circle cx="21" cy="16" r="2"/><circle cx="14" cy="23" r="2"/></svg>;

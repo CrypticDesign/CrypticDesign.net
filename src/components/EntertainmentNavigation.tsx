@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import ResponsiveSectionNavigation from "@/components/ResponsiveSectionNavigation";
 import { ARCADE_CATEGORIES, ENTERTAINMENT_NAV_ITEMS, MUSIC_CATEGORIES, VIDEO_CATEGORIES, arcadeCategory, entertainmentCategoryHref, musicCategory, videoCategory, isEntertainmentDestinationActive, isEntertainmentNavigationRelevant, type ArcadeCategorySlug, type EntertainmentNavIcon } from "@/lib/entertainment-navigation";
 
 const destinationCategories = { arcade: ARCADE_CATEGORIES, music: MUSIC_CATEGORIES, video: VIDEO_CATEGORIES } as const;
@@ -53,7 +54,7 @@ export default function EntertainmentNavigation() {
 
   const renderDestinations = (surface: "desktop" | "mobile") => ENTERTAINMENT_NAV_ITEMS.map((item) => {
     const active = isEntertainmentDestinationActive(pathname, item.href);
-    if (item.icon === "arcade" || item.icon === "music" || item.icon === "video") {
+    if (surface === "desktop" && (item.icon === "arcade" || item.icon === "music" || item.icon === "video")) {
       const destinationIcon = item.icon;
       const categories = destinationCategories[item.icon];
       const query = destinationQueries[item.icon];
@@ -91,18 +92,16 @@ export default function EntertainmentNavigation() {
   const compactCategories = openDestination ? destinationCategories[openDestination] : null;
   const compactQuery = openDestination ? destinationQueries[openDestination] : null;
   const compactSelected = openDestination === "arcade" ? selectedArcadeCategory : openDestination === "music" ? (musicCategory(searchParams.get("filter") ?? undefined)?.slug ?? "all") : (videoCategory(searchParams.get("filter") ?? undefined)?.slug ?? "all");
-  const compactArcadeMenu = compactItem && compactCategories && compactQuery && openDestination ? <details className="arcade-filter-menu" data-theme={compactItem.theme}>
+  const compactArcadeMenu = compactItem && compactCategories && compactQuery && openDestination ? <details key={`${pathname}:${searchParams.toString()}`} className="arcade-filter-menu" data-theme={compactItem.theme}>
     <summary><span>{compactItem.label} navigation</span><strong>{compactCategories.find((category) => category.slug === compactSelected)?.label}</strong></summary><nav aria-label={`Compact ${compactItem.label} navigation`}>{compactCategories.map((category) => <Link href={entertainmentCategoryHref(openDestination, category.slug)} key={category.slug} aria-current={category.slug === compactSelected ? "page" : undefined}>{category.label}</Link>)}</nav>
   </details> : null;
 
   return (
-    <section id="entertainment-category-drawer" className="entertainment-navigation" data-open={categoryDrawerOpen} data-franchise={arcadeFranchiseRoute || undefined} data-section-theme={activeItem?.theme ?? "blue"} aria-label="Explore Entertainment">
+    <section id="entertainment-category-drawer" className="entertainment-navigation" data-open={categoryDrawerOpen} data-franchise={arcadeFranchiseRoute || undefined} data-section-theme="cyan" aria-label="Explore Entertainment">
       <div className="shell entertainment-navigation__viewport">
-        <nav className="entertainment-navigation__bar entertainment-navigation__desktop" aria-label="Entertainment destinations">{renderDestinations("desktop")}</nav>
-        <details className="entertainment-navigation__menu">
-          <summary>Entertainment <span>{activeItem?.label ?? "Browse"}</span></summary>
-          <nav className="entertainment-navigation__menu-panel" aria-label="Entertainment destinations">{renderDestinations("mobile")}</nav>
-        </details>
+        <ResponsiveSectionNavigation label="Explore" current={activeItem?.label ?? "Browse"} ariaLabel="Entertainment destinations" desktopChildren={renderDestinations("desktop")}>
+          {renderDestinations("mobile")}
+        </ResponsiveSectionNavigation>
         {compactArcadeMenu}
       </div>
     </section>

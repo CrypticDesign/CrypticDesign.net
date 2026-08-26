@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import ResponsiveSectionNavigation from "@/components/ResponsiveSectionNavigation";
 
 const serviceSlugs = new Set(["product-strategy", "ux-interaction", "interface-systems", "creative-technology"]);
 const items = [
@@ -24,5 +25,5 @@ export default function ProfessionalNavigation() {
   const pathname = usePathname();
   const segment = pathname.split("/")[2] ?? "";
   const active = (href: string) => href === "/professional/services" ? pathname === href || serviceSlugs.has(segment) : href === "/professional" ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
-  return <section className="entertainment-navigation professional-navigation" data-section-theme="violet" aria-label="Explore Professional"><div className="shell entertainment-navigation__viewport"><nav className="entertainment-navigation__bar professional-navigation__bar" aria-label="Professional sections">{items.map((item) => <Link href={item.href} key={item.href} className="entertainment-navigation__item" data-theme="violet" aria-current={active(item.href) ? "page" : undefined}><span className="entertainment-navigation__icon"><Icon name={item.icon}/></span><span className="entertainment-navigation__copy"><strong>{item.label}</strong><small>{item.description}</small></span></Link>)}</nav></div></section>;
+  return <section className="entertainment-navigation professional-navigation" data-section-theme="violet" aria-label="Explore Professional"><div className="shell entertainment-navigation__viewport"><ResponsiveSectionNavigation label="Professional" current={items.find((item) => active(item.href))?.label ?? "Overview"} className="professional-navigation__bar" ariaLabel="Professional sections">{items.map((item) => <Link href={item.href} key={item.href} className="entertainment-navigation__item" data-theme="violet" aria-current={active(item.href) ? "page" : undefined}><span className="entertainment-navigation__icon"><Icon name={item.icon}/></span><span className="entertainment-navigation__copy"><strong>{item.label}</strong><small>{item.description}</small></span></Link>)}</ResponsiveSectionNavigation></div></section>;
 }

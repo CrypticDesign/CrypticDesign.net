@@ -52,7 +52,7 @@ test("brand wordmark uses the Cryptic VDS sans-serif type stack", async () => {
   assert.match(globals, /\.site-brand\{[^}]*font-family:Roboto,Arial,sans-serif/);
 });
 
-test("primary navigation exposes contextual Sign In or Account directly without a dropdown", async () => {
+test("primary navigation exposes Sign In or Account without a nested account dropdown", async () => {
   const header = await readFile(headerUrl, "utf8");
   assert.match(header, /href: "\/", label: "Home", tone: "blue"/);
   assert.match(header, /href: "\/entertainment", label: "Explore", tone: "cyan"/);
@@ -66,8 +66,7 @@ test("primary navigation exposes contextual Sign In or Account directly without 
   assert.match(header, /href="\/search" aria-label="Search"/);
   assert.match(header, /<Link href=\{accountHref\} data-tone="blue"/);
   assert.match(header, /aria-current=\{accountSectionActive \? "page" : undefined\}/);
-  assert.doesNotMatch(header, /aria-label="Open site menu"/);
-  assert.doesNotMatch(header, />Menu<\/button>/);
+  assert.match(header, /aria-controls="primary-navigation"/);
   assert.doesNotMatch(header, /account-menu__panel/);
   assert.doesNotMatch(header, /aria-haspopup="menu"/);
 });
@@ -193,7 +192,7 @@ test("primary Explore and its destination drawer expose independent controls", a
   assert.match(globals, /\.entertainment-navigation__item-options\[data-open="false"\]\{max-height:0/);
   assert.match(globals, /\.entertainment-navigation__item-options a\[aria-current="page"\]/);
   assert.match(entertainmentNavigation, /className="arcade-filter-menu"/);
-  assert.match(entertainmentNavigation, /data-section-theme=\{activeItem\?\.theme \?\? "blue"\}/);
+  assert.match(entertainmentNavigation, /data-section-theme="cyan"/);
   assert.match(globals, /data-section-theme="blue"/);
   assert.match(entertainmentNavigation, /aria-label=\{`Compact \$\{compactItem\.label\} navigation`\}/);
   assert.match(globals, /\.entertainment-navigation__item-options\{display:none!important\}/);
