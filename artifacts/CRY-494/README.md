@@ -2,9 +2,10 @@
 
 **Evidence date:** 2026-08-26 (America/Chicago)
 **Local implementation disposition:** PASS
-**Launch/deploy-preview disposition:** CONDITIONAL PASS
+**Deploy-preview disposition:** PASS
+**Launch disposition:** CONDITIONAL PASS
 
-The local candidate implements the approved entertainment/community-first Homepage hierarchy and passes the focused Home, authenticated My Home, responsive, keyboard, WebGL, reduced-motion, no-WebGL, type, lint, unit/contract, production-build, and full six-route accessibility checks described below. Launch remains conditional pending the authorized push, PR, deploy preview, and deployed rerun; manual screen-reader coverage was not performed.
+The candidate implements the approved entertainment/community-first Homepage hierarchy and passes the focused Home, authenticated My Home, responsive, keyboard, WebGL, reduced-motion, no-WebGL, type, lint, unit/contract, production-build, and full six-route accessibility checks described below. PR #60 and its Netlify deploy preview pass the deployed Homepage, accessibility, route, metadata, fallback, and shared-scene checks. Launch remains conditional because merge/production deployment and manual screen-reader coverage were not performed.
 
 ## Branch and external state
 
@@ -12,9 +13,10 @@ The local candidate implements the approved entertainment/community-first Homepa
 - Isolated worktree: `C:\Users\Robert Croft\crypticdesign.net\.worktrees\cry-494-homepage-v2`
 - Branch: `agent/cry-494-homepage-v2`
 - Base: `origin/main` at `073d165` (`Merge pull request #59 from CrypticDesign/agent/cry-496-professional-refinement`)
-- Commit: this local CRY-494 commit; not pushed
-- PR: not created; proposed title is `CRY-494 Refine signed-out homepage around entertainment and community`
-- Deploy preview: not created
+- Implementation commits: `c0914cd` and `3c31e81`; branch pushed to `origin/agent/cry-494-homepage-v2`
+- PR: [#60 — CRY-494 Refine signed-out homepage around entertainment and community](https://github.com/CrypticDesign/CrypticDesign.net/pull/60)
+- Deploy preview: [Netlify preview #60](https://deploy-preview-60--frabjous-frangipane-650548.netlify.app)
+- Netlify checks: PASS — deploy preview, header rules, and redirect rules successful; pages-changed check neutral/skipped
 - Production/staging mutation: none
 - Parallel-work protection: the active `C:\Projects\CrypticDesign.net` CRY-496 checkout and its uncommitted `next-env.d.ts` change were not modified
 
@@ -22,9 +24,11 @@ The local candidate implements the approved entertainment/community-first Homepa
 
 - `src/components/PublicHome.tsx`
 - `src/app/responsive.css`
+- `src/app/globals.css`
 - `src/lib/my-home-dashboard-contract.test.ts`
 - `src/lib/site-header-auth-contract.test.ts`
 - `src/lib/public-home-v2-contract.test.ts`
+- `src/lib/prismatic-spectrum-contract.test.ts`
 - `scripts/qa-my-home.mjs`
 - `scripts/qa-public-home-v2.mjs`
 - `artifacts/CRY-494/**`
@@ -81,6 +85,9 @@ No Homepage-only product or release record was created.
 | `node scripts/qa-public-home-v2.mjs http://127.0.0.1:3101 artifacts/CRY-494/home-v2` | PASS — semantic order, routes, metadata, focus, overflow, normal WebGL, mobile static tier, reduced motion, forced no-WebGL |
 | `node scripts/qa-page-scene-runtime.mjs http://127.0.0.1:3101` | PASS — Home, Entertainment, Community, Professional share one governed runtime and active scenes |
 | `node scripts/qa-live-a11y.mjs http://127.0.0.1:3100 artifacts/CRY-494/a11y` | PASS — zero WCAG 2.1 A/AA violations across all six routes |
+| `node scripts/qa-public-home-v2.mjs https://deploy-preview-60--frabjous-frangipane-650548.netlify.app artifacts/CRY-494/deploy-preview/home-v2` | PASS — all six desktop/mobile rendering and fallback modes plus twelve governed destinations |
+| `node scripts/qa-live-a11y.mjs https://deploy-preview-60--frabjous-frangipane-650548.netlify.app artifacts/CRY-494/deploy-preview/a11y` | PASS — zero WCAG 2.1 A/AA violations across all six deployed routes |
+| `node scripts/qa-page-scene-runtime.mjs https://deploy-preview-60--frabjous-frangipane-650548.netlify.app` | PASS — all four deployed scenes active; only expected fail-closed membership 503s |
 
 ## Browser, viewport, and accessibility coverage
 
@@ -117,15 +124,18 @@ No Homepage-only product or release record was created.
 - `runtime/laptop-1024.png`
 - `runtime/tablet-768.png`
 - `runtime/mobile-390.png`
+- `deploy-preview/home-v2/*.png`
+- `deploy-preview/a11y/*.png`
 
 ## Limitations / waivers
 
 1. The canonical spec's generic Request Access / Join Waitlist wording conflicts with the current CRY-489 runtime, which has no request submission behavior. The implementation preserves the truthful `Account availability` action instead.
 2. The four Entertainment media-card contrast findings were remediated by routing section link text through the accessible `--section-accent-text` token. The rebuilt six-route axe audit now passes with zero violations.
-3. External PR/deploy evidence is pending the authorized push and preview workflow.
+3. PR #60 and the Netlify deploy preview are complete and verified. Merge and production deployment remain separate approval gates.
 4. Manual assistive-technology and non-Chromium browser coverage remain outstanding.
 
 ## Recommendation
 
 **Local CRY-494 candidate: PASS.**
-**Deploy-preview / launch evidence: CONDITIONAL PASS** pending the authorized push/PR/deploy preview, deployed rerun, Robert visual approval, and the remaining manual accessibility gates.
+**Deploy-preview evidence: PASS.**
+**Launch evidence: CONDITIONAL PASS** pending merge/production authorization, Robert's final preview approval, and the remaining manual accessibility gates.

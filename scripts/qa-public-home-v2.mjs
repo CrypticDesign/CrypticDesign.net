@@ -53,6 +53,7 @@ for (const mode of modes) {
     const response = await page.goto(`${baseUrl}/`, { waitUntil: "domcontentloaded" });
     assert.equal(response?.status(), 200);
     await page.getByRole("heading", { name: stages[0], exact: true }).waitFor();
+    await page.waitForFunction(() => document.querySelector(".page-scene")?.hasAttribute("data-quality"));
     await page.waitForTimeout(mode.name === "default" ? 2500 : 500);
 
     const facts = await page.evaluate((expectedStages) => {

@@ -1,0 +1,11 @@
+{
+  "url": "https://deploy-preview-60--frabjous-frangipane-650548.netlify.app",
+  "command": "node scripts/qa-live-a11y.mjs https://deploy-preview-60--frabjous-frangipane-650548.netlify.app artifacts/CRY-494/deploy-preview/a11y",
+  "routesChecked": 6,
+  "statuses": [200, 200, 200, 200, 200, 200],
+  "wcag21AAViolations": 0,
+  "undersizedTouchTargets": 0,
+  "allSampledFocusVisible": true,
+  "reflow720HorizontalOverflow": false,
+  "exitCode": 0
+}
