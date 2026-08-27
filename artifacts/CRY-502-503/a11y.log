@@ -1,0 +1,518 @@
+[
+  {
+    "route": "/",
+    "status": 200,
+    "violations": [],
+    "keyboard": [
+      {
+        "tag": "a",
+        "name": "Skip to main content",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Cryptic DesignWorlds to explore. Stories to live.",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Home",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "summary",
+        "name": "Play",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Community",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Professional",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Search",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Sign In",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Explore What's Here",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Enter Community",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Sign in to My Home →",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "View All Entertainment →",
+        "visible": true,
+        "focusVisible": true
+      }
+    ],
+    "undersizedTouchTargets": [],
+    "undersizedTouchTargetCount": 0,
+    "zoomEquivalent": {
+      "horizontalOverflow": false,
+      "mainVisible": true,
+      "headingVisible": true
+    }
+  },
+  {
+    "route": "/entertainment",
+    "status": 200,
+    "violations": [],
+    "keyboard": [
+      {
+        "tag": "a",
+        "name": "Skip to main content",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Cryptic DesignWorlds to explore. Stories to live.",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Home",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "summary",
+        "name": "Play",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Community",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Professional",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Search",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Sign In",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "OverviewEntertainment",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "summary",
+        "name": "ArcadeGames & playable samples",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "summary",
+        "name": "MusicSound & signal",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "summary",
+        "name": "VideoWatch & listen",
+        "visible": true,
+        "focusVisible": true
+      }
+    ],
+    "undersizedTouchTargets": [],
+    "undersizedTouchTargetCount": 0,
+    "zoomEquivalent": {
+      "horizontalOverflow": false,
+      "mainVisible": true,
+      "headingVisible": true
+    }
+  },
+  {
+    "route": "/community",
+    "status": 200,
+    "violations": [],
+    "keyboard": [
+      {
+        "tag": "a",
+        "name": "Skip to main content",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Cryptic DesignWorlds to explore. Stories to live.",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Home",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "summary",
+        "name": "Play",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Community",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Professional",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Search",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Sign In",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "ExploreParticipation paths",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "GroupsShared participation",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "EventsScheduled participation",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "CreatorsPeople behind the work",
+        "visible": true,
+        "focusVisible": true
+      }
+    ],
+    "undersizedTouchTargets": [],
+    "undersizedTouchTargetCount": 0,
+    "zoomEquivalent": {
+      "horizontalOverflow": false,
+      "mainVisible": true,
+      "headingVisible": true
+    }
+  },
+  {
+    "route": "/professional",
+    "status": 200,
+    "violations": [],
+    "keyboard": [
+      {
+        "tag": "a",
+        "name": "Skip to main content",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Cryptic DesignWorlds to explore. Stories to live.",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Home",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "summary",
+        "name": "Play",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Community",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Professional",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Search",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Sign In",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "OverviewProfessional studio",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "ServicesStrategy through delivery",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Case StudiesWork & engagement context",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "ArticlesResearch & analysis",
+        "visible": true,
+        "focusVisible": true
+      }
+    ],
+    "undersizedTouchTargets": [],
+    "undersizedTouchTargetCount": 0,
+    "zoomEquivalent": {
+      "horizontalOverflow": false,
+      "mainVisible": true,
+      "headingVisible": true
+    }
+  },
+  {
+    "route": "/account/create",
+    "status": 200,
+    "violations": [],
+    "keyboard": [
+      {
+        "tag": "a",
+        "name": "Skip to main content",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Cryptic DesignWorlds to explore. Stories to live.",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Home",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "summary",
+        "name": "Play",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Community",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Professional",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Search",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Sign In",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Explore Entertainment",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Already have access? Sign in →",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Return to Account →",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "My Home",
+        "visible": true,
+        "focusVisible": true
+      }
+    ],
+    "undersizedTouchTargets": [],
+    "undersizedTouchTargetCount": 0,
+    "zoomEquivalent": {
+      "horizontalOverflow": false,
+      "mainVisible": true,
+      "headingVisible": true
+    }
+  },
+  {
+    "route": "/account/sign-in",
+    "status": 200,
+    "violations": [],
+    "keyboard": [
+      {
+        "tag": "a",
+        "name": "Skip to main content",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Cryptic DesignWorlds to explore. Stories to live.",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Home",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "summary",
+        "name": "Play",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Community",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Professional",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Search",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Sign In",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "a",
+        "name": "Account availability",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "input",
+        "name": null,
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "button",
+        "name": "Show password",
+        "visible": true,
+        "focusVisible": true
+      },
+      {
+        "tag": "input",
+        "name": null,
+        "visible": true,
+        "focusVisible": true
+      }
+    ],
+    "undersizedTouchTargets": [],
+    "undersizedTouchTargetCount": 0,
+    "zoomEquivalent": {
+      "horizontalOverflow": false,
+      "mainVisible": true,
+      "headingVisible": true
+    }
+  }
+]

@@ -20,14 +20,24 @@ test("Community implements the approved IA while withholding Spaces", () => {
   assert.match(navigationComponent, /visibleCommunityNavigationItems/);
   assert.match(navigationComponent, /ariaLabel="Community sections"/);
   assert.match(navigationComponent, /aria-current=/);
+  assert.doesNotMatch(navigation, /What is happening/);
   assert.match(layout, /<CommunityNavigation \/>/);
 });
 
-test("Community Explore uses a curated modular hierarchy without a generic feed", () => {
-  for (const heading of ["Happening now / Featured", "Explore Groups", "Upcoming Events", "Featured Creators", "Selected Community Activity", "Continue Participating"]) assert.match(page, new RegExp(heading));
-  assert.match(page, /No governed activity stream is connected/);
+test("Community puts staged participation before explicitly cross-platform exploration", () => {
+  for (const heading of ["Participation paths", "Creators / Available", "Groups / Opening in stages", "Events / Opening in stages", "Explore while Community opens", "Continue Participating"]) assert.ok(page.includes(heading));
+  assert.ok(page.indexOf("Creators / Available") < page.indexOf("Groups / Opening"));
+  assert.ok(page.indexOf("Groups / Opening") < page.indexOf("Events / Opening"));
+  assert.ok(page.indexOf("Events / Opening") < page.indexOf("From across the platform"));
+  assert.match(page, /href="#participation-paths"/);
+  assert.match(page, /showSignInAction=\{false\}/);
+  assert.match(page, /authenticated \? "\/" : "\/account\/sign-in"/);
+  assert.match(page, /authenticated \? <section/);
   assert.match(page, /getInitialAccountAuthenticated/);
-  assert.match(page, /uses curated destinations instead of a generic infinite feed/);
+  assert.match(page, /opening in stages/);
+  assert.match(page, /No groups are published yet/);
+  assert.match(page, /No approved event calendar is connected/);
+  assert.doesNotMatch(page, /Happening now|Explore what is happening|No governed activity stream is connected|community-explore__activity|href="\/community\/spaces"/);
   assert.doesNotMatch(page, /Live community activity|RSVP|Join the community/i);
   assert.doesNotMatch(page, /\d+[,.]?\d*[kKmM] (members|followers|attending)/);
 });
@@ -46,6 +56,8 @@ test("Community routes are indexed and availability remains semantic", () => {
   for (const route of ["/community", "/community/groups", "/community/events", "/community/creators"]) assert.match(sitemap, new RegExp(route.replaceAll("/", "\\/")));
   assert.doesNotMatch(sitemap, /"\/community\/spaces"/);
   assert.match(status, /aria-label="Current community status"/);
-  assert.match(status, /<dt>Public discovery<\/dt><dd data-status="open">Open<\/dd>/);
-  assert.match(status, /data-status="closed">Not available<\/dd>/);
+  assert.match(status, /<dt>Public Community<\/dt><dd data-status="open">Open<\/dd>/);
+  assert.match(status, /<dt>Activity<\/dt><dd>Not connected<\/dd>/);
+  assert.match(status, /No published groups yet/);
+  assert.match(status, /No approved calendar yet/);
 });

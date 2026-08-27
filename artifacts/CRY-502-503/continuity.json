@@ -1,0 +1,9 @@
+{
+  "checks": [
+    "Homepage v2 public handoff destinations",
+    "Signed-out Community has Sign In and no private shortcuts",
+    "Server-authenticated Community has real My Home/Library/Account shortcuts",
+    "Sign-out removes authenticated continuation"
+  ],
+  "result": "PASS"
+}

@@ -1,0 +1,1504 @@
+
+> crypticdesign-net@0.1.0 test
+> node --experimental-strip-types --test src/**/*.test.ts
+
+TAP version 13
+# (node:26576) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:26576) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/account-access-form-contract.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: account inputs retain a visible, minimum-size control treatment
+ok 1 - account inputs retain a visible, minimum-size control treatment
+  ---
+  duration_ms: 6.8354
+  ...
+# Subtest: Supabase account forms fail closed until Turnstile supplies a token
+ok 2 - Supabase account forms fail closed until Turnstile supplies a token
+  ---
+  duration_ms: 38.908
+  ...
+# Subtest: sign-in fields remain visible when local account services are disconnected
+ok 3 - sign-in fields remain visible when local account services are disconnected
+  ---
+  duration_ms: 22.561
+  ...
+# Subtest: local sandbox offers a credential-free test account
+ok 4 - local sandbox offers a credential-free test account
+  ---
+  duration_ms: 11.6166
+  ...
+# Subtest: successful sign-in continues directly to My Home
+ok 5 - successful sign-in continues directly to My Home
+  ---
+  duration_ms: 35.8197
+  ...
+# Subtest: password controls support visibility and route recovery honestly
+ok 6 - password controls support visibility and route recovery honestly
+  ---
+  duration_ms: 10.9456
+  ...
+# Subtest: sign-in explains the account and subscription relationship without redundant navigation
+ok 7 - sign-in explains the account and subscription relationship without redundant navigation
+  ---
+  duration_ms: 8.9121
+  ...
+# Subtest: account entry pages share the VDS ecosystem panel and sign-in hero is full bleed
+ok 8 - account entry pages share the VDS ecosystem panel and sign-in hero is full bleed
+  ---
+  duration_ms: 9.9618
+  ...
+# (node:23236) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:23236) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/account-admission.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: account admission fails closed when configuration is absent or invalid
+ok 9 - account admission fails closed when configuration is absent or invalid
+  ---
+  duration_ms: 1.236
+  ...
+# Subtest: invitation mode never enables public account creation
+ok 10 - invitation mode never enables public account creation
+  ---
+  duration_ms: 0.2681
+  ...
+# Subtest: closed messaging preserves accountless public access
+ok 11 - closed messaging preserves accountless public access
+  ---
+  duration_ms: 0.26
+  ...
+# (node:27772) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:27772) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/account-feature-intro-contract.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: first-use account pattern explains subscriber value and feature operation
+ok 12 - first-use account pattern explains subscriber value and feature operation
+  ---
+  duration_ms: 4.8408
+  ...
+# Subtest: account pages begin directly below account navigation at every breakpoint
+ok 13 - account pages begin directly below account navigation at every breakpoint
+  ---
+  duration_ms: 2.3531
+  ...
+# Subtest: empty Character and Library states introduce their features instead of dead-ending
+ok 14 - empty Character and Library states introduce their features instead of dead-ending
+  ---
+  duration_ms: 3.0935
+  ...
+# Subtest: Subscription, Settings, and Notifications expose only working or honestly gated account states
+ok 15 - Subscription, Settings, and Notifications expose only working or honestly gated account states
+  ---
+  duration_ms: 1.9151
+  ...
+# (node:30992) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:30992) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/account-mvp-contract.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: authenticated Account is an operational identity surface rather than a My Home or marketing duplicate
+ok 16 - authenticated Account is an operational identity surface rather than a My Home or marketing duplicate
+  ---
+  duration_ms: 13.5562
+  ...
+# Subtest: account identity is resolved server-side without exposing age or operator metadata
+ok 17 - account identity is resolved server-side without exposing age or operator metadata
+  ---
+  duration_ms: 1.6801
+  ...
+# Subtest: Character remains owner-scoped, separately summarized, and private by default
+ok 18 - Character remains owner-scoped, separately summarized, and private by default
+  ---
+  duration_ms: 2.0221
+  ...
+# Subtest: unsupported account capabilities are visibly gated instead of simulated
+ok 19 - unsupported account capabilities are visibly gated instead of simulated
+  ---
+  duration_ms: 2.6825
+  ...
+# Subtest: account navigation follows the five-destination icon-led VDS section pattern
+ok 20 - account navigation follows the five-destination icon-led VDS section pattern
+  ---
+  duration_ms: 3.5421
+  ...
+# Subtest: each Account tab uses the shared full-width VDS image hero
+ok 21 - each Account tab uses the shared full-width VDS image hero
+  ---
+  duration_ms: 2.986
+  ...
+# Subtest: My Library supports authenticated empty, filter, sort, and remove states
+ok 22 - My Library supports authenticated empty, filter, sort, and remove states
+  ---
+  duration_ms: 1.2996
+  ...
+# (node:35776) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:35776) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/admission-migration-contract.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: admission schema keeps authority-bearing tables server-only
+ok 23 - admission schema keeps authority-bearing tables server-only
+  ---
+  duration_ms: 5.6022
+  ...
+# Subtest: token exchange is atomic, idempotent, wave-bound, and single-use
+ok 24 - token exchange is atomic, idempotent, wave-bound, and single-use
+  ---
+  duration_ms: 1.8497
+  ...
+# Subtest: public exchange route fails closed and never exposes the service key
+ok 25 - public exchange route fails closed and never exposes the service key
+  ---
+  duration_ms: 3.4009
+  ...
+# (node:32856) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:32856) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/admission.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: creates opaque 256-bit invitation tokens and stable HMAC digests
+ok 26 - creates opaque 256-bit invitation tokens and stable HMAC digests
+  ---
+  duration_ms: 2.4262
+  ...
+# Subtest: signs a short-lived invitation session without placing email in the cookie
+ok 27 - signs a short-lived invitation session without placing email in the cookie
+  ---
+  duration_ms: 1.5544
+  ...
+# Subtest: permits only the approved forward invitation state path and terminal stops
+ok 28 - permits only the approved forward invitation state path and terminal stops
+  ---
+  duration_ms: 0.2346
+  ...
+# Subtest: normalizes invitation email for exact wave binding
+ok 29 - normalizes invitation email for exact wave binding
+  ---
+  duration_ms: 0.2953
+  ...
+# (node:9120) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:9120) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/arcade.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: Explore exposes the approved Cryptic-specific playable groups
+ok 30 - Explore exposes the approved Cryptic-specific playable groups
+  ---
+  duration_ms: 1.2487
+  ...
+# Subtest: Explore does not duplicate Featured or Cryptic Originals as catalog buckets
+ok 31 - Explore does not duplicate Featured or Cryptic Originals as catalog buckets
+  ---
+  duration_ms: 0.6473
+  ...
+# Subtest: construction entries expose the required planning fields
+ok 32 - construction entries expose the required planning fields
+  ---
+  duration_ms: 0.5193
+  ...
+# Subtest: genres remain secondary metadata rather than primary navigation
+ok 33 - genres remain secondary metadata rather than primary navigation
+  ---
+  duration_ms: 1.3565
+  ...
+# (node:20320) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:20320) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/avatar-asset-intake.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: accepts an owned local GLB with immutable provenance inside a versioned budget
+ok 34 - accepts an owned local GLB with immutable provenance inside a versioned budget
+  ---
+  duration_ms: 2.5307
+  ...
+# Subtest: rejects remote, traversal, and non-GLB sources
+ok 35 - rejects remote, traversal, and non-GLB sources
+  ---
+  duration_ms: 0.4926
+  ...
+# Subtest: fails closed when provenance, approval, checksum, or unrestricted ownership is absent
+ok 36 - fails closed when provenance, approval, checksum, or unrestricted ownership is absent
+  ---
+  duration_ms: 0.3007
+  ...
+# Subtest: reports each exceeded measurable budget with the budget version
+ok 37 - reports each exceeded measurable budget with the budget version
+  ---
+  duration_ms: 0.2685
+  ...
+# Subtest: rejects malformed metric and budget values instead of comparing them
+ok 38 - rejects malformed metric and budget values instead of comparing them
+  ---
+  duration_ms: 0.4694
+  ...
+# (node:33308) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:33308) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/avatar-compatibility.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: accepts a deterministic compatible selection without WebGL
+ok 39 - accepts a deterministic compatible selection without WebGL
+  ---
+  duration_ms: 2.7049
+  ...
+# Subtest: reports unknown assets, same-layer collisions, and explicit conflicts
+ok 40 - reports unknown assets, same-layer collisions, and explicit conflicts
+  ---
+  duration_ms: 0.3668
+  ...
+# Subtest: proposes an authored fallback for a rig mismatch
+ok 41 - proposes an authored fallback for a rig mismatch
+  ---
+  duration_ms: 0.4876
+  ...
+# (node:33020) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:33020) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/avatar-inspection.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: provides deterministic keyboard-equivalent view and rotation commands
+ok 42 - provides deterministic keyboard-equivalent view and rotation commands
+  ---
+  duration_ms: 1.8468
+  ...
+# Subtest: disables animation for reduced motion and non-WebGL presentations
+ok 43 - disables animation for reduced motion and non-WebGL presentations
+  ---
+  duration_ms: 0.4073
+  ...
+# Subtest: builds a structured textual recipe and requires portrait and full-body alternatives
+ok 44 - builds a structured textual recipe and requires portrait and full-body alternatives
+  ---
+  duration_ms: 0.4951
+  ...
+# Subtest: preserves confirmation parity without WebGL
+ok 45 - preserves confirmation parity without WebGL
+  ---
+  duration_ms: 0.2394
+  ...
+# Subtest: creates a concise status announcement after inspection changes
+ok 46 - creates a concise status announcement after inspection changes
+  ---
+  duration_ms: 0.3001
+  ...
+# (node:31792) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:31792) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/avatar-renderer-evidence.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: accepts complete real-browser evidence bound to an asset and budget
+ok 47 - accepts complete real-browser evidence bound to an asset and budget
+  ---
+  duration_ms: 3.5783
+  ...
+# Subtest: rejects synthetic evidence even when every reported result passes
+ok 48 - rejects synthetic evidence even when every reported result passes
+  ---
+  duration_ms: 0.5404
+  ...
+# Subtest: requires exact asset checksum and budget version binding
+ok 49 - requires exact asset checksum and budget version binding
+  ---
+  duration_ms: 0.4443
+  ...
+# Subtest: requires every visual, fallback, recovery, and disposal capability
+ok 50 - requires every visual, fallback, recovery, and disposal capability
+  ---
+  duration_ms: 0.325
+  ...
+# Subtest: reports invalid and out-of-budget measurements independently
+ok 51 - reports invalid and out-of-budget measurements independently
+  ---
+  duration_ms: 0.3443
+  ...
+# (node:29648) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:29648) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/avatar.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: accepts the portable versioned avatar recipe
+ok 52 - accepts the portable versioned avatar recipe
+  ---
+  duration_ms: 1.6661
+  ...
+# Subtest: rejects unknown avatar assets and recipe versions
+ok 53 - rejects unknown avatar assets and recipe versions
+  ---
+  duration_ms: 1.064
+  ...
+# (node:33252) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:33252) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/character-forge-draft.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: keeps up to three recoverable variants without creating a character
+ok 54 - keeps up to three recoverable variants without creating a character
+  ---
+  duration_ms: 3.787
+  ...
+# Subtest: rejects stale autosave revisions and preserves the latest checkpoint
+ok 55 - rejects stale autosave revisions and preserves the latest checkpoint
+  ---
+  duration_ms: 0.6803
+  ...
+# Subtest: confirms once, consumes the draft, and replays idempotently
+ok 56 - confirms once, consumes the draft, and replays idempotently
+  ---
+  duration_ms: 2.1127
+  ...
+# Subtest: serializes confirmation and enforces one owner and one handle
+ok 57 - serializes confirmation and enforces one owner and one handle
+  ---
+  duration_ms: 0.7232
+  ...
+# Subtest: failed compatibility leaves the draft recoverable and discard needs confirmation
+ok 58 - failed compatibility leaves the draft recoverable and discard needs confirmation
+  ---
+  duration_ms: 0.7942
+  ...
+# (node:35700) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:35700) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/character-journey.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: presents verified Time as human-readable days without exposing levels or points
+ok 59 - presents verified Time as human-readable days without exposing levels or points
+  ---
+  duration_ms: 36.3072
+  ...
+# Subtest: uses exact versioned era boundaries
+ok 60 - uses exact versioned era boundaries
+  ---
+  duration_ms: 0.3968
+  ...
+# Subtest: returns named chapters after Legacy without prestige or higher ranks
+ok 61 - returns named chapters after Legacy without prestige or higher ranks
+  ---
+  duration_ms: 0.3462
+  ...
+# Subtest: formats the first day without displaying a zero-day counter
+ok 62 - formats the first day without displaying a zero-day counter
+  ---
+  duration_ms: 0.6322
+  ...
+# Subtest: rejects malformed or reordered era definitions
+ok 63 - rejects malformed or reordered era definitions
+  ---
+  duration_ms: 0.4117
+  ...
+# (node:34096) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:34096) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/character-store.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: persists one account-owned character with immutable history
+ok 64 - persists one account-owned character with immutable history
+  ---
+  duration_ms: 28.2862
+  ...
+# Subtest: serializes concurrent creation and enforces one character per account
+ok 65 - serializes concurrent creation and enforces one character per account
+  ---
+  duration_ms: 24.7057
+  ...
+# Subtest: scopes idempotency by operation, account, character, and payload
+ok 66 - scopes idempotency by operation, account, character, and payload
+  ---
+  duration_ms: 450.0432
+  ...
+# Subtest: retires and restores without deleting identity or history
+ok 67 - retires and restores without deleting identity or history
+  ---
+  duration_ms: 224.6809
+  ...
+# (node:31544) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:31544) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/characters.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: separates account authorization from public character identity
+ok 68 - separates account authorization from public character identity
+  ---
+  duration_ms: 1.4736
+  ...
+# Subtest: system citizens cannot grant account authority
+ok 69 - system citizens cannot grant account authority
+  ---
+  duration_ms: 0.5706
+  ...
+# Subtest: validates privacy-safe public profile limits
+ok 70 - validates privacy-safe public profile limits
+  ---
+  duration_ms: 2.7535
+  ...
+# (node:30576) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:30576) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/community-page-contract.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: Community implements the approved IA while withholding Spaces
+ok 71 - Community implements the approved IA while withholding Spaces
+  ---
+  duration_ms: 2.7995
+  ...
+# Subtest: Community puts staged participation before explicitly cross-platform exploration
+ok 72 - Community puts staged participation before explicitly cross-platform exploration
+  ---
+  duration_ms: 0.7055
+  ...
+# Subtest: supported destinations are truthful and preserve authority boundaries
+ok 73 - supported destinations are truthful and preserve authority boundaries
+  ---
+  duration_ms: 0.2486
+  ...
+# Subtest: Community routes are indexed and availability remains semantic
+ok 74 - Community routes are indexed and availability remains semantic
+  ---
+  duration_ms: 0.2628
+  ...
+# (node:31156) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:31156) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/email-confirmation-contract.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: email confirmation requires an intentional POST before consuming the OTP
+ok 75 - email confirmation requires an intentional POST before consuming the OTP
+  ---
+  duration_ms: 6.3304
+  ...
+# Subtest: public account creation cannot issue confirmation emails
+ok 76 - public account creation cannot issue confirmation emails
+  ---
+  duration_ms: 10.9954
+  ...
+# (node:24180) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:24180) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/entertainment-frontdoor.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: Entertainment is the canonical six-stage public discovery front door
+ok 77 - Entertainment is the canonical six-stage public discovery front door
+  ---
+  duration_ms: 1.5047
+  ...
+# Subtest: featured and curated selections use governed records and exact availability
+ok 78 - featured and curated selections use governed records and exact availability
+  ---
+  duration_ms: 1.3316
+  ...
+# Subtest: selection fails closed for withheld rights, drafts and nonpublic access
+ok 79 - selection fails closed for withheld rights, drafts and nonpublic access
+  ---
+  duration_ms: 0.4537
+  ...
+# Subtest: generic discovery points home while contextual Play retains Arcade compatibility
+ok 80 - generic discovery points home while contextual Play retains Arcade compatibility
+  ---
+  duration_ms: 1.6133
+  ...
+# (node:25336) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:25336) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/entertainment-navigation.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: Entertainment navigation exposes only scalable media destinations
+ok 81 - Entertainment navigation exposes only scalable media destinations
+  ---
+  duration_ms: 2.585
+  ...
+# Subtest: Entertainment navigation never targets a retired route
+ok 82 - Entertainment navigation never targets a retired route
+  ---
+  duration_ms: 0.2551
+  ...
+# Subtest: active matching includes nested routes without activating the hub
+ok 83 - active matching includes nested routes without activating the hub
+  ---
+  duration_ms: 0.2221
+  ...
+# Subtest: Explore drawer exposes scalable categories instead of franchise links
+ok 84 - Explore drawer exposes scalable categories instead of franchise links
+  ---
+  duration_ms: 0.2325
+  ...
+# Subtest: Singularis game routes activate Explore while other legacy directors activate Overview
+ok 85 - Singularis game routes activate Explore while other legacy directors activate Overview
+  ---
+  duration_ms: 0.3165
+  ...
+# Subtest: Explore franchise navigation resolves to the single product roots
+ok 86 - Explore franchise navigation resolves to the single product roots
+  ---
+  duration_ms: 0.2055
+  ...
+# Subtest: shows the shared bar across connected entertainment content only
+ok 87 - shows the shared bar across connected entertainment content only
+  ---
+  duration_ms: 0.3523
+  ...
+# (node:8744) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:8744) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/entitlements.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: allows access from an effective matching grant and returns audit evidence
+ok 88 - allows access from an effective matching grant and returns audit evidence
+  ---
+  duration_ms: 2.7213
+  ...
+# Subtest: fails closed for anonymous, malformed, or unmatched requests
+ok 89 - fails closed for anonymous, malformed, or unmatched requests
+  ---
+  duration_ms: 0.2881
+  ...
+# Subtest: rejects future, expired, and revoked grants
+ok 90 - rejects future, expired, and revoked grants
+  ---
+  duration_ms: 0.2567
+  ...
+# Subtest: supports resource and action wildcards
+ok 91 - supports resource and action wildcards
+  ---
+  duration_ms: 0.2319
+  ...
+# Subtest: an expired event grant cannot remove independent purchased access
+ok 92 - an expired event grant cannot remove independent purchased access
+  ---
+  duration_ms: 0.3018
+  ...
+# (node:7316) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:7316) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/explore-page-contract.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: Arcade retains the Explore compatibility URL without competing with Entertainment
+ok 93 - Arcade retains the Explore compatibility URL without competing with Entertainment
+  ---
+  duration_ms: 5.59
+  ...
+# Subtest: Arcade uses a playable catalog and honest access language
+ok 94 - Arcade uses a playable catalog and honest access language
+  ---
+  duration_ms: 2.9284
+  ...
+# Subtest: Explore preserves transparent playable availability states
+ok 95 - Explore preserves transparent playable availability states
+  ---
+  duration_ms: 1.5747
+  ...
+# (node:28408) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:28408) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/first-signal.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: trace resolves First Signal successfully with server-owned Time and Context
+ok 96 - trace resolves First Signal successfully with server-owned Time and Context
+  ---
+  duration_ms: 3.6202
+  ...
+# Subtest: force fails but preserves legitimate Time and applies only a session condition
+ok 97 - force fails but preserves legitimate Time and applies only a session condition
+  ---
+  duration_ms: 0.6654
+  ...
+# Subtest: completed characters can replay in practice without persistent Time
+ok 98 - completed characters can replay in practice without persistent Time
+  ---
+  duration_ms: 0.3735
+  ...
+# (node:16768) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:16768) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/interactive-experience.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: accepts trusted Arcade evidence even when the player fails
+ok 99 - accepts trusted Arcade evidence even when the player fails
+  ---
+  duration_ms: 1.3099
+  ...
+# Subtest: practice mode produces no persistent Time
+ok 100 - practice mode produces no persistent Time
+  ---
+  duration_ms: 0.2434
+  ...
+# Subtest: rejects untrusted, stale, contradictory, and impossible results
+ok 101 - rejects untrusted, stale, contradictory, and impossible results
+  ---
+  duration_ms: 1.2255
+  ...
+# Subtest: supports branching-video results through the same contract
+ok 102 - supports branching-video results through the same contract
+  ---
+  duration_ms: 0.2126
+  ...
+# (node:26824) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:26824) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/launch-metadata.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: Singularis exposes launch-ready description and share-image metadata
+ok 103 - Singularis exposes launch-ready description and share-image metadata
+  ---
+  duration_ms: 48.9433
+  ...
+# Subtest: Cryptic Signal audio route exposes launch-ready description and share image
+ok 104 - Cryptic Signal audio route exposes launch-ready description and share image
+  ---
+  duration_ms: 6.6985
+  ...
+# Subtest: route-specific share cards use the 1200 by 630 social format
+ok 105 - route-specific share cards use the 1200 by 630 social format
+  ---
+  duration_ms: 29.1708
+  ...
+# (node:35504) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:35504) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/media-catalog.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: Music and Video expose the approved Cryptic Design filters
+ok 106 - Music and Video expose the approved Cryptic Design filters
+  ---
+  duration_ms: 1.906
+  ...
+# Subtest: every Music and Video stub carries shared construction-page fields
+ok 107 - every Music and Video stub carries shared construction-page fields
+  ---
+  duration_ms: 0.5606
+  ...
+# (node:30452) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:30452) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/media-player-surface.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: uses the global FAB player without page-level embedded player stubs
+ok 108 - uses the global FAB player without page-level embedded player stubs
+  ---
+  duration_ms: 2.8605
+  ...
+# (node:20924) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:20924) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/membership-session-captcha-contract.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: Supabase sign-in forwards Turnstile tokens
+ok 109 - Supabase sign-in forwards Turnstile tokens
+  ---
+  duration_ms: 4.3029
+  ...
+# Subtest: public account creation has no Supabase signup path
+ok 110 - public account creation has no Supabase signup path
+  ---
+  duration_ms: 4.016
+  ...
+# (node:24228) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:24228) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/membership-store.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: persists subscriptions and idempotent transitions
+ok 111 - persists subscriptions and idempotent transitions
+  ---
+  duration_ms: 41.0225
+  ...
+# Subtest: rejects mismatched tier and price
+ok 112 - rejects mismatched tier and price
+  ---
+  duration_ms: 8.8695
+  ...
+# (node:5292) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:5292) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/membership.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: allows activation and records an immutable transition event
+ok 113 - allows activation and records an immutable transition event
+  ---
+  duration_ms: 2.4618
+  ...
+# Subtest: treats repeated provider events as a no-op
+ok 114 - treats repeated provider events as a no-op
+  ---
+  duration_ms: 0.2218
+  ...
+# Subtest: rejects impossible transitions
+ok 115 - rejects impossible transitions
+  ---
+  duration_ms: 0.7101
+  ...
+# Subtest: sandbox fixtures preserve the audited historical tier names and prices
+ok 116 - sandbox fixtures preserve the audited historical tier names and prices
+  ---
+  duration_ms: 4.4878
+  ...
+# Subtest: resolves unique benefits only from trialing or active subscriptions
+ok 117 - resolves unique benefits only from trialing or active subscriptions
+  ---
+  duration_ms: 0.7841
+  ...
+# Subtest: revokes tier benefits when a subscription is canceled or expired
+ok 118 - revokes tier benefits when a subscription is canceled or expired
+  ---
+  duration_ms: 0.2734
+  ...
+# Subtest: covers canonical recovery, refund, dispute, and termination transitions
+ok 119 - covers canonical recovery, refund, dispute, and termination transitions
+  ---
+  duration_ms: 0.4559
+  ...
+# (node:28060) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:28060) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/my-home-dashboard-contract.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: My Home uses governed account, Character, and Library boundaries
+ok 120 - My Home uses governed account, Character, and Library boundaries
+  ---
+  duration_ms: 1.3822
+  ...
+# Subtest: public Home and authenticated My Home are separate server-selected surfaces
+ok 121 - public Home and authenticated My Home are separate server-selected surfaces
+  ---
+  duration_ms: 0.4118
+  ...
+# Subtest: My Home exposes typed future integration boundaries without fake persistence
+ok 122 - My Home exposes typed future integration boundaries without fake persistence
+  ---
+  duration_ms: 0.2565
+  ...
+# Subtest: My Home keeps canonical account utilities available
+ok 123 - My Home keeps canonical account utilities available
+  ---
+  duration_ms: 0.278
+  ...
+# (node:28844) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:28844) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/page-scene-component-contract.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: WebGL capability probing is cached and releases its temporary context
+ok 124 - WebGL capability probing is cached and releases its temporary context
+  ---
+  duration_ms: 1.283
+  ...
+# Subtest: route scene cleanup releases renderer resources and its live context
+ok 125 - route scene cleanup releases renderer resources and its live context
+  ---
+  duration_ms: 0.2517
+  ...
+# Subtest: the scene reserves its secondary accent for one lower-opacity orbital ring
+ok 126 - the scene reserves its secondary accent for one lower-opacity orbital ring
+  ---
+  duration_ms: 0.3012
+  ...
+# (node:30100) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:30100) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/page-scene.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: keeps every public scene in one governed registry
+ok 127 - keeps every public scene in one governed registry
+  ---
+  duration_ms: 2.3029
+  ...
+# Subtest: uses canonical destination accents with a restrained Community social accent
+ok 128 - uses canonical destination accents with a restrained Community social accent
+  ---
+  duration_ms: 0.3343
+  ...
+# Subtest: declares governed backdrop assets for every scene
+ok 129 - declares governed backdrop assets for every scene
+  ---
+  duration_ms: 0.4018
+  ...
+# Subtest: uses a static low tier for reduced motion, constrained mobile, save-data, or missing WebGL
+ok 130 - uses a static low tier for reduced motion, constrained mobile, save-data, or missing WebGL
+  ---
+  duration_ms: 0.3751
+  ...
+# Subtest: selects conservative automatic tiers and honors explicit quality after hard constraints
+ok 131 - selects conservative automatic tiers and honors explicit quality after hard constraints
+  ---
+  duration_ms: 0.3751
+  ...
+# Subtest: classifies measured frame rate and only auto-downgrades sustained high-tier pressure
+ok 132 - classifies measured frame rate and only auto-downgrades sustained high-tier pressure
+  ---
+  duration_ms: 0.2595
+  ...
+# (node:19928) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:19928) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/password-recovery-contract.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: password recovery requests a CAPTCHA-protected Supabase email without revealing account existence
+ok 133 - password recovery requests a CAPTCHA-protected Supabase email without revealing account existence
+  ---
+  duration_ms: 5.2809
+  ...
+# Subtest: recovery callback exchanges the PKCE code before opening the password form
+ok 134 - recovery callback exchanges the PKCE code before opening the password form
+  ---
+  duration_ms: 3.9887
+  ...
+# Subtest: password changes require an authenticated user and matching passwords
+ok 135 - password changes require an authenticated user and matching passwords
+  ---
+  duration_ms: 1.879
+  ...
+# (node:28604) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:28604) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/player-accessibility-contract.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: the global player uses a stable accessible panel relationship across server-rendered routes
+ok 136 - the global player uses a stable accessible panel relationship across server-rendered routes
+  ---
+  duration_ms: 1.3268
+  ...
+# (node:20588) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:20588) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/prismatic-spectrum-contract.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: the vivid nonsemantic spectrum is centralized and keeps status hues semantic
+ok 137 - the vivid nonsemantic spectrum is centralized and keeps status hues semantic
+  ---
+  duration_ms: 2.2344
+  ...
+# Subtest: major page sections use explicit governed accents
+ok 138 - major page sections use explicit governed accents
+  ---
+  duration_ms: 0.8598
+  ...
+# Subtest: top-level destination accents follow the canonical progression
+ok 139 - top-level destination accents follow the canonical progression
+  ---
+  duration_ms: 0.3817
+  ...
+# Subtest: destination subnavigation inherits the same canonical accent as its primary menu
+ok 140 - destination subnavigation inherits the same canonical accent as its primary menu
+  ---
+  duration_ms: 0.3681
+  ...
+# Subtest: Community uses Indigo for identity and Magenta only for social emphasis
+ok 141 - Community uses Indigo for identity and Magenta only for social emphasis
+  ---
+  duration_ms: 0.3541
+  ...
+# Subtest: Explore navigation and portal iconography preserve the canonical VDS
+ok 142 - Explore navigation and portal iconography preserve the canonical VDS
+  ---
+  duration_ms: 0.9911
+  ...
+# Subtest: refactored major pages no longer hard-code legacy section accents
+ok 143 - refactored major pages no longer hard-code legacy section accents
+  ---
+  duration_ms: 1.6461
+  ...
+# (node:15692) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:15692) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/production-auth-migration.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: replaces timestamp-bearing RPC overloads with database-timestamped functions
+ok 144 - replaces timestamp-bearing RPC overloads with database-timestamped functions
+  ---
+  duration_ms: 24.03
+  ...
+# Subtest: enforces the canonical member archetype vocabulary in PostgreSQL
+ok 145 - enforces the canonical member archetype vocabulary in PostgreSQL
+  ---
+  duration_ms: 4.1939
+  ...
+# (node:33832) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:33832) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/professional-content.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: Professional publishes the approved eleven-article inventory with local hero art
+ok 146 - Professional publishes the approved eleven-article inventory with local hero art
+  ---
+  duration_ms: 4.7379
+  ...
+# Subtest: Professional publishes six case studies and maps all 55 proof images
+ok 147 - Professional publishes six case studies and maps all 55 proof images
+  ---
+  duration_ms: 7.0506
+  ...
+# Subtest: Professional preserves owned editorial imagery from the live articles
+ok 148 - Professional preserves owned editorial imagery from the live articles
+  ---
+  duration_ms: 4.0935
+  ...
+# Subtest: Professional launch routes expose canonical and share metadata
+ok 149 - Professional launch routes expose canonical and share metadata
+  ---
+  duration_ms: 1.4303
+  ...
+# Subtest: Professional uses one contact path, section tabs, and complete capability pages
+ok 150 - Professional uses one contact path, section tabs, and complete capability pages
+  ---
+  duration_ms: 1.023
+  ...
+# Subtest: Professional inquiry encodes every field without query or header injection
+ok 151 - Professional inquiry encodes every field without query or header injection
+  ---
+  duration_ms: 1.5814
+  ...
+# Subtest: Professional article curation preserves every source and cleans only presentation
+ok 152 - Professional article curation preserves every source and cleans only presentation
+  ---
+  duration_ms: 27.4213
+  ...
+# Subtest: Professional overview has the approved hierarchy and governed selected proof
+ok 153 - Professional overview has the approved hierarchy and governed selected proof
+  ---
+  duration_ms: 1.4669
+  ...
+# (node:34004) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:34004) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/progression-store.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: records activity once and preserves rule evidence
+ok 154 - records activity once and preserves rule evidence
+  ---
+  duration_ms: 218.3888
+  ...
+# Subtest: reverses by adding one immutable correction
+ok 155 - reverses by adding one immutable correction
+  ---
+  duration_ms: 204.6266
+  ...
+# Subtest: scopes idempotency and snapshots to a character
+ok 156 - scopes idempotency and snapshots to a character
+  ---
+  duration_ms: 334.5881
+  ...
+# (node:24912) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:24912) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/progression.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: uses explicit, versioned internal rules
+ok 157 - uses explicit, versioned internal rules
+  ---
+  duration_ms: 3.0259
+  ...
+# Subtest: calculates balance from an additive ledger without changing entitlements
+ok 158 - calculates balance from an additive ledger without changing entitlements
+  ---
+  duration_ms: 0.6349
+  ...
+# (node:31348) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:31348) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/public-home-v2-contract.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: signed-out Home preserves the required nine-stage semantic journey
+ok 159 - signed-out Home preserves the required nine-stage semantic journey
+  ---
+  duration_ms: 1.9831
+  ...
+# Subtest: Home keeps the authenticated route boundary and one shared PageScene
+ok 160 - Home keeps the authenticated route boundary and one shared PageScene
+  ---
+  duration_ms: 0.4378
+  ...
+# Subtest: hero and discovery routes prioritize Entertainment and Community
+ok 161 - hero and discovery routes prioritize Entertainment and Community
+  ---
+  duration_ms: 0.4752
+  ...
+# Subtest: Featured Experiences and CURRENT SIGNAL derive from governed shared data
+ok 162 - Featured Experiences and CURRENT SIGNAL derive from governed shared data
+  ---
+  duration_ms: 0.2289
+  ...
+# Subtest: Community and admission claims remain fail-closed and non-fabricated
+ok 163 - Community and admission claims remain fail-closed and non-fabricated
+  ---
+  duration_ms: 0.4383
+  ...
+# (node:29944) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:29944) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/public-profile-actions.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: keeps every public action disabled behind an explicit feature gate
+ok 164 - keeps every public action disabled behind an explicit feature gate
+  ---
+  duration_ms: 1.3463
+  ...
+# Subtest: requires authentication, public rendering, active state, and remaining rate limit
+ok 165 - requires authentication, public rendering, active state, and remaining rate limit
+  ---
+  duration_ms: 0.2167
+  ...
+# Subtest: honors blocking in either direction and external youth/content policy decisions
+ok 166 - honors blocking in either direction and external youth/content policy decisions
+  ---
+  duration_ms: 0.2551
+  ...
+# Subtest: prevents self follow and appreciate while allowing private save and policy-approved share
+ok 167 - prevents self follow and appreciate while allowing private save and policy-approved share
+  ---
+  duration_ms: 0.2811
+  ...
+# Subtest: records accepted action evidence idempotently with its policy version
+ok 168 - records accepted action evidence idempotently with its policy version
+  ---
+  duration_ms: 6.8333
+  ...
+# Subtest: corrects evidence additively and never turns a denied action into accepted evidence
+ok 169 - corrects evidence additively and never turns a denied action into accepted evidence
+  ---
+  duration_ms: 1.2364
+  ...
+# (node:34924) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:34924) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/redirects.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: every legacy route redirects to its canonical destination
+ok 170 - every legacy route redirects to its canonical destination
+  ---
+  duration_ms: 1.881
+  ...
+# Subtest: no redirect points at a retired route as its destination
+ok 171 - no redirect points at a retired route as its destination
+  ---
+  duration_ms: 10.4801
+  ...
+# Subtest: the public sitemap excludes routes that immediately redirect
+ok 172 - the public sitemap excludes routes that immediately redirect
+  ---
+  duration_ms: 17.6158
+  ...
+# (node:1940) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:1940) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/releases.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: requires an account before evaluating entitlements
+ok 173 - requires an account before evaluating entitlements
+  ---
+  duration_ms: 2.6078
+  ...
+# Subtest: locks content when the required entitlement is absent
+ok 174 - locks content when the required entitlement is absent
+  ---
+  duration_ms: 0.2477
+  ...
+# Subtest: grants content when the required entitlement is present
+ok 175 - grants content when the required entitlement is present
+  ---
+  duration_ms: 0.3971
+  ...
+# Subtest: rights and publication governance override membership
+ok 176 - rights and publication governance override membership
+  ---
+  duration_ms: 0.2047
+  ...
+# Subtest: routes the Singularis vertical slice into the continuous gamespace
+ok 177 - routes the Singularis vertical slice into the continuous gamespace
+  ---
+  duration_ms: 0.5711
+  ...
+# Subtest: keeps ordinary releases on their release detail pages
+ok 178 - keeps ordinary releases on their release detail pages
+  ---
+  duration_ms: 0.1822
+  ...
+# (node:28356) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:28356) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/responsive-layout-contract.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: route sections share one mobile disclosure, with links instead of nested summaries
+ok 179 - route sections share one mobile disclosure, with links instead of nested summaries
+  ---
+  duration_ms: 9.176
+  ...
+# Subtest: responsive contracts are loaded after legacy page CSS
+ok 180 - responsive contracts are loaded after legacy page CSS
+  ---
+  duration_ms: 2.7853
+  ...
+# Subtest: mobile player reserves space and immersive game view hides its dock
+ok 181 - mobile player reserves space and immersive game view hides its dock
+  ---
+  duration_ms: 1.8001
+  ...
+# Subtest: fullscreen game grows between its toolbar and status without overlay controls
+ok 182 - fullscreen game grows between its toolbar and status without overlay controls
+  ---
+  duration_ms: 62.9196
+  ...
+# (node:2700) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:2700) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/rpg-content-store.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: persists an idempotent onboarding quest and grants explainable noncommercial rewards
+ok 183 - persists an idempotent onboarding quest and grants explainable noncommercial rewards
+  ---
+  duration_ms: 39.1998
+  ...
+# (node:20192) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:20192) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/rpg-content.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: completes versioned quest objectives idempotently
+ok 184 - completes versioned quest objectives idempotently
+  ---
+  duration_ms: 1.8957
+  ...
+# Subtest: preserves failed and abandoned quest outcomes
+ok 185 - preserves failed and abandoned quest outcomes
+  ---
+  duration_ms: 2.4462
+  ...
+# Subtest: preserves achievement evidence and lifecycle
+ok 186 - preserves achievement evidence and lifecycle
+  ---
+  duration_ms: 2.8501
+  ...
+# Subtest: creates only noncommercial nontransferable collectible grants
+ok 187 - creates only noncommercial nontransferable collectible grants
+  ---
+  duration_ms: 0.2681
+  ...
+# (node:13928) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:13928) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/rpg-experience-store.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: persists Time and contextual usage as replay-safe ledgers
+ok 188 - persists Time and contextual usage as replay-safe ledgers
+  ---
+  duration_ms: 52.5522
+  ...
+# Subtest: rejects duplicate sessions and conflicting idempotency payloads
+ok 189 - rejects duplicate sessions and conflicting idempotency payloads
+  ---
+  duration_ms: 14.4093
+  ...
+# Subtest: reverses Time and attribute usage additively
+ok 190 - reverses Time and attribute usage additively
+  ---
+  duration_ms: 18.3758
+  ...
+# Subtest: projects journey, active conditions, effective capability, and additive recovery
+ok 191 - projects journey, active conditions, effective capability, and additive recovery
+  ---
+  duration_ms: 333.1469
+  ...
+# (node:14872) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:14872) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/rpg-experience.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: uses an endless, deterministic Time curve
+ok 192 - uses an endless, deterministic Time curve
+  ---
+  duration_ms: 2.7584
+  ...
+# Subtest: starts every classless character with equal attributes and resources
+ok 193 - starts every classless character with equal attributes and resources
+  ---
+  duration_ms: 0.4417
+  ...
+# Subtest: turns verified Time and Context into explainable attribute usage
+ok 194 - turns verified Time and Context into explainable attribute usage
+  ---
+  duration_ms: 0.512
+  ...
+# Subtest: reduces contextual growth for routine low-challenge activity
+ok 195 - reduces contextual growth for routine low-challenge activity
+  ---
+  duration_ms: 0.4971
+  ...
+# Subtest: advances attributes through an uncapped contextual-use curve
+ok 196 - advances attributes through an uncapped contextual-use curve
+  ---
+  duration_ms: 20.6034
+  ...
+# Subtest: conditions change effective capability without deleting base attributes
+ok 197 - conditions change effective capability without deleting base attributes
+  ---
+  duration_ms: 1.6013
+  ...
+# Subtest: rejects invalid active Time, factors, and context vectors
+ok 198 - rejects invalid active Time, factors, and context vectors
+  ---
+  duration_ms: 0.9364
+  ...
+# (node:28196) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:28196) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/sandbox-session.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: signs and verifies a sandbox member identity
+ok 199 - signs and verifies a sandbox member identity
+  ---
+  duration_ms: 2.2032
+  ...
+# Subtest: rejects a tampered sandbox session
+ok 200 - rejects a tampered sandbox session
+  ---
+  duration_ms: 0.9574
+  ...
+# (node:29240) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:29240) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/singularis-embedded-build.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: embeds the verified v05 build only for the Operation runtime
+ok 201 - embeds the verified v05 build only for the Operation runtime
+  ---
+  duration_ms: 1.2049
+  ...
+# Subtest: keeps the embedded runtime in a stable parent render tree
+ok 202 - keeps the embedded runtime in a stable parent render tree
+  ---
+  duration_ms: 0.3386
+  ...
+# Subtest: uses the approved Singularis marketing artwork for first contact
+ok 203 - uses the approved Singularis marketing artwork for first contact
+  ---
+  duration_ms: 0.3987
+  ...
+# Subtest: keeps franchise navigation in a collapsible left workspace rail
+ok 204 - keeps franchise navigation in a collapsible left workspace rail
+  ---
+  duration_ms: 0.2698
+  ...
+# Subtest: resets document scroll after Singularis phase navigation
+ok 205 - resets document scroll after Singularis phase navigation
+  ---
+  duration_ms: 0.2021
+  ...
+# Subtest: v05 exposes a versioned same-origin page bridge
+ok 206 - v05 exposes a versioned same-origin page bridge
+  ---
+  duration_ms: 14.2351
+  ...
+# (node:24084) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:24084) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/singularis-game-state-adapter.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: fails closed when production transport is not configured
+ok 207 - fails closed when production transport is not configured
+  ---
+  duration_ms: 12.4817
+  ...
+# Subtest: accepts only authoritative state returned by the platform transport
+ok 208 - accepts only authoritative state returned by the platform transport
+  ---
+  duration_ms: 3.2652
+  ...
+# Subtest: rejects malformed runtime and platform envelopes without granting progress
+ok 209 - rejects malformed runtime and platform envelopes without granting progress
+  ---
+  duration_ms: 0.3806
+  ...
+# (node:23772) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:23772) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/singularis-gamespace.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: moves explicitly from arrival through active training
+ok 210 - moves explicitly from arrival through active training
+  ---
+  duration_ms: 1.8767
+  ...
+# Subtest: interruption retains identity, craft, and checkpoint and resume does not restart
+ok 211 - interruption retains identity, craft, and checkpoint and resume does not restart
+  ---
+  duration_ms: 0.2857
+  ...
+# Subtest: ending training records no result, reward, penalty, or war effort
+ok 212 - ending training records no result, reward, penalty, or war effort
+  ---
+  duration_ms: 0.3172
+  ...
+# Subtest: completion activates the pilot and unlocks Operations exactly once
+ok 213 - completion activates the pilot and unlocks Operations exactly once
+  ---
+  duration_ms: 0.2211
+  ...
+# Subtest: world state advances independently without mutating session state
+ok 214 - world state advances independently without mutating session state
+  ---
+  duration_ms: 0.4144
+  ...
+# Subtest: hydrates a returning Pilot without skipping the First Contact overview
+ok 215 - hydrates a returning Pilot without skipping the First Contact overview
+  ---
+  duration_ms: 0.2366
+  ...
+# Subtest: launches Transit Escort for an active Pilot and returns to preparation
+ok 216 - launches Transit Escort for an active Pilot and returns to preparation
+  ---
+  duration_ms: 0.3536
+  ...
+# Subtest: creates every review phase with internally consistent deterministic game state
+ok 217 - creates every review phase with internally consistent deterministic game state
+  ---
+  duration_ms: 0.4722
+  ...
+# Subtest: reset clears durable pilot progress and replay creates a fresh training runtime
+ok 218 - reset clears durable pilot progress and replay creates a fresh training runtime
+  ---
+  duration_ms: 0.5113
+  ...
+# (node:21832) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:21832) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/site-header-auth-contract.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: global account navigation starts from server authentication state
+ok 219 - global account navigation starts from server authentication state
+  ---
+  duration_ms: 16.4481
+  ...
+# Subtest: global account navigation synchronizes Account without duplicating Home
+ok 220 - global account navigation synchronizes Account without duplicating Home
+  ---
+  duration_ms: 2.617
+  ...
+# Subtest: brand wordmark uses the Cryptic VDS sans-serif type stack
+ok 221 - brand wordmark uses the Cryptic VDS sans-serif type stack
+  ---
+  duration_ms: 2.1033
+  ...
+# Subtest: primary navigation exposes Sign In or Account without a nested account dropdown
+ok 222 - primary navigation exposes Sign In or Account without a nested account dropdown
+  ---
+  duration_ms: 2.2392
+  ...
+# Subtest: signed-out Home follows the governed entertainment and community hierarchy
+ok 223 - signed-out Home follows the governed entertainment and community hierarchy
+  ---
+  duration_ms: 4.4602
+  ...
+# Subtest: account subnavigation is available only to authenticated visitors
+ok 224 - account subnavigation is available only to authenticated visitors
+  ---
+  duration_ms: 1.4714
+  ...
+# Subtest: signed-out Account is a benefits and live availability overview
+ok 225 - signed-out Account is a benefits and live availability overview
+  ---
+  duration_ms: 1.267
+  ...
+# Subtest: primary Account link does not duplicate utility or franchise destinations
+ok 226 - primary Account link does not duplicate utility or franchise destinations
+  ---
+  duration_ms: 1.1031
+  ...
+# Subtest: primary Play and its destination drawer expose independent controls
+ok 227 - primary Play and its destination drawer expose independent controls
+  ---
+  duration_ms: 3.4571
+  ...
+# (node:28236) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:28236) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/site-navigation.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: compact header identifies routes independently of content accents
+ok 228 - compact header identifies routes independently of content accents
+  ---
+  duration_ms: 4.2592
+  ...
+# Subtest: compact navigation includes narrow desktops and preserves larger layouts
+ok 229 - compact navigation includes narrow desktops and preserves larger layouts
+  ---
+  duration_ms: 19.881
+  ...
+# Subtest: compact toggle reuses VDS navigation and shared icon treatment
+ok 230 - compact toggle reuses VDS navigation and shared icon treatment
+  ---
+  duration_ms: 10.5486
+  ...
+# Subtest: keeps Entertainment active across its legacy and current destinations
+ok 231 - keeps Entertainment active across its legacy and current destinations
+  ---
+  duration_ms: 0.4985
+  ...
+# Subtest: treats Community as an independent primary section
+ok 232 - treats Community as an independent primary section
+  ---
+  duration_ms: 0.3717
+  ...
+# Subtest: suppresses the redundant top breadcrumb on franchise roots
+ok 233 - suppresses the redundant top breadcrumb on franchise roots
+  ---
+  duration_ms: 0.4346
+  ...
+# Subtest: isolates development manifests from production builds
+ok 234 - isolates development manifests from production builds
+  ---
+  duration_ms: 3.4395
+  ...
+# (node:8344) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:8344) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/supabase-character-store.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: never sends caller-controlled persistence timestamps to character RPCs
+ok 235 - never sends caller-controlled persistence timestamps to character RPCs
+  ---
+  duration_ms: 4.8152
+  ...
+# (node:32764) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:32764) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/supabase-server.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: completes sign-out only when Supabase accepts it
+ok 236 - completes sign-out only when Supabase accepts it
+  ---
+  duration_ms: 4.4817
+  ...
+# Subtest: preserves authenticated state when Supabase rejects sign-out
+ok 237 - preserves authenticated state when Supabase rejects sign-out
+  ---
+  duration_ms: 2.4136
+  ...
+# (node:26860) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:26860) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/Operations%20-%20Documents/Build/crypticdesign-net-cry502-503/src/lib/visual-hero-contract.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\Operations - Documents\\Build\\crypticdesign-net-cry502-503\\package.json.
+# Subtest: global hero artwork covers every container boundary at every breakpoint
+ok 238 - global hero artwork covers every container boundary at every breakpoint
+  ---
+  duration_ms: 3.233
+  ...
+# Subtest: Lifa uses its approved full-width franchise artwork
+ok 239 - Lifa uses its approved full-width franchise artwork
+  ---
+  duration_ms: 0.4065
+  ...
+# Subtest: Singularis first-contact artwork sits outside the constrained content rail
+ok 240 - Singularis first-contact artwork sits outside the constrained content rail
+  ---
+  duration_ms: 0.6491
+  ...
+1..240
+# tests 240
+# suites 0
+# pass 240
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3776.5508

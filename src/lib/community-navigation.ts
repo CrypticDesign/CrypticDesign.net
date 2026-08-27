@@ -1,5 +1,5 @@
 export const COMMUNITY_NAV_ITEMS = [
-  { key: "explore", href: "/community", label: "Explore", description: "What is happening", icon: "worlds", visible: true },
+  { key: "explore", href: "/community", label: "Explore", description: "Participation paths", icon: "worlds", visible: true },
   { key: "groups", href: "/community/groups", label: "Groups", description: "Shared participation", icon: "crew", visible: true },
   { key: "spaces", href: "/community/spaces", label: "Spaces", description: "Governed shared places", icon: "home", visible: false },
   { key: "events", href: "/community/events", label: "Events", description: "Scheduled participation", icon: "events", visible: true },
