@@ -1,0 +1,16 @@
+{
+  "hero": "Static scene displayed.An independent entertainment universeWorlds to explore.Stories to experience.Systems that connect them.Enter original games, worlds, music, stories, and interactive experiences built to exist as parts of one connected universe. Explore what is here now and follow what comes next.Explore What's HereEnter CommunityAlready a member?Sign in to My Home →",
+  "join": "Join the next waveThis is just the beginning.Explore publicly now. Request future member access as member capabilities expand. Requesting access does not create an account or guarantee access.Accounts closedRequest AccessSign In",
+  "links": [
+    {
+      "href": "/account/create",
+      "text": "Request Access"
+    },
+    {
+      "href": "/account/sign-in",
+      "text": "Sign In"
+    }
+  ],
+  "scrollWidth": 375,
+  "width": 390
+}

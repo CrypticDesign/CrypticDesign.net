@@ -86,7 +86,7 @@ test("signed-out Home follows the governed entertainment and community hierarchy
   assert.match(publicHome, /Choose a signal\./);
   assert.match(publicHome, /This isn&apos;t just something to watch\./);
   assert.match(publicHome, /Sign in to My Home/);
-  assert.match(publicHome, /href="\/account\/create" className="button home-primary-cta">Account availability<\/Link>/);
+  assert.match(publicHome, /href="\/account\/create" className="button home-primary-cta">Request Access<\/Link>/);
   assert.doesNotMatch(publicHome, /className="button home-secondary-cta">Discover the studio/);
   assert.doesNotMatch(publicHome, />Sign up<\/Link>/);
   assert.match(ecosystemStatus, /aria-label="Current ecosystem status"/);

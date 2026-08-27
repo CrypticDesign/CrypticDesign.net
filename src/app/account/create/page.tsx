@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import AccountAccessForm from "@/components/AccountAccessForm";
+import RequestAccessForm from "@/components/RequestAccessForm";
 import AccountEcosystemStatus from "@/components/AccountEcosystemStatus";
 import { accountAdmissionMode } from "@/lib/account-admission";
 
 export const metadata: Metadata = {
-  title: "Account Availability",
+  title: "Request Access",
   alternates: { canonical: "/account/create" }, openGraph: { images: ["/share/account-create.png"] }, twitter: { card: "summary_large_image", images: ["/share/account-create.png"] }, 
-  description: "Review Cryptic Design account availability, invitation requirements, and the public entertainment experiences you can explore without signing in.",
+  description: "Request future CrypticDesign.net member access while public entertainment remains open without an account.",
 };
 
 export default function CreateAccountPage() {
@@ -20,17 +20,17 @@ export default function CreateAccountPage() {
         </div>
         <div className="account-hero__copy">
           <div className="signal-rail" />
-          <span className="eyebrow">New accounts</span>
-          <h1 className="display-title">Account<br />Availability</h1>
+          <span className="eyebrow">REQUEST ACCESS</span>
+          <h1 className="display-title">Join the next wave.</h1>
           <p>
-            New accounts are not open yet. When invitations begin, you will need one
-            to create an account. You can still explore the public site without signing in.
+            Public exploration is open now. Member access is being introduced in controlled waves
+            while we finish the account, community, and subscription systems.
           </p>
         </div>
         <AccountEcosystemStatus admissionMode={accountAdmissionMode()} showAvailabilityAction={false} />
       </header>
       <section className="account-content-grid">
-        <AccountAccessForm mode="create" />
+        <RequestAccessForm />
         <aside className="account-context-panel">
           <span className="eyebrow">What remains open</span>
           <h2>Explore without an account.</h2>
@@ -40,10 +40,11 @@ export default function CreateAccountPage() {
             <li><span>02</span> Articles and visual studies</li>
             <li><span>03</span> Entertainment samples</li>
           </ul>
+          <Link href="/entertainment" className="button secondary">Explore Entertainment</Link>
         </aside>
       </section>
       <nav className="account-link-rail" aria-label="Account navigation">
-        <Link href="/account/sign-in">Already have access? Sign in <span aria-hidden="true">→</span></Link>
+        <Link href="/account/sign-in">Already have access? Sign In <span aria-hidden="true">→</span></Link>
         <Link href="/account">Return to Account <span aria-hidden="true">→</span></Link>
       </nav>
     </main>

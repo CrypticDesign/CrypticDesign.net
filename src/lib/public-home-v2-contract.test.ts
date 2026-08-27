@@ -62,8 +62,10 @@ test("Featured Experiences and CURRENT SIGNAL derive from governed shared data",
 
 test("Community and admission claims remain fail-closed and non-fabricated", () => {
   assert.match(home, /current published schedule or empty state/);
-  assert.match(home, /Account requests are not open yet/);
-  assert.match(home, /href="\/account\/create"[\s\S]*Account availability/);
-  assert.doesNotMatch(home, /Create Account|Sign Up Free|Join Waitlist|Request Access/);
+  assert.match(home, /Requesting access does not create an account or guarantee access/);
+  assert.match(home, /public-home-v2__join[\s\S]*href="\/account\/create"[^>]*>Request Access/);
+  assert.equal(home.match(/>Request Access</g)?.length, 1);
+  assert.doesNotMatch(home.slice(0, home.indexOf('className="public-home-v2__join"')), />Request Access</);
+  assert.doesNotMatch(home, /Create Account|Sign Up Free|Join Waitlist|Account requests are not open yet/);
   assert.doesNotMatch(home, /member count|online now|attendees|reactions|messages|posts/i);
 });
