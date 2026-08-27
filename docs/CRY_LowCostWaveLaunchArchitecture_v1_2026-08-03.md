@@ -10,6 +10,10 @@
 
 ## 1. Decision summary
 
+### Approved navigation label update — 2026-08-27
+
+Robert approved the main-menu sequence **Home / Play / Community / Professional**, renaming the existing **Explore** primary label to **Play**. Play retains the /entertainment destination, cyan identity, active-route matching, and existing drawer behavior. The compact header uses the same Play label. This is a label-only change: contextual Explore navigation, page titles, homepage section copy, routes, Search, and Sign In / Account utilities are unchanged. Jira/Confluence/FigJam synchronization is pending separate write authorization; this note records the approved local drift from earlier sitemap labels.
+
 CrypticDesign.net should launch through controlled subscriber invitation waves while keeping the public sampling experience static, accountless, and inexpensive.
 
 The initial operating model is:

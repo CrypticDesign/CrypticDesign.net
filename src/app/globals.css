@@ -596,7 +596,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 
 /* Canonical VDS prismatic inheritance: explicit major sections own one accent; descendants fall back to Neon Blue. */
 [data-section-accent] .display-title em{color:var(--section-accent)}
-[data-section-accent] .text-link,[data-section-accent] .portal-feature>i,[data-section-accent] .portal-entry>i,[data-section-accent] .public-home-portal__studio li:before{color:var(--section-accent)}
+[data-section-accent] .text-link,[data-section-accent] .portal-feature>i,[data-section-accent] .portal-entry>i,[data-section-accent] .public-home-portal__studio li:before{color:var(--section-accent-text,var(--section-accent))}
 [data-section-accent].explore-portal__continuum a:hover,[data-section-accent].explore-portal__continuum a:focus-visible{border-color:var(--section-accent)}
 [data-section-accent].my-home-priority-grid,[data-section-accent].my-home-detail-grid{padding-top:18px}
 .public-home-portal__member>a,.portal-utility>a,.public-home-portal__section-label>a,.community-explore-card a,.site-footer__bottom a{min-height:44px;align-items:center}

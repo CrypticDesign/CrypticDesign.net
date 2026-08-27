@@ -1,0 +1,29 @@
+{
+  "pullRequest": "https://github.com/CrypticDesign/CrypticDesign.net/pull/60",
+  "preview": "https://deploy-preview-60--frabjous-frangipane-650548.netlify.app",
+  "netlify": {
+    "deployPreview": "success",
+    "headerRules": "success",
+    "redirectRules": "success",
+    "pagesChanged": "neutral"
+  },
+  "homepageMatrix": {
+    "status": "pass",
+    "modes": ["default", "reduced-motion", "no-webgl"],
+    "viewports": ["desktop-1440", "mobile-390"],
+    "governedDestinationsChecked": 12
+  },
+  "accessibility": {
+    "status": "pass",
+    "routesChecked": 6,
+    "wcag21AAViolations": 0,
+    "undersizedTouchTargets": 0,
+    "horizontalOverflow": false
+  },
+  "pageScenes": {
+    "status": "pass",
+    "routes": ["/", "/entertainment", "/community", "/professional"],
+    "unexpectedResponses": 0,
+    "expectedFailClosedMembershipResponses": true
+  }
+}

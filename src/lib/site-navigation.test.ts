@@ -10,10 +10,11 @@ import {
 test("compact header identifies routes independently of content accents", () => {
   for (const [path, label, tone] of [
     ["/", "Home", "blue"],
-    ["/entertainment/music", "Explore", "cyan"],
-    ["/audio/rooms", "Explore", "cyan"],
-    ["/products/singularis", "Explore", "cyan"],
-    ["/releases/latest", "Explore", "cyan"],
+    ["/entertainment", "Play", "cyan"],
+    ["/entertainment/music", "Play", "cyan"],
+    ["/audio/rooms", "Play", "cyan"],
+    ["/products/singularis", "Play", "cyan"],
+    ["/releases/latest", "Play", "cyan"],
     ["/community/events", "Community", "indigo"],
     ["/professional/services", "Professional", "violet"],
     ["/search", "Search", "blue"],
@@ -22,6 +23,7 @@ test("compact header identifies routes independently of content accents", () => 
     ["/community-other", "Menu", "blue"],
   ]) assert.deepEqual(getPrimaryNavigationIdentity(path), { label, tone });
   assert.deepEqual(getPrimaryNavigationIdentity("/", true), { label: "My Home", tone: "indigo" });
+  assert.deepEqual(getPrimaryNavigationIdentity("/entertainment", true), { label: "Play", tone: "cyan" });
 });
 
 test("compact navigation includes narrow desktops and preserves larger layouts", async () => {

@@ -55,10 +55,10 @@ test("brand wordmark uses the Cryptic VDS sans-serif type stack", async () => {
 test("primary navigation exposes Sign In or Account without a nested account dropdown", async () => {
   const header = await readFile(headerUrl, "utf8");
   assert.match(header, /href: "\/", label: "Home", tone: "blue"/);
-  assert.match(header, /href: "\/entertainment", label: "Explore", tone: "cyan"/);
+  assert.match(header, /href: "\/entertainment", label: "Play", tone: "cyan"/);
   assert.match(header, /href: "\/community", label: "Community", tone: "indigo"/);
   assert.match(header, /href: "\/professional", label: "Professional", tone: "violet"/);
-  const primaryLabels = ["Home", "Explore", "Community", "Professional"];
+  const primaryLabels = ["Home", "Play", "Community", "Professional"];
   const labelIndexes = primaryLabels.map((label) => header.indexOf(`label: "${label}"`));
   assert.ok(labelIndexes.every((index) => index >= 0));
   assert.deepEqual([...labelIndexes].sort((a, b) => a - b), labelIndexes);
@@ -71,7 +71,7 @@ test("primary navigation exposes Sign In or Account without a nested account dro
   assert.doesNotMatch(header, /aria-haspopup="menu"/);
 });
 
-test("signed-out Home is a public ecosystem front door with governed account status", async () => {
+test("signed-out Home follows the governed entertainment and community hierarchy", async () => {
   const [publicHome, homePage, ecosystemStatus, globals] = await Promise.all([
     readFile(new URL("../components/PublicHome.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
@@ -80,13 +80,14 @@ test("signed-out Home is a public ecosystem front door with governed account sta
   ]);
   assert.match(homePage, /getInitialAccountAuthenticated/);
   assert.match(homePage, /<PublicHome accountAdmissionMode=\{accountAdmissionMode\(\)\} \/>/);
-  assert.match(publicHome, /href="\/entertainment" className="button home-primary-cta">Explore entertainment<\/Link>/);
-  assert.match(publicHome, /href="\/professional" className="button home-secondary-cta">Discover the studio<\/Link>/);
-  assert.match(publicHome, /Featured now/);
-  assert.match(publicHome, /One ecosystem\. Three ways in\./);
-  assert.match(publicHome, /Public by default/);
+  assert.match(publicHome, /href="\/entertainment" className="button home-primary-cta">Explore What&apos;s Here<\/Link>/);
+  assert.match(publicHome, /href="\/community" className="button home-secondary-cta">Enter Community<\/Link>/);
+  assert.match(publicHome, /Featured experiences/);
+  assert.match(publicHome, /Choose a signal\./);
+  assert.match(publicHome, /This isn&apos;t just something to watch\./);
   assert.match(publicHome, /Sign in to My Home/);
-  assert.match(publicHome, /<AccountEcosystemStatus admissionMode=\{accountAdmissionMode\} showAvailabilityAction=\{false\}/);
+  assert.match(publicHome, /href="\/account\/create" className="button home-primary-cta">Account availability<\/Link>/);
+  assert.doesNotMatch(publicHome, /className="button home-secondary-cta">Discover the studio/);
   assert.doesNotMatch(publicHome, />Sign up<\/Link>/);
   assert.match(ecosystemStatus, /aria-label="Current ecosystem status"/);
   assert.match(ecosystemStatus, /<dd data-status="open">Open<\/dd>/);
@@ -147,13 +148,13 @@ test("primary Account link does not duplicate utility or franchise destinations"
   assert.doesNotMatch(header, /href: "\/products\/lifa"/);
 });
 
-test("primary Explore and its destination drawer expose independent controls", async () => {
+test("primary Play and its destination drawer expose independent controls", async () => {
   const [header, entertainmentNavigation, globals] = await Promise.all([
     readFile(headerUrl, "utf8"),
     readFile(entertainmentNavigationUrl, "utf8"),
     readFile(globalsUrl, "utf8"),
   ]);
-  assert.match(header, /href: "\/entertainment", label: "Explore", tone: "cyan"/);
+  assert.match(header, /href: "\/entertainment", label: "Play", tone: "cyan"/);
   assert.match(header, /href: "\/community", label: "Community", tone: "indigo"/);
   assert.match(header, /className="site-primary-drawer"/);
   assert.doesNotMatch(header, /className="site-primary-link__arrow"/);
