@@ -56,6 +56,16 @@ Browser actions used the same production build through a temporary loopback-only
 
 ## Acceptance disposition
 
-**CONDITIONAL PASS locally.** The conversion, truthful copy, data limits, approved destination, no-mutation boundary, public fallback, Sign In route, and narrow Homepage synchronization pass. Native keyboard traversal/activation needs manual confirmation. Deploy-preview validation and review/merge gates are recorded in `HANDOFF.md`.
+**CONDITIONAL PASS locally and on deploy preview.** The conversion, truthful copy, data limits, approved destination, no-mutation boundary, public fallback, Sign In route, and narrow Homepage synchronization pass. Native keyboard traversal/activation needs manual confirmation. Deploy-preview validation and review/merge gates are recorded in `HANDOFF.md`.
+
+## Deploy preview
+
+PR: [#61](https://github.com/CrypticDesign/CrypticDesign.net/pull/61). [Request Access preview](https://deploy-preview-61--frabjous-frangipane-650548.netlify.app/account/create). Application commit: `1df50b80f54bfc7ed0e748c02b235d8c886d60ef`. Netlify deploy `6a907eaabb00070008cade1f` succeeded; header/redirect checks passed, Pages changed was skipped.
+
+The strict configured admission probe initially failed its expected-403 assertion because preview account services are unconfigured: response `503 {"error":"Membership sandbox is disabled"}`, without Set-Cookie. This is a fail-closed environment state, not evidence of the configured rejection branch. No provider configuration or credentials were changed to force a pass.
+
+`node scripts/qa-request-access-http.mjs https://deploy-preview-61--frabjous-frangipane-650548.netlify.app artifacts/CRY-504/preview-http.json --expect-unconfigured` passed the explicitly selected disabled-service profile, both negative probes, and four page checks. The script still defaults to requiring the exact 403 rejection; the local production run reconfirmed that profile.
+
+Preview browser preparation produced the approved Community mailto with synthetic data (`preview-mailto.txt`). Feedback and geometry passed at 1440×900, 768×1024, and 390×844 (`preview-browser.json`, preview screenshots). No email was sent. Preview provider availability remains a separate environment limitation; CRY-491/provider and CRY-489 release gates are not closed by this work.
 
 Email application availability/delivery is controlled by the visitor's device. The site cannot confirm sending or receipt, and no automation sent an email. No persistent waitlist, provider, API, CRM, CAPTCHA, or recurring service was added. No merge, production deploy, Jira transition, or Confluence write is part of this evidence.

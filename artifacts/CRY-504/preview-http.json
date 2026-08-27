@@ -1,0 +1,45 @@
+{
+  "base": "https://deploy-preview-61--frabjous-frangipane-650548.netlify.app",
+  "checkedAt": "2026-08-27T18:18:34.764Z",
+  "admissionProfile": "unconfigured services (configured 403 path requires separate evidence)",
+  "routes": [
+    {
+      "path": "/account/create",
+      "status": 200,
+      "pass": true
+    },
+    {
+      "path": "/account/sign-in",
+      "status": 200,
+      "pass": true
+    },
+    {
+      "path": "/entertainment",
+      "status": 200,
+      "pass": true
+    },
+    {
+      "path": "/",
+      "status": 200,
+      "pass": true
+    }
+  ],
+  "admission": [
+    {
+      "suppliedDetails": false,
+      "status": 503,
+      "payload": {
+        "error": "Membership sandbox is disabled"
+      },
+      "setsCookie": false
+    },
+    {
+      "suppliedDetails": true,
+      "status": 503,
+      "payload": {
+        "error": "Membership sandbox is disabled"
+      },
+      "setsCookie": false
+    }
+  ]
+}

@@ -5,7 +5,8 @@ import { writeFile } from "node:fs/promises";
 import { load } from "cheerio";
 
 const base = process.argv[2] ?? "http://127.0.0.1:3001";
-const results = { base, checkedAt: new Date().toISOString(), routes: [], admission: [] };
+const expectUnconfigured = process.argv.includes("--expect-unconfigured");
+const results = { base, checkedAt: new Date().toISOString(), admissionProfile: expectUnconfigured ? "unconfigured services (configured 403 path requires separate evidence)" : "configured admission rejection", routes: [], admission: [] };
 for (const path of ["/account/create", "/account/sign-in", "/entertainment", "/"]) {
   const response = await fetch(`${base}${path}`);
   assert.equal(response.status, 200, path);
@@ -33,9 +34,15 @@ for (const body of [{ action: "create" }, { action: "create", email: "visitor@ex
     method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body),
   });
   const payload = await response.json();
-  assert.equal(response.status, 403);
-  assert.equal(payload.code, "ACCOUNT_ADMISSION_CLOSED");
-  assert.equal(payload.accountCreationAvailable, false);
+  if (expectUnconfigured) {
+    assert.equal(response.status, 503);
+    assert.equal(payload.error, "Membership sandbox is disabled");
+    assert.notEqual(payload.accountCreationAvailable, true);
+  } else {
+    assert.equal(response.status, 403);
+    assert.equal(payload.code, "ACCOUNT_ADMISSION_CLOSED");
+    assert.equal(payload.accountCreationAvailable, false);
+  }
   assert.equal(Boolean(payload.authenticated), false);
   assert.equal(payload.memberId, undefined);
   assert.equal(response.headers.get("set-cookie"), null);

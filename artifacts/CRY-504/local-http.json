@@ -1,6 +1,7 @@
 {
   "base": "http://127.0.0.1:3001",
-  "checkedAt": "2026-08-27T18:05:31.682Z",
+  "checkedAt": "2026-08-27T18:19:26.021Z",
+  "admissionProfile": "configured admission rejection",
   "routes": [
     {
       "path": "/account/create",

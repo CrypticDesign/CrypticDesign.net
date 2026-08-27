@@ -1,0 +1,24 @@
+{
+  "layouts": [
+    {
+      "feedback": "Your email app should open with the request prepared. Review it and send it to complete your request. Reopen prepared email.",
+      "formWidth": 767.1979370117188,
+      "scrollWidth": 1425,
+      "width": 1440
+    },
+    {
+      "feedback": "Your email app should open with the request prepared. Review it and send it to complete your request. Reopen prepared email.",
+      "formWidth": 712.6666870117188,
+      "scrollWidth": 753,
+      "width": 768
+    },
+    {
+      "feedback": "Your email app should open with the request prepared. Review it and send it to complete your request. Reopen prepared email.",
+      "formWidth": 342.66668701171875,
+      "scrollWidth": 375,
+      "width": 390
+    }
+  ],
+  "mailto": "mailto:robert.croft@crypticdesign.net?subject=CrypticDesign.net%20access%20request%20%E2%80%94%20Community&body=Name%3A%20QA%20Preview%0AEmail%3A%20visitor%40example.com%0APrimary%20Interest%3A%20Community%0A%0AI%20would%20like%20to%20request%20access%20to%20CrypticDesign.net%20when%20an%20appropriate%20member-access%20wave%20becomes%20available.",
+  "emailSent": false
+}
