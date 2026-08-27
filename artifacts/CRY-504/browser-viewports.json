@@ -1,0 +1,80 @@
+[
+  {
+    "fields": [
+      {
+        "height": 49.33333587646485,
+        "label": "Email (required)",
+        "name": "email",
+        "required": true
+      },
+      {
+        "height": 49.33333587646485,
+        "label": "Name (optional)",
+        "name": "name",
+        "required": false
+      },
+      {
+        "height": 48,
+        "label": "Primary Interest (optional)Select an interestGames & WorldsMusic & MediaCommunityCreator ParticipationGeneral Platform Access",
+        "name": "interest",
+        "required": false
+      }
+    ],
+    "formWidth": 767.1979370117188,
+    "headings": 1,
+    "scrollWidth": 1425,
+    "width": 1440
+  },
+  {
+    "fields": [
+      {
+        "height": 49.33333587646485,
+        "label": "Email (required)",
+        "name": "email",
+        "required": true
+      },
+      {
+        "height": 49.33333587646485,
+        "label": "Name (optional)",
+        "name": "name",
+        "required": false
+      },
+      {
+        "height": 48,
+        "label": "Primary Interest (optional)Select an interestGames & WorldsMusic & MediaCommunityCreator ParticipationGeneral Platform Access",
+        "name": "interest",
+        "required": false
+      }
+    ],
+    "formWidth": 712.6666870117188,
+    "headings": 1,
+    "scrollWidth": 753,
+    "width": 768
+  },
+  {
+    "fields": [
+      {
+        "height": 49.33333587646485,
+        "label": "Email (required)",
+        "name": "email",
+        "required": true
+      },
+      {
+        "height": 49.33333587646485,
+        "label": "Name (optional)",
+        "name": "name",
+        "required": false
+      },
+      {
+        "height": 48,
+        "label": "Primary Interest (optional)Select an interestGames & WorldsMusic & MediaCommunityCreator ParticipationGeneral Platform Access",
+        "name": "interest",
+        "required": false
+      }
+    ],
+    "formWidth": 342.66668701171875,
+    "headings": 1,
+    "scrollWidth": 375,
+    "width": 390
+  }
+]

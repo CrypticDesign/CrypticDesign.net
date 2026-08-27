@@ -1,0 +1,52 @@
+{
+  "base": "http://127.0.0.1:3001",
+  "checkedAt": "2026-08-27T18:05:31.682Z",
+  "routes": [
+    {
+      "path": "/account/create",
+      "status": 200,
+      "pass": true
+    },
+    {
+      "path": "/account/sign-in",
+      "status": 200,
+      "pass": true
+    },
+    {
+      "path": "/entertainment",
+      "status": 200,
+      "pass": true
+    },
+    {
+      "path": "/",
+      "status": 200,
+      "pass": true
+    }
+  ],
+  "admission": [
+    {
+      "suppliedDetails": false,
+      "status": 403,
+      "payload": {
+        "error": "Subscriber accounts are not open for public registration. Public pages and samples remain available without an account.",
+        "code": "ACCOUNT_ADMISSION_CLOSED",
+        "mode": "supabase",
+        "accountAdmissionMode": "closed",
+        "accountCreationAvailable": false
+      },
+      "setsCookie": false
+    },
+    {
+      "suppliedDetails": true,
+      "status": 403,
+      "payload": {
+        "error": "Subscriber accounts are not open for public registration. Public pages and samples remain available without an account.",
+        "code": "ACCOUNT_ADMISSION_CLOSED",
+        "mode": "supabase",
+        "accountAdmissionMode": "closed",
+        "accountCreationAvailable": false
+      },
+      "setsCookie": false
+    }
+  ]
+}

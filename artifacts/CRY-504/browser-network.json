@@ -1,0 +1,55 @@
+{
+  "requestCount": 89,
+  "nonGetCount": 0,
+  "membershipRequests": [
+    {
+      "method": "GET",
+      "path": "/api/membership/session"
+    },
+    {
+      "method": "GET",
+      "path": "/api/membership/session"
+    },
+    {
+      "method": "GET",
+      "path": "/api/membership/session"
+    },
+    {
+      "method": "GET",
+      "path": "/api/membership/session"
+    },
+    {
+      "method": "GET",
+      "path": "/api/membership/session"
+    },
+    {
+      "method": "GET",
+      "path": "/api/membership/session"
+    },
+    {
+      "method": "GET",
+      "path": "/api/membership/session"
+    },
+    {
+      "method": "GET",
+      "path": "/api/membership/session"
+    },
+    {
+      "method": "GET",
+      "path": "/api/membership/session"
+    },
+    {
+      "method": "GET",
+      "path": "/api/membership/session"
+    },
+    {
+      "method": "GET",
+      "path": "/api/membership/session"
+    },
+    {
+      "method": "GET",
+      "path": "/api/membership/session"
+    }
+  ],
+  "nonGetRequests": []
+}

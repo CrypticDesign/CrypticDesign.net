@@ -1,0 +1,142 @@
+(node:19224) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+TAP version 13
+# (node:32948) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:32948) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/.worktrees/cry-504-request-access/src/lib/account-access-form-contract.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\.worktrees\\cry-504-request-access\\package.json.
+# Subtest: account inputs retain a visible, minimum-size control treatment
+ok 1 - account inputs retain a visible, minimum-size control treatment
+  ---
+  duration_ms: 53.5807
+  ...
+# Subtest: Supabase account forms fail closed until Turnstile supplies a token
+ok 2 - Supabase account forms fail closed until Turnstile supplies a token
+  ---
+  duration_ms: 23.4215
+  ...
+# Subtest: sign-in fields remain visible when local account services are disconnected
+ok 3 - sign-in fields remain visible when local account services are disconnected
+  ---
+  duration_ms: 17.8425
+  ...
+# Subtest: local sandbox offers a credential-free test account
+ok 4 - local sandbox offers a credential-free test account
+  ---
+  duration_ms: 17.8257
+  ...
+# Subtest: successful sign-in continues directly to My Home
+ok 5 - successful sign-in continues directly to My Home
+  ---
+  duration_ms: 28.7998
+  ...
+# Subtest: password controls support visibility and route recovery honestly
+ok 6 - password controls support visibility and route recovery honestly
+  ---
+  duration_ms: 4.5383
+  ...
+# Subtest: sign-in explains the account and subscription relationship without redundant navigation
+ok 7 - sign-in explains the account and subscription relationship without redundant navigation
+  ---
+  duration_ms: 4.854
+  ...
+# Subtest: account entry pages share the VDS ecosystem panel and sign-in hero is full bleed
+ok 8 - account entry pages share the VDS ecosystem panel and sign-in hero is full bleed
+  ---
+  duration_ms: 4.1913
+  ...
+# (node:23928) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:23928) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/.worktrees/cry-504-request-access/src/lib/account-admission.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\.worktrees\\cry-504-request-access\\package.json.
+# Subtest: account admission fails closed when configuration is absent or invalid
+ok 9 - account admission fails closed when configuration is absent or invalid
+  ---
+  duration_ms: 3.9606
+  ...
+# Subtest: invitation mode never enables public account creation
+ok 10 - invitation mode never enables public account creation
+  ---
+  duration_ms: 0.3544
+  ...
+# Subtest: closed messaging preserves accountless public access
+ok 11 - closed messaging preserves accountless public access
+  ---
+  duration_ms: 0.316
+  ...
+# (node:21456) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:21456) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/.worktrees/cry-504-request-access/src/lib/public-home-v2-contract.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\.worktrees\\cry-504-request-access\\package.json.
+# Subtest: signed-out Home preserves the required nine-stage semantic journey
+ok 12 - signed-out Home preserves the required nine-stage semantic journey
+  ---
+  duration_ms: 1.3423
+  ...
+# Subtest: Home keeps the authenticated route boundary and one shared PageScene
+ok 13 - Home keeps the authenticated route boundary and one shared PageScene
+  ---
+  duration_ms: 0.4627
+  ...
+# Subtest: hero and discovery routes prioritize Entertainment and Community
+ok 14 - hero and discovery routes prioritize Entertainment and Community
+  ---
+  duration_ms: 0.5021
+  ...
+# Subtest: Featured Experiences and CURRENT SIGNAL derive from governed shared data
+ok 15 - Featured Experiences and CURRENT SIGNAL derive from governed shared data
+  ---
+  duration_ms: 0.4318
+  ...
+# Subtest: Community and admission claims remain fail-closed and non-fabricated
+ok 16 - Community and admission claims remain fail-closed and non-fabricated
+  ---
+  duration_ms: 1.322
+  ...
+# (node:15820) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:15820) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/Robert%20Croft/crypticdesign.net/.worktrees/cry-504-request-access/src/lib/request-access.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Users\\Robert Croft\\crypticdesign.net\\.worktrees\\cry-504-request-access\\package.json.
+# Subtest: Request Access uses the approved company destination and exact interest vocabulary
+ok 17 - Request Access uses the approved company destination and exact interest vocabulary
+  ---
+  duration_ms: 3.9399
+  ...
+# Subtest: minimal request requires email and defaults optional values
+ok 18 - minimal request requires email and defaults optional values
+  ---
+  duration_ms: 3.0841
+  ...
+# Subtest: all approved interests and optional names encode safely without extra mail headers
+ok 19 - all approved interests and optional names encode safely without extra mail headers
+  ---
+  duration_ms: 6.6888
+  ...
+# Subtest: account/create presents Request Access with preserved canonical and share asset
+ok 20 - account/create presents Request Access with preserved canonical and share asset
+  ---
+  duration_ms: 0.453
+  ...
+# Subtest: dedicated conversion collects only approved fields and explains the mail handoff
+ok 21 - dedicated conversion collects only approved fields and explains the mail handoff
+  ---
+  duration_ms: 3.0465
+  ...
+# Subtest: public admission and the existing server rejection remain closed
+ok 22 - public admission and the existing server rejection remain closed
+  ---
+  duration_ms: 2.5203
+  ...
+1..22
+# tests 22
+# suites 0
+# pass 22
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 604.6184

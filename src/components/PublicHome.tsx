@@ -194,8 +194,8 @@ export default function PublicHome({ accountAdmissionMode }: { accountAdmissionM
         </section>
 
         <section className="public-home-v2__join" data-section-accent="magenta" aria-labelledby="join-title">
-          <div><span className="kicker">Join the next wave</span><h2 id="join-title">This is just the beginning.</h2><p>Explore publicly now. Account requests are not open yet; review availability if you want to become part of the platform as member capabilities expand.</p><span className="public-home-v2__state">{accountState}</span></div>
-          <div className="hero-actions"><Link href="/account/create" className="button home-primary-cta">Account availability</Link><Link href="/account/sign-in" className="button secondary">Sign In</Link></div>
+          <div><span className="kicker">Join the next wave</span><h2 id="join-title">This is just the beginning.</h2><p>Explore publicly now. Request future member access as member capabilities expand. Requesting access does not create an account or guarantee access.</p><span className="public-home-v2__state">{accountState}</span></div>
+          <div className="hero-actions"><Link href="/account/create" className="button home-primary-cta">Request Access</Link><Link href="/account/sign-in" className="button secondary">Sign In</Link></div>
         </section>
       </div>
     </main>
