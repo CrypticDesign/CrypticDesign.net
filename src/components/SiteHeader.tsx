@@ -10,7 +10,7 @@ import EcosystemPortalIcon from "@/components/EcosystemPortalIcon";
 
 const NAV = [
   { href: "/", label: "Home", tone: "blue" },
-  { href: "/entertainment", label: "Explore", tone: "cyan" },
+  { href: "/entertainment", label: "Play", tone: "cyan" },
   { href: "/community", label: "Community", tone: "indigo" },
   { href: "/professional", label: "Professional", tone: "violet" },
 ] as const;

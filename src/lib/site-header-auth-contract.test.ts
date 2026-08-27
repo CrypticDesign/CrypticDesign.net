@@ -55,10 +55,10 @@ test("brand wordmark uses the Cryptic VDS sans-serif type stack", async () => {
 test("primary navigation exposes Sign In or Account without a nested account dropdown", async () => {
   const header = await readFile(headerUrl, "utf8");
   assert.match(header, /href: "\/", label: "Home", tone: "blue"/);
-  assert.match(header, /href: "\/entertainment", label: "Explore", tone: "cyan"/);
+  assert.match(header, /href: "\/entertainment", label: "Play", tone: "cyan"/);
   assert.match(header, /href: "\/community", label: "Community", tone: "indigo"/);
   assert.match(header, /href: "\/professional", label: "Professional", tone: "violet"/);
-  const primaryLabels = ["Home", "Explore", "Community", "Professional"];
+  const primaryLabels = ["Home", "Play", "Community", "Professional"];
   const labelIndexes = primaryLabels.map((label) => header.indexOf(`label: "${label}"`));
   assert.ok(labelIndexes.every((index) => index >= 0));
   assert.deepEqual([...labelIndexes].sort((a, b) => a - b), labelIndexes);
@@ -148,13 +148,13 @@ test("primary Account link does not duplicate utility or franchise destinations"
   assert.doesNotMatch(header, /href: "\/products\/lifa"/);
 });
 
-test("primary Explore and its destination drawer expose independent controls", async () => {
+test("primary Play and its destination drawer expose independent controls", async () => {
   const [header, entertainmentNavigation, globals] = await Promise.all([
     readFile(headerUrl, "utf8"),
     readFile(entertainmentNavigationUrl, "utf8"),
     readFile(globalsUrl, "utf8"),
   ]);
-  assert.match(header, /href: "\/entertainment", label: "Explore", tone: "cyan"/);
+  assert.match(header, /href: "\/entertainment", label: "Play", tone: "cyan"/);
   assert.match(header, /href: "\/community", label: "Community", tone: "indigo"/);
   assert.match(header, /className="site-primary-drawer"/);
   assert.doesNotMatch(header, /className="site-primary-link__arrow"/);

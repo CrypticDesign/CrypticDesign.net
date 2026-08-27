@@ -68,7 +68,7 @@ test("major page sections use explicit governed accents", () => {
 test("top-level destination accents follow the canonical progression", () => {
   for (const entry of [
     '{ href: "/", label: "Home", tone: "blue" }',
-    '{ href: "/entertainment", label: "Explore", tone: "cyan" }',
+    '{ href: "/entertainment", label: "Play", tone: "cyan" }',
     '{ href: "/community", label: "Community", tone: "indigo" }',
     '{ href: "/professional", label: "Professional", tone: "violet" }',
   ]) assert.match(header, new RegExp(entry.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));

@@ -38,7 +38,7 @@ export function shouldShowTopBreadcrumb(pathname: string): boolean {
 /** Route identity for the compact header, independent of content-section accents. */
 export function getPrimaryNavigationIdentity(pathname: string, authenticated = false) {
   if (pathname === "/") return { label: authenticated ? "My Home" : "Home", tone: authenticated ? "indigo" : "blue" };
-  if (isPrimaryNavigationActive(pathname, "/entertainment")) return { label: "Explore", tone: "cyan" };
+  if (isPrimaryNavigationActive(pathname, "/entertainment")) return { label: "Play", tone: "cyan" };
   if (isPrimaryNavigationActive(pathname, "/community")) return { label: "Community", tone: "indigo" };
   if (isPrimaryNavigationActive(pathname, "/professional")) return { label: "Professional", tone: "violet" };
   if (pathname === "/search") return { label: "Search", tone: "blue" };
