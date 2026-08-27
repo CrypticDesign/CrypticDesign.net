@@ -1,0 +1,20 @@
+{
+  "generated": "2026-08-26T18:37:21.244Z",
+  "status": "Original CRY-496 implementation acceptance; superseded for current review by portrait-update/README.md and PR #59.",
+  "implementationCommit": "27aa472acf55d1f31d414f608403609e1987e95b",
+  "pullRequest": "https://github.com/CrypticDesign/CrypticDesign.net/pull/59",
+  "preview": {
+    "url": "https://deploy-preview-59--frabjous-frangipane-650548.netlify.app",
+    "smokeChecks": 10,
+    "axeScans": 10,
+    "axeViolations": 0,
+    "canonicalRoutes": 20,
+    "articleRedirects": 11,
+    "inquiryFields": 9,
+    "pass": true
+  },
+  "deploymentLog": "https://app.netlify.com/projects/frabjous-frangipane-650548/deploys/6a8f319e567ff60008895081",
+  "localAcceptance": true,
+  "boundary": "The following commit adds evidence only; runtime source is identical to the deployed implementation commit. No merge, production deployment, Jira or Confluence mutation, or email send performed.",
+  "supersededBy": "artifacts/CRY-496/portrait-update/README.md"
+}

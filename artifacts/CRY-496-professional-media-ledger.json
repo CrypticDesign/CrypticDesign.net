@@ -1,0 +1,648 @@
+{
+  "summary": {
+    "generated": "2026-08-26T18:40:56.677Z",
+    "articles": 11,
+    "articleImages": 11,
+    "caseStudies": 6,
+    "caseStudyImages": 55,
+    "professionalAssets": 70,
+    "missing": [],
+    "unreferenced": [],
+    "duplicateReferences": [
+      "/images/professional-hero.png"
+    ],
+    "pass": true
+  },
+  "ledger": [
+    {
+      "asset": "/images/articles/2026-game-design-benchmarks.png",
+      "destination": "/professional/articles/[slug]",
+      "usage": "article hero",
+      "rights": "Owned editorial content",
+      "altTextState": "authored in route/content model",
+      "bytes": 1746824,
+      "state": "present"
+    },
+    {
+      "asset": "/images/articles/ai-in-ux-design.png",
+      "destination": "/professional/articles/[slug]",
+      "usage": "article hero",
+      "rights": "Owned editorial content",
+      "altTextState": "authored in route/content model",
+      "bytes": 1734756,
+      "state": "present"
+    },
+    {
+      "asset": "/images/articles/arc-raiders-a-player-experience-review.jpg",
+      "destination": "/professional/articles/[slug]",
+      "usage": "article hero",
+      "rights": "Owned editorial content",
+      "altTextState": "authored in route/content model",
+      "bytes": 93800,
+      "state": "present"
+    },
+    {
+      "asset": "/images/articles/artificial-intelligence-2023-q1-cryptic-insights.png",
+      "destination": "/professional/articles/[slug]",
+      "usage": "article hero",
+      "rights": "Owned editorial content",
+      "altTextState": "authored in route/content model",
+      "bytes": 1024130,
+      "state": "present"
+    },
+    {
+      "asset": "/images/articles/holistic-ux-design-systems-thinking.png",
+      "destination": "/professional/articles/[slug]",
+      "usage": "article hero",
+      "rights": "Owned editorial content",
+      "altTextState": "authored in route/content model",
+      "bytes": 1897004,
+      "state": "present"
+    },
+    {
+      "asset": "/images/articles/how-to-conduct-a-ux-audit.png",
+      "destination": "/professional/articles/[slug]",
+      "usage": "article hero",
+      "rights": "Owned editorial content",
+      "altTextState": "authored in route/content model",
+      "bytes": 1753798,
+      "state": "present"
+    },
+    {
+      "asset": "/images/articles/owning-the-stack-post-generative-creative-economy.png",
+      "destination": "/professional/articles/[slug]",
+      "usage": "article hero",
+      "rights": "Owned editorial content",
+      "altTextState": "authored in route/content model",
+      "bytes": 2366406,
+      "state": "present"
+    },
+    {
+      "asset": "/images/articles/scalable-ui-systems-design-tokens-components.png",
+      "destination": "/professional/articles/[slug]",
+      "usage": "article hero",
+      "rights": "Owned editorial content",
+      "altTextState": "authored in route/content model",
+      "bytes": 1964292,
+      "state": "present"
+    },
+    {
+      "asset": "/images/articles/shaping-the-universe.png",
+      "destination": "/professional/articles/[slug]",
+      "usage": "article hero",
+      "rights": "Owned editorial content",
+      "altTextState": "authored in route/content model",
+      "bytes": 1374620,
+      "state": "present"
+    },
+    {
+      "asset": "/images/articles/video-games-2023-q1-cryptic-insights.png",
+      "destination": "/professional/articles/[slug]",
+      "usage": "article hero",
+      "rights": "Owned editorial content",
+      "altTextState": "authored in route/content model",
+      "bytes": 1822950,
+      "state": "present"
+    },
+    {
+      "asset": "/images/articles/when-tools-begin-to-decide.png",
+      "destination": "/professional/articles/[slug]",
+      "usage": "article hero",
+      "rights": "Owned editorial content",
+      "altTextState": "authored in route/content model",
+      "bytes": 765072,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/digimancy-breather-expanded.png",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 3970094,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/digimancy-breather.png",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 5964800,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/digimancy-combat.png",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 5047728,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/digimancy-hazard.png",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 1604456,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/digimancy-negotiation.png",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 1775666,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/digimancy-pirate.png",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 1688194,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/humankind-attack.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 278502,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/humankind-battle.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 275033,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/humankind-contender.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 268528,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/humankind-deployment.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 265387,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/humankind-hero.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 90874,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/humankind-opponent.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 269650,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/humankind-turnend.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 250186,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/humankind-turnstart.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 261642,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/humankind-unitresults.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 264567,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/humankind-unitturn.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 273464,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/humankind-wire-city.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 64462,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/humankind-wire-pop.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 67815,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/onward-attachments.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 92042,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/onward-customize.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 109846,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/onward-loadout.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 68108,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/onward-role.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 67222,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/onward-stats.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 152754,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/onward-tryout.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 99488,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/onward-workshop.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 189216,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/risetopower-base.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 311630,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/risetopower-buildmenu.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 272541,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/risetopower-city.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 289807,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/risetopower-destroyer.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 263982,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/risetopower-guild.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 250965,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/risetopower-hero.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 304250,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/risetopower-popup.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 145899,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/risetopower-sector.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 173109,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/risetopower-shipyard.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 252071,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/risetopower-shipyard2.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 275891,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/risetopower-terrain.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 293475,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/wellsky-buttons.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 77807,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/wellsky-color.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 126700,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/wellsky-dashboard.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 56898,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/wellsky-foundations.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 72390,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/wellsky-hero.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 76825,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/wellsky-material.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 84067,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/wellsky-nav-menu.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 67081,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/wellsky-navdesktop.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 93460,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/wellsky-navigation.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 83048,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/wellsky-search.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 70871,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/wellsky-testing.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 64069,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/winreality-cards.png",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 170278,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/winreality-components.png",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 252521,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/winreality-drills.png",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 395539,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/winreality-grid.png",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 12430,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/winreality-hero.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 79696,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/winreality-login.png",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 318163,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/winreality-logo.jpg",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 3968,
+      "state": "present"
+    },
+    {
+      "asset": "/images/case-studies/winreality-profile.png",
+      "destination": "/professional/case-studies",
+      "usage": "case-study proof/gallery",
+      "rights": "Approved client/founder portfolio evidence",
+      "altTextState": "authored in route/content model",
+      "bytes": 365972,
+      "state": "present"
+    },
+    {
+      "asset": "/images/professional-case.png",
+      "destination": "/professional",
+      "usage": "Professional landing/supporting art",
+      "rights": "Owned brand content",
+      "altTextState": "authored in route/content model",
+      "bytes": 708768,
+      "state": "present"
+    },
+    {
+      "asset": "/images/professional-hero.png",
+      "destination": "/professional",
+      "usage": "Professional landing/supporting art",
+      "rights": "Owned brand content",
+      "altTextState": "authored in route/content model",
+      "bytes": 729481,
+      "state": "present"
+    },
+    {
+      "asset": "/images/singularis.png",
+      "destination": "/professional",
+      "usage": "Professional landing/supporting art",
+      "rights": "Owned brand content",
+      "altTextState": "authored in route/content model",
+      "bytes": 72422,
+      "state": "present"
+    },
+    {
+      "asset": "/images/team/robert-croft.png",
+      "destination": "/professional",
+      "usage": "Professional landing/supporting art",
+      "rights": "Owned brand content",
+      "altTextState": "authored in route/content model",
+      "bytes": 6411334,
+      "state": "present"
+    }
+  ]
+}

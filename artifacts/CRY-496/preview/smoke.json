@@ -1,0 +1,229 @@
+{
+  "generated": "2026-08-26T18:36:37.539Z",
+  "base": "https://deploy-preview-59--frabjous-frangipane-650548.netlify.app",
+  "browser": "chromium",
+  "version": "149.0.7827.55",
+  "checks": [
+    {
+      "route": "/professional",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "h1": [
+        "Designing systems people can understand, trust, and use."
+      ],
+      "overflow": false,
+      "violet": "#9400d3",
+      "brokenImages": [],
+      "violations": [],
+      "labels": [
+        "Overview",
+        "Services",
+        "Case Studies",
+        "Articles",
+        "Start a Project"
+      ],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "route": "/professional",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "h1": [
+        "Designing systems people can understand, trust, and use."
+      ],
+      "overflow": false,
+      "violet": "#9400d3",
+      "brokenImages": [],
+      "violations": [],
+      "labels": [
+        "Overview",
+        "Services",
+        "Case Studies",
+        "Articles",
+        "Start a Project"
+      ],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "route": "/professional/services",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "h1": [
+        "Senior product and experience design for complex systems."
+      ],
+      "overflow": false,
+      "violet": "#9400d3",
+      "brokenImages": [],
+      "violations": [],
+      "labels": [
+        "Overview",
+        "Services",
+        "Case Studies",
+        "Articles",
+        "Start a Project"
+      ],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "route": "/professional/services",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "h1": [
+        "Senior product and experience design for complex systems."
+      ],
+      "overflow": false,
+      "violet": "#9400d3",
+      "brokenImages": [],
+      "violations": [],
+      "labels": [
+        "Overview",
+        "Services",
+        "Case Studies",
+        "Articles",
+        "Start a Project"
+      ],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "route": "/professional/case-studies",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "h1": [
+        "Work under real constraints."
+      ],
+      "overflow": false,
+      "violet": "#9400d3",
+      "brokenImages": [],
+      "violations": [],
+      "labels": [
+        "Overview",
+        "Services",
+        "Case Studies",
+        "Articles",
+        "Start a Project"
+      ],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "route": "/professional/case-studies",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "h1": [
+        "Work under real constraints."
+      ],
+      "overflow": false,
+      "violet": "#9400d3",
+      "brokenImages": [],
+      "violations": [],
+      "labels": [
+        "Overview",
+        "Services",
+        "Case Studies",
+        "Articles",
+        "Start a Project"
+      ],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "route": "/professional/articles",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "h1": [
+        "Research, systems, and design thinking."
+      ],
+      "overflow": false,
+      "violet": "#9400d3",
+      "brokenImages": [],
+      "violations": [],
+      "labels": [
+        "Overview",
+        "Services",
+        "Case Studies",
+        "Articles",
+        "Start a Project"
+      ],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "route": "/professional/articles",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "h1": [
+        "Research, systems, and design thinking."
+      ],
+      "overflow": false,
+      "violet": "#9400d3",
+      "brokenImages": [],
+      "violations": [],
+      "labels": [
+        "Overview",
+        "Services",
+        "Case Studies",
+        "Articles",
+        "Start a Project"
+      ],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "route": "/professional/inquiry",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "h1": [
+        "Tell us what you're trying to solve."
+      ],
+      "overflow": false,
+      "violet": "#9400d3",
+      "brokenImages": [],
+      "violations": [],
+      "labels": [
+        "Overview",
+        "Services",
+        "Case Studies",
+        "Articles",
+        "Start a Project"
+      ],
+      "errors": [],
+      "pass": true
+    },
+    {
+      "route": "/professional/inquiry",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "h1": [
+        "Tell us what you're trying to solve."
+      ],
+      "overflow": false,
+      "violet": "#9400d3",
+      "brokenImages": [],
+      "violations": [],
+      "labels": [
+        "Overview",
+        "Services",
+        "Case Studies",
+        "Articles",
+        "Start a Project"
+      ],
+      "errors": [],
+      "pass": true
+    }
+  ],
+  "pass": true
+}

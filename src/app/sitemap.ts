@@ -1,3 +1,4 @@
+import { publicServices } from "@/lib/services";
 import type { MetadataRoute } from "next";
 import { publicReleases, releaseDestination } from "@/lib/releases";
 import { publicProducts } from "@/lib/products";
@@ -26,5 +27,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${BASE}/professional/articles/${a.slug}`,
     lastModified: a.published ? new Date(a.published) : now,
   }));
-  return [...staticEntries, ...releaseEntries, ...productEntries, ...articleEntries];
+  const serviceEntries = publicServices().map(service => ({ url: `${BASE}/professional/${service.slug}`, lastModified: now }));
+  return [...staticEntries, ...releaseEntries, ...productEntries, ...articleEntries, ...serviceEntries];
 }

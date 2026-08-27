@@ -8,7 +8,7 @@ const serviceSlugs = new Set(["product-strategy", "ux-interaction", "interface-s
 const items = [
   { label: "Overview", description: "Professional studio", href: "/professional", icon: "overview" },
   { label: "Services", description: "Strategy through delivery", href: "/professional/services", icon: "services" },
-  { label: "Case Studies", description: "Selected client work", href: "/professional/case-studies", icon: "cases" },
+  { label: "Case Studies", description: "Work & engagement context", href: "/professional/case-studies", icon: "cases" },
   { label: "Articles", description: "Research & analysis", href: "/professional/articles", icon: "articles" },
   { label: "Start a Project", description: "Tell us the problem", href: "/professional/inquiry", icon: "inquiry" },
 ];

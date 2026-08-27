@@ -1,0 +1,84 @@
+{
+  "generated": "2026-08-26T18:32:31.728Z",
+  "scope": "CRY-497 / CRY-498 / CRY-499 local acceptance",
+  "pass": true,
+  "browsers": [
+    {
+      "engine": "chromium",
+      "version": "149.0.7827.55",
+      "checks": 63,
+      "uiPass": true,
+      "lightboxPass": true,
+      "originalCombinedPass": false,
+      "originalProblems": [
+        "/professional/ux-interaction: missing sitemap route",
+        "/professional/interface-systems: missing sitemap route",
+        "/professional/creative-technology: missing sitemap route",
+        "/professional/product-strategy: missing sitemap route"
+      ]
+    },
+    {
+      "engine": "firefox",
+      "version": "151.0",
+      "checks": 63,
+      "uiPass": true,
+      "lightboxPass": true,
+      "originalCombinedPass": false,
+      "originalProblems": [
+        "/professional/ux-interaction: missing sitemap route",
+        "/professional/interface-systems: missing sitemap route",
+        "/professional/creative-technology: missing sitemap route",
+        "/professional/product-strategy: missing sitemap route"
+      ]
+    },
+    {
+      "engine": "webkit",
+      "version": "26.5",
+      "checks": 63,
+      "uiPass": true,
+      "lightboxPass": true,
+      "originalCombinedPass": false,
+      "originalProblems": [
+        "/professional/ux-interaction: missing sitemap route",
+        "/professional/interface-systems: missing sitemap route",
+        "/professional/creative-technology: missing sitemap route",
+        "/professional/product-strategy: missing sitemap route"
+      ]
+    }
+  ],
+  "viewports": [
+    {
+      "width": 390,
+      "height": 844
+    },
+    {
+      "width": 768,
+      "height": 1024
+    },
+    {
+      "width": 1440,
+      "height": 900
+    }
+  ],
+  "axeScans": 63,
+  "axeViolations": 0,
+  "unitTests": {
+    "passed": 231,
+    "failed": 0
+  },
+  "productionBuild": {
+    "pass": true,
+    "generatedPages": 75
+  },
+  "lint": true,
+  "typescript": true,
+  "finalRoutes": {
+    "pass": true,
+    "canonical": 20,
+    "articleRedirects": 11
+  },
+  "inquiry": true,
+  "preservation": true,
+  "remediation": "Original combined browser runs failed only four missing sitemap entries. UI code is unchanged after those runs. src/app/sitemap.ts was corrected, production build repeated, and routes-final.json records the targeted passing recheck. Browser reports are retained without rewriting their failed combined status.",
+  "review": "PR #59 deployed and verified; see acceptance.json. Robert review required before merge."
+}

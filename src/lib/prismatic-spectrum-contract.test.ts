@@ -57,7 +57,11 @@ test("major page sections use explicit governed accents", () => {
   assertAccentOrder(entertainment, ["cyan", "indigo", "violet", "magenta"]);
   assertAccentOrder(community, ["indigo", "blue", "cyan", "magenta", "indigo", "blue"]);
   assertAccentOrder(explore, ["cyan", "indigo", "violet", "magenta", "blue"]);
-  assertAccentOrder(professional, ["violet", "magenta", "blue", "cyan", "indigo", "violet", "magenta"]);
+  // CRY-496 supersedes the old full-spectrum overview cadence with restrained route identity.
+  assertAccentOrder(professional, ["violet"]);
+  const layout = readFileSync(new URL("../app/professional/layout.tsx", import.meta.url), "utf8");
+  assert.match(layout, /professional-experience.*data-section-accent="violet"/);
+  assert.doesNotMatch(professional, /data-section-accent="(?:magenta|red|yellow|green)"/);
 });
 
 test("top-level destination accents follow the canonical progression", () => {

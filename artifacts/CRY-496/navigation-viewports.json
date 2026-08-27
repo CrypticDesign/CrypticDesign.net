@@ -1,0 +1,47 @@
+[
+  {
+    "viewport": "mobile-390",
+    "triggerVisible": true,
+    "keyboardOpened": true,
+    "navigation": {
+      "rows": 5,
+      "itemCount": 5,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "horizontallyScrollable": false,
+      "minLinkHeight": 60,
+      "allItemsVisible": true,
+      "currentLabel": "Overview"
+    }
+  },
+  {
+    "viewport": "tablet-768",
+    "triggerVisible": true,
+    "keyboardOpened": true,
+    "navigation": {
+      "rows": 5,
+      "itemCount": 5,
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "horizontallyScrollable": false,
+      "minLinkHeight": 60,
+      "allItemsVisible": true,
+      "currentLabel": "Overview"
+    }
+  },
+  {
+    "viewport": "desktop-1440",
+    "triggerVisible": false,
+    "keyboardOpened": null,
+    "navigation": {
+      "rows": 1,
+      "itemCount": 5,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "horizontallyScrollable": false,
+      "minLinkHeight": 76,
+      "allItemsVisible": true,
+      "currentLabel": "Overview"
+    }
+  }
+]
