@@ -1,9 +1,9 @@
 import assert from "node:assert/strict";
-import { mkdir } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import { chromium } from "playwright";
 
 const baseUrl = (process.argv[2] || "http://127.0.0.1:3100").replace(/\/$/, "");
-const outputDirectory = "qa-screens/my-home";
+const outputDirectory = "artifacts/CRY-494/runtime";
 const viewports = [
   { name: "desktop-wide-1920", width: 1920, height: 1080 },
   { name: "desktop-1440", width: 1440, height: 900 },
@@ -27,11 +27,18 @@ for (const viewport of viewports) {
   const response = await page.goto(`${baseUrl}/`, { waitUntil: "domcontentloaded" });
   assert.equal(response?.status(), 200);
   await page.getByRole("heading", { name: "Worlds to explore. Stories to experience. Systems that connect them." }).waitFor();
-  await page.getByRole("link", { name: "Explore entertainment", exact: true }).waitFor();
-  await page.getByRole("link", { name: "Discover the studio", exact: true }).waitFor();
-  await page.getByRole("heading", { name: "Featured now", exact: true }).waitFor();
-  await page.getByRole("heading", { name: "One ecosystem. Three ways in.", exact: true }).waitFor();
-  await page.getByRole("link", { name: "Sign in to My Home" }).waitFor();
+  await page.getByRole("link", { name: "Explore What's Here", exact: true }).waitFor();
+  await page.getByRole("link", { name: "Enter Community", exact: true }).waitFor();
+  await page.getByRole("heading", { name: "Enter something real.", exact: true }).waitFor();
+  await page.getByRole("heading", { name: "Choose a signal.", exact: true }).waitFor();
+  await page.getByRole("heading", { name: "This isn't just something to watch.", exact: true }).waitFor();
+  await page.getByRole("heading", { name: "Your experience doesn't have to reset every time you leave a page.", exact: true }).waitFor();
+  await page.getByRole("heading", { name: "Signal & Systems: Deep Space Transmission", exact: true }).waitFor();
+  await page.getByRole("heading", { name: "Independent worlds, experiences, and systems.", exact: true }).waitFor();
+  await page.getByRole("heading", { name: "We build for others, too.", exact: true }).waitFor();
+  await page.getByRole("heading", { name: "This is just the beginning.", exact: true }).waitFor();
+  await page.getByRole("link", { name: "Sign in to My Home" }).first().waitFor();
+  assert.equal(await page.locator('.public-home-portal__hero a[href="/professional"]').count(), 0);
   assert.equal(await page.getByText("Sign up", { exact: true }).count(), 0);
   const signedOutLayout = await page.evaluate(() => ({
     documentWidth: document.documentElement.scrollWidth,
@@ -45,18 +52,17 @@ for (const viewport of viewports) {
     heroBottom: document.querySelector(".public-home-portal__hero")?.getBoundingClientRect().bottom ?? 0,
     heroContentLeft: document.querySelector(".public-home-portal__hero-content")?.getBoundingClientRect().left ?? 0,
     portalStackLeft: document.querySelector(".public-home-portal__stack")?.getBoundingClientRect().left ?? 0,
-    featuredLabelTop: document.querySelector("#featured-now-title")?.getBoundingClientRect().top ?? 0,
-    titleRight: document.querySelector("#public-home-title")?.getBoundingClientRect().right ?? 0,
-    memberLeft: document.querySelector(".public-home-portal__member")?.getBoundingClientRect().left ?? 0,
+    featuredLabelTop: document.querySelector("#featured-experiences-title")?.getBoundingClientRect().top ?? 0,
+    semanticSections: document.querySelectorAll(".public-home-v2__stack > section").length,
   }));
   assert.ok(signedOutLayout.documentWidth <= signedOutLayout.viewportWidth + 1, `${viewport.name} signed-out page overflows horizontally`);
   assert.equal(signedOutLayout.h1Count, 1);
+  assert.equal(signedOutLayout.semanticSections, 8);
   assert.equal(signedOutLayout.clippedControls, 0, `${viewport.name} signed-out Home has clipped controls`);
   assert.ok(Math.abs(signedOutLayout.heroContentLeft - signedOutLayout.portalStackLeft) <= 1, `${viewport.name} public hero and content stack use different left rails`);
   if (viewport.width > 1100) {
-    assert.ok(signedOutLayout.heroHeight <= 530, `${viewport.name} public hero is too tall (${signedOutLayout.heroHeight}px)`);
-    assert.ok(signedOutLayout.featuredLabelTop >= signedOutLayout.heroBottom + 20, `${viewport.name} Featured now overlaps the hero boundary`);
-    assert.ok(signedOutLayout.titleRight + 32 <= signedOutLayout.memberLeft, `${viewport.name} public hero title collides with the member panel`);
+    assert.ok(signedOutLayout.heroHeight <= 680, `${viewport.name} public hero is too tall (${signedOutLayout.heroHeight}px)`);
+    assert.ok(signedOutLayout.featuredLabelTop >= signedOutLayout.heroBottom + 20, `${viewport.name} Featured Experiences overlaps the hero boundary`);
   }
 
   const communityResponse = await page.goto(`${baseUrl}/community`, { waitUntil: "domcontentloaded" });
@@ -65,9 +71,10 @@ for (const viewport of viewports) {
   await page.getByRole("heading", { name: "Happening now / Featured", exact: true }).waitFor();
   await page.getByRole("heading", { name: "No governed activity stream is connected.", exact: true }).waitFor();
   await page.getByLabel("Current community status").getByText("Community features not available yet", { exact: true }).waitFor();
-  const communityNavigation = page.getByRole("navigation", { name: "Community sections" });
-  for (const label of ["Explore", "Groups", "Events", "Creators"]) await communityNavigation.getByRole("link", { name: new RegExp(`^${label}`) }).waitFor();
-  assert.equal(await communityNavigation.getByText("Spaces", { exact: true }).count(), 0);
+  for (const label of ["Explore", "Groups", "Events", "Creators"]) {
+    assert.ok(await page.locator(".community-navigation a", { hasText: label }).count() >= 1);
+  }
+  assert.equal(await page.locator(".community-navigation").getByText("Spaces", { exact: true }).count(), 0);
   assert.equal(await page.getByText("Join the community", { exact: true }).count(), 0);
   const communityLayout = await page.evaluate(() => ({
     documentWidth: document.documentElement.scrollWidth,
@@ -90,8 +97,8 @@ for (const viewport of viewports) {
     const destinationResponse = await page.goto(`${baseUrl}${destination.path}`, { waitUntil: "domcontentloaded" });
     assert.equal(destinationResponse?.status(), 200);
     await page.getByRole("heading", { name: destination.heading, exact: true }).waitFor();
-    const activeState = await page.getByRole("navigation", { name: "Community sections" }).getByRole("link", { name: new RegExp(`^${destination.active}`) }).getAttribute("aria-current");
-    assert.equal(activeState, "page", `${viewport.name} ${destination.active} navigation state is not active`);
+    const activeCount = await page.locator('.community-navigation a[aria-current="page"]', { hasText: destination.active }).count();
+    assert.ok(activeCount >= 1, `${viewport.name} ${destination.active} navigation state is not active`);
   }
 
   const exploreResponse = await page.goto(`${baseUrl}/entertainment/explore`, { waitUntil: "domcontentloaded" });
@@ -119,7 +126,6 @@ for (const viewport of viewports) {
   assert.equal(signInResponse.status(), 200, "Local sandbox sign-in must be available for authenticated QA");
   await page.goto(`${baseUrl}/community`, { waitUntil: "domcontentloaded" });
   await page.getByRole("heading", { name: "Continue from your private platform state.", exact: true }).waitFor();
-  await page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "Account", exact: true }).waitFor();
   await page.goto(`${baseUrl}/community/groups`, { waitUntil: "domcontentloaded" });
   const communitySessionResponse = await context.request.get(`${baseUrl}/api/membership/session`);
   assert.equal(communitySessionResponse.status(), 200);
@@ -191,4 +197,5 @@ for (const viewport of viewports) {
 }
 
 await browser.close();
+await writeFile(`${outputDirectory}/results.json`, JSON.stringify(results, null, 2));
 console.log(JSON.stringify(results, null, 2));

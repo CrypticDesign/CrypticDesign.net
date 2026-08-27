@@ -1,0 +1,459 @@
+[
+  {
+    "mode": "default",
+    "viewport": "desktop-1440",
+    "facts": {
+      "documentWidth": 1440,
+      "viewportWidth": 1440,
+      "h1Count": 1,
+      "stagePositions": [
+        {
+          "stage": "Worlds to explore. Stories to experience. Systems that connect them.",
+          "found": true,
+          "top": 146
+        },
+        {
+          "stage": "Enter something real.",
+          "found": true,
+          "top": 689.359375
+        },
+        {
+          "stage": "Choose a signal.",
+          "found": true,
+          "top": 1204.53125
+        },
+        {
+          "stage": "This isn't just something to watch.",
+          "found": true,
+          "top": 1607.1875
+        },
+        {
+          "stage": "Your experience doesn't have to reset every time you leave a page.",
+          "found": true,
+          "top": 2067.875
+        },
+        {
+          "stage": "Signal & Systems: Deep Space Transmission",
+          "found": true,
+          "top": 2653.296875
+        },
+        {
+          "stage": "Independent worlds, experiences, and systems.",
+          "found": true,
+          "top": 3044.21875
+        },
+        {
+          "stage": "We build for others, too.",
+          "found": true,
+          "top": 3283.84375
+        },
+        {
+          "stage": "This is just the beginning.",
+          "found": true,
+          "top": 3517.78125
+        }
+      ],
+      "scene": "public-home",
+      "quality": "high",
+      "lifecycle": "running",
+      "renderer": "active",
+      "state": "ready",
+      "fallbackPoster": true,
+      "canvasCount": 1,
+      "canonical": "https://crypticdesign.net",
+      "ogImage": "https://crypticdesign.net/share/home.png",
+      "professionalHeroLinks": 0
+    },
+    "focus": {
+      "tag": "A",
+      "outlineStyle": "solid",
+      "outlineWidth": "2px"
+    },
+    "consoleErrors": [],
+    "routeStatuses": {
+      "/entertainment": 200,
+      "/community": 200,
+      "/products/singularis": 200,
+      "/products/lifa": 200,
+      "/releases/singularis-themes-vol-1": 200,
+      "/releases/visual-study-01": 200,
+      "/community/creators": 200,
+      "/community/groups": 200,
+      "/community/events": 200,
+      "/account/create": 200,
+      "/account/sign-in": 200,
+      "/professional": 200
+    },
+    "screenshot": "artifacts/CRY-494/home-v2/default-desktop-1440.png"
+  },
+  {
+    "mode": "default",
+    "viewport": "mobile-390",
+    "facts": {
+      "documentWidth": 390,
+      "viewportWidth": 390,
+      "h1Count": 1,
+      "stagePositions": [
+        {
+          "stage": "Worlds to explore. Stories to experience. Systems that connect them.",
+          "found": true,
+          "top": 335
+        },
+        {
+          "stage": "Enter something real.",
+          "found": true,
+          "top": 1077.25
+        },
+        {
+          "stage": "Choose a signal.",
+          "found": true,
+          "top": 2466.515625
+        },
+        {
+          "stage": "This isn't just something to watch.",
+          "found": true,
+          "top": 3304.75
+        },
+        {
+          "stage": "Your experience doesn't have to reset every time you leave a page.",
+          "found": true,
+          "top": 4301.3125
+        },
+        {
+          "stage": "Signal & Systems: Deep Space Transmission",
+          "found": true,
+          "top": 5918.078125
+        },
+        {
+          "stage": "Independent worlds, experiences, and systems.",
+          "found": true,
+          "top": 6292.8125
+        },
+        {
+          "stage": "We build for others, too.",
+          "found": true,
+          "top": 6805.140625
+        },
+        {
+          "stage": "This is just the beginning.",
+          "found": true,
+          "top": 7196.546875
+        }
+      ],
+      "scene": "public-home",
+      "quality": "low",
+      "lifecycle": "static",
+      "renderer": "inactive",
+      "state": "poster",
+      "fallbackPoster": true,
+      "canvasCount": 1,
+      "canonical": "https://crypticdesign.net",
+      "ogImage": "https://crypticdesign.net/share/home.png",
+      "professionalHeroLinks": 0
+    },
+    "focus": {
+      "tag": "A",
+      "outlineStyle": "solid",
+      "outlineWidth": "2px"
+    },
+    "consoleErrors": [],
+    "routeStatuses": {},
+    "screenshot": "artifacts/CRY-494/home-v2/default-mobile-390.png"
+  },
+  {
+    "mode": "reduced-motion",
+    "viewport": "desktop-1440",
+    "facts": {
+      "documentWidth": 1440,
+      "viewportWidth": 1440,
+      "h1Count": 1,
+      "stagePositions": [
+        {
+          "stage": "Worlds to explore. Stories to experience. Systems that connect them.",
+          "found": true,
+          "top": 146
+        },
+        {
+          "stage": "Enter something real.",
+          "found": true,
+          "top": 689.359375
+        },
+        {
+          "stage": "Choose a signal.",
+          "found": true,
+          "top": 1204.53125
+        },
+        {
+          "stage": "This isn't just something to watch.",
+          "found": true,
+          "top": 1607.1875
+        },
+        {
+          "stage": "Your experience doesn't have to reset every time you leave a page.",
+          "found": true,
+          "top": 2067.875
+        },
+        {
+          "stage": "Signal & Systems: Deep Space Transmission",
+          "found": true,
+          "top": 2653.296875
+        },
+        {
+          "stage": "Independent worlds, experiences, and systems.",
+          "found": true,
+          "top": 3044.21875
+        },
+        {
+          "stage": "We build for others, too.",
+          "found": true,
+          "top": 3283.84375
+        },
+        {
+          "stage": "This is just the beginning.",
+          "found": true,
+          "top": 3517.78125
+        }
+      ],
+      "scene": "public-home",
+      "quality": "low",
+      "lifecycle": "static",
+      "renderer": "inactive",
+      "state": "poster",
+      "fallbackPoster": true,
+      "canvasCount": 1,
+      "canonical": "https://crypticdesign.net",
+      "ogImage": "https://crypticdesign.net/share/home.png",
+      "professionalHeroLinks": 0
+    },
+    "focus": {
+      "tag": "A",
+      "outlineStyle": "solid",
+      "outlineWidth": "3px"
+    },
+    "consoleErrors": [],
+    "routeStatuses": {},
+    "screenshot": "artifacts/CRY-494/home-v2/reduced-motion-desktop-1440.png"
+  },
+  {
+    "mode": "reduced-motion",
+    "viewport": "mobile-390",
+    "facts": {
+      "documentWidth": 390,
+      "viewportWidth": 390,
+      "h1Count": 1,
+      "stagePositions": [
+        {
+          "stage": "Worlds to explore. Stories to experience. Systems that connect them.",
+          "found": true,
+          "top": 335
+        },
+        {
+          "stage": "Enter something real.",
+          "found": true,
+          "top": 1077.25
+        },
+        {
+          "stage": "Choose a signal.",
+          "found": true,
+          "top": 2466.515625
+        },
+        {
+          "stage": "This isn't just something to watch.",
+          "found": true,
+          "top": 3304.75
+        },
+        {
+          "stage": "Your experience doesn't have to reset every time you leave a page.",
+          "found": true,
+          "top": 4301.3125
+        },
+        {
+          "stage": "Signal & Systems: Deep Space Transmission",
+          "found": true,
+          "top": 5918.078125
+        },
+        {
+          "stage": "Independent worlds, experiences, and systems.",
+          "found": true,
+          "top": 6292.8125
+        },
+        {
+          "stage": "We build for others, too.",
+          "found": true,
+          "top": 6805.140625
+        },
+        {
+          "stage": "This is just the beginning.",
+          "found": true,
+          "top": 7196.546875
+        }
+      ],
+      "scene": "public-home",
+      "quality": "low",
+      "lifecycle": "static",
+      "renderer": "inactive",
+      "state": "poster",
+      "fallbackPoster": true,
+      "canvasCount": 1,
+      "canonical": "https://crypticdesign.net",
+      "ogImage": "https://crypticdesign.net/share/home.png",
+      "professionalHeroLinks": 0
+    },
+    "focus": {
+      "tag": "A",
+      "outlineStyle": "solid",
+      "outlineWidth": "3px"
+    },
+    "consoleErrors": [],
+    "routeStatuses": {},
+    "screenshot": "artifacts/CRY-494/home-v2/reduced-motion-mobile-390.png"
+  },
+  {
+    "mode": "no-webgl",
+    "viewport": "desktop-1440",
+    "facts": {
+      "documentWidth": 1440,
+      "viewportWidth": 1440,
+      "h1Count": 1,
+      "stagePositions": [
+        {
+          "stage": "Worlds to explore. Stories to experience. Systems that connect them.",
+          "found": true,
+          "top": 146
+        },
+        {
+          "stage": "Enter something real.",
+          "found": true,
+          "top": 689.359375
+        },
+        {
+          "stage": "Choose a signal.",
+          "found": true,
+          "top": 1204.53125
+        },
+        {
+          "stage": "This isn't just something to watch.",
+          "found": true,
+          "top": 1607.1875
+        },
+        {
+          "stage": "Your experience doesn't have to reset every time you leave a page.",
+          "found": true,
+          "top": 2067.875
+        },
+        {
+          "stage": "Signal & Systems: Deep Space Transmission",
+          "found": true,
+          "top": 2653.296875
+        },
+        {
+          "stage": "Independent worlds, experiences, and systems.",
+          "found": true,
+          "top": 3044.21875
+        },
+        {
+          "stage": "We build for others, too.",
+          "found": true,
+          "top": 3283.84375
+        },
+        {
+          "stage": "This is just the beginning.",
+          "found": true,
+          "top": 3517.78125
+        }
+      ],
+      "scene": "public-home",
+      "quality": "low",
+      "lifecycle": "static",
+      "renderer": "inactive",
+      "state": "poster",
+      "fallbackPoster": true,
+      "canvasCount": 1,
+      "canonical": "https://crypticdesign.net",
+      "ogImage": "https://crypticdesign.net/share/home.png",
+      "professionalHeroLinks": 0
+    },
+    "focus": {
+      "tag": "A",
+      "outlineStyle": "solid",
+      "outlineWidth": "2px"
+    },
+    "consoleErrors": [],
+    "routeStatuses": {},
+    "screenshot": "artifacts/CRY-494/home-v2/no-webgl-desktop-1440.png"
+  },
+  {
+    "mode": "no-webgl",
+    "viewport": "mobile-390",
+    "facts": {
+      "documentWidth": 390,
+      "viewportWidth": 390,
+      "h1Count": 1,
+      "stagePositions": [
+        {
+          "stage": "Worlds to explore. Stories to experience. Systems that connect them.",
+          "found": true,
+          "top": 335
+        },
+        {
+          "stage": "Enter something real.",
+          "found": true,
+          "top": 1077.25
+        },
+        {
+          "stage": "Choose a signal.",
+          "found": true,
+          "top": 2466.515625
+        },
+        {
+          "stage": "This isn't just something to watch.",
+          "found": true,
+          "top": 3304.75
+        },
+        {
+          "stage": "Your experience doesn't have to reset every time you leave a page.",
+          "found": true,
+          "top": 4301.3125
+        },
+        {
+          "stage": "Signal & Systems: Deep Space Transmission",
+          "found": true,
+          "top": 5918.078125
+        },
+        {
+          "stage": "Independent worlds, experiences, and systems.",
+          "found": true,
+          "top": 6292.8125
+        },
+        {
+          "stage": "We build for others, too.",
+          "found": true,
+          "top": 6805.140625
+        },
+        {
+          "stage": "This is just the beginning.",
+          "found": true,
+          "top": 7196.546875
+        }
+      ],
+      "scene": "public-home",
+      "quality": "low",
+      "lifecycle": "static",
+      "renderer": "inactive",
+      "state": "poster",
+      "fallbackPoster": true,
+      "canvasCount": 1,
+      "canonical": "https://crypticdesign.net",
+      "ogImage": "https://crypticdesign.net/share/home.png",
+      "professionalHeroLinks": 0
+    },
+    "focus": {
+      "tag": "A",
+      "outlineStyle": "solid",
+      "outlineWidth": "2px"
+    },
+    "consoleErrors": [],
+    "routeStatuses": {},
+    "screenshot": "artifacts/CRY-494/home-v2/no-webgl-mobile-390.png"
+  }
+]

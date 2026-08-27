@@ -1,0 +1,212 @@
+[
+  {
+    "viewport": "desktop-wide-1920",
+    "signedOutLayout": {
+      "documentWidth": 1920,
+      "viewportWidth": 1920,
+      "h1Count": 1,
+      "clippedControls": 0,
+      "heroHeight": 554.234375,
+      "heroBottom": 612.234375,
+      "heroContentLeft": 304,
+      "portalStackLeft": 304,
+      "featuredLabelTop": 715.234375,
+      "semanticSections": 8
+    },
+    "communityLayout": {
+      "documentWidth": 1920,
+      "viewportWidth": 1920,
+      "h1Count": 1,
+      "clippedControls": 0
+    },
+    "exploreLayout": {
+      "documentWidth": 1920,
+      "viewportWidth": 1920,
+      "h1Count": 1,
+      "clippedControls": 0
+    },
+    "signedInLayout": {
+      "documentWidth": 1920,
+      "viewportWidth": 1920,
+      "h1Count": 1,
+      "clippedControls": 0,
+      "utilityCount": 5,
+      "runtimeHeading": "Character required",
+      "runtimeCanvasCount": 0,
+      "runtimeFallbackCount": 0
+    },
+    "focused": {
+      "tag": "A",
+      "outlineStyle": "solid",
+      "outlineWidth": "2px"
+    }
+  },
+  {
+    "viewport": "desktop-1440",
+    "signedOutLayout": {
+      "documentWidth": 1440,
+      "viewportWidth": 1440,
+      "h1Count": 1,
+      "clippedControls": 0,
+      "heroHeight": 528.359375,
+      "heroBottom": 586.359375,
+      "heroContentLeft": 64,
+      "portalStackLeft": 64,
+      "featuredLabelTop": 689.359375,
+      "semanticSections": 8
+    },
+    "communityLayout": {
+      "documentWidth": 1440,
+      "viewportWidth": 1440,
+      "h1Count": 1,
+      "clippedControls": 0
+    },
+    "exploreLayout": {
+      "documentWidth": 1440,
+      "viewportWidth": 1440,
+      "h1Count": 1,
+      "clippedControls": 0
+    },
+    "signedInLayout": {
+      "documentWidth": 1440,
+      "viewportWidth": 1440,
+      "h1Count": 1,
+      "clippedControls": 0,
+      "utilityCount": 5,
+      "runtimeHeading": "Character required",
+      "runtimeCanvasCount": 0,
+      "runtimeFallbackCount": 0
+    },
+    "focused": {
+      "tag": "A",
+      "outlineStyle": "solid",
+      "outlineWidth": "2px"
+    }
+  },
+  {
+    "viewport": "laptop-1024",
+    "signedOutLayout": {
+      "documentWidth": 1024,
+      "viewportWidth": 1024,
+      "h1Count": 1,
+      "clippedControls": 0,
+      "heroHeight": 650,
+      "heroBottom": 714,
+      "heroContentLeft": 64,
+      "portalStackLeft": 64,
+      "featuredLabelTop": 741,
+      "semanticSections": 8
+    },
+    "communityLayout": {
+      "documentWidth": 1024,
+      "viewportWidth": 1024,
+      "h1Count": 1,
+      "clippedControls": 0
+    },
+    "exploreLayout": {
+      "documentWidth": 1024,
+      "viewportWidth": 1024,
+      "h1Count": 1,
+      "clippedControls": 0
+    },
+    "signedInLayout": {
+      "documentWidth": 1024,
+      "viewportWidth": 1024,
+      "h1Count": 1,
+      "clippedControls": 0,
+      "utilityCount": 5,
+      "runtimeHeading": "Character required",
+      "runtimeCanvasCount": 0,
+      "runtimeFallbackCount": 0
+    },
+    "focused": {
+      "tag": "A",
+      "outlineStyle": "solid",
+      "outlineWidth": "2px"
+    }
+  },
+  {
+    "viewport": "tablet-768",
+    "signedOutLayout": {
+      "documentWidth": 768,
+      "viewportWidth": 768,
+      "h1Count": 1,
+      "clippedControls": 0,
+      "heroHeight": 771.59375,
+      "heroBottom": 835.59375,
+      "heroContentLeft": 20,
+      "portalStackLeft": 20,
+      "featuredLabelTop": 926.59375,
+      "semanticSections": 8
+    },
+    "communityLayout": {
+      "documentWidth": 768,
+      "viewportWidth": 768,
+      "h1Count": 1,
+      "clippedControls": 0
+    },
+    "exploreLayout": {
+      "documentWidth": 768,
+      "viewportWidth": 768,
+      "h1Count": 1,
+      "clippedControls": 0
+    },
+    "signedInLayout": {
+      "documentWidth": 768,
+      "viewportWidth": 768,
+      "h1Count": 1,
+      "clippedControls": 0,
+      "utilityCount": 5,
+      "runtimeHeading": "Character required",
+      "runtimeCanvasCount": 0,
+      "runtimeFallbackCount": 0
+    },
+    "focused": {
+      "tag": "A",
+      "outlineStyle": "solid",
+      "outlineWidth": "2px"
+    }
+  },
+  {
+    "viewport": "mobile-390",
+    "signedOutLayout": {
+      "documentWidth": 390,
+      "viewportWidth": 390,
+      "h1Count": 1,
+      "clippedControls": 0,
+      "heroHeight": 922.25,
+      "heroBottom": 986.25,
+      "heroContentLeft": 20,
+      "portalStackLeft": 20,
+      "featuredLabelTop": 1077.25,
+      "semanticSections": 8
+    },
+    "communityLayout": {
+      "documentWidth": 390,
+      "viewportWidth": 390,
+      "h1Count": 1,
+      "clippedControls": 0
+    },
+    "exploreLayout": {
+      "documentWidth": 390,
+      "viewportWidth": 390,
+      "h1Count": 1,
+      "clippedControls": 0
+    },
+    "signedInLayout": {
+      "documentWidth": 390,
+      "viewportWidth": 390,
+      "h1Count": 1,
+      "clippedControls": 0,
+      "utilityCount": 5,
+      "runtimeHeading": "Character required",
+      "runtimeCanvasCount": 0,
+      "runtimeFallbackCount": 0
+    },
+    "focused": {
+      "tag": "A",
+      "outlineStyle": "solid",
+      "outlineWidth": "2px"
+    }
+  }
+]

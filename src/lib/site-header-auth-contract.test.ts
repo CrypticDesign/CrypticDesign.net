@@ -71,7 +71,7 @@ test("primary navigation exposes Sign In or Account without a nested account dro
   assert.doesNotMatch(header, /aria-haspopup="menu"/);
 });
 
-test("signed-out Home is a public ecosystem front door with governed account status", async () => {
+test("signed-out Home follows the governed entertainment and community hierarchy", async () => {
   const [publicHome, homePage, ecosystemStatus, globals] = await Promise.all([
     readFile(new URL("../components/PublicHome.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
@@ -80,13 +80,14 @@ test("signed-out Home is a public ecosystem front door with governed account sta
   ]);
   assert.match(homePage, /getInitialAccountAuthenticated/);
   assert.match(homePage, /<PublicHome accountAdmissionMode=\{accountAdmissionMode\(\)\} \/>/);
-  assert.match(publicHome, /href="\/entertainment" className="button home-primary-cta">Explore entertainment<\/Link>/);
-  assert.match(publicHome, /href="\/professional" className="button home-secondary-cta">Discover the studio<\/Link>/);
-  assert.match(publicHome, /Featured now/);
-  assert.match(publicHome, /One ecosystem\. Three ways in\./);
-  assert.match(publicHome, /Public by default/);
+  assert.match(publicHome, /href="\/entertainment" className="button home-primary-cta">Explore What&apos;s Here<\/Link>/);
+  assert.match(publicHome, /href="\/community" className="button home-secondary-cta">Enter Community<\/Link>/);
+  assert.match(publicHome, /Featured experiences/);
+  assert.match(publicHome, /Choose a signal\./);
+  assert.match(publicHome, /This isn&apos;t just something to watch\./);
   assert.match(publicHome, /Sign in to My Home/);
-  assert.match(publicHome, /<AccountEcosystemStatus admissionMode=\{accountAdmissionMode\} showAvailabilityAction=\{false\}/);
+  assert.match(publicHome, /href="\/account\/create" className="button home-primary-cta">Account availability<\/Link>/);
+  assert.doesNotMatch(publicHome, /className="button home-secondary-cta">Discover the studio/);
   assert.doesNotMatch(publicHome, />Sign up<\/Link>/);
   assert.match(ecosystemStatus, /aria-label="Current ecosystem status"/);
   assert.match(ecosystemStatus, /<dd data-status="open">Open<\/dd>/);

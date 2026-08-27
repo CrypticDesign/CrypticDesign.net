@@ -20,14 +20,14 @@ test("My Home uses governed account, Character, and Library boundaries", () => {
 test("public Home and authenticated My Home are separate server-selected surfaces", () => {
   assert.match(homePage, /getInitialAccountAuthenticated/);
   assert.match(homePage, /authenticated[\s\S]*<MyHomeDashboard initialAuthenticated \/>[\s\S]*<PublicHome accountAdmissionMode=/);
-  assert.match(publicHome, /One platform\. Many paths\./);
-  assert.match(publicHome, /Explore entertainment/);
-  assert.match(publicHome, /Discover the studio/);
-  assert.match(publicHome, /Featured now/);
-  assert.match(publicHome, /One ecosystem\. Three ways in\./);
+  assert.match(publicHome, /An independent entertainment universe/);
+  assert.match(publicHome, /Explore What&apos;s Here/);
+  assert.match(publicHome, /Enter Community/);
+  assert.match(publicHome, /Enter something real\./);
+  assert.match(publicHome, /Choose a signal\./);
   assert.match(publicHome, /Sign in to My Home/);
-  assert.match(publicHome, /<AccountEcosystemStatus/);
-  assert.doesNotMatch(publicHome, /Your place in Cryptic Design/);
+  assert.match(publicHome, /Your place in the platform/);
+  assert.doesNotMatch(publicHome, /className="button home-secondary-cta">Discover the studio/);
 });
 
 test("My Home exposes typed future integration boundaries without fake persistence", () => {
