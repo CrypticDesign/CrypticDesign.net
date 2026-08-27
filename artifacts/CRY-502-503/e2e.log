@@ -1,0 +1,17 @@
+
+> crypticdesign-net@0.1.0 test:e2e
+> npm run test:e2e:membership && npm run test:e2e:character && npm run test:e2e:account
+
+
+> crypticdesign-net@0.1.0 test:e2e:membership
+> node tests/membership-flow.e2e.mjs
+
+Membership E2E passed: lock -> sign-in -> activate -> unlock -> cancel -> revoke -> relock -> expire
+
+> crypticdesign-net@0.1.0 test:e2e:character
+> node tests/character-flow.e2e.mjs
+
+Character E2E passed: deny anonymous -> sign-in -> create -> read domains -> retire -> history -> sign-out
+
+> crypticdesign-net@0.1.0 test:e2e:account
+> node tests/account-auth-ctas.e2e.mjs

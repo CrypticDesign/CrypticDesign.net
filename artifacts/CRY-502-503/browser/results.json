@@ -1,0 +1,1803 @@
+{
+  "results": [
+    {
+      "route": "/entertainment",
+      "mode": "default",
+      "width": 390,
+      "status": 200,
+      "facts": {
+        "headingCount": 1,
+        "headings": [
+          "Enter the worlds, sound, and systems in motion.",
+          "Singularis Themes, Vol. 1",
+          "Play. Listen. Watch.",
+          "Arcade",
+          "Music",
+          "Video",
+          "Worlds beyond a single medium",
+          "Singularis",
+          "Lifa",
+          "Selected releases",
+          "Singularis: Vertical Slice",
+          "Singularis: Overture",
+          "Visual Study 01",
+          "Find your next connection."
+        ],
+        "text": "Static scene displayed.\nENTER ENTERTAINMENT\nEnter the worlds, sound, and systems in motion.\n\nExplore games, music, video, original worlds, releases, and experiments across one connected entertainment platform.\n\nEXPLORE ENTERTAINMENT\nBROWSE RELEASES\nFEATURED / AUDIO / COMING SOON\nSingularis Themes, Vol. 1\n\nEarly thematic material from the Singularis score — motifs and atmospheres from the world's first act.\n\nVIEW RELEASE DETAILS\nEXPLORE MUSIC\nCHOOSE A MODE\nPlay. Listen. Watch.\n\nBrowse each catalog without an account. Availability is shown for each experience.\n\nPLAY\nArcade\n\nGames, playable samples, prototypes, and interactive experiences.\n\nOPEN\n+\nLISTEN\nMusic\n\nScores, albums, tracks, signals, and audio releases.\n\nOPEN\n+\nWATCH\nVideo\n\nFilms, trailers, transmissions, visual stories, and series.\n\nOPEN\n+\nENTER A WORLD\nWorlds beyond a single medium\n\nOriginal properties connecting games, music, stories, and experiments.\n\nWORLD / IN DEVELOPMENT\nSingularis\n\nSingularis is a near-future transmedia universe exploring humanity's transition through technological acceleration, infrastructure, and systemic change.\n\nOPEN\n+\nWORLD / IN DEVELOPMENT\nLifa\n\nA universe-building experience about creation, emergence, and life at planetary scale.\n\nOPEN\n+\nFEATURED ACROSS CRYPTIC DESIGN\nSelected releases\n\nExplore announced work and its current availability.\n\nGAME / COMING SOON\nSingularis: Vertical Slice\n\nA playable first passage into the Singularis universe.\n\nOPEN\n+\nVIDEO / COMING SOON\nSingularis: Overture\n\nA cinematic prologue rendered in the Unreal + AI pipeline.\n\nOPEN\n+\nLAB / COMING SOON\nVisual Study 01\n\nA generative study in signal, structure, and light.\n\nOPEN\n+\nCONTINUE\nFind your next connection.\n\nDiscover Community participation paths, browse releases, or sign in to your personal My Home.\n\nEXPLORE COMMUNITY\n→\nBROWSE RELEASES\n→\nSIGN IN TO MY HOME\n→",
+        "overflow": false,
+        "canonical": "https://crypticdesign.net/entertainment",
+        "ogImage": "https://crypticdesign.net/share/entertainment.png",
+        "twitterImage": "https://crypticdesign.net/share/entertainment.png",
+        "scene": {
+          "scene": "entertainment",
+          "state": "poster",
+          "lifecycle": "static",
+          "renderer": "inactive",
+          "quality": "low"
+        },
+        "poster": true,
+        "heroCopy": null,
+        "heroStatus": null,
+        "links": [
+          {
+            "text": "Explore Entertainment",
+            "href": "#choose-a-mode"
+          },
+          {
+            "text": "Browse Releases",
+            "href": "/releases"
+          },
+          {
+            "text": "View release details",
+            "href": "/releases/singularis-themes-vol-1"
+          },
+          {
+            "text": "Explore Music",
+            "href": "/audio"
+          },
+          {
+            "text": "PlayArcadeGames, playable samples, prototypes, and interactive experiences.Open +",
+            "href": "/entertainment/explore"
+          },
+          {
+            "text": "ListenMusicScores, albums, tracks, signals, and audio releases.Open +",
+            "href": "/audio"
+          },
+          {
+            "text": "WatchVideoFilms, trailers, transmissions, visual stories, and series.Open +",
+            "href": "/entertainment/cinema"
+          },
+          {
+            "text": "World / in developmentSingularisSingularis is a near-future transmedia universe exploring humanity's transition through technological acceleration, infrastructure, and systemic change.Open +",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "World / in developmentLifaA universe-building experience about creation, emergence, and life at planetary scale.Open +",
+            "href": "/products/lifa"
+          },
+          {
+            "text": "game / Coming soonSingularis: Vertical SliceA playable first passage into the Singularis universe.Open +",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "video / Coming soonSingularis: OvertureA cinematic prologue rendered in the Unreal + AI pipeline.Open +",
+            "href": "/releases/singularis-overture"
+          },
+          {
+            "text": "lab / Coming soonVisual Study 01A generative study in signal, structure, and light.Open +",
+            "href": "/releases/visual-study-01"
+          },
+          {
+            "text": "Explore Community →",
+            "href": "/community"
+          },
+          {
+            "text": "Browse Releases →",
+            "href": "/releases"
+          },
+          {
+            "text": "Sign In to My Home →",
+            "href": "/account/sign-in"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/community",
+      "mode": "default",
+      "width": 390,
+      "status": 200,
+      "facts": {
+        "headingCount": 1,
+        "headings": [
+          "Find the signal.Share the journey.",
+          "Participation paths",
+          "Discover people through work.",
+          "Find shared purpose.",
+          "Make room for shared experiences.",
+          "Explore while Community opens.",
+          "Participation with clear boundaries."
+        ],
+        "text": "Static scene displayed.\nCOMMUNITY / EXPLORE\nFind the signal.\nShare the journey.\n\nDiscover the people, groups, events, and shared experiences forming around Cryptic Design. Public Community is opening in stages, and every visible path reflects real current availability.\n\nSEE PARTICIPATION PATHS\nSIGN IN TO MY HOME\nCURRENT COMMUNITY STATUS\nCommunity is opening in stages\nPUBLIC COMMUNITY\nOPEN\nCREATORS\nPUBLIC PROFILE AVAILABLE\nGROUPS\nNO PUBLISHED GROUPS YET\nEVENTS\nNO APPROVED CALENDAR YET\nACTIVITY\nNOT CONNECTED\n\nBrowse public profiles and participation plans without an account. Group membership and event registration are not available yet.\n\nPARTICIPATION PATHS\nWHAT IS OPEN, AND WHAT IS NEXT\nCREATORS / AVAILABLE\nDiscover people through work.\n\nExplore Robert K. Croft’s approved public profile and the projects, releases, research, and studio practice behind it.\n\nDISCOVER CREATORS\n→\nGROUPS / OPENING IN STAGES\nFind shared purpose.\n\nNo groups are published yet. Learn about the planned ways to take part; group membership is not available.\n\nVIEW GROUP PLANS\n→\nEVENTS / OPENING IN STAGES\nMake room for shared experiences.\n\nNo approved event calendar is connected. Explore the planned event formats; there are no events to register for yet.\n\nVIEW EVENT PLANS\n→\nFROM ACROSS THE PLATFORM\nExplore while Community opens.\n\nGames, music, video, and release previews are open to browse. These are Entertainment destinations, not Community activity.\n\nEXPLORE ENTERTAINMENT\n→\nBROWSE RELEASES\n→\nOUR COMMUNITY. OUR CODE.\nParticipation with clear boundaries.\nBe respectful\nTreat people and their work with care.\nBe inclusive\nDesign for welcome, access, and belonging.\nBe creative\nShare ideas without taking ownership.\nProtect the space\nSafety and privacy outrank engagement.",
+        "overflow": false,
+        "canonical": "https://crypticdesign.net/community",
+        "ogImage": "https://crypticdesign.net/images/current-focus.png",
+        "twitterImage": "https://crypticdesign.net/images/current-focus.png",
+        "scene": {
+          "scene": "community",
+          "state": "poster",
+          "lifecycle": "static",
+          "renderer": "inactive",
+          "quality": "low"
+        },
+        "poster": true,
+        "heroCopy": {
+          "top": 165,
+          "bottom": 534.96875,
+          "left": 20,
+          "right": 370
+        },
+        "heroStatus": {
+          "top": 566.96875,
+          "bottom": 943.96875,
+          "left": 20,
+          "right": 370
+        },
+        "links": [
+          {
+            "text": "See Participation Paths",
+            "href": "#participation-paths"
+          },
+          {
+            "text": "Sign in to My Home",
+            "href": "/account/sign-in"
+          },
+          {
+            "text": "Discover Creators →",
+            "href": "/community/creators"
+          },
+          {
+            "text": "View Group plans →",
+            "href": "/community/groups"
+          },
+          {
+            "text": "View Event plans →",
+            "href": "/community/events"
+          },
+          {
+            "text": "Explore Entertainment →",
+            "href": "/entertainment"
+          },
+          {
+            "text": "Browse Releases →",
+            "href": "/releases"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/entertainment/explore",
+      "mode": "default",
+      "width": 390,
+      "status": 200,
+      "facts": {
+        "headingCount": 1,
+        "headings": [
+          "Find your nextplayable experience.",
+          "Public browsing is open.",
+          "Playable catalog",
+          "Singularis Browser Prototype",
+          "Future Singularis Playable Experience",
+          "Lifa: Genesis",
+          "Cross-Media Missions",
+          "Interactive Experiments",
+          "Continue beyond Arcade."
+        ],
+        "text": "ARCADE / PLAYABLE CATALOG\nFind your next\nplayable experience.\n\nBrowse games, playable samples, prototypes, and interactive experiences. Check each entry for what you can play and what is still in development.\n\nBROWSE PLAYABLE CATALOG\nEXPLORE ENTERTAINMENT\nARCADE AVAILABILITY\nPublic browsing is open.\nPUBLIC CATALOG\nOPEN\nPLAYABLE SAMPLE\nOPEN\n\nNo account or subscription is required to browse the catalog or open a public sample.\n\nPLAYABLE CATALOG\nAVAILABILITY SHOWN PER EXPERIENCE\nSINGULARIS\nPUBLIC SAMPLE\nSingularis Browser Prototype\n\nA music-driven vertical-shooter sample and the primary playable entry into the Singularis universe.\n\nPLATFORM\nWeb browser\nACCESS\nPublic sample; subscriber version planned\nGENRES\nAction · Rhythm · Shooter\nOPEN EXPERIENCE →\nSINGULARIS\nCONSTRUCTION\nFuture Singularis Playable Experience\n\nA construction space for the next approved Singularis game experience and connected Operations.\n\nPLATFORM\nWeb browser target\nACCESS\nSubscriber access planned; public sample under review\nGENRES\nAction · Simulation · Shooter\nSTATUS DETAILS — NO ACCESS YET\nLIFA\nIN DEVELOPMENT\nLifa: Genesis\n\nThe first planned playable expression of Lifa, held as a construction page until a public prototype is approved.\n\nPLATFORM\nPlatform under evaluation\nACCESS\nSubscriber access planned; public sample under review\nGENRES\nAdventure · Strategy · Simulation\nSTATUS DETAILS — NO ACCESS YET\nCONNECTED EXPERIENCES\nCONSTRUCTION\nCross-Media Missions\n\nPlayable narrative assignments connecting Explore with video, music, communications, and visual content.\n\nPLATFORM\nWeb browser\nACCESS\nSubscriber access planned; samples may be public\nGENRES\nAdventure · Simulation\nSTATUS DETAILS — NO ACCESS YET\nEXPERIMENTAL\nCONSTRUCTION\nInteractive Experiments\n\nEarly prototypes, technical demonstrations, and research-driven playable studies clearly labeled as unfinished work.\n\nPLATFORM\nWeb browser\nACCESS\nPublic sampling when approved\nGENRES\nPuzzle · Simulation\nSTATUS DETAILS — NO ACCESS YET\nEVERY PATH CONNECTS\nContinue beyond Arcade.\n\nFind music, video, worlds, and releases at the Entertainment front door.\n\nEXPLORE ENTERTAINMENT\n→\nPUBLIC RELEASES\n→\nCOMMUNITY\n→\nSIGN IN TO MY HOME\n→",
+        "overflow": false,
+        "canonical": "https://crypticdesign.net/entertainment/explore",
+        "ogImage": "https://crypticdesign.net/share/entertainment.png",
+        "twitterImage": "https://crypticdesign.net/share/entertainment.png",
+        "scene": null,
+        "poster": null,
+        "heroCopy": null,
+        "heroStatus": null,
+        "links": [
+          {
+            "text": "Browse playable catalog",
+            "href": "#playable-catalog"
+          },
+          {
+            "text": "Explore Entertainment",
+            "href": "/entertainment"
+          },
+          {
+            "text": "SingularisPublic sampleSingularis Browser PrototypeA music-driven vertical-shooter sample and the primary playable entry into the Singularis universe.PlatformWeb browserAccessPublic sample; subscriber version plannedGenresAction · Rhythm · ShooterOpen experience →",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "Explore Entertainment →",
+            "href": "/entertainment"
+          },
+          {
+            "text": "Public releases →",
+            "href": "/releases"
+          },
+          {
+            "text": "Community →",
+            "href": "/community"
+          },
+          {
+            "text": "Sign In to My Home →",
+            "href": "/account/sign-in"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/entertainment",
+      "mode": "default",
+      "width": 768,
+      "status": 200,
+      "facts": {
+        "headingCount": 1,
+        "headings": [
+          "Enter the worlds, sound, and systems in motion.",
+          "Singularis Themes, Vol. 1",
+          "Play. Listen. Watch.",
+          "Arcade",
+          "Music",
+          "Video",
+          "Worlds beyond a single medium",
+          "Singularis",
+          "Lifa",
+          "Selected releases",
+          "Singularis: Vertical Slice",
+          "Singularis: Overture",
+          "Visual Study 01",
+          "Find your next connection."
+        ],
+        "text": "Ambient scene ready.\nENTER ENTERTAINMENT\nEnter the worlds, sound, and systems in motion.\n\nExplore games, music, video, original worlds, releases, and experiments across one connected entertainment platform.\n\nEXPLORE ENTERTAINMENT\nBROWSE RELEASES\nFEATURED / AUDIO / COMING SOON\nSingularis Themes, Vol. 1\n\nEarly thematic material from the Singularis score — motifs and atmospheres from the world's first act.\n\nVIEW RELEASE DETAILS\nEXPLORE MUSIC\nCHOOSE A MODE\nPlay. Listen. Watch.\n\nBrowse each catalog without an account. Availability is shown for each experience.\n\nPLAY\nArcade\n\nGames, playable samples, prototypes, and interactive experiences.\n\nOPEN\n+\nLISTEN\nMusic\n\nScores, albums, tracks, signals, and audio releases.\n\nOPEN\n+\nWATCH\nVideo\n\nFilms, trailers, transmissions, visual stories, and series.\n\nOPEN\n+\nENTER A WORLD\nWorlds beyond a single medium\n\nOriginal properties connecting games, music, stories, and experiments.\n\nWORLD / IN DEVELOPMENT\nSingularis\n\nSingularis is a near-future transmedia universe exploring humanity's transition through technological acceleration, infrastructure, and systemic change.\n\nOPEN\n+\nWORLD / IN DEVELOPMENT\nLifa\n\nA universe-building experience about creation, emergence, and life at planetary scale.\n\nOPEN\n+\nFEATURED ACROSS CRYPTIC DESIGN\nSelected releases\n\nExplore announced work and its current availability.\n\nGAME / COMING SOON\nSingularis: Vertical Slice\n\nA playable first passage into the Singularis universe.\n\nOPEN\n+\nVIDEO / COMING SOON\nSingularis: Overture\n\nA cinematic prologue rendered in the Unreal + AI pipeline.\n\nOPEN\n+\nLAB / COMING SOON\nVisual Study 01\n\nA generative study in signal, structure, and light.\n\nOPEN\n+\nCONTINUE\nFind your next connection.\n\nDiscover Community participation paths, browse releases, or sign in to your personal My Home.\n\nEXPLORE COMMUNITY\n→\nBROWSE RELEASES\n→\nSIGN IN TO MY HOME\n→",
+        "overflow": false,
+        "canonical": "https://crypticdesign.net/entertainment",
+        "ogImage": "https://crypticdesign.net/share/entertainment.png",
+        "twitterImage": "https://crypticdesign.net/share/entertainment.png",
+        "scene": {
+          "scene": "entertainment",
+          "state": "ready",
+          "lifecycle": "running",
+          "renderer": "active",
+          "quality": "mid",
+          "performance": "measuring",
+          "assets": "ready"
+        },
+        "poster": true,
+        "heroCopy": null,
+        "heroStatus": null,
+        "links": [
+          {
+            "text": "Explore Entertainment",
+            "href": "#choose-a-mode"
+          },
+          {
+            "text": "Browse Releases",
+            "href": "/releases"
+          },
+          {
+            "text": "View release details",
+            "href": "/releases/singularis-themes-vol-1"
+          },
+          {
+            "text": "Explore Music",
+            "href": "/audio"
+          },
+          {
+            "text": "PlayArcadeGames, playable samples, prototypes, and interactive experiences.Open +",
+            "href": "/entertainment/explore"
+          },
+          {
+            "text": "ListenMusicScores, albums, tracks, signals, and audio releases.Open +",
+            "href": "/audio"
+          },
+          {
+            "text": "WatchVideoFilms, trailers, transmissions, visual stories, and series.Open +",
+            "href": "/entertainment/cinema"
+          },
+          {
+            "text": "World / in developmentSingularisSingularis is a near-future transmedia universe exploring humanity's transition through technological acceleration, infrastructure, and systemic change.Open +",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "World / in developmentLifaA universe-building experience about creation, emergence, and life at planetary scale.Open +",
+            "href": "/products/lifa"
+          },
+          {
+            "text": "game / Coming soonSingularis: Vertical SliceA playable first passage into the Singularis universe.Open +",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "video / Coming soonSingularis: OvertureA cinematic prologue rendered in the Unreal + AI pipeline.Open +",
+            "href": "/releases/singularis-overture"
+          },
+          {
+            "text": "lab / Coming soonVisual Study 01A generative study in signal, structure, and light.Open +",
+            "href": "/releases/visual-study-01"
+          },
+          {
+            "text": "Explore Community →",
+            "href": "/community"
+          },
+          {
+            "text": "Browse Releases →",
+            "href": "/releases"
+          },
+          {
+            "text": "Sign In to My Home →",
+            "href": "/account/sign-in"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/community",
+      "mode": "default",
+      "width": 768,
+      "status": 200,
+      "facts": {
+        "headingCount": 1,
+        "headings": [
+          "Find the signal.Share the journey.",
+          "Participation paths",
+          "Discover people through work.",
+          "Find shared purpose.",
+          "Make room for shared experiences.",
+          "Explore while Community opens.",
+          "Participation with clear boundaries."
+        ],
+        "text": "Ambient scene ready.\nCOMMUNITY / EXPLORE\nFind the signal.\nShare the journey.\n\nDiscover the people, groups, events, and shared experiences forming around Cryptic Design. Public Community is opening in stages, and every visible path reflects real current availability.\n\nSEE PARTICIPATION PATHS\nSIGN IN TO MY HOME\nCURRENT COMMUNITY STATUS\nCommunity is opening in stages\nPUBLIC COMMUNITY\nOPEN\nCREATORS\nPUBLIC PROFILE AVAILABLE\nGROUPS\nNO PUBLISHED GROUPS YET\nEVENTS\nNO APPROVED CALENDAR YET\nACTIVITY\nNOT CONNECTED\n\nBrowse public profiles and participation plans without an account. Group membership and event registration are not available yet.\n\nPARTICIPATION PATHS\nWHAT IS OPEN, AND WHAT IS NEXT\nCREATORS / AVAILABLE\nDiscover people through work.\n\nExplore Robert K. Croft’s approved public profile and the projects, releases, research, and studio practice behind it.\n\nDISCOVER CREATORS\n→\nGROUPS / OPENING IN STAGES\nFind shared purpose.\n\nNo groups are published yet. Learn about the planned ways to take part; group membership is not available.\n\nVIEW GROUP PLANS\n→\nEVENTS / OPENING IN STAGES\nMake room for shared experiences.\n\nNo approved event calendar is connected. Explore the planned event formats; there are no events to register for yet.\n\nVIEW EVENT PLANS\n→\nFROM ACROSS THE PLATFORM\nExplore while Community opens.\n\nGames, music, video, and release previews are open to browse. These are Entertainment destinations, not Community activity.\n\nEXPLORE ENTERTAINMENT\n→\nBROWSE RELEASES\n→\nOUR COMMUNITY. OUR CODE.\nParticipation with clear boundaries.\nBe respectful\nTreat people and their work with care.\nBe inclusive\nDesign for welcome, access, and belonging.\nBe creative\nShare ideas without taking ownership.\nProtect the space\nSafety and privacy outrank engagement.",
+        "overflow": false,
+        "canonical": "https://crypticdesign.net/community",
+        "ogImage": "https://crypticdesign.net/images/current-focus.png",
+        "twitterImage": "https://crypticdesign.net/images/current-focus.png",
+        "scene": {
+          "scene": "community",
+          "state": "ready",
+          "lifecycle": "running",
+          "renderer": "active",
+          "quality": "mid",
+          "performance": "measuring",
+          "assets": "ready"
+        },
+        "poster": true,
+        "heroCopy": {
+          "top": 181,
+          "bottom": 470.5625,
+          "left": 32,
+          "right": 736
+        },
+        "heroStatus": {
+          "top": 502.5625,
+          "bottom": 864.0625,
+          "left": 59,
+          "right": 709
+        },
+        "links": [
+          {
+            "text": "See Participation Paths",
+            "href": "#participation-paths"
+          },
+          {
+            "text": "Sign in to My Home",
+            "href": "/account/sign-in"
+          },
+          {
+            "text": "Discover Creators →",
+            "href": "/community/creators"
+          },
+          {
+            "text": "View Group plans →",
+            "href": "/community/groups"
+          },
+          {
+            "text": "View Event plans →",
+            "href": "/community/events"
+          },
+          {
+            "text": "Explore Entertainment →",
+            "href": "/entertainment"
+          },
+          {
+            "text": "Browse Releases →",
+            "href": "/releases"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/entertainment/explore",
+      "mode": "default",
+      "width": 768,
+      "status": 200,
+      "facts": {
+        "headingCount": 1,
+        "headings": [
+          "Find your nextplayable experience.",
+          "Public browsing is open.",
+          "Playable catalog",
+          "Singularis Browser Prototype",
+          "Future Singularis Playable Experience",
+          "Lifa: Genesis",
+          "Cross-Media Missions",
+          "Interactive Experiments",
+          "Continue beyond Arcade."
+        ],
+        "text": "ARCADE / PLAYABLE CATALOG\nFind your next\nplayable experience.\n\nBrowse games, playable samples, prototypes, and interactive experiences. Check each entry for what you can play and what is still in development.\n\nBROWSE PLAYABLE CATALOG\nEXPLORE ENTERTAINMENT\nARCADE AVAILABILITY\nPublic browsing is open.\nPUBLIC CATALOG\nOPEN\nPLAYABLE SAMPLE\nOPEN\n\nNo account or subscription is required to browse the catalog or open a public sample.\n\nPLAYABLE CATALOG\nAVAILABILITY SHOWN PER EXPERIENCE\nSINGULARIS\nPUBLIC SAMPLE\nSingularis Browser Prototype\n\nA music-driven vertical-shooter sample and the primary playable entry into the Singularis universe.\n\nPLATFORM\nWeb browser\nACCESS\nPublic sample; subscriber version planned\nGENRES\nAction · Rhythm · Shooter\nOPEN EXPERIENCE →\nSINGULARIS\nCONSTRUCTION\nFuture Singularis Playable Experience\n\nA construction space for the next approved Singularis game experience and connected Operations.\n\nPLATFORM\nWeb browser target\nACCESS\nSubscriber access planned; public sample under review\nGENRES\nAction · Simulation · Shooter\nSTATUS DETAILS — NO ACCESS YET\nLIFA\nIN DEVELOPMENT\nLifa: Genesis\n\nThe first planned playable expression of Lifa, held as a construction page until a public prototype is approved.\n\nPLATFORM\nPlatform under evaluation\nACCESS\nSubscriber access planned; public sample under review\nGENRES\nAdventure · Strategy · Simulation\nSTATUS DETAILS — NO ACCESS YET\nCONNECTED EXPERIENCES\nCONSTRUCTION\nCross-Media Missions\n\nPlayable narrative assignments connecting Explore with video, music, communications, and visual content.\n\nPLATFORM\nWeb browser\nACCESS\nSubscriber access planned; samples may be public\nGENRES\nAdventure · Simulation\nSTATUS DETAILS — NO ACCESS YET\nEXPERIMENTAL\nCONSTRUCTION\nInteractive Experiments\n\nEarly prototypes, technical demonstrations, and research-driven playable studies clearly labeled as unfinished work.\n\nPLATFORM\nWeb browser\nACCESS\nPublic sampling when approved\nGENRES\nPuzzle · Simulation\nSTATUS DETAILS — NO ACCESS YET\nEVERY PATH CONNECTS\nContinue beyond Arcade.\n\nFind music, video, worlds, and releases at the Entertainment front door.\n\nEXPLORE ENTERTAINMENT\n→\nPUBLIC RELEASES\n→\nCOMMUNITY\n→\nSIGN IN TO MY HOME\n→",
+        "overflow": false,
+        "canonical": "https://crypticdesign.net/entertainment/explore",
+        "ogImage": "https://crypticdesign.net/share/entertainment.png",
+        "twitterImage": "https://crypticdesign.net/share/entertainment.png",
+        "scene": null,
+        "poster": null,
+        "heroCopy": null,
+        "heroStatus": null,
+        "links": [
+          {
+            "text": "Browse playable catalog",
+            "href": "#playable-catalog"
+          },
+          {
+            "text": "Explore Entertainment",
+            "href": "/entertainment"
+          },
+          {
+            "text": "SingularisPublic sampleSingularis Browser PrototypeA music-driven vertical-shooter sample and the primary playable entry into the Singularis universe.PlatformWeb browserAccessPublic sample; subscriber version plannedGenresAction · Rhythm · ShooterOpen experience →",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "Explore Entertainment →",
+            "href": "/entertainment"
+          },
+          {
+            "text": "Public releases →",
+            "href": "/releases"
+          },
+          {
+            "text": "Community →",
+            "href": "/community"
+          },
+          {
+            "text": "Sign In to My Home →",
+            "href": "/account/sign-in"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/entertainment",
+      "mode": "default",
+      "width": 1440,
+      "status": 200,
+      "facts": {
+        "headingCount": 1,
+        "headings": [
+          "Enter the worlds, sound, and systems in motion.",
+          "Singularis Themes, Vol. 1",
+          "Play. Listen. Watch.",
+          "Arcade",
+          "Music",
+          "Video",
+          "Worlds beyond a single medium",
+          "Singularis",
+          "Lifa",
+          "Selected releases",
+          "Singularis: Vertical Slice",
+          "Singularis: Overture",
+          "Visual Study 01",
+          "Find your next connection."
+        ],
+        "text": "Ambient scene ready.\nENTER ENTERTAINMENT\nEnter the worlds, sound, and systems in motion.\n\nExplore games, music, video, original worlds, releases, and experiments across one connected entertainment platform.\n\nEXPLORE ENTERTAINMENT\nBROWSE RELEASES\nFEATURED / AUDIO / COMING SOON\nSingularis Themes, Vol. 1\n\nEarly thematic material from the Singularis score — motifs and atmospheres from the world's first act.\n\nVIEW RELEASE DETAILS\nEXPLORE MUSIC\nCHOOSE A MODE\nPlay. Listen. Watch.\n\nBrowse each catalog without an account. Availability is shown for each experience.\n\nPLAY\nArcade\n\nGames, playable samples, prototypes, and interactive experiences.\n\nOPEN\n+\nLISTEN\nMusic\n\nScores, albums, tracks, signals, and audio releases.\n\nOPEN\n+\nWATCH\nVideo\n\nFilms, trailers, transmissions, visual stories, and series.\n\nOPEN\n+\nENTER A WORLD\nWorlds beyond a single medium\n\nOriginal properties connecting games, music, stories, and experiments.\n\nWORLD / IN DEVELOPMENT\nSingularis\n\nSingularis is a near-future transmedia universe exploring humanity's transition through technological acceleration, infrastructure, and systemic change.\n\nOPEN\n+\nWORLD / IN DEVELOPMENT\nLifa\n\nA universe-building experience about creation, emergence, and life at planetary scale.\n\nOPEN\n+\nFEATURED ACROSS CRYPTIC DESIGN\nSelected releases\n\nExplore announced work and its current availability.\n\nGAME / COMING SOON\nSingularis: Vertical Slice\n\nA playable first passage into the Singularis universe.\n\nOPEN\n+\nVIDEO / COMING SOON\nSingularis: Overture\n\nA cinematic prologue rendered in the Unreal + AI pipeline.\n\nOPEN\n+\nLAB / COMING SOON\nVisual Study 01\n\nA generative study in signal, structure, and light.\n\nOPEN\n+\nCONTINUE\nFind your next connection.\n\nDiscover Community participation paths, browse releases, or sign in to your personal My Home.\n\nEXPLORE COMMUNITY\n→\nBROWSE RELEASES\n→\nSIGN IN TO MY HOME\n→",
+        "overflow": false,
+        "canonical": "https://crypticdesign.net/entertainment",
+        "ogImage": "https://crypticdesign.net/share/entertainment.png",
+        "twitterImage": "https://crypticdesign.net/share/entertainment.png",
+        "scene": {
+          "scene": "entertainment",
+          "state": "ready",
+          "lifecycle": "running",
+          "renderer": "active",
+          "quality": "high",
+          "performance": "measuring",
+          "assets": "ready"
+        },
+        "poster": true,
+        "heroCopy": null,
+        "heroStatus": null,
+        "links": [
+          {
+            "text": "Explore Entertainment",
+            "href": "#choose-a-mode"
+          },
+          {
+            "text": "Browse Releases",
+            "href": "/releases"
+          },
+          {
+            "text": "View release details",
+            "href": "/releases/singularis-themes-vol-1"
+          },
+          {
+            "text": "Explore Music",
+            "href": "/audio"
+          },
+          {
+            "text": "PlayArcadeGames, playable samples, prototypes, and interactive experiences.Open +",
+            "href": "/entertainment/explore"
+          },
+          {
+            "text": "ListenMusicScores, albums, tracks, signals, and audio releases.Open +",
+            "href": "/audio"
+          },
+          {
+            "text": "WatchVideoFilms, trailers, transmissions, visual stories, and series.Open +",
+            "href": "/entertainment/cinema"
+          },
+          {
+            "text": "World / in developmentSingularisSingularis is a near-future transmedia universe exploring humanity's transition through technological acceleration, infrastructure, and systemic change.Open +",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "World / in developmentLifaA universe-building experience about creation, emergence, and life at planetary scale.Open +",
+            "href": "/products/lifa"
+          },
+          {
+            "text": "game / Coming soonSingularis: Vertical SliceA playable first passage into the Singularis universe.Open +",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "video / Coming soonSingularis: OvertureA cinematic prologue rendered in the Unreal + AI pipeline.Open +",
+            "href": "/releases/singularis-overture"
+          },
+          {
+            "text": "lab / Coming soonVisual Study 01A generative study in signal, structure, and light.Open +",
+            "href": "/releases/visual-study-01"
+          },
+          {
+            "text": "Explore Community →",
+            "href": "/community"
+          },
+          {
+            "text": "Browse Releases →",
+            "href": "/releases"
+          },
+          {
+            "text": "Sign In to My Home →",
+            "href": "/account/sign-in"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/community",
+      "mode": "default",
+      "width": 1440,
+      "status": 200,
+      "facts": {
+        "headingCount": 1,
+        "headings": [
+          "Find the signal.Share the journey.",
+          "Participation paths",
+          "Discover people through work.",
+          "Find shared purpose.",
+          "Make room for shared experiences.",
+          "Explore while Community opens.",
+          "Participation with clear boundaries."
+        ],
+        "text": "Ambient scene ready.\nCOMMUNITY / EXPLORE\nFind the signal.\nShare the journey.\n\nDiscover the people, groups, events, and shared experiences forming around Cryptic Design. Public Community is opening in stages, and every visible path reflects real current availability.\n\nSEE PARTICIPATION PATHS\nSIGN IN TO MY HOME\nCURRENT COMMUNITY STATUS\nCommunity is opening in stages\nPUBLIC COMMUNITY\nOPEN\nCREATORS\nPUBLIC PROFILE AVAILABLE\nGROUPS\nNO PUBLISHED GROUPS YET\nEVENTS\nNO APPROVED CALENDAR YET\nACTIVITY\nNOT CONNECTED\n\nBrowse public profiles and participation plans without an account. Group membership and event registration are not available yet.\n\nPARTICIPATION PATHS\nWHAT IS OPEN, AND WHAT IS NEXT\nCREATORS / AVAILABLE\nDiscover people through work.\n\nExplore Robert K. Croft’s approved public profile and the projects, releases, research, and studio practice behind it.\n\nDISCOVER CREATORS\n→\nGROUPS / OPENING IN STAGES\nFind shared purpose.\n\nNo groups are published yet. Learn about the planned ways to take part; group membership is not available.\n\nVIEW GROUP PLANS\n→\nEVENTS / OPENING IN STAGES\nMake room for shared experiences.\n\nNo approved event calendar is connected. Explore the planned event formats; there are no events to register for yet.\n\nVIEW EVENT PLANS\n→\nFROM ACROSS THE PLATFORM\nExplore while Community opens.\n\nGames, music, video, and release previews are open to browse. These are Entertainment destinations, not Community activity.\n\nEXPLORE ENTERTAINMENT\n→\nBROWSE RELEASES\n→\nOUR COMMUNITY. OUR CODE.\nParticipation with clear boundaries.\nBe respectful\nTreat people and their work with care.\nBe inclusive\nDesign for welcome, access, and belonging.\nBe creative\nShare ideas without taking ownership.\nProtect the space\nSafety and privacy outrank engagement.",
+        "overflow": false,
+        "canonical": "https://crypticdesign.net/community",
+        "ogImage": "https://crypticdesign.net/images/current-focus.png",
+        "twitterImage": "https://crypticdesign.net/images/current-focus.png",
+        "scene": {
+          "scene": "community",
+          "state": "ready",
+          "lifecycle": "running",
+          "renderer": "active",
+          "quality": "high",
+          "performance": "measuring",
+          "assets": "ready"
+        },
+        "poster": true,
+        "heroCopy": {
+          "top": 279.203125,
+          "bottom": 613.796875,
+          "left": 64,
+          "right": 988
+        },
+        "heroStatus": {
+          "top": 258,
+          "bottom": 635,
+          "left": 1036,
+          "right": 1376
+        },
+        "links": [
+          {
+            "text": "See Participation Paths",
+            "href": "#participation-paths"
+          },
+          {
+            "text": "Sign in to My Home",
+            "href": "/account/sign-in"
+          },
+          {
+            "text": "Discover Creators →",
+            "href": "/community/creators"
+          },
+          {
+            "text": "View Group plans →",
+            "href": "/community/groups"
+          },
+          {
+            "text": "View Event plans →",
+            "href": "/community/events"
+          },
+          {
+            "text": "Explore Entertainment →",
+            "href": "/entertainment"
+          },
+          {
+            "text": "Browse Releases →",
+            "href": "/releases"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/entertainment/explore",
+      "mode": "default",
+      "width": 1440,
+      "status": 200,
+      "facts": {
+        "headingCount": 1,
+        "headings": [
+          "Find your nextplayable experience.",
+          "Public browsing is open.",
+          "Playable catalog",
+          "Singularis Browser Prototype",
+          "Future Singularis Playable Experience",
+          "Lifa: Genesis",
+          "Cross-Media Missions",
+          "Interactive Experiments",
+          "Continue beyond Arcade."
+        ],
+        "text": "ARCADE / PLAYABLE CATALOG\nFind your next\nplayable experience.\n\nBrowse games, playable samples, prototypes, and interactive experiences. Check each entry for what you can play and what is still in development.\n\nBROWSE PLAYABLE CATALOG\nEXPLORE ENTERTAINMENT\nARCADE AVAILABILITY\nPublic browsing is open.\nPUBLIC CATALOG\nOPEN\nPLAYABLE SAMPLE\nOPEN\n\nNo account or subscription is required to browse the catalog or open a public sample.\n\nPLAYABLE CATALOG\nAVAILABILITY SHOWN PER EXPERIENCE\nSINGULARIS\nPUBLIC SAMPLE\nSingularis Browser Prototype\n\nA music-driven vertical-shooter sample and the primary playable entry into the Singularis universe.\n\nPLATFORM\nWeb browser\nACCESS\nPublic sample; subscriber version planned\nGENRES\nAction · Rhythm · Shooter\nOPEN EXPERIENCE →\nSINGULARIS\nCONSTRUCTION\nFuture Singularis Playable Experience\n\nA construction space for the next approved Singularis game experience and connected Operations.\n\nPLATFORM\nWeb browser target\nACCESS\nSubscriber access planned; public sample under review\nGENRES\nAction · Simulation · Shooter\nSTATUS DETAILS — NO ACCESS YET\nLIFA\nIN DEVELOPMENT\nLifa: Genesis\n\nThe first planned playable expression of Lifa, held as a construction page until a public prototype is approved.\n\nPLATFORM\nPlatform under evaluation\nACCESS\nSubscriber access planned; public sample under review\nGENRES\nAdventure · Strategy · Simulation\nSTATUS DETAILS — NO ACCESS YET\nCONNECTED EXPERIENCES\nCONSTRUCTION\nCross-Media Missions\n\nPlayable narrative assignments connecting Explore with video, music, communications, and visual content.\n\nPLATFORM\nWeb browser\nACCESS\nSubscriber access planned; samples may be public\nGENRES\nAdventure · Simulation\nSTATUS DETAILS — NO ACCESS YET\nEXPERIMENTAL\nCONSTRUCTION\nInteractive Experiments\n\nEarly prototypes, technical demonstrations, and research-driven playable studies clearly labeled as unfinished work.\n\nPLATFORM\nWeb browser\nACCESS\nPublic sampling when approved\nGENRES\nPuzzle · Simulation\nSTATUS DETAILS — NO ACCESS YET\nEVERY PATH CONNECTS\nContinue beyond Arcade.\n\nFind music, video, worlds, and releases at the Entertainment front door.\n\nEXPLORE ENTERTAINMENT\n→\nPUBLIC RELEASES\n→\nCOMMUNITY\n→\nSIGN IN TO MY HOME\n→",
+        "overflow": false,
+        "canonical": "https://crypticdesign.net/entertainment/explore",
+        "ogImage": "https://crypticdesign.net/share/entertainment.png",
+        "twitterImage": "https://crypticdesign.net/share/entertainment.png",
+        "scene": null,
+        "poster": null,
+        "heroCopy": null,
+        "heroStatus": null,
+        "links": [
+          {
+            "text": "Browse playable catalog",
+            "href": "#playable-catalog"
+          },
+          {
+            "text": "Explore Entertainment",
+            "href": "/entertainment"
+          },
+          {
+            "text": "SingularisPublic sampleSingularis Browser PrototypeA music-driven vertical-shooter sample and the primary playable entry into the Singularis universe.PlatformWeb browserAccessPublic sample; subscriber version plannedGenresAction · Rhythm · ShooterOpen experience →",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "Explore Entertainment →",
+            "href": "/entertainment"
+          },
+          {
+            "text": "Public releases →",
+            "href": "/releases"
+          },
+          {
+            "text": "Community →",
+            "href": "/community"
+          },
+          {
+            "text": "Sign In to My Home →",
+            "href": "/account/sign-in"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/entertainment",
+      "mode": "reduced-motion",
+      "width": 390,
+      "status": 200,
+      "facts": {
+        "headingCount": 1,
+        "headings": [
+          "Enter the worlds, sound, and systems in motion.",
+          "Singularis Themes, Vol. 1",
+          "Play. Listen. Watch.",
+          "Arcade",
+          "Music",
+          "Video",
+          "Worlds beyond a single medium",
+          "Singularis",
+          "Lifa",
+          "Selected releases",
+          "Singularis: Vertical Slice",
+          "Singularis: Overture",
+          "Visual Study 01",
+          "Find your next connection."
+        ],
+        "text": "Static scene displayed.\nENTER ENTERTAINMENT\nEnter the worlds, sound, and systems in motion.\n\nExplore games, music, video, original worlds, releases, and experiments across one connected entertainment platform.\n\nEXPLORE ENTERTAINMENT\nBROWSE RELEASES\nFEATURED / AUDIO / COMING SOON\nSingularis Themes, Vol. 1\n\nEarly thematic material from the Singularis score — motifs and atmospheres from the world's first act.\n\nVIEW RELEASE DETAILS\nEXPLORE MUSIC\nCHOOSE A MODE\nPlay. Listen. Watch.\n\nBrowse each catalog without an account. Availability is shown for each experience.\n\nPLAY\nArcade\n\nGames, playable samples, prototypes, and interactive experiences.\n\nOPEN\n+\nLISTEN\nMusic\n\nScores, albums, tracks, signals, and audio releases.\n\nOPEN\n+\nWATCH\nVideo\n\nFilms, trailers, transmissions, visual stories, and series.\n\nOPEN\n+\nENTER A WORLD\nWorlds beyond a single medium\n\nOriginal properties connecting games, music, stories, and experiments.\n\nWORLD / IN DEVELOPMENT\nSingularis\n\nSingularis is a near-future transmedia universe exploring humanity's transition through technological acceleration, infrastructure, and systemic change.\n\nOPEN\n+\nWORLD / IN DEVELOPMENT\nLifa\n\nA universe-building experience about creation, emergence, and life at planetary scale.\n\nOPEN\n+\nFEATURED ACROSS CRYPTIC DESIGN\nSelected releases\n\nExplore announced work and its current availability.\n\nGAME / COMING SOON\nSingularis: Vertical Slice\n\nA playable first passage into the Singularis universe.\n\nOPEN\n+\nVIDEO / COMING SOON\nSingularis: Overture\n\nA cinematic prologue rendered in the Unreal + AI pipeline.\n\nOPEN\n+\nLAB / COMING SOON\nVisual Study 01\n\nA generative study in signal, structure, and light.\n\nOPEN\n+\nCONTINUE\nFind your next connection.\n\nDiscover Community participation paths, browse releases, or sign in to your personal My Home.\n\nEXPLORE COMMUNITY\n→\nBROWSE RELEASES\n→\nSIGN IN TO MY HOME\n→",
+        "overflow": false,
+        "canonical": "https://crypticdesign.net/entertainment",
+        "ogImage": "https://crypticdesign.net/share/entertainment.png",
+        "twitterImage": "https://crypticdesign.net/share/entertainment.png",
+        "scene": {
+          "scene": "entertainment",
+          "state": "poster",
+          "lifecycle": "static",
+          "renderer": "inactive",
+          "quality": "low"
+        },
+        "poster": true,
+        "heroCopy": null,
+        "heroStatus": null,
+        "links": [
+          {
+            "text": "Explore Entertainment",
+            "href": "#choose-a-mode"
+          },
+          {
+            "text": "Browse Releases",
+            "href": "/releases"
+          },
+          {
+            "text": "View release details",
+            "href": "/releases/singularis-themes-vol-1"
+          },
+          {
+            "text": "Explore Music",
+            "href": "/audio"
+          },
+          {
+            "text": "PlayArcadeGames, playable samples, prototypes, and interactive experiences.Open +",
+            "href": "/entertainment/explore"
+          },
+          {
+            "text": "ListenMusicScores, albums, tracks, signals, and audio releases.Open +",
+            "href": "/audio"
+          },
+          {
+            "text": "WatchVideoFilms, trailers, transmissions, visual stories, and series.Open +",
+            "href": "/entertainment/cinema"
+          },
+          {
+            "text": "World / in developmentSingularisSingularis is a near-future transmedia universe exploring humanity's transition through technological acceleration, infrastructure, and systemic change.Open +",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "World / in developmentLifaA universe-building experience about creation, emergence, and life at planetary scale.Open +",
+            "href": "/products/lifa"
+          },
+          {
+            "text": "game / Coming soonSingularis: Vertical SliceA playable first passage into the Singularis universe.Open +",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "video / Coming soonSingularis: OvertureA cinematic prologue rendered in the Unreal + AI pipeline.Open +",
+            "href": "/releases/singularis-overture"
+          },
+          {
+            "text": "lab / Coming soonVisual Study 01A generative study in signal, structure, and light.Open +",
+            "href": "/releases/visual-study-01"
+          },
+          {
+            "text": "Explore Community →",
+            "href": "/community"
+          },
+          {
+            "text": "Browse Releases →",
+            "href": "/releases"
+          },
+          {
+            "text": "Sign In to My Home →",
+            "href": "/account/sign-in"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/community",
+      "mode": "reduced-motion",
+      "width": 390,
+      "status": 200,
+      "facts": {
+        "headingCount": 1,
+        "headings": [
+          "Find the signal.Share the journey.",
+          "Participation paths",
+          "Discover people through work.",
+          "Find shared purpose.",
+          "Make room for shared experiences.",
+          "Explore while Community opens.",
+          "Participation with clear boundaries."
+        ],
+        "text": "Static scene displayed.\nCOMMUNITY / EXPLORE\nFind the signal.\nShare the journey.\n\nDiscover the people, groups, events, and shared experiences forming around Cryptic Design. Public Community is opening in stages, and every visible path reflects real current availability.\n\nSEE PARTICIPATION PATHS\nSIGN IN TO MY HOME\nCURRENT COMMUNITY STATUS\nCommunity is opening in stages\nPUBLIC COMMUNITY\nOPEN\nCREATORS\nPUBLIC PROFILE AVAILABLE\nGROUPS\nNO PUBLISHED GROUPS YET\nEVENTS\nNO APPROVED CALENDAR YET\nACTIVITY\nNOT CONNECTED\n\nBrowse public profiles and participation plans without an account. Group membership and event registration are not available yet.\n\nPARTICIPATION PATHS\nWHAT IS OPEN, AND WHAT IS NEXT\nCREATORS / AVAILABLE\nDiscover people through work.\n\nExplore Robert K. Croft’s approved public profile and the projects, releases, research, and studio practice behind it.\n\nDISCOVER CREATORS\n→\nGROUPS / OPENING IN STAGES\nFind shared purpose.\n\nNo groups are published yet. Learn about the planned ways to take part; group membership is not available.\n\nVIEW GROUP PLANS\n→\nEVENTS / OPENING IN STAGES\nMake room for shared experiences.\n\nNo approved event calendar is connected. Explore the planned event formats; there are no events to register for yet.\n\nVIEW EVENT PLANS\n→\nFROM ACROSS THE PLATFORM\nExplore while Community opens.\n\nGames, music, video, and release previews are open to browse. These are Entertainment destinations, not Community activity.\n\nEXPLORE ENTERTAINMENT\n→\nBROWSE RELEASES\n→\nOUR COMMUNITY. OUR CODE.\nParticipation with clear boundaries.\nBe respectful\nTreat people and their work with care.\nBe inclusive\nDesign for welcome, access, and belonging.\nBe creative\nShare ideas without taking ownership.\nProtect the space\nSafety and privacy outrank engagement.",
+        "overflow": false,
+        "canonical": "https://crypticdesign.net/community",
+        "ogImage": "https://crypticdesign.net/images/current-focus.png",
+        "twitterImage": "https://crypticdesign.net/images/current-focus.png",
+        "scene": {
+          "scene": "community",
+          "state": "poster",
+          "lifecycle": "static",
+          "renderer": "inactive",
+          "quality": "low"
+        },
+        "poster": true,
+        "heroCopy": {
+          "top": 165,
+          "bottom": 534.96875,
+          "left": 20,
+          "right": 370
+        },
+        "heroStatus": {
+          "top": 566.96875,
+          "bottom": 943.96875,
+          "left": 20,
+          "right": 370
+        },
+        "links": [
+          {
+            "text": "See Participation Paths",
+            "href": "#participation-paths"
+          },
+          {
+            "text": "Sign in to My Home",
+            "href": "/account/sign-in"
+          },
+          {
+            "text": "Discover Creators →",
+            "href": "/community/creators"
+          },
+          {
+            "text": "View Group plans →",
+            "href": "/community/groups"
+          },
+          {
+            "text": "View Event plans →",
+            "href": "/community/events"
+          },
+          {
+            "text": "Explore Entertainment →",
+            "href": "/entertainment"
+          },
+          {
+            "text": "Browse Releases →",
+            "href": "/releases"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/entertainment",
+      "mode": "reduced-motion",
+      "width": 1440,
+      "status": 200,
+      "facts": {
+        "headingCount": 1,
+        "headings": [
+          "Enter the worlds, sound, and systems in motion.",
+          "Singularis Themes, Vol. 1",
+          "Play. Listen. Watch.",
+          "Arcade",
+          "Music",
+          "Video",
+          "Worlds beyond a single medium",
+          "Singularis",
+          "Lifa",
+          "Selected releases",
+          "Singularis: Vertical Slice",
+          "Singularis: Overture",
+          "Visual Study 01",
+          "Find your next connection."
+        ],
+        "text": "Static scene displayed.\nENTER ENTERTAINMENT\nEnter the worlds, sound, and systems in motion.\n\nExplore games, music, video, original worlds, releases, and experiments across one connected entertainment platform.\n\nEXPLORE ENTERTAINMENT\nBROWSE RELEASES\nFEATURED / AUDIO / COMING SOON\nSingularis Themes, Vol. 1\n\nEarly thematic material from the Singularis score — motifs and atmospheres from the world's first act.\n\nVIEW RELEASE DETAILS\nEXPLORE MUSIC\nCHOOSE A MODE\nPlay. Listen. Watch.\n\nBrowse each catalog without an account. Availability is shown for each experience.\n\nPLAY\nArcade\n\nGames, playable samples, prototypes, and interactive experiences.\n\nOPEN\n+\nLISTEN\nMusic\n\nScores, albums, tracks, signals, and audio releases.\n\nOPEN\n+\nWATCH\nVideo\n\nFilms, trailers, transmissions, visual stories, and series.\n\nOPEN\n+\nENTER A WORLD\nWorlds beyond a single medium\n\nOriginal properties connecting games, music, stories, and experiments.\n\nWORLD / IN DEVELOPMENT\nSingularis\n\nSingularis is a near-future transmedia universe exploring humanity's transition through technological acceleration, infrastructure, and systemic change.\n\nOPEN\n+\nWORLD / IN DEVELOPMENT\nLifa\n\nA universe-building experience about creation, emergence, and life at planetary scale.\n\nOPEN\n+\nFEATURED ACROSS CRYPTIC DESIGN\nSelected releases\n\nExplore announced work and its current availability.\n\nGAME / COMING SOON\nSingularis: Vertical Slice\n\nA playable first passage into the Singularis universe.\n\nOPEN\n+\nVIDEO / COMING SOON\nSingularis: Overture\n\nA cinematic prologue rendered in the Unreal + AI pipeline.\n\nOPEN\n+\nLAB / COMING SOON\nVisual Study 01\n\nA generative study in signal, structure, and light.\n\nOPEN\n+\nCONTINUE\nFind your next connection.\n\nDiscover Community participation paths, browse releases, or sign in to your personal My Home.\n\nEXPLORE COMMUNITY\n→\nBROWSE RELEASES\n→\nSIGN IN TO MY HOME\n→",
+        "overflow": false,
+        "canonical": "https://crypticdesign.net/entertainment",
+        "ogImage": "https://crypticdesign.net/share/entertainment.png",
+        "twitterImage": "https://crypticdesign.net/share/entertainment.png",
+        "scene": {
+          "scene": "entertainment",
+          "state": "poster",
+          "lifecycle": "static",
+          "renderer": "inactive",
+          "quality": "low"
+        },
+        "poster": true,
+        "heroCopy": null,
+        "heroStatus": null,
+        "links": [
+          {
+            "text": "Explore Entertainment",
+            "href": "#choose-a-mode"
+          },
+          {
+            "text": "Browse Releases",
+            "href": "/releases"
+          },
+          {
+            "text": "View release details",
+            "href": "/releases/singularis-themes-vol-1"
+          },
+          {
+            "text": "Explore Music",
+            "href": "/audio"
+          },
+          {
+            "text": "PlayArcadeGames, playable samples, prototypes, and interactive experiences.Open +",
+            "href": "/entertainment/explore"
+          },
+          {
+            "text": "ListenMusicScores, albums, tracks, signals, and audio releases.Open +",
+            "href": "/audio"
+          },
+          {
+            "text": "WatchVideoFilms, trailers, transmissions, visual stories, and series.Open +",
+            "href": "/entertainment/cinema"
+          },
+          {
+            "text": "World / in developmentSingularisSingularis is a near-future transmedia universe exploring humanity's transition through technological acceleration, infrastructure, and systemic change.Open +",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "World / in developmentLifaA universe-building experience about creation, emergence, and life at planetary scale.Open +",
+            "href": "/products/lifa"
+          },
+          {
+            "text": "game / Coming soonSingularis: Vertical SliceA playable first passage into the Singularis universe.Open +",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "video / Coming soonSingularis: OvertureA cinematic prologue rendered in the Unreal + AI pipeline.Open +",
+            "href": "/releases/singularis-overture"
+          },
+          {
+            "text": "lab / Coming soonVisual Study 01A generative study in signal, structure, and light.Open +",
+            "href": "/releases/visual-study-01"
+          },
+          {
+            "text": "Explore Community →",
+            "href": "/community"
+          },
+          {
+            "text": "Browse Releases →",
+            "href": "/releases"
+          },
+          {
+            "text": "Sign In to My Home →",
+            "href": "/account/sign-in"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/community",
+      "mode": "reduced-motion",
+      "width": 1440,
+      "status": 200,
+      "facts": {
+        "headingCount": 1,
+        "headings": [
+          "Find the signal.Share the journey.",
+          "Participation paths",
+          "Discover people through work.",
+          "Find shared purpose.",
+          "Make room for shared experiences.",
+          "Explore while Community opens.",
+          "Participation with clear boundaries."
+        ],
+        "text": "Static scene displayed.\nCOMMUNITY / EXPLORE\nFind the signal.\nShare the journey.\n\nDiscover the people, groups, events, and shared experiences forming around Cryptic Design. Public Community is opening in stages, and every visible path reflects real current availability.\n\nSEE PARTICIPATION PATHS\nSIGN IN TO MY HOME\nCURRENT COMMUNITY STATUS\nCommunity is opening in stages\nPUBLIC COMMUNITY\nOPEN\nCREATORS\nPUBLIC PROFILE AVAILABLE\nGROUPS\nNO PUBLISHED GROUPS YET\nEVENTS\nNO APPROVED CALENDAR YET\nACTIVITY\nNOT CONNECTED\n\nBrowse public profiles and participation plans without an account. Group membership and event registration are not available yet.\n\nPARTICIPATION PATHS\nWHAT IS OPEN, AND WHAT IS NEXT\nCREATORS / AVAILABLE\nDiscover people through work.\n\nExplore Robert K. Croft’s approved public profile and the projects, releases, research, and studio practice behind it.\n\nDISCOVER CREATORS\n→\nGROUPS / OPENING IN STAGES\nFind shared purpose.\n\nNo groups are published yet. Learn about the planned ways to take part; group membership is not available.\n\nVIEW GROUP PLANS\n→\nEVENTS / OPENING IN STAGES\nMake room for shared experiences.\n\nNo approved event calendar is connected. Explore the planned event formats; there are no events to register for yet.\n\nVIEW EVENT PLANS\n→\nFROM ACROSS THE PLATFORM\nExplore while Community opens.\n\nGames, music, video, and release previews are open to browse. These are Entertainment destinations, not Community activity.\n\nEXPLORE ENTERTAINMENT\n→\nBROWSE RELEASES\n→\nOUR COMMUNITY. OUR CODE.\nParticipation with clear boundaries.\nBe respectful\nTreat people and their work with care.\nBe inclusive\nDesign for welcome, access, and belonging.\nBe creative\nShare ideas without taking ownership.\nProtect the space\nSafety and privacy outrank engagement.",
+        "overflow": false,
+        "canonical": "https://crypticdesign.net/community",
+        "ogImage": "https://crypticdesign.net/images/current-focus.png",
+        "twitterImage": "https://crypticdesign.net/images/current-focus.png",
+        "scene": {
+          "scene": "community",
+          "state": "poster",
+          "lifecycle": "static",
+          "renderer": "inactive",
+          "quality": "low"
+        },
+        "poster": true,
+        "heroCopy": {
+          "top": 279.203125,
+          "bottom": 613.796875,
+          "left": 64,
+          "right": 988
+        },
+        "heroStatus": {
+          "top": 258,
+          "bottom": 635,
+          "left": 1036,
+          "right": 1376
+        },
+        "links": [
+          {
+            "text": "See Participation Paths",
+            "href": "#participation-paths"
+          },
+          {
+            "text": "Sign in to My Home",
+            "href": "/account/sign-in"
+          },
+          {
+            "text": "Discover Creators →",
+            "href": "/community/creators"
+          },
+          {
+            "text": "View Group plans →",
+            "href": "/community/groups"
+          },
+          {
+            "text": "View Event plans →",
+            "href": "/community/events"
+          },
+          {
+            "text": "Explore Entertainment →",
+            "href": "/entertainment"
+          },
+          {
+            "text": "Browse Releases →",
+            "href": "/releases"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/entertainment",
+      "mode": "no-webgl",
+      "width": 390,
+      "status": 200,
+      "facts": {
+        "headingCount": 1,
+        "headings": [
+          "Enter the worlds, sound, and systems in motion.",
+          "Singularis Themes, Vol. 1",
+          "Play. Listen. Watch.",
+          "Arcade",
+          "Music",
+          "Video",
+          "Worlds beyond a single medium",
+          "Singularis",
+          "Lifa",
+          "Selected releases",
+          "Singularis: Vertical Slice",
+          "Singularis: Overture",
+          "Visual Study 01",
+          "Find your next connection."
+        ],
+        "text": "Static scene displayed.\nENTER ENTERTAINMENT\nEnter the worlds, sound, and systems in motion.\n\nExplore games, music, video, original worlds, releases, and experiments across one connected entertainment platform.\n\nEXPLORE ENTERTAINMENT\nBROWSE RELEASES\nFEATURED / AUDIO / COMING SOON\nSingularis Themes, Vol. 1\n\nEarly thematic material from the Singularis score — motifs and atmospheres from the world's first act.\n\nVIEW RELEASE DETAILS\nEXPLORE MUSIC\nCHOOSE A MODE\nPlay. Listen. Watch.\n\nBrowse each catalog without an account. Availability is shown for each experience.\n\nPLAY\nArcade\n\nGames, playable samples, prototypes, and interactive experiences.\n\nOPEN\n+\nLISTEN\nMusic\n\nScores, albums, tracks, signals, and audio releases.\n\nOPEN\n+\nWATCH\nVideo\n\nFilms, trailers, transmissions, visual stories, and series.\n\nOPEN\n+\nENTER A WORLD\nWorlds beyond a single medium\n\nOriginal properties connecting games, music, stories, and experiments.\n\nWORLD / IN DEVELOPMENT\nSingularis\n\nSingularis is a near-future transmedia universe exploring humanity's transition through technological acceleration, infrastructure, and systemic change.\n\nOPEN\n+\nWORLD / IN DEVELOPMENT\nLifa\n\nA universe-building experience about creation, emergence, and life at planetary scale.\n\nOPEN\n+\nFEATURED ACROSS CRYPTIC DESIGN\nSelected releases\n\nExplore announced work and its current availability.\n\nGAME / COMING SOON\nSingularis: Vertical Slice\n\nA playable first passage into the Singularis universe.\n\nOPEN\n+\nVIDEO / COMING SOON\nSingularis: Overture\n\nA cinematic prologue rendered in the Unreal + AI pipeline.\n\nOPEN\n+\nLAB / COMING SOON\nVisual Study 01\n\nA generative study in signal, structure, and light.\n\nOPEN\n+\nCONTINUE\nFind your next connection.\n\nDiscover Community participation paths, browse releases, or sign in to your personal My Home.\n\nEXPLORE COMMUNITY\n→\nBROWSE RELEASES\n→\nSIGN IN TO MY HOME\n→",
+        "overflow": false,
+        "canonical": "https://crypticdesign.net/entertainment",
+        "ogImage": "https://crypticdesign.net/share/entertainment.png",
+        "twitterImage": "https://crypticdesign.net/share/entertainment.png",
+        "scene": {
+          "scene": "entertainment",
+          "state": "poster",
+          "lifecycle": "static",
+          "renderer": "inactive",
+          "quality": "low"
+        },
+        "poster": true,
+        "heroCopy": null,
+        "heroStatus": null,
+        "links": [
+          {
+            "text": "Explore Entertainment",
+            "href": "#choose-a-mode"
+          },
+          {
+            "text": "Browse Releases",
+            "href": "/releases"
+          },
+          {
+            "text": "View release details",
+            "href": "/releases/singularis-themes-vol-1"
+          },
+          {
+            "text": "Explore Music",
+            "href": "/audio"
+          },
+          {
+            "text": "PlayArcadeGames, playable samples, prototypes, and interactive experiences.Open +",
+            "href": "/entertainment/explore"
+          },
+          {
+            "text": "ListenMusicScores, albums, tracks, signals, and audio releases.Open +",
+            "href": "/audio"
+          },
+          {
+            "text": "WatchVideoFilms, trailers, transmissions, visual stories, and series.Open +",
+            "href": "/entertainment/cinema"
+          },
+          {
+            "text": "World / in developmentSingularisSingularis is a near-future transmedia universe exploring humanity's transition through technological acceleration, infrastructure, and systemic change.Open +",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "World / in developmentLifaA universe-building experience about creation, emergence, and life at planetary scale.Open +",
+            "href": "/products/lifa"
+          },
+          {
+            "text": "game / Coming soonSingularis: Vertical SliceA playable first passage into the Singularis universe.Open +",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "video / Coming soonSingularis: OvertureA cinematic prologue rendered in the Unreal + AI pipeline.Open +",
+            "href": "/releases/singularis-overture"
+          },
+          {
+            "text": "lab / Coming soonVisual Study 01A generative study in signal, structure, and light.Open +",
+            "href": "/releases/visual-study-01"
+          },
+          {
+            "text": "Explore Community →",
+            "href": "/community"
+          },
+          {
+            "text": "Browse Releases →",
+            "href": "/releases"
+          },
+          {
+            "text": "Sign In to My Home →",
+            "href": "/account/sign-in"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/community",
+      "mode": "no-webgl",
+      "width": 390,
+      "status": 200,
+      "facts": {
+        "headingCount": 1,
+        "headings": [
+          "Find the signal.Share the journey.",
+          "Participation paths",
+          "Discover people through work.",
+          "Find shared purpose.",
+          "Make room for shared experiences.",
+          "Explore while Community opens.",
+          "Participation with clear boundaries."
+        ],
+        "text": "Static scene displayed.\nCOMMUNITY / EXPLORE\nFind the signal.\nShare the journey.\n\nDiscover the people, groups, events, and shared experiences forming around Cryptic Design. Public Community is opening in stages, and every visible path reflects real current availability.\n\nSEE PARTICIPATION PATHS\nSIGN IN TO MY HOME\nCURRENT COMMUNITY STATUS\nCommunity is opening in stages\nPUBLIC COMMUNITY\nOPEN\nCREATORS\nPUBLIC PROFILE AVAILABLE\nGROUPS\nNO PUBLISHED GROUPS YET\nEVENTS\nNO APPROVED CALENDAR YET\nACTIVITY\nNOT CONNECTED\n\nBrowse public profiles and participation plans without an account. Group membership and event registration are not available yet.\n\nPARTICIPATION PATHS\nWHAT IS OPEN, AND WHAT IS NEXT\nCREATORS / AVAILABLE\nDiscover people through work.\n\nExplore Robert K. Croft’s approved public profile and the projects, releases, research, and studio practice behind it.\n\nDISCOVER CREATORS\n→\nGROUPS / OPENING IN STAGES\nFind shared purpose.\n\nNo groups are published yet. Learn about the planned ways to take part; group membership is not available.\n\nVIEW GROUP PLANS\n→\nEVENTS / OPENING IN STAGES\nMake room for shared experiences.\n\nNo approved event calendar is connected. Explore the planned event formats; there are no events to register for yet.\n\nVIEW EVENT PLANS\n→\nFROM ACROSS THE PLATFORM\nExplore while Community opens.\n\nGames, music, video, and release previews are open to browse. These are Entertainment destinations, not Community activity.\n\nEXPLORE ENTERTAINMENT\n→\nBROWSE RELEASES\n→\nOUR COMMUNITY. OUR CODE.\nParticipation with clear boundaries.\nBe respectful\nTreat people and their work with care.\nBe inclusive\nDesign for welcome, access, and belonging.\nBe creative\nShare ideas without taking ownership.\nProtect the space\nSafety and privacy outrank engagement.",
+        "overflow": false,
+        "canonical": "https://crypticdesign.net/community",
+        "ogImage": "https://crypticdesign.net/images/current-focus.png",
+        "twitterImage": "https://crypticdesign.net/images/current-focus.png",
+        "scene": {
+          "scene": "community",
+          "state": "poster",
+          "lifecycle": "static",
+          "renderer": "inactive",
+          "quality": "low"
+        },
+        "poster": true,
+        "heroCopy": {
+          "top": 165,
+          "bottom": 534.96875,
+          "left": 20,
+          "right": 370
+        },
+        "heroStatus": {
+          "top": 566.96875,
+          "bottom": 943.96875,
+          "left": 20,
+          "right": 370
+        },
+        "links": [
+          {
+            "text": "See Participation Paths",
+            "href": "#participation-paths"
+          },
+          {
+            "text": "Sign in to My Home",
+            "href": "/account/sign-in"
+          },
+          {
+            "text": "Discover Creators →",
+            "href": "/community/creators"
+          },
+          {
+            "text": "View Group plans →",
+            "href": "/community/groups"
+          },
+          {
+            "text": "View Event plans →",
+            "href": "/community/events"
+          },
+          {
+            "text": "Explore Entertainment →",
+            "href": "/entertainment"
+          },
+          {
+            "text": "Browse Releases →",
+            "href": "/releases"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/entertainment",
+      "mode": "no-webgl",
+      "width": 1440,
+      "status": 200,
+      "facts": {
+        "headingCount": 1,
+        "headings": [
+          "Enter the worlds, sound, and systems in motion.",
+          "Singularis Themes, Vol. 1",
+          "Play. Listen. Watch.",
+          "Arcade",
+          "Music",
+          "Video",
+          "Worlds beyond a single medium",
+          "Singularis",
+          "Lifa",
+          "Selected releases",
+          "Singularis: Vertical Slice",
+          "Singularis: Overture",
+          "Visual Study 01",
+          "Find your next connection."
+        ],
+        "text": "Static scene displayed.\nENTER ENTERTAINMENT\nEnter the worlds, sound, and systems in motion.\n\nExplore games, music, video, original worlds, releases, and experiments across one connected entertainment platform.\n\nEXPLORE ENTERTAINMENT\nBROWSE RELEASES\nFEATURED / AUDIO / COMING SOON\nSingularis Themes, Vol. 1\n\nEarly thematic material from the Singularis score — motifs and atmospheres from the world's first act.\n\nVIEW RELEASE DETAILS\nEXPLORE MUSIC\nCHOOSE A MODE\nPlay. Listen. Watch.\n\nBrowse each catalog without an account. Availability is shown for each experience.\n\nPLAY\nArcade\n\nGames, playable samples, prototypes, and interactive experiences.\n\nOPEN\n+\nLISTEN\nMusic\n\nScores, albums, tracks, signals, and audio releases.\n\nOPEN\n+\nWATCH\nVideo\n\nFilms, trailers, transmissions, visual stories, and series.\n\nOPEN\n+\nENTER A WORLD\nWorlds beyond a single medium\n\nOriginal properties connecting games, music, stories, and experiments.\n\nWORLD / IN DEVELOPMENT\nSingularis\n\nSingularis is a near-future transmedia universe exploring humanity's transition through technological acceleration, infrastructure, and systemic change.\n\nOPEN\n+\nWORLD / IN DEVELOPMENT\nLifa\n\nA universe-building experience about creation, emergence, and life at planetary scale.\n\nOPEN\n+\nFEATURED ACROSS CRYPTIC DESIGN\nSelected releases\n\nExplore announced work and its current availability.\n\nGAME / COMING SOON\nSingularis: Vertical Slice\n\nA playable first passage into the Singularis universe.\n\nOPEN\n+\nVIDEO / COMING SOON\nSingularis: Overture\n\nA cinematic prologue rendered in the Unreal + AI pipeline.\n\nOPEN\n+\nLAB / COMING SOON\nVisual Study 01\n\nA generative study in signal, structure, and light.\n\nOPEN\n+\nCONTINUE\nFind your next connection.\n\nDiscover Community participation paths, browse releases, or sign in to your personal My Home.\n\nEXPLORE COMMUNITY\n→\nBROWSE RELEASES\n→\nSIGN IN TO MY HOME\n→",
+        "overflow": false,
+        "canonical": "https://crypticdesign.net/entertainment",
+        "ogImage": "https://crypticdesign.net/share/entertainment.png",
+        "twitterImage": "https://crypticdesign.net/share/entertainment.png",
+        "scene": {
+          "scene": "entertainment",
+          "state": "poster",
+          "lifecycle": "static",
+          "renderer": "inactive",
+          "quality": "low"
+        },
+        "poster": true,
+        "heroCopy": null,
+        "heroStatus": null,
+        "links": [
+          {
+            "text": "Explore Entertainment",
+            "href": "#choose-a-mode"
+          },
+          {
+            "text": "Browse Releases",
+            "href": "/releases"
+          },
+          {
+            "text": "View release details",
+            "href": "/releases/singularis-themes-vol-1"
+          },
+          {
+            "text": "Explore Music",
+            "href": "/audio"
+          },
+          {
+            "text": "PlayArcadeGames, playable samples, prototypes, and interactive experiences.Open +",
+            "href": "/entertainment/explore"
+          },
+          {
+            "text": "ListenMusicScores, albums, tracks, signals, and audio releases.Open +",
+            "href": "/audio"
+          },
+          {
+            "text": "WatchVideoFilms, trailers, transmissions, visual stories, and series.Open +",
+            "href": "/entertainment/cinema"
+          },
+          {
+            "text": "World / in developmentSingularisSingularis is a near-future transmedia universe exploring humanity's transition through technological acceleration, infrastructure, and systemic change.Open +",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "World / in developmentLifaA universe-building experience about creation, emergence, and life at planetary scale.Open +",
+            "href": "/products/lifa"
+          },
+          {
+            "text": "game / Coming soonSingularis: Vertical SliceA playable first passage into the Singularis universe.Open +",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "video / Coming soonSingularis: OvertureA cinematic prologue rendered in the Unreal + AI pipeline.Open +",
+            "href": "/releases/singularis-overture"
+          },
+          {
+            "text": "lab / Coming soonVisual Study 01A generative study in signal, structure, and light.Open +",
+            "href": "/releases/visual-study-01"
+          },
+          {
+            "text": "Explore Community →",
+            "href": "/community"
+          },
+          {
+            "text": "Browse Releases →",
+            "href": "/releases"
+          },
+          {
+            "text": "Sign In to My Home →",
+            "href": "/account/sign-in"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/community",
+      "mode": "no-webgl",
+      "width": 1440,
+      "status": 200,
+      "facts": {
+        "headingCount": 1,
+        "headings": [
+          "Find the signal.Share the journey.",
+          "Participation paths",
+          "Discover people through work.",
+          "Find shared purpose.",
+          "Make room for shared experiences.",
+          "Explore while Community opens.",
+          "Participation with clear boundaries."
+        ],
+        "text": "Static scene displayed.\nCOMMUNITY / EXPLORE\nFind the signal.\nShare the journey.\n\nDiscover the people, groups, events, and shared experiences forming around Cryptic Design. Public Community is opening in stages, and every visible path reflects real current availability.\n\nSEE PARTICIPATION PATHS\nSIGN IN TO MY HOME\nCURRENT COMMUNITY STATUS\nCommunity is opening in stages\nPUBLIC COMMUNITY\nOPEN\nCREATORS\nPUBLIC PROFILE AVAILABLE\nGROUPS\nNO PUBLISHED GROUPS YET\nEVENTS\nNO APPROVED CALENDAR YET\nACTIVITY\nNOT CONNECTED\n\nBrowse public profiles and participation plans without an account. Group membership and event registration are not available yet.\n\nPARTICIPATION PATHS\nWHAT IS OPEN, AND WHAT IS NEXT\nCREATORS / AVAILABLE\nDiscover people through work.\n\nExplore Robert K. Croft’s approved public profile and the projects, releases, research, and studio practice behind it.\n\nDISCOVER CREATORS\n→\nGROUPS / OPENING IN STAGES\nFind shared purpose.\n\nNo groups are published yet. Learn about the planned ways to take part; group membership is not available.\n\nVIEW GROUP PLANS\n→\nEVENTS / OPENING IN STAGES\nMake room for shared experiences.\n\nNo approved event calendar is connected. Explore the planned event formats; there are no events to register for yet.\n\nVIEW EVENT PLANS\n→\nFROM ACROSS THE PLATFORM\nExplore while Community opens.\n\nGames, music, video, and release previews are open to browse. These are Entertainment destinations, not Community activity.\n\nEXPLORE ENTERTAINMENT\n→\nBROWSE RELEASES\n→\nOUR COMMUNITY. OUR CODE.\nParticipation with clear boundaries.\nBe respectful\nTreat people and their work with care.\nBe inclusive\nDesign for welcome, access, and belonging.\nBe creative\nShare ideas without taking ownership.\nProtect the space\nSafety and privacy outrank engagement.",
+        "overflow": false,
+        "canonical": "https://crypticdesign.net/community",
+        "ogImage": "https://crypticdesign.net/images/current-focus.png",
+        "twitterImage": "https://crypticdesign.net/images/current-focus.png",
+        "scene": {
+          "scene": "community",
+          "state": "poster",
+          "lifecycle": "static",
+          "renderer": "inactive",
+          "quality": "low"
+        },
+        "poster": true,
+        "heroCopy": {
+          "top": 279.203125,
+          "bottom": 613.796875,
+          "left": 64,
+          "right": 988
+        },
+        "heroStatus": {
+          "top": 258,
+          "bottom": 635,
+          "left": 1036,
+          "right": 1376
+        },
+        "links": [
+          {
+            "text": "See Participation Paths",
+            "href": "#participation-paths"
+          },
+          {
+            "text": "Sign in to My Home",
+            "href": "/account/sign-in"
+          },
+          {
+            "text": "Discover Creators →",
+            "href": "/community/creators"
+          },
+          {
+            "text": "View Group plans →",
+            "href": "/community/groups"
+          },
+          {
+            "text": "View Event plans →",
+            "href": "/community/events"
+          },
+          {
+            "text": "Explore Entertainment →",
+            "href": "/entertainment"
+          },
+          {
+            "text": "Browse Releases →",
+            "href": "/releases"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/entertainment",
+      "mode": "no-js",
+      "width": 390,
+      "status": 200,
+      "facts": {
+        "headingCount": 1,
+        "headings": [
+          "Enter the worlds, sound, and systems in motion.",
+          "Singularis Themes, Vol. 1",
+          "Play. Listen. Watch.",
+          "Arcade",
+          "Music",
+          "Video",
+          "Worlds beyond a single medium",
+          "Singularis",
+          "Lifa",
+          "Selected releases",
+          "Singularis: Vertical Slice",
+          "Singularis: Overture",
+          "Visual Study 01",
+          "Find your next connection."
+        ],
+        "text": "Static scene displayed.\nENTER ENTERTAINMENT\nEnter the worlds, sound, and systems in motion.\n\nExplore games, music, video, original worlds, releases, and experiments across one connected entertainment platform.\n\nEXPLORE ENTERTAINMENT\nBROWSE RELEASES\nFEATURED / AUDIO / COMING SOON\nSingularis Themes, Vol. 1\n\nEarly thematic material from the Singularis score — motifs and atmospheres from the world's first act.\n\nVIEW RELEASE DETAILS\nEXPLORE MUSIC\nCHOOSE A MODE\nPlay. Listen. Watch.\n\nBrowse each catalog without an account. Availability is shown for each experience.\n\nPLAY\nArcade\n\nGames, playable samples, prototypes, and interactive experiences.\n\nOPEN\n+\nLISTEN\nMusic\n\nScores, albums, tracks, signals, and audio releases.\n\nOPEN\n+\nWATCH\nVideo\n\nFilms, trailers, transmissions, visual stories, and series.\n\nOPEN\n+\nENTER A WORLD\nWorlds beyond a single medium\n\nOriginal properties connecting games, music, stories, and experiments.\n\nWORLD / IN DEVELOPMENT\nSingularis\n\nSingularis is a near-future transmedia universe exploring humanity's transition through technological acceleration, infrastructure, and systemic change.\n\nOPEN\n+\nWORLD / IN DEVELOPMENT\nLifa\n\nA universe-building experience about creation, emergence, and life at planetary scale.\n\nOPEN\n+\nFEATURED ACROSS CRYPTIC DESIGN\nSelected releases\n\nExplore announced work and its current availability.\n\nGAME / COMING SOON\nSingularis: Vertical Slice\n\nA playable first passage into the Singularis universe.\n\nOPEN\n+\nVIDEO / COMING SOON\nSingularis: Overture\n\nA cinematic prologue rendered in the Unreal + AI pipeline.\n\nOPEN\n+\nLAB / COMING SOON\nVisual Study 01\n\nA generative study in signal, structure, and light.\n\nOPEN\n+\nCONTINUE\nFind your next connection.\n\nDiscover Community participation paths, browse releases, or sign in to your personal My Home.\n\nEXPLORE COMMUNITY\n→\nBROWSE RELEASES\n→\nSIGN IN TO MY HOME\n→",
+        "overflow": false,
+        "canonical": "https://crypticdesign.net/entertainment",
+        "ogImage": "https://crypticdesign.net/share/entertainment.png",
+        "twitterImage": "https://crypticdesign.net/share/entertainment.png",
+        "scene": {
+          "scene": "entertainment",
+          "state": "poster",
+          "lifecycle": "loading",
+          "renderer": "inactive"
+        },
+        "poster": true,
+        "heroCopy": null,
+        "heroStatus": null,
+        "links": [
+          {
+            "text": "Explore Entertainment",
+            "href": "#choose-a-mode"
+          },
+          {
+            "text": "Browse Releases",
+            "href": "/releases"
+          },
+          {
+            "text": "View release details",
+            "href": "/releases/singularis-themes-vol-1"
+          },
+          {
+            "text": "Explore Music",
+            "href": "/audio"
+          },
+          {
+            "text": "PlayArcadeGames, playable samples, prototypes, and interactive experiences.Open +",
+            "href": "/entertainment/explore"
+          },
+          {
+            "text": "ListenMusicScores, albums, tracks, signals, and audio releases.Open +",
+            "href": "/audio"
+          },
+          {
+            "text": "WatchVideoFilms, trailers, transmissions, visual stories, and series.Open +",
+            "href": "/entertainment/cinema"
+          },
+          {
+            "text": "World / in developmentSingularisSingularis is a near-future transmedia universe exploring humanity's transition through technological acceleration, infrastructure, and systemic change.Open +",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "World / in developmentLifaA universe-building experience about creation, emergence, and life at planetary scale.Open +",
+            "href": "/products/lifa"
+          },
+          {
+            "text": "game / Coming soonSingularis: Vertical SliceA playable first passage into the Singularis universe.Open +",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "video / Coming soonSingularis: OvertureA cinematic prologue rendered in the Unreal + AI pipeline.Open +",
+            "href": "/releases/singularis-overture"
+          },
+          {
+            "text": "lab / Coming soonVisual Study 01A generative study in signal, structure, and light.Open +",
+            "href": "/releases/visual-study-01"
+          },
+          {
+            "text": "Explore Community →",
+            "href": "/community"
+          },
+          {
+            "text": "Browse Releases →",
+            "href": "/releases"
+          },
+          {
+            "text": "Sign In to My Home →",
+            "href": "/account/sign-in"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/community",
+      "mode": "no-js",
+      "width": 390,
+      "status": 200,
+      "facts": {
+        "headingCount": 1,
+        "headings": [
+          "Find the signal.Share the journey.",
+          "Participation paths",
+          "Discover people through work.",
+          "Find shared purpose.",
+          "Make room for shared experiences.",
+          "Explore while Community opens.",
+          "Participation with clear boundaries."
+        ],
+        "text": "Static scene displayed.\nCOMMUNITY / EXPLORE\nFind the signal.\nShare the journey.\n\nDiscover the people, groups, events, and shared experiences forming around Cryptic Design. Public Community is opening in stages, and every visible path reflects real current availability.\n\nSEE PARTICIPATION PATHS\nSIGN IN TO MY HOME\nCURRENT COMMUNITY STATUS\nCommunity is opening in stages\nPUBLIC COMMUNITY\nOPEN\nCREATORS\nPUBLIC PROFILE AVAILABLE\nGROUPS\nNO PUBLISHED GROUPS YET\nEVENTS\nNO APPROVED CALENDAR YET\nACTIVITY\nNOT CONNECTED\n\nBrowse public profiles and participation plans without an account. Group membership and event registration are not available yet.\n\nPARTICIPATION PATHS\nWHAT IS OPEN, AND WHAT IS NEXT\nCREATORS / AVAILABLE\nDiscover people through work.\n\nExplore Robert K. Croft’s approved public profile and the projects, releases, research, and studio practice behind it.\n\nDISCOVER CREATORS\n→\nGROUPS / OPENING IN STAGES\nFind shared purpose.\n\nNo groups are published yet. Learn about the planned ways to take part; group membership is not available.\n\nVIEW GROUP PLANS\n→\nEVENTS / OPENING IN STAGES\nMake room for shared experiences.\n\nNo approved event calendar is connected. Explore the planned event formats; there are no events to register for yet.\n\nVIEW EVENT PLANS\n→\nFROM ACROSS THE PLATFORM\nExplore while Community opens.\n\nGames, music, video, and release previews are open to browse. These are Entertainment destinations, not Community activity.\n\nEXPLORE ENTERTAINMENT\n→\nBROWSE RELEASES\n→\nOUR COMMUNITY. OUR CODE.\nParticipation with clear boundaries.\nBe respectful\nTreat people and their work with care.\nBe inclusive\nDesign for welcome, access, and belonging.\nBe creative\nShare ideas without taking ownership.\nProtect the space\nSafety and privacy outrank engagement.",
+        "overflow": false,
+        "canonical": "https://crypticdesign.net/community",
+        "ogImage": "https://crypticdesign.net/images/current-focus.png",
+        "twitterImage": "https://crypticdesign.net/images/current-focus.png",
+        "scene": {
+          "scene": "community",
+          "state": "poster",
+          "lifecycle": "loading",
+          "renderer": "inactive"
+        },
+        "poster": true,
+        "heroCopy": {
+          "top": 165,
+          "bottom": 534.96875,
+          "left": 20,
+          "right": 370
+        },
+        "heroStatus": {
+          "top": 566.96875,
+          "bottom": 943.96875,
+          "left": 20,
+          "right": 370
+        },
+        "links": [
+          {
+            "text": "See Participation Paths",
+            "href": "#participation-paths"
+          },
+          {
+            "text": "Sign in to My Home",
+            "href": "/account/sign-in"
+          },
+          {
+            "text": "Discover Creators →",
+            "href": "/community/creators"
+          },
+          {
+            "text": "View Group plans →",
+            "href": "/community/groups"
+          },
+          {
+            "text": "View Event plans →",
+            "href": "/community/events"
+          },
+          {
+            "text": "Explore Entertainment →",
+            "href": "/entertainment"
+          },
+          {
+            "text": "Browse Releases →",
+            "href": "/releases"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/entertainment",
+      "mode": "no-js",
+      "width": 1440,
+      "status": 200,
+      "facts": {
+        "headingCount": 1,
+        "headings": [
+          "Enter the worlds, sound, and systems in motion.",
+          "Singularis Themes, Vol. 1",
+          "Play. Listen. Watch.",
+          "Arcade",
+          "Music",
+          "Video",
+          "Worlds beyond a single medium",
+          "Singularis",
+          "Lifa",
+          "Selected releases",
+          "Singularis: Vertical Slice",
+          "Singularis: Overture",
+          "Visual Study 01",
+          "Find your next connection."
+        ],
+        "text": "Static scene displayed.\nENTER ENTERTAINMENT\nEnter the worlds, sound, and systems in motion.\n\nExplore games, music, video, original worlds, releases, and experiments across one connected entertainment platform.\n\nEXPLORE ENTERTAINMENT\nBROWSE RELEASES\nFEATURED / AUDIO / COMING SOON\nSingularis Themes, Vol. 1\n\nEarly thematic material from the Singularis score — motifs and atmospheres from the world's first act.\n\nVIEW RELEASE DETAILS\nEXPLORE MUSIC\nCHOOSE A MODE\nPlay. Listen. Watch.\n\nBrowse each catalog without an account. Availability is shown for each experience.\n\nPLAY\nArcade\n\nGames, playable samples, prototypes, and interactive experiences.\n\nOPEN\n+\nLISTEN\nMusic\n\nScores, albums, tracks, signals, and audio releases.\n\nOPEN\n+\nWATCH\nVideo\n\nFilms, trailers, transmissions, visual stories, and series.\n\nOPEN\n+\nENTER A WORLD\nWorlds beyond a single medium\n\nOriginal properties connecting games, music, stories, and experiments.\n\nWORLD / IN DEVELOPMENT\nSingularis\n\nSingularis is a near-future transmedia universe exploring humanity's transition through technological acceleration, infrastructure, and systemic change.\n\nOPEN\n+\nWORLD / IN DEVELOPMENT\nLifa\n\nA universe-building experience about creation, emergence, and life at planetary scale.\n\nOPEN\n+\nFEATURED ACROSS CRYPTIC DESIGN\nSelected releases\n\nExplore announced work and its current availability.\n\nGAME / COMING SOON\nSingularis: Vertical Slice\n\nA playable first passage into the Singularis universe.\n\nOPEN\n+\nVIDEO / COMING SOON\nSingularis: Overture\n\nA cinematic prologue rendered in the Unreal + AI pipeline.\n\nOPEN\n+\nLAB / COMING SOON\nVisual Study 01\n\nA generative study in signal, structure, and light.\n\nOPEN\n+\nCONTINUE\nFind your next connection.\n\nDiscover Community participation paths, browse releases, or sign in to your personal My Home.\n\nEXPLORE COMMUNITY\n→\nBROWSE RELEASES\n→\nSIGN IN TO MY HOME\n→",
+        "overflow": false,
+        "canonical": "https://crypticdesign.net/entertainment",
+        "ogImage": "https://crypticdesign.net/share/entertainment.png",
+        "twitterImage": "https://crypticdesign.net/share/entertainment.png",
+        "scene": {
+          "scene": "entertainment",
+          "state": "poster",
+          "lifecycle": "loading",
+          "renderer": "inactive"
+        },
+        "poster": true,
+        "heroCopy": null,
+        "heroStatus": null,
+        "links": [
+          {
+            "text": "Explore Entertainment",
+            "href": "#choose-a-mode"
+          },
+          {
+            "text": "Browse Releases",
+            "href": "/releases"
+          },
+          {
+            "text": "View release details",
+            "href": "/releases/singularis-themes-vol-1"
+          },
+          {
+            "text": "Explore Music",
+            "href": "/audio"
+          },
+          {
+            "text": "PlayArcadeGames, playable samples, prototypes, and interactive experiences.Open +",
+            "href": "/entertainment/explore"
+          },
+          {
+            "text": "ListenMusicScores, albums, tracks, signals, and audio releases.Open +",
+            "href": "/audio"
+          },
+          {
+            "text": "WatchVideoFilms, trailers, transmissions, visual stories, and series.Open +",
+            "href": "/entertainment/cinema"
+          },
+          {
+            "text": "World / in developmentSingularisSingularis is a near-future transmedia universe exploring humanity's transition through technological acceleration, infrastructure, and systemic change.Open +",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "World / in developmentLifaA universe-building experience about creation, emergence, and life at planetary scale.Open +",
+            "href": "/products/lifa"
+          },
+          {
+            "text": "game / Coming soonSingularis: Vertical SliceA playable first passage into the Singularis universe.Open +",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "video / Coming soonSingularis: OvertureA cinematic prologue rendered in the Unreal + AI pipeline.Open +",
+            "href": "/releases/singularis-overture"
+          },
+          {
+            "text": "lab / Coming soonVisual Study 01A generative study in signal, structure, and light.Open +",
+            "href": "/releases/visual-study-01"
+          },
+          {
+            "text": "Explore Community →",
+            "href": "/community"
+          },
+          {
+            "text": "Browse Releases →",
+            "href": "/releases"
+          },
+          {
+            "text": "Sign In to My Home →",
+            "href": "/account/sign-in"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/community",
+      "mode": "no-js",
+      "width": 1440,
+      "status": 200,
+      "facts": {
+        "headingCount": 1,
+        "headings": [
+          "Find the signal.Share the journey.",
+          "Participation paths",
+          "Discover people through work.",
+          "Find shared purpose.",
+          "Make room for shared experiences.",
+          "Explore while Community opens.",
+          "Participation with clear boundaries."
+        ],
+        "text": "Static scene displayed.\nCOMMUNITY / EXPLORE\nFind the signal.\nShare the journey.\n\nDiscover the people, groups, events, and shared experiences forming around Cryptic Design. Public Community is opening in stages, and every visible path reflects real current availability.\n\nSEE PARTICIPATION PATHS\nSIGN IN TO MY HOME\nCURRENT COMMUNITY STATUS\nCommunity is opening in stages\nPUBLIC COMMUNITY\nOPEN\nCREATORS\nPUBLIC PROFILE AVAILABLE\nGROUPS\nNO PUBLISHED GROUPS YET\nEVENTS\nNO APPROVED CALENDAR YET\nACTIVITY\nNOT CONNECTED\n\nBrowse public profiles and participation plans without an account. Group membership and event registration are not available yet.\n\nPARTICIPATION PATHS\nWHAT IS OPEN, AND WHAT IS NEXT\nCREATORS / AVAILABLE\nDiscover people through work.\n\nExplore Robert K. Croft’s approved public profile and the projects, releases, research, and studio practice behind it.\n\nDISCOVER CREATORS\n→\nGROUPS / OPENING IN STAGES\nFind shared purpose.\n\nNo groups are published yet. Learn about the planned ways to take part; group membership is not available.\n\nVIEW GROUP PLANS\n→\nEVENTS / OPENING IN STAGES\nMake room for shared experiences.\n\nNo approved event calendar is connected. Explore the planned event formats; there are no events to register for yet.\n\nVIEW EVENT PLANS\n→\nFROM ACROSS THE PLATFORM\nExplore while Community opens.\n\nGames, music, video, and release previews are open to browse. These are Entertainment destinations, not Community activity.\n\nEXPLORE ENTERTAINMENT\n→\nBROWSE RELEASES\n→\nOUR COMMUNITY. OUR CODE.\nParticipation with clear boundaries.\nBe respectful\nTreat people and their work with care.\nBe inclusive\nDesign for welcome, access, and belonging.\nBe creative\nShare ideas without taking ownership.\nProtect the space\nSafety and privacy outrank engagement.",
+        "overflow": false,
+        "canonical": "https://crypticdesign.net/community",
+        "ogImage": "https://crypticdesign.net/images/current-focus.png",
+        "twitterImage": "https://crypticdesign.net/images/current-focus.png",
+        "scene": {
+          "scene": "community",
+          "state": "poster",
+          "lifecycle": "loading",
+          "renderer": "inactive"
+        },
+        "poster": true,
+        "heroCopy": {
+          "top": 279.203125,
+          "bottom": 613.796875,
+          "left": 64,
+          "right": 988
+        },
+        "heroStatus": {
+          "top": 258,
+          "bottom": 635,
+          "left": 1036,
+          "right": 1376
+        },
+        "links": [
+          {
+            "text": "See Participation Paths",
+            "href": "#participation-paths"
+          },
+          {
+            "text": "Sign in to My Home",
+            "href": "/account/sign-in"
+          },
+          {
+            "text": "Discover Creators →",
+            "href": "/community/creators"
+          },
+          {
+            "text": "View Group plans →",
+            "href": "/community/groups"
+          },
+          {
+            "text": "View Event plans →",
+            "href": "/community/events"
+          },
+          {
+            "text": "Explore Entertainment →",
+            "href": "/entertainment"
+          },
+          {
+            "text": "Browse Releases →",
+            "href": "/releases"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": []
+    }
+  ],
+  "errors": []
+}

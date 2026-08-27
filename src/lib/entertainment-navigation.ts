@@ -10,7 +10,7 @@ export type EntertainmentNavItem = {
 
 export const ENTERTAINMENT_NAV_ITEMS: readonly EntertainmentNavItem[] = [
   { href: "/entertainment", label: "Overview", description: "Entertainment", icon: "all", theme: "cyan" },
-  { href: "/entertainment/explore", label: "Explore", description: "Games, worlds & more", icon: "arcade", theme: "cyan" },
+  { href: "/entertainment/explore", label: "Arcade", description: "Games & playable samples", icon: "arcade", theme: "cyan" },
   { href: "/audio", label: "Music", description: "Sound & signal", icon: "music", theme: "cyan" },
   { href: "/entertainment/cinema", label: "Video", description: "Watch & listen", icon: "video", theme: "cyan" },
 ] as const;

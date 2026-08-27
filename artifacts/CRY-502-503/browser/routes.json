@@ -1,0 +1,87 @@
+[
+  {
+    "route": "/",
+    "status": 200
+  },
+  {
+    "route": "/entertainment",
+    "status": 200
+  },
+  {
+    "route": "/community",
+    "status": 200
+  },
+  {
+    "route": "/entertainment/explore",
+    "status": 200
+  },
+  {
+    "route": "/community/creators",
+    "status": 200
+  },
+  {
+    "route": "/community/groups",
+    "status": 200
+  },
+  {
+    "route": "/community/events",
+    "status": 200
+  },
+  {
+    "route": "/audio",
+    "status": 200
+  },
+  {
+    "route": "/entertainment/cinema",
+    "status": 200
+  },
+  {
+    "route": "/products/singularis",
+    "status": 200
+  },
+  {
+    "route": "/products/lifa",
+    "status": 200
+  },
+  {
+    "route": "/releases",
+    "status": 200
+  },
+  {
+    "route": "/releases/singularis-themes-vol-1",
+    "status": 200
+  },
+  {
+    "route": "/account/sign-in",
+    "status": 200
+  },
+  {
+    "route": "/account/create",
+    "status": 200
+  },
+  {
+    "route": "/entertainment/arcade",
+    "status": 308,
+    "location": "/entertainment/explore"
+  },
+  {
+    "route": "/entertainment/arcade?genre=lifa",
+    "status": 308,
+    "location": "/entertainment/explore?genre=lifa"
+  },
+  {
+    "route": "/entertainment/explore?genre=singularis",
+    "status": 307,
+    "location": "/products/singularis"
+  },
+  {
+    "route": "/entertainment/explore?genre=lifa",
+    "status": 307,
+    "location": "/products/lifa"
+  },
+  {
+    "route": "/entertainment/explore?genre=featured",
+    "status": 307,
+    "location": "/entertainment/explore"
+  }
+]

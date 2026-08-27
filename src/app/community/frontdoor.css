@@ -1,0 +1,43 @@
+/* CRY-503: keep availability in flow as copy grows and at narrow widths. */
+.community-explore .community-portal__hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  align-items: center;
+  gap: 48px;
+  min-height: 620px;
+  padding: 64px max(calc((100vw - 1312px) / 2), 32px);
+}
+.community-explore .community-portal__hero-content {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+.community-explore .community-portal__hero-status {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  border-color: var(--cry-accent-indigo);
+}
+.community-explore .community-availability dl > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: 12px;
+}
+.community-explore .community-availability dd { text-align: right; }
+.community-explore .community-explore-card h3 {
+  margin: 12px 0 8px;
+  font: 600 21px "IBM Plex Sans", Arial;
+}
+.community-explore #participation-paths { scroll-margin-top: 150px; }
+@media (max-width: 1000px) {
+  .community-explore .community-portal__hero {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+    padding: 64px 32px 32px;
+  }
+  .community-explore .community-portal__hero-status { max-width: 650px; }
+}
+@media (max-width: 540px) {
+  .community-explore .community-portal__hero { padding: 48px 20px 28px; }
+}

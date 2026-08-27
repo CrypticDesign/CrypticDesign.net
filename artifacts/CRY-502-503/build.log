@@ -1,0 +1,107 @@
+
+> crypticdesign-net@0.1.0 build
+> next build
+
+   ▲ Next.js 15.5.21
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 9.4s
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/75) ...
+   Generating static pages (18/75)
+   Generating static pages (37/75)
+   Generating static pages (56/75)
+ ✓ Generating static pages (75/75)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                                                        Size  First Load JS
+┌ ƒ /                                                                           10.4 kB         260 kB
+├ ƒ /_not-found                                                                   189 B         103 kB
+├ ƒ /account                                                                     4.7 kB         255 kB
+├ ƒ /account/character                                                          5.99 kB         259 kB
+├ ƒ /account/character/first-signal                                                2 kB         108 kB
+├ ƒ /account/create                                                               187 B         116 kB
+├ ƒ /account/create-character                                                   2.27 kB         250 kB
+├ ƒ /account/notifications                                                        192 B         106 kB
+├ ƒ /account/recover                                                            3.64 kB         115 kB
+├ ƒ /account/reset-password                                                     1.32 kB         112 kB
+├ ƒ /account/security                                                             750 B         112 kB
+├ ƒ /account/settings                                                             204 B         111 kB
+├ ƒ /account/sign-in                                                              186 B         116 kB
+├ ƒ /account/subscription                                                         204 B         111 kB
+├ ƒ /api/admission/exchange                                                       189 B         103 kB
+├ ƒ /api/characters                                                               189 B         103 kB
+├ ƒ /api/characters/[id]                                                          189 B         103 kB
+├ ƒ /api/characters/[id]/first-signal                                             189 B         103 kB
+├ ƒ /api/characters/[id]/history                                                  189 B         103 kB
+├ ƒ /api/characters/[id]/progression                                              189 B         103 kB
+├ ƒ /api/characters/[id]/rpg                                                      189 B         103 kB
+├ ƒ /api/characters/[id]/rpg-content                                              189 B         103 kB
+├ ƒ /api/membership/password                                                      189 B         103 kB
+├ ƒ /api/membership/recovery                                                      189 B         103 kB
+├ ƒ /api/membership/session                                                       189 B         103 kB
+├ ƒ /api/membership/subscriptions                                                 189 B         103 kB
+├ ƒ /api/membership/subscriptions/[id]/transition                                 189 B         103 kB
+├ ƒ /api/membership/tiers                                                         189 B         103 kB
+├ ƒ /audio                                                                        192 B         106 kB
+├ ƒ /auth/callback                                                                189 B         103 kB
+├ ƒ /auth/confirm                                                                 192 B         106 kB
+├ ƒ /auth/confirm/complete                                                        189 B         103 kB
+├ ƒ /community                                                                  3.69 kB         254 kB
+├ ƒ /community/creators                                                         3.68 kB         254 kB
+├ ƒ /community/events                                                             137 B         254 kB
+├ ƒ /community/groups                                                             138 B         254 kB
+├ ƒ /creator-tools                                                                192 B         106 kB
+├ ƒ /creator-tools/request                                                      1.27 kB         104 kB
+├ ƒ /entertainment                                                                139 B         254 kB
+├ ƒ /entertainment/arcade                                                         189 B         103 kB
+├ ƒ /entertainment/cinema                                                         192 B         106 kB
+├ ƒ /entertainment/creative-labs                                                  187 B         111 kB
+├ ƒ /entertainment/explore                                                        204 B         111 kB
+├ ƒ /entertainment/listening-rooms                                                187 B         111 kB
+├ ƒ /entertainment/store                                                          204 B         111 kB
+├ ƒ /entertainment/virtual-rooms                                                  187 B         111 kB
+├ ƒ /entertainment/visual-studies                                                 204 B         111 kB
+├ ○ /icon.svg                                                                       0 B            0 B
+├ ƒ /library                                                                    4.67 kB         116 kB
+├ ƒ /privacy                                                                      189 B         103 kB
+├ ƒ /products                                                                     192 B         106 kB
+├ ● /products/[slug]                                                            9.14 kB         259 kB
+├   ├ /products/singularis
+├   ├ /products/lifa
+├   ├ /products/cryptic-signal
+├   └ /products/image-of-the-day
+├ ƒ /professional                                                                 138 B         254 kB
+├ ● /professional/[slug]                                                          204 B         111 kB
+├   ├ /professional/product-strategy
+├   ├ /professional/ux-interaction
+├   ├ /professional/interface-systems
+├   └ /professional/creative-technology
+├ ƒ /professional/articles                                                        204 B         111 kB
+├ ● /professional/articles/[slug]                                                 204 B         111 kB
+├   ├ /professional/articles/owning-the-stack-post-generative-creative-economy
+├   ├ /professional/articles/2026-game-design-benchmarks
+├   ├ /professional/articles/arc-raiders-a-player-experience-review
+├   └ [+8 more paths]
+├ ƒ /professional/case-studies                                                  2.02 kB         113 kB
+├ ƒ /professional/contact                                                         192 B         106 kB
+├ ƒ /professional/creators                                                        192 B         106 kB
+├ ƒ /professional/inquiry                                                       1.54 kB         104 kB
+├ ƒ /professional/services                                                        187 B         111 kB
+├ ƒ /releases                                                                     204 B         111 kB
+├ ƒ /releases/[slug]                                                              658 B         112 kB
+├ ○ /robots.txt                                                                   189 B         103 kB
+├ ƒ /search                                                                       189 B         103 kB
+├ ○ /sitemap.xml                                                                  189 B         103 kB
+└ ƒ /terms                                                                        189 B         103 kB
++ First Load JS shared by all                                                    103 kB
+  ├ chunks/1255-612df69cb02f2021.js                                             46.3 kB
+  ├ chunks/4bd1b696-f785427dddbba9fb.js                                         54.2 kB
+  └ other shared chunks (total)                                                 2.03 kB
+
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand

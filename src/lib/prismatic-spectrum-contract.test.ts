@@ -56,8 +56,9 @@ test("major page sections use explicit governed accents", () => {
   assertAccentOrder(publicHome, ["blue", "cyan", "indigo", "violet", "magenta"]);
   assertAccentOrder(myHome, ["indigo", "violet", "magenta", "blue", "cyan", "indigo", "indigo"]);
   assertAccentOrder(entertainment, ["cyan", "indigo", "violet", "magenta"]);
-  assertAccentOrder(community, ["indigo", "blue", "cyan", "magenta", "indigo", "blue"]);
-  assertAccentOrder(explore, ["cyan", "indigo", "violet", "magenta", "blue"]);
+  // CRY-502/503 removes duplicate discovery and the empty activity module.
+  assertAccentOrder(community, ["indigo", "indigo", "magenta", "indigo", "blue"]);
+  assertAccentOrder(explore, ["cyan", "indigo", "blue"]);
   // CRY-496 supersedes the old full-spectrum overview cadence with restrained route identity.
   assertAccentOrder(professional, ["violet"]);
   const layout = readFileSync(new URL("../app/professional/layout.tsx", import.meta.url), "utf8");
@@ -86,7 +87,7 @@ test("destination subnavigation inherits the same canonical accent as its primar
 
 test("Community uses Indigo for identity and Magenta only for social emphasis", () => {
   assert.match(community, /community-portal__hero" data-section-accent="indigo"/);
-  assert.match(community, /community-explore__activity" data-section-accent="magenta"/);
+  assert.match(community, /explore-portal__continuum" data-section-accent="magenta"/);
   assert.match(community, /community-explore-card community-explore-card--social/);
   assert.match(globals, /\.community-portal__hero-content \.display-title em\{color:var\(--cry-accent-magenta\)\}/);
   assert.match(globals, /\.community-primary-cta\{border-color:var\(--cry-accent-blue\);background:var\(--cry-accent-blue\)/);

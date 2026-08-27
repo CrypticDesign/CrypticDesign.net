@@ -1,0 +1,122 @@
+[
+  {
+    "path": "/",
+    "status": 200,
+    "expectedScene": "public-home",
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+      "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+    ],
+    "failedResponses": [
+      {
+        "status": 503,
+        "url": "http://127.0.0.1:3502/api/membership/session"
+      },
+      {
+        "status": 503,
+        "url": "http://127.0.0.1:3502/api/membership/session"
+      }
+    ],
+    "unexpectedResponses": [],
+    "scene": "public-home",
+    "state": "ready",
+    "lifecycle": "running",
+    "renderer": "active",
+    "assets": "ready",
+    "quality": "high",
+    "performance": "constrained",
+    "fps": 46,
+    "adaptive": null,
+    "canvas": true
+  },
+  {
+    "path": "/entertainment",
+    "status": 200,
+    "expectedScene": "entertainment",
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+      "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+    ],
+    "failedResponses": [
+      {
+        "status": 503,
+        "url": "http://127.0.0.1:3502/api/membership/session"
+      },
+      {
+        "status": 503,
+        "url": "http://127.0.0.1:3502/api/membership/session"
+      }
+    ],
+    "unexpectedResponses": [],
+    "scene": "entertainment",
+    "state": "ready",
+    "lifecycle": "running",
+    "renderer": "active",
+    "assets": "ready",
+    "quality": "mid",
+    "performance": "constrained",
+    "fps": 44,
+    "adaptive": "downgraded",
+    "canvas": true
+  },
+  {
+    "path": "/community",
+    "status": 200,
+    "expectedScene": "community",
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+      "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+    ],
+    "failedResponses": [
+      {
+        "status": 503,
+        "url": "http://127.0.0.1:3502/api/membership/session"
+      },
+      {
+        "status": 503,
+        "url": "http://127.0.0.1:3502/api/membership/session"
+      }
+    ],
+    "unexpectedResponses": [],
+    "scene": "community",
+    "state": "ready",
+    "lifecycle": "running",
+    "renderer": "active",
+    "assets": "ready",
+    "quality": "mid",
+    "performance": "constrained",
+    "fps": 35,
+    "adaptive": "downgraded",
+    "canvas": true
+  },
+  {
+    "path": "/professional",
+    "status": 200,
+    "expectedScene": "professional",
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+      "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+    ],
+    "failedResponses": [
+      {
+        "status": 503,
+        "url": "http://127.0.0.1:3502/api/membership/session"
+      },
+      {
+        "status": 503,
+        "url": "http://127.0.0.1:3502/api/membership/session"
+      }
+    ],
+    "unexpectedResponses": [],
+    "scene": "professional",
+    "state": "ready",
+    "lifecycle": "running",
+    "renderer": "active",
+    "assets": "ready",
+    "quality": "mid",
+    "performance": "constrained",
+    "fps": 37,
+    "adaptive": "downgraded",
+    "canvas": true
+  }
+]

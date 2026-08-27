@@ -10,6 +10,17 @@
 
 ## 1. Decision summary
 
+### Approved Wave 0 front-door refinement — CRY-502/503, 2026-08-27
+
+Execution authority: Confluence page 465960961 (coordinated implementation handoff), superseding older route proposals below for this scope.
+
+- General public Entertainment discovery remains canonical at `/entertainment`.
+- Arcade retains `/entertainment/explore` as its playable-catalog compatibility URL, labeled **Arcade**, not a second general discovery homepage. `/entertainment/arcade` retains its permanent redirect.
+- Music stays at `/audio`, Video at `/entertainment/cinema`, and Singularis/Lifa at their existing `/products` destinations.
+- Community leads with Creators, Groups, Events and explicit availability; Spaces stays withheld. Cross-platform exploration is not Community activity.
+- No URL inventory changes. Figma-only drift is nonblocking under the handoff; external documentation synchronization remains separately gated.
+- Evidence: `artifacts/CRY-502-503/`. CRY-504 owns Request Access/account changes. CRY-505 remains open until CRY-504, CRY-502 and CRY-503 integrate.
+
 ### Approved navigation label update — 2026-08-27
 
 Robert approved the main-menu sequence **Home / Play / Community / Professional**, renaming the existing **Explore** primary label to **Play**. Play retains the /entertainment destination, cyan identity, active-route matching, and existing drawer behavior. The compact header uses the same Play label. This is a label-only change: contextual Explore navigation, page titles, homepage section copy, routes, Search, and Sign In / Account utilities are unchanged. Jira/Confluence/FigJam synchronization is pending separate write authorization; this note records the approved local drift from earlier sitemap labels.

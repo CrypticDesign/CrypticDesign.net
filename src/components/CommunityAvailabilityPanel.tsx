@@ -9,13 +9,15 @@ export default function CommunityAvailabilityPanel({ className = "", showSignInA
   return (
     <aside className={["account-telemetry", "community-availability", className].filter(Boolean).join(" ")} aria-label="Current community status">
       <span className="account-telemetry__label">Current community status</span>
-      <strong data-status="closed"><i aria-hidden="true" /> Community features not available yet</strong>
+      <strong>Community is opening in stages</strong>
       <dl>
-        <div><dt>Public discovery</dt><dd data-status="open">Open</dd></div>
-        <div><dt>Crews &amp; groups</dt><dd data-status="closed">Not available</dd></div>
-        <div><dt>Events &amp; discussions</dt><dd data-status="closed">Not available</dd></div>
+        <div><dt>Public Community</dt><dd data-status="open">Open</dd></div>
+        <div><dt>Creators</dt><dd data-status="open">Public profile available</dd></div>
+        <div><dt>Groups</dt><dd>No published groups yet</dd></div>
+        <div><dt>Events</dt><dd>No approved calendar yet</dd></div>
+        <div><dt>Activity</dt><dd>Not connected</dd></div>
       </dl>
-      <p className="community-availability__note">This page presents the planned community layer without creating accounts, conversations, member directories, events, or participation data.</p>
+      <p className="community-availability__note">Browse public profiles and participation plans without an account. Group membership and event registration are not available yet.</p>
       {showSignInAction ? <Link href="/account/sign-in" className="button home-secondary-cta">Sign in to My Home</Link> : null}
     </aside>
   );
