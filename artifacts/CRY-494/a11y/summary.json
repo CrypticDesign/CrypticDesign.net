@@ -1,5 +1,5 @@
 {
-  "command": "node scripts/qa-live-a11y.mjs http://127.0.0.1:3101 artifacts/CRY-494/a11y",
+  "command": "node scripts/qa-live-a11y.mjs http://127.0.0.1:3100 artifacts/CRY-494/a11y",
   "home": {
     "status": 200,
     "wcag21AAViolations": 0,
@@ -8,14 +8,18 @@
     "allSampledFocusVisible": true,
     "reflow720HorizontalOverflow": false
   },
-  "fullCommandExit": 1,
-  "inheritedFindings": [
+  "routesChecked": 6,
+  "wcag21AAViolations": 0,
+  "undersizedTouchTargets": 0,
+  "allSampledFocusVisible": true,
+  "reflow720HorizontalOverflow": false,
+  "fullCommandExit": 0,
+  "remediatedFindings": [
     {
       "route": "/entertainment",
       "rule": "color-contrast",
-      "impact": "serious",
-      "nodes": 4,
-      "scope": "Existing Entertainment media-card text links outside the CRY-494 Homepage diff"
+      "previousNodes": 4,
+      "resolution": "Section link text now uses --section-accent-text with the governed section accent as fallback."
     }
   ]
 }

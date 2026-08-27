@@ -42,6 +42,7 @@ test("the vivid nonsemantic spectrum is centralized and keeps status hues semant
   assert.match(globals, /--section-accent-border:color-mix\(in srgb,var\(--section-accent\) 72%,transparent\)/);
   assert.match(globals, /--section-accent-glow:color-mix\(in srgb,var\(--section-accent\) 28%,transparent\)/);
   assert.match(globals, /--section-accent-surface:color-mix\(in srgb,var\(--section-accent\) 10%,transparent\)/);
+  assert.match(globals, /\[data-section-accent\] \.text-link,[^{]+\{color:var\(--section-accent-text,var\(--section-accent\)\)\}/);
   assert.match(globals, /--status-success:#34D399/);
   assert.match(globals, /--status-warning:#F6C453/);
   assert.match(globals, /--status-error:#FF6B7A/);

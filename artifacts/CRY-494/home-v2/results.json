@@ -302,7 +302,7 @@
     "focus": {
       "tag": "A",
       "outlineStyle": "solid",
-      "outlineWidth": "3px"
+      "outlineWidth": "2px"
     },
     "consoleErrors": [],
     "routeStatuses": {},

@@ -4,7 +4,7 @@
 **Local implementation disposition:** PASS
 **Launch/deploy-preview disposition:** CONDITIONAL PASS
 
-The local candidate implements the approved entertainment/community-first Homepage hierarchy and passes the focused Home, authenticated My Home, responsive, keyboard, WebGL, reduced-motion, no-WebGL, type, lint, unit/contract, and production-build checks described below. Launch remains conditional because no external push, PR, deploy preview, Jira transition, or Confluence update was authorized or performed; manual screen-reader coverage was not performed; and the inherited full-site axe run still reports four pre-existing Entertainment card contrast findings outside this Homepage diff.
+The local candidate implements the approved entertainment/community-first Homepage hierarchy and passes the focused Home, authenticated My Home, responsive, keyboard, WebGL, reduced-motion, no-WebGL, type, lint, unit/contract, production-build, and full six-route accessibility checks described below. Launch remains conditional pending the authorized push, PR, deploy preview, and deployed rerun; manual screen-reader coverage was not performed.
 
 ## Branch and external state
 
@@ -80,7 +80,7 @@ No Homepage-only product or release record was created.
 | `node scripts/qa-my-home.mjs http://127.0.0.1:3102` | PASS — five Chromium viewports, signed-out Home + Community + Explore + authenticated My Home |
 | `node scripts/qa-public-home-v2.mjs http://127.0.0.1:3101 artifacts/CRY-494/home-v2` | PASS — semantic order, routes, metadata, focus, overflow, normal WebGL, mobile static tier, reduced motion, forced no-WebGL |
 | `node scripts/qa-page-scene-runtime.mjs http://127.0.0.1:3101` | PASS — Home, Entertainment, Community, Professional share one governed runtime and active scenes |
-| `node scripts/qa-live-a11y.mjs http://127.0.0.1:3101 artifacts/CRY-494/a11y` | Home PASS; full command CONDITIONAL — four pre-existing Entertainment card color-contrast findings |
+| `node scripts/qa-live-a11y.mjs http://127.0.0.1:3100 artifacts/CRY-494/a11y` | PASS — zero WCAG 2.1 A/AA violations across all six routes |
 
 ## Browser, viewport, and accessibility coverage
 
@@ -121,11 +121,11 @@ No Homepage-only product or release record was created.
 ## Limitations / waivers
 
 1. The canonical spec's generic Request Access / Join Waitlist wording conflicts with the current CRY-489 runtime, which has no request submission behavior. The implementation preserves the truthful `Account availability` action instead.
-2. The full inherited axe audit reports four serious color-contrast findings on Entertainment media-card text links. Home itself reports zero violations, and CRY-494 changes none of those Entertainment elements.
-3. No external PR/deploy evidence exists yet because external GitHub and deploy mutations remain approval-gated.
+2. The four Entertainment media-card contrast findings were remediated by routing section link text through the accessible `--section-accent-text` token. The rebuilt six-route axe audit now passes with zero violations.
+3. External PR/deploy evidence is pending the authorized push and preview workflow.
 4. Manual assistive-technology and non-Chromium browser coverage remain outstanding.
 
 ## Recommendation
 
 **Local CRY-494 candidate: PASS.**
-**Deploy-preview / launch evidence: CONDITIONAL PASS** pending an authorized push/PR/deploy preview, deployed rerun, Robert visual approval, and disposition of the inherited Entertainment contrast findings/manual accessibility gates.
+**Deploy-preview / launch evidence: CONDITIONAL PASS** pending the authorized push/PR/deploy preview, deployed rerun, Robert visual approval, and the remaining manual accessibility gates.
