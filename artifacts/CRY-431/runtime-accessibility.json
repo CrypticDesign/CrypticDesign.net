@@ -1,0 +1,12 @@
+[
+  {
+    "state": "ready",
+    "violations": [],
+    "undersizedControls": []
+  },
+  {
+    "state": "active-embedded",
+    "violations": [],
+    "undersizedControls": []
+  }
+]

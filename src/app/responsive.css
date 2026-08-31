@@ -77,24 +77,35 @@
 .sin-cgs__prototype-controls { position: relative; inset: auto; width: 100%; box-shadow: none; }
 .sin-cgs__prototype-controls:not([open]) { width: 100%; }
 .sin-cgs__runtime-head { height: auto; min-height: 48px; align-items: center; flex-wrap: wrap; padding-bottom: 8px; }
-.sin-cgs .sin-cgs__fullscreen { position: static; flex-shrink: 0; margin: 0; min-height: 44px !important; }
+.sin-cgs .sin-cgs__fullscreen,
+.sin-cgs .sin-cgs__audio { position: static; flex-shrink: 0; margin: 0; min-height: 44px !important; }
+.sin-cgs button:not(.secondary, .sin-cgs__fullscreen) { color: #03080f; }
 .sin-cgs__runtime-head > span { min-width: 0; }
 .sin-cgs__status { flex-wrap: wrap; }
 
 /* Declare this after ALL ordinary viewport heights. dvh follows mobile browser
    chrome; the middle grid track grows instead of retaining a 360px game frame. */
-.sin-cgs__runtime:fullscreen,
-.sin-cgs__runtime--expanded {
+.experience-runtime--custom[data-expanded="true"] { overflow: auto; }
+.experience-runtime--custom[data-expanded="true"] .sin-cgs { min-height: 100dvh; }
+.experience-runtime--custom[data-expanded="true"] .sin-cgs__wrap { width: 100%; height: 100dvh; padding: 0; }
+.experience-runtime--custom[data-expanded="true"] .sin-cgs__hero-art,
+.experience-runtime--custom[data-expanded="true"] .sin-cgs__prototype-controls,
+.experience-runtime--custom[data-expanded="true"] .sin-cgs__heading,
+.experience-runtime--custom[data-expanded="true"] .sin-cgs__nav-menu,
+.experience-runtime--custom[data-expanded="true"] .sin-cgs__nav-rail,
+.experience-runtime--custom[data-expanded="true"] .sin-cgs__panel,
+.experience-runtime--custom[data-expanded="true"] .sin-cgs__arrival-body,
+.experience-runtime--custom[data-expanded="true"] .sin-cgs__continuity { display: none; }
+.experience-runtime--custom[data-expanded="true"] .sin-cgs__workspace { display: block; height: 100dvh; }
+.experience-runtime--custom[data-expanded="true"] .sin-cgs__runtime {
   display: grid; grid-template-rows: auto minmax(0, 1fr) auto;
   width: 100%; height: 100vh; height: 100dvh; min-height: 0 !important;
   padding: max(8px, env(safe-area-inset-top)) max(8px, env(safe-area-inset-right)) max(8px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left));
   overflow: hidden;
 }
-.sin-cgs__runtime:fullscreen .sin-cgs__viewport,
-.sin-cgs__runtime--expanded .sin-cgs__viewport { height: 100%; min-height: 0; }
-.sin-cgs__runtime:fullscreen .sin-cgs__status,
-.sin-cgs__runtime--expanded .sin-cgs__status { flex-direction: row; gap: 6px 14px; min-height: 36px; padding: 6px 10px; font-size: 9px; }
-body:has(.sin-cgs__runtime--expanded) .cs-root { display: none; }
+.experience-runtime--custom[data-expanded="true"] .sin-cgs__viewport { height: 100%; min-height: 0; }
+.experience-runtime--custom[data-expanded="true"] .sin-cgs__status { flex-direction: row; gap: 6px 14px; min-height: 36px; padding: 6px 10px; font-size: 9px; }
+body:has(.experience-runtime--custom[data-expanded="true"]) .cs-root { display: none; }
 
 @media (max-width: 780px) {
   .entertainment-navigation__desktop { display: none; }

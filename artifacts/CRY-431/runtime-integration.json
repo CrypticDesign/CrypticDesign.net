@@ -1,0 +1,29 @@
+[
+  {
+    "name": "desktop-shared-runtime",
+    "http": 200,
+    "initial": {
+      "runtimeId": "singularis:continuous-gamespace:v1",
+      "controls": 0,
+      "fullscreenLabel": "Fullscreen",
+      "audioLabel": "Enable audio"
+    },
+    "audioEnabled": "false",
+    "fullscreenOwner": "singularis:continuous-gamespace:v1",
+    "sameSurfaceInFullscreen": true,
+    "sameSurfaceAfterExit": true,
+    "returnedState": "updated"
+  },
+  {
+    "name": "desktop-fullscreen-fallback",
+    "expanded": "true",
+    "sameSurfaceExpanded": true,
+    "collapsed": true
+  },
+  {
+    "name": "mobile-fullscreen-fallback",
+    "expanded": "true",
+    "sameSurfaceExpanded": true,
+    "collapsed": true
+  }
+]

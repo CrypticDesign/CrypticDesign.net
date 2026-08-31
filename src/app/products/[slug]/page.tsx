@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import ExperienceRuntime from "@/components/ExperienceRuntime";
 import ReleaseCard from "@/components/ReleaseCard";
 import SingularisGamespace from "@/components/SingularisGamespace";
 import { getProduct, publicProducts } from "@/lib/products";
@@ -62,7 +63,14 @@ export default async function ProductHome({
 
     return (
       <main className="singularis-page">
-        <SingularisGamespace />
+        <ExperienceRuntime
+          runtimeId="singularis:continuous-gamespace:v1"
+          accessibleLabel="Singularis interactive experience"
+          controls="consumer"
+          capabilities={{ controller: true }}
+        >
+          <SingularisGamespace />
+        </ExperienceRuntime>
         {transmissions.length > 0 && (
           <div className="shell singularis-page__releases">
             <span className="kicker">From the Singularis universe</span>
