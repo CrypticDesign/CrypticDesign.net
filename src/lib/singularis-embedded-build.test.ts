@@ -3,7 +3,20 @@ import { existsSync, readFileSync } from "node:fs";
 import test from "node:test";
 
 const component = readFileSync("src/components/SingularisGamespace.tsx", "utf8");
+const productPage = readFileSync("src/app/products/[slug]/page.tsx", "utf8");
 const build = readFileSync("public/games/singularis/v05/index.html", "utf8");
+
+test("mounts Singularis as a consumer of the canonical shared ExperienceRuntime", () => {
+  assert.match(productPage, /runtimeId="singularis:continuous-gamespace:v1"/);
+  assert.match(productPage, /controls="consumer"/);
+  assert.match(productPage, /<SingularisGamespace \/>/);
+  assert.match(component, /useExperienceRuntime\(\)/);
+  assert.match(component, /const \{ reportReady \} = runtime/);
+  assert.match(component, /reportReady\(\)/);
+  assert.match(component, /runtime\.requestFullscreen\(\)/);
+  assert.match(component, /runtime\.enableAudio/);
+  assert.doesNotMatch(component, /stageRef\.current\?\.requestFullscreen/);
+});
 
 test("embeds the verified v05 build only for the Operation runtime", () => {
   assert.match(component, /state\.phase === "operation" \? <iframe/);

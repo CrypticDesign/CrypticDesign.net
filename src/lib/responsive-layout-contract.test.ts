@@ -28,7 +28,7 @@ test("responsive contracts are loaded after legacy page CSS", async () => {
 test("mobile player reserves space and immersive game view hides its dock", async () => {
   const css = await source("../app/responsive.css");
   assert.match(css, /body:has\(\.cs-root\) \{ padding-bottom: calc\(68px/);
-  assert.match(css, /body:has\(\.sin-cgs__runtime--expanded\) \.cs-root \{ display: none; \}/);
+  assert.match(css, /body:has\(\.experience-runtime--custom\[data-expanded="true"\]\) \.cs-root \{ display: none; \}/);
   assert.match(css, /flex: 0 0 48px; width: 48px; height: 48px/);
 });
 
@@ -37,7 +37,7 @@ test("fullscreen game grows between its toolbar and status without overlay contr
   assert.match(css, /grid-template-rows: auto minmax\(0, 1fr\) auto/);
   assert.match(css, /height: 100dvh; min-height: 0 !important/);
   const game = await source("../components/SingularisGamespace.tsx");
-  assert.match(game, /sin-cgs__runtime-head[^\n]+\{fullscreenButton\}<\/div>/);
+  assert.match(game, /sin-cgs__runtime-head[^\n]+\{audioButton\}\{fullscreenButton\}<\/div>/);
   const runtime = await source("../../public/games/singularis/v05/index.html");
   assert.match(runtime, /justify-content:safe center;overflow-y:auto/);
   assert.match(runtime, /\.screen>\*\{flex-shrink:0/);

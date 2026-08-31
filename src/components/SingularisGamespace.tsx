@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useReducer, useRef, useState } from "react";
+import { useExperienceRuntime } from "@/components/ExperienceRuntime";
 import SingularisUniverseViewport from "@/components/SingularisUniverseViewport";
 import { createSingularisGamespaceState, singularisGamespaceReducer, type GamespacePhase, type SingularisSimpleActionType } from "@/lib/singularis-gamespace";
 import { recordSingularisEvent, type SingularisEventName } from "@/lib/singularis-instrumentation";
@@ -53,21 +54,29 @@ const singularisWorkspaceSections = [
 type SingularisWorkspaceSection = typeof singularisWorkspaceSections[number]["id"];
 
 export default function SingularisGamespace() {
+  const runtime = useExperienceRuntime();
   const [state, dispatch] = useReducer(singularisGamespaceReducer, undefined, () => createSingularisGamespaceState());
-  const stageRef = useRef<HTMLDivElement>(null);
   const previousPhaseRef = useRef(state.phase);
-  const [fullscreen, setFullscreen] = useState(false);
-  const [expanded, setExpanded] = useState(false);
   const [franchiseDrawerOpen, setFranchiseDrawerOpen] = useState(true);
   const [workspaceSection, setWorkspaceSection] = useState<SingularisWorkspaceSection>("mission-control");
   const [embeddedRuntime, setEmbeddedRuntime] = useState<EmbeddedRuntimeState>(initialEmbeddedRuntime);
   const immersive = ["entering", "training", "interrupted", "complete", "operation"].includes(state.phase);
+  const fullscreen = runtime.state.phase === "active-fullscreen";
+  const expanded = runtime.isExpanded;
+  const { reportReady } = runtime;
 
   const act = (type: SingularisSimpleActionType, event?: SingularisEventName) => {
     if (event) recordSingularisEvent(event);
     dispatch({ type });
   };
 
+  useEffect(() => {
+    reportReady();
+  }, [reportReady]);
+  useEffect(() => {
+    if (immersive && (runtime.state.phase === "ready" || runtime.state.phase === "updated")) runtime.activate();
+    else if (!immersive && runtime.isActive) void runtime.deactivate();
+  }, [immersive, runtime]);
   useEffect(() => {
     if (window.localStorage.getItem("cryptic:singularis-pilot-active") === "true") dispatch({ type: "HYDRATE_RETURNING_PILOT" });
     else recordSingularisEvent("singularis_arrival_viewed");
@@ -112,35 +121,18 @@ export default function SingularisGamespace() {
     return () => window.removeEventListener("blur", interrupt);
   }, [state.phase]);
   useEffect(() => {
-    const interruptOnEscape = (event: KeyboardEvent) => { if (event.key === "Escape" && state.phase === "training" && !expanded && !fullscreen) dispatch({ type: "INTERRUPT" }); };
+    const interruptOnEscape = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      if (expanded && !fullscreen) {
+        void runtime.requestFullscreen();
+        return;
+      }
+      if (state.phase === "training" && !fullscreen) dispatch({ type: "INTERRUPT" });
+    };
     window.addEventListener("keydown", interruptOnEscape);
     return () => window.removeEventListener("keydown", interruptOnEscape);
-  }, [expanded, fullscreen, state.phase]);
-  useEffect(() => {
-    const sync = () => setFullscreen(document.fullscreenElement === stageRef.current);
-    document.addEventListener("fullscreenchange", sync);
-    return () => document.removeEventListener("fullscreenchange", sync);
-  }, []);
-  useEffect(() => {
-    if (!expanded) return;
-    const prior = document.body.style.overflow;
-    const close = (event: KeyboardEvent) => { if (event.key === "Escape") setExpanded(false); };
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", close);
-    return () => { document.body.style.overflow = prior; window.removeEventListener("keydown", close); };
-  }, [expanded]);
-
-  const toggleFullscreen = async () => {
-    if (document.fullscreenElement) await document.exitFullscreen();
-    else if (expanded) setExpanded(false);
-    // Mobile browsers differ on element fullscreen support. The in-page mode
-    // follows the dynamic viewport and keeps the same reachable exit control.
-    else if (window.matchMedia("(max-width: 780px), (pointer: coarse)").matches) setExpanded(true);
-    else {
-      try { await stageRef.current?.requestFullscreen(); if (document.fullscreenElement !== stageRef.current) setExpanded(true); }
-      catch { setExpanded(true); }
-    }
-  };
+  }, [expanded, fullscreen, runtime, state.phase]);
+  const toggleFullscreen = () => runtime.requestFullscreen();
 
   const resetExperience = () => {
     window.localStorage.removeItem("cryptic:singularis-pilot-active");
@@ -166,14 +158,15 @@ export default function SingularisGamespace() {
     : state.phase === "synchronized" ? "Your training record is now part of Singularis. The universe continued while you trained, and your next activity reflects the current world state."
     : "The runtime is expanding into Training Simulation 01 without leaving the Singularis page.";
 
-  const fullscreenButton = <button type="button" className="sin-cgs__fullscreen" onClick={toggleFullscreen} aria-expanded={fullscreen || expanded} aria-label={fullscreen || expanded ? "Exit fullscreen universe view" : "Open universe view fullscreen"}>{fullscreen || expanded ? "Exit fullscreen" : "Fullscreen"}</button>;
+  const fullscreenButton = <button type="button" className="sin-cgs__fullscreen" onClick={() => void toggleFullscreen()} aria-expanded={fullscreen || expanded} aria-label={fullscreen || expanded ? "Exit fullscreen universe view" : "Open universe view fullscreen"}>{fullscreen || expanded ? "Exit fullscreen" : "Fullscreen"}</button>;
+  const audioButton = <button type="button" className="sin-cgs__audio" aria-pressed={!runtime.state.audio.muted} onClick={runtime.state.audio.muted ? runtime.enableAudio : runtime.muteAudio}>{runtime.state.audio.muted ? "Enable audio" : "Mute audio"}</button>;
 
   // Keep the iframe in this component's stable render tree. Defining and mounting a
   // nested React component here would give it a new component identity whenever
   // runtime telemetry updates, causing React to reload the embedded game.
   const renderUniverse = (active = false) => (
-    <div ref={stageRef} className={`sin-cgs__runtime ${active ? "sin-cgs__runtime--active" : ""} ${expanded ? "sin-cgs__runtime--expanded" : ""}`}>
-      <div className="sin-cgs__runtime-head"><span>{active ? state.session.simulationId : "Live universe"}</span><span>{active ? "Runtime active" : "World status"} <i /></span>{fullscreenButton}</div>
+    <div className={`sin-cgs__runtime ${active ? "sin-cgs__runtime--active" : ""}`} data-experience-phase={runtime.state.phase}>
+      <div className="sin-cgs__runtime-head"><span>{active ? state.session.simulationId : "Live universe"}</span><span>{active ? "Runtime active" : "World status"} <i /></span>{audioButton}{fullscreenButton}</div>
       <div className="sin-cgs__viewport">{state.phase === "operation" ? <iframe className="sin-cgs__game-frame" src="/games/singularis/v05/index.html" title="Singularis Leviathan Protocol v05 game runtime" allow="autoplay; fullscreen; gamepad" onLoad={() => setEmbeddedRuntime((current) => ({ ...current, ready: true, lifecycle: current.lifecycle === "loading" ? "ready" : current.lifecycle }))} /> : workspaceSection !== "mission-control" ? <iframe className="sin-cgs__game-frame" src={`/games/singularis/workspaces/${workspaceSection}/index.html`} title={`Singularis ${singularisWorkspaceSections.find((section) => section.id === workspaceSection)?.label} workspace`} /> : <SingularisUniverseViewport session={state.session} onCheckpoint={() => dispatch({ type: "ADVANCE_CHECKPOINT" })} />}
         {active && state.phase !== "operation" && <div className="sin-cgs__score"><strong>Score {state.session.score.toLocaleString()}</strong><strong>Wave {String(state.session.wave).padStart(2, "0")} / {String(state.session.waveCount).padStart(2, "0")}</strong></div>}
         {state.phase === "entering" && <div className="sin-cgs__center-card"><span>Training Simulation 01</span><h2>Synchronizing controls</h2><p>Input remains locked until runtime readiness is confirmed.</p></div>}

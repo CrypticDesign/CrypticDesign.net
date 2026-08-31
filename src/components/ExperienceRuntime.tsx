@@ -30,6 +30,7 @@ interface ExperienceRuntimeBaseProps {
   runtimeId: string;
   accessibleLabel: string;
   launchMode?: "embedded" | "fullscreen";
+  controls?: "shared" | "consumer";
   capabilities?: Partial<ExperienceRuntimeCapabilities>;
   authoritativeContext?: ExperienceRuntimeAuthoritativeContextV1;
 }
@@ -44,6 +45,7 @@ export interface ExperienceRuntimeController {
   capabilities: ExperienceRuntimeCapabilities;
   authoritativeContext: ExperienceRuntimeAuthoritativeContextV1;
   isActive: boolean;
+  isExpanded: boolean;
   activate: () => void;
   deactivate: () => Promise<void>;
   requestFullscreen: () => Promise<void>;
@@ -71,6 +73,7 @@ export default function ExperienceRuntime({
   fallbackPoster,
   accessibleLabel,
   launchMode = "embedded",
+  controls = "shared",
   quality = "auto",
   capabilities: capabilityOverrides,
   authoritativeContext,
@@ -187,6 +190,10 @@ export default function ExperienceRuntime({
       }
       return;
     }
+    if (expandedFallback) {
+      setExpandedFallback(false);
+      return;
+    }
 
     const root = rootRef.current;
     if (!capabilities.fullscreen || !root?.requestFullscreen) {
@@ -200,7 +207,7 @@ export default function ExperienceRuntime({
       setExpandedFallback(true);
       dispatch({ type: "FULLSCREEN_FAILED", reason: "fullscreen-request-failed-expanded-embedded" });
     }
-  }, [capabilities.fullscreen]);
+  }, [capabilities.fullscreen, expandedFallback]);
 
   const activateFullscreen = useCallback(async () => {
     if (runtimeLauncherLabel(state.context) === "Unavailable") return;
@@ -233,6 +240,7 @@ export default function ExperienceRuntime({
     capabilities,
     authoritativeContext: context,
     isActive,
+    isExpanded: expandedFallback || state.phase === "active-fullscreen",
     activate,
     deactivate,
     requestFullscreen: toggleFullscreen,
@@ -250,6 +258,7 @@ export default function ExperienceRuntime({
     context,
     deactivate,
     enableAudio,
+    expandedFallback,
     interrupt,
     isActive,
     markUpdated,
@@ -279,7 +288,7 @@ export default function ExperienceRuntime({
     <ExperienceRuntimeContext.Provider value={controller}>
       <div
         ref={rootRef}
-        className="experience-runtime visual-hero__image"
+        className={`experience-runtime ${hasCustomSurface ? "experience-runtime--custom" : "visual-hero__image"}`}
         data-runtime-id={runtimeId}
         data-launch-mode={launchMode}
         data-runtime-state={state.phase}
@@ -293,7 +302,7 @@ export default function ExperienceRuntime({
         role="region"
         aria-label={accessibleLabel}
         onKeyDown={(event) => {
-          if (capabilities.keyboard && event.key === "Escape" && isActive && document.fullscreenElement !== rootRef.current) {
+          if (controls === "shared" && capabilities.keyboard && event.key === "Escape" && isActive && document.fullscreenElement !== rootRef.current) {
             event.preventDefault();
             void deactivate();
           }
@@ -312,7 +321,7 @@ export default function ExperienceRuntime({
             onRuntimeStatus={handleSceneStatus}
           />
         )}
-        <div className="experience-runtime__controls" aria-label="Experience controls">
+        {controls === "shared" ? <div className="experience-runtime__controls" aria-label="Experience controls">
           {!isActive && state.phase !== "fallback" ? (
             <button
               ref={launchButtonRef}
@@ -337,7 +346,7 @@ export default function ExperienceRuntime({
               <button type="button" className="experience-runtime__control" onClick={() => void deactivate()}>Exit experience</button>
             </>
           ) : null}
-        </div>
+        </div> : null}
         <span className="sr-only" aria-live="polite">{statusMessage}</span>
       </div>
     </ExperienceRuntimeContext.Provider>
