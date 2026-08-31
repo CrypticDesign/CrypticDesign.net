@@ -36,6 +36,7 @@ interface PlayerValue {
   repeat: RepeatMode;
   expanded: boolean;
   queueOpen: boolean;
+  audioPriorityOwner: string | null;
   /** True while the active track has no published audio file to stream. */
   silentPreview: boolean;
   toggle: () => void;
@@ -49,6 +50,8 @@ interface PlayerValue {
   setExpanded: (value: boolean) => void;
   toggleQueue: () => void;
   playTrackAt: (index: number) => void;
+  requestAudioPriority: (ownerId: string) => void;
+  releaseAudioPriority: (ownerId: string) => void;
 }
 
 const PlayerContext = createContext<PlayerValue | null>(null);
@@ -79,14 +82,19 @@ export function PlayerProvider({
   const [expanded, setExpanded] = useState(false);
   const [queueOpen, setQueueOpen] = useState(false);
   const [metaDuration, setMetaDuration] = useState<number | null>(null);
+  const [audioPriorityOwner, setAudioPriorityOwner] = useState<string | null>(null);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const timeRef = useRef(0);
+  const playingRef = useRef(false);
+  const audioPriorityOwnerRef = useRef<string | null>(null);
+  const resumeAfterExperienceRef = useRef(false);
 
   const track = queue[index];
   const declaredDuration = track?.duration ?? 0;
   const duration = metaDuration && metaDuration > 0 ? metaDuration : declaredDuration;
   const hasAudioSource = Boolean(track?.src);
+  playingRef.current = playing;
 
   const setTime = useCallback((value: number) => {
     timeRef.current = value;
@@ -212,6 +220,22 @@ export function PlayerProvider({
     [queue.length, setTime],
   );
 
+  const requestAudioPriority = useCallback((ownerId: string) => {
+    if (audioPriorityOwnerRef.current === ownerId) return;
+    if (audioPriorityOwnerRef.current === null) resumeAfterExperienceRef.current = playingRef.current;
+    audioPriorityOwnerRef.current = ownerId;
+    setAudioPriorityOwner(ownerId);
+    setPlaying(false);
+  }, []);
+
+  const releaseAudioPriority = useCallback((ownerId: string) => {
+    if (audioPriorityOwnerRef.current !== ownerId) return;
+    audioPriorityOwnerRef.current = null;
+    setAudioPriorityOwner(null);
+    if (resumeAfterExperienceRef.current) setPlaying(true);
+    resumeAfterExperienceRef.current = false;
+  }, []);
+
   const value = useMemo<PlayerValue>(
     () => ({
       queue,
@@ -226,6 +250,7 @@ export function PlayerProvider({
       repeat,
       expanded,
       queueOpen,
+      audioPriorityOwner,
       silentPreview: !hasAudioSource,
       toggle,
       next,
@@ -239,9 +264,12 @@ export function PlayerProvider({
       setExpanded,
       toggleQueue: () => setQueueOpen((value) => !value),
       playTrackAt,
+      requestAudioPriority,
+      releaseAudioPriority,
     }),
     [
       currentTime,
+      audioPriorityOwner,
       duration,
       expanded,
       hasAudioSource,
@@ -253,6 +281,7 @@ export function PlayerProvider({
       previous,
       queue,
       queueOpen,
+      releaseAudioPriority,
       repeat,
       seek,
       setVolume,
@@ -260,6 +289,7 @@ export function PlayerProvider({
       toggle,
       track,
       volume,
+      requestAudioPriority,
     ],
   );
 

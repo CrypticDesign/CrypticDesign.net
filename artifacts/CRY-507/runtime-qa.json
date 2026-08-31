@@ -1,0 +1,98 @@
+[
+  {
+    "name": "desktop-1440",
+    "status": 200,
+    "before": "1",
+    "beforeInteraction": "ambient",
+    "active": {
+      "focused": true,
+      "inputOwner": "runtime",
+      "renderer": "1",
+      "interaction": "active"
+    },
+    "fallback": {
+      "phase": "active-embedded",
+      "expanded": "true",
+      "renderer": "1"
+    },
+    "focusReturned": true
+  },
+  {
+    "name": "tablet-768",
+    "status": 200,
+    "before": "1",
+    "beforeInteraction": "ambient",
+    "active": {
+      "focused": true,
+      "inputOwner": "runtime",
+      "renderer": "1",
+      "interaction": "active"
+    },
+    "fallback": {
+      "phase": "active-embedded",
+      "expanded": "true",
+      "renderer": "1"
+    },
+    "focusReturned": true
+  },
+  {
+    "name": "mobile-390-fallback",
+    "runtime": "fallback",
+    "renderer": "inactive",
+    "semanticHeading": "Enter the worlds, sound, and systems in motion.",
+    "semanticAction": "Explore Entertainment"
+  },
+  {
+    "name": "fullscreen-success",
+    "before": "1",
+    "fullscreenRenderer": "1",
+    "exitedRenderer": "1",
+    "returnedState": "updated"
+  },
+  {
+    "name": "audio-arbitration",
+    "pausedForExperience": "false",
+    "restoredGlobalPlayer": true
+  },
+  {
+    "name": "no-webgl",
+    "runtime": "fallback",
+    "renderer": "inactive",
+    "semanticHeading": "Enter the worlds, sound, and systems in motion.",
+    "semanticAction": "Explore Entertainment"
+  },
+  {
+    "name": "reduced-motion",
+    "runtime": "fallback",
+    "renderer": "inactive",
+    "semanticHeading": "Enter the worlds, sound, and systems in motion.",
+    "semanticAction": "Explore Entertainment"
+  },
+  {
+    "name": "context-loss-recovery",
+    "renderer": "1",
+    "lost": {
+      "state": "fallback",
+      "lifecycle": "context-lost"
+    },
+    "restored": {
+      "state": "ready",
+      "lifecycle": "running",
+      "renderer": "1"
+    }
+  },
+  {
+    "name": "asset-load-failure",
+    "runtime": "ready",
+    "renderer": "active",
+    "assets": "fallback",
+    "semanticHeading": "Enter the worlds, sound, and systems in motion.",
+    "semanticAction": "Explore Entertainment"
+  },
+  {
+    "name": "route-cleanup",
+    "entertainmentRenderer": "1",
+    "disposed": "disposed",
+    "communityScene": "community"
+  }
+]

@@ -1,0 +1,36 @@
+[
+  {
+    "state": "ready",
+    "violations": [],
+    "controls": [
+      {
+        "name": "Fullscreen",
+        "width": 97,
+        "height": 44
+      }
+    ],
+    "undersizedControls": []
+  },
+  {
+    "state": "active-embedded",
+    "violations": [],
+    "controls": [
+      {
+        "name": "Expanded in page",
+        "width": 128,
+        "height": 44
+      },
+      {
+        "name": "Enable experience audio",
+        "width": 173,
+        "height": 44
+      },
+      {
+        "name": "Exit experience",
+        "width": 120,
+        "height": 44
+      }
+    ],
+    "undersizedControls": []
+  }
+]
