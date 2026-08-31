@@ -2,6 +2,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { resolveEmailConfirmationPolicy } from "@/lib/email-confirmation-policy";
+
 export const metadata: Metadata = {
   title: "Confirm Email",
   robots: { index: false, follow: false },
@@ -12,15 +14,6 @@ type ConfirmationSearchParams = {
   type?: string | string[];
 };
 
-const confirmationTypes = new Set<EmailOtpType>([
-  "email",
-  "email_change",
-  "invite",
-  "magiclink",
-  "recovery",
-  "signup",
-]);
-
 export default async function ConfirmEmailPage({
   searchParams,
 }: {
@@ -29,11 +22,12 @@ export default async function ConfirmEmailPage({
   const params = await searchParams;
   const tokenHash = typeof params.token_hash === "string" ? params.token_hash : "";
   const requestedType = typeof params.type === "string" ? params.type : "";
-  const type = confirmationTypes.has(requestedType as EmailOtpType)
-    ? (requestedType as EmailOtpType)
-    : null;
-  const canConfirm = Boolean(tokenHash && type);
+  const policy = resolveEmailConfirmationPolicy(requestedType);
+  const type: EmailOtpType | null = policy?.type ?? null;
+  const canConfirm = Boolean(tokenHash && policy?.allowed);
   const recoveringPassword = type === "recovery";
+  const changingEmail = type === "email_change";
+  const admissionRequired = policy?.kind === "admission-required";
 
   return (
     <main className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10 sm:px-6">
@@ -41,13 +35,17 @@ export default async function ConfirmEmailPage({
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent-cyan">
           Account security
         </p>
-        <h1 className="text-3xl font-semibold text-white">{recoveringPassword ? "Continue password recovery" : "Confirm your email"}</h1>
+        <h1 className="text-3xl font-semibold text-white">
+          {recoveringPassword ? "Continue password recovery" : changingEmail ? "Confirm your new email" : "Confirm your email"}
+        </h1>
         <p className="max-w-xl text-muted-foreground">
           {canConfirm
             ? recoveringPassword
               ? "Continue to a secure page where you can choose a new password."
-              : "Finish creating your Cryptic Design account. Your email is not confirmed until you press the button below."
-            : "This confirmation link is incomplete or invalid. Request a new confirmation email and try again."}
+              : "Confirm this email change for your existing Cryptic Design account."
+            : admissionRequired
+              ? "This link cannot admit a new member while account access is closed. Request access or sign in with an existing admitted account."
+              : "This confirmation link is incomplete or invalid. Request a new account-security email and try again."}
         </p>
       </header>
 
@@ -61,12 +59,12 @@ export default async function ConfirmEmailPage({
               after this deliberate action.
             </p>
             <button type="submit" className="button-primary w-fit">
-              {recoveringPassword ? "Continue to reset password" : "Confirm email address"}
+              {recoveringPassword ? "Continue to reset password" : "Confirm email change"}
             </button>
           </form>
         ) : (
           <Link href="/account/create" className="button-primary inline-flex w-fit">
-            Account availability
+            Request access
           </Link>
         )}
       </section>

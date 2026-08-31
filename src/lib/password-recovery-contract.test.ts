@@ -33,6 +33,7 @@ test("recovery callback exchanges the PKCE code before opening the password form
     readFile(resetPageUrl, "utf8"),
   ]);
   assert.match(callback, /auth\.exchangeCodeForSession\(code\)/);
+  assert.match(callback, /findAdmittedMember\(session\.client, data\.user\.id\)/);
   assert.match(callback, /"\/account\/reset-password"/);
   assert.match(resetPage, /<PasswordResetForm \/>/);
 });
@@ -46,6 +47,7 @@ test("password changes require an authenticated user and matching passwords", as
   assert.match(form, /confirmation: form\.get\("confirmation"\)/);
   assert.match(route, /password !== body\.confirmation/);
   assert.match(route, /auth\.getUser\(\)/);
+  assert.match(route, /findAdmittedMember\(session\.client, data\.user\.id\)/);
   assert.match(route, /auth\.updateUser\(\{ password \}\)/);
   assert.match(route, /This reset link is invalid or has expired/);
 });
