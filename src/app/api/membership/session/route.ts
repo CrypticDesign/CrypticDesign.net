@@ -9,6 +9,7 @@ import {
 import { membershipSandboxEnabled, membershipSandboxPreferred } from "@/lib/membership-store";
 import { createSandboxSession, requireSandboxMember, SANDBOX_SESSION_COOKIE } from "@/lib/sandbox-session";
 import { signOutSupabaseSession } from "@/lib/supabase/auth";
+import { findAdmittedMember } from "@/lib/supabase/member-admission";
 import { createRequestSupabaseClient, supabaseConfigured } from "@/lib/supabase/server";
 
 export async function GET(request: NextRequest) {
@@ -20,9 +21,16 @@ export async function GET(request: NextRequest) {
     try {
       const session = createRequestSupabaseClient(request);
       const { data, error } = await session.client.auth.getUser();
+      const profile = !error && data.user
+        ? await findAdmittedMember(session.client, data.user.id)
+        : { memberId: null, error: false };
+      if (profile.error) {
+        return session.applyCookies(NextResponse.json({ authenticated: false, error: "Account services are temporarily unavailable", mode: "supabase", accountCreationAvailable: false }, { status: 503 }));
+      }
+      if (data.user && !profile.memberId) await signOutSupabaseSession(session.client);
       return session.applyCookies(NextResponse.json({
-        authenticated: !error && Boolean(data.user),
-        memberId: data.user?.id ?? null,
+        authenticated: Boolean(profile.memberId),
+        memberId: profile.memberId,
         mode: "supabase",
         accountAdmissionMode: accountAdmissionMode(),
         accountCreationAvailable: PUBLIC_ACCOUNT_CREATION_AVAILABLE,
@@ -67,7 +75,20 @@ export async function POST(request: NextRequest) {
       const session = createRequestSupabaseClient(request);
       const { data, error } = await session.client.auth.signInWithPassword({ email, password, options: { captchaToken } });
       if (error) return session.applyCookies(NextResponse.json({ error: "Email or password was not accepted", mode: "supabase" }, { status: 401 }));
-      return session.applyCookies(NextResponse.json({ authenticated: true, memberId: data.user.id, mode: "supabase", message: "You are signed in." }));
+      const profile = await findAdmittedMember(session.client, data.user.id);
+      if (profile.error) {
+        await signOutSupabaseSession(session.client);
+        return session.applyCookies(NextResponse.json({ error: "Account services are temporarily unavailable", mode: "supabase" }, { status: 503 }));
+      }
+      if (!profile.memberId) {
+        await signOutSupabaseSession(session.client);
+        return session.applyCookies(NextResponse.json({
+          error: "This identity has not been admitted as a member.",
+          code: "ACCOUNT_ADMISSION_REQUIRED",
+          mode: "supabase",
+        }, { status: 403 }));
+      }
+      return session.applyCookies(NextResponse.json({ authenticated: true, memberId: profile.memberId, mode: "supabase", message: "You are signed in." }));
     } catch {
       return NextResponse.json({ error: "Account services are temporarily unavailable", mode: "supabase" }, { status: 503 });
     }
