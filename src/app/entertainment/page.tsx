@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import ExperienceRuntime from "@/components/ExperienceRuntime";
 import MediaCard from "@/components/MediaCard";
-import PageScene from "@/components/PageScene";
 import { entertainmentSelection, releaseAvailability } from "@/lib/entertainment-frontdoor";
 import { publicProducts } from "@/lib/products";
 import { releaseDestination, releaseImage } from "@/lib/releases";
@@ -20,7 +20,7 @@ export default function EntertainmentHub() {
   const worlds = publicProducts().filter((product) => ["singularis", "lifa"].includes(product.slug));
   return <main>
     <section className="visual-hero !min-h-[560px]" data-section-accent="cyan" aria-labelledby="entertainment-title">
-      <PageScene sceneId="entertainment" fallbackPoster="/images/entertainment-hero.png" />
+      <ExperienceRuntime runtimeId="cryptic-design:entertainment:v1" sceneId="entertainment" fallbackPoster="/images/entertainment-hero.png" accessibleLabel="Entertainment interactive experience" launchMode="fullscreen" />
       <div className="visual-hero__wash" />
       <div className="visual-hero__content"><div className="signal-rail" /><span className="kicker">Enter Entertainment</span>
         <h1 id="entertainment-title" className="display-title">Enter the worlds, sound, and systems in motion.</h1>

@@ -12,6 +12,7 @@ import {
   type PageSceneId,
   type PageSceneQuality,
 } from "@/lib/page-scene";
+import type { ExperienceRuntimeInputOwner, ExperienceRuntimePhase } from "@/lib/experience-runtime";
 
 type NavigatorWithCapabilities = Navigator & {
   deviceMemory?: number;
@@ -19,6 +20,7 @@ type NavigatorWithCapabilities = Navigator & {
 };
 
 let cachedWebGLSupport: boolean | undefined;
+let rendererInstanceSequence = 0;
 
 function supportsWebGL(): boolean {
   if (cachedWebGLSupport !== undefined) return cachedWebGLSupport;
@@ -39,15 +41,34 @@ export default function PageScene({
   fallbackPoster,
   quality = "auto",
   interaction = "ambient",
+  runtimePhase = "presentation",
+  inputOwner = "page",
+  pointerEnabled = true,
+  touchEnabled = true,
+  onRuntimeStatus,
 }: {
   sceneId: PageSceneId;
   fallbackPoster: string;
   quality?: PageSceneQuality;
-  interaction?: "ambient" | "none";
+  interaction?: "active" | "ambient" | "none";
+  runtimePhase?: ExperienceRuntimePhase;
+  inputOwner?: ExperienceRuntimeInputOwner;
+  pointerEnabled?: boolean;
+  touchEnabled?: boolean;
+  onRuntimeStatus?: (status: "ready" | "fallback", reason?: string) => void;
 }) {
   const hostRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const interactionRef = useRef(interaction);
+  const pointerEnabledRef = useRef(pointerEnabled);
+  const touchEnabledRef = useRef(touchEnabled);
+  const statusRef = useRef(onRuntimeStatus);
   const [presentation, setPresentation] = useState<"poster" | "webgl">("poster");
+
+  interactionRef.current = interaction;
+  pointerEnabledRef.current = pointerEnabled;
+  touchEnabledRef.current = touchEnabled;
+  statusRef.current = onRuntimeStatus;
 
   useEffect(() => {
     const host = hostRef.current;
@@ -70,6 +91,8 @@ export default function PageScene({
     if (resolvedQuality === "low") {
       host.dataset.lifecycle = "static";
       host.dataset.renderer = "inactive";
+      host.dataset.state = "fallback";
+      statusRef.current?.("fallback", motionQuery.matches ? "reduced-motion" : "webgl-unavailable-or-constrained");
       return;
     }
 
@@ -86,6 +109,7 @@ export default function PageScene({
       host.dataset.state = "fallback";
       host.dataset.lifecycle = "static";
       host.dataset.renderer = "inactive";
+      statusRef.current?.("fallback", "renderer-creation-failed");
       return;
     }
 
@@ -93,6 +117,7 @@ export default function PageScene({
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.setClearColor(definition.background, 0);
     host.dataset.renderer = "active";
+    host.dataset.rendererInstance = String(++rendererInstanceSequence);
     host.dataset.performance = "measuring";
     host.dataset.assets = definition.assets.length ? "loading" : "none";
 
@@ -215,11 +240,13 @@ export default function PageScene({
     const render = () => {
       if (!visible || document.hidden || !contextAvailable) return;
       const elapsed = clock.getElapsedTime();
-      system.rotation.y = elapsed * 0.035 + pointerX * 0.08;
-      system.rotation.x = Math.sin(elapsed * 0.12) * 0.04 + pointerY * 0.05;
-      particles.rotation.y = elapsed * 0.008;
-      camera.position.x += (pointerX * 0.22 - camera.position.x) * 0.025;
-      camera.position.y += (0.25 - pointerY * 0.12 - camera.position.y) * 0.025;
+      const activeInteraction = interactionRef.current === "active";
+      const inputStrength = activeInteraction ? 0.22 : 0.08;
+      system.rotation.y = elapsed * (activeInteraction ? 0.065 : 0.035) + pointerX * inputStrength;
+      system.rotation.x = Math.sin(elapsed * 0.12) * 0.04 + pointerY * (activeInteraction ? 0.14 : 0.05);
+      particles.rotation.y = elapsed * (activeInteraction ? 0.018 : 0.008);
+      camera.position.x += (pointerX * (activeInteraction ? 0.52 : 0.22) - camera.position.x) * 0.025;
+      camera.position.y += (0.25 - pointerY * (activeInteraction ? 0.3 : 0.12) - camera.position.y) * 0.025;
       camera.lookAt(0, 0, 0);
       renderer.render(scene, camera);
       sampledFrames += 1;
@@ -270,7 +297,8 @@ export default function PageScene({
     };
     const handleVisibility = () => document.hidden ? stop() : start();
     const handlePointer = (event: PointerEvent) => {
-      if (interaction === "none") return;
+      if (interactionRef.current === "none") return;
+      if (event.pointerType === "touch" ? !touchEnabledRef.current : !pointerEnabledRef.current) return;
       const bounds = host.getBoundingClientRect();
       pointerX = ((event.clientX - bounds.left) / Math.max(bounds.width, 1) - 0.5) * 2;
       pointerY = ((event.clientY - bounds.top) / Math.max(bounds.height, 1) - 0.5) * 2;
@@ -281,11 +309,13 @@ export default function PageScene({
       stop();
       host.dataset.state = "fallback";
       setPresentation("poster");
+      statusRef.current?.("fallback", "webgl-context-lost");
     };
     const handleContextRestored = () => {
       contextAvailable = true;
       host.dataset.state = "ready";
       setPresentation("webgl");
+      statusRef.current?.("ready");
       start();
     };
 
@@ -305,6 +335,7 @@ export default function PageScene({
     renderer.render(scene, camera);
     host.dataset.state = "ready";
     setPresentation("webgl");
+    statusRef.current?.("ready");
     start();
 
     return () => {
@@ -328,10 +359,10 @@ export default function PageScene({
       host.dataset.lifecycle = "disposed";
       host.dataset.renderer = "inactive";
     };
-  }, [interaction, quality, sceneId]);
+  }, [quality, sceneId]);
 
   return (
-    <div ref={hostRef} className="page-scene visual-hero__image" data-scene={sceneId} data-state="poster" data-lifecycle="loading" data-renderer="inactive">
+    <div ref={hostRef} className="page-scene visual-hero__image" data-scene={sceneId} data-state="poster" data-lifecycle="loading" data-renderer="inactive" data-runtime-state={runtimePhase} data-input-owner={inputOwner} data-interaction={interaction}>
       <Image className="page-scene__poster" src={fallbackPoster} alt="" fill priority sizes="100vw" />
       <canvas ref={canvasRef} aria-hidden="true" />
       <span className="sr-only" aria-live="polite">{presentation === "webgl" ? "Ambient scene ready." : "Static scene displayed."}</span>
