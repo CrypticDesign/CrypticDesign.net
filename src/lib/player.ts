@@ -1,23 +1,9 @@
 /**
  * Cryptic Signal player model (CRY-242 shared player).
  *
- * Tracks are derived from published releases so the shared player inherits the
- * same rights and visibility governance as every other public surface —
- * `publicReleases()` has already applied `isPubliclyRenderable`, and
- * `releaseDestination()` keeps links pointing at the consolidated routes.
- *
- * Catalog audio is not published yet, so seed tracks carry no `src`. The
- * player treats a src-less track as a silent preview: transport, timeline and
- * queue all behave normally against the declared duration, and real streaming
- * begins the moment a file URL is attached to a track here.
+ * The default queue only includes tracks with published audio. This keeps the
+ * global player honest: every item shown in the library can actually play.
  */
-
-import {
-  publicReleases,
-  releaseDestination,
-  releaseImage,
-  type Release,
-} from "@/lib/releases";
 
 export interface PlayerTrack {
   id: string;
@@ -50,7 +36,7 @@ function audioUrl(file: string): string {
   return `${AUDIO_BASE}/${file}`;
 }
 
-/** Published audio, newest first. Durations are refined from file metadata on load. */
+/** Published audio in library order. Durations are refined from file metadata on load. */
 const CATALOG_TRACKS: PlayerTrack[] = [
   {
     id: "reflection",
@@ -74,52 +60,33 @@ const CATALOG_TRACKS: PlayerTrack[] = [
     bitrate: "320 Kbps",
     href: "/audio",
   },
+  {
+    id: "kyrie-of-a-dying-star-cabaret",
+    title: "Kyrie of a Dying Star Cabaret",
+    artist: "Cryptic Signal",
+    artwork: "/images/singularis.png",
+    duration: 257,
+    src: audioUrl("sin-kyrie-of-a-dying-star-cabaret.mp3"),
+    format: "MP3",
+    bitrate: "181 Kbps",
+    href: "/products/singularis",
+  },
+  {
+    id: "leviathan-dreaming",
+    title: "Leviathan Dreaming",
+    artist: "Cryptic Signal",
+    artwork: "/images/singularis.png",
+    duration: 393,
+    src: audioUrl("sin-leviathan-dreaming.mp3"),
+    format: "MP3",
+    bitrate: "173 Kbps",
+    href: "/products/singularis",
+  },
 ];
 
-const FLAGSHIP_TRACK: PlayerTrack = {
-  id: "signal-systems",
-  title: "Signal & Systems",
-  artist: "Cryptic Signal",
-  artwork: "/images/signal-systems.png",
-  duration: 312,
-  format: "MP3",
-  bitrate: "320 Kbps",
-  href: "/audio",
-};
-
-/** Deterministic placeholder runtime so the timeline reads naturally. */
-function seedDuration(slug: string): number {
-  let hash = 0;
-  for (let i = 0; i < slug.length; i += 1) hash = (hash * 31 + slug.charCodeAt(i)) % 997;
-  return 168 + (hash % 220);
-}
-
-function trackFromRelease(release: Release): PlayerTrack {
-  return {
-    id: release.slug,
-    title: release.title,
-    artist: "Cryptic Signal",
-    artwork: releaseImage(release),
-    duration: seedDuration(release.slug),
-    format: "MP3",
-    bitrate: "320 Kbps",
-    href: releaseDestination(release),
-  };
-}
-
-/** The default listening queue: the flagship release plus published audio. */
+/** The default listening queue contains playable, published audio only. */
 export function defaultQueue(): PlayerTrack[] {
-  const seen = new Set<string>([FLAGSHIP_TRACK.id, ...CATALOG_TRACKS.map((t) => t.id)]);
-  const listening: PlayerTrack[] = [];
-
-  for (const release of publicReleases()) {
-    const isListening = release.kind === "audio" || release.lanes.includes("listen");
-    if (!isListening || seen.has(release.slug)) continue;
-    seen.add(release.slug);
-    listening.push(trackFromRelease(release));
-  }
-
-  return [...CATALOG_TRACKS, FLAGSHIP_TRACK, ...listening];
+  return [...CATALOG_TRACKS];
 }
 
 /** mm:ss, padded so the timeline does not shift width as it counts. */
