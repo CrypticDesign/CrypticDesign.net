@@ -321,7 +321,7 @@ export default function ExperienceRuntime({
             onRuntimeStatus={handleSceneStatus}
           />
         )}
-        {controls === "shared" ? <div className="experience-runtime__controls" aria-label="Experience controls">
+        {controls === "shared" ? <div className="experience-runtime__controls" role="group" aria-label="Experience controls">
           {!isActive && state.phase !== "fallback" ? (
             <button
               ref={launchButtonRef}
