@@ -30,6 +30,45 @@
   font: 600 21px "IBM Plex Sans", Arial;
 }
 .community-explore #participation-paths { scroll-margin-top: 150px; }
+.community-explore .community-explore__platform-cta {
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 42px;
+  padding: 40px 48px;
+  border-top: 2px solid var(--section-accent-border);
+  border-left-width: 1px;
+  background: radial-gradient(circle at 82% 10%, var(--section-accent-glow), transparent 38%), #050b12;
+}
+.community-explore .community-explore__platform-cta h2 {
+  margin: 10px 0 8px;
+  font-size: 24px;
+}
+.community-explore .community-explore__platform-cta p {
+  font-size: 12px;
+  line-height: 1.68;
+}
+.community-explore .community-explore__platform-actions {
+  display: flex;
+  width: max-content;
+  max-width: 100%;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 12px;
+  margin: 0;
+}
+.community-explore .community-explore__platform-actions .button {
+  min-width: 170px;
+  min-height: 54px;
+  padding-inline: 24px;
+  font-size: 10px;
+}
+.community-explore .community-explore__platform-actions .secondary {
+  border-color: color-mix(in srgb, var(--section-accent) 32%, var(--line));
+  background: rgb(3 8 15 / 80%);
+  color: #fff;
+}
+.community-explore .community-explore__platform-primary {
+  min-width: 190px;
+}
 @media (max-width: 1000px) {
   .community-explore .community-portal__hero {
     grid-template-columns: minmax(0, 1fr);
@@ -37,7 +76,12 @@
     padding: 64px 32px 32px;
   }
   .community-explore .community-portal__hero-status { max-width: 650px; }
+  .community-explore .community-explore__platform-cta { grid-template-columns: 1fr; padding: 32px; }
+  .community-explore .community-explore__platform-actions { width: 100%; justify-content: flex-start; }
 }
 @media (max-width: 540px) {
   .community-explore .community-portal__hero { padding: 48px 20px 28px; }
+  .community-explore .community-explore__platform-cta { padding: 28px 22px; }
+  .community-explore .community-explore__platform-actions { display: grid; }
+  .community-explore .community-explore__platform-actions .button { width: 100%; }
 }
