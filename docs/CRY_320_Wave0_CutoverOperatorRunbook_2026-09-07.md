@@ -37,12 +37,12 @@ Proposed stabilization window: cutover completion through **Thursday, September 
 - [x] Netlify aliases `crypticdesign.net` and `www.crypticdesign.net` added to this exact project under Robert's 2026-09-07 approval.
 - [x] Netlify customized Pending DNS verification instructions match the planned records below.
 - [x] Canonical direction confirmed: **apex primary; `www` redirects automatically to apex**.
-- [ ] Netlify certificate issuance path is ready for both aliases; no blocking CAA/AAAA/DNSSEC conflict exists.
+- [x] Certificate preconditions checked: the preserved zone contains no CAA or AAAA record and GoDaddy DNSSEC is off. Apex/`www` certificate issuance remains pending the approved DNS cutover.
 - [ ] Candidate deploy ID, commit, branch, published state, and critical environment-variable names/scopes are reconfirmed.
 - [ ] Squarespace remains healthy, paid, and available for rollback through stabilization.
-- [ ] Microsoft 365, Proofpoint/PPE, Resend/Supabase Auth, DKIM, SPF, DMARC, Autodiscover, and verification records are identified as protected/non-web records.
+- [x] Microsoft 365, Proofpoint/PPE, Resend/Supabase Auth, DKIM, SPF, DMARC, Autodiscover, and verification records are identified as protected/non-web records in the preserved 33-record export.
 - [x] Operator: **Robert K. Croft**.
-- [ ] Communication path and rollback authority recorded in CRY-320.
+- [x] Communication path: CRY-320. Rollback authority: Robert K. Croft. Both recorded in CRY-320.
 - [ ] Robert records exact GO timestamp. The staffed window is confirmed above.
 
 Any unchecked item means **NO-GO**.
@@ -62,6 +62,30 @@ Netlify's customized Pending External DNS verification panels confirm the exact 
 Protected records: do not modify `demo`, MX, SPF, DKIM, DMARC, Autodiscover, auth/email, CAA, or provider-verification records unless a separate reviewed change explicitly requires it.
 
 ## Operator checklist
+
+### Control assignments
+
+- Decision owner, operator, and rollback authority: **Robert K. Croft**
+- Live operational log and communication channel: **Jira CRY-320**
+- Readiness/decision summary: **Confluence — CrypticDesign.net Sprint 42 Recovery and Wave 0 Release Readiness**
+- Technical evidence: this runbook, the preserved GoDaddy export, Netlify domain management, and the approved release deployment
+
+### Minute-by-minute execution — Monday, September 14, 2026
+
+| Time (America/Chicago) | Owner | Action / stop gate |
+| --- | --- | --- |
+| 9:30–9:40 AM | Robert | Open Netlify, GoDaddy DNS, CRY-320, this runbook, and rollback evidence. Reconfirm access without making changes. |
+| 9:40–9:50 AM | Robert | Reconfirm release deploy/commit, Squarespace health, `demo`, mail/auth baseline, two-resolver DNS state, and protected-record list. |
+| 9:50–9:55 AM | Robert | Record current public/TLS state and exact before/after values in CRY-320. Any drift or missing evidence is NO-GO. |
+| 9:55–10:00 AM | Robert | Record explicit **GO** or **NO-GO** in CRY-320. No DNS edit without the GO timestamp. |
+| 10:00–10:05 AM | Robert | If GO, replace only the four apex Squarespace A records with `75.2.60.5`, then replace only `www → ext-cust.squarespace.com` with `www → frabjous-frangipane-650548.netlify.app`. |
+| 10:05–10:15 AM | Robert | Record provider completion time; query Google and Cloudflare DNS. Confirm protected records were untouched. |
+| 10:15–10:30 AM | Robert | Verify Netlify DNS status, apex/`www` TLS issuance, and `www → apex`. If material failure persists for 15 minutes, roll back. |
+| 10:30–10:45 AM | Robert | Run front-door, route, redirect, robots, sitemap, media, metadata, Request Access, Sign In, accessibility, responsive, Chromium, and WebKit smoke checks. |
+| 10:45–11:00 AM | Robert | Verify Microsoft 365 inbound/outbound mail and Auth confirmation delivery. Any mail disruption triggers rollback. |
+| 11:00–11:10 AM | Robert | Record **CONDITIONAL / STABILIZING** or **ROLLBACK STARTED** in CRY-320 with evidence links. |
+| 11:10 AM–12:00 PM | Robert | Stabilization/repair buffer. Do not broaden scope; roll back if launch-critical acceptance cannot be restored inside the window. |
+| 12:00 PM | Robert | Record window-close state. Continue +60-minute, +24-hour, and 72-hour monitoring before RELEASED. |
 
 ### T-30 minutes
 
