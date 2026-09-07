@@ -2,13 +2,13 @@
 
 Date: 2026-09-07 (America/Chicago)
 
-Release candidate source: `8e7a6273803b852ff132499be746dd98ceed9ea0`
+Release candidate source: `878206d62ed84f756c872bd5584b20df038b7b51`
 
 Release-candidate URL: `https://demo.crypticdesign.net`
 
 Netlify site: `frabjous-frangipane-650548`
 
-Exact provider deploy ID: **operator verification required**
+Exact provider deploy ID: `6a9ec27d15a1fb0008145b06` (`published`, `main`)
 
 Recommendation: **NO-GO**
 
@@ -28,9 +28,9 @@ The code, production dependency, core experience, Request Access admission, inte
 | Community / CRY-503 | PASS as its own surface | Truthful staged surface and accessibility verified; Done |
 | Integrated journey / CRY-505 | PASS | PR #71 merged as `8e7a627`; deployed main passed 24/24 route/browser/viewport checks with zero WCAG, browser, overflow, semantic, canonical, or journey errors |
 | Netlify edge / CRY-434 | PASS WITH FOLLOW-UPS | 60 direct checks and eight redirects passed; four defense-in-depth headers absent |
-| Apex/`www` hostname and TLS readiness | NOT VERIFIED | Provider-side aliases/certificate readiness unavailable through current read-only evidence |
+| Apex/`www` hostname and TLS readiness | FAIL / NOT CONFIGURED | Authenticated Netlify inspection confirms only `demo.crypticdesign.net` is attached and covered by TLS; apex and `www` are absent, so their certificates cannot yet provision |
 | DNS preservation/export | PARTIAL | Public web/mail baseline recorded; complete GoDaddy zone export still required |
-| Exact deploy/commit binding | NOT VERIFIED | Runtime contains merged behavior, but provider deploy ID and SHA binding require Netlify UI confirmation |
+| Exact deploy/commit binding | PASS | Netlify published deploy `6a9ec27d15a1fb0008145b06` is bound to `main @ 878206d62ed84f756c872bd5584b20df038b7b51` |
 | Operator/window/explicit Robert GO | NOT RECORDED | Mandatory stop gate |
 
 ## Public DNS preservation matrix
@@ -51,11 +51,13 @@ DKIM, auth-email, provider-verification, and any non-public records must be pres
 
 ## Proposed web-record changes — plan only
 
-After Netlify aliases are configured and Netlify provides the exact supported values:
+The standard-network external-DNS targets are confirmed in current Netlify documentation; customized provider instructions still must be rechecked after the aliases are added:
 
-1. Replace only the four Squarespace apex A records with the confirmed Netlify apex target (historical plan value: `75.2.60.5`; re-confirm in Netlify before use).
-2. Replace only the `www` Squarespace CNAME with the exact Netlify target supplied for this site.
+1. Replace the four Squarespace apex A records with one apex A record: `@ → 75.2.60.5` (GoDaddy fallback because the apex cannot use a normal CNAME).
+2. Replace the `www` Squarespace CNAME with `www → frabjous-frangipane-650548.netlify.app`.
 3. Leave `demo`, MX, SPF, DKIM, DMARC, Autodiscover, auth-email, and verification records untouched.
+
+Do not execute these values until Netlify shows both aliases on this exact site, the Pending DNS verification guidance matches, the full GoDaddy export is preserved, and Robert records an explicit GO.
 
 ## Rollback packet
 
@@ -67,7 +69,7 @@ Rollback immediately for repeated 5xx/front-door failure, DNS/TLS/canonical fail
 
 ## Cutover operator sequence
 
-1. Confirm exact Netlify main-production deploy ID ↔ `8e7a627`.
+1. Reconfirm Netlify main-production deploy `6a9ec27d15a1fb0008145b06` ↔ `878206d62ed84f756c872bd5584b20df038b7b51`.
 2. Add/verify apex and `www` aliases, certificate readiness, and canonical direction in Netlify without changing DNS.
 3. Export the complete GoDaddy zone and capture provider screenshots in restricted evidence.
 4. Record operator, window, communication path, exact before/after web-record values, and rollback authority.
@@ -80,7 +82,7 @@ Rollback immediately for repeated 5xx/front-door failure, DNS/TLS/canonical fail
 ## Remaining risks and follow-ups
 
 - CRY-505 is cleared; no active product-journey blocker remains in this packet.
-- Provider UI must confirm aliases, certificate readiness, environment scopes, and exact deploy binding.
+- Provider UI confirms the exact deploy binding and healthy `demo` certificate; apex/`www` aliases and their certificate readiness remain unconfigured.
 - Complete DNS export is not yet preserved in this packet.
 - CSP, frame protection, Referrer-Policy, and Permissions-Policy are absent on the demo and should be hardened separately.
 - CRY-510 tracks three development-only dependency advisories and the Node engine mismatch; production dependencies remain clean.
