@@ -30,6 +30,7 @@ test("Community puts staged participation before explicitly cross-platform explo
   assert.ok(page.indexOf("Groups / Opening") < page.indexOf("Events / Opening"));
   assert.ok(page.indexOf("Events / Opening") < page.indexOf("From across the platform"));
   assert.match(page, /href="#participation-paths"/);
+  assert.match(page, /href="\/account\/create">Request Access/);
   assert.match(page, /showSignInAction=\{false\}/);
   assert.match(page, /authenticated \? "\/" : "\/account\/sign-in"/);
   assert.match(page, /authenticated \? <section/);
