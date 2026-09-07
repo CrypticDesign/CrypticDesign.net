@@ -53,9 +53,9 @@ export default function EntertainmentHub() {
         <div className="media-grid">{selected.map((release) => <MediaCard key={release.slug} href={releaseDestination(release)} image={releaseImage(release)} eyebrow={`${release.kind} / ${releaseAvailability(release)}`} title={release.title} body={release.tagline} />)}</div>
         {!selected.length ? <p>No public selections are available yet.</p> : null}
       </section>
-      <section className="explore-portal__continuum" data-section-accent="indigo" aria-labelledby="entertainment-continue-title">
+      <section className="explore-portal__continuum explore-portal__continuum--cta" data-section-accent="indigo" aria-labelledby="entertainment-continue-title">
         <div><span className="kicker">Continue</span><h2 id="entertainment-continue-title">Find your next connection.</h2><p>Discover Community participation paths, browse releases, or sign in to your personal My Home.</p></div>
-        <nav aria-label="Continue from Entertainment"><Link href="/community">Explore Community <span aria-hidden="true">→</span></Link><Link href="/releases">Browse Releases <span aria-hidden="true">→</span></Link><Link href="/account/sign-in">Sign In to My Home <span aria-hidden="true">→</span></Link></nav>
+        <nav className="hero-actions explore-portal__continuum-actions" aria-label="Continue from Entertainment"><Link href="/community" className="button home-primary-cta">Explore Community</Link><Link href="/releases" className="button secondary">Browse Releases</Link><Link href="/account/sign-in" className="button secondary">Sign In to My Home</Link></nav>
       </section>
     </div>
   </main>;

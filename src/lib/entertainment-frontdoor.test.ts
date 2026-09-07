@@ -18,6 +18,8 @@ test("Entertainment is the canonical six-stage public discovery front door", () 
   assert.match(page, /publicProducts\(\)/);
   assert.match(page, /href="#choose-a-mode"/);
   assert.match(page, /href="\/releases".*Browse Releases/);
+  assert.match(page, /explore-portal__continuum--cta/);
+  assert.match(page, /href="\/community" className="button home-primary-cta">Explore Community/);
   assert.doesNotMatch(page, /Popular now|live mix|Trending|Latest|href="\/library"/i);
 });
 
@@ -47,7 +49,7 @@ test("selection fails closed for withheld rights, drafts and nonpublic access", 
 test("generic discovery points home while contextual Play retains Arcade compatibility", () => {
   const community = readFileSync(new URL("../app/community/page.tsx", import.meta.url), "utf8");
   const header = readFileSync(new URL("../components/SiteHeader.tsx", import.meta.url), "utf8");
-  assert.match(community, /href="\/entertainment">Explore Entertainment/);
+  assert.match(community, /href="\/entertainment"[^>]*>Explore Entertainment/);
   assert.doesNotMatch(community, /\/entertainment\/explore/);
   assert.match(header, /href: "\/entertainment", label: "Play"/);
 });

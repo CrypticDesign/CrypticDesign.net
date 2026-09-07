@@ -57,9 +57,9 @@ export default async function ArcadePage({ searchParams }: { searchParams: Promi
         <div className="arcade-grid">{entries.map((entry) => <ArcadeCatalogCard entry={entry} key={entry.slug}/>)}</div>
       </section>
 
-      <section className="explore-portal__continuum" data-section-accent="blue" aria-labelledby="explore-continuum-title">
+      <section className="explore-portal__continuum explore-portal__continuum--cta" data-section-accent="blue" aria-labelledby="explore-continuum-title">
         <div><span className="kicker">Every path connects</span><h2 id="explore-continuum-title">Continue beyond Arcade.</h2><p>Find music, video, worlds, and releases at the Entertainment front door.</p></div>
-        <nav aria-label="Continue exploring"><Link href="/entertainment">Explore Entertainment <span aria-hidden="true">→</span></Link><Link href="/releases">Public releases <span aria-hidden="true">→</span></Link><Link href="/community">Community <span aria-hidden="true">→</span></Link><Link href="/account/sign-in">Sign In to My Home <span aria-hidden="true">→</span></Link></nav>
+        <nav className="hero-actions explore-portal__continuum-actions" aria-label="Continue exploring"><Link href="/entertainment" className="button home-primary-cta">Explore Entertainment</Link><Link href="/releases" className="button secondary">Public releases</Link><Link href="/community" className="button secondary">Community</Link><Link href="/account/sign-in" className="button secondary">Sign In to My Home</Link></nav>
       </section>
     </div>
   </main>;

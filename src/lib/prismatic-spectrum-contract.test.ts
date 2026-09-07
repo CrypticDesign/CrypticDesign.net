@@ -87,7 +87,7 @@ test("destination subnavigation inherits the same canonical accent as its primar
 
 test("Community uses Indigo for identity and Magenta only for social emphasis", () => {
   assert.match(community, /community-portal__hero" data-section-accent="indigo"/);
-  assert.match(community, /explore-portal__continuum" data-section-accent="magenta"/);
+  assert.match(community, /explore-portal__continuum explore-portal__continuum--cta" data-section-accent="magenta"/);
   assert.match(community, /community-explore-card community-explore-card--social/);
   assert.match(globals, /\.community-portal__hero-content \.display-title em\{color:var\(--cry-accent-magenta\)\}/);
   assert.match(globals, /\.community-primary-cta\{border-color:var\(--cry-accent-blue\);background:var\(--cry-accent-blue\)/);
