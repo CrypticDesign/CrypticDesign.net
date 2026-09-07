@@ -28,10 +28,10 @@ The code, production dependency, core experience, Request Access admission, inte
 | Community / CRY-503 | PASS as its own surface | Truthful staged surface and accessibility verified; Done |
 | Integrated journey / CRY-505 | PASS | PR #71 merged as `8e7a627`; deployed main passed 24/24 route/browser/viewport checks with zero WCAG, browser, overflow, semantic, canonical, or journey errors |
 | Netlify edge / CRY-434 | PASS WITH FOLLOW-UPS | 60 direct checks and eight redirects passed; four defense-in-depth headers absent |
-| Apex/`www` hostname and TLS readiness | FAIL / NOT CONFIGURED | Authenticated Netlify inspection confirms only `demo.crypticdesign.net` is attached and covered by TLS; apex and `www` are absent, so their certificates cannot yet provision |
+| Apex/`www` hostname and TLS readiness | CONFIGURED / PENDING DNS | Apex is Primary; `www` redirects automatically to apex; customized targets match the runbook; both await external DNS verification and TLS provisioning |
 | DNS preservation/export | PASS | Authenticated GoDaddy export preserved: 33 records, 3,096 bytes, SHA-256 `B27C8866AE981CD9FA2791D520BCB2057CB737D6785A0F86AAB9ED9D94174BAC`; protected values retained outside ordinary reports |
 | Exact deploy/commit binding | PASS | Netlify published deploy `6a9ec27d15a1fb0008145b06` is bound to `main @ 878206d62ed84f756c872bd5584b20df038b7b51` |
-| Operator/window/explicit Robert GO | NOT RECORDED | Mandatory stop gate |
+| Operator/window/explicit Robert GO | PARTIAL | Robert confirmed as operator and 2026-09-14 10:00 AM–12:00 PM CT as the staffed window; explicit cutover GO remains mandatory |
 
 ## Public DNS preservation matrix
 
@@ -51,13 +51,13 @@ DKIM, auth-email, provider-verification, and any non-public records must be pres
 
 ## Proposed web-record changes — plan only
 
-The standard-network external-DNS targets are confirmed in current Netlify documentation; customized provider instructions still must be rechecked after the aliases are added:
+Netlify aliases are configured and the authenticated customized panels confirm:
 
 1. Replace the four Squarespace apex A records with one apex A record: `@ → 75.2.60.5` (GoDaddy fallback because the apex cannot use a normal CNAME).
 2. Replace the `www` Squarespace CNAME with `www → frabjous-frangipane-650548.netlify.app`.
 3. Leave `demo`, MX, SPF, DKIM, DMARC, Autodiscover, auth-email, and verification records untouched.
 
-Do not execute these values until Netlify shows both aliases on this exact site, the Pending DNS verification guidance matches, the full GoDaddy export is preserved, and Robert records an explicit GO.
+Do not execute these values until Robert records an explicit GO. Netlify shows both production hostnames on this exact site, the customized guidance matches, and the full GoDaddy export is preserved.
 
 ## Rollback packet
 
@@ -82,7 +82,7 @@ Rollback immediately for repeated 5xx/front-door failure, DNS/TLS/canonical fail
 ## Remaining risks and follow-ups
 
 - CRY-505 is cleared; no active product-journey blocker remains in this packet.
-- Provider UI confirms the exact deploy binding and healthy `demo` certificate; apex/`www` aliases and their certificate readiness remain unconfigured.
+- Provider UI confirms the exact deploy binding, configured apex/`www` canonical relationship, customized DNS values, and healthy `demo` certificate. Apex/`www` certificate completion remains dependent on the approved DNS cutover.
 - Complete GoDaddy DNS export is preserved in the restricted operations evidence folder and excluded from Git.
 - CSP, frame protection, Referrer-Policy, and Permissions-Policy are absent on the demo and should be hardened separately.
 - CRY-510 tracks three development-only dependency advisories and the Node engine mismatch; production dependencies remain clean.

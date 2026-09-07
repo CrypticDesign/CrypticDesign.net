@@ -4,9 +4,9 @@ Prepared: 2026-09-07 (America/Chicago)
 
 Owner and final decision authority: Robert K. Croft
 
-Status: **DRAFT / NO-GO — no provider or DNS mutation is authorized by this document**
+Status: **PREPARED / NO-GO — Netlify aliases are configured; production DNS cutover still requires explicit Robert GO**
 
-Proposed staffed change window: **Monday, September 14, 2026, 10:00 AM–12:00 PM America/Chicago**
+Confirmed staffed change window: **Monday, September 14, 2026, 10:00 AM–12:00 PM America/Chicago**
 
 Proposed stabilization window: cutover completion through **Thursday, September 17, 2026, 12:00 PM America/Chicago** (minimum 72 hours)
 
@@ -25,8 +25,8 @@ Proposed stabilization window: cutover completion through **Thursday, September 
 - Candidate URL: `https://demo.crypticdesign.net`
 - GitHub commit: `878206d62ed84f756c872bd5584b20df038b7b51`
 - Netlify published deploy: `6a9ec27d15a1fb0008145b06`
-- Netlify domain state verified 2026-09-07: `demo.crypticdesign.net` is the only custom/primary domain.
-- Netlify TLS state verified 2026-09-07: Let's Encrypt is enabled for `demo.crypticdesign.net`; apex and `www` are not attached and therefore are not certificate-ready.
+- Netlify domain state verified 2026-09-07: `crypticdesign.net` is Primary; `www.crypticdesign.net` redirects automatically to the primary domain; `demo.crypticdesign.net` remains a domain alias.
+- Netlify TLS state verified 2026-09-07: Let's Encrypt remains enabled for `demo.crypticdesign.net`; apex and `www` are attached but remain Pending External DNS verification, so their certificates cannot provision before DNS cutover.
 - Current canonical public site: Squarespace at `www.crypticdesign.net`.
 - Current apex TLS presents `*.squarespace.com` and fails hostname validation; this is a current-state cutover blocker, not Netlify-candidate evidence.
 
@@ -34,22 +34,22 @@ Proposed stabilization window: cutover completion through **Thursday, September 
 
 - [x] Full GoDaddy zone export downloaded and stored in the restricted evidence directory; 33 records, 3,096 bytes, SHA-256 `B27C8866AE981CD9FA2791D520BCB2057CB737D6785A0F86AAB9ED9D94174BAC`.
 - [ ] Restricted provider screenshots captured without copying credentials or verification-token values into Jira/Confluence.
-- [ ] Netlify aliases `crypticdesign.net` and `www.crypticdesign.net` added to this exact project under a separately approved provider mutation.
-- [ ] Netlify customized Pending DNS verification instructions match the planned records below.
-- [ ] Canonical direction confirmed: **apex primary; `www` redirects to apex**.
+- [x] Netlify aliases `crypticdesign.net` and `www.crypticdesign.net` added to this exact project under Robert's 2026-09-07 approval.
+- [x] Netlify customized Pending DNS verification instructions match the planned records below.
+- [x] Canonical direction confirmed: **apex primary; `www` redirects automatically to apex**.
 - [ ] Netlify certificate issuance path is ready for both aliases; no blocking CAA/AAAA/DNSSEC conflict exists.
 - [ ] Candidate deploy ID, commit, branch, published state, and critical environment-variable names/scopes are reconfirmed.
 - [ ] Squarespace remains healthy, paid, and available for rollback through stabilization.
 - [ ] Microsoft 365, Proofpoint/PPE, Resend/Supabase Auth, DKIM, SPF, DMARC, Autodiscover, and verification records are identified as protected/non-web records.
-- [ ] Operator: **Robert K. Croft**, or a substitute explicitly named by Robert in CRY-320.
+- [x] Operator: **Robert K. Croft**.
 - [ ] Communication path and rollback authority recorded in CRY-320.
-- [ ] Robert records exact GO timestamp and confirms the proposed window (or replaces it with another exact window).
+- [ ] Robert records exact GO timestamp. The staffed window is confirmed above.
 
 Any unchecked item means **NO-GO**.
 
 ## Exact web-record change plan
 
-Current Netlify standard-network guidance for external DNS uses `75.2.60.5` for an apex A-record fallback and the project's `.netlify.app` hostname for `www`. Reconfirm the customized Pending DNS verification panel after the aliases exist; customized values override this draft.
+Netlify's customized Pending External DNS verification panels confirm the exact standard-network values below. The apex panel recommends ALIAS/ANAME/flattened CNAME where supported and confirms `75.2.60.5` as the fallback A record. GoDaddy uses the confirmed A-record path. The `www` panel confirms the project's `.netlify.app` hostname.
 
 | Host | Before | Planned after | TTL | Action |
 | --- | --- | --- | --- | --- |
@@ -121,3 +121,5 @@ Rollback sequence:
 
 - 2026-09-07: Draft created from the authenticated Netlify domain/TLS inspection, public DNS/TLS baseline, current Netlify external-DNS guidance, and merged Sprint 42 release evidence. No provider or DNS mutation performed.
 - 2026-09-07: Authenticated GoDaddy export preserved at `Operations - Documents/CRY-320_DNSPreservation_2026-09-07/crypticdesign.net.godaddy-zone-2026-09-07.txt`; 33 records and protected mail/authentication categories verified without publishing their values. No DNS mutation performed.
+- 2026-09-07: Under Robert's explicit approval, Netlify aliases were configured with `crypticdesign.net` as Primary, `www.crypticdesign.net` as the automatic redirect to primary, and `demo.crypticdesign.net` retained as an alias. A redundant manual `www` alias was removed after Netlify generated its automatic canonical entry. Customized DNS targets match this runbook. No GoDaddy DNS change was performed.
+- 2026-09-07: Robert K. Croft confirmed as operator and Monday, September 14, 2026, 10:00 AM–12:00 PM America/Chicago confirmed as the staffed cutover window.
