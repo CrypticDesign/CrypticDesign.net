@@ -1,0 +1,149 @@
+# CRY-320 — Wave 0 production-domain cutover operator runbook
+
+Prepared: 2026-09-07 (America/Chicago)
+
+Owner and final decision authority: Robert K. Croft
+
+Status: **PREPARED / NO-GO — Netlify aliases are configured; production DNS cutover still requires explicit Robert GO**
+
+Confirmed staffed change window: **Monday, September 14, 2026, 10:00 AM–12:00 PM America/Chicago**
+
+Proposed stabilization window: cutover completion through **Thursday, September 17, 2026, 12:00 PM America/Chicago** (minimum 72 hours)
+
+## Control loop
+
+- Trigger: Robert records an explicit GO in CRY-320 after every pre-change gate below is checked.
+- Stop condition: RELEASED after the stabilization window, or ROLLED BACK after the public Squarespace state is restored and verified.
+- Source inputs: Netlify project `frabjous-frangipane-650548`, GoDaddy zone for `crypticdesign.net`, GitHub `main`, CRY-320, the recovery/readiness Confluence page, and the preserved evidence packet.
+- Authority class: read-only preparation until Robert's explicit GO; DNS, Netlify alias, deploy, email, identity, Squarespace, and paid-service mutations remain separately gated.
+- Verification method: two independent DNS resolvers; HTTPS/TLS/canonical checks; route, redirect, media, metadata, accessibility, responsive, and Chromium/WebKit smoke tests; Microsoft 365 and Auth mail checks.
+- Escalation boundary: stop immediately on uncertain record ownership, unexpected provider warnings, unrelated DNS drift, certificate failure, mail impact, authentication/data-isolation regression, or any missing rollback evidence.
+- Usage guardrail: one coherent production change window; do not use main-branch deploys as a debugging loop; avoid provider plan upgrades or metered services.
+
+## Approved candidate and current provider state
+
+- Candidate URL: `https://demo.crypticdesign.net`
+- GitHub commit: `878206d62ed84f756c872bd5584b20df038b7b51`
+- Netlify published deploy: `6a9ec27d15a1fb0008145b06`
+- Netlify domain state verified 2026-09-07: `crypticdesign.net` is Primary; `www.crypticdesign.net` redirects automatically to the primary domain; `demo.crypticdesign.net` remains a domain alias.
+- Netlify TLS state verified 2026-09-07: Let's Encrypt remains enabled for `demo.crypticdesign.net`; apex and `www` are attached but remain Pending External DNS verification, so their certificates cannot provision before DNS cutover.
+- Current canonical public site: Squarespace at `www.crypticdesign.net`.
+- Current apex TLS presents `*.squarespace.com` and fails hostname validation; this is a current-state cutover blocker, not Netlify-candidate evidence.
+
+## Mandatory pre-change gates
+
+- [x] Full GoDaddy zone export downloaded and stored in the restricted evidence directory; 33 records, 3,096 bytes, SHA-256 `B27C8866AE981CD9FA2791D520BCB2057CB737D6785A0F86AAB9ED9D94174BAC`.
+- [ ] Restricted provider screenshots captured without copying credentials or verification-token values into Jira/Confluence.
+- [x] Netlify aliases `crypticdesign.net` and `www.crypticdesign.net` added to this exact project under Robert's 2026-09-07 approval.
+- [x] Netlify customized Pending DNS verification instructions match the planned records below.
+- [x] Canonical direction confirmed: **apex primary; `www` redirects automatically to apex**.
+- [x] Certificate preconditions checked: the preserved zone contains no CAA or AAAA record and GoDaddy DNSSEC is off. Apex/`www` certificate issuance remains pending the approved DNS cutover.
+- [ ] Candidate deploy ID, commit, branch, published state, and critical environment-variable names/scopes are reconfirmed.
+- [ ] Squarespace remains healthy, paid, and available for rollback through stabilization.
+- [x] Microsoft 365, Proofpoint/PPE, Resend/Supabase Auth, DKIM, SPF, DMARC, Autodiscover, and verification records are identified as protected/non-web records in the preserved 33-record export.
+- [x] Operator: **Robert K. Croft**.
+- [x] Communication path: CRY-320. Rollback authority: Robert K. Croft. Both recorded in CRY-320.
+- [ ] Robert records exact GO timestamp. The staffed window is confirmed above.
+
+Any unchecked item means **NO-GO**.
+
+## Exact web-record change plan
+
+Netlify's customized Pending External DNS verification panels confirm the exact standard-network values below. The apex panel recommends ALIAS/ANAME/flattened CNAME where supported and confirms `75.2.60.5` as the fallback A record. GoDaddy uses the confirmed A-record path. The `www` panel confirms the project's `.netlify.app` hostname.
+
+| Host | Before | Planned after | TTL | Action |
+| --- | --- | --- | --- | --- |
+| `@` | A `198.185.159.144` | A `75.2.60.5` | 600 | Replace |
+| `@` | A `198.185.159.145` | — | — | Remove as part of the same approved apex replacement |
+| `@` | A `198.49.23.144` | — | — | Remove as part of the same approved apex replacement |
+| `@` | A `198.49.23.145` | — | — | Remove as part of the same approved apex replacement |
+| `www` | CNAME `ext-cust.squarespace.com` | CNAME `frabjous-frangipane-650548.netlify.app` | 3600 | Replace |
+
+Protected records: do not modify `demo`, MX, SPF, DKIM, DMARC, Autodiscover, auth/email, CAA, or provider-verification records unless a separate reviewed change explicitly requires it.
+
+## Operator checklist
+
+### Control assignments
+
+- Decision owner, operator, and rollback authority: **Robert K. Croft**
+- Live operational log and communication channel: **Jira CRY-320**
+- Readiness/decision summary: **Confluence — CrypticDesign.net Sprint 42 Recovery and Wave 0 Release Readiness**
+- Technical evidence: this runbook, the preserved GoDaddy export, Netlify domain management, and the approved release deployment
+
+### Minute-by-minute execution — Monday, September 14, 2026
+
+| Time (America/Chicago) | Owner | Action / stop gate |
+| --- | --- | --- |
+| 9:30–9:40 AM | Robert | Open Netlify, GoDaddy DNS, CRY-320, this runbook, and rollback evidence. Reconfirm access without making changes. |
+| 9:40–9:50 AM | Robert | Reconfirm release deploy/commit, Squarespace health, `demo`, mail/auth baseline, two-resolver DNS state, and protected-record list. |
+| 9:50–9:55 AM | Robert | Record current public/TLS state and exact before/after values in CRY-320. Any drift or missing evidence is NO-GO. |
+| 9:55–10:00 AM | Robert | Record explicit **GO** or **NO-GO** in CRY-320. No DNS edit without the GO timestamp. |
+| 10:00–10:05 AM | Robert | If GO, replace only the four apex Squarespace A records with `75.2.60.5`, then replace only `www → ext-cust.squarespace.com` with `www → frabjous-frangipane-650548.netlify.app`. |
+| 10:05–10:15 AM | Robert | Record provider completion time; query Google and Cloudflare DNS. Confirm protected records were untouched. |
+| 10:15–10:30 AM | Robert | Verify Netlify DNS status, apex/`www` TLS issuance, and `www → apex`. If material failure persists for 15 minutes, roll back. |
+| 10:30–10:45 AM | Robert | Run front-door, route, redirect, robots, sitemap, media, metadata, Request Access, Sign In, accessibility, responsive, Chromium, and WebKit smoke checks. |
+| 10:45–11:00 AM | Robert | Verify Microsoft 365 inbound/outbound mail and Auth confirmation delivery. Any mail disruption triggers rollback. |
+| 11:00–11:10 AM | Robert | Record **CONDITIONAL / STABILIZING** or **ROLLBACK STARTED** in CRY-320 with evidence links. |
+| 11:10 AM–12:00 PM | Robert | Stabilization/repair buffer. Do not broaden scope; roll back if launch-critical acceptance cannot be restored inside the window. |
+| 12:00 PM | Robert | Record window-close state. Continue +60-minute, +24-hour, and 72-hour monitoring before RELEASED. |
+
+### T-30 minutes
+
+- [ ] Reconfirm all mandatory gates and exact before/after values.
+- [ ] Confirm deploy `6a9ec27d15a1fb0008145b06` remains published from commit `878206d62ed84f756c872bd5584b20df038b7b51`.
+- [ ] Verify `demo.crypticdesign.net`, Squarespace `www`, critical mail paths, and the rollback zone export.
+- [ ] Open Netlify domain management, GoDaddy DNS, CRY-320, and the evidence checklist; make no change yet.
+
+### Change
+
+- [ ] Record the start timestamp in CRY-320.
+- [ ] Apply only the two logical web changes in the table: apex replacement and `www` replacement.
+- [ ] Record provider acknowledgement and exact completion timestamp.
+- [ ] Do not change nameservers or any protected record.
+
+### T+0 to T+15 minutes
+
+- [ ] Check apex A and `www` CNAME from two independent resolvers.
+- [ ] Verify valid HTTPS for apex and `www` and the `www → apex` canonical redirect.
+- [ ] Verify Home, Entertainment, Community, Professional, Request Access, Sign In, robots, sitemap, 404, representative media, and required legacy redirects.
+- [ ] Verify responsive Chromium and WebKit smoke checks with zero material console, overflow, accessibility, or navigation errors.
+- [ ] Verify Microsoft 365 inbound/outbound and Auth confirmation delivery without exposing message or identity data in ordinary evidence.
+- [ ] If any rollback trigger is present and cannot be corrected inside 15 minutes, execute rollback.
+
+### T+60 minutes and stabilization
+
+- [ ] Repeat DNS, TLS, canonical, front-door, auth/admission, mail, and error-rate checks at +60 minutes, +24 hours, and stabilization close.
+- [ ] Keep `demo.crypticdesign.net` and Squarespace available throughout stabilization.
+- [ ] Record RELEASED only after the 72-hour evidence set is complete.
+- [ ] Do not cancel Squarespace without a separate explicit approval.
+
+## Rollback triggers
+
+Rollback immediately for repeated 5xx/front-door failure; apex/`www` DNS, TLS, or canonical failure; redirect loops or widespread 404s; Microsoft 365 or Auth mail disruption; material accessibility, navigation, authentication, or data-isolation regression; restricted/retired content exposure; or unacceptable active security exposure.
+
+## Exact DNS rollback values
+
+Restore all four Squarespace apex records and the original `www` CNAME:
+
+| Host | Type | Restore value | TTL |
+| --- | --- | --- | --- |
+| `@` | A | `198.185.159.144` | 600 |
+| `@` | A | `198.185.159.145` | 600 |
+| `@` | A | `198.49.23.144` | 600 |
+| `@` | A | `198.49.23.145` | 600 |
+| `www` | CNAME | `ext-cust.squarespace.com` | 3600 |
+
+Rollback sequence:
+
+1. Record ROLLBACK STARTED and the trigger timestamp in CRY-320.
+2. Restore the exact five values above; leave protected records untouched.
+3. Verify both resolvers, Squarespace `www`, apex behavior, TLS, critical redirects, and mail.
+4. If the candidate deployment itself is faulty while DNS is otherwise sound, restore/pin the last separately recorded known-good Netlify deploy; do not guess a historical deploy.
+5. Record ROLLED BACK, evidence locations, impact, and next-decision owner before another attempt.
+
+## Audit history
+
+- 2026-09-07: Draft created from the authenticated Netlify domain/TLS inspection, public DNS/TLS baseline, current Netlify external-DNS guidance, and merged Sprint 42 release evidence. No provider or DNS mutation performed.
+- 2026-09-07: Authenticated GoDaddy export preserved at `Operations - Documents/CRY-320_DNSPreservation_2026-09-07/crypticdesign.net.godaddy-zone-2026-09-07.txt`; 33 records and protected mail/authentication categories verified without publishing their values. No DNS mutation performed.
+- 2026-09-07: Under Robert's explicit approval, Netlify aliases were configured with `crypticdesign.net` as Primary, `www.crypticdesign.net` as the automatic redirect to primary, and `demo.crypticdesign.net` retained as an alias. A redundant manual `www` alias was removed after Netlify generated its automatic canonical entry. Customized DNS targets match this runbook. No GoDaddy DNS change was performed.
+- 2026-09-07: Robert K. Croft confirmed as operator and Monday, September 14, 2026, 10:00 AM–12:00 PM America/Chicago confirmed as the staffed cutover window.
