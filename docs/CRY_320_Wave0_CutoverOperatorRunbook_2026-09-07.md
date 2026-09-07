@@ -32,7 +32,7 @@ Proposed stabilization window: cutover completion through **Thursday, September 
 
 ## Mandatory pre-change gates
 
-- [ ] Full GoDaddy zone export downloaded and stored in the restricted evidence directory.
+- [x] Full GoDaddy zone export downloaded and stored in the restricted evidence directory; 33 records, 3,096 bytes, SHA-256 `B27C8866AE981CD9FA2791D520BCB2057CB737D6785A0F86AAB9ED9D94174BAC`.
 - [ ] Restricted provider screenshots captured without copying credentials or verification-token values into Jira/Confluence.
 - [ ] Netlify aliases `crypticdesign.net` and `www.crypticdesign.net` added to this exact project under a separately approved provider mutation.
 - [ ] Netlify customized Pending DNS verification instructions match the planned records below.
@@ -120,3 +120,4 @@ Rollback sequence:
 ## Audit history
 
 - 2026-09-07: Draft created from the authenticated Netlify domain/TLS inspection, public DNS/TLS baseline, current Netlify external-DNS guidance, and merged Sprint 42 release evidence. No provider or DNS mutation performed.
+- 2026-09-07: Authenticated GoDaddy export preserved at `Operations - Documents/CRY-320_DNSPreservation_2026-09-07/crypticdesign.net.godaddy-zone-2026-09-07.txt`; 33 records and protected mail/authentication categories verified without publishing their values. No DNS mutation performed.

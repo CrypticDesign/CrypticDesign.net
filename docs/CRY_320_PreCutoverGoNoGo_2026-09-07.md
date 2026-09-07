@@ -29,7 +29,7 @@ The code, production dependency, core experience, Request Access admission, inte
 | Integrated journey / CRY-505 | PASS | PR #71 merged as `8e7a627`; deployed main passed 24/24 route/browser/viewport checks with zero WCAG, browser, overflow, semantic, canonical, or journey errors |
 | Netlify edge / CRY-434 | PASS WITH FOLLOW-UPS | 60 direct checks and eight redirects passed; four defense-in-depth headers absent |
 | Apex/`www` hostname and TLS readiness | FAIL / NOT CONFIGURED | Authenticated Netlify inspection confirms only `demo.crypticdesign.net` is attached and covered by TLS; apex and `www` are absent, so their certificates cannot yet provision |
-| DNS preservation/export | PARTIAL | Public web/mail baseline recorded; complete GoDaddy zone export still required |
+| DNS preservation/export | PASS | Authenticated GoDaddy export preserved: 33 records, 3,096 bytes, SHA-256 `B27C8866AE981CD9FA2791D520BCB2057CB737D6785A0F86AAB9ED9D94174BAC`; protected values retained outside ordinary reports |
 | Exact deploy/commit binding | PASS | Netlify published deploy `6a9ec27d15a1fb0008145b06` is bound to `main @ 878206d62ed84f756c872bd5584b20df038b7b51` |
 | Operator/window/explicit Robert GO | NOT RECORDED | Mandatory stop gate |
 
@@ -83,7 +83,7 @@ Rollback immediately for repeated 5xx/front-door failure, DNS/TLS/canonical fail
 
 - CRY-505 is cleared; no active product-journey blocker remains in this packet.
 - Provider UI confirms the exact deploy binding and healthy `demo` certificate; apex/`www` aliases and their certificate readiness remain unconfigured.
-- Complete DNS export is not yet preserved in this packet.
+- Complete GoDaddy DNS export is preserved in the restricted operations evidence folder and excluded from Git.
 - CSP, frame protection, Referrer-Policy, and Permissions-Policy are absent on the demo and should be hardened separately.
 - CRY-510 tracks three development-only dependency advisories and the Node engine mismatch; production dependencies remain clean.
 
