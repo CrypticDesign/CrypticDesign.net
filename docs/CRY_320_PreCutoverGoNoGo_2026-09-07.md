@@ -1,10 +1,15 @@
 # CRY-320 — Wave 0 pre-cutover Go/No-Go
 
-Date: 2026-09-07 (America/Chicago)  
-Release candidate source: `8e7a6273803b852ff132499be746dd98ceed9ea0`  
-Release-candidate URL: `https://demo.crypticdesign.net`  
-Netlify site: `frabjous-frangipane-650548`  
-Exact provider deploy ID: **operator verification required**  
+Date: 2026-09-07 (America/Chicago)
+
+Release candidate source: `8e7a6273803b852ff132499be746dd98ceed9ea0`
+
+Release-candidate URL: `https://demo.crypticdesign.net`
+
+Netlify site: `frabjous-frangipane-650548`
+
+Exact provider deploy ID: **operator verification required**
+
 Recommendation: **NO-GO**
 
 ## Decision
