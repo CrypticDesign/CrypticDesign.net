@@ -31,7 +31,9 @@ test("Community puts staged participation before explicitly cross-platform explo
   assert.ok(page.indexOf("Events / Opening") < page.indexOf("From across the platform"));
   assert.match(page, /href="#participation-paths"/);
   assert.match(page, /href="\/account\/create"[^>]*>Request Access/);
-  assert.match(page, /home-primary-cta community-explore__platform-primary/);
+  assert.match(page, /explore-portal__continuum--cta/);
+  assert.match(page, /href="\/account\/create"[^>]*className="button home-primary-cta"/);
+  assert.match(page, /continue-participating-title[\s\S]*explore-portal__continuum-actions[\s\S]*href="\/" className="button home-primary-cta">My Home/);
   assert.match(page, /showSignInAction=\{false\}/);
   assert.match(page, /authenticated \? "\/" : "\/account\/sign-in"/);
   assert.match(page, /authenticated \? <section/);

@@ -442,6 +442,41 @@ body:has(.experience-runtime--custom[data-expanded="true"]) .cs-root { display: 
 .public-home-v2__join .public-home-v2__state { margin-top: 18px; }
 .public-home-v2__join .hero-actions { flex: 0 0 auto; margin: 0; }
 
+/* Shared Home-style CTA finish for cross-portal continuation panels. */
+.explore-portal__continuum--cta {
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 42px;
+  padding: 40px 48px;
+  border-top: 2px solid var(--section-accent-border);
+  border-left-width: 1px;
+  background: radial-gradient(circle at 82% 10%, var(--section-accent-glow), transparent 38%), #050b12;
+}
+.explore-portal__continuum--cta h2 { margin: 10px 0 8px; font-size: 24px; }
+.explore-portal__continuum--cta p { font-size: 12px; line-height: 1.68; }
+.explore-portal__continuum .explore-portal__continuum-actions {
+  display: flex;
+  width: max-content;
+  max-width: 100%;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 12px;
+  margin: 0;
+}
+.explore-portal__continuum--cta .button {
+  min-width: 170px;
+  min-height: 54px;
+  padding-inline: 24px;
+  font-size: 10px;
+}
+.explore-portal__continuum--cta .home-primary-cta,
+.explore-portal__continuum--cta .home-primary-cta:hover,
+.explore-portal__continuum--cta .home-primary-cta:focus-visible { color: #03080f; }
+.explore-portal__continuum--cta .secondary {
+  border-color: color-mix(in srgb, var(--section-accent) 32%, var(--line));
+  background: rgb(3 8 15 / 80%);
+  color: #fff;
+}
+
 @media (max-width: 1100px) {
   .public-home-v2__experience-grid,
   .public-home-v2__path-grid,
@@ -465,6 +500,8 @@ body:has(.experience-runtime--custom[data-expanded="true"]) .cs-root { display: 
   .public-home-v2__signal-copy { padding: 30px 26px 36px; }
   .public-home-v2__join { display: grid; padding: 30px 26px; }
   .public-home-v2__join .hero-actions { width: 100%; }
+  .explore-portal__continuum--cta { grid-template-columns: 1fr; padding: 32px; }
+  .explore-portal__continuum .explore-portal__continuum-actions { width: 100%; justify-content: flex-start; }
 }
 
 @media (max-width: 560px) {
@@ -472,6 +509,9 @@ body:has(.experience-runtime--custom[data-expanded="true"]) .cs-root { display: 
   .public-home-v2 .public-home-portal__hero-content { padding-top: 220px; }
   .public-home-v2 .public-home-portal__hero-content .display-title { font-size: 38px; }
   .public-home-v2__member-link { display: grid; gap: 2px; }
+  .explore-portal__continuum--cta { padding: 28px 22px; }
+  .explore-portal__continuum .explore-portal__continuum-actions { display: grid; }
+  .explore-portal__continuum--cta .button { width: 100%; }
   .public-home-v2__experience-grid,
   .public-home-v2__path-grid,
   .public-home-v2__continuity-grid { grid-template-columns: 1fr; }
