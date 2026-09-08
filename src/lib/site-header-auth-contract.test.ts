@@ -81,12 +81,12 @@ test("signed-out Home follows the governed entertainment and community hierarchy
   assert.match(homePage, /getInitialAccountAuthenticated/);
   assert.match(homePage, /<PublicHome accountAdmissionMode=\{accountAdmissionMode\(\)\} \/>/);
   assert.match(publicHome, /href="\/entertainment" className="button home-primary-cta">Explore What&apos;s Here<\/Link>/);
-  assert.match(publicHome, /href="\/community" className="button home-secondary-cta">Enter Community<\/Link>/);
+  assert.match(publicHome, /href="\/community" className="button home-secondary-cta"[^>]*>Enter Community<\/AnalyticsLink>/);
   assert.match(publicHome, /Featured experiences/);
   assert.match(publicHome, /Choose a signal\./);
   assert.match(publicHome, /This isn&apos;t just something to watch\./);
   assert.match(publicHome, /Sign in to My Home/);
-  assert.match(publicHome, /href="\/account\/create" className="button home-primary-cta">Request Access<\/Link>/);
+  assert.match(publicHome, /href="\/account\/create" className="button home-primary-cta"[^>]*>Request Access<\/AnalyticsLink>/);
   assert.doesNotMatch(publicHome, /className="button home-secondary-cta">Discover the studio/);
   assert.doesNotMatch(publicHome, />Sign up<\/Link>/);
   assert.match(ecosystemStatus, /aria-label="Current ecosystem status"/);

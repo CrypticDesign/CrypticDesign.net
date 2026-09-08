@@ -37,7 +37,7 @@ test("Home keeps the authenticated route boundary and one shared PageScene", () 
 
 test("hero and discovery routes prioritize Entertainment and Community", () => {
   assert.match(home, /href="\/entertainment" className="button home-primary-cta">Explore What&apos;s Here/);
-  assert.match(home, /href="\/community" className="button home-secondary-cta">Enter Community/);
+  assert.match(home, /href="\/community" className="button home-secondary-cta"[^>]*>Enter Community/);
   assert.doesNotMatch(home, /href="\/professional" className="button home-secondary-cta"/);
   for (const href of [
     "/entertainment/explore",
