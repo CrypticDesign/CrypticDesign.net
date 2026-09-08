@@ -43,10 +43,18 @@ export default function CreateAccountPage() {
           <Link href="/entertainment" className="button secondary">Explore Entertainment</Link>
         </aside>
       </section>
-      <nav className="account-link-rail" aria-label="Account navigation">
-        <Link href="/account/sign-in">Already have access? Sign In <span aria-hidden="true">→</span></Link>
-        <Link href="/account">Return to Account <span aria-hidden="true">→</span></Link>
-      </nav>
+      <section className="explore-portal__continuum explore-portal__continuum--cta" data-section-accent="indigo" aria-labelledby="request-access-continue-title">
+        <div>
+          <span className="kicker">Continue</span>
+          <h2 id="request-access-continue-title">Keep exploring what is open now.</h2>
+          <p>Discover Community participation paths, browse releases, or sign in to your personal My Home.</p>
+        </div>
+        <nav className="hero-actions explore-portal__continuum-actions" aria-label="Continue from Request Access">
+          <Link href="/community" className="button home-primary-cta">Explore Community</Link>
+          <Link href="/releases" className="button secondary">Browse Releases</Link>
+          <Link href="/account/sign-in" className="button secondary">Sign In to My Home</Link>
+        </nav>
+      </section>
     </main>
   );
 }

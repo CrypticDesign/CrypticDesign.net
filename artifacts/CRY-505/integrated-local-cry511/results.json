@@ -1,0 +1,211 @@
+{
+  "generatedAt": "2026-09-08T03:33:03.218Z",
+  "base": "http://127.0.0.1:3111",
+  "branch": "fix/cry-511-request-access-continuation",
+  "sourceBase": "bad451e0f8a2bba60ff6421df2670613d6e876ca",
+  "viewports": [
+    {
+      "name": "mobile-390",
+      "width": 390,
+      "height": 844,
+      "facts": {
+        "clientWidth": 375,
+        "h1Count": 1,
+        "hasLegacySignIn": false,
+        "hasReturnAccount": false,
+        "legacyRailCount": 0,
+        "links": [
+          {
+            "href": "mailto:robert.croft@crypticdesign.net",
+            "text": "robert.croft@crypticdesign.net"
+          },
+          {
+            "href": "/entertainment",
+            "text": "Explore Entertainment"
+          },
+          {
+            "href": "/community",
+            "text": "Explore Community"
+          },
+          {
+            "href": "/releases",
+            "text": "Browse Releases"
+          },
+          {
+            "href": "/account/sign-in",
+            "text": "Sign In to My Home"
+          }
+        ],
+        "mainCount": 1,
+        "overflow": false,
+        "scrollWidth": 375,
+        "title": "Request Access | Cryptic Design"
+      },
+      "visible": {
+        "community": true,
+        "releases": true,
+        "signIn": true
+      },
+      "keyboardFocus": {
+        "communityFocus": {
+          "boxShadow": "color(srgb 0.435294 0.482353 1 / 0.5) 0px 0px 36px 0px",
+          "href": "/community",
+          "outline": "rgb(111, 123, 255) solid 2px",
+          "text": "Explore Community"
+        },
+        "releasesFocus": {
+          "boxShadow": "none",
+          "href": "/releases",
+          "outline": "rgb(111, 123, 255) solid 2px",
+          "text": "Browse Releases"
+        }
+      },
+      "screenshotPath": "C:/Users/Robert Croft/crypticdesign.net/_work/sprint42-current-main/_work/cry-511/artifacts/CRY-505/integrated-local-cry511/account-create-mobile-390-continuation.png"
+    },
+    {
+      "name": "tablet-768",
+      "width": 768,
+      "height": 1024,
+      "facts": {
+        "clientWidth": 753,
+        "h1Count": 1,
+        "hasLegacySignIn": false,
+        "hasReturnAccount": false,
+        "legacyRailCount": 0,
+        "links": [
+          {
+            "href": "mailto:robert.croft@crypticdesign.net",
+            "text": "robert.croft@crypticdesign.net"
+          },
+          {
+            "href": "/entertainment",
+            "text": "Explore Entertainment"
+          },
+          {
+            "href": "/community",
+            "text": "Explore Community"
+          },
+          {
+            "href": "/releases",
+            "text": "Browse Releases"
+          },
+          {
+            "href": "/account/sign-in",
+            "text": "Sign In to My Home"
+          }
+        ],
+        "mainCount": 1,
+        "overflow": false,
+        "scrollWidth": 753,
+        "title": "Request Access | Cryptic Design"
+      },
+      "visible": {
+        "community": true,
+        "releases": true,
+        "signIn": true
+      },
+      "keyboardFocus": {
+        "communityFocus": {
+          "boxShadow": "oklab(0.640683 0.0188864 -0.192642 / 0.492289) 0px 0px 35.4859px 0px",
+          "href": "/community",
+          "outline": "rgb(111, 123, 255) solid 2px",
+          "text": "Explore Community"
+        },
+        "releasesFocus": {
+          "boxShadow": "none",
+          "href": "/releases",
+          "outline": "rgb(111, 123, 255) solid 2px",
+          "text": "Browse Releases"
+        }
+      },
+      "screenshotPath": "C:/Users/Robert Croft/crypticdesign.net/_work/sprint42-current-main/_work/cry-511/artifacts/CRY-505/integrated-local-cry511/account-create-tablet-768-continuation.png"
+    },
+    {
+      "name": "desktop-1440",
+      "width": 1440,
+      "height": 900,
+      "facts": {
+        "clientWidth": 1425,
+        "h1Count": 1,
+        "hasLegacySignIn": false,
+        "hasReturnAccount": false,
+        "legacyRailCount": 0,
+        "links": [
+          {
+            "href": "mailto:robert.croft@crypticdesign.net",
+            "text": "robert.croft@crypticdesign.net"
+          },
+          {
+            "href": "/entertainment",
+            "text": "Explore Entertainment"
+          },
+          {
+            "href": "/community",
+            "text": "Explore Community"
+          },
+          {
+            "href": "/releases",
+            "text": "Browse Releases"
+          },
+          {
+            "href": "/account/sign-in",
+            "text": "Sign In to My Home"
+          }
+        ],
+        "mainCount": 1,
+        "overflow": false,
+        "scrollWidth": 1425,
+        "title": "Request Access | Cryptic Design"
+      },
+      "visible": {
+        "community": true,
+        "releases": true,
+        "signIn": true
+      },
+      "keyboardFocus": {
+        "communityFocus": {
+          "boxShadow": "oklab(0.640683 0.0188864 -0.192642 / 0.499438) 0px 0px 35.9625px 0px",
+          "href": "/community",
+          "outline": "rgb(111, 123, 255) solid 2px",
+          "text": "Explore Community"
+        },
+        "releasesFocus": {
+          "boxShadow": "none",
+          "href": "/releases",
+          "outline": "rgb(111, 123, 255) solid 2px",
+          "text": "Browse Releases"
+        }
+      },
+      "screenshotPath": "C:/Users/Robert Croft/crypticdesign.net/_work/sprint42-current-main/_work/cry-511/artifacts/CRY-505/integrated-local-cry511/account-create-desktop-1440-continuation.png"
+    }
+  ],
+  "signInKeyboardFocus": {
+    "boxShadow": "none",
+    "href": "/account/sign-in",
+    "outline": "rgb(111, 123, 255) solid 2px",
+    "tabIndex": 0,
+    "tag": "A",
+    "text": "Sign In to My Home"
+  },
+  "interactionDestinations": [
+    {
+      "label": "Explore Community",
+      "expected": "/community",
+      "actual": "/community",
+      "pass": true
+    },
+    {
+      "label": "Browse Releases",
+      "expected": "/releases",
+      "actual": "/releases",
+      "pass": true
+    },
+    {
+      "label": "Sign In to My Home",
+      "expected": "/account/sign-in",
+      "actual": "/account/sign-in",
+      "pass": true
+    }
+  ],
+  "pass": true
+}
