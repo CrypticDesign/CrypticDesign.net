@@ -4,6 +4,7 @@ import CommunityAvailabilityPanel from "@/components/CommunityAvailabilityPanel"
 import PortalIcon from "@/components/EcosystemPortalIcon";
 import PageScene from "@/components/PageScene";
 import { AnalyticsLink } from "@/components/AnalyticsLink";
+import { ANALYTICS_EVENTS } from "@/lib/analytics";
 import { getInitialAccountAuthenticated } from "@/lib/server-account-state";
 import "./frontdoor.css";
 
@@ -38,7 +39,7 @@ export default async function CommunityPage() {
           <nav className="hero-actions explore-portal__continuum-actions" aria-label="Explore beyond Community">
             <Link href="/entertainment" className="button secondary">Explore Entertainment</Link>
             <Link href="/releases" className="button secondary">Browse Releases</Link>
-            <AnalyticsLink href="/account/create" className="button home-primary-cta" analyticsEvent={{ name: "request_access_open", payload: { source: "community_continue" } }}>Request Access</AnalyticsLink>
+            <AnalyticsLink href="/account/create" className="button home-primary-cta" analyticsEvent={{ name: ANALYTICS_EVENTS.REQUEST_ACCESS_OPEN, payload: { source: "community_continue" } }}>Request Access</AnalyticsLink>
           </nav>
         </section>
         {authenticated ? <section className="community-explore__continue explore-portal__continuum explore-portal__continuum--cta" data-section-accent="indigo" aria-labelledby="continue-participating-title"><div><span className="kicker">Continue Participating</span><h2 id="continue-participating-title">Return to your personal space.</h2><p>Open your My Home, saved releases, or account settings.</p></div><nav className="hero-actions explore-portal__continuum-actions" aria-label="Authenticated participation shortcuts"><Link href="/" className="button home-primary-cta">My Home</Link><Link href="/library" className="button secondary">My Library</Link><Link href="/account" className="button secondary">Account</Link></nav></section> : null}

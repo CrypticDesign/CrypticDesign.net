@@ -1,0 +1,179 @@
+meta:
+  product: "CrypticDesign.net"
+  version: 2
+  created: 2026-09-09
+  updated: 2026-09-09
+  owner: "Cryptic Design Analytics and Performance Lead"
+  implementation: google_analytics
+  destinations: [google_analytics]
+  platform: browser_nextjs
+  measurement_id: "G-WRXM0WLPF9"
+  pii_policy: none
+  internal_user_policy: environment_and_host_allowlist
+  consent_policy: explicit_opt_in
+  rollout: single_verified_hotfix
+  implementation_status: locally_verified_pending_review_and_production_delivery
+
+entities:
+  anonymous_client:
+    id_property: ga_client_id
+    id_format: "GA4-managed browser identifier"
+    traits: []
+    notes:
+      - "The application does not read, persist, or transmit an account/member/Character identifier in Wave 0."
+      - "No PII traits are permitted."
+
+groups: []
+
+events:
+  - name: page_view
+    category: navigation
+    description: A consented visitor opens a new canonical application pathname.
+    properties:
+      - name: page_path
+        type: string
+        required: true
+      - name: page_location
+        type: string
+        required: true
+      - name: page_referrer
+        type: string
+        required: false
+    expected_frequency: high
+
+  - name: experience_play
+    category: core_value
+    description: A consented visitor deliberately activates a public interactive experience.
+    properties:
+      - name: experience_id
+        type: string
+        required: true
+      - name: page_location
+        type: string
+        required: true
+      - name: page_referrer
+        type: string
+        required: false
+    expected_frequency: medium
+
+  - name: community_open
+    category: feature_usage
+    description: A consented visitor follows a governed Community entry path.
+    properties:
+      - name: source
+        type: string
+        required: true
+      - name: page_location
+        type: string
+        required: true
+      - name: page_referrer
+        type: string
+        required: false
+    expected_frequency: medium
+
+  - name: request_access_open
+    category: lifecycle
+    description: A consented visitor opens the Account Availability or Request Access path.
+    properties:
+      - name: source
+        type: string
+        required: true
+      - name: page_location
+        type: string
+        required: true
+      - name: page_referrer
+        type: string
+        required: false
+    expected_frequency: low
+
+  - name: request_access_submit
+    category: lifecycle
+    description: A consented visitor prepares the local mailto access-request handoff.
+    properties:
+      - name: method
+        type: string
+        enum: [mailto_handoff]
+        required: true
+      - name: page_location
+        type: string
+        required: true
+      - name: page_referrer
+        type: string
+        required: false
+    expected_frequency: low
+
+  - name: sign_in_open
+    category: lifecycle
+    description: A consented visitor follows a governed Sign In entry path.
+    properties:
+      - name: source
+        type: string
+        required: true
+      - name: page_location
+        type: string
+        required: true
+      - name: page_referrer
+        type: string
+        required: false
+    expected_frequency: low
+
+  - name: release_view
+    category: core_value
+    description: A consented visitor opens a published public release route.
+    properties:
+      - name: release_slug
+        type: string
+        required: true
+      - name: page_location
+        type: string
+        required: true
+      - name: page_referrer
+        type: string
+        required: false
+    expected_frequency: medium
+
+  - name: product_view
+    category: core_value
+    description: A consented visitor opens a public product or franchise route.
+    properties:
+      - name: product_slug
+        type: string
+        required: true
+      - name: page_location
+        type: string
+        required: true
+      - name: page_referrer
+        type: string
+        required: false
+    expected_frequency: medium
+
+  - name: outbound_link
+    category: feature_usage
+    description: A consented visitor follows an approved outbound franchise, social, reference, or other public link.
+    properties:
+      - name: destination_domain
+        type: string
+        required: true
+      - name: destination_category
+        type: string
+        enum: [franchise, social, reference, other]
+        required: true
+      - name: page_location
+        type: string
+        required: true
+      - name: page_referrer
+        type: string
+        required: false
+    expected_frequency: low
+
+snapshot_sync: []
+
+implementation_notes:
+  - "Use GA4-compatible snake_case event names; preserve the nine-event CRY-517 contract."
+  - "Centralize event-name constants and payload types; do not introduce arbitrary string event names."
+  - "Load gtag.js only after explicit visitor consent on a canonical production host."
+  - "Use Google's standard function-based queue: dataLayer.push(arguments)."
+  - "Configure send_page_view=false and emit one manual page_view per canonical pathname change."
+  - "Do not send names, emails, account/member/Character identifiers, form contents, tokens, payment/order data, arbitrary queries, or replay data."
+  - "Delivery must remain non-blocking and must not alter navigation or form behavior."
+  - "Verify one real g/collect hit with Tag Assistant or browser network diagnostics before production closure."

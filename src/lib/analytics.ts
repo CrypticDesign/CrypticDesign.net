@@ -4,16 +4,28 @@ export const CANONICAL_ANALYTICS_HOSTS = ["crypticdesign.net", "www.crypticdesig
 export type AnalyticsConsent = "granted" | "denied";
 export type AnalyticsEnvironment = "production" | "development" | "test";
 
+export const ANALYTICS_EVENTS = {
+  PAGE_VIEW: "page_view",
+  EXPERIENCE_PLAY: "experience_play",
+  COMMUNITY_OPEN: "community_open",
+  REQUEST_ACCESS_OPEN: "request_access_open",
+  REQUEST_ACCESS_SUBMIT: "request_access_submit",
+  SIGN_IN_OPEN: "sign_in_open",
+  RELEASE_VIEW: "release_view",
+  PRODUCT_VIEW: "product_view",
+  OUTBOUND_LINK: "outbound_link",
+} as const;
+
 export type AnalyticsPayloadMap = {
-  page_view: { page_path: string };
-  experience_play: { experience_id: string };
-  community_open: { source: string };
-  request_access_open: { source: string };
-  request_access_submit: { method: "mailto_handoff" };
-  sign_in_open: { source: string };
-  release_view: { release_slug: string };
-  product_view: { product_slug: string };
-  outbound_link: { destination_domain: string; destination_category: "franchise" | "social" | "reference" | "other" };
+  [ANALYTICS_EVENTS.PAGE_VIEW]: { page_path: string };
+  [ANALYTICS_EVENTS.EXPERIENCE_PLAY]: { experience_id: string };
+  [ANALYTICS_EVENTS.COMMUNITY_OPEN]: { source: string };
+  [ANALYTICS_EVENTS.REQUEST_ACCESS_OPEN]: { source: string };
+  [ANALYTICS_EVENTS.REQUEST_ACCESS_SUBMIT]: { method: "mailto_handoff" };
+  [ANALYTICS_EVENTS.SIGN_IN_OPEN]: { source: string };
+  [ANALYTICS_EVENTS.RELEASE_VIEW]: { release_slug: string };
+  [ANALYTICS_EVENTS.PRODUCT_VIEW]: { product_slug: string };
+  [ANALYTICS_EVENTS.OUTBOUND_LINK]: { destination_domain: string; destination_category: "franchise" | "social" | "reference" | "other" };
 };
 
 export type AnalyticsEventName = keyof AnalyticsPayloadMap;
@@ -105,22 +117,22 @@ export function buildAnalyticsEvent<Name extends AnalyticsEventName>(
   payload: AnalyticsPayloadMap[Name],
 ): AnalyticsEvent {
   switch (name) {
-    case "page_view":
-      return { name, payload: { page_path: sanitizeCanonicalPath((payload as AnalyticsPayloadMap["page_view"]).page_path) } } as AnalyticsEvent;
-    case "experience_play":
-      return { name, payload: { experience_id: sanitizePublicIdentifier((payload as AnalyticsPayloadMap["experience_play"]).experience_id) } } as AnalyticsEvent;
-    case "release_view":
-      return { name, payload: { release_slug: sanitizePublicIdentifier((payload as AnalyticsPayloadMap["release_view"]).release_slug) } } as AnalyticsEvent;
-    case "product_view":
-      return { name, payload: { product_slug: sanitizePublicIdentifier((payload as AnalyticsPayloadMap["product_view"]).product_slug) } } as AnalyticsEvent;
-    case "community_open":
-    case "request_access_open":
-    case "sign_in_open":
+    case ANALYTICS_EVENTS.PAGE_VIEW:
+      return { name, payload: { page_path: sanitizeCanonicalPath((payload as AnalyticsPayloadMap[typeof ANALYTICS_EVENTS.PAGE_VIEW]).page_path) } } as AnalyticsEvent;
+    case ANALYTICS_EVENTS.EXPERIENCE_PLAY:
+      return { name, payload: { experience_id: sanitizePublicIdentifier((payload as AnalyticsPayloadMap[typeof ANALYTICS_EVENTS.EXPERIENCE_PLAY]).experience_id) } } as AnalyticsEvent;
+    case ANALYTICS_EVENTS.RELEASE_VIEW:
+      return { name, payload: { release_slug: sanitizePublicIdentifier((payload as AnalyticsPayloadMap[typeof ANALYTICS_EVENTS.RELEASE_VIEW]).release_slug) } } as AnalyticsEvent;
+    case ANALYTICS_EVENTS.PRODUCT_VIEW:
+      return { name, payload: { product_slug: sanitizePublicIdentifier((payload as AnalyticsPayloadMap[typeof ANALYTICS_EVENTS.PRODUCT_VIEW]).product_slug) } } as AnalyticsEvent;
+    case ANALYTICS_EVENTS.COMMUNITY_OPEN:
+    case ANALYTICS_EVENTS.REQUEST_ACCESS_OPEN:
+    case ANALYTICS_EVENTS.SIGN_IN_OPEN:
       return { name, payload: { source: sanitizePublicIdentifier((payload as { source: string }).source) } } as AnalyticsEvent;
-    case "request_access_submit":
+    case ANALYTICS_EVENTS.REQUEST_ACCESS_SUBMIT:
       return { name, payload: { method: "mailto_handoff" } } as AnalyticsEvent;
-    case "outbound_link": {
-      const outbound = payload as AnalyticsPayloadMap["outbound_link"];
+    case ANALYTICS_EVENTS.OUTBOUND_LINK: {
+      const outbound = payload as AnalyticsPayloadMap[typeof ANALYTICS_EVENTS.OUTBOUND_LINK];
       return { name, payload: { destination_domain: sanitizeOutboundDestination(`https://${outbound.destination_domain}`), destination_category: outbound.destination_category } } as AnalyticsEvent;
     }
   }
@@ -128,11 +140,11 @@ export function buildAnalyticsEvent<Name extends AnalyticsEventName>(
 
 export function deriveRouteViewEvents(pathname: string): AnalyticsEvent[] {
   const path = sanitizeCanonicalPath(pathname);
-  const events: AnalyticsEvent[] = [buildAnalyticsEvent("page_view", { page_path: path })];
+  const events: AnalyticsEvent[] = [buildAnalyticsEvent(ANALYTICS_EVENTS.PAGE_VIEW, { page_path: path })];
   const release = path.match(/^\/releases\/([a-z0-9][a-z0-9-]{0,79})\/?$/)?.[1];
   const product = path.match(/^\/products\/([a-z0-9][a-z0-9-]{0,79})\/?$/)?.[1];
-  if (release) events.push(buildAnalyticsEvent("release_view", { release_slug: release }));
-  if (product) events.push(buildAnalyticsEvent("product_view", { product_slug: product }));
+  if (release) events.push(buildAnalyticsEvent(ANALYTICS_EVENTS.RELEASE_VIEW, { release_slug: release }));
+  if (product) events.push(buildAnalyticsEvent(ANALYTICS_EVENTS.PRODUCT_VIEW, { product_slug: product }));
   return events;
 }
 

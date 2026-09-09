@@ -53,3 +53,24 @@ Verified on 2026-09-08 against the production build generated from this branch:
 - Browser resource timing and DOM inspection found zero GA scripts and zero GA collection resources on `127.0.0.1`, confirming local fail-closed behavior. No browser console errors were recorded; an existing Three.js deprecation warning was present.
 
 Live canonical-host dispatch remains intentionally unverified in this local-only change because no deployment or Google Analytics administration change was authorized. After an approved deployment, validate consent grant/revoke, one `page_view` per canonical route change, the nine event names and payload shapes, absence of query strings/direct identifiers, and the GA4 Realtime/DebugView results before closing production verification.
+
+## 2026-09-09 delivery hotfix
+
+After PR #75 deployed to the canonical site, Google Tag Assistant detected the correct tag, on-page configuration, and destination `G-WRXM0WLPF9`, but reported deferred events and no hits sent. The merged queue stub pushed rest-parameter Arrays into `dataLayer`; Google's documented bootstrap requires each command to retain the calling function's `Arguments` object.
+
+The hotfix on `agent/cry-517-ga4-hit-delivery` now:
+
+- uses a dependency-free `createGoogleTagQueue` helper that pushes `arguments`;
+- centralizes all nine event names in the typed `ANALYTICS_EVENTS` registry;
+- adds a runtime regression proving the queued command is an `Arguments` object rather than an Array;
+- preserves the correct measurement ID, consent prompt, fail-closed environment matrix, payload sanitization, and event scope.
+
+Local verification on 2026-09-09:
+
+- `npm test`: 296 passed, 0 failed;
+- TypeScript no-emit: passed;
+- `npm run lint`: passed;
+- production `npm run build` with `NEXT_PUBLIC_GA_MEASUREMENT_ID=G-WRXM0WLPF9`: passed; 78 static routes generated;
+- emitted bundles contain `G-WRXM0WLPF9` in seven route/shared chunks, contain zero instances of `G-XBP2025J3N`, and compile the queue to `push(arguments)`.
+
+Canonical production collection remains pending reviewed merge, Netlify deployment, and a new consented Tag Assistant/Realtime verification.

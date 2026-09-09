@@ -5,6 +5,7 @@ import RequestAccessForm from "@/components/RequestAccessForm";
 import AccountEcosystemStatus from "@/components/AccountEcosystemStatus";
 import { AnalyticsLink } from "@/components/AnalyticsLink";
 import { accountAdmissionMode } from "@/lib/account-admission";
+import { ANALYTICS_EVENTS } from "@/lib/analytics";
 
 export const metadata: Metadata = {
   title: "Request Access",
@@ -51,9 +52,9 @@ export default function CreateAccountPage() {
           <p>Discover Community participation paths, browse releases, or sign in to your personal My Home.</p>
         </div>
         <nav className="hero-actions explore-portal__continuum-actions" aria-label="Continue from Request Access">
-          <AnalyticsLink href="/community" className="button home-primary-cta" analyticsEvent={{ name: "community_open", payload: { source: "request_access_continue" } }}>Explore Community</AnalyticsLink>
+          <AnalyticsLink href="/community" className="button home-primary-cta" analyticsEvent={{ name: ANALYTICS_EVENTS.COMMUNITY_OPEN, payload: { source: "request_access_continue" } }}>Explore Community</AnalyticsLink>
           <Link href="/releases" className="button secondary">Browse Releases</Link>
-          <AnalyticsLink href="/account/sign-in" className="button secondary" analyticsEvent={{ name: "sign_in_open", payload: { source: "request_access_continue" } }}>Sign In to My Home</AnalyticsLink>
+          <AnalyticsLink href="/account/sign-in" className="button secondary" analyticsEvent={{ name: ANALYTICS_EVENTS.SIGN_IN_OPEN, payload: { source: "request_access_continue" } }}>Sign In to My Home</AnalyticsLink>
         </nav>
       </section>
     </main>

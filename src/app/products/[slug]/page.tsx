@@ -6,6 +6,7 @@ import ExperienceRuntime from "@/components/ExperienceRuntime";
 import ReleaseCard from "@/components/ReleaseCard";
 import SingularisGamespace from "@/components/SingularisGamespace";
 import { AnalyticsAnchor } from "@/components/AnalyticsLink";
+import { ANALYTICS_EVENTS } from "@/lib/analytics";
 import { getProduct, publicProducts } from "@/lib/products";
 import { publicReleases } from "@/lib/releases";
 
@@ -102,7 +103,7 @@ export default async function ProductHome({
             <p>Lifa combines simulation, strategy, discovery, and planetary-scale experimentation in one evolving universe.</p>
           </section>
           <div className="flex flex-wrap gap-4 text-sm">
-            {product.franchiseUrl && <AnalyticsAnchor href={product.franchiseUrl} className="text-accent-violet hover:underline" analyticsEvent={{ name: "outbound_link", payload: { destination_domain: new URL(product.franchiseUrl).hostname, destination_category: "franchise" } }}>Visit {product.title} franchise home ↗</AnalyticsAnchor>}
+            {product.franchiseUrl && <AnalyticsAnchor href={product.franchiseUrl} className="text-accent-violet hover:underline" analyticsEvent={{ name: ANALYTICS_EVENTS.OUTBOUND_LINK, payload: { destination_domain: new URL(product.franchiseUrl).hostname, destination_category: "franchise" } }}>Visit {product.title} franchise home ↗</AnalyticsAnchor>}
             <Link href="/products" className="text-accent-cyan hover:underline">← All products</Link>
           </div>
         </div>
@@ -158,7 +159,7 @@ export default async function ProductHome({
 
       <div className="flex flex-wrap gap-4 text-sm">
         {product.franchiseUrl && (
-          <AnalyticsAnchor href={product.franchiseUrl} className="text-accent-violet hover:underline" analyticsEvent={{ name: "outbound_link", payload: { destination_domain: new URL(product.franchiseUrl).hostname, destination_category: "franchise" } }}>
+          <AnalyticsAnchor href={product.franchiseUrl} className="text-accent-violet hover:underline" analyticsEvent={{ name: ANALYTICS_EVENTS.OUTBOUND_LINK, payload: { destination_domain: new URL(product.franchiseUrl).hostname, destination_category: "franchise" } }}>
             Visit {product.title} franchise home ↗
           </AnalyticsAnchor>
         )}

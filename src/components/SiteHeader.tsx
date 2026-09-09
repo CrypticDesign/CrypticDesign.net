@@ -8,6 +8,7 @@ import { MEMBERSHIP_SESSION_CHANGED_EVENT } from "@/lib/membership-session-event
 import { getPrimaryNavigationIdentity, isPrimaryNavigationActive } from "@/lib/site-navigation";
 import EcosystemPortalIcon from "@/components/EcosystemPortalIcon";
 import { AnalyticsLink } from "@/components/AnalyticsLink";
+import { ANALYTICS_EVENTS } from "@/lib/analytics";
 
 const NAV = [
   { href: "/", label: "Home", tone: "blue" },
@@ -113,14 +114,14 @@ export default function SiteHeader({ initialAuthenticated = false }: { initialAu
                 <Link href={item.href} data-tone={item.tone} aria-current={active ? "page" : undefined} className="site-primary-link site-primary-link--compact"><span>{item.label}</span></Link>
               </Fragment>;
               return item.href === "/community"
-                ? <AnalyticsLink key={item.href} href={item.href} data-tone={item.tone} aria-current={active ? "page" : undefined} className="site-primary-link" analyticsEvent={{ name: "community_open", payload: { source: "primary_navigation" } }}><span>{item.label}</span></AnalyticsLink>
+                ? <AnalyticsLink key={item.href} href={item.href} data-tone={item.tone} aria-current={active ? "page" : undefined} className="site-primary-link" analyticsEvent={{ name: ANALYTICS_EVENTS.COMMUNITY_OPEN, payload: { source: "primary_navigation" } }}><span>{item.label}</span></AnalyticsLink>
                 : <Link key={item.href} href={item.href} data-tone={item.tone} aria-current={active ? "page" : undefined} className="site-primary-link"><span>{item.label}</span></Link>;
             })}
             <Link href="/search" aria-label="Search" aria-current={pathname === "/search" ? "page" : undefined} className="site-header__search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg><span className="site-header__search-label">Search</span></Link>
             <div className="account-menu">
               {authenticated
                 ? <Link href={accountHref} data-tone="blue" aria-current={accountSectionActive ? "page" : undefined} className="utility-nav site-utility-link account-menu__trigger">{accountLabel}</Link>
-                : <AnalyticsLink href={accountHref} data-tone="blue" aria-current={accountSectionActive ? "page" : undefined} className="utility-nav site-utility-link account-menu__trigger" analyticsEvent={{ name: "sign_in_open", payload: { source: "primary_navigation" } }}>{accountLabel}</AnalyticsLink>}
+                : <AnalyticsLink href={accountHref} data-tone="blue" aria-current={accountSectionActive ? "page" : undefined} className="utility-nav site-utility-link account-menu__trigger" analyticsEvent={{ name: ANALYTICS_EVENTS.SIGN_IN_OPEN, payload: { source: "primary_navigation" } }}>{accountLabel}</AnalyticsLink>}
             </div>
           </nav>
         </div>

@@ -34,7 +34,7 @@ npm run build   # production build (includes type checking)
 
 ## Environment variables
 
-None required yet. When variables are introduced, document them in `.env.example` (committed) and keep real values in `.env.local` (ignored).
+Variables are documented in `.env.example`; keep real secret values in `.env.local` or the approved deployment environment. GA4 uses the public `NEXT_PUBLIC_GA_MEASUREMENT_ID` value only in production builds on canonical hosts and only after visitor consent.
 
 ## Project structure
 

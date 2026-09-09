@@ -25,6 +25,7 @@ import {
   type ExperienceRuntimeState,
 } from "@/lib/experience-runtime";
 import type { PageSceneId, PageSceneQuality } from "@/lib/page-scene";
+import { ANALYTICS_EVENTS } from "@/lib/analytics";
 import { trackAnalyticsEvent } from "@/lib/analytics-client";
 
 interface ExperienceRuntimeBaseProps {
@@ -158,7 +159,7 @@ export default function ExperienceRuntime({
 
   const activate = useCallback(() => {
     if (runtimeLauncherLabel(state.context) === "Unavailable") return;
-    trackAnalyticsEvent("experience_play", { experience_id: runtimeId });
+    trackAnalyticsEvent(ANALYTICS_EVENTS.EXPERIENCE_PLAY, { experience_id: runtimeId });
     dispatch({ type: "ACTIVATE" });
     window.requestAnimationFrame(() => {
       dispatch({ type: "ACTIVATED" });
@@ -213,7 +214,7 @@ export default function ExperienceRuntime({
 
   const activateFullscreen = useCallback(async () => {
     if (runtimeLauncherLabel(state.context) === "Unavailable") return;
-    trackAnalyticsEvent("experience_play", { experience_id: runtimeId });
+    trackAnalyticsEvent(ANALYTICS_EVENTS.EXPERIENCE_PLAY, { experience_id: runtimeId });
     dispatch({ type: "ACTIVATE" });
     dispatch({ type: "ACTIVATED" });
     rootRef.current?.focus();
