@@ -55,9 +55,9 @@ test("account/create uses the governed Wave 0 continuation contract", () => {
   assert.doesNotMatch(page, /Return to Account/);
   assert.match(page, /explore-portal__continuum explore-portal__continuum--cta/);
   assert.match(page, /hero-actions explore-portal__continuum-actions/);
-  assert.match(page, /href="\/community"[^>]*>Explore Community<\/Link>/);
+  assert.match(page, /href="\/community"[^>]*>Explore Community<\/AnalyticsLink>/);
   assert.match(page, /href="\/releases"[^>]*>Browse Releases<\/Link>/);
-  assert.match(page, /href="\/account\/sign-in"[^>]*>Sign In to My Home<\/Link>/);
+  assert.match(page, /href="\/account\/sign-in"[^>]*>Sign In to My Home<\/AnalyticsLink>/);
 });
 
 test("dedicated conversion collects only approved fields and explains the mail handoff", () => {

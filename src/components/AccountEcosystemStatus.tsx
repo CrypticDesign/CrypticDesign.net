@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { AnalyticsLink } from "@/components/AnalyticsLink";
 
 import type { AccountAdmissionMode } from "@/lib/account-admission";
 
@@ -33,7 +33,7 @@ export default function AccountEcosystemStatus({
           : "New accounts are temporarily closed while we finish the account and subscription model for launch."}
       </p>
       {showAvailabilityAction ? (
-        <Link href="/account/create" className="button home-secondary-cta account-ecosystem-status__cta">Account availability</Link>
+        <AnalyticsLink href="/account/create" className="button home-secondary-cta account-ecosystem-status__cta" analyticsEvent={{ name: "request_access_open", payload: { source: "account_status" } }}>Account availability</AnalyticsLink>
       ) : null}
     </aside>
   );

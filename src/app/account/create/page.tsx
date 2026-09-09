@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import RequestAccessForm from "@/components/RequestAccessForm";
 import AccountEcosystemStatus from "@/components/AccountEcosystemStatus";
+import { AnalyticsLink } from "@/components/AnalyticsLink";
 import { accountAdmissionMode } from "@/lib/account-admission";
 
 export const metadata: Metadata = {
@@ -50,9 +51,9 @@ export default function CreateAccountPage() {
           <p>Discover Community participation paths, browse releases, or sign in to your personal My Home.</p>
         </div>
         <nav className="hero-actions explore-portal__continuum-actions" aria-label="Continue from Request Access">
-          <Link href="/community" className="button home-primary-cta">Explore Community</Link>
+          <AnalyticsLink href="/community" className="button home-primary-cta" analyticsEvent={{ name: "community_open", payload: { source: "request_access_continue" } }}>Explore Community</AnalyticsLink>
           <Link href="/releases" className="button secondary">Browse Releases</Link>
-          <Link href="/account/sign-in" className="button secondary">Sign In to My Home</Link>
+          <AnalyticsLink href="/account/sign-in" className="button secondary" analyticsEvent={{ name: "sign_in_open", payload: { source: "request_access_continue" } }}>Sign In to My Home</AnalyticsLink>
         </nav>
       </section>
     </main>
