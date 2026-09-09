@@ -1,6 +1,7 @@
 import { AnalyticsLink } from "@/components/AnalyticsLink";
 
 import type { AccountAdmissionMode } from "@/lib/account-admission";
+import { ANALYTICS_EVENTS } from "@/lib/analytics";
 
 type AccountEcosystemStatusProps = {
   admissionMode: AccountAdmissionMode;
@@ -33,7 +34,7 @@ export default function AccountEcosystemStatus({
           : "New accounts are temporarily closed while we finish the account and subscription model for launch."}
       </p>
       {showAvailabilityAction ? (
-        <AnalyticsLink href="/account/create" className="button home-secondary-cta account-ecosystem-status__cta" analyticsEvent={{ name: "request_access_open", payload: { source: "account_status" } }}>Account availability</AnalyticsLink>
+        <AnalyticsLink href="/account/create" className="button home-secondary-cta account-ecosystem-status__cta" analyticsEvent={{ name: ANALYTICS_EVENTS.REQUEST_ACCESS_OPEN, payload: { source: "account_status" } }}>Account availability</AnalyticsLink>
       ) : null}
     </aside>
   );

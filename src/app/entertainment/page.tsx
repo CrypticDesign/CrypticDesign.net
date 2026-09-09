@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ExperienceRuntime from "@/components/ExperienceRuntime";
 import { AnalyticsLink } from "@/components/AnalyticsLink";
+import { ANALYTICS_EVENTS } from "@/lib/analytics";
 import MediaCard from "@/components/MediaCard";
 import { entertainmentSelection, releaseAvailability } from "@/lib/entertainment-frontdoor";
 import { publicProducts } from "@/lib/products";
@@ -56,7 +57,7 @@ export default function EntertainmentHub() {
       </section>
       <section className="explore-portal__continuum explore-portal__continuum--cta" data-section-accent="indigo" aria-labelledby="entertainment-continue-title">
         <div><span className="kicker">Continue</span><h2 id="entertainment-continue-title">Find your next connection.</h2><p>Discover Community participation paths, browse releases, or sign in to your personal My Home.</p></div>
-        <nav className="hero-actions explore-portal__continuum-actions" aria-label="Continue from Entertainment"><AnalyticsLink href="/community" className="button home-primary-cta" analyticsEvent={{ name: "community_open", payload: { source: "entertainment_continue" } }}>Explore Community</AnalyticsLink><Link href="/releases" className="button secondary">Browse Releases</Link><AnalyticsLink href="/account/sign-in" className="button secondary" analyticsEvent={{ name: "sign_in_open", payload: { source: "entertainment_continue" } }}>Sign In to My Home</AnalyticsLink></nav>
+        <nav className="hero-actions explore-portal__continuum-actions" aria-label="Continue from Entertainment"><AnalyticsLink href="/community" className="button home-primary-cta" analyticsEvent={{ name: ANALYTICS_EVENTS.COMMUNITY_OPEN, payload: { source: "entertainment_continue" } }}>Explore Community</AnalyticsLink><Link href="/releases" className="button secondary">Browse Releases</Link><AnalyticsLink href="/account/sign-in" className="button secondary" analyticsEvent={{ name: ANALYTICS_EVENTS.SIGN_IN_OPEN, payload: { source: "entertainment_continue" } }}>Sign In to My Home</AnalyticsLink></nav>
       </section>
     </div>
   </main>;

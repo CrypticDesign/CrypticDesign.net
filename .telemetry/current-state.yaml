@@ -1,0 +1,119 @@
+# Current State: reverse-engineered from codebase
+# Scanned: 2026-09-09
+# SDK: Google Analytics 4 gtag.js (CDN)
+
+events:
+  - name: "page_view"
+    status: LIVE
+    locations:
+      - file: "src/lib/analytics.ts"
+        line: 131
+      - file: "src/components/AnalyticsProvider.tsx"
+        line: 100
+    properties: [page_path, page_location, page_referrer]
+    source: frontend
+  - name: "experience_play"
+    status: LIVE
+    locations:
+      - file: "src/components/ExperienceRuntime.tsx"
+        line: 161
+      - file: "src/components/ExperienceRuntime.tsx"
+        line: 216
+    properties: [experience_id, page_location, page_referrer]
+    source: frontend
+  - name: "community_open"
+    status: LIVE
+    locations:
+      - file: "src/components/SiteHeader.tsx"
+        line: 116
+      - file: "src/components/PublicHome.tsx"
+        line: 103
+      - file: "src/components/PublicHome.tsx"
+        line: 148
+      - file: "src/app/entertainment/page.tsx"
+        line: 59
+      - file: "src/app/account/create/page.tsx"
+        line: 54
+    properties: [source, page_location, page_referrer]
+    source: frontend
+  - name: "request_access_open"
+    status: LIVE
+    locations:
+      - file: "src/components/PublicHome.tsx"
+        line: 199
+      - file: "src/components/AccountEcosystemStatus.tsx"
+        line: 36
+      - file: "src/app/community/page.tsx"
+        line: 41
+    properties: [source, page_location, page_referrer]
+    source: frontend
+  - name: "request_access_submit"
+    status: LIVE
+    locations:
+      - file: "src/components/RequestAccessForm.tsx"
+        line: 20
+    properties: [method, page_location, page_referrer]
+    source: frontend
+  - name: "sign_in_open"
+    status: LIVE
+    locations:
+      - file: "src/components/SiteHeader.tsx"
+        line: 123
+      - file: "src/components/PublicHome.tsx"
+        line: 107
+      - file: "src/components/PublicHome.tsx"
+        line: 164
+      - file: "src/components/PublicHome.tsx"
+        line: 199
+      - file: "src/app/entertainment/page.tsx"
+        line: 59
+      - file: "src/app/account/create/page.tsx"
+        line: 56
+    properties: [source, page_location, page_referrer]
+    source: frontend
+  - name: "release_view"
+    status: LIVE
+    locations:
+      - file: "src/lib/analytics.ts"
+        line: 134
+      - file: "src/components/AnalyticsProvider.tsx"
+        line: 100
+    properties: [release_slug, page_location, page_referrer]
+    source: frontend
+  - name: "product_view"
+    status: LIVE
+    locations:
+      - file: "src/lib/analytics.ts"
+        line: 135
+      - file: "src/components/AnalyticsProvider.tsx"
+        line: 100
+    properties: [product_slug, page_location, page_referrer]
+    source: frontend
+  - name: "outbound_link"
+    status: LIVE
+    locations:
+      - file: "src/app/products/[slug]/page.tsx"
+        line: 105
+      - file: "src/app/products/[slug]/page.tsx"
+        line: 161
+    properties: [destination_domain, destination_category, page_location, page_referrer]
+    source: frontend
+
+identity:
+  identify_calls: []
+  group_calls: []
+  page_calls:
+    - location: "src/components/AnalyticsProvider.tsx:100"
+      details: "Manual SPA page_view events derived from canonical pathnames"
+  reset_calls:
+    - location: "src/components/AnalyticsProvider.tsx:57"
+      details: "Consent revocation enables the measurement-specific ga-disable flag"
+
+patterns:
+  naming_style: "snake_case"
+  naming_format: "GA4 action/outcome names"
+  centralized: true
+  error_handling: "Synchronous non-blocking boolean dispatcher; unauthorized or unavailable delivery returns false"
+  consent: "Tag loading and event dispatch require an explicit first-party granted preference"
+  environment_isolation: "Production build plus canonical host allowlist plus valid G- measurement ID"
+  orphaned_events: 0

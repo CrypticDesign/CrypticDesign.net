@@ -5,6 +5,7 @@ import PortalIcon, { type EcosystemPortalIconName } from "@/components/Ecosystem
 import PageScene from "@/components/PageScene";
 import { AnalyticsLink } from "@/components/AnalyticsLink";
 import type { AccountAdmissionMode } from "@/lib/account-admission";
+import { ANALYTICS_EVENTS } from "@/lib/analytics";
 import { MUSIC_ENTRIES } from "@/lib/media-catalog";
 import { getProduct } from "@/lib/products";
 import { getRelease, releaseDestination, releaseImage } from "@/lib/releases";
@@ -100,11 +101,11 @@ export default function PublicHome({ accountAdmissionMode }: { accountAdmissionM
           <p>Enter original games, worlds, music, stories, and interactive experiences built to exist as parts of one connected universe. Explore what is here now and follow what comes next.</p>
           <div className="hero-actions">
             <Link href="/entertainment" className="button home-primary-cta">Explore What&apos;s Here</Link>
-            <AnalyticsLink href="/community" className="button home-secondary-cta" analyticsEvent={{ name: "community_open", payload: { source: "home_hero" } }}>Enter Community</AnalyticsLink>
+            <AnalyticsLink href="/community" className="button home-secondary-cta" analyticsEvent={{ name: ANALYTICS_EVENTS.COMMUNITY_OPEN, payload: { source: "home_hero" } }}>Enter Community</AnalyticsLink>
           </div>
           <div className="public-home-v2__member-link">
             <span>Already a member?</span>
-            <AnalyticsLink href="/account/sign-in" analyticsEvent={{ name: "sign_in_open", payload: { source: "home_hero" } }}>Sign in to My Home <span aria-hidden="true">→</span></AnalyticsLink>
+            <AnalyticsLink href="/account/sign-in" analyticsEvent={{ name: ANALYTICS_EVENTS.SIGN_IN_OPEN, payload: { source: "home_hero" } }}>Sign in to My Home <span aria-hidden="true">→</span></AnalyticsLink>
           </div>
         </div>
       </section>
@@ -145,7 +146,7 @@ export default function PublicHome({ accountAdmissionMode }: { accountAdmissionM
         <section className="public-home-v2__community" data-section-accent="violet" aria-labelledby="community-preview-title">
           <div className="public-home-v2__heading">
             <div><span className="kicker">Community</span><h2 id="community-preview-title">This isn&apos;t just something to watch.</h2><h3>Become part of what we&apos;re building.</h3><p>CrypticDesign.net is being built around persistent identity, shared experiences, creators, groups, and participation. Public discovery is open now; deeper participation will expand through controlled access as those systems come online.</p></div>
-            <AnalyticsLink href="/community" className="text-link" analyticsEvent={{ name: "community_open", payload: { source: "home_community" } }}>Explore Community <span aria-hidden="true">→</span></AnalyticsLink>
+            <AnalyticsLink href="/community" className="text-link" analyticsEvent={{ name: ANALYTICS_EVENTS.COMMUNITY_OPEN, payload: { source: "home_community" } }}>Explore Community <span aria-hidden="true">→</span></AnalyticsLink>
           </div>
           <div className="public-home-v2__community-grid">
             {communityPaths.map((path) => (
@@ -161,7 +162,7 @@ export default function PublicHome({ accountAdmissionMode }: { accountAdmissionM
         <section className="public-home-v2__continuity" data-section-accent="magenta" aria-labelledby="continuity-title">
           <div className="public-home-v2__heading">
             <div><span className="kicker">Your place in the platform</span><h2 id="continuity-title">Your experience doesn&apos;t have to reset every time you leave a page.</h2><p>CrypticDesign.net is being built as a connected environment where identity, discoveries, saved work, participation, and experiences can persist across the platform.</p></div>
-            <AnalyticsLink href="/account/sign-in" className="button secondary" analyticsEvent={{ name: "sign_in_open", payload: { source: "home_continuity" } }}>Sign in to My Home</AnalyticsLink>
+            <AnalyticsLink href="/account/sign-in" className="button secondary" analyticsEvent={{ name: ANALYTICS_EVENTS.SIGN_IN_OPEN, payload: { source: "home_continuity" } }}>Sign in to My Home</AnalyticsLink>
           </div>
           <div className="public-home-v2__continuity-grid">
             <article><span>Admitted-member capability</span><h3>Character</h3><p>Your persistent member representation across approved platform experiences.</p></article>
@@ -196,7 +197,7 @@ export default function PublicHome({ accountAdmissionMode }: { accountAdmissionM
 
         <section className="public-home-v2__join" data-section-accent="magenta" aria-labelledby="join-title">
           <div><span className="kicker">Join the next wave</span><h2 id="join-title">This is just the beginning.</h2><p>Explore publicly now. Request future member access as member capabilities expand. Requesting access does not create an account or guarantee access.</p><span className="public-home-v2__state">{accountState}</span></div>
-          <div className="hero-actions"><AnalyticsLink href="/account/create" className="button home-primary-cta" analyticsEvent={{ name: "request_access_open", payload: { source: "home_join" } }}>Request Access</AnalyticsLink><AnalyticsLink href="/account/sign-in" className="button secondary" analyticsEvent={{ name: "sign_in_open", payload: { source: "home_join" } }}>Sign In</AnalyticsLink></div>
+          <div className="hero-actions"><AnalyticsLink href="/account/create" className="button home-primary-cta" analyticsEvent={{ name: ANALYTICS_EVENTS.REQUEST_ACCESS_OPEN, payload: { source: "home_join" } }}>Request Access</AnalyticsLink><AnalyticsLink href="/account/sign-in" className="button secondary" analyticsEvent={{ name: ANALYTICS_EVENTS.SIGN_IN_OPEN, payload: { source: "home_join" } }}>Sign In</AnalyticsLink></div>
         </section>
       </div>
     </main>
