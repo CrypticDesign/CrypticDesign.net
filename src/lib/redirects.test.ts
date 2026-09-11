@@ -22,7 +22,7 @@ const EXPECTED: Record<string, string> = {
   "/labs": "/entertainment/visual-studies",
   // CRY-266 — retired Creative Works hierarchy (4 known slugs + parent + catch-all)
   "/creative-works": "/entertainment",
-  "/creative-works/visual-studies": "/entertainment/visual-studies",
+  "/creative-works/visual-studies": "/entertainment",
   "/creative-works/singularis": "/products/singularis",
   "/creative-works/holistic-ux": "/professional/articles",
   "/creative-works/crypticdesign-net": "/professional",
@@ -68,8 +68,32 @@ test("no redirect points at a retired route as its destination", async () => {
   }
 });
 
+test("Creative Works retirement redirects are permanent and explicit slugs precede the catch-all", async () => {
+  assert.ok(typeof nextConfig.redirects === "function", "redirects() must exist");
+  const rules = await nextConfig.redirects!();
+  const creativeWorksRules = rules.filter((rule) => rule.source.startsWith("/creative-works"));
+  const catchAllIndex = creativeWorksRules.findIndex((rule) => rule.source === "/creative-works/:slug*");
+
+  assert.equal(creativeWorksRules.length, 6, "parent, four known slugs, and catch-all must be present");
+  assert.equal(catchAllIndex, creativeWorksRules.length - 1, "catch-all must follow every known slug");
+  for (const rule of creativeWorksRules) {
+    assert.equal(rule.permanent, true, `${rule.source} must use a permanent redirect`);
+  }
+});
+
+test("the independent creator request route remains outside Creative Works retirement", async () => {
+  const { access } = await import("node:fs/promises");
+  await access("src/app/creator-tools/request/page.tsx");
+  const source = await import("node:fs/promises").then(({ readFile }) =>
+    readFile("src/app/creator-tools/request/page.tsx", "utf8"),
+  );
+  assert.match(source, /canonical:\s*["']\/creator-tools\/request["']/);
+  assert.doesNotMatch(source, /creative-works/);
+});
+
 test("the public sitemap excludes routes that immediately redirect", async () => {
   const source = await import("node:fs/promises").then(({ readFile }) => readFile("src/app/sitemap.ts", "utf8"));
   assert.doesNotMatch(source, /STATIC_ROUTES[\s\S]*"\/professional\/contact"/);
+  assert.doesNotMatch(source, /creative-works/);
   assert.match(source, /releaseDestination\(release\)/);
 });

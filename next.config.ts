@@ -16,14 +16,17 @@ const nextConfig: NextConfig = {
       { source: "/personal", destination: "/", permanent: false },
       { source: "/worlds", destination: "/entertainment", permanent: false },
       { source: "/labs", destination: "/entertainment/visual-studies", permanent: false },
-      { source: "/creative-works", destination: "/entertainment", permanent: false },
-      { source: "/creative-works/visual-studies", destination: "/entertainment/visual-studies", permanent: false },
-      // PROVISIONAL targets — Robert to confirm:
-      { source: "/creative-works/singularis", destination: "/products/singularis", permanent: false },
-      { source: "/creative-works/holistic-ux", destination: "/professional/articles", permanent: false },
-      { source: "/creative-works/crypticdesign-net", destination: "/professional", permanent: false },
-      // Safety net for any unmapped legacy slug:
-      { source: "/creative-works/:slug*", destination: "/entertainment", permanent: false },
+      // CRY-266: Creative Works is permanently retired. Sitemap v20 does not
+      // retain Visual Studies as a canonical destination, so that legacy slug
+      // resolves to the Entertainment front door instead of preserving a v18
+      // detail-page assumption.
+      { source: "/creative-works", destination: "/entertainment", permanent: true },
+      { source: "/creative-works/visual-studies", destination: "/entertainment", permanent: true },
+      { source: "/creative-works/singularis", destination: "/products/singularis", permanent: true },
+      { source: "/creative-works/holistic-ux", destination: "/professional/articles", permanent: true },
+      { source: "/creative-works/crypticdesign-net", destination: "/professional", permanent: true },
+      // Preserve unknown inbound links without recreating the retired hierarchy.
+      { source: "/creative-works/:slug*", destination: "/entertainment", permanent: true },
       // Wave 0: preserve the Arcade/playable catalog's existing compatibility URL.
       // General Entertainment discovery is canonical at /entertainment.
       { source: "/entertainment/arcade", destination: "/entertainment/explore", permanent: true },
