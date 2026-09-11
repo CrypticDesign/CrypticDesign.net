@@ -8,7 +8,7 @@
 
 **Authority:** CRY-363, CRY-320, CrypticDesign.net Platform Operations Manual, Infrastructure and Operations Architecture
 
-**Result:** Conditional pass until the two provider-side controls below are enabled and one post-change release confirms a single production deploy.
+**Result:** Conditional pass. PR verification, Deploy Preview behavior, Netlify Git-only production enforcement, and the GitHub `production-main` ruleset are verified. One post-change approved merge must still confirm exactly one production deploy, and the duplicate same-SHA scheduling incident still requires Netlify audit/support follow-up.
 
 ## Authoritative production branch
 
@@ -24,22 +24,22 @@ The verified live baseline was GitHub `main` commit `ac8046e2e1801dc868e4d1b545e
 
 | Event | Current result | Production? | Evidence / constraint |
 | --- | --- | --- | --- |
-| Push directly to `main` | Netlify Git integration starts a production deploy and auto-publishes it when successful | Yes | `main` is the Netlify production branch and auto publishing is on |
+| Push directly to `main` | Rejected by the active `production-main` ruleset for routine users/operators; an Organization Admin using the always-allow bypass can still push, which causes Netlify to start a production deploy | Only through the explicit admin bypass | The ruleset requires a pull request before merging; `main` remains the Netlify production branch |
 | Merge a pull request into `main` | The merge commit is pushed to `main`; Netlify starts and auto-publishes a production deploy | Yes | Recent production deploys normally map one-to-one to accepted PR merge commits |
-| Open or update a pull request targeting `main` | Netlify builds a Deploy Preview at `deploy-preview-<PR>--frabjous-frangipane-650548.netlify.app` | No | PR #77 produced completed Deploy Preview `6aa226dc0c352d0008cb2565` for commit `515d402` |
+| Open or update a pull request targeting `main` | Netlify builds a Deploy Preview at `deploy-preview-<PR>--frabjous-frangipane-650548.netlify.app` | No | PR #78 successfully reported `netlify/frabjous-frangipane-650548/deploy-preview`; its GitHub Actions job reported `Test, type, lint, and build` |
 | Push to an ordinary feature branch with no open PR | No Netlify deploy | No | Branch deploys are limited to two explicitly configured branches |
 | Push to `codex/cry-320-launch-readiness` or `codex/cry-335-production-auth` | Netlify creates/updates a stable branch deploy | No | These are the only configured Branch deploy branches |
-| Netlify UI **Trigger deploy**, retry, or publish operation | Can create or publish a production-context deploy | Yes | **Enforce deployment methods** currently says all methods can deploy to production |
-| Netlify CLI `netlify deploy --prod` | Can deploy to production | Yes | Git-only production enforcement is currently off |
-| Netlify API or MCP production request | Can deploy to production | Yes | Git-only production enforcement is currently off |
+| Netlify UI **Trigger deploy**, retry, or publish operation not backed by a production-branch Git change | Cannot publish production; non-production contexts remain available | No | Git-only production deployment enforcement is enabled |
+| Netlify CLI `netlify deploy --prod` | Production publication is blocked; CLI remains available for non-production contexts | No | Git-only production deployment enforcement is enabled |
+| Netlify API or MCP production request | Production publication is blocked; API and MCP remain available for non-production contexts | No | Git-only production deployment enforcement is enabled |
 | Netlify build hook | None configured | No current hook trigger | **Build hooks** contains only **Add build hook**; no hook entries are present |
-| GitHub Actions workflow | None existed before CRY-363 and none deployed to Netlify | No | GitHub Actions showed **Get started with GitHub Actions**; the repository had no `.github/workflows` tree |
+| GitHub Actions workflow | The CRY-363 repository-verification workflow runs on pull requests targeting `main` and does not deploy | No | Successful PR #78 job name: `Test, type, lint, and build` |
 | GitHub repository or organization webhook | None configured | No current webhook trigger | Both repository and CrypticDesign organization **Settings > Webhooks** showed no webhook entries |
 | Netlify GitHub App | Receives repository/PR events and creates the Git-based deploys above | Depends on branch/event | One Netlify GitHub App installation is present |
 
 ## Deploy Preview and branch-deploy behavior
 
-Deploy Previews are enabled for any pull request whose base is the production branch or one of the branch-deploy branches. The live PR #77 preview confirms that the GitHub App comments with the preview URL and reports the deploy state back to the pull request.
+Deploy Previews are enabled for any pull request whose base is the production branch or one of the branch-deploy branches. Live PR #78 confirms that the GitHub App reports the successful preview as `netlify/frabjous-frangipane-650548/deploy-preview`; GitHub Actions reports repository verification as `Test, type, lint, and build`.
 
 Normal development should therefore use a feature branch plus an early pull request against `main`. Each additional feature-branch commit updates the same non-production Deploy Preview. A feature branch that needs a stable URL without a pull request must first be added to the Netlify Branch deploy list; repository configuration cannot grant that provider setting.
 
@@ -66,35 +66,35 @@ At the stated 15 credits per production deploy, this incident used 45 credits wh
 
 These controls improve release readiness but deliberately do not pretend that a repository file can enforce provider account settings.
 
-## Required manual provider actions
+## Verified provider controls and remaining manual action
 
-### 1. Netlify: allow only Git workflows to publish production
+### Netlify: Git-only production deployment enforcement — PASS
 
-This setting exists only in the Netlify project UI and was not changed by CRY-363.
+Netlify Git-only production deployment enforcement is enabled for `frabjous-frangipane-650548`:
 
-1. Open Netlify project `frabjous-frangipane-650548`.
-2. Go to **Project configuration > Build & deploy > Continuous deployment**.
-3. In **Enforce deployment methods**, select **Configure**.
-4. Choose the option that requires Git-based deployments for production and confirm/save.
-5. Return to the card and verify it states that production deploys must come from the Git workflow/production branch.
+- Only changes to the production Git branch can deploy to production.
+- Netlify CLI, MCP, and API cannot publish production.
+- CLI, MCP, and API remain available for non-production deploy contexts.
+- Deploy Previews, branch deploys, merge-to-`main` continuous delivery, and Git-based emergency-fix PRs remain available.
 
-This blocks accidental production publication through Netlify CLI, MCP, API, and direct Deploy Preview publication while preserving Deploy Previews, branch deploys, merge-to-`main` continuous delivery, and Git-based emergency-fix PRs. Official behavior: <https://docs.netlify.com/build/git-workflows/overview/#enforce-git-based-deployments>.
+Official behavior: <https://docs.netlify.com/build/git-workflows/overview/#enforce-git-based-deployments>.
 
-### 2. GitHub: require pull requests for `main`
+### GitHub: `production-main` ruleset — PASS
 
-GitHub currently has no classic branch protection and no repository ruleset. This setting is also provider-side and was not changed by CRY-363.
+The `production-main` ruleset is active and targets the default branch, `main`. Its verified rules are:
 
-1. Open `CrypticDesign/CrypticDesign.net` in GitHub.
-2. Go to **Settings > Rules > Rulesets** and create a branch ruleset.
-3. Name it `production-main`, set enforcement to **Active**, and target the default branch (`main`).
-4. Enable **Require a pull request before merging**, **Block force pushes**, and **Restrict deletions**.
-5. Preserve Robert/organization-owner bypass authority for an emergency only; routine fixes still use a small PR so they receive a Deploy Preview.
-6. After the CRY-363 workflow has run once on a pull request, require the `Test, type, lint, and build` check. Also require the existing Netlify Deploy Preview status/check selected from GitHub's observed check list; do not type or invent a check name that GitHub has not reported.
-7. Save, then verify a test feature branch cannot push directly to `main` and cannot merge while either required check is failing.
+- Require a pull request before merging.
+- Restrict deletions.
+- Block force pushes.
+- Required approving reviews: `0`.
+- Organization Admin bypass: **Always allow**.
+- Merge commits, squash merges, and rebase merges remain allowed.
 
-This preserves normal accepted merge-to-production continuous delivery: review and verification happen on the PR, then the single accepted merge commit triggers the single intentional production deploy.
+PR #78 established the exact successful check names `Test, type, lint, and build` and `netlify/frabjous-frangipane-650548/deploy-preview`. These observed names must be used exactly if required status checks are added to the ruleset later; this runbook does not claim that a required-status-check rule was enabled when it was not among the verified rules above.
 
-### 3. Netlify support/audit follow-up for the duplicate Git event
+The active ruleset preserves normal accepted merge-to-production continuous delivery: review and verification happen on the PR, then the single accepted merge commit triggers the single intentional production deploy. The Organization Admin bypass preserves emergency and rollback authority but is not the routine development path.
+
+### Netlify support/audit follow-up for the duplicate Git event — PENDING
 
 Open a Netlify support request or inspect the team audit log using the three deploy IDs above. Ask Netlify to identify why two Git-attributed production builds were scheduled for the same `8057223` merge commit one minute apart and whether both incurred the 15-credit production charge. Do not delete deploys or relink the repository as a speculative fix.
 
@@ -112,8 +112,8 @@ Open a Netlify support request or inspect the team audit log using the three dep
 
 - Deploy Previews and the two configured branch deploys: no change to the stated zero-credit deployment charge.
 - Intended releases/fixes: remain one production deploy at 15 credits per accepted merge.
-- Direct-to-`main` iteration: reduced from one 15-credit deploy per push to zero production deploys before the final merge after the GitHub ruleset is enabled.
-- Non-Git production triggers: reduced to zero after Netlify Git-only production enforcement is enabled.
+- Direct-to-`main` iteration: reduced from one 15-credit deploy per routine push to zero production deploys before the final merge now that the GitHub ruleset is active. Organization Admin retains an always-allow emergency bypass.
+- Non-Git production triggers: reduced to zero now that Netlify Git-only production enforcement is enabled.
 - Duplicate Git scheduling: not guaranteed fixed by repository controls; resolving the provider duplicate would have saved 15 credits in the September 9 incident.
 
 For the observed September 9 incident, the full target is 15 credits instead of 45, saving 30 credits (66.7%). Future monthly savings are `15 credits × the number of avoided direct-main, manual/API, and duplicate production deploys`; no honest fixed monthly amount can be claimed from one incident.
@@ -127,12 +127,11 @@ Run on 2026-09-10 with temporary Node `v24.21.0`, matching Netlify's configured 
 - `npm run lint`: pass.
 - `npm run build`: pass, Next.js 15.5.21 compiled successfully and generated 78/78 static pages.
 
-## Acceptance verification after provider changes
+## Acceptance verification
 
-- [ ] A feature-branch push with no PR does not create a production deploy.
-- [ ] A PR against `main` runs `Test, type, lint, and build` and receives a Deploy Preview.
-- [ ] A direct push to `main` is rejected for routine users/operators.
-- [ ] Netlify reports Git-only production deployment enforcement.
-- [ ] One approved merge to `main` produces exactly one production deploy for its merge SHA.
-- [ ] CLI/API/MCP and direct preview publication cannot publish production.
-- [ ] The prior known-good deploy remains available for rollback.
+- [x] **PASS — PR verification + Deploy Preview:** PR #78 completed `Test, type, lint, and build` and `netlify/frabjous-frangipane-650548/deploy-preview` successfully.
+- [x] **PASS — Netlify Git-only production enforcement:** only changes to the production Git branch can deploy to production.
+- [x] **PASS — GitHub `production-main` ruleset:** active and targeting the default branch `main` with the verified pull-request, deletion, and force-push protections.
+- [x] **PASS — CLI/API/MCP production publication blocked:** these methods remain available only for non-production contexts.
+- [ ] **PENDING — Single-deploy release proof:** one approved merge to `main` must produce exactly one production deploy for its merge SHA.
+- [ ] **PENDING — Duplicate scheduling audit:** Netlify audit/support must explain the duplicate Git-attributed production builds for the same September 9 merge SHA and confirm their credit treatment.
