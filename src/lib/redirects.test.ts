@@ -19,7 +19,7 @@ async function redirectMap(): Promise<Map<string, string>> {
 const EXPECTED: Record<string, string> = {
   // CRY-269 — retired Worlds and Labs hierarchies
   "/worlds": "/entertainment",
-  "/labs": "/entertainment/visual-studies",
+  "/labs": "/entertainment",
   // CRY-266 — retired Creative Works hierarchy (4 known slugs + parent + catch-all)
   "/creative-works": "/entertainment",
   "/creative-works/visual-studies": "/entertainment",
@@ -29,7 +29,7 @@ const EXPECTED: Record<string, string> = {
   "/creative-works/:slug*": "/entertainment",
   "/releases/singularis-vertical-slice": "/products/singularis",
   // Legacy /personal chain must point at final destinations, not deleted routes
-  "/personal/creative-labs": "/entertainment/visual-studies",
+  "/personal/creative-labs": "/entertainment",
   "/personal/rooms": "/entertainment",
   "/personal/collections": "/entertainment",
   // CRY-344 — Squarespace legacy set (spot-check of key entries)
@@ -65,6 +65,19 @@ test("no redirect points at a retired route as its destination", async () => {
         `${source} redirects to retired route ${dead}; point it at the canonical destination instead`,
       );
     }
+  }
+});
+
+test("Worlds and Labs retirement redirects are permanent", async () => {
+  assert.ok(typeof nextConfig.redirects === "function", "redirects() must exist");
+  const rules = await nextConfig.redirects!();
+  const retiredSources = ["/worlds", "/labs", "/personal/creative-labs"];
+
+  for (const source of retiredSources) {
+    const rule = rules.find((candidate) => candidate.source === source);
+    assert.ok(rule, `${source} redirect must exist`);
+    assert.equal(rule.destination, "/entertainment", `${source} must resolve to Entertainment`);
+    assert.equal(rule.permanent, true, `${source} must use a permanent redirect`);
   }
 });
 

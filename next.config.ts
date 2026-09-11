@@ -9,13 +9,13 @@ const nextConfig: NextConfig = {
     // (audience-first correction, 2026-07-10; tracked on CRY-255).
     return [
       { source: "/personal/library", destination: "/library", permanent: false },
-      { source: "/personal/creative-labs", destination: "/entertainment/visual-studies", permanent: false },
+      { source: "/personal/creative-labs", destination: "/entertainment", permanent: true },
       { source: "/personal/rooms", destination: "/entertainment", permanent: false },
       { source: "/personal/collections", destination: "/entertainment", permanent: false },
       { source: "/personal/:lane", destination: "/releases", permanent: false },
       { source: "/personal", destination: "/", permanent: false },
-      { source: "/worlds", destination: "/entertainment", permanent: false },
-      { source: "/labs", destination: "/entertainment/visual-studies", permanent: false },
+      { source: "/worlds", destination: "/entertainment", permanent: true },
+      { source: "/labs", destination: "/entertainment", permanent: true },
       // CRY-266: Creative Works is permanently retired. Sitemap v20 does not
       // retain Visual Studies as a canonical destination, so that legacy slug
       // resolves to the Entertainment front door instead of preserving a v18
