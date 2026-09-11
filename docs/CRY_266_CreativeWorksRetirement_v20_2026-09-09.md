@@ -1,7 +1,9 @@
 # CRY-266 — Creative Works retirement map (Sitemap v20)
 
-Status: implementation record  
-Date: 2026-09-09  
+Status: implementation record
+
+Date: 2026-09-09
+
 Authority: CRY-242; CRY-266; Confluence `Platform Information Architecture` (Sitemap v20, current direction 2026-08-27); repository/runtime evidence
 
 ## Decision
