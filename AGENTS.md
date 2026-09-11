@@ -29,13 +29,14 @@ This repository is the implementation source of truth for the CrypticDesign.net 
 
 ## Deployment cost discipline (Netlify)
 
-Demo hosting runs on Netlify (`frabjous-frangipane-650548`, project `demo.crypticdesign.net`), auto-deploying from GitHub on every push to `main`. **Build credits are finite and metered.**
+Netlify project `frabjous-frangipane-650548` is linked to this GitHub repository with `main` as its production branch and automatic publishing enabled. **Production deploy credits are finite and metered.** The verified operating state on 2026-09-10 is Personal, 1,000 credits/month, 479.7 remaining, auto recharge disabled, 15 credits per production deploy, and zero deployment charge for Deploy Previews or branch deploys.
 
-- **Every push/merge to `main` triggers one production build that spends credits.** Plan allowances: Free = 300 credits/month, Personal = 1,000/month, Pro = 3,000/month. The billing period resets mid-month (currently the 17th). When credits run out, production deploys pause until reset — the demo freezes at the last successful build and review-by-demo goes dark for the rest of the cycle.
+- **Every push/merge to `main` triggers a production build that spends credits.** Opening or updating a pull request against `main` creates a non-production Deploy Preview instead. An ordinary feature-branch push without an open pull request does not deploy; branch deploys are limited to the branches explicitly enabled in Netlify.
 - **Never use `main` as the debugging loop.** In July 2026, ~13 same-day pushes to `main` burned 275 of 300 monthly credits in four days and froze the demo. Do not repeat this.
 - **Validate locally before deploying.** Run `npm run build`, `tsc --noEmit`, `npm test`, and viewport QA (`scripts/qa-viewports.mjs`) on a branch first. The deploy is the last step after the change is proven, not the tool you use to prove it.
 - **One coherent unit = one merge = one deploy.** Batch related edits on a branch, open a PR, get review, then merge once. Do not push a fix, notice a problem, and push again — that is two builds where one would do.
 - **Do not push directly to `main`.** Work on `agent/<topic>` branches and merge via PR. This gates review and naturally batches deploys.
+- **Do not trigger production from Netlify UI, CLI, API, or MCP during routine work.** Provider-side Git-only production enforcement and GitHub `main` protection are required controls; their exact configuration and the verified trigger map are in `docs/CRY_363_GitHubNetlifyDeploymentWorkflow_2026-09-10.md`.
 - **Treat every deploy as a spend.** Before merging, confirm the change is worth a build credit and that nothing else is about to follow it that could be batched in.
 
 ## Sitemap sync rule
