@@ -1,0 +1,1373 @@
+{
+  "generatedAt": "2026-09-07T13:41:39.304Z",
+  "base": "https://demo.crypticdesign.net",
+  "engines": [
+    "chromium",
+    "webkit"
+  ],
+  "routes": [
+    "/",
+    "/entertainment",
+    "/entertainment/explore",
+    "/community",
+    "/account/create",
+    "/account/sign-in"
+  ],
+  "checks": 24,
+  "errors": [],
+  "pass": true,
+  "results": [
+    {
+      "engine": "chromium",
+      "viewport": "mobile-390",
+      "route": "/",
+      "status": 200,
+      "facts": {
+        "title": "Cryptic Design",
+        "h1Count": 1,
+        "hasMain": true,
+        "canonical": "https://crypticdesign.net/",
+        "overflow": false,
+        "links": [
+          {
+            "text": "Explore What's Here",
+            "href": "/entertainment"
+          },
+          {
+            "text": "Enter Community",
+            "href": "/community"
+          },
+          {
+            "text": "Sign in to My Home →",
+            "href": "/account/sign-in"
+          },
+          {
+            "text": "View All Entertainment →",
+            "href": "/entertainment"
+          },
+          {
+            "text": "In development · ScheduledSingularisScience-fiction universe→",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "In development · ScheduledLifa: GenesisLiving-systems game experience→",
+            "href": "/products/lifa"
+          },
+          {
+            "text": "ReleasedSignal & Systems: Deep Space TransmissionExperimental single→",
+            "href": "/releases/singularis-themes-vol-1"
+          },
+          {
+            "text": "Coming soon · ScheduledVisual Study 01Visual systems and experiments→",
+            "href": "/releases/visual-study-01"
+          },
+          {
+            "text": "PlayGames, prototypes, arcade experiences, and interactive worlds.→",
+            "href": "/entertainment/explore"
+          },
+          {
+            "text": "Watch & listenMusic, film, visual media, stories, and cinematic experiences.→",
+            "href": "/entertainment/listening-rooms"
+          },
+          {
+            "text": "Explore worldsSingularis, Lifa, releases, experiments, and interconnected projects.→",
+            "href": "/products"
+          },
+          {
+            "text": "Discover communityCreators, groups, events, and governed participation.→",
+            "href": "/community"
+          },
+          {
+            "text": "Explore Community →",
+            "href": "/community"
+          },
+          {
+            "text": "CreatorsDiscover people through published work and approved public profiles.→",
+            "href": "/community/creators"
+          },
+          {
+            "text": "GroupsSee the governed group model and current public availability.→",
+            "href": "/community/groups"
+          },
+          {
+            "text": "EventsExplore supported participation and the current published schedule or empty state.→",
+            "href": "/community/events"
+          },
+          {
+            "text": "Sign in to My Home",
+            "href": "/account/sign-in"
+          },
+          {
+            "text": "Open the release →",
+            "href": "/releases/singularis-themes-vol-1"
+          },
+          {
+            "text": "About Cryptic Design",
+            "href": "/professional"
+          },
+          {
+            "text": "Explore Professional →",
+            "href": "/professional"
+          },
+          {
+            "text": "Request Access",
+            "href": "/account/create"
+          },
+          {
+            "text": "Sign In",
+            "href": "/account/sign-in"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": [],
+      "screenshot": "artifacts/CRY-505/integrated-main-after-pr71/home-mobile-390.png"
+    },
+    {
+      "engine": "chromium",
+      "viewport": "mobile-390",
+      "route": "/entertainment",
+      "status": 200,
+      "facts": {
+        "title": "Entertainment Hub | Cryptic Design",
+        "h1Count": 1,
+        "hasMain": true,
+        "canonical": "https://crypticdesign.net/entertainment",
+        "overflow": false,
+        "links": [
+          {
+            "text": "Explore Entertainment",
+            "href": "#choose-a-mode"
+          },
+          {
+            "text": "Browse Releases",
+            "href": "/releases"
+          },
+          {
+            "text": "View release details",
+            "href": "/releases/singularis-themes-vol-1"
+          },
+          {
+            "text": "Explore Music",
+            "href": "/audio"
+          },
+          {
+            "text": "PlayArcadeGames, playable samples, prototypes, and interactive experiences.Open +",
+            "href": "/entertainment/explore"
+          },
+          {
+            "text": "ListenMusicScores, albums, tracks, signals, and audio releases.Open +",
+            "href": "/audio"
+          },
+          {
+            "text": "WatchVideoFilms, trailers, transmissions, visual stories, and series.Open +",
+            "href": "/entertainment/cinema"
+          },
+          {
+            "text": "World / in developmentSingularisSingularis is a near-future transmedia universe exploring humanity's transition through technological acceleration, infrastructure, and systemic change.Open +",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "World / in developmentLifaA universe-building experience about creation, emergence, and life at planetary scale.Open +",
+            "href": "/products/lifa"
+          },
+          {
+            "text": "game / Coming soonSingularis: Vertical SliceA playable first passage into the Singularis universe.Open +",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "video / Coming soonSingularis: OvertureA cinematic prologue rendered in the Unreal + AI pipeline.Open +",
+            "href": "/releases/singularis-overture"
+          },
+          {
+            "text": "lab / Coming soonVisual Study 01A generative study in signal, structure, and light.Open +",
+            "href": "/releases/visual-study-01"
+          },
+          {
+            "text": "Explore Community →",
+            "href": "/community"
+          },
+          {
+            "text": "Browse Releases →",
+            "href": "/releases"
+          },
+          {
+            "text": "Sign In to My Home →",
+            "href": "/account/sign-in"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": [],
+      "screenshot": "artifacts/CRY-505/integrated-main-after-pr71/entertainment-mobile-390.png"
+    },
+    {
+      "engine": "chromium",
+      "viewport": "mobile-390",
+      "route": "/entertainment/explore",
+      "status": 200,
+      "facts": {
+        "title": "Arcade | Cryptic Design",
+        "h1Count": 1,
+        "hasMain": true,
+        "canonical": "https://crypticdesign.net/entertainment/explore",
+        "overflow": false,
+        "links": [
+          {
+            "text": "Browse playable catalog",
+            "href": "#playable-catalog"
+          },
+          {
+            "text": "Explore Entertainment",
+            "href": "/entertainment"
+          },
+          {
+            "text": "SingularisPublic sampleSingularis Browser PrototypeA music-driven vertical-shooter sample and the primary playable entry into the Singularis universe.PlatformWeb browserAccessPublic sample; subscriber version plannedGenresAction · Rhythm · ShooterOpen experience →",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "Explore Entertainment →",
+            "href": "/entertainment"
+          },
+          {
+            "text": "Public releases →",
+            "href": "/releases"
+          },
+          {
+            "text": "Community →",
+            "href": "/community"
+          },
+          {
+            "text": "Sign In to My Home →",
+            "href": "/account/sign-in"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": [],
+      "screenshot": null
+    },
+    {
+      "engine": "chromium",
+      "viewport": "mobile-390",
+      "route": "/community",
+      "status": 200,
+      "facts": {
+        "title": "Community | Cryptic Design",
+        "h1Count": 1,
+        "hasMain": true,
+        "canonical": "https://crypticdesign.net/community",
+        "overflow": false,
+        "links": [
+          {
+            "text": "See Participation Paths",
+            "href": "#participation-paths"
+          },
+          {
+            "text": "Sign in to My Home",
+            "href": "/account/sign-in"
+          },
+          {
+            "text": "Discover Creators →",
+            "href": "/community/creators"
+          },
+          {
+            "text": "View Group plans →",
+            "href": "/community/groups"
+          },
+          {
+            "text": "View Event plans →",
+            "href": "/community/events"
+          },
+          {
+            "text": "Explore Entertainment →",
+            "href": "/entertainment"
+          },
+          {
+            "text": "Browse Releases →",
+            "href": "/releases"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": [],
+      "screenshot": "artifacts/CRY-505/integrated-main-after-pr71/community-mobile-390.png"
+    },
+    {
+      "engine": "chromium",
+      "viewport": "mobile-390",
+      "route": "/account/create",
+      "status": 200,
+      "facts": {
+        "title": "Request Access | Cryptic Design",
+        "h1Count": 1,
+        "hasMain": true,
+        "canonical": "https://crypticdesign.net/account/create",
+        "overflow": false,
+        "links": [
+          {
+            "text": "robert.croft@crypticdesign.net",
+            "href": "mailto:robert.croft@crypticdesign.net"
+          },
+          {
+            "text": "Explore Entertainment",
+            "href": "/entertainment"
+          },
+          {
+            "text": "Already have access? Sign In →",
+            "href": "/account/sign-in"
+          },
+          {
+            "text": "Return to Account →",
+            "href": "/account"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": [],
+      "screenshot": "artifacts/CRY-505/integrated-main-after-pr71/account-create-mobile-390.png"
+    },
+    {
+      "engine": "chromium",
+      "viewport": "mobile-390",
+      "route": "/account/sign-in",
+      "status": 200,
+      "facts": {
+        "title": "Sign In | Cryptic Design",
+        "h1Count": 1,
+        "hasMain": true,
+        "canonical": "https://crypticdesign.net/account/sign-in",
+        "overflow": false,
+        "links": [
+          {
+            "text": "Account availability",
+            "href": "/account/create"
+          },
+          {
+            "text": "Forgot password?",
+            "href": "/account/recover"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": [],
+      "screenshot": null
+    },
+    {
+      "engine": "chromium",
+      "viewport": "tablet-768",
+      "route": "/",
+      "status": 200,
+      "facts": {
+        "title": "Cryptic Design",
+        "h1Count": 1,
+        "hasMain": true,
+        "canonical": "https://crypticdesign.net/",
+        "overflow": false,
+        "links": [
+          {
+            "text": "Explore What's Here",
+            "href": "/entertainment"
+          },
+          {
+            "text": "Enter Community",
+            "href": "/community"
+          },
+          {
+            "text": "Sign in to My Home →",
+            "href": "/account/sign-in"
+          },
+          {
+            "text": "View All Entertainment →",
+            "href": "/entertainment"
+          },
+          {
+            "text": "In development · ScheduledSingularisScience-fiction universe→",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "In development · ScheduledLifa: GenesisLiving-systems game experience→",
+            "href": "/products/lifa"
+          },
+          {
+            "text": "ReleasedSignal & Systems: Deep Space TransmissionExperimental single→",
+            "href": "/releases/singularis-themes-vol-1"
+          },
+          {
+            "text": "Coming soon · ScheduledVisual Study 01Visual systems and experiments→",
+            "href": "/releases/visual-study-01"
+          },
+          {
+            "text": "PlayGames, prototypes, arcade experiences, and interactive worlds.→",
+            "href": "/entertainment/explore"
+          },
+          {
+            "text": "Watch & listenMusic, film, visual media, stories, and cinematic experiences.→",
+            "href": "/entertainment/listening-rooms"
+          },
+          {
+            "text": "Explore worldsSingularis, Lifa, releases, experiments, and interconnected projects.→",
+            "href": "/products"
+          },
+          {
+            "text": "Discover communityCreators, groups, events, and governed participation.→",
+            "href": "/community"
+          },
+          {
+            "text": "Explore Community →",
+            "href": "/community"
+          },
+          {
+            "text": "CreatorsDiscover people through published work and approved public profiles.→",
+            "href": "/community/creators"
+          },
+          {
+            "text": "GroupsSee the governed group model and current public availability.→",
+            "href": "/community/groups"
+          },
+          {
+            "text": "EventsExplore supported participation and the current published schedule or empty state.→",
+            "href": "/community/events"
+          },
+          {
+            "text": "Sign in to My Home",
+            "href": "/account/sign-in"
+          },
+          {
+            "text": "Open the release →",
+            "href": "/releases/singularis-themes-vol-1"
+          },
+          {
+            "text": "About Cryptic Design",
+            "href": "/professional"
+          },
+          {
+            "text": "Explore Professional →",
+            "href": "/professional"
+          },
+          {
+            "text": "Request Access",
+            "href": "/account/create"
+          },
+          {
+            "text": "Sign In",
+            "href": "/account/sign-in"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": [],
+      "screenshot": null
+    },
+    {
+      "engine": "chromium",
+      "viewport": "tablet-768",
+      "route": "/entertainment",
+      "status": 200,
+      "facts": {
+        "title": "Entertainment Hub | Cryptic Design",
+        "h1Count": 1,
+        "hasMain": true,
+        "canonical": "https://crypticdesign.net/entertainment",
+        "overflow": false,
+        "links": [
+          {
+            "text": "Explore Entertainment",
+            "href": "#choose-a-mode"
+          },
+          {
+            "text": "Browse Releases",
+            "href": "/releases"
+          },
+          {
+            "text": "View release details",
+            "href": "/releases/singularis-themes-vol-1"
+          },
+          {
+            "text": "Explore Music",
+            "href": "/audio"
+          },
+          {
+            "text": "PlayArcadeGames, playable samples, prototypes, and interactive experiences.Open +",
+            "href": "/entertainment/explore"
+          },
+          {
+            "text": "ListenMusicScores, albums, tracks, signals, and audio releases.Open +",
+            "href": "/audio"
+          },
+          {
+            "text": "WatchVideoFilms, trailers, transmissions, visual stories, and series.Open +",
+            "href": "/entertainment/cinema"
+          },
+          {
+            "text": "World / in developmentSingularisSingularis is a near-future transmedia universe exploring humanity's transition through technological acceleration, infrastructure, and systemic change.Open +",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "World / in developmentLifaA universe-building experience about creation, emergence, and life at planetary scale.Open +",
+            "href": "/products/lifa"
+          },
+          {
+            "text": "game / Coming soonSingularis: Vertical SliceA playable first passage into the Singularis universe.Open +",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "video / Coming soonSingularis: OvertureA cinematic prologue rendered in the Unreal + AI pipeline.Open +",
+            "href": "/releases/singularis-overture"
+          },
+          {
+            "text": "lab / Coming soonVisual Study 01A generative study in signal, structure, and light.Open +",
+            "href": "/releases/visual-study-01"
+          },
+          {
+            "text": "Explore Community →",
+            "href": "/community"
+          },
+          {
+            "text": "Browse Releases →",
+            "href": "/releases"
+          },
+          {
+            "text": "Sign In to My Home →",
+            "href": "/account/sign-in"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": [],
+      "screenshot": null
+    },
+    {
+      "engine": "chromium",
+      "viewport": "tablet-768",
+      "route": "/entertainment/explore",
+      "status": 200,
+      "facts": {
+        "title": "Arcade | Cryptic Design",
+        "h1Count": 1,
+        "hasMain": true,
+        "canonical": "https://crypticdesign.net/entertainment/explore",
+        "overflow": false,
+        "links": [
+          {
+            "text": "Browse playable catalog",
+            "href": "#playable-catalog"
+          },
+          {
+            "text": "Explore Entertainment",
+            "href": "/entertainment"
+          },
+          {
+            "text": "SingularisPublic sampleSingularis Browser PrototypeA music-driven vertical-shooter sample and the primary playable entry into the Singularis universe.PlatformWeb browserAccessPublic sample; subscriber version plannedGenresAction · Rhythm · ShooterOpen experience →",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "Explore Entertainment →",
+            "href": "/entertainment"
+          },
+          {
+            "text": "Public releases →",
+            "href": "/releases"
+          },
+          {
+            "text": "Community →",
+            "href": "/community"
+          },
+          {
+            "text": "Sign In to My Home →",
+            "href": "/account/sign-in"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": [],
+      "screenshot": null
+    },
+    {
+      "engine": "chromium",
+      "viewport": "tablet-768",
+      "route": "/community",
+      "status": 200,
+      "facts": {
+        "title": "Community | Cryptic Design",
+        "h1Count": 1,
+        "hasMain": true,
+        "canonical": "https://crypticdesign.net/community",
+        "overflow": false,
+        "links": [
+          {
+            "text": "See Participation Paths",
+            "href": "#participation-paths"
+          },
+          {
+            "text": "Sign in to My Home",
+            "href": "/account/sign-in"
+          },
+          {
+            "text": "Discover Creators →",
+            "href": "/community/creators"
+          },
+          {
+            "text": "View Group plans →",
+            "href": "/community/groups"
+          },
+          {
+            "text": "View Event plans →",
+            "href": "/community/events"
+          },
+          {
+            "text": "Explore Entertainment →",
+            "href": "/entertainment"
+          },
+          {
+            "text": "Browse Releases →",
+            "href": "/releases"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": [],
+      "screenshot": null
+    },
+    {
+      "engine": "chromium",
+      "viewport": "tablet-768",
+      "route": "/account/create",
+      "status": 200,
+      "facts": {
+        "title": "Request Access | Cryptic Design",
+        "h1Count": 1,
+        "hasMain": true,
+        "canonical": "https://crypticdesign.net/account/create",
+        "overflow": false,
+        "links": [
+          {
+            "text": "robert.croft@crypticdesign.net",
+            "href": "mailto:robert.croft@crypticdesign.net"
+          },
+          {
+            "text": "Explore Entertainment",
+            "href": "/entertainment"
+          },
+          {
+            "text": "Already have access? Sign In →",
+            "href": "/account/sign-in"
+          },
+          {
+            "text": "Return to Account →",
+            "href": "/account"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": [],
+      "screenshot": null
+    },
+    {
+      "engine": "chromium",
+      "viewport": "tablet-768",
+      "route": "/account/sign-in",
+      "status": 200,
+      "facts": {
+        "title": "Sign In | Cryptic Design",
+        "h1Count": 1,
+        "hasMain": true,
+        "canonical": "https://crypticdesign.net/account/sign-in",
+        "overflow": false,
+        "links": [
+          {
+            "text": "Account availability",
+            "href": "/account/create"
+          },
+          {
+            "text": "Forgot password?",
+            "href": "/account/recover"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": [],
+      "screenshot": null
+    },
+    {
+      "engine": "chromium",
+      "viewport": "desktop-1440",
+      "route": "/",
+      "status": 200,
+      "facts": {
+        "title": "Cryptic Design",
+        "h1Count": 1,
+        "hasMain": true,
+        "canonical": "https://crypticdesign.net/",
+        "overflow": false,
+        "links": [
+          {
+            "text": "Explore What's Here",
+            "href": "/entertainment"
+          },
+          {
+            "text": "Enter Community",
+            "href": "/community"
+          },
+          {
+            "text": "Sign in to My Home →",
+            "href": "/account/sign-in"
+          },
+          {
+            "text": "View All Entertainment →",
+            "href": "/entertainment"
+          },
+          {
+            "text": "In development · ScheduledSingularisScience-fiction universe→",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "In development · ScheduledLifa: GenesisLiving-systems game experience→",
+            "href": "/products/lifa"
+          },
+          {
+            "text": "ReleasedSignal & Systems: Deep Space TransmissionExperimental single→",
+            "href": "/releases/singularis-themes-vol-1"
+          },
+          {
+            "text": "Coming soon · ScheduledVisual Study 01Visual systems and experiments→",
+            "href": "/releases/visual-study-01"
+          },
+          {
+            "text": "PlayGames, prototypes, arcade experiences, and interactive worlds.→",
+            "href": "/entertainment/explore"
+          },
+          {
+            "text": "Watch & listenMusic, film, visual media, stories, and cinematic experiences.→",
+            "href": "/entertainment/listening-rooms"
+          },
+          {
+            "text": "Explore worldsSingularis, Lifa, releases, experiments, and interconnected projects.→",
+            "href": "/products"
+          },
+          {
+            "text": "Discover communityCreators, groups, events, and governed participation.→",
+            "href": "/community"
+          },
+          {
+            "text": "Explore Community →",
+            "href": "/community"
+          },
+          {
+            "text": "CreatorsDiscover people through published work and approved public profiles.→",
+            "href": "/community/creators"
+          },
+          {
+            "text": "GroupsSee the governed group model and current public availability.→",
+            "href": "/community/groups"
+          },
+          {
+            "text": "EventsExplore supported participation and the current published schedule or empty state.→",
+            "href": "/community/events"
+          },
+          {
+            "text": "Sign in to My Home",
+            "href": "/account/sign-in"
+          },
+          {
+            "text": "Open the release →",
+            "href": "/releases/singularis-themes-vol-1"
+          },
+          {
+            "text": "About Cryptic Design",
+            "href": "/professional"
+          },
+          {
+            "text": "Explore Professional →",
+            "href": "/professional"
+          },
+          {
+            "text": "Request Access",
+            "href": "/account/create"
+          },
+          {
+            "text": "Sign In",
+            "href": "/account/sign-in"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": [],
+      "screenshot": "artifacts/CRY-505/integrated-main-after-pr71/home-desktop-1440.png"
+    },
+    {
+      "engine": "chromium",
+      "viewport": "desktop-1440",
+      "route": "/entertainment",
+      "status": 200,
+      "facts": {
+        "title": "Entertainment Hub | Cryptic Design",
+        "h1Count": 1,
+        "hasMain": true,
+        "canonical": "https://crypticdesign.net/entertainment",
+        "overflow": false,
+        "links": [
+          {
+            "text": "Explore Entertainment",
+            "href": "#choose-a-mode"
+          },
+          {
+            "text": "Browse Releases",
+            "href": "/releases"
+          },
+          {
+            "text": "View release details",
+            "href": "/releases/singularis-themes-vol-1"
+          },
+          {
+            "text": "Explore Music",
+            "href": "/audio"
+          },
+          {
+            "text": "PlayArcadeGames, playable samples, prototypes, and interactive experiences.Open +",
+            "href": "/entertainment/explore"
+          },
+          {
+            "text": "ListenMusicScores, albums, tracks, signals, and audio releases.Open +",
+            "href": "/audio"
+          },
+          {
+            "text": "WatchVideoFilms, trailers, transmissions, visual stories, and series.Open +",
+            "href": "/entertainment/cinema"
+          },
+          {
+            "text": "World / in developmentSingularisSingularis is a near-future transmedia universe exploring humanity's transition through technological acceleration, infrastructure, and systemic change.Open +",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "World / in developmentLifaA universe-building experience about creation, emergence, and life at planetary scale.Open +",
+            "href": "/products/lifa"
+          },
+          {
+            "text": "game / Coming soonSingularis: Vertical SliceA playable first passage into the Singularis universe.Open +",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "video / Coming soonSingularis: OvertureA cinematic prologue rendered in the Unreal + AI pipeline.Open +",
+            "href": "/releases/singularis-overture"
+          },
+          {
+            "text": "lab / Coming soonVisual Study 01A generative study in signal, structure, and light.Open +",
+            "href": "/releases/visual-study-01"
+          },
+          {
+            "text": "Explore Community",
+            "href": "/community"
+          },
+          {
+            "text": "Browse Releases",
+            "href": "/releases"
+          },
+          {
+            "text": "Sign In to My Home",
+            "href": "/account/sign-in"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": [],
+      "screenshot": "artifacts/CRY-505/integrated-main-after-pr71/entertainment-desktop-1440.png"
+    },
+    {
+      "engine": "chromium",
+      "viewport": "desktop-1440",
+      "route": "/entertainment/explore",
+      "status": 200,
+      "facts": {
+        "title": "Arcade | Cryptic Design",
+        "h1Count": 1,
+        "hasMain": true,
+        "canonical": "https://crypticdesign.net/entertainment/explore",
+        "overflow": false,
+        "links": [
+          {
+            "text": "Browse playable catalog",
+            "href": "#playable-catalog"
+          },
+          {
+            "text": "Explore Entertainment",
+            "href": "/entertainment"
+          },
+          {
+            "text": "SingularisPublic sampleSingularis Browser PrototypeA music-driven vertical-shooter sample and the primary playable entry into the Singularis universe.PlatformWeb browserAccessPublic sample; subscriber version plannedGenresAction · Rhythm · ShooterOpen experience →",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "Explore Entertainment",
+            "href": "/entertainment"
+          },
+          {
+            "text": "Public releases",
+            "href": "/releases"
+          },
+          {
+            "text": "Community",
+            "href": "/community"
+          },
+          {
+            "text": "Sign In to My Home",
+            "href": "/account/sign-in"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": [],
+      "screenshot": null
+    },
+    {
+      "engine": "chromium",
+      "viewport": "desktop-1440",
+      "route": "/community",
+      "status": 200,
+      "facts": {
+        "title": "Community | Cryptic Design",
+        "h1Count": 1,
+        "hasMain": true,
+        "canonical": "https://crypticdesign.net/community",
+        "overflow": false,
+        "links": [
+          {
+            "text": "See Participation Paths",
+            "href": "#participation-paths"
+          },
+          {
+            "text": "Sign in to My Home",
+            "href": "/account/sign-in"
+          },
+          {
+            "text": "Discover Creators →",
+            "href": "/community/creators"
+          },
+          {
+            "text": "View Group plans →",
+            "href": "/community/groups"
+          },
+          {
+            "text": "View Event plans →",
+            "href": "/community/events"
+          },
+          {
+            "text": "Explore Entertainment",
+            "href": "/entertainment"
+          },
+          {
+            "text": "Browse Releases",
+            "href": "/releases"
+          },
+          {
+            "text": "Request Access",
+            "href": "/account/create"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": [],
+      "screenshot": "artifacts/CRY-505/integrated-main-after-pr71/community-desktop-1440.png"
+    },
+    {
+      "engine": "chromium",
+      "viewport": "desktop-1440",
+      "route": "/account/create",
+      "status": 200,
+      "facts": {
+        "title": "Request Access | Cryptic Design",
+        "h1Count": 1,
+        "hasMain": true,
+        "canonical": "https://crypticdesign.net/account/create",
+        "overflow": false,
+        "links": [
+          {
+            "text": "robert.croft@crypticdesign.net",
+            "href": "mailto:robert.croft@crypticdesign.net"
+          },
+          {
+            "text": "Explore Entertainment",
+            "href": "/entertainment"
+          },
+          {
+            "text": "Already have access? Sign In →",
+            "href": "/account/sign-in"
+          },
+          {
+            "text": "Return to Account →",
+            "href": "/account"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": [],
+      "screenshot": "artifacts/CRY-505/integrated-main-after-pr71/account-create-desktop-1440.png"
+    },
+    {
+      "engine": "chromium",
+      "viewport": "desktop-1440",
+      "route": "/account/sign-in",
+      "status": 200,
+      "facts": {
+        "title": "Sign In | Cryptic Design",
+        "h1Count": 1,
+        "hasMain": true,
+        "canonical": "https://crypticdesign.net/account/sign-in",
+        "overflow": false,
+        "links": [
+          {
+            "text": "Account availability",
+            "href": "/account/create"
+          },
+          {
+            "text": "Forgot password?",
+            "href": "/account/recover"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": [],
+      "screenshot": null
+    },
+    {
+      "engine": "webkit",
+      "viewport": "desktop-1440",
+      "route": "/",
+      "status": 200,
+      "facts": {
+        "title": "Cryptic Design",
+        "h1Count": 1,
+        "hasMain": true,
+        "canonical": "https://crypticdesign.net/",
+        "overflow": false,
+        "links": [
+          {
+            "text": "Explore What's Here",
+            "href": "/entertainment"
+          },
+          {
+            "text": "Enter Community",
+            "href": "/community"
+          },
+          {
+            "text": "Sign in to My Home →",
+            "href": "/account/sign-in"
+          },
+          {
+            "text": "View All Entertainment →",
+            "href": "/entertainment"
+          },
+          {
+            "text": "In development · ScheduledSingularisScience-fiction universe→",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "In development · ScheduledLifa: GenesisLiving-systems game experience→",
+            "href": "/products/lifa"
+          },
+          {
+            "text": "ReleasedSignal & Systems: Deep Space TransmissionExperimental single→",
+            "href": "/releases/singularis-themes-vol-1"
+          },
+          {
+            "text": "Coming soon · ScheduledVisual Study 01Visual systems and experiments→",
+            "href": "/releases/visual-study-01"
+          },
+          {
+            "text": "PlayGames, prototypes, arcade experiences, and interactive worlds.→",
+            "href": "/entertainment/explore"
+          },
+          {
+            "text": "Watch & listenMusic, film, visual media, stories, and cinematic experiences.→",
+            "href": "/entertainment/listening-rooms"
+          },
+          {
+            "text": "Explore worldsSingularis, Lifa, releases, experiments, and interconnected projects.→",
+            "href": "/products"
+          },
+          {
+            "text": "Discover communityCreators, groups, events, and governed participation.→",
+            "href": "/community"
+          },
+          {
+            "text": "Explore Community →",
+            "href": "/community"
+          },
+          {
+            "text": "CreatorsDiscover people through published work and approved public profiles.→",
+            "href": "/community/creators"
+          },
+          {
+            "text": "GroupsSee the governed group model and current public availability.→",
+            "href": "/community/groups"
+          },
+          {
+            "text": "EventsExplore supported participation and the current published schedule or empty state.→",
+            "href": "/community/events"
+          },
+          {
+            "text": "Sign in to My Home",
+            "href": "/account/sign-in"
+          },
+          {
+            "text": "Open the release →",
+            "href": "/releases/singularis-themes-vol-1"
+          },
+          {
+            "text": "About Cryptic Design",
+            "href": "/professional"
+          },
+          {
+            "text": "Explore Professional →",
+            "href": "/professional"
+          },
+          {
+            "text": "Request Access",
+            "href": "/account/create"
+          },
+          {
+            "text": "Sign In",
+            "href": "/account/sign-in"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": [],
+      "screenshot": null
+    },
+    {
+      "engine": "webkit",
+      "viewport": "desktop-1440",
+      "route": "/entertainment",
+      "status": 200,
+      "facts": {
+        "title": "Entertainment Hub | Cryptic Design",
+        "h1Count": 1,
+        "hasMain": true,
+        "canonical": "https://crypticdesign.net/entertainment",
+        "overflow": false,
+        "links": [
+          {
+            "text": "Explore Entertainment",
+            "href": "#choose-a-mode"
+          },
+          {
+            "text": "Browse Releases",
+            "href": "/releases"
+          },
+          {
+            "text": "View release details",
+            "href": "/releases/singularis-themes-vol-1"
+          },
+          {
+            "text": "Explore Music",
+            "href": "/audio"
+          },
+          {
+            "text": "PlayArcadeGames, playable samples, prototypes, and interactive experiences.Open +",
+            "href": "/entertainment/explore"
+          },
+          {
+            "text": "ListenMusicScores, albums, tracks, signals, and audio releases.Open +",
+            "href": "/audio"
+          },
+          {
+            "text": "WatchVideoFilms, trailers, transmissions, visual stories, and series.Open +",
+            "href": "/entertainment/cinema"
+          },
+          {
+            "text": "World / in developmentSingularisSingularis is a near-future transmedia universe exploring humanity's transition through technological acceleration, infrastructure, and systemic change.Open +",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "World / in developmentLifaA universe-building experience about creation, emergence, and life at planetary scale.Open +",
+            "href": "/products/lifa"
+          },
+          {
+            "text": "game / Coming soonSingularis: Vertical SliceA playable first passage into the Singularis universe.Open +",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "video / Coming soonSingularis: OvertureA cinematic prologue rendered in the Unreal + AI pipeline.Open +",
+            "href": "/releases/singularis-overture"
+          },
+          {
+            "text": "lab / Coming soonVisual Study 01A generative study in signal, structure, and light.Open +",
+            "href": "/releases/visual-study-01"
+          },
+          {
+            "text": "Explore Community",
+            "href": "/community"
+          },
+          {
+            "text": "Browse Releases",
+            "href": "/releases"
+          },
+          {
+            "text": "Sign In to My Home",
+            "href": "/account/sign-in"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": [],
+      "screenshot": null
+    },
+    {
+      "engine": "webkit",
+      "viewport": "desktop-1440",
+      "route": "/entertainment/explore",
+      "status": 200,
+      "facts": {
+        "title": "Arcade | Cryptic Design",
+        "h1Count": 1,
+        "hasMain": true,
+        "canonical": "https://crypticdesign.net/entertainment/explore",
+        "overflow": false,
+        "links": [
+          {
+            "text": "Browse playable catalog",
+            "href": "#playable-catalog"
+          },
+          {
+            "text": "Explore Entertainment",
+            "href": "/entertainment"
+          },
+          {
+            "text": "SingularisPublic sampleSingularis Browser PrototypeA music-driven vertical-shooter sample and the primary playable entry into the Singularis universe.PlatformWeb browserAccessPublic sample; subscriber version plannedGenresAction · Rhythm · ShooterOpen experience →",
+            "href": "/products/singularis"
+          },
+          {
+            "text": "Explore Entertainment",
+            "href": "/entertainment"
+          },
+          {
+            "text": "Public releases",
+            "href": "/releases"
+          },
+          {
+            "text": "Community",
+            "href": "/community"
+          },
+          {
+            "text": "Sign In to My Home",
+            "href": "/account/sign-in"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": [],
+      "screenshot": null
+    },
+    {
+      "engine": "webkit",
+      "viewport": "desktop-1440",
+      "route": "/community",
+      "status": 200,
+      "facts": {
+        "title": "Community | Cryptic Design",
+        "h1Count": 1,
+        "hasMain": true,
+        "canonical": "https://crypticdesign.net/community",
+        "overflow": false,
+        "links": [
+          {
+            "text": "See Participation Paths",
+            "href": "#participation-paths"
+          },
+          {
+            "text": "Sign in to My Home",
+            "href": "/account/sign-in"
+          },
+          {
+            "text": "Discover Creators →",
+            "href": "/community/creators"
+          },
+          {
+            "text": "View Group plans →",
+            "href": "/community/groups"
+          },
+          {
+            "text": "View Event plans →",
+            "href": "/community/events"
+          },
+          {
+            "text": "Explore Entertainment",
+            "href": "/entertainment"
+          },
+          {
+            "text": "Browse Releases",
+            "href": "/releases"
+          },
+          {
+            "text": "Request Access",
+            "href": "/account/create"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": [],
+      "screenshot": null
+    },
+    {
+      "engine": "webkit",
+      "viewport": "desktop-1440",
+      "route": "/account/create",
+      "status": 200,
+      "facts": {
+        "title": "Request Access | Cryptic Design",
+        "h1Count": 1,
+        "hasMain": true,
+        "canonical": "https://crypticdesign.net/account/create",
+        "overflow": false,
+        "links": [
+          {
+            "text": "robert.croft@crypticdesign.net",
+            "href": "mailto:robert.croft@crypticdesign.net"
+          },
+          {
+            "text": "Explore Entertainment",
+            "href": "/entertainment"
+          },
+          {
+            "text": "Already have access? Sign In →",
+            "href": "/account/sign-in"
+          },
+          {
+            "text": "Return to Account →",
+            "href": "/account"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": [],
+      "screenshot": null
+    },
+    {
+      "engine": "webkit",
+      "viewport": "desktop-1440",
+      "route": "/account/sign-in",
+      "status": 200,
+      "facts": {
+        "title": "Sign In | Cryptic Design",
+        "h1Count": 1,
+        "hasMain": true,
+        "canonical": "https://crypticdesign.net/account/sign-in",
+        "overflow": false,
+        "links": [
+          {
+            "text": "Account availability",
+            "href": "/account/create"
+          },
+          {
+            "text": "Forgot password?",
+            "href": "/account/recover"
+          }
+        ]
+      },
+      "violations": [],
+      "pageErrors": [],
+      "screenshot": null
+    }
+  ]
+}

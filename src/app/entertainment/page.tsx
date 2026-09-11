@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import ExperienceRuntime from "@/components/ExperienceRuntime";
+import { AnalyticsLink } from "@/components/AnalyticsLink";
+import { ANALYTICS_EVENTS } from "@/lib/analytics";
 import MediaCard from "@/components/MediaCard";
 import { entertainmentSelection, releaseAvailability } from "@/lib/entertainment-frontdoor";
 import { publicProducts } from "@/lib/products";
@@ -53,9 +55,9 @@ export default function EntertainmentHub() {
         <div className="media-grid">{selected.map((release) => <MediaCard key={release.slug} href={releaseDestination(release)} image={releaseImage(release)} eyebrow={`${release.kind} / ${releaseAvailability(release)}`} title={release.title} body={release.tagline} />)}</div>
         {!selected.length ? <p>No public selections are available yet.</p> : null}
       </section>
-      <section className="explore-portal__continuum" data-section-accent="indigo" aria-labelledby="entertainment-continue-title">
+      <section className="explore-portal__continuum explore-portal__continuum--cta" data-section-accent="indigo" aria-labelledby="entertainment-continue-title">
         <div><span className="kicker">Continue</span><h2 id="entertainment-continue-title">Find your next connection.</h2><p>Discover Community participation paths, browse releases, or sign in to your personal My Home.</p></div>
-        <nav aria-label="Continue from Entertainment"><Link href="/community">Explore Community <span aria-hidden="true">→</span></Link><Link href="/releases">Browse Releases <span aria-hidden="true">→</span></Link><Link href="/account/sign-in">Sign In to My Home <span aria-hidden="true">→</span></Link></nav>
+        <nav className="hero-actions explore-portal__continuum-actions" aria-label="Continue from Entertainment"><AnalyticsLink href="/community" className="button home-primary-cta" analyticsEvent={{ name: ANALYTICS_EVENTS.COMMUNITY_OPEN, payload: { source: "entertainment_continue" } }}>Explore Community</AnalyticsLink><Link href="/releases" className="button secondary">Browse Releases</Link><AnalyticsLink href="/account/sign-in" className="button secondary" analyticsEvent={{ name: ANALYTICS_EVENTS.SIGN_IN_OPEN, payload: { source: "entertainment_continue" } }}>Sign In to My Home</AnalyticsLink></nav>
       </section>
     </div>
   </main>;

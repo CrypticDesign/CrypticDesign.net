@@ -27,6 +27,7 @@ export default async function ConfirmEmailPage({
   const canConfirm = Boolean(tokenHash && policy?.allowed);
   const recoveringPassword = type === "recovery";
   const changingEmail = type === "email_change";
+  const acceptingInvitation = policy?.kind === "admission";
   const admissionRequired = policy?.kind === "admission-required";
 
   return (
@@ -36,11 +37,13 @@ export default async function ConfirmEmailPage({
           Account security
         </p>
         <h1 className="text-3xl font-semibold text-white">
-          {recoveringPassword ? "Continue password recovery" : changingEmail ? "Confirm your new email" : "Confirm your email"}
+          {recoveringPassword ? "Continue password recovery" : changingEmail ? "Confirm your new email" : acceptingInvitation ? "Continue your account invitation" : "Confirm your email"}
         </h1>
         <p className="max-w-xl text-muted-foreground">
           {canConfirm
-            ? recoveringPassword
+            ? acceptingInvitation
+              ? "Verify the invited email, then complete the remaining account-access checks."
+              : recoveringPassword
               ? "Continue to a secure page where you can choose a new password."
               : "Confirm this email change for your existing Cryptic Design account."
             : admissionRequired
@@ -59,7 +62,7 @@ export default async function ConfirmEmailPage({
               after this deliberate action.
             </p>
             <button type="submit" className="button-primary w-fit">
-              {recoveringPassword ? "Continue to reset password" : "Confirm email change"}
+              {acceptingInvitation ? "Verify invited email" : recoveringPassword ? "Continue to reset password" : "Confirm email change"}
             </button>
           </form>
         ) : (

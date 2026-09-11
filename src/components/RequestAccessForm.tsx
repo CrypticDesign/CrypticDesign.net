@@ -3,6 +3,8 @@
 import { type FormEvent, useState } from "react";
 import { buildRequestAccessMailto, requestAccessEmail, requestAccessInterests } from "@/lib/request-access";
 import styles from "./RequestAccessForm.module.css";
+import { ANALYTICS_EVENTS } from "@/lib/analytics";
+import { trackAnalyticsEvent } from "@/lib/analytics-client";
 
 export default function RequestAccessForm() {
   const [request, setRequest] = useState({ email: "", name: "", interest: "" });
@@ -16,6 +18,7 @@ export default function RequestAccessForm() {
     event.preventDefault();
     const mailto = buildRequestAccessMailto(request);
     setPreparedMailto(mailto);
+    trackAnalyticsEvent(ANALYTICS_EVENTS.REQUEST_ACCESS_SUBMIT, { method: "mailto_handoff" });
     window.location.href = mailto;
   }
 

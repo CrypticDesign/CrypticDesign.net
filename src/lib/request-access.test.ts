@@ -38,7 +38,7 @@ test("all approved interests and optional names encode safely without extra mail
   assert.match(injected.searchParams.get("body")!, /Name: QA Name\n/);
 });
 
-test("account/create presents Request Access with preserved canonical and share asset", () => {
+test("account/create presents Request Access with preserved canonical, form, and share asset", () => {
   assert.match(page, /title: "Request Access"/);
   assert.match(page, /canonical: "\/account\/create"/);
   assert.match(page, /\/share\/account-create\.png/);
@@ -46,8 +46,18 @@ test("account/create presents Request Access with preserved canonical and share 
   assert.match(page, /<h1[^>]*>Join the next wave\.<\/h1>/);
   assert.match(page, /<RequestAccessForm \/>/);
   assert.doesNotMatch(page, /AccountAccessForm/);
-  assert.match(page, /href="\/account\/sign-in">Already have access\? Sign In/);
   assert.match(page, /href="\/entertainment"[^>]*>Explore Entertainment/);
+});
+
+test("account/create uses the governed Wave 0 continuation contract", () => {
+  assert.doesNotMatch(page, /account-link-rail/);
+  assert.doesNotMatch(page, /Already have access\? Sign In/);
+  assert.doesNotMatch(page, /Return to Account/);
+  assert.match(page, /explore-portal__continuum explore-portal__continuum--cta/);
+  assert.match(page, /hero-actions explore-portal__continuum-actions/);
+  assert.match(page, /href="\/community"[^>]*>Explore Community<\/AnalyticsLink>/);
+  assert.match(page, /href="\/releases"[^>]*>Browse Releases<\/Link>/);
+  assert.match(page, /href="\/account\/sign-in"[^>]*>Sign In to My Home<\/AnalyticsLink>/);
 });
 
 test("dedicated conversion collects only approved fields and explains the mail handoff", () => {

@@ -25,6 +25,8 @@ import {
   type ExperienceRuntimeState,
 } from "@/lib/experience-runtime";
 import type { PageSceneId, PageSceneQuality } from "@/lib/page-scene";
+import { ANALYTICS_EVENTS } from "@/lib/analytics";
+import { trackAnalyticsEvent } from "@/lib/analytics-client";
 
 interface ExperienceRuntimeBaseProps {
   runtimeId: string;
@@ -157,12 +159,13 @@ export default function ExperienceRuntime({
 
   const activate = useCallback(() => {
     if (runtimeLauncherLabel(state.context) === "Unavailable") return;
+    trackAnalyticsEvent(ANALYTICS_EVENTS.EXPERIENCE_PLAY, { experience_id: runtimeId });
     dispatch({ type: "ACTIVATE" });
     window.requestAnimationFrame(() => {
       dispatch({ type: "ACTIVATED" });
       rootRef.current?.focus();
     });
-  }, [state.context]);
+  }, [runtimeId, state.context]);
 
   const interrupt = useCallback(async () => {
     if (document.fullscreenElement === rootRef.current && document.exitFullscreen) {
@@ -211,11 +214,12 @@ export default function ExperienceRuntime({
 
   const activateFullscreen = useCallback(async () => {
     if (runtimeLauncherLabel(state.context) === "Unavailable") return;
+    trackAnalyticsEvent(ANALYTICS_EVENTS.EXPERIENCE_PLAY, { experience_id: runtimeId });
     dispatch({ type: "ACTIVATE" });
     dispatch({ type: "ACTIVATED" });
     rootRef.current?.focus();
     await toggleFullscreen();
-  }, [state.context, toggleFullscreen]);
+  }, [runtimeId, state.context, toggleFullscreen]);
 
   const enableAudio = useCallback(() => {
     if (!capabilities.audio) return;
@@ -321,7 +325,7 @@ export default function ExperienceRuntime({
             onRuntimeStatus={handleSceneStatus}
           />
         )}
-        {controls === "shared" ? <div className="experience-runtime__controls" aria-label="Experience controls">
+        {controls === "shared" ? <div className="experience-runtime__controls" role="group" aria-label="Experience controls">
           {!isActive && state.phase !== "fallback" ? (
             <button
               ref={launchButtonRef}

@@ -26,6 +26,8 @@ test("Arcade uses a playable catalog and honest access language", async () => {
   assert.match(page, /title: "Arcade"/);
   assert.doesNotMatch(page, /featuredPaths|Browse categories|Cryptic universe/);
   assert.match(page, /No account or subscription is required/);
+  assert.match(page, /explore-portal__continuum--cta/);
+  assert.match(page, /href="\/entertainment" className="button home-primary-cta">Explore Entertainment/);
   assert.doesNotMatch(page, /Join now|Join the community|earned rewards|member count|Trending now/i);
 });
 

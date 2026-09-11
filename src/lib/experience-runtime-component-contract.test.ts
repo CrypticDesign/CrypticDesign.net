@@ -82,3 +82,7 @@ test("focus, Escape, fallback, and unmount cleanup remain explicit", () => {
   assert.match(runtime, /dispatch\(\{ type: "RESOLVE" \}\)/);
   assert.match(runtime, /dispatch\(\{ type: "UPDATE" \}\)/);
 });
+
+test("shared controls use a nameable group role", () => {
+  assert.match(runtime, /className="experience-runtime__controls" role="group" aria-label="Experience controls"/);
+});

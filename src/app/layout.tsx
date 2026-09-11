@@ -7,6 +7,7 @@ import EntertainmentNavigation from "@/components/EntertainmentNavigation";
 import CommunityNavigation from "@/components/CommunityNavigation";
 import FabMediaPlayer from "@/components/player/FabMediaPlayer";
 import { PlayerProvider } from "@/components/player/PlayerProvider";
+import AnalyticsProvider, { AnalyticsPreferencesButton } from "@/components/AnalyticsProvider";
 import { getInitialAccountAuthenticated } from "@/lib/server-account-state";
 import "./globals.css";
 import "./singularis.css";
@@ -41,6 +42,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="en">
       <body className="flex min-h-screen flex-col antialiased">
         <a className="skip-link" href="#main-content">Skip to main content</a>
+        <AnalyticsProvider>
         <PlayerProvider>
         <SiteHeader initialAuthenticated={initialAuthenticated} />
         <EntertainmentNavigation />
@@ -59,11 +61,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 <div className="footer-column"><strong>CONNECT</strong><Link href="/professional/contact">Contact</Link><Link href="/creator-tools">Creators</Link><Link href="/account">Account</Link></div>
               </div>
             </div>
-            <div className="site-footer__bottom"><p>© {new Date().getFullYear()} Cryptic Design LLC. All rights reserved.</p><p><Link href="/privacy" className="hover:text-white">PRIVACY</Link> &nbsp; ACCESSIBILITY &nbsp; <Link href="/terms" className="hover:text-white">TERMS</Link></p></div>
+            <div className="site-footer__bottom"><p>© {new Date().getFullYear()} Cryptic Design LLC. All rights reserved.</p><p><Link href="/privacy" className="hover:text-white">PRIVACY</Link> &nbsp; <AnalyticsPreferencesButton className="hover:text-white" /> &nbsp; ACCESSIBILITY &nbsp; <Link href="/terms" className="hover:text-white">TERMS</Link></p></div>
           </div>
         </footer>
         <FabMediaPlayer />
         </PlayerProvider>
+        </AnalyticsProvider>
       </body>
     </html>
   );
