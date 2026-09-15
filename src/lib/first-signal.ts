@@ -1,7 +1,13 @@
 import type { ExperienceResultProposal } from "./interactive-experience.ts";
 import type { ContextVector } from "./rpg-experience.ts";
+import type { ExperienceAccessDefinition } from "./experience-access.ts";
 
 export const FIRST_SIGNAL_EXPERIENCE = { id: "first-signal-run", version: 1, verifiedActiveMinutes: 3 } as const;
+export const FIRST_SIGNAL_ACCESS = {
+  declaration: "INTERNAL_ONLY",
+  resource: "experience:first-signal",
+  action: "execute-development",
+} as const satisfies ExperienceAccessDefinition;
 export type FirstSignalChoice = "trace" | "force";
 
 const CONTEXT: Record<FirstSignalChoice, ContextVector> = {

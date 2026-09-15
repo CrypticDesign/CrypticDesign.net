@@ -111,9 +111,9 @@ export const RELEASES: Release[] = withReviewMetadata<Release>([
   {
     slug: "singularis-vertical-slice",
     title: "Singularis: Vertical Slice",
-    tagline: "A playable first passage into the Singularis universe.",
+    tagline: "An announced first passage into the Singularis universe.",
     description:
-      "The first playable slice of Singularis — a browser-first experience exploring the core loop, tone, and world of Cryptic Design's flagship original IP.",
+      "A planned browser-first Singularis experience exploring the core loop, tone, and world of Cryptic Design's flagship original IP.",
     kind: "game",
     genres: ["Action", "Rhythm", "Shooter"],
     lanes: ["play"],

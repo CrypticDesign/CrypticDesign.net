@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { getCharacterStore } from "@/lib/character-store";
-import { firstSignalCondition, firstSignalProposal, type FirstSignalChoice } from "@/lib/first-signal";
+import { FIRST_SIGNAL_ACCESS, firstSignalCondition, firstSignalProposal, type FirstSignalChoice } from "@/lib/first-signal";
 import { validateExperienceResult } from "@/lib/interactive-experience";
 import { membershipSandboxEnabled } from "@/lib/membership-store";
 import { getRpgContentStore } from "@/lib/rpg-content-store";
@@ -25,14 +25,14 @@ async function state(id: string) {
 }
 
 export async function GET(request: NextRequest, context: { params: Promise<{ id: string }> }) {
-  if (!membershipSandboxEnabled()) return NextResponse.json({ error: "RPG sandbox is disabled" }, { status: 503 });
+  if (FIRST_SIGNAL_ACCESS.declaration !== "INTERNAL_ONLY" || !membershipSandboxEnabled()) return NextResponse.json({ error: "RPG sandbox is disabled" }, { status: 503 });
   const { id } = await context.params; const ownership = await ownedActiveCharacter(request, id);
   if ("error" in ownership) return ownership.error;
   return NextResponse.json(await state(id));
 }
 
 export async function POST(request: NextRequest, context: { params: Promise<{ id: string }> }) {
-  if (!membershipSandboxEnabled()) return NextResponse.json({ error: "RPG sandbox is disabled" }, { status: 503 });
+  if (FIRST_SIGNAL_ACCESS.declaration !== "INTERNAL_ONLY" || !membershipSandboxEnabled()) return NextResponse.json({ error: "RPG sandbox is disabled" }, { status: 503 });
   const { id } = await context.params; const ownership = await ownedActiveCharacter(request, id);
   if ("error" in ownership) return ownership.error;
   try {

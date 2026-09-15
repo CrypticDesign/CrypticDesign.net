@@ -60,6 +60,7 @@ export default function SingularisGamespace() {
   const [franchiseDrawerOpen, setFranchiseDrawerOpen] = useState(true);
   const [workspaceSection, setWorkspaceSection] = useState<SingularisWorkspaceSection>("mission-control");
   const [embeddedRuntime, setEmbeddedRuntime] = useState<EmbeddedRuntimeState>(initialEmbeddedRuntime);
+  const embeddedRuntimeRef = useRef<HTMLIFrameElement>(null);
   const immersive = ["entering", "training", "interrupted", "complete", "operation"].includes(state.phase);
   const fullscreen = runtime.state.phase === "active-fullscreen";
   const expanded = runtime.isExpanded;
@@ -91,7 +92,7 @@ export default function SingularisGamespace() {
   }, [state.phase]);
   useEffect(() => {
     const receiveRuntimeMessage = (event: MessageEvent) => {
-      if (event.origin !== window.location.origin || event.data?.source !== "singularis-v05" || event.data?.contractVersion !== 1) return;
+      if (event.origin !== window.location.origin || event.source !== embeddedRuntimeRef.current?.contentWindow || event.data?.source !== "singularis-v05" || event.data?.contractVersion !== 1) return;
       const payload = event.data.payload;
       if (!payload || typeof payload !== "object") return;
       setEmbeddedRuntime({
@@ -167,7 +168,7 @@ export default function SingularisGamespace() {
   const renderUniverse = (active = false) => (
     <div className={`sin-cgs__runtime ${active ? "sin-cgs__runtime--active" : ""}`} data-experience-phase={runtime.state.phase}>
       <div className="sin-cgs__runtime-head"><span>{active ? state.session.simulationId : "Live universe"}</span><span>{active ? "Runtime active" : "World status"} <i /></span>{audioButton}{fullscreenButton}</div>
-      <div className="sin-cgs__viewport">{state.phase === "operation" ? <iframe className="sin-cgs__game-frame" src="/games/singularis/v05/index.html" title="Singularis Leviathan Protocol v05 game runtime" allow="autoplay; fullscreen; gamepad" onLoad={() => setEmbeddedRuntime((current) => ({ ...current, ready: true, lifecycle: current.lifecycle === "loading" ? "ready" : current.lifecycle }))} /> : workspaceSection !== "mission-control" ? <iframe className="sin-cgs__game-frame" src={`/games/singularis/workspaces/${workspaceSection}/index.html`} title={`Singularis ${singularisWorkspaceSections.find((section) => section.id === workspaceSection)?.label} workspace`} /> : <SingularisUniverseViewport session={state.session} onCheckpoint={() => dispatch({ type: "ADVANCE_CHECKPOINT" })} />}
+      <div className="sin-cgs__viewport">{state.phase === "operation" ? <iframe ref={embeddedRuntimeRef} className="sin-cgs__game-frame" src="/games/singularis/v05/index.html" title="Singularis Leviathan Protocol v05 game runtime" allow="autoplay; fullscreen; gamepad" onLoad={() => setEmbeddedRuntime((current) => ({ ...current, ready: true, lifecycle: current.lifecycle === "loading" ? "ready" : current.lifecycle }))} /> : workspaceSection !== "mission-control" ? <iframe className="sin-cgs__game-frame" src={`/games/singularis/workspaces/${workspaceSection}/index.html`} title={`Singularis ${singularisWorkspaceSections.find((section) => section.id === workspaceSection)?.label} workspace`} /> : <SingularisUniverseViewport session={state.session} onCheckpoint={() => dispatch({ type: "ADVANCE_CHECKPOINT" })} />}
         {active && state.phase !== "operation" && <div className="sin-cgs__score"><strong>Score {state.session.score.toLocaleString()}</strong><strong>Wave {String(state.session.wave).padStart(2, "0")} / {String(state.session.waveCount).padStart(2, "0")}</strong></div>}
         {state.phase === "entering" && <div className="sin-cgs__center-card"><span>Training Simulation 01</span><h2>Synchronizing controls</h2><p>Input remains locked until runtime readiness is confirmed.</p></div>}
         {state.phase === "interrupted" && <div className="sin-cgs__center-card"><span>Flight control</span><h2>Your flight is paused</h2><p>Return when ready, or end the simulation. The living universe continues outside this training instance.</p><div><button onClick={() => act("RESUME", "training_simulation_resumed")}>Return to flight</button><button className="secondary" onClick={() => act("END_SIMULATION", "training_simulation_ended")}>End simulation</button></div></div>}

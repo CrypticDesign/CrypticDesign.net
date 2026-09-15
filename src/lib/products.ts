@@ -7,6 +7,10 @@ import {
   type PublicContentGovernance,
   withReviewMetadata,
 } from "@/lib/releases";
+import {
+  isPubliclyDiscoverableExperience,
+  type ExperienceAccessDefinition,
+} from "@/lib/experience-access";
 
 export interface Product extends PublicContentGovernance {
   slug: string;
@@ -16,9 +20,22 @@ export interface Product extends PublicContentGovernance {
   shareImage?: string;
   status: "active" | "in-development" | "on-hold" | "reclassified" | "future";
   releaseSlugs: string[];
+  experience?: ExperienceAccessDefinition;
   /** Optional owned franchise destination outside the platform shell. */
   franchiseUrl?: string;
 }
+
+export const SINGULARIS_EXPERIENCE = {
+  declaration: "PUBLIC_COMING_SOON",
+  resource: "experience:singularis",
+  action: "execute-development",
+} as const satisfies ExperienceAccessDefinition;
+
+export const LIFA_EXPERIENCE = {
+  declaration: "PUBLIC_COMING_SOON",
+  resource: "experience:lifa",
+  action: "execute-development",
+} as const satisfies ExperienceAccessDefinition;
 
 export const PRODUCTS: Product[] = withReviewMetadata<Product>([
   {
@@ -30,6 +47,7 @@ export const PRODUCTS: Product[] = withReviewMetadata<Product>([
       "Singularis is a near-future science-fiction universe spanning games, animation, music, and interconnected worldbuilding systems. Set during humanity's transition into a multi-planetary civilization, it explores what happens when technology, infrastructure, automation, and planetary-scale systems begin moving faster than human institutions can coordinate or control—not after collapse, but during acceleration.",
     shareImage: "/share/singularis.png",
     status: "in-development",
+    experience: SINGULARIS_EXPERIENCE,
     releaseSlugs: [
       "singularis-vertical-slice",
       "singularis-overture",
@@ -47,6 +65,7 @@ export const PRODUCTS: Product[] = withReviewMetadata<Product>([
     description:
       "Lifa is a science-driven interactive experience where players shape systems from early formation toward life-sustaining worlds. Blending simulation, strategy, and discovery, it invites players to experiment with planetary development, environmental conditions, and cosmic systems.",
     status: "in-development",
+    experience: LIFA_EXPERIENCE,
     releaseSlugs: [],
     franchiseUrl: "https://lifa.crypticdesign.net",
     rights_status: "owned",
@@ -80,7 +99,10 @@ export const PRODUCTS: Product[] = withReviewMetadata<Product>([
 ]);
 
 export function publicProducts(): Product[] {
-  return PRODUCTS.filter(isPubliclyRenderable);
+  return PRODUCTS.filter((product) =>
+    isPubliclyRenderable(product)
+    && isPubliclyDiscoverableExperience(product.experience),
+  );
 }
 
 export function getProduct(slug: string): Product | undefined {

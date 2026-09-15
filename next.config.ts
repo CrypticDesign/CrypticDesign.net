@@ -1,6 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  outputFileTracingIncludes: {
+    "/games/singularis/[...assetPath]": [
+      "./protected-experiences/singularis/**/*",
+    ],
+  },
   // Keep the live Turbopack preview isolated from `next build`; sharing
   // `.next` lets a production build delete development manifests mid-session.
   distDir: process.env.NODE_ENV === "development" ? ".next-dev" : ".next",
