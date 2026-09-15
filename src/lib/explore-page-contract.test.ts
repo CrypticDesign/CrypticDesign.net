@@ -17,7 +17,7 @@ test("Arcade retains the Explore compatibility URL without competing with Entert
   assert.match(redirects, /source: "\/entertainment\/arcade", destination: "\/entertainment\/explore", permanent: true/);
 });
 
-test("Arcade uses a playable catalog and honest access language", async () => {
+test("Arcade uses an experience catalog and honest access language", async () => {
   const page = await readFile(pagePath, "utf8");
   for (const href of ["/entertainment", "/releases", "/community"]) {
     assert.match(page, new RegExp(`href: "${href.replaceAll("/", "\\/")}"|href="${href.replaceAll("/", "\\/")}"`));
@@ -25,16 +25,19 @@ test("Arcade uses a playable catalog and honest access language", async () => {
   assert.match(page, /Public browsing is open/);
   assert.match(page, /title: "Arcade"/);
   assert.doesNotMatch(page, /featuredPaths|Browse categories|Cryptic universe/);
-  assert.match(page, /No account or subscription is required/);
+  assert.match(page, /No account is required to browse/);
+  assert.match(page, /Signing in does not unlock unfinished experiences/);
   assert.match(page, /explore-portal__continuum--cta/);
   assert.match(page, /href="\/entertainment" className="button home-primary-cta">Explore Entertainment/);
   assert.doesNotMatch(page, /Join now|Join the community|earned rewards|member count|Trending now/i);
 });
 
-test("Explore preserves transparent playable availability states", async () => {
+test("Explore preserves transparent experience availability states", async () => {
   const page = await readFile(pagePath, "utf8");
   assert.match(page, /arcadeEntriesFor/);
   assert.match(page, /entry\.status/);
   assert.match(page, /Status details — no access yet/);
   assert.match(page, /data-state="open"/);
+  assert.match(page, /Development builds/);
+  assert.match(page, /Authorization required/);
 });

@@ -38,7 +38,7 @@ test("fullscreen game grows between its toolbar and status without overlay contr
   assert.match(css, /height: 100dvh; min-height: 0 !important/);
   const game = await source("../components/SingularisGamespace.tsx");
   assert.match(game, /sin-cgs__runtime-head[^\n]+\{audioButton\}\{fullscreenButton\}<\/div>/);
-  const runtime = await source("../../public/games/singularis/v05/index.html");
+  const runtime = await source("../../protected-experiences/singularis/v05/index.html");
   assert.match(runtime, /justify-content:safe center;overflow-y:auto/);
   assert.match(runtime, /\.screen>\*\{flex-shrink:0/);
   assert.match(runtime, /'s-title'\)\.addEventListener\('click'/);

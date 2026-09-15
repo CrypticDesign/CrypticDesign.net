@@ -41,7 +41,7 @@ export default function EntertainmentHub() {
       <section id="choose-a-mode" data-section-accent="violet" aria-labelledby="choose-a-mode-title">
         <div className="section-heading"><div><span className="kicker">Choose a mode</span><h2 id="choose-a-mode-title" className="section-title">Play. Listen. Watch.</h2></div><p>Browse each catalog without an account. Availability is shown for each experience.</p></div>
         <div className="media-grid">
-          <MediaCard href="/entertainment/explore" image="/images/singularis-marketing-02.jpg" eyebrow="Play" title="Arcade" body="Games, playable samples, prototypes, and interactive experiences." />
+          <MediaCard href="/entertainment/explore" image="/images/singularis-marketing-02.jpg" eyebrow="Play" title="Arcade" body="Games, announced prototypes, and interactive worlds with clear availability." />
           <MediaCard href="/audio" image="/images/signal-systems.png" eyebrow="Listen" title="Music" body="Scores, albums, tracks, signals, and audio releases." accent="violet" />
           <MediaCard href="/entertainment/cinema" image="/images/entertainment-hero.png" eyebrow="Watch" title="Video" body="Films, trailers, transmissions, visual stories, and series." accent="indigo" />
         </div>

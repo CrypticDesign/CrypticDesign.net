@@ -9,7 +9,7 @@ import { arcadeCategory } from "@/lib/entertainment-navigation";
 export const metadata: Metadata = {
   title: "Arcade",
   alternates: { canonical: "/entertainment/explore" },
-  description: "Browse games, playable samples, prototypes, and interactive experiences. Availability is shown for each Arcade entry.",
+  description: "Browse games, prototypes, and interactive worlds. Release and development availability is shown for each Arcade entry.",
   openGraph: { title: "Arcade", url: "/entertainment/explore", images: ["/share/entertainment.png"] },
   twitter: { card: "summary_large_image", images: ["/share/entertainment.png"] },
 };
@@ -20,7 +20,7 @@ function ArcadeCatalogCard({ entry }: { entry: ArcadeEntry }) {
     <h3>{entry.title}</h3>
     <p>{entry.premise}</p>
     <dl><div><dt>Platform</dt><dd>{entry.platform}</dd></div><div><dt>Access</dt><dd>{entry.access}</dd></div><div><dt>Genres</dt><dd>{entry.genres.join(" · ")}</dd></div></dl>
-    <span className="arcade-card__action">{entry.href ? "Open experience →" : "Status details — no access yet"}</span>
+    <span className="arcade-card__action">{entry.href ? "View experience details →" : "Status details — no access yet"}</span>
   </>;
   return entry.href ? <Link className="arcade-card" href={entry.href}>{content}</Link> : <article className="arcade-card arcade-card--construction">{content}</article>;
 }
@@ -40,20 +40,20 @@ export default async function ArcadePage({ searchParams }: { searchParams: Promi
       <div className="visual-hero__content explore-portal__hero-content">
         <div className="signal-rail" />
         <span className="kicker">Arcade / playable catalog</span>
-        <h1 id="explore-title" className="display-title">Find your next<br /><em>playable experience.</em></h1>
-        <p>Browse games, playable samples, prototypes, and interactive experiences. Check each entry for what you can play and what is still in development.</p>
-        <div className="hero-actions"><a href="#playable-catalog" className="button home-primary-cta">Browse playable catalog</a><Link href="/entertainment" className="button home-secondary-cta">Explore Entertainment</Link></div>
+        <h1 id="explore-title" className="display-title">Discover your next<br /><em>interactive world.</em></h1>
+        <p>Browse games, prototypes, and interactive experiences. Each entry states whether it is released, coming soon, or still in development.</p>
+        <div className="hero-actions"><a href="#playable-catalog" className="button home-primary-cta">Browse experience catalog</a><Link href="/entertainment" className="button home-secondary-cta">Explore Entertainment</Link></div>
       </div>
       <aside className="explore-portal__access" aria-labelledby="explore-access-title">
         <span className="kicker">Arcade availability</span><h2 id="explore-access-title">Public browsing is open.</h2>
-        <dl><div><dt>Public catalog</dt><dd><span className="account-status-label" data-state="open">Open</span></dd></div><div><dt>Playable sample</dt><dd><span className="account-status-label" data-state="open">Open</span></dd></div></dl>
-        <p>No account or subscription is required to browse the catalog or open a public sample.</p>
+        <dl><div><dt>Public catalog</dt><dd><span className="account-status-label" data-state="open">Open</span></dd></div><div><dt>Development builds</dt><dd><span className="account-status-label">Authorization required</span></dd></div></dl>
+        <p>No account is required to browse. Signing in does not unlock unfinished experiences without separate development authorization.</p>
       </aside>
     </section>
 
     <div className="shell explore-portal__stack">
       <section id="playable-catalog" data-section-accent="indigo" aria-labelledby="playable-catalog-title">
-        <div className="public-home-portal__section-label"><h2 id="playable-catalog-title">{selected.slug === "all" ? "Playable catalog" : `${selected.label} experiences`}</h2><span>Availability shown per experience</span></div>
+        <div className="public-home-portal__section-label"><h2 id="playable-catalog-title">{selected.slug === "all" ? "Experience catalog" : `${selected.label} experiences`}</h2><span>Availability shown per experience</span></div>
         <div className="arcade-grid">{entries.map((entry) => <ArcadeCatalogCard entry={entry} key={entry.slug}/>)}</div>
       </section>
 

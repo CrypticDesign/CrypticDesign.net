@@ -5,7 +5,7 @@ export type ArcadeEntry = {
   title: string;
   franchise: string;
   premise: string;
-  status: "Public sample" | "In development" | "Construction";
+  status: "Coming soon" | "In development" | "Construction";
   platform: string;
   access: string;
   categories: readonly ArcadeCategorySlug[];
@@ -19,10 +19,10 @@ export const ARCADE_ENTRIES: readonly ArcadeEntry[] = [
     slug: "singularis-browser-prototype",
     title: "Singularis Browser Prototype",
     franchise: "Singularis",
-    premise: "A music-driven vertical-shooter sample and the primary playable entry into the Singularis universe.",
-    status: "Public sample",
+    premise: "A music-driven vertical-shooter experience in active development inside the Singularis universe.",
+    status: "Coming soon",
     platform: "Web browser",
-    access: "Public sample; subscriber version planned",
+    access: "Public discovery; separately authorized development access",
     categories: ["all", "singularis"],
     genres: ["Action", "Rhythm", "Shooter"],
     href: "/products/singularis",
@@ -35,7 +35,7 @@ export const ARCADE_ENTRIES: readonly ArcadeEntry[] = [
     premise: "A construction space for the next approved Singularis game experience and connected Operations.",
     status: "Construction",
     platform: "Web browser target",
-    access: "Subscriber access planned; public sample under review",
+    access: "Public discovery; execution remains closed until approved",
     categories: ["all", "singularis"],
     genres: ["Action", "Simulation", "Shooter"],
   },
@@ -46,7 +46,7 @@ export const ARCADE_ENTRIES: readonly ArcadeEntry[] = [
     premise: "The first planned playable expression of Lifa, held as a construction page until a public prototype is approved.",
     status: "In development",
     platform: "Platform under evaluation",
-    access: "Subscriber access planned; public sample under review",
+    access: "Public discovery; execution remains closed until approved",
     categories: ["all", "lifa"],
     genres: ["Adventure", "Strategy", "Simulation"],
     featured: true,
@@ -58,7 +58,7 @@ export const ARCADE_ENTRIES: readonly ArcadeEntry[] = [
     premise: "Playable narrative assignments connecting Explore with video, music, communications, and visual content.",
     status: "Construction",
     platform: "Web browser",
-    access: "Subscriber access planned; samples may be public",
+    access: "Public discovery; execution remains closed until approved",
     categories: ["all"],
     genres: ["Adventure", "Simulation"],
   },
@@ -69,7 +69,7 @@ export const ARCADE_ENTRIES: readonly ArcadeEntry[] = [
     premise: "Early prototypes, technical demonstrations, and research-driven playable studies clearly labeled as unfinished work.",
     status: "Construction",
     platform: "Web browser",
-    access: "Public sampling when approved",
+    access: "Public discovery; execution remains closed until approved",
     categories: ["all"],
     genres: ["Puzzle", "Simulation"],
   },

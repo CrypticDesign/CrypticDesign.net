@@ -4,9 +4,11 @@ import test from "node:test";
 
 const component = readFileSync("src/components/SingularisGamespace.tsx", "utf8");
 const productPage = readFileSync("src/app/products/[slug]/page.tsx", "utf8");
-const build = readFileSync("public/games/singularis/v05/index.html", "utf8");
+const route = readFileSync("src/app/games/singularis/[...assetPath]/route.ts", "utf8");
+const build = readFileSync("protected-experiences/singularis/v05/index.html", "utf8");
 
 test("mounts Singularis as a consumer of the canonical shared ExperienceRuntime", () => {
+  assert.match(productPage, /experienceAccess\?\.executable/);
   assert.match(productPage, /runtimeId="singularis:continuous-gamespace:v1"/);
   assert.match(productPage, /controls="consumer"/);
   assert.match(productPage, /<SingularisGamespace \/>/);
@@ -22,6 +24,15 @@ test("embeds the verified v05 build only for the Operation runtime", () => {
   assert.match(component, /state\.phase === "operation" \? <iframe/);
   assert.match(component, /src="\/games\/singularis\/v05\/index\.html"/);
   assert.match(component, /title="Singularis Leviathan Protocol v05 game runtime"/);
+});
+
+test("keeps Singularis runtime files outside the public static directory", () => {
+  assert.equal(existsSync("public/games/singularis/v05/index.html"), false);
+  assert.equal(existsSync("protected-experiences/singularis/v05/index.html"), true);
+  assert.match(route, /resolveRequestExperienceAccess/);
+  assert.match(route, /if \(!authorization\.access\.executable\)/);
+  assert.match(route, /private, no-store/);
+  assert.match(route, /resolveSingularisRuntimeAsset/);
 });
 
 test("keeps the embedded runtime in a stable parent render tree", () => {
@@ -61,4 +72,5 @@ test("v05 exposes a versioned same-origin page bridge", () => {
   assert.match(build, /'operation-ended'/);
   assert.match(build, /window\.parent\.postMessage/);
   assert.match(build, /'s-gate'\)\.addEventListener\('pointerdown'/);
+  assert.match(component, /event\.source !== embeddedRuntimeRef\.current\?\.contentWindow/);
 });
