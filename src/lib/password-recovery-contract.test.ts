@@ -22,7 +22,8 @@ test("password recovery requests a CAPTCHA-protected Supabase email without reve
   assert.match(route, /if \(!captchaToken\)/);
   assert.match(route, /auth\.resetPasswordForEmail\(email/);
   assert.match(route, /captchaToken,/);
-  assert.match(route, /redirectTo: `\$\{redirectOrigin\}\/auth\/callback`/);
+  assert.match(route, /redirectTo: canonicalSiteUrl\("\/auth\/callback"\)\.toString\(\)/);
+  assert.doesNotMatch(route, /request\.nextUrl\.origin/);
   assert.match(route, /GENERIC_RECOVERY_MESSAGE/);
   assert.doesNotMatch(route, /user not found/i);
 });
@@ -35,6 +36,8 @@ test("recovery callback exchanges the PKCE code before opening the password form
   assert.match(callback, /auth\.exchangeCodeForSession\(code\)/);
   assert.match(callback, /findAdmittedMember\(session\.client, data\.user\.id\)/);
   assert.match(callback, /"\/account\/reset-password"/);
+  assert.match(callback, /canonicalSiteUrl\(destination\)/);
+  assert.doesNotMatch(callback, /new URL\([^\n]+request\.url/);
   assert.match(resetPage, /<PasswordResetForm \/>/);
 });
 

@@ -21,7 +21,8 @@ test("email confirmation requires an intentional POST before consuming the OTP",
   assert.match(page, /resolveEmailConfirmationPolicy/);
   assert.match(completionRoute, /if \(!policy\.allowed\)/);
   assert.match(completionRoute, /auth\.verifyOtp\(\{ token_hash: tokenHash, type \}\)/);
-  assert.match(completionRoute, /new URL\(policy\.destination, request\.url\)/);
+  assert.match(completionRoute, /canonicalSiteUrl\(policy\.destination\)/);
+  assert.doesNotMatch(completionRoute, /new URL\([^\n]+request\.url/);
   assert.match(policy, /signup: \{ type: "signup", allowed: false/);
   assert.match(policy, /invite: \{ type: "invite", allowed: true/);
   assert.match(completionRoute, /!admissionAcceptanceConfigured\(\)/);
