@@ -11,6 +11,7 @@ import { ANALYTICS_EVENTS } from "@/lib/analytics";
 import { getProduct } from "@/lib/products";
 import { publicReleases } from "@/lib/releases";
 import { resolvePageExperienceAccess } from "@/lib/server-experience-access";
+import { socialMetadata } from "@/lib/social-metadata";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -23,17 +24,17 @@ export async function generateMetadata({
   const { slug } = await params;
   const product = getProduct(slug);
   if (!product) return {};
-  const shareImages = product.shareImage ? [product.shareImage] : undefined;
+  const url = `/products/${product.slug}`;
   return {
     title: product.title,
     description: product.summary,
-    alternates: { canonical: `/products/${product.slug}` },
-    ...(shareImages
-      ? {
-          openGraph: { images: shareImages },
-          twitter: { card: "summary_large_image" as const, images: shareImages },
-        }
-      : {}),
+    alternates: { canonical: url },
+    ...socialMetadata({
+      title: `${product.title} | Cryptic Design`,
+      description: product.summary,
+      url,
+      image: product.shareImage || "/share/products.png",
+    }),
   };
 }
 

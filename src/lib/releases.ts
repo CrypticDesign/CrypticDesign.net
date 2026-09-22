@@ -276,6 +276,15 @@ export function releaseImage(release: Release): string {
   return "/images/entertainment-feature.png";
 }
 
+/** 1200×630 social-card art, separate from in-page editorial/hero imagery. */
+export function releaseShareImage(release: Release): string {
+  if (release.productSlug === "singularis") return "/share/singularis.png";
+  if (release.kind === "audio") return "/share/audio.png";
+  if (release.kind === "article") return "/share/articles.png";
+  if (release.kind === "lab") return "/share/visual-studies.png";
+  return "/share/entertainment.png";
+}
+
 export function releasesForLane(lane: LaneSlug): Release[] {
   return publicReleases().filter((release) => release.lanes.includes(lane)).sort(
     (a, b) => b.releasedAt.localeCompare(a.releasedAt),

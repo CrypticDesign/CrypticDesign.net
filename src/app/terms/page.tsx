@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
+import { socialMetadata } from "@/lib/social-metadata";
+
+const description = "Terms of use and intellectual-property notice for CrypticDesign.net — how the site may be used, ownership of content, and disclosures for preview features.";
 
 export const metadata: Metadata = {
   title: "Terms of Use",
-  alternates: { canonical: "/terms" }, openGraph: { images: ["/share/terms.png"] }, twitter: { card: "summary_large_image", images: ["/share/terms.png"] }, 
-  description: "Terms of use and intellectual-property notice for CrypticDesign.net — how the site may be used, ownership of content, and disclosures for preview features.",
+  description,
+  alternates: { canonical: "/terms" },
+  ...socialMetadata({ title: "Terms of Use | Cryptic Design", description, url: "/terms", image: "/share/terms.png" }),
 };
 
 // Seeded from the legacy site's rights statement per CRY-344 ruling #3

@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { evaluateReleaseAccess, releaseDestination, type Release } from "./releases.ts";
+import { evaluateReleaseAccess, releaseDestination, releaseShareImage, type Release } from "./releases.ts";
 
 const release: Release = {
   slug: "locked", title: "Locked", tagline: "Test", description: "Protected body",
@@ -36,4 +36,12 @@ test("routes the Singularis vertical slice into the continuous gamespace", () =>
 
 test("keeps ordinary releases on their release detail pages", () => {
   assert.equal(releaseDestination(release), "/releases/locked");
+});
+
+test("uses 1200 by 630 share-card assets instead of editorial release images", () => {
+  assert.equal(releaseShareImage({ ...release, productSlug: "singularis" }), "/share/singularis.png");
+  assert.equal(releaseShareImage({ ...release, kind: "audio" }), "/share/audio.png");
+  assert.equal(releaseShareImage(release), "/share/articles.png");
+  assert.equal(releaseShareImage({ ...release, kind: "lab" }), "/share/visual-studies.png");
+  assert.equal(releaseShareImage({ ...release, kind: "video" }), "/share/entertainment.png");
 });

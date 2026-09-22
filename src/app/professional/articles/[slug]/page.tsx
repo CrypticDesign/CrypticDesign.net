@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import ArticleBody from "@/components/ArticleBody";
 import { allArticles, getArticle } from "@/lib/articles";
 import articleImages from "@/lib/article-images.json";
+import { socialMetadata } from "@/lib/social-metadata";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -36,20 +37,21 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     s.length <= max ? s : s.slice(0, max - 1).replace(/\s+\S*$/, "").trimEnd() + "…";
   const metaTitle = clamp(article.title, 60);
   const metaDescription = clamp(article.description, 158);
+  const url = `/professional/articles/${article.slug}`;
   return {
     // `absolute` skips the root layout's "%s | Cryptic Design" suffix so the
     // article's own headline can use the full 60-char budget (CRY-260).
     title: { absolute: metaTitle },
     description: metaDescription,
-    alternates: { canonical: `/professional/articles/${article.slug}` },
-    openGraph: {
-      type: "article",
+    alternates: { canonical: url },
+    ...socialMetadata({
       title: metaTitle,
       description: metaDescription,
+      url,
+      image: article.hero || "/share/articles.png",
+      type: "article",
       publishedTime: article.published || undefined,
-      images: article.hero ? [article.hero] : undefined,
-    },
-    twitter: { card: "summary_large_image", title: metaTitle, description: metaDescription, images: article.hero ? [article.hero] : undefined },
+    }),
     authors: [{ name: "Robert K. Croft", url: "https://crypticdesign.net" }],
     keywords: [...article.categories, ...article.tags],
     robots: { index: true, follow: true },
