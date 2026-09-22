@@ -29,3 +29,9 @@ test("rejects unknown, sibling, separator, percent-encoded, and traversal inputs
     assert.equal(resolveSingularisRuntimeAsset(candidate), null, candidate.join("/"));
   }
 });
+
+test("rejects inherited object properties as unknown runtime assets", () => {
+  for (const key of ["constructor", "toString", "__proto__", "hasOwnProperty"]) {
+    assert.equal(resolveSingularisRuntimeAsset([key]), null, key);
+  }
+});

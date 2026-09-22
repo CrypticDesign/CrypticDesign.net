@@ -37,6 +37,7 @@ export function resolveSingularisRuntimeAsset(
   )) return null;
 
   const key = pathSegments.join("/") as SingularisRuntimeAssetKey;
+  if (!Object.hasOwn(SINGULARIS_RUNTIME_ASSET_MANIFEST, key)) return null;
   const relativePath = SINGULARIS_RUNTIME_ASSET_MANIFEST[key];
   if (!relativePath) return null;
 
