@@ -31,7 +31,7 @@ test("Singularis exposes launch-ready description and share-image metadata", asy
     "utf8",
   );
   assert.match(source, /product\.shareImage/);
-  assert.match(source, /summary_large_image/);
+  assert.match(source, /socialMetadata/);
 });
 
 test("Cryptic Signal audio route exposes launch-ready description and share image", async () => {
@@ -39,11 +39,11 @@ test("Cryptic Signal audio route exposes launch-ready description and share imag
     path.join(process.cwd(), "src/app/audio/page.tsx"),
     "utf8",
   );
-  const description = source.match(/description:\s*\n\s*"([^"]+)"/)?.[1];
+  const description = source.match(/const description =\s*\n?\s*"([^"]+)"/)?.[1];
   assert.ok(description);
   assertMetadataLength("Cryptic Signal", description);
   assert.match(source, /\/share\/audio\.png/);
-  assert.match(source, /summary_large_image/);
+  assert.match(source, /socialMetadata/);
 });
 
 test("route-specific share cards use the 1200 by 630 social format", async () => {

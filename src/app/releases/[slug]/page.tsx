@@ -8,8 +8,9 @@ import SaveButton from "@/components/SaveButton";
 import { getProduct } from "@/lib/products";
 import { resolveEntitlements } from "@/lib/membership";
 import { getMembershipStore, membershipSandboxEnabled } from "@/lib/membership-store";
-import { LANES, evaluateReleaseAccess, getRelease, publicReleases, releaseImage } from "@/lib/releases";
+import { LANES, evaluateReleaseAccess, getRelease, publicReleases, releaseImage, releaseShareImage } from "@/lib/releases";
 import { SANDBOX_SESSION_COOKIE, verifySandboxSession } from "@/lib/sandbox-session";
+import { socialMetadata } from "@/lib/social-metadata";
 
 export const dynamic = "force-dynamic";
 
@@ -17,11 +18,18 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const release = getRelease(slug);
   if (!release) return {};
+  const url = `/releases/${release.slug}`;
   return {
     title: release.title,
     description: release.tagline,
-    alternates: { canonical: `/releases/${release.slug}` },
-    openGraph: { title: release.title, description: release.tagline, type: "article", images: [releaseImage(release)] },
+    alternates: { canonical: url },
+    ...socialMetadata({
+      title: release.title,
+      description: release.tagline,
+      url,
+      image: releaseShareImage(release),
+      type: "article",
+    }),
   };
 }
 

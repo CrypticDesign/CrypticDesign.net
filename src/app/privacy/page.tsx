@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { AnalyticsPreferencesButton } from "@/components/AnalyticsProvider";
+import { socialMetadata } from "@/lib/social-metadata";
+
+const description = "How Cryptic Design handles information, aggregate analytics, and the choices available to visitors.";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
+  description,
   alternates: { canonical: "/privacy" },
-  openGraph: { images: ["/share/privacy.png"] },
-  twitter: { card: "summary_large_image", images: ["/share/privacy.png"] },
-  description: "How Cryptic Design handles information, aggregate analytics, and the choices available to visitors.",
+  ...socialMetadata({ title: "Privacy Policy | Cryptic Design", description, url: "/privacy", image: "/share/privacy.png" }),
 };
 
 export default function PrivacyPage() {
