@@ -7,10 +7,11 @@ import { normalizeAdmissionEmail } from "@/lib/admission";
 import { signOutSupabaseSession } from "@/lib/supabase/auth";
 import { createRequestSupabaseClient, supabaseConfigured } from "@/lib/supabase/server";
 import { createServiceRoleSupabaseClient } from "@/lib/supabase/service";
+import { canonicalSiteUrl } from "@/lib/site-origin";
 
 export async function POST(request: NextRequest) {
   if (!supabaseConfigured()) {
-    return NextResponse.redirect(new URL("/account/sign-in?error=unavailable", request.url), 303);
+    return NextResponse.redirect(canonicalSiteUrl("/account/sign-in?error=unavailable"), 303);
   }
 
   const form = await request.formData();
@@ -22,13 +23,13 @@ export async function POST(request: NextRequest) {
   const type: EmailOtpType | null = policy?.type ?? null;
 
   if (typeof tokenHash !== "string" || !tokenHash || !type || !policy) {
-    return NextResponse.redirect(new URL("/account/sign-in?error=confirmation", request.url), 303);
+    return NextResponse.redirect(canonicalSiteUrl("/account/sign-in?error=confirmation"), 303);
   }
   if (!policy.allowed) {
-    return NextResponse.redirect(new URL("/account/sign-in?error=admission", request.url), 303);
+    return NextResponse.redirect(canonicalSiteUrl("/account/sign-in?error=admission"), 303);
   }
   if (policy.kind === "admission" && !admissionAcceptanceConfigured()) {
-    return NextResponse.redirect(new URL("/account/sign-in?error=admission", request.url), 303);
+    return NextResponse.redirect(canonicalSiteUrl("/account/sign-in?error=admission"), 303);
   }
 
   const session = createRequestSupabaseClient(request);
@@ -37,7 +38,7 @@ export async function POST(request: NextRequest) {
     const user = result.data.user;
     if (!user?.email) {
       await signOutSupabaseSession(session.client);
-      return session.applyCookies(NextResponse.redirect(new URL("/account/sign-in?error=admission", request.url), 303));
+      return session.applyCookies(NextResponse.redirect(canonicalSiteUrl("/account/sign-in?error=admission"), 303));
     }
     try {
       const readiness = await createServiceRoleSupabaseClient().rpc("admission_invite_ready", {
@@ -45,7 +46,7 @@ export async function POST(request: NextRequest) {
         p_normalized_email: normalizeAdmissionEmail(user.email),
       });
       if (!readiness.error && readiness.data === true) {
-        const destination = new URL(policy.destination, request.url);
+        const destination = canonicalSiteUrl(policy.destination);
         return session.applyCookies(NextResponse.redirect(destination, 303));
       }
     } catch {
@@ -53,11 +54,11 @@ export async function POST(request: NextRequest) {
     }
 
     await signOutSupabaseSession(session.client);
-    return session.applyCookies(NextResponse.redirect(new URL("/account/sign-in?error=admission", request.url), 303));
+    return session.applyCookies(NextResponse.redirect(canonicalSiteUrl("/account/sign-in?error=admission"), 303));
   }
   const destination = result.error
-    ? new URL("/account/sign-in?error=confirmation", request.url)
-    : new URL(policy.destination, request.url);
+    ? canonicalSiteUrl("/account/sign-in?error=confirmation")
+    : canonicalSiteUrl(policy.destination);
 
   return session.applyCookies(NextResponse.redirect(destination, 303));
 }

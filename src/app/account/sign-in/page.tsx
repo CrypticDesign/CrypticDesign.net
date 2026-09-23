@@ -8,6 +8,7 @@ import { accountAdmissionMode } from "@/lib/account-admission";
 export const metadata: Metadata = {
   title: "Sign In",
   alternates: { canonical: "/account/sign-in" },
+  robots: { index: false, follow: true },
   description: "Sign in to CrypticDesign.net.",
 };
 

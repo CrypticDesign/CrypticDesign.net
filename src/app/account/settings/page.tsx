@@ -6,6 +6,7 @@ import { getInitialAccountIdentity } from "@/lib/server-account-state";
 export const metadata: Metadata = {
   title: "Settings & Privacy",
   alternates: { canonical: "/account/settings" },
+  robots: { index: false, follow: false },
   description: "Review supported Cryptic Design preferences, privacy, security, and account lifecycle controls.",
 };
 

@@ -7,6 +7,7 @@ import { getInitialAccountIdentity } from "@/lib/server-account-state";
 export const metadata: Metadata = {
   title: "Account Security",
   alternates: { canonical: "/account/security" },
+  robots: { index: false, follow: false },
   description: "Review Cryptic Design account verification, session, password recovery, and security controls.",
 };
 

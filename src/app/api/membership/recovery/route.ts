@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createRequestSupabaseClient, supabaseConfigured } from "@/lib/supabase/server";
+import { canonicalSiteUrl } from "@/lib/site-origin";
 
 const GENERIC_RECOVERY_MESSAGE = "If that email belongs to an account, a reset link is on its way.";
 
@@ -22,11 +23,9 @@ export async function POST(request: NextRequest) {
 
   try {
     const session = createRequestSupabaseClient(request);
-    const configuredOrigin = process.env.NEXT_PUBLIC_SITE_URL?.trim().replace(/\/$/, "");
-    const redirectOrigin = configuredOrigin || request.nextUrl.origin;
     await session.client.auth.resetPasswordForEmail(email, {
       captchaToken,
-      redirectTo: `${redirectOrigin}/auth/callback`,
+      redirectTo: canonicalSiteUrl("/auth/callback").toString(),
     });
     return session.applyCookies(NextResponse.json({ message: GENERIC_RECOVERY_MESSAGE }, { status: 202 }));
   } catch {

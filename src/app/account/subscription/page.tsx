@@ -6,6 +6,7 @@ import { getInitialAccountIdentity } from "@/lib/server-account-state";
 export const metadata: Metadata = {
   title: "Subscription & Access",
   alternates: { canonical: "/account/subscription" },
+  robots: { index: false, follow: false },
   description: "Review your Cryptic Design account, membership, subscription, and entitlement state.",
 };
 
