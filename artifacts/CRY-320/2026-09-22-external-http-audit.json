@@ -1,0 +1,500 @@
+{
+  "ticket": "CRY-320",
+  "generatedAt": "2026-09-23T03:23:24.262Z",
+  "baseUrl": "https://www.crypticdesign.net/",
+  "locations": [
+    {
+      "region": "Northern America",
+      "limit": 1
+    },
+    {
+      "region": "Western Europe",
+      "limit": 1
+    },
+    {
+      "region": "Australia and New Zealand",
+      "limit": 1
+    }
+  ],
+  "pass": true,
+  "routes": [
+    {
+      "clients": [
+        {
+          "client": "automated",
+          "requestedUrl": "https://www.crypticdesign.net/",
+          "finalUrl": "https://crypticdesign.net/",
+          "redirected": true,
+          "statusCode": 200,
+          "elapsedMs": 921,
+          "contentType": "text/html; charset=utf-8",
+          "bodyBytes": 71693,
+          "pass": true,
+          "failures": []
+        },
+        {
+          "client": "desktop-browser",
+          "requestedUrl": "https://www.crypticdesign.net/",
+          "finalUrl": "https://crypticdesign.net/",
+          "redirected": true,
+          "statusCode": 200,
+          "elapsedMs": 263,
+          "contentType": "text/html; charset=utf-8",
+          "bodyBytes": 71693,
+          "pass": true,
+          "failures": []
+        },
+        {
+          "client": "mobile-browser",
+          "requestedUrl": "https://www.crypticdesign.net/",
+          "finalUrl": "https://crypticdesign.net/",
+          "redirected": true,
+          "statusCode": 200,
+          "elapsedMs": 283,
+          "contentType": "text/html; charset=utf-8",
+          "bodyBytes": 71693,
+          "pass": true,
+          "failures": []
+        },
+        {
+          "client": "search-crawler",
+          "requestedUrl": "https://www.crypticdesign.net/",
+          "finalUrl": "https://crypticdesign.net/",
+          "redirected": true,
+          "statusCode": 200,
+          "elapsedMs": 249,
+          "contentType": "text/html; charset=utf-8",
+          "bodyBytes": 71693,
+          "pass": true,
+          "failures": []
+        },
+        {
+          "client": "social-crawler",
+          "requestedUrl": "https://www.crypticdesign.net/",
+          "finalUrl": "https://crypticdesign.net/",
+          "redirected": true,
+          "statusCode": 200,
+          "elapsedMs": 393,
+          "contentType": "text/html; charset=utf-8",
+          "bodyBytes": 70090,
+          "pass": true,
+          "failures": []
+        }
+      ],
+      "global": {
+        "requestedUrl": "https://www.crypticdesign.net/",
+        "measurementId": "2cINQMUqTwrmSlJi000021Bal",
+        "measurementUrl": "https://api.globalping.io/v1/measurements/2cINQMUqTwrmSlJi000021Bal",
+        "status": "finished",
+        "createdAt": "2026-09-23T03:23:20.054Z",
+        "updatedAt": "2026-09-23T03:23:20.762Z",
+        "probesCount": 3,
+        "pass": true,
+        "probes": [
+          {
+            "probe": {
+              "continent": "NA",
+              "region": "Northern America",
+              "country": "US",
+              "state": "CA",
+              "city": "Los Angeles",
+              "asn": 36352,
+              "network": "HostPapa",
+              "tags": [
+                "datacenter-network"
+              ]
+            },
+            "status": "finished",
+            "statusCode": 301,
+            "statusCodeName": "Moved Permanently",
+            "resolvedAddress": "52.52.192.191",
+            "timings": {
+              "total": 161,
+              "dns": 38,
+              "tcp": 10,
+              "tls": 100,
+              "firstByte": 12,
+              "download": 1
+            },
+            "tls": {
+              "authorized": true,
+              "protocol": "TLSv1.3",
+              "cipherName": "TLS_AES_128_GCM_SHA256",
+              "subject": {
+                "CN": "crypticdesign.net",
+                "alt": "DNS:crypticdesign.net, DNS:demo.crypticdesign.net, DNS:www.crypticdesign.net"
+              },
+              "issuer": {
+                "C": "US",
+                "O": "Let's Encrypt",
+                "CN": "YE1"
+              },
+              "createdAt": "2026-09-07T18:10:41.000Z",
+              "expiresAt": "2026-12-06T18:10:40.000Z"
+            },
+            "headers": {
+              "content-type": "text/plain; charset=utf-8",
+              "location": "https://crypticdesign.net/",
+              "server": "Netlify",
+              "strict-transport-security": "max-age=31536000",
+              "x-nf-request-id": "01M364M3BSSFE4D924EG47S5QN"
+            },
+            "acceptedRedirect": "https://crypticdesign.net/",
+            "bodyTruncated": false,
+            "pass": true,
+            "failures": []
+          },
+          {
+            "probe": {
+              "continent": "EU",
+              "region": "Western Europe",
+              "country": "DE",
+              "state": null,
+              "city": "Falkenstein",
+              "asn": 24940,
+              "network": "Hetzner Online",
+              "tags": [
+                "datacenter-network",
+                "u-LucHeart"
+              ]
+            },
+            "status": "finished",
+            "statusCode": 301,
+            "statusCodeName": "Moved Permanently",
+            "resolvedAddress": "63.176.8.218",
+            "timings": {
+              "total": 180,
+              "dns": 28,
+              "tcp": 8,
+              "tls": 136,
+              "firstByte": 8,
+              "download": 0
+            },
+            "tls": {
+              "authorized": true,
+              "protocol": "TLSv1.3",
+              "cipherName": "TLS_AES_128_GCM_SHA256",
+              "subject": {
+                "CN": "crypticdesign.net",
+                "alt": "DNS:crypticdesign.net, DNS:demo.crypticdesign.net, DNS:www.crypticdesign.net"
+              },
+              "issuer": {
+                "C": "US",
+                "O": "Let's Encrypt",
+                "CN": "YE1"
+              },
+              "createdAt": "2026-09-07T18:10:41.000Z",
+              "expiresAt": "2026-12-06T18:10:40.000Z"
+            },
+            "headers": {
+              "content-type": "text/plain; charset=utf-8",
+              "location": "https://crypticdesign.net/",
+              "server": "Netlify",
+              "strict-transport-security": "max-age=31536000",
+              "x-nf-request-id": "01M364M39K6X794CQ4YD18CYTR"
+            },
+            "acceptedRedirect": "https://crypticdesign.net/",
+            "bodyTruncated": false,
+            "pass": true,
+            "failures": []
+          },
+          {
+            "probe": {
+              "continent": "OC",
+              "region": "Australia and New Zealand",
+              "country": "AU",
+              "state": null,
+              "city": "Sydney",
+              "asn": 31898,
+              "network": "Oracle",
+              "tags": [
+                "oci-ap-sydney-1",
+                "oci",
+                "datacenter-network",
+                "u-nanonic",
+                "u-nanonic:oci-syd"
+              ]
+            },
+            "status": "finished",
+            "statusCode": 301,
+            "statusCodeName": "Moved Permanently",
+            "resolvedAddress": "54.253.94.210",
+            "timings": {
+              "total": 377,
+              "dns": 155,
+              "tcp": 2,
+              "tls": 10,
+              "firstByte": 210,
+              "download": 0
+            },
+            "tls": {
+              "authorized": true,
+              "protocol": "TLSv1.3",
+              "cipherName": "TLS_AES_128_GCM_SHA256",
+              "subject": {
+                "CN": "crypticdesign.net",
+                "alt": "DNS:crypticdesign.net, DNS:demo.crypticdesign.net, DNS:www.crypticdesign.net"
+              },
+              "issuer": {
+                "C": "US",
+                "O": "Let's Encrypt",
+                "CN": "YE1"
+              },
+              "createdAt": "2026-09-07T18:10:41.000Z",
+              "expiresAt": "2026-12-06T18:10:40.000Z"
+            },
+            "headers": {
+              "content-type": "text/plain; charset=utf-8",
+              "location": "https://crypticdesign.net/",
+              "server": "Netlify",
+              "strict-transport-security": "max-age=31536000",
+              "x-nf-request-id": "01M364M3DX5JX9AFNAR5Z5FWP8"
+            },
+            "acceptedRedirect": "https://crypticdesign.net/",
+            "bodyTruncated": false,
+            "pass": true,
+            "failures": []
+          }
+        ]
+      }
+    },
+    {
+      "clients": [
+        {
+          "client": "automated",
+          "requestedUrl": "https://www.crypticdesign.net/products/singularis",
+          "finalUrl": "https://crypticdesign.net/products/singularis",
+          "redirected": true,
+          "statusCode": 200,
+          "elapsedMs": 270,
+          "contentType": "text/html; charset=utf-8",
+          "bodyBytes": 66282,
+          "pass": true,
+          "failures": []
+        },
+        {
+          "client": "desktop-browser",
+          "requestedUrl": "https://www.crypticdesign.net/products/singularis",
+          "finalUrl": "https://crypticdesign.net/products/singularis",
+          "redirected": true,
+          "statusCode": 200,
+          "elapsedMs": 257,
+          "contentType": "text/html; charset=utf-8",
+          "bodyBytes": 66282,
+          "pass": true,
+          "failures": []
+        },
+        {
+          "client": "mobile-browser",
+          "requestedUrl": "https://www.crypticdesign.net/products/singularis",
+          "finalUrl": "https://crypticdesign.net/products/singularis",
+          "redirected": true,
+          "statusCode": 200,
+          "elapsedMs": 290,
+          "contentType": "text/html; charset=utf-8",
+          "bodyBytes": 66282,
+          "pass": true,
+          "failures": []
+        },
+        {
+          "client": "search-crawler",
+          "requestedUrl": "https://www.crypticdesign.net/products/singularis",
+          "finalUrl": "https://crypticdesign.net/products/singularis",
+          "redirected": true,
+          "statusCode": 200,
+          "elapsedMs": 269,
+          "contentType": "text/html; charset=utf-8",
+          "bodyBytes": 66282,
+          "pass": true,
+          "failures": []
+        },
+        {
+          "client": "social-crawler",
+          "requestedUrl": "https://www.crypticdesign.net/products/singularis",
+          "finalUrl": "https://crypticdesign.net/products/singularis",
+          "redirected": true,
+          "statusCode": 200,
+          "elapsedMs": 246,
+          "contentType": "text/html; charset=utf-8",
+          "bodyBytes": 64679,
+          "pass": true,
+          "failures": []
+        }
+      ],
+      "global": {
+        "requestedUrl": "https://www.crypticdesign.net/products/singularis",
+        "measurementId": "2Is6MftAMfzVtMPBQ00021Bal",
+        "measurementUrl": "https://api.globalping.io/v1/measurements/2Is6MftAMfzVtMPBQ00021Bal",
+        "status": "finished",
+        "createdAt": "2026-09-23T03:23:23.018Z",
+        "updatedAt": "2026-09-23T03:23:23.824Z",
+        "probesCount": 3,
+        "pass": true,
+        "probes": [
+          {
+            "probe": {
+              "continent": "NA",
+              "region": "Northern America",
+              "country": "US",
+              "state": "NY",
+              "city": "Buffalo",
+              "asn": 36352,
+              "network": "HostPapa",
+              "tags": [
+                "datacenter-network",
+                "u-365cent"
+              ]
+            },
+            "status": "finished",
+            "statusCode": 301,
+            "statusCodeName": "Moved Permanently",
+            "resolvedAddress": "98.84.224.111",
+            "timings": {
+              "total": 209,
+              "dns": 121,
+              "tcp": 24,
+              "tls": 39,
+              "firstByte": 24,
+              "download": 1
+            },
+            "tls": {
+              "authorized": true,
+              "protocol": "TLSv1.3",
+              "cipherName": "TLS_AES_128_GCM_SHA256",
+              "subject": {
+                "CN": "crypticdesign.net",
+                "alt": "DNS:crypticdesign.net, DNS:demo.crypticdesign.net, DNS:www.crypticdesign.net"
+              },
+              "issuer": {
+                "C": "US",
+                "O": "Let's Encrypt",
+                "CN": "YE1"
+              },
+              "createdAt": "2026-09-07T18:10:41.000Z",
+              "expiresAt": "2026-12-06T18:10:40.000Z"
+            },
+            "headers": {
+              "content-type": "text/plain; charset=utf-8",
+              "location": "https://crypticdesign.net/products/singularis",
+              "server": "Netlify",
+              "strict-transport-security": "max-age=31536000",
+              "x-nf-request-id": "01M364M694BBG5JXF4KEC6TB00"
+            },
+            "acceptedRedirect": "https://crypticdesign.net/products/singularis",
+            "bodyTruncated": false,
+            "pass": true,
+            "failures": []
+          },
+          {
+            "probe": {
+              "continent": "EU",
+              "region": "Western Europe",
+              "country": "DE",
+              "state": null,
+              "city": "Falkenstein",
+              "asn": 24940,
+              "network": "Hetzner Online",
+              "tags": [
+                "datacenter-network"
+              ]
+            },
+            "status": "finished",
+            "statusCode": 301,
+            "statusCodeName": "Moved Permanently",
+            "resolvedAddress": "63.176.8.218",
+            "timings": {
+              "total": 182,
+              "dns": 38,
+              "tcp": 8,
+              "tls": 125,
+              "firstByte": 11,
+              "download": 0
+            },
+            "tls": {
+              "authorized": true,
+              "protocol": "TLSv1.3",
+              "cipherName": "TLS_AES_128_GCM_SHA256",
+              "subject": {
+                "CN": "crypticdesign.net",
+                "alt": "DNS:crypticdesign.net, DNS:demo.crypticdesign.net, DNS:www.crypticdesign.net"
+              },
+              "issuer": {
+                "C": "US",
+                "O": "Let's Encrypt",
+                "CN": "YE1"
+              },
+              "createdAt": "2026-09-07T18:10:41.000Z",
+              "expiresAt": "2026-12-06T18:10:40.000Z"
+            },
+            "headers": {
+              "content-type": "text/plain; charset=utf-8",
+              "location": "https://crypticdesign.net/products/singularis",
+              "server": "Netlify",
+              "strict-transport-security": "max-age=31536000",
+              "x-nf-request-id": "01M364M66CCAPS9D5C58MBK1N8"
+            },
+            "acceptedRedirect": "https://crypticdesign.net/products/singularis",
+            "bodyTruncated": false,
+            "pass": true,
+            "failures": []
+          },
+          {
+            "probe": {
+              "continent": "OC",
+              "region": "Australia and New Zealand",
+              "country": "AU",
+              "state": null,
+              "city": "Sydney",
+              "asn": 31898,
+              "network": "Oracle",
+              "tags": [
+                "oci-ap-sydney-1",
+                "oci",
+                "eyeball-network"
+              ]
+            },
+            "status": "finished",
+            "statusCode": 301,
+            "statusCodeName": "Moved Permanently",
+            "resolvedAddress": "54.253.94.210",
+            "timings": {
+              "total": 504,
+              "dns": 274,
+              "tcp": 2,
+              "tls": 9,
+              "firstByte": 219,
+              "download": 0
+            },
+            "tls": {
+              "authorized": true,
+              "protocol": "TLSv1.3",
+              "cipherName": "TLS_AES_128_GCM_SHA256",
+              "subject": {
+                "CN": "crypticdesign.net",
+                "alt": "DNS:crypticdesign.net, DNS:demo.crypticdesign.net, DNS:www.crypticdesign.net"
+              },
+              "issuer": {
+                "C": "US",
+                "O": "Let's Encrypt",
+                "CN": "YE1"
+              },
+              "createdAt": "2026-09-07T18:10:41.000Z",
+              "expiresAt": "2026-12-06T18:10:40.000Z"
+            },
+            "headers": {
+              "content-type": "text/plain; charset=utf-8",
+              "location": "https://crypticdesign.net/products/singularis",
+              "server": "Netlify",
+              "strict-transport-security": "max-age=31536000",
+              "x-nf-request-id": "01M364M6E3QJ66T5EMEAE5NAPJ"
+            },
+            "acceptedRedirect": "https://crypticdesign.net/products/singularis",
+            "bodyTruncated": false,
+            "pass": true,
+            "failures": []
+          }
+        ]
+      }
+    }
+  ]
+}

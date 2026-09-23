@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "test": "node --experimental-strip-types --test src/**/*.test.ts scripts/metadata-audit.test.mjs",
+    "test": "node --experimental-strip-types --test src/**/*.test.ts scripts/metadata-audit.test.mjs scripts/external-http-audit.test.mjs",
     "test:e2e": "npm run test:e2e:membership && npm run test:e2e:character && npm run test:e2e:account",
     "test:e2e:account": "node tests/account-auth-ctas.e2e.mjs",
     "test:e2e:membership": "node tests/membership-flow.e2e.mjs",
@@ -19,7 +19,8 @@
     "qa:page-scene": "node scripts/qa-page-scene-runtime.mjs",
     "preserve:squarespace": "node scripts/cry-344-preserve.mjs",
     "evidence:cry344": "node scripts/generate-cry344-ledgers.mjs",
-    "audit:metadata": "node scripts/metadata-audit.mjs"
+    "audit:metadata": "node scripts/metadata-audit.mjs",
+    "audit:external-http": "node scripts/external-http-audit.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.3",

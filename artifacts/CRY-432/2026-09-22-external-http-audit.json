@@ -1,0 +1,507 @@
+{
+  "ticket": "CRY-432",
+  "generatedAt": "2026-09-23T03:23:50.007Z",
+  "baseUrl": "https://demo.crypticdesign.net/",
+  "locations": [
+    {
+      "region": "Northern America",
+      "limit": 1
+    },
+    {
+      "region": "Western Europe",
+      "limit": 1
+    },
+    {
+      "region": "Australia and New Zealand",
+      "limit": 1
+    }
+  ],
+  "pass": true,
+  "routes": [
+    {
+      "clients": [
+        {
+          "client": "automated",
+          "requestedUrl": "https://demo.crypticdesign.net/",
+          "finalUrl": "https://demo.crypticdesign.net/",
+          "redirected": false,
+          "statusCode": 200,
+          "elapsedMs": 771,
+          "contentType": "text/html; charset=utf-8",
+          "bodyBytes": 71693,
+          "pass": true,
+          "failures": []
+        },
+        {
+          "client": "desktop-browser",
+          "requestedUrl": "https://demo.crypticdesign.net/",
+          "finalUrl": "https://demo.crypticdesign.net/",
+          "redirected": false,
+          "statusCode": 200,
+          "elapsedMs": 144,
+          "contentType": "text/html; charset=utf-8",
+          "bodyBytes": 71693,
+          "pass": true,
+          "failures": []
+        },
+        {
+          "client": "mobile-browser",
+          "requestedUrl": "https://demo.crypticdesign.net/",
+          "finalUrl": "https://demo.crypticdesign.net/",
+          "redirected": false,
+          "statusCode": 200,
+          "elapsedMs": 162,
+          "contentType": "text/html; charset=utf-8",
+          "bodyBytes": 71693,
+          "pass": true,
+          "failures": []
+        },
+        {
+          "client": "search-crawler",
+          "requestedUrl": "https://demo.crypticdesign.net/",
+          "finalUrl": "https://demo.crypticdesign.net/",
+          "redirected": false,
+          "statusCode": 200,
+          "elapsedMs": 159,
+          "contentType": "text/html; charset=utf-8",
+          "bodyBytes": 71693,
+          "pass": true,
+          "failures": []
+        },
+        {
+          "client": "social-crawler",
+          "requestedUrl": "https://demo.crypticdesign.net/",
+          "finalUrl": "https://demo.crypticdesign.net/",
+          "redirected": false,
+          "statusCode": 200,
+          "elapsedMs": 439,
+          "contentType": "text/html; charset=utf-8",
+          "bodyBytes": 70090,
+          "pass": true,
+          "failures": []
+        }
+      ],
+      "global": {
+        "requestedUrl": "https://demo.crypticdesign.net/",
+        "measurementId": "2AUj3VIjxDbYxNc2v00021Bal",
+        "measurementUrl": "https://api.globalping.io/v1/measurements/2AUj3VIjxDbYxNc2v00021Bal",
+        "status": "finished",
+        "createdAt": "2026-09-23T03:23:43.911Z",
+        "updatedAt": "2026-09-23T03:23:45.437Z",
+        "probesCount": 3,
+        "pass": true,
+        "probes": [
+          {
+            "probe": {
+              "continent": "NA",
+              "region": "Northern America",
+              "country": "US",
+              "state": "CA",
+              "city": "Los Angeles",
+              "asn": 36352,
+              "network": "HostPapa",
+              "tags": [
+                "datacenter-network",
+                "u-tw-kk-li"
+              ]
+            },
+            "status": "finished",
+            "statusCode": 200,
+            "statusCodeName": "OK",
+            "resolvedAddress": "18.208.88.157",
+            "timings": {
+              "total": 364,
+              "dns": 5,
+              "tcp": 64,
+              "tls": 100,
+              "firstByte": 192,
+              "download": 3
+            },
+            "tls": {
+              "authorized": true,
+              "protocol": "TLSv1.3",
+              "cipherName": "TLS_AES_128_GCM_SHA256",
+              "subject": {
+                "CN": "crypticdesign.net",
+                "alt": "DNS:crypticdesign.net, DNS:demo.crypticdesign.net, DNS:www.crypticdesign.net"
+              },
+              "issuer": {
+                "C": "US",
+                "O": "Let's Encrypt",
+                "CN": "YE1"
+              },
+              "createdAt": "2026-09-07T18:10:41.000Z",
+              "expiresAt": "2026-12-06T18:10:40.000Z"
+            },
+            "headers": {
+              "cache-control": "private,no-cache,no-store,max-age=0,must-revalidate",
+              "content-type": "text/html; charset=utf-8",
+              "server": "Netlify",
+              "strict-transport-security": "max-age=31536000",
+              "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding",
+              "x-nf-request-id": "01M364MTPA73VEX28127CY69P3"
+            },
+            "acceptedRedirect": null,
+            "bodyTruncated": true,
+            "pass": true,
+            "failures": []
+          },
+          {
+            "probe": {
+              "continent": "EU",
+              "region": "Western Europe",
+              "country": "DE",
+              "state": null,
+              "city": "Falkenstein",
+              "asn": 24940,
+              "network": "Hetzner Online",
+              "tags": [
+                "datacenter-network"
+              ]
+            },
+            "status": "finished",
+            "statusCode": 200,
+            "statusCodeName": "OK",
+            "resolvedAddress": "63.176.8.218",
+            "timings": {
+              "total": 706,
+              "dns": 27,
+              "tcp": 9,
+              "tls": 15,
+              "firstByte": 592,
+              "download": 63
+            },
+            "tls": {
+              "authorized": true,
+              "protocol": "TLSv1.3",
+              "cipherName": "TLS_AES_128_GCM_SHA256",
+              "subject": {
+                "CN": "crypticdesign.net",
+                "alt": "DNS:crypticdesign.net, DNS:demo.crypticdesign.net, DNS:www.crypticdesign.net"
+              },
+              "issuer": {
+                "C": "US",
+                "O": "Let's Encrypt",
+                "CN": "YE1"
+              },
+              "createdAt": "2026-09-07T18:10:41.000Z",
+              "expiresAt": "2026-12-06T18:10:40.000Z"
+            },
+            "headers": {
+              "cache-control": "private,no-cache,no-store,max-age=0,must-revalidate",
+              "content-type": "text/html; charset=utf-8",
+              "server": "Netlify",
+              "strict-transport-security": "max-age=31536000",
+              "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding",
+              "x-nf-request-id": "01M364MTF8WFHG5CY48SR8NDN0"
+            },
+            "acceptedRedirect": null,
+            "bodyTruncated": true,
+            "pass": true,
+            "failures": []
+          },
+          {
+            "probe": {
+              "continent": "OC",
+              "region": "Australia and New Zealand",
+              "country": "AU",
+              "state": null,
+              "city": "Sydney",
+              "asn": 31898,
+              "network": "Oracle",
+              "tags": [
+                "oci-ap-sydney-1",
+                "oci",
+                "datacenter-network",
+                "u-itsalljustdata"
+              ]
+            },
+            "status": "finished",
+            "statusCode": 200,
+            "statusCodeName": "OK",
+            "resolvedAddress": "54.253.94.210",
+            "timings": {
+              "total": 1152,
+              "dns": 278,
+              "tcp": 3,
+              "tls": 9,
+              "firstByte": 677,
+              "download": 185
+            },
+            "tls": {
+              "authorized": true,
+              "protocol": "TLSv1.3",
+              "cipherName": "TLS_AES_128_GCM_SHA256",
+              "subject": {
+                "CN": "crypticdesign.net",
+                "alt": "DNS:crypticdesign.net, DNS:demo.crypticdesign.net, DNS:www.crypticdesign.net"
+              },
+              "issuer": {
+                "C": "US",
+                "O": "Let's Encrypt",
+                "CN": "YE1"
+              },
+              "createdAt": "2026-09-07T18:10:41.000Z",
+              "expiresAt": "2026-12-06T18:10:40.000Z"
+            },
+            "headers": {
+              "cache-control": "private,no-cache,no-store,max-age=0,must-revalidate",
+              "content-type": "text/html; charset=utf-8",
+              "server": "Netlify",
+              "strict-transport-security": "max-age=31536000",
+              "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding",
+              "x-nf-request-id": "01M364MTW8G2VZPVTN8MJWSQ1T"
+            },
+            "acceptedRedirect": null,
+            "bodyTruncated": true,
+            "pass": true,
+            "failures": []
+          }
+        ]
+      }
+    },
+    {
+      "clients": [
+        {
+          "client": "automated",
+          "requestedUrl": "https://demo.crypticdesign.net/products/singularis",
+          "finalUrl": "https://demo.crypticdesign.net/products/singularis",
+          "redirected": false,
+          "statusCode": 200,
+          "elapsedMs": 197,
+          "contentType": "text/html; charset=utf-8",
+          "bodyBytes": 66282,
+          "pass": true,
+          "failures": []
+        },
+        {
+          "client": "desktop-browser",
+          "requestedUrl": "https://demo.crypticdesign.net/products/singularis",
+          "finalUrl": "https://demo.crypticdesign.net/products/singularis",
+          "redirected": false,
+          "statusCode": 200,
+          "elapsedMs": 150,
+          "contentType": "text/html; charset=utf-8",
+          "bodyBytes": 66282,
+          "pass": true,
+          "failures": []
+        },
+        {
+          "client": "mobile-browser",
+          "requestedUrl": "https://demo.crypticdesign.net/products/singularis",
+          "finalUrl": "https://demo.crypticdesign.net/products/singularis",
+          "redirected": false,
+          "statusCode": 200,
+          "elapsedMs": 167,
+          "contentType": "text/html; charset=utf-8",
+          "bodyBytes": 66282,
+          "pass": true,
+          "failures": []
+        },
+        {
+          "client": "search-crawler",
+          "requestedUrl": "https://demo.crypticdesign.net/products/singularis",
+          "finalUrl": "https://demo.crypticdesign.net/products/singularis",
+          "redirected": false,
+          "statusCode": 200,
+          "elapsedMs": 204,
+          "contentType": "text/html; charset=utf-8",
+          "bodyBytes": 66282,
+          "pass": true,
+          "failures": []
+        },
+        {
+          "client": "social-crawler",
+          "requestedUrl": "https://demo.crypticdesign.net/products/singularis",
+          "finalUrl": "https://demo.crypticdesign.net/products/singularis",
+          "redirected": false,
+          "statusCode": 200,
+          "elapsedMs": 138,
+          "contentType": "text/html; charset=utf-8",
+          "bodyBytes": 64679,
+          "pass": true,
+          "failures": []
+        }
+      ],
+      "global": {
+        "requestedUrl": "https://demo.crypticdesign.net/products/singularis",
+        "measurementId": "2E2XJykebQXmlvxkC00021Bal",
+        "measurementUrl": "https://api.globalping.io/v1/measurements/2E2XJykebQXmlvxkC00021Bal",
+        "status": "finished",
+        "createdAt": "2026-09-23T03:23:47.664Z",
+        "updatedAt": "2026-09-23T03:23:49.396Z",
+        "probesCount": 3,
+        "pass": true,
+        "probes": [
+          {
+            "probe": {
+              "continent": "NA",
+              "region": "Northern America",
+              "country": "US",
+              "state": "CA",
+              "city": "Los Angeles",
+              "asn": 36352,
+              "network": "HostPapa",
+              "tags": [
+                "eyeball-network",
+                "u-gbzret4d"
+              ]
+            },
+            "status": "finished",
+            "statusCode": 200,
+            "statusCodeName": "OK",
+            "resolvedAddress": "52.52.192.191",
+            "timings": {
+              "total": 1562,
+              "dns": 126,
+              "tcp": 62,
+              "tls": 71,
+              "firstByte": 1302,
+              "download": 1
+            },
+            "tls": {
+              "authorized": true,
+              "protocol": "TLSv1.3",
+              "cipherName": "TLS_AES_128_GCM_SHA256",
+              "subject": {
+                "CN": "crypticdesign.net",
+                "alt": "DNS:crypticdesign.net, DNS:demo.crypticdesign.net, DNS:www.crypticdesign.net"
+              },
+              "issuer": {
+                "C": "US",
+                "O": "Let's Encrypt",
+                "CN": "YE1"
+              },
+              "createdAt": "2026-09-07T18:10:41.000Z",
+              "expiresAt": "2026-12-06T18:10:40.000Z"
+            },
+            "headers": {
+              "cache-control": "private,no-cache,no-store,max-age=0,must-revalidate",
+              "content-type": "text/html; charset=utf-8",
+              "server": "Netlify",
+              "strict-transport-security": "max-age=31536000",
+              "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding",
+              "x-nf-request-id": "01M364MYEHTRCBMX5D4ZF22FSK"
+            },
+            "acceptedRedirect": null,
+            "bodyTruncated": true,
+            "pass": true,
+            "failures": []
+          },
+          {
+            "probe": {
+              "continent": "EU",
+              "region": "Western Europe",
+              "country": "DE",
+              "state": null,
+              "city": "Falkenstein",
+              "asn": 24940,
+              "network": "Hetzner Online",
+              "tags": [
+                "datacenter-network",
+                "u-maiku2"
+              ]
+            },
+            "status": "finished",
+            "statusCode": 200,
+            "statusCodeName": "OK",
+            "resolvedAddress": "35.157.26.135",
+            "timings": {
+              "total": 462,
+              "dns": 24,
+              "tcp": 8,
+              "tls": 14,
+              "firstByte": 404,
+              "download": 12
+            },
+            "tls": {
+              "authorized": true,
+              "protocol": "TLSv1.3",
+              "cipherName": "TLS_AES_128_GCM_SHA256",
+              "subject": {
+                "CN": "crypticdesign.net",
+                "alt": "DNS:crypticdesign.net, DNS:demo.crypticdesign.net, DNS:www.crypticdesign.net"
+              },
+              "issuer": {
+                "C": "US",
+                "O": "Let's Encrypt",
+                "CN": "YE1"
+              },
+              "createdAt": "2026-09-07T18:10:41.000Z",
+              "expiresAt": "2026-12-06T18:10:40.000Z"
+            },
+            "headers": {
+              "cache-control": "private,no-cache,no-store,max-age=0,must-revalidate",
+              "content-type": "text/html; charset=utf-8",
+              "server": "Netlify",
+              "strict-transport-security": "max-age=31536000",
+              "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding",
+              "x-nf-request-id": "01M364MY4EF19E69WN914S4MB2"
+            },
+            "acceptedRedirect": null,
+            "bodyTruncated": true,
+            "pass": true,
+            "failures": []
+          },
+          {
+            "probe": {
+              "continent": "OC",
+              "region": "Australia and New Zealand",
+              "country": "AU",
+              "state": null,
+              "city": "Sydney",
+              "asn": 31898,
+              "network": "Oracle",
+              "tags": [
+                "oci-ap-sydney-1",
+                "oci",
+                "datacenter-network",
+                "u-itsalljustdata"
+              ]
+            },
+            "status": "finished",
+            "statusCode": 200,
+            "statusCodeName": "OK",
+            "resolvedAddress": "54.253.94.210",
+            "timings": {
+              "total": 743,
+              "dns": 1,
+              "tcp": 3,
+              "tls": 9,
+              "firstByte": 525,
+              "download": 205
+            },
+            "tls": {
+              "authorized": true,
+              "protocol": "TLSv1.3",
+              "cipherName": "TLS_AES_128_GCM_SHA256",
+              "subject": {
+                "CN": "crypticdesign.net",
+                "alt": "DNS:crypticdesign.net, DNS:demo.crypticdesign.net, DNS:www.crypticdesign.net"
+              },
+              "issuer": {
+                "C": "US",
+                "O": "Let's Encrypt",
+                "CN": "YE1"
+              },
+              "createdAt": "2026-09-07T18:10:41.000Z",
+              "expiresAt": "2026-12-06T18:10:40.000Z"
+            },
+            "headers": {
+              "cache-control": "private,no-cache,no-store,max-age=0,must-revalidate",
+              "content-type": "text/html; charset=utf-8",
+              "server": "Netlify",
+              "strict-transport-security": "max-age=31536000",
+              "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding",
+              "x-nf-request-id": "01M364MY8WDTQSFCK55PZ27BGX"
+            },
+            "acceptedRedirect": null,
+            "bodyTruncated": true,
+            "pass": true,
+            "failures": []
+          }
+        ]
+      }
+    }
+  ]
+}
