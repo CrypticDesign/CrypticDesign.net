@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { renderMarkdown, summarizeMeasurement, summarizeProbeResult } from "./external-http-audit.mjs";
+import { parseArgs, renderMarkdown, summarizeMeasurement, summarizeProbeResult } from "./external-http-audit.mjs";
 
 function passingProbe(region = "Northern America") {
   return {
@@ -76,4 +76,13 @@ test("renderMarkdown records regional delivery evidence and the browser boundary
   assert.match(markdown, /mobile-browser/);
   assert.match(markdown, /Western Europe/);
   assert.match(markdown, /human-browser or operational verification/);
+});
+
+test("parseArgs accepts a comma-separated route override", () => {
+  const parsed = parseArgs([
+    "--base=https://www.crypticdesign.net",
+    "--routes=/account/character/first-signal,/account/character",
+  ]);
+
+  assert.deepEqual(parsed.routes, ["/account/character/first-signal", "/account/character"]);
 });

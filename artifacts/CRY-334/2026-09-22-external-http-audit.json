@@ -1,0 +1,260 @@
+{
+  "ticket": "CRY-334",
+  "generatedAt": "2026-09-23T03:44:18.304Z",
+  "baseUrl": "https://www.crypticdesign.net/",
+  "locations": [
+    {
+      "region": "Northern America",
+      "limit": 1
+    },
+    {
+      "region": "Western Europe",
+      "limit": 1
+    },
+    {
+      "region": "Australia and New Zealand",
+      "limit": 1
+    }
+  ],
+  "pass": true,
+  "routes": [
+    {
+      "clients": [
+        {
+          "client": "automated",
+          "requestedUrl": "https://www.crypticdesign.net/account/character/first-signal",
+          "finalUrl": "https://crypticdesign.net/account/character/first-signal",
+          "redirected": true,
+          "statusCode": 200,
+          "elapsedMs": 1071,
+          "contentType": "text/html; charset=utf-8",
+          "bodyBytes": 31875,
+          "pass": true,
+          "failures": []
+        },
+        {
+          "client": "desktop-browser",
+          "requestedUrl": "https://www.crypticdesign.net/account/character/first-signal",
+          "finalUrl": "https://crypticdesign.net/account/character/first-signal",
+          "redirected": true,
+          "statusCode": 200,
+          "elapsedMs": 293,
+          "contentType": "text/html; charset=utf-8",
+          "bodyBytes": 31875,
+          "pass": true,
+          "failures": []
+        },
+        {
+          "client": "mobile-browser",
+          "requestedUrl": "https://www.crypticdesign.net/account/character/first-signal",
+          "finalUrl": "https://crypticdesign.net/account/character/first-signal",
+          "redirected": true,
+          "statusCode": 200,
+          "elapsedMs": 213,
+          "contentType": "text/html; charset=utf-8",
+          "bodyBytes": 31875,
+          "pass": true,
+          "failures": []
+        },
+        {
+          "client": "search-crawler",
+          "requestedUrl": "https://www.crypticdesign.net/account/character/first-signal",
+          "finalUrl": "https://crypticdesign.net/account/character/first-signal",
+          "redirected": true,
+          "statusCode": 200,
+          "elapsedMs": 196,
+          "contentType": "text/html; charset=utf-8",
+          "bodyBytes": 31875,
+          "pass": true,
+          "failures": []
+        },
+        {
+          "client": "social-crawler",
+          "requestedUrl": "https://www.crypticdesign.net/account/character/first-signal",
+          "finalUrl": "https://crypticdesign.net/account/character/first-signal",
+          "redirected": true,
+          "statusCode": 200,
+          "elapsedMs": 198,
+          "contentType": "text/html; charset=utf-8",
+          "bodyBytes": 30272,
+          "pass": true,
+          "failures": []
+        }
+      ],
+      "global": {
+        "requestedUrl": "https://www.crypticdesign.net/account/character/first-signal",
+        "measurementId": "2wX5XkpZKUdwbs3rs00021Bb6",
+        "measurementUrl": "https://api.globalping.io/v1/measurements/2wX5XkpZKUdwbs3rs00021Bb6",
+        "status": "finished",
+        "createdAt": "2026-09-23T03:44:16.955Z",
+        "updatedAt": "2026-09-23T03:44:17.925Z",
+        "probesCount": 3,
+        "pass": true,
+        "probes": [
+          {
+            "probe": {
+              "continent": "NA",
+              "region": "Northern America",
+              "country": "US",
+              "state": "CA",
+              "city": "Los Angeles",
+              "asn": 36352,
+              "network": "HostPapa",
+              "tags": [
+                "datacenter-network",
+                "u-su-haris"
+              ]
+            },
+            "status": "finished",
+            "statusCode": 301,
+            "statusCodeName": "Moved Permanently",
+            "resolvedAddress": "18.208.88.157",
+            "timings": {
+              "total": 65,
+              "dns": 13,
+              "tcp": 2,
+              "tls": 10,
+              "firstByte": 40,
+              "download": 0
+            },
+            "tls": {
+              "authorized": true,
+              "protocol": "TLSv1.3",
+              "cipherName": "TLS_AES_128_GCM_SHA256",
+              "subject": {
+                "CN": "crypticdesign.net",
+                "alt": "DNS:crypticdesign.net, DNS:demo.crypticdesign.net, DNS:www.crypticdesign.net"
+              },
+              "issuer": {
+                "C": "US",
+                "O": "Let's Encrypt",
+                "CN": "YE1"
+              },
+              "createdAt": "2026-09-07T18:10:41.000Z",
+              "expiresAt": "2026-12-06T18:10:40.000Z"
+            },
+            "headers": {
+              "content-type": "text/plain; charset=utf-8",
+              "location": "https://crypticdesign.net/account/character/first-signal",
+              "server": "Netlify",
+              "strict-transport-security": "max-age=31536000",
+              "x-nf-request-id": "01M365TEME3MNQNHX1DHYSBHXD"
+            },
+            "acceptedRedirect": "https://crypticdesign.net/account/character/first-signal",
+            "bodyTruncated": false,
+            "pass": true,
+            "failures": []
+          },
+          {
+            "probe": {
+              "continent": "EU",
+              "region": "Western Europe",
+              "country": "DE",
+              "state": null,
+              "city": "Falkenstein",
+              "asn": 24940,
+              "network": "Hetzner Online",
+              "tags": [
+                "datacenter-network"
+              ]
+            },
+            "status": "finished",
+            "statusCode": 301,
+            "statusCodeName": "Moved Permanently",
+            "resolvedAddress": "63.176.8.218",
+            "timings": {
+              "total": 485,
+              "dns": 110,
+              "tcp": 14,
+              "tls": 300,
+              "firstByte": 47,
+              "download": 14
+            },
+            "tls": {
+              "authorized": true,
+              "protocol": "TLSv1.3",
+              "cipherName": "TLS_AES_128_GCM_SHA256",
+              "subject": {
+                "CN": "crypticdesign.net",
+                "alt": "DNS:crypticdesign.net, DNS:demo.crypticdesign.net, DNS:www.crypticdesign.net"
+              },
+              "issuer": {
+                "C": "US",
+                "O": "Let's Encrypt",
+                "CN": "YE1"
+              },
+              "createdAt": "2026-09-07T18:10:41.000Z",
+              "expiresAt": "2026-12-06T18:10:40.000Z"
+            },
+            "headers": {
+              "content-type": "text/plain; charset=utf-8",
+              "location": "https://crypticdesign.net/account/character/first-signal",
+              "server": "Netlify",
+              "strict-transport-security": "max-age=31536000",
+              "x-nf-request-id": "01M365TFA3TNBJACP0A5BZWHXV"
+            },
+            "acceptedRedirect": "https://crypticdesign.net/account/character/first-signal",
+            "bodyTruncated": false,
+            "pass": true,
+            "failures": []
+          },
+          {
+            "probe": {
+              "continent": "OC",
+              "region": "Australia and New Zealand",
+              "country": "AU",
+              "state": null,
+              "city": "Sydney",
+              "asn": 31898,
+              "network": "Oracle",
+              "tags": [
+                "oci-ap-sydney-1",
+                "oci",
+                "datacenter-network"
+              ]
+            },
+            "status": "finished",
+            "statusCode": 301,
+            "statusCodeName": "Moved Permanently",
+            "resolvedAddress": "54.253.94.210",
+            "timings": {
+              "total": 396,
+              "dns": 177,
+              "tcp": 2,
+              "tls": 10,
+              "firstByte": 207,
+              "download": 0
+            },
+            "tls": {
+              "authorized": true,
+              "protocol": "TLSv1.3",
+              "cipherName": "TLS_AES_128_GCM_SHA256",
+              "subject": {
+                "CN": "crypticdesign.net",
+                "alt": "DNS:crypticdesign.net, DNS:demo.crypticdesign.net, DNS:www.crypticdesign.net"
+              },
+              "issuer": {
+                "C": "US",
+                "O": "Let's Encrypt",
+                "CN": "YE1"
+              },
+              "createdAt": "2026-09-07T18:10:41.000Z",
+              "expiresAt": "2026-12-06T18:10:40.000Z"
+            },
+            "headers": {
+              "content-type": "text/plain; charset=utf-8",
+              "location": "https://crypticdesign.net/account/character/first-signal",
+              "server": "Netlify",
+              "strict-transport-security": "max-age=31536000",
+              "x-nf-request-id": "01M365TEWQE9PXJXJZ8ZQW5REF"
+            },
+            "acceptedRedirect": "https://crypticdesign.net/account/character/first-signal",
+            "bodyTruncated": false,
+            "pass": true,
+            "failures": []
+          }
+        ]
+      }
+    }
+  ]
+}

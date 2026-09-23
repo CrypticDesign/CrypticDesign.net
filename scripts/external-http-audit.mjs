@@ -309,19 +309,22 @@ export function renderMarkdown(report) {
   return lines.join("\n");
 }
 
-function parseArgs(argv) {
+export function parseArgs(argv) {
   const values = Object.fromEntries(argv.filter((arg) => arg.startsWith("--") && arg.includes("=")).map((arg) => arg.slice(2).split(/=(.*)/s, 2)));
   return {
     baseUrl: values.base || DEFAULT_BASE_URL,
     outDir: values["out-dir"] || path.join("artifacts", "CRY-432"),
     ticket: values.ticket || "CRY-432",
     acceptRedirects: values["accept-redirects"] === "true",
+    routes: values.routes
+      ? values.routes.split(",").map((route) => route.trim()).filter(Boolean)
+      : DEFAULT_ROUTES,
   };
 }
 
 async function main() {
-  const { baseUrl, outDir, ticket, acceptRedirects } = parseArgs(process.argv.slice(2));
-  const report = await auditExternalHttp(baseUrl, { ticket, acceptRedirects });
+  const { baseUrl, outDir, ticket, acceptRedirects, routes } = parseArgs(process.argv.slice(2));
+  const report = await auditExternalHttp(baseUrl, { ticket, acceptRedirects, routes });
   const date = chicagoDate();
   await mkdir(outDir, { recursive: true });
   const jsonPath = path.join(outDir, `${date}-external-http-audit.json`);
