@@ -10,6 +10,7 @@ import { ANALYTICS_EVENTS } from "@/lib/analytics";
 export const metadata: Metadata = {
   title: "Request Access",
   alternates: { canonical: "/account/create" }, openGraph: { images: ["/share/account-create.png"] }, twitter: { card: "summary_large_image", images: ["/share/account-create.png"] }, 
+  robots: { index: true, follow: true },
   description: "Request future CrypticDesign.net member access while public entertainment remains open without an account.",
 };
 

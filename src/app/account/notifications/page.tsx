@@ -5,6 +5,7 @@ import { getInitialAccountIdentity } from "@/lib/server-account-state";
 export const metadata: Metadata = {
   title: "Notifications",
   alternates: { canonical: "/account/notifications" },
+  robots: { index: false, follow: false },
   description: "Review Cryptic Design account notification state and supported preferences.",
 };
 

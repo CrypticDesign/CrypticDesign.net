@@ -9,6 +9,7 @@ import { getInitialAccountIdentity } from "@/lib/server-account-state";
 export const metadata: Metadata = {
   title: "Account",
   alternates: { canonical: "/account" },
+  robots: { index: true, follow: true },
   description: "Your Cryptic Design account, character, and settings.",
 };
 

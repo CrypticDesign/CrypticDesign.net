@@ -7,7 +7,7 @@ import { allArticles } from "@/lib/articles";
 const BASE = "https://crypticdesign.net";
 
 const STATIC_ROUTES = [
-  "", "/community", "/community/groups", "/community/events", "/community/creators", "/entertainment", "/entertainment/explore", "/entertainment/cinema",
+  "", "/account", "/account/create", "/community", "/community/groups", "/community/events", "/community/creators", "/entertainment", "/entertainment/explore", "/entertainment/cinema",
   "/entertainment/creative-labs", "/entertainment/listening-rooms",
   "/entertainment/virtual-rooms", "/entertainment/visual-studies", "/entertainment/store",
   "/professional", "/professional/services", "/professional/articles", "/privacy", "/terms",

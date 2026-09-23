@@ -4,6 +4,7 @@ import CharacterCreator from "@/components/CharacterCreator";
 export const metadata: Metadata = {
   title: "Create Character",
   alternates: { canonical: "/account/create-character" },
+  robots: { index: false, follow: false },
   description: "Every account creates a character — your identity across the platform.",
 };
 
