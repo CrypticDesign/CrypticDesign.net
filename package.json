@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev --turbopack --hostname 127.0.0.1",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
@@ -19,7 +19,8 @@
     "qa:page-scene": "node scripts/qa-page-scene-runtime.mjs",
     "preserve:squarespace": "node scripts/cry-344-preserve.mjs",
     "evidence:cry344": "node scripts/generate-cry344-ledgers.mjs",
-    "audit:metadata": "node scripts/metadata-audit.mjs"
+    "audit:metadata": "node scripts/metadata-audit.mjs",
+    "qa:operator-origin": "node tests/operator-origin.e2e.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.3",

@@ -179,7 +179,7 @@ export default function MyHomeDashboard({ initialAuthenticated = true, accountAd
                 <>
                   <div className="my-home-identity__header">
                     <div className="my-home-identity__mark" aria-hidden="true">{character.name.slice(0, 1).toUpperCase()}</div>
-                    <div><h2 id="identity-summary-title">{character.name}</h2><p>@{character.handle} · {character.archetype}</p></div>
+                    <div><h2 id="identity-summary-title">{character.name}</h2><p>@{character.handle}</p></div>
                   </div>
                   <dl className="my-home-inline-facts">
                     <div><dt>Status</dt><dd>{character.status}</dd></div>
