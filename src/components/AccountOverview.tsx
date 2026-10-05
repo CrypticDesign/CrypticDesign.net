@@ -55,7 +55,7 @@ function CharacterSummary({ state }: { state: CharacterState }) {
       <div className="account-character-summary__identity">
         <span className="eyebrow">Persistent character</span>
         <h3>{character.name}</h3>
-        <p>@{character.handle} · {character.archetype}</p>
+        <p>@{character.handle}</p>
         <dl className="account-inline-facts">
           <div><dt>Character state</dt><dd>{character.status}</dd></div>
           <div><dt>Profile visibility</dt><dd>{privacy}</dd></div>
