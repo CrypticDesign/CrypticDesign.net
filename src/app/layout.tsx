@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import AccountNavigation from "@/components/AccountNavigation";
@@ -36,7 +37,23 @@ export const metadata: Metadata = {
   },
 };
 
+function OperatorRoot({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body className="min-h-screen antialiased">
+        <a className="skip-link" href="#main-content">Skip to operator console</a>
+        <div id="main-content" tabIndex={-1}>{children}</div>
+      </body>
+    </html>
+  );
+}
+
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const requestHeaders = await headers();
+  if (requestHeaders.get("x-cry-operator-surface") === "1") {
+    return <OperatorRoot>{children}</OperatorRoot>;
+  }
+
   const initialAuthenticated = await getInitialAccountAuthenticated();
   return (
     <html lang="en">
