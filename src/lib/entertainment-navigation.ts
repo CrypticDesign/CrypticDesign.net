@@ -1,4 +1,7 @@
+import { getRelease } from "./releases.ts";
+
 export type EntertainmentNavIcon = "all" | "arcade" | "music" | "video";
+export type EntertainmentDestination = "overview" | "arcade" | "music" | "video";
 
 export type EntertainmentNavItem = {
   href: string;
@@ -76,35 +79,55 @@ export function isEntertainmentNavigationRelevant(pathname: string) {
   );
 }
 
-function isArcadeDestinationPath(pathname: string) {
-  return pathname === "/entertainment/arcade"
-    || pathname.startsWith("/entertainment/arcade/")
-    || pathname.includes("singularis")
-    || pathname === "/products/lifa"
-    || pathname.startsWith("/products/lifa/");
+function releaseFromPath(pathname: string) {
+  const slug = pathname.match(/^\/releases\/([^/]+)\/?$/)?.[1];
+  return slug ? getRelease(slug) : undefined;
 }
 
-function isMusicDestinationPath(pathname: string) {
-  return pathname === "/audio"
+export function entertainmentDestinationForPath(pathname: string): EntertainmentDestination {
+  if (
+    pathname === "/entertainment/arcade"
+    || pathname.startsWith("/entertainment/arcade/")
+    || pathname === "/products/singularis"
+    || pathname.startsWith("/products/singularis/")
+    || pathname === "/products/lifa"
+    || pathname.startsWith("/products/lifa/")
+  ) return "arcade";
+
+  if (
+    pathname === "/audio"
     || pathname.startsWith("/audio/")
     || pathname === "/entertainment/listening-rooms"
-    || pathname.startsWith("/entertainment/listening-rooms/");
+    || pathname.startsWith("/entertainment/listening-rooms/")
+  ) return "music";
+
+  if (
+    pathname === "/entertainment/cinema"
+    || pathname.startsWith("/entertainment/cinema/")
+  ) return "video";
+
+  const release = releaseFromPath(pathname);
+  if (release?.kind === "game") return "arcade";
+  if (release?.kind === "audio") return "music";
+  if (release?.kind === "video") return "video";
+  return "overview";
 }
 
-function isVideoDestinationPath(pathname: string) {
-  return pathname === "/entertainment/cinema"
-    || pathname.startsWith("/entertainment/cinema/");
+export function entertainmentCategoryForPath(pathname: string) {
+  if (pathname === "/products/singularis" || pathname.startsWith("/products/singularis/")) return "singularis";
+  if (pathname === "/products/lifa" || pathname.startsWith("/products/lifa/")) return "lifa";
+  if (pathname === "/entertainment/listening-rooms" || pathname.startsWith("/entertainment/listening-rooms/")) return "collections";
+
+  const release = releaseFromPath(pathname);
+  if (release?.productSlug === "singularis" && ["game", "audio", "video"].includes(release.kind)) return "singularis";
+  return undefined;
 }
 
 export function isEntertainmentDestinationActive(pathname: string, href: string) {
-  if (href === "/entertainment") {
-    return isEntertainmentNavigationRelevant(pathname)
-      && !isArcadeDestinationPath(pathname)
-      && !isMusicDestinationPath(pathname)
-      && !isVideoDestinationPath(pathname);
-  }
-  if (href === "/entertainment/arcade") return isArcadeDestinationPath(pathname);
-  if (href === "/audio") return isMusicDestinationPath(pathname);
-  if (href === "/entertainment/cinema") return isVideoDestinationPath(pathname);
+  const destination = entertainmentDestinationForPath(pathname);
+  if (href === "/entertainment") return isEntertainmentNavigationRelevant(pathname) && destination === "overview";
+  if (href === "/entertainment/arcade") return destination === "arcade";
+  if (href === "/audio") return destination === "music";
+  if (href === "/entertainment/cinema") return destination === "video";
   return pathname === href || pathname.startsWith(`${href}/`);
 }

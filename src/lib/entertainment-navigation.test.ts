@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { ARCADE_CATEGORIES, ENTERTAINMENT_NAV_ITEMS, arcadeCategory, entertainmentCategoryHref, isEntertainmentDestinationActive, isEntertainmentNavigationRelevant } from "./entertainment-navigation.ts";
+import { ARCADE_CATEGORIES, ENTERTAINMENT_NAV_ITEMS, arcadeCategory, entertainmentCategoryForPath, entertainmentCategoryHref, entertainmentDestinationForPath, isEntertainmentDestinationActive, isEntertainmentNavigationRelevant } from "./entertainment-navigation.ts";
 
 const canonicalDestinations = [
   "/entertainment",
@@ -85,6 +85,25 @@ test("Singularis game routes activate Arcade while other legacy directors activa
   assert.equal(isEntertainmentDestinationActive("/products/singularis", "/entertainment"), false);
   assert.equal(isEntertainmentDestinationActive("/products/lifa", "/entertainment/arcade"), true);
   assert.equal(isEntertainmentDestinationActive("/products/lifa", "/entertainment"), false);
+});
+
+test("release details follow their media kind instead of matching franchise words in the slug", () => {
+  assert.equal(entertainmentDestinationForPath("/releases/singularis-themes-vol-1"), "music");
+  assert.equal(entertainmentDestinationForPath("/releases/singularis-overture"), "video");
+  assert.equal(entertainmentDestinationForPath("/releases/singularis-vertical-slice"), "arcade");
+  assert.equal(entertainmentDestinationForPath("/releases/visual-study-01"), "overview");
+  assert.equal(entertainmentCategoryForPath("/releases/singularis-themes-vol-1"), "singularis");
+  assert.equal(entertainmentCategoryForPath("/releases/singularis-overture"), "singularis");
+
+  assert.equal(isEntertainmentDestinationActive("/releases/singularis-themes-vol-1", "/audio"), true);
+  assert.equal(isEntertainmentDestinationActive("/releases/singularis-themes-vol-1", "/entertainment/arcade"), false);
+  assert.equal(isEntertainmentDestinationActive("/releases/singularis-overture", "/entertainment/cinema"), true);
+  assert.equal(isEntertainmentDestinationActive("/releases/singularis-overture", "/entertainment/arcade"), false);
+});
+
+test("Listening Rooms opens Music at its Collections category", () => {
+  assert.equal(entertainmentDestinationForPath("/entertainment/listening-rooms"), "music");
+  assert.equal(entertainmentCategoryForPath("/entertainment/listening-rooms"), "collections");
 });
 
 test("Arcade franchise navigation resolves to the single product roots", () => {

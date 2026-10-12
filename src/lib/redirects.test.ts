@@ -122,4 +122,7 @@ test("Public Releases is embedded in Entertainment instead of keeping an index p
   const entertainment = await import("node:fs/promises").then(({ readFile }) => readFile("src/app/entertainment/page.tsx", "utf8"));
   assert.match(entertainment, /id="public-releases"/);
   assert.match(entertainment, /publicReleases\(\)/);
+  const breadcrumbs = await import("node:fs/promises").then(({ readFile }) => readFile("src/components/SubNavBreadcrumbs.tsx", "utf8"));
+  assert.match(breadcrumbs, /segment: "public-releases", href: "\/entertainment#public-releases"/);
+  assert.doesNotMatch(breadcrumbs, /return \[\{ segment: "entertainment"[^\n]+\.\.\.route\];\s*\}\s*if \(\["releases"/);
 });

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import ResponsiveSectionNavigation from "@/components/ResponsiveSectionNavigation";
-import { ARCADE_CATEGORIES, ENTERTAINMENT_NAV_ITEMS, MUSIC_CATEGORIES, VIDEO_CATEGORIES, arcadeCategory, entertainmentCategoryHref, musicCategory, videoCategory, isEntertainmentDestinationActive, isEntertainmentNavigationRelevant, type ArcadeCategorySlug, type EntertainmentNavIcon } from "@/lib/entertainment-navigation";
+import { ARCADE_CATEGORIES, ENTERTAINMENT_NAV_ITEMS, MUSIC_CATEGORIES, VIDEO_CATEGORIES, arcadeCategory, entertainmentCategoryForPath, entertainmentCategoryHref, entertainmentDestinationForPath, musicCategory, videoCategory, isEntertainmentDestinationActive, isEntertainmentNavigationRelevant, type ArcadeCategorySlug, type EntertainmentNavIcon } from "@/lib/entertainment-navigation";
 
 const destinationCategories = { arcade: ARCADE_CATEGORIES, music: MUSIC_CATEGORIES, video: VIDEO_CATEGORIES } as const;
 const destinationQueries = { arcade: "genre", music: "filter", video: "filter" } as const;
@@ -24,8 +24,10 @@ export default function EntertainmentNavigation() {
   const [, setArcadeMenuOpen] = useState(false);
   const [openDestination, setOpenDestination] = useState<"arcade" | "music" | "video" | null>(null);
   const [selectedArcadeCategory, setSelectedArcadeCategory] = useState<ArcadeCategorySlug>("all");
-  const singularisRoute = pathname.includes("singularis");
-  const lifaRoute = pathname === "/products/lifa" || pathname.startsWith("/products/lifa/");
+  const routeDestination = entertainmentDestinationForPath(pathname);
+  const routeCategory = entertainmentCategoryForPath(pathname);
+  const singularisRoute = routeDestination === "arcade" && routeCategory === "singularis";
+  const lifaRoute = routeDestination === "arcade" && routeCategory === "lifa";
   const arcadeFranchiseRoute = singularisRoute || lifaRoute;
 
   useEffect(() => {
@@ -41,11 +43,11 @@ export default function EntertainmentNavigation() {
   }, []);
 
   useEffect(() => {
-    const open = arcadeFranchiseRoute || pathname === "/entertainment/arcade" || pathname.startsWith("/entertainment/arcade/");
+    const open = routeDestination === "arcade";
     setArcadeMenuOpen(open);
-    setOpenDestination(open ? "arcade" : pathname === "/audio" || pathname.startsWith("/audio/") ? "music" : pathname === "/entertainment/cinema" || pathname.startsWith("/entertainment/cinema/") ? "video" : null);
+    setOpenDestination(routeDestination === "overview" ? null : routeDestination);
     window.dispatchEvent(new CustomEvent("cryptic:arcade-drawer", { detail: { open } }));
-  }, [pathname, arcadeFranchiseRoute]);
+  }, [routeDestination]);
 
   if (!isEntertainmentNavigationRelevant(pathname)) return null;
   const activeItem = ENTERTAINMENT_NAV_ITEMS.find((item) =>
@@ -59,7 +61,7 @@ export default function EntertainmentNavigation() {
       const categories = destinationCategories[item.icon];
       const query = destinationQueries[item.icon];
       const drawerOpen = openDestination === item.icon;
-      const selected = item.icon === "arcade" ? selectedArcadeCategory : item.icon === "music" ? (musicCategory(searchParams.get(query) ?? undefined)?.slug ?? "all") : (videoCategory(searchParams.get(query) ?? undefined)?.slug ?? "all");
+      const selected = item.icon === "arcade" ? selectedArcadeCategory : item.icon === "music" ? (musicCategory(routeCategory ?? searchParams.get(query) ?? undefined)?.slug ?? "all") : (videoCategory(routeCategory ?? searchParams.get(query) ?? undefined)?.slug ?? "all");
       return (
         <details key={item.href} className="entertainment-navigation__item-drawer" data-theme={item.theme} data-open={drawerOpen} open>
           <summary className="entertainment-navigation__item" data-theme={item.theme} aria-current={active ? "page" : undefined} aria-expanded={drawerOpen} aria-controls={`${item.icon}-destination-drawer-${surface}`} onClick={(event) => { event.preventDefault(); const onRoute = pathname === item.href || pathname.startsWith(`${item.href}/`); setOpenDestination(destinationIcon); if (destinationIcon === "arcade") { setArcadeMenuOpen(true); window.dispatchEvent(new CustomEvent("cryptic:arcade-drawer", { detail: { open: true } })); } if (!onRoute || searchParams.has(query)) router.push(item.href); }}>
@@ -91,7 +93,7 @@ export default function EntertainmentNavigation() {
   const compactItem = ENTERTAINMENT_NAV_ITEMS.find((item) => item.icon === openDestination);
   const compactCategories = openDestination ? destinationCategories[openDestination] : null;
   const compactQuery = openDestination ? destinationQueries[openDestination] : null;
-  const compactSelected = openDestination === "arcade" ? selectedArcadeCategory : openDestination === "music" ? (musicCategory(searchParams.get("filter") ?? undefined)?.slug ?? "all") : (videoCategory(searchParams.get("filter") ?? undefined)?.slug ?? "all");
+  const compactSelected = openDestination === "arcade" ? selectedArcadeCategory : openDestination === "music" ? (musicCategory(routeCategory ?? searchParams.get("filter") ?? undefined)?.slug ?? "all") : (videoCategory(routeCategory ?? searchParams.get("filter") ?? undefined)?.slug ?? "all");
   const compactArcadeMenu = compactItem && compactCategories && compactQuery && openDestination ? <details key={`${pathname}:${searchParams.toString()}`} className="arcade-filter-menu" data-theme={compactItem.theme}>
     <summary><span>{compactItem.label} navigation</span><strong>{compactCategories.find((category) => category.slug === compactSelected)?.label}</strong></summary><nav aria-label={`Compact ${compactItem.label} navigation`}>{compactCategories.map((category) => <Link href={entertainmentCategoryHref(openDestination, category.slug)} key={category.slug} aria-current={category.slug === compactSelected ? "page" : undefined}>{category.label}</Link>)}</nav>
   </details> : null;
