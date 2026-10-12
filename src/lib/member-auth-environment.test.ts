@@ -17,15 +17,15 @@ const headerUrl = new URL("../components/SiteHeader.tsx", import.meta.url);
 const accountSessionUrl = new URL("./account-session.ts", import.meta.url);
 const experienceAccessUrl = new URL("./server-experience-access.ts", import.meta.url);
 
-test("member Auth is available only on explicit development hosts", () => {
+test("member Auth is available only on explicit public and development hosts", () => {
   assert.equal(memberAuthAvailableForHost("demo.crypticdesign.net"), true);
   assert.equal(memberAuthAvailableForHost("localhost:3000"), true);
   assert.equal(memberAuthAvailableForHost("127.0.0.1:3000"), true);
   assert.equal(memberAuthAvailableForHost("branch--frabjous-frangipane-650548.netlify.app"), true);
   assert.equal(memberAuthAvailableForHost("frabjous-frangipane-650548.netlify.app"), true);
   assert.equal(memberAuthAvailableForHost("unrelated-site.netlify.app"), false);
-  assert.equal(memberAuthAvailableForHost("crypticdesign.net"), false);
-  assert.equal(memberAuthAvailableForHost("www.crypticdesign.net"), false);
+  assert.equal(memberAuthAvailableForHost("crypticdesign.net"), true);
+  assert.equal(memberAuthAvailableForHost("www.crypticdesign.net"), true);
   assert.equal(memberAuthAvailableForHost("unknown.example"), false);
   assert.equal(memberAuthAvailableForHost(null), false);
 });
@@ -64,11 +64,12 @@ test("host normalization honors the first forwarded host and strips ports", () =
   assert.equal(normalizeRequestHost("[::1]:3000"), "::1");
   assert.equal(memberAuthAvailableForHeaders(new Headers({ host: "localhost:3000" })), true);
   assert.equal(memberAuthAvailableForHeaders(new Headers({ host: "demo.crypticdesign.net", "x-forwarded-host": "demo.crypticdesign.net" })), true);
-  assert.equal(memberAuthAvailableForHeaders(new Headers({ host: "crypticdesign.net", "x-forwarded-host": "demo.crypticdesign.net" })), false);
+  assert.equal(memberAuthAvailableForHeaders(new Headers({ host: "crypticdesign.net", "x-forwarded-host": "www.crypticdesign.net" })), true);
+  assert.equal(memberAuthAvailableForHeaders(new Headers({ host: "crypticdesign.net", "x-forwarded-host": "untrusted.example" })), false);
   assert.equal(memberAuthAvailableForHeaders(new Headers()), false);
 });
 
-test("the production boundary blocks Auth pages, APIs, and server session resolution", async () => {
+test("the host boundary blocks Auth pages, APIs, and server session resolution on unknown hosts", async () => {
   const [middleware, serverAccountState, layout, header, accountSession, experienceAccess] = await Promise.all([
     readFile(middlewareUrl, "utf8"),
     readFile(serverAccountStateUrl, "utf8"),
