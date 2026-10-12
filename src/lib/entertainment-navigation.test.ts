@@ -35,6 +35,44 @@ test("overview remains visibly active on public index routes", () => {
   assert.equal(isEntertainmentDestinationActive("/releases", "/entertainment/arcade"), false);
 });
 
+test("every shared Entertainment route has exactly one visibly active destination", () => {
+  const routes = [
+    "/entertainment",
+    "/entertainment/arcade",
+    "/entertainment/cinema",
+    "/entertainment/creative-labs",
+    "/entertainment/listening-rooms",
+    "/entertainment/store",
+    "/entertainment/virtual-rooms",
+    "/entertainment/visual-studies",
+    "/audio",
+    "/products",
+    "/products/singularis",
+    "/products/lifa",
+    "/releases",
+    "/releases/example",
+  ];
+
+  for (const pathname of routes) {
+    const activeDestinations = ENTERTAINMENT_NAV_ITEMS.filter((item) =>
+      isEntertainmentDestinationActive(pathname, item.href),
+    );
+    assert.equal(activeDestinations.length, 1, pathname);
+  }
+});
+
+test("Listening Rooms identifies Music while contextual destinations identify Overview", () => {
+  assert.equal(isEntertainmentDestinationActive("/entertainment/listening-rooms", "/audio"), true);
+  for (const pathname of [
+    "/entertainment/creative-labs",
+    "/entertainment/store",
+    "/entertainment/virtual-rooms",
+    "/entertainment/visual-studies",
+  ]) {
+    assert.equal(isEntertainmentDestinationActive(pathname, "/entertainment"), true, pathname);
+  }
+});
+
 test("Arcade drawer exposes scalable categories instead of franchise links", () => {
   assert.deepEqual(ARCADE_CATEGORIES.map((category) => category.label), [
     "Lobby", "Singularis", "Lifa",

@@ -76,12 +76,35 @@ export function isEntertainmentNavigationRelevant(pathname: string) {
   );
 }
 
+function isArcadeDestinationPath(pathname: string) {
+  return pathname === "/entertainment/arcade"
+    || pathname.startsWith("/entertainment/arcade/")
+    || pathname.includes("singularis")
+    || pathname === "/products/lifa"
+    || pathname.startsWith("/products/lifa/");
+}
+
+function isMusicDestinationPath(pathname: string) {
+  return pathname === "/audio"
+    || pathname.startsWith("/audio/")
+    || pathname === "/entertainment/listening-rooms"
+    || pathname.startsWith("/entertainment/listening-rooms/");
+}
+
+function isVideoDestinationPath(pathname: string) {
+  return pathname === "/entertainment/cinema"
+    || pathname.startsWith("/entertainment/cinema/");
+}
+
 export function isEntertainmentDestinationActive(pathname: string, href: string) {
   if (href === "/entertainment") {
-    const arcadeFranchise = pathname.includes("singularis") || pathname === "/products/lifa" || pathname.startsWith("/products/lifa/");
-    const overviewRoute = pathname === "/products" || pathname.startsWith("/products/") || pathname === "/releases" || pathname.startsWith("/releases/");
-    return pathname === href || (overviewRoute && !arcadeFranchise);
+    return isEntertainmentNavigationRelevant(pathname)
+      && !isArcadeDestinationPath(pathname)
+      && !isMusicDestinationPath(pathname)
+      && !isVideoDestinationPath(pathname);
   }
-  if (href === "/entertainment/arcade" && (pathname.includes("singularis") || pathname === "/products/lifa" || pathname.startsWith("/products/lifa/"))) return true;
+  if (href === "/entertainment/arcade") return isArcadeDestinationPath(pathname);
+  if (href === "/audio") return isMusicDestinationPath(pathname);
+  if (href === "/entertainment/cinema") return isVideoDestinationPath(pathname);
   return pathname === href || pathname.startsWith(`${href}/`);
 }
