@@ -8,16 +8,22 @@ import {
   validOperatorCsrfToken,
 } from "@/lib/account-administration-operator-origin";
 import { indexingDirectiveForRequest } from "@/lib/indexing-policy";
+import {
+  isMemberAuthApiPath,
+  isMemberAuthPagePath,
+  memberAuthAvailableForHeaders,
+} from "@/lib/member-auth-environment";
 
 export function middleware(request: NextRequest) {
   const host = request.headers.get("host");
   const forwardedHost = request.headers.get("x-forwarded-host");
   const publicHost = forwardedHost ?? host;
+  const pathname = request.nextUrl.pathname;
   const environment = process.env.NODE_ENV;
   const operatorDecision = operatorOriginDecision({
     host,
     forwardedHost,
-    pathname: request.nextUrl.pathname,
+    pathname,
     environment,
   });
 
@@ -51,6 +57,27 @@ export function middleware(request: NextRequest) {
       response.cookies.set(csrfCookie.name, csrfToken, csrfCookie.options);
     }
     return response;
+  }
+
+  if (!memberAuthAvailableForHeaders(request.headers)) {
+    if (isMemberAuthApiPath(pathname)) {
+      return NextResponse.json({
+        authenticated: false,
+        accountCreationAvailable: false,
+        mode: "disabled",
+        error: "Member authentication is unavailable on this site.",
+      }, {
+        status: 503,
+        headers: { "Cache-Control": "no-store" },
+      });
+    }
+
+    if (isMemberAuthPagePath(pathname)) {
+      const destination = request.nextUrl.clone();
+      destination.pathname = "/account";
+      destination.search = "?auth=unavailable";
+      return NextResponse.redirect(destination, 307);
+    }
   }
 
   const directive = indexingDirectiveForRequest(publicHost, request.nextUrl.pathname);

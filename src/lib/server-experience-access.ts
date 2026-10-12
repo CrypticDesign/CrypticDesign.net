@@ -2,10 +2,11 @@ import "server-only";
 
 import { createServerClient } from "@supabase/ssr";
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import type { NextRequest } from "next/server";
 
 import { resolveAccountSession } from "./account-session";
+import { memberAuthAvailableForHeaders } from "./member-auth-environment";
 import {
   DEVELOPMENT_ENTITLEMENT_SOURCES,
   resolveDevelopmentEntitlement,
@@ -97,6 +98,11 @@ export async function resolvePageExperienceAccess(
   definition: ExperienceAccessDefinition,
 ): Promise<ExperienceAccessDecision> {
   if (definition.declaration === "PUBLIC_RELEASE" || !supabaseConfigured()) {
+    return resolveExperienceAccess(definition.declaration, false);
+  }
+
+  const requestHeaders = await headers();
+  if (!memberAuthAvailableForHeaders(requestHeaders)) {
     return resolveExperienceAccess(definition.declaration, false);
   }
 
