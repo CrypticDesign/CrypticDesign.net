@@ -79,7 +79,8 @@ export function isEntertainmentNavigationRelevant(pathname: string) {
 export function isEntertainmentDestinationActive(pathname: string, href: string) {
   if (href === "/entertainment") {
     const arcadeFranchise = pathname.includes("singularis") || pathname === "/products/lifa" || pathname.startsWith("/products/lifa/");
-    return pathname === href || ((pathname.startsWith("/products/") || pathname.startsWith("/releases/")) && !arcadeFranchise);
+    const overviewRoute = pathname === "/products" || pathname.startsWith("/products/") || pathname === "/releases" || pathname.startsWith("/releases/");
+    return pathname === href || (overviewRoute && !arcadeFranchise);
   }
   if (href === "/entertainment/arcade" && (pathname.includes("singularis") || pathname === "/products/lifa" || pathname.startsWith("/products/lifa/"))) return true;
   return pathname === href || pathname.startsWith(`${href}/`);

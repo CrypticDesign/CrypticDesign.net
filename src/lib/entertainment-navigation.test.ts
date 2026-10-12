@@ -28,6 +28,13 @@ test("active matching includes nested routes without activating the hub", () => 
   assert.equal(isEntertainmentDestinationActive("/entertainment", "/entertainment"), true);
 });
 
+test("overview remains visibly active on public index routes", () => {
+  for (const pathname of ["/releases", "/products"]) {
+    assert.equal(isEntertainmentDestinationActive(pathname, "/entertainment"), true, pathname);
+  }
+  assert.equal(isEntertainmentDestinationActive("/releases", "/entertainment/arcade"), false);
+});
+
 test("Arcade drawer exposes scalable categories instead of franchise links", () => {
   assert.deepEqual(ARCADE_CATEGORIES.map((category) => category.label), [
     "Lobby", "Singularis", "Lifa",
