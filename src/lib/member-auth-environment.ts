@@ -1,4 +1,6 @@
-const DEVELOPMENT_AUTH_HOSTS = new Set([
+const MEMBER_AUTH_HOSTS = new Set([
+  "crypticdesign.net",
+  "www.crypticdesign.net",
   "demo.crypticdesign.net",
   "localhost",
   "127.0.0.1",
@@ -32,13 +34,14 @@ export function normalizeRequestHost(host: string | null | undefined): string {
 }
 
 /**
- * Production member authentication stays unavailable until CRY-395 has a
- * separately owned and configured production Supabase project. Unknown hosts
- * fail closed; only the named development surfaces may exercise Auth.
+ * Member authentication remains available on the current public and
+ * development surfaces while CRY-395 separates their provider projects.
+ * Unknown hosts fail closed instead of inheriting whichever credentials happen
+ * to be present in the deployment environment.
  */
 export function memberAuthAvailableForHost(host: string | null | undefined): boolean {
   const normalizedHost = normalizeRequestHost(host);
-  return DEVELOPMENT_AUTH_HOSTS.has(normalizedHost)
+  return MEMBER_AUTH_HOSTS.has(normalizedHost)
     || normalizedHost === DEVELOPMENT_NETLIFY_SITE
     || normalizedHost.endsWith(`--${DEVELOPMENT_NETLIFY_SITE}`);
 }
