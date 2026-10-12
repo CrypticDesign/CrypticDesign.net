@@ -4,7 +4,7 @@ import { ARCADE_CATEGORIES, ENTERTAINMENT_NAV_ITEMS, arcadeCategory, entertainme
 
 const canonicalDestinations = [
   "/entertainment",
-  "/entertainment/explore",
+  "/entertainment/arcade",
   "/audio",
   "/entertainment/cinema",
 ];
@@ -23,12 +23,12 @@ test("Entertainment navigation never targets a retired route", () => {
 });
 
 test("active matching includes nested routes without activating the hub", () => {
-  assert.equal(isEntertainmentDestinationActive("/entertainment/explore/singularis/game-01", "/entertainment/explore"), true);
+  assert.equal(isEntertainmentDestinationActive("/entertainment/arcade/singularis/game-01", "/entertainment/arcade"), true);
   assert.equal(isEntertainmentDestinationActive("/entertainment/cinema", "/entertainment"), false);
   assert.equal(isEntertainmentDestinationActive("/entertainment", "/entertainment"), true);
 });
 
-test("Explore drawer exposes scalable categories instead of franchise links", () => {
+test("Arcade drawer exposes scalable categories instead of franchise links", () => {
   assert.deepEqual(ARCADE_CATEGORIES.map((category) => category.label), [
     "Lobby", "Singularis", "Lifa",
   ]);
@@ -36,20 +36,20 @@ test("Explore drawer exposes scalable categories instead of franchise links", ()
   assert.equal(arcadeCategory("not-a-category"), undefined);
 });
 
-test("Singularis game routes activate Explore while other legacy directors activate Overview", () => {
-  assert.equal(isEntertainmentDestinationActive("/products/singularis", "/entertainment/explore"), true);
+test("Singularis game routes activate Arcade while other legacy directors activate Overview", () => {
+  assert.equal(isEntertainmentDestinationActive("/products/singularis", "/entertainment/arcade"), true);
   assert.equal(isEntertainmentDestinationActive("/products/singularis", "/entertainment"), false);
-  assert.equal(isEntertainmentDestinationActive("/products/lifa", "/entertainment/explore"), true);
+  assert.equal(isEntertainmentDestinationActive("/products/lifa", "/entertainment/arcade"), true);
   assert.equal(isEntertainmentDestinationActive("/products/lifa", "/entertainment"), false);
 });
 
-test("Explore franchise navigation resolves to the single product roots", () => {
+test("Arcade franchise navigation resolves to the single product roots", () => {
   assert.equal(entertainmentCategoryHref("arcade", "singularis"), "/products/singularis");
   assert.equal(entertainmentCategoryHref("arcade", "lifa"), "/products/lifa");
 });
 
 test("shows the shared bar across connected entertainment content only", () => {
-  for (const pathname of ["/entertainment/explore", "/audio", "/products/singularis", "/releases/example"]) {
+  for (const pathname of ["/entertainment/arcade", "/audio", "/products/singularis", "/releases/example"]) {
     assert.equal(isEntertainmentNavigationRelevant(pathname), true, pathname);
   }
   for (const pathname of ["/", "/professional", "/account", "/library"]) {

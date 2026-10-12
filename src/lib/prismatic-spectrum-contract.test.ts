@@ -8,7 +8,7 @@ const publicHome = readFileSync(new URL("../components/PublicHome.tsx", import.m
 const myHome = readFileSync(new URL("../components/MyHomeDashboard.tsx", import.meta.url), "utf8");
 const community = readFileSync(new URL("../app/community/page.tsx", import.meta.url), "utf8");
 const entertainment = readFileSync(new URL("../app/entertainment/page.tsx", import.meta.url), "utf8");
-const explore = readFileSync(new URL("../app/entertainment/explore/page.tsx", import.meta.url), "utf8");
+const arcade = readFileSync(new URL("../app/entertainment/arcade/page.tsx", import.meta.url), "utf8");
 const professional = readFileSync(new URL("../app/professional/page.tsx", import.meta.url), "utf8");
 const professionalNavigation = readFileSync(new URL("../components/ProfessionalNavigation.tsx", import.meta.url), "utf8");
 const communityNavigation = readFileSync(new URL("../components/CommunityNavigation.tsx", import.meta.url), "utf8");
@@ -58,7 +58,7 @@ test("major page sections use explicit governed accents", () => {
   assertAccentOrder(entertainment, ["cyan", "indigo", "violet", "magenta"]);
   // CRY-502/503 removes duplicate discovery and the empty activity module.
   assertAccentOrder(community, ["indigo", "indigo", "magenta", "indigo", "blue"]);
-  assertAccentOrder(explore, ["cyan", "indigo", "blue"]);
+  assertAccentOrder(arcade, ["cyan", "indigo", "blue"]);
   // CRY-496 supersedes the old full-spectrum overview cadence with restrained route identity.
   assertAccentOrder(professional, ["violet"]);
   const layout = readFileSync(new URL("../app/professional/layout.tsx", import.meta.url), "utf8");
@@ -103,7 +103,7 @@ test("Explore navigation and portal iconography preserve the canonical VDS", () 
 });
 
 test("refactored major pages no longer hard-code legacy section accents", () => {
-  const refactored = [header, publicHome, myHome, community, explore, professional].join("\n");
+  const refactored = [header, publicHome, myHome, community, arcade, professional].join("\n");
   assert.doesNotMatch(refactored, /data-section-accent="(?:green|yellow|red)"/);
   assert.doesNotMatch(refactored, /#(?:FFD400|ED00A8|00E5FF|55A7FF|9B5CFF)/i);
   assert.match(globals, /\.service-card__copy\{[^}]*border-top:3px solid var\(--section-accent\)/);

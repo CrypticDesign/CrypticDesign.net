@@ -32,9 +32,9 @@ const nextConfig: NextConfig = {
       { source: "/creative-works/crypticdesign-net", destination: "/professional", permanent: true },
       // Preserve unknown inbound links without recreating the retired hierarchy.
       { source: "/creative-works/:slug*", destination: "/entertainment", permanent: true },
-      // Wave 0: preserve the Arcade/playable catalog's existing compatibility URL.
-      // General Entertainment discovery is canonical at /entertainment.
-      { source: "/entertainment/arcade", destination: "/entertainment/explore", permanent: true },
+      // CRY-242 / CRY-416: Arcade is canonical under Sitemap v20. Preserve the
+      // former Explore URL as an inbound compatibility path.
+      { source: "/entertainment/explore", destination: "/entertainment/arcade", permanent: true },
       // Singularis has one continuous playable destination. Preserve the old
       // release URL as an inbound link without keeping a duplicate page.
       {

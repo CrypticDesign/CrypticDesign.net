@@ -8,6 +8,8 @@
 **Scope:** Cost-constrained MVP architecture, Wave 1 acceptance scope, admission model, entity/cardinality model, and operating-cost ledger
 **External mutations:** None. This document does not authorize Supabase paid-plan activation, payment-provider setup, Jira/Confluence/Figma changes, deployment, or public launch.
 
+> **Current-authority notice — 2026-10-12:** This is a historical launch-planning baseline. Current Jira, canonical Confluence, repository `main`, and verified production at `https://crypticdesign.net` supersede this document where they differ. In particular, `/entertainment/arcade` is now the canonical Arcade route and `/entertainment/explore` is compatibility-only.
+
 ## 1. Decision summary
 
 ### Approved Wave 0 front-door refinement — CRY-502/503, 2026-08-27
@@ -15,7 +17,7 @@
 Execution authority: Confluence page 465960961 (coordinated implementation handoff), superseding older route proposals below for this scope.
 
 - General public Entertainment discovery remains canonical at `/entertainment`.
-- Arcade retains `/entertainment/explore` as its playable-catalog compatibility URL, labeled **Arcade**, not a second general discovery homepage. `/entertainment/arcade` retains its permanent redirect.
+- At the time of this launch plan, Arcade used `/entertainment/explore` as its playable-catalog URL and redirected `/entertainment/arcade` there. That historical routing decision is superseded by the current-authority notice above.
 - Music stays at `/audio`, Video at `/entertainment/cinema`, and Singularis/Lifa at their existing `/products` destinations.
 - Community leads with Creators, Groups, Events and explicit availability; Spaces stays withheld. Cross-platform exploration is not Community activity.
 - No URL inventory changes. Figma-only drift is nonblocking under the handoff; external documentation synchronization remains separately gated.

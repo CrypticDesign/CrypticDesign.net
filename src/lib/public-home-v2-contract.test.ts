@@ -40,7 +40,7 @@ test("hero and discovery routes prioritize Entertainment and Community", () => {
   assert.match(home, /href="\/community" className="button home-secondary-cta"[^>]*>Enter Community/);
   assert.doesNotMatch(home, /href="\/professional" className="button home-secondary-cta"/);
   for (const href of [
-    "/entertainment/explore",
+    "/entertainment/arcade",
     "/entertainment/listening-rooms",
     "/products",
     "/community",

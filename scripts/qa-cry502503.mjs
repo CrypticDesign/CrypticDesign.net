@@ -10,14 +10,14 @@ await mkdir(out, { recursive: true });
 const browser = await chromium.launch();
 const results = [];
 const errors = [];
-const routes = ["/entertainment", "/community", "/entertainment/explore"];
+const routes = ["/entertainment", "/community", "/entertainment/arcade"];
 const modes = ["default", "reduced-motion", "no-webgl", "no-js"];
 
 try {
   for (const mode of modes) {
     for (const width of (mode === "default" ? [390, 768, 1440] : [390, 1440])) {
       for (const route of routes) {
-        if (route.endsWith("/explore") && mode !== "default") continue;
+        if (route.endsWith("/arcade") && mode !== "default") continue;
         const context = await browser.newContext({
           viewport: { width, height: 900 }, reducedMotion: mode === "reduced-motion" ? "reduce" : "no-preference",
           javaScriptEnabled: mode !== "no-js",
@@ -91,7 +91,7 @@ try {
         }
         await page.screenshot({ path: out + "/" + route.slice(1).replaceAll("/", "-") + "-" + mode + "-" + width + ".png", fullPage: true });
         if (mode === "default") {
-          const anchor = route === "/community" ? "See Participation Paths" : route.endsWith("/explore") ? "Browse playable catalog" : "Explore Entertainment";
+          const anchor = route === "/community" ? "See Participation Paths" : route.endsWith("/arcade") ? "Browse experience catalog" : "Explore Entertainment";
           await page.getByRole("link", { name: anchor, exact: true }).first().press("Enter");
           check(new URL(page.url()).hash.length > 1, "Keyboard-operable discovery anchor");
           await page.keyboard.press("Tab");
@@ -114,11 +114,11 @@ try {
     if (response.status() !== 200) errors.push({ route, description: "Direct nested route HTTP 200" });
   }
   for (const [route, destination] of [
-    ["/entertainment/arcade", "/entertainment/explore"],
-    ["/entertainment/arcade?genre=lifa", "/entertainment/explore?genre=lifa"],
-    ["/entertainment/explore?genre=singularis", "/products/singularis"],
-    ["/entertainment/explore?genre=lifa", "/products/lifa"],
-    ["/entertainment/explore?genre=featured", "/entertainment/explore"],
+    ["/entertainment/explore", "/entertainment/arcade"],
+    ["/entertainment/explore?genre=lifa", "/entertainment/arcade?genre=lifa"],
+    ["/entertainment/arcade?genre=singularis", "/products/singularis"],
+    ["/entertainment/arcade?genre=lifa", "/products/lifa"],
+    ["/entertainment/arcade?genre=featured", "/entertainment/arcade"],
   ]) {
     const response = await request.request.get(base + route, { maxRedirects: 0 });
     const location = response.headers().location;

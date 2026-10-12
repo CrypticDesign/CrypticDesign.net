@@ -2,19 +2,19 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
 
-const pagePath = new URL("../app/entertainment/explore/page.tsx", import.meta.url);
+const pagePath = new URL("../app/entertainment/arcade/page.tsx", import.meta.url);
 const navigationPath = new URL("./entertainment-navigation.ts", import.meta.url);
 const redirectsPath = new URL("../../next.config.ts", import.meta.url);
 
-test("Arcade retains the Explore compatibility URL without competing with Entertainment", async () => {
+test("Arcade is canonical while Explore remains a compatibility URL", async () => {
   const [page, navigation, redirects] = await Promise.all([
     readFile(pagePath, "utf8"),
     readFile(navigationPath, "utf8"),
     readFile(redirectsPath, "utf8"),
   ]);
-  assert.match(page, /alternates: \{ canonical: "\/entertainment\/explore" \}/);
-  assert.match(navigation, /href: "\/entertainment\/explore", label: "Arcade"/);
-  assert.match(redirects, /source: "\/entertainment\/arcade", destination: "\/entertainment\/explore", permanent: true/);
+  assert.match(page, /alternates: \{ canonical: "\/entertainment\/arcade" \}/);
+  assert.match(navigation, /href: "\/entertainment\/arcade", label: "Arcade"/);
+  assert.match(redirects, /source: "\/entertainment\/explore", destination: "\/entertainment\/arcade", permanent: true/);
 });
 
 test("Arcade uses an experience catalog and honest access language", async () => {
@@ -32,7 +32,7 @@ test("Arcade uses an experience catalog and honest access language", async () =>
   assert.doesNotMatch(page, /Join now|Join the community|earned rewards|member count|Trending now/i);
 });
 
-test("Explore preserves transparent experience availability states", async () => {
+test("Arcade preserves transparent experience availability states", async () => {
   const page = await readFile(pagePath, "utf8");
   assert.match(page, /arcadeEntriesFor/);
   assert.match(page, /entry\.status/);

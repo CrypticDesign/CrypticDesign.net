@@ -5,7 +5,7 @@ import test from "node:test";
 const products = readFileSync("src/lib/products.ts", "utf8");
 const productPage = readFileSync("src/app/products/[slug]/page.tsx", "utf8");
 const serverAccess = readFileSync("src/lib/server-experience-access.ts", "utf8");
-const arcade = readFileSync("src/app/entertainment/explore/page.tsx", "utf8");
+const arcade = readFileSync("src/app/entertainment/arcade/page.tsx", "utf8");
 const firstSignal = readFileSync("src/lib/first-signal.ts", "utf8");
 const firstSignalRoute = readFileSync("src/app/api/characters/[id]/first-signal/route.ts", "utf8");
 const releases = readFileSync("src/lib/releases.ts", "utf8");

@@ -28,6 +28,7 @@ const EXPECTED: Record<string, string> = {
   "/creative-works/crypticdesign-net": "/professional",
   "/creative-works/:slug*": "/entertainment",
   "/releases/singularis-vertical-slice": "/products/singularis",
+  "/entertainment/explore": "/entertainment/arcade",
   // Legacy /personal chain must point at final destinations, not deleted routes
   "/personal/creative-labs": "/entertainment",
   "/personal/rooms": "/entertainment",
@@ -108,5 +109,7 @@ test("the public sitemap excludes routes that immediately redirect", async () =>
   const source = await import("node:fs/promises").then(({ readFile }) => readFile("src/app/sitemap.ts", "utf8"));
   assert.doesNotMatch(source, /STATIC_ROUTES[\s\S]*"\/professional\/contact"/);
   assert.doesNotMatch(source, /creative-works/);
+  assert.doesNotMatch(source, /"\/entertainment\/explore"/);
+  assert.match(source, /"\/entertainment\/arcade"/);
   assert.match(source, /releaseDestination\(release\)/);
 });
