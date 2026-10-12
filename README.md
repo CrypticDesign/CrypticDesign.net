@@ -44,9 +44,9 @@ src/app/    App Router routes, layouts, global styles
 
 ## Source of truth
 
-- Architecture/IA: Confluence — "Corrected IA and Native Feature Taxonomy", "Native Audio Feature Correction", "MVP Boundary by Native Feature Set"
-- Sitemap: FigJam — CrypticDesign.net Sitemap v11
+- Architecture/IA: Confluence — "CrypticDesign.net Platform Architecture" and "Platform Information Architecture"
+- Sitemap: Sitemap v20 as recorded in current Confluence and Jira authority; Figma/FigJam is optional reference tooling, not a completion gate
 - Executable work: Jira — epic CRY-242
-- Implementation: this repository
+- Implementation/runtime evidence: this repository and the verified deployment
 
 See `AGENTS.md` for agent/contributor operating rules.
