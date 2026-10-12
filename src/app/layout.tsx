@@ -10,6 +10,7 @@ import FabMediaPlayer from "@/components/player/FabMediaPlayer";
 import { PlayerProvider } from "@/components/player/PlayerProvider";
 import AnalyticsProvider, { AnalyticsPreferencesButton } from "@/components/AnalyticsProvider";
 import { getInitialAccountAuthenticated } from "@/lib/server-account-state";
+import { memberAuthAvailableForHeaders } from "@/lib/member-auth-environment";
 import "./globals.css";
 import "./singularis.css";
 import "./responsive.css";
@@ -54,14 +55,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     return <OperatorRoot>{children}</OperatorRoot>;
   }
 
-  const initialAuthenticated = await getInitialAccountAuthenticated();
+  const memberAuthAvailable = memberAuthAvailableForHeaders(requestHeaders);
+  const initialAuthenticated = memberAuthAvailable ? await getInitialAccountAuthenticated() : false;
   return (
     <html lang="en">
       <body className="flex min-h-screen flex-col antialiased">
         <a className="skip-link" href="#main-content">Skip to main content</a>
         <AnalyticsProvider>
         <PlayerProvider>
-        <SiteHeader initialAuthenticated={initialAuthenticated} />
+        <SiteHeader initialAuthenticated={initialAuthenticated} memberAuthAvailable={memberAuthAvailable} />
         <EntertainmentNavigation />
         <CommunityNavigation />
         <AccountNavigation initialAuthenticated={initialAuthenticated} />

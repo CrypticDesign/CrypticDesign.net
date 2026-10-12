@@ -17,7 +17,7 @@ const NAV = [
   { href: "/professional", label: "Professional", tone: "violet" },
 ] as const;
 
-export default function SiteHeader({ initialAuthenticated = false }: { initialAuthenticated?: boolean }) {
+export default function SiteHeader({ initialAuthenticated = false, memberAuthAvailable = true }: { initialAuthenticated?: boolean; memberAuthAvailable?: boolean }) {
   const pathname = usePathname();
   const router = useRouter();
   const entertainmentMenuRef = useRef<HTMLDetailsElement>(null);
@@ -27,8 +27,8 @@ export default function SiteHeader({ initialAuthenticated = false }: { initialAu
   const [authenticated, setAuthenticated] = useState(initialAuthenticated);
   const [entertainmentMenuOpen, setEntertainmentMenuOpen] = useState(() => isPrimaryNavigationActive(pathname, "/entertainment"));
   const accountSectionActive = pathname === "/account" || pathname.startsWith("/account/") || pathname === "/library";
-  const accountLabel = authenticated ? "Account" : "Sign In";
-  const accountHref = authenticated ? "/account" : "/account/sign-in";
+  const accountLabel = authenticated || !memberAuthAvailable ? "Account" : "Sign In";
+  const accountHref = authenticated || !memberAuthAvailable ? "/account" : "/account/sign-in";
   const activeIdentity = getPrimaryNavigationIdentity(pathname, authenticated);
 
   useEffect(() => { setMobileMenuOpen(false); }, [pathname]);
@@ -50,6 +50,11 @@ export default function SiteHeader({ initialAuthenticated = false }: { initialAu
   }, [mobileMenuOpen]);
 
   useEffect(() => {
+    if (!memberAuthAvailable) {
+      setAuthenticated(false);
+      return;
+    }
+
     let active = true;
     async function syncSession() {
       try {
@@ -75,7 +80,7 @@ export default function SiteHeader({ initialAuthenticated = false }: { initialAu
       active = false;
       window.removeEventListener(MEMBERSHIP_SESSION_CHANGED_EVENT, handleSessionChange);
     };
-  }, [pathname]);
+  }, [pathname, memberAuthAvailable]);
 
   useEffect(() => {
     const open = isPrimaryNavigationActive(pathname, "/entertainment");
@@ -119,7 +124,7 @@ export default function SiteHeader({ initialAuthenticated = false }: { initialAu
             })}
             <Link href="/search" aria-label="Search" aria-current={pathname === "/search" ? "page" : undefined} className="site-header__search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg><span className="site-header__search-label">Search</span></Link>
             <div className="account-menu">
-              {authenticated
+              {authenticated || !memberAuthAvailable
                 ? <Link href={accountHref} data-tone="blue" aria-current={accountSectionActive ? "page" : undefined} className="utility-nav site-utility-link account-menu__trigger">{accountLabel}</Link>
                 : <AnalyticsLink href={accountHref} data-tone="blue" aria-current={accountSectionActive ? "page" : undefined} className="utility-nav site-utility-link account-menu__trigger" analyticsEvent={{ name: ANALYTICS_EVENTS.SIGN_IN_OPEN, payload: { source: "primary_navigation" } }}>{accountLabel}</AnalyticsLink>}
             </div>

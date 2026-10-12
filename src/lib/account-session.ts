@@ -1,9 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
+import { memberAuthAvailableForHeaders } from "./member-auth-environment";
 import { membershipSandboxEnabled, membershipSandboxPreferred } from "./membership-store";
 import { requireSandboxMember } from "./sandbox-session";
 import { createRequestSupabaseClient, supabaseConfigured, type AccountSession } from "./supabase/server";
 
 export async function resolveAccountSession(request: NextRequest): Promise<AccountSession> {
+  if (!memberAuthAvailableForHeaders(request.headers)) {
+    return {
+      accountId: null,
+      mode: "disabled",
+      client: null,
+      applyCookies: <T extends NextResponse>(response: T) => response,
+    };
+  }
+
   if (membershipSandboxPreferred()) {
     return {
       accountId: requireSandboxMember(request),

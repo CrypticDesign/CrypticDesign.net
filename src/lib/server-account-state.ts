@@ -1,7 +1,8 @@
 import "server-only";
 
 import { createServerClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
+import { memberAuthAvailableForHeaders } from "./member-auth-environment";
 import { membershipSandboxEnabled, membershipSandboxPreferred } from "./membership-store";
 import { SANDBOX_SESSION_COOKIE, verifySandboxSession } from "./sandbox-session";
 import { supabaseConfigured } from "./supabase/server";
@@ -31,6 +32,9 @@ const SIGNED_OUT_ACCOUNT: ServerAccountIdentity = {
 };
 
 export async function getInitialAccountIdentity(): Promise<ServerAccountIdentity> {
+  const requestHeaders = await headers();
+  if (!memberAuthAvailableForHeaders(requestHeaders)) return SIGNED_OUT_ACCOUNT;
+
   const cookieStore = await cookies();
 
   if (membershipSandboxPreferred()) {

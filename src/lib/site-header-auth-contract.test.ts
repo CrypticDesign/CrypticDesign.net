@@ -35,8 +35,8 @@ test("global account navigation synchronizes Account without duplicating Home", 
   assert.doesNotMatch(header, /myHomeHref/);
   assert.doesNotMatch(header, />My Home<\/span>/);
   assert.doesNotMatch(header, /site-primary-link--my-home/);
-  assert.match(header, /authenticated \? "Account" : "Sign In"/);
-  assert.match(header, /authenticated \? "\/account" : "\/account\/sign-in"/);
+  assert.match(header, /authenticated \|\| !memberAuthAvailable \? "Account" : "Sign In"/);
+  assert.match(header, /authenticated \|\| !memberAuthAvailable \? "\/account" : "\/account\/sign-in"/);
   assert.match(header, /href=\{accountHref\}/);
   assert.match(header, />\{accountLabel\}<\/Link>/);
   assert.match(accessForm, /announceMembershipSession\(nextAuthenticated\)/);
