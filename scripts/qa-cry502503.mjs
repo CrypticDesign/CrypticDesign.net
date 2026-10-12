@@ -108,13 +108,14 @@ try {
   }
   const request = await browser.newContext();
   const routeChecks = [];
-  for (const route of ["/", ...routes, "/community/creators", "/community/groups", "/community/events", "/audio", "/entertainment/cinema", "/products/singularis", "/products/lifa", "/releases", "/releases/singularis-themes-vol-1", "/account/sign-in", "/account/create"]) {
+  for (const route of ["/", ...routes, "/community/creators", "/community/groups", "/community/events", "/audio", "/entertainment/cinema", "/products/singularis", "/products/lifa", "/releases/singularis-themes-vol-1", "/account/sign-in", "/account/create"]) {
     const response = await request.request.get(base + route);
     routeChecks.push({ route, status: response.status() });
     if (response.status() !== 200) errors.push({ route, description: "Direct nested route HTTP 200" });
   }
   for (const [route, destination] of [
     ["/entertainment/explore", "/entertainment/arcade"],
+    ["/releases", "/entertainment#public-releases"],
     ["/entertainment/explore?genre=lifa", "/entertainment/arcade?genre=lifa"],
     ["/entertainment/arcade?genre=singularis", "/products/singularis"],
     ["/entertainment/arcade?genre=lifa", "/products/lifa"],

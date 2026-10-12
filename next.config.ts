@@ -17,7 +17,7 @@ const nextConfig: NextConfig = {
       { source: "/personal/creative-labs", destination: "/entertainment", permanent: true },
       { source: "/personal/rooms", destination: "/entertainment", permanent: false },
       { source: "/personal/collections", destination: "/entertainment", permanent: false },
-      { source: "/personal/:lane", destination: "/releases", permanent: false },
+      { source: "/personal/:lane", destination: "/entertainment#public-releases", permanent: false },
       { source: "/personal", destination: "/", permanent: false },
       { source: "/worlds", destination: "/entertainment", permanent: true },
       { source: "/labs", destination: "/entertainment", permanent: true },
@@ -35,6 +35,9 @@ const nextConfig: NextConfig = {
       // CRY-242 / CRY-416: Arcade is canonical under Sitemap v20. Preserve the
       // former Explore URL as an inbound compatibility path.
       { source: "/entertainment/explore", destination: "/entertainment/arcade", permanent: true },
+      // Public Releases is embedded in the Entertainment Overview. Preserve the
+      // former index URL as an inbound compatibility path to that section.
+      { source: "/releases", destination: "/entertainment#public-releases", permanent: true },
       // Singularis has one continuous playable destination. Preserve the old
       // release URL as an inbound link without keeping a duplicate page.
       {

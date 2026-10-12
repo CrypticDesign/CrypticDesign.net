@@ -59,7 +59,7 @@ export default async function ArcadePage({ searchParams }: { searchParams: Promi
 
       <section className="explore-portal__continuum explore-portal__continuum--cta" data-section-accent="blue" aria-labelledby="arcade-continuum-title">
         <div><span className="kicker">Every path connects</span><h2 id="arcade-continuum-title">Continue beyond Arcade.</h2><p>Find music, video, worlds, and releases at the Entertainment front door.</p></div>
-        <nav className="hero-actions explore-portal__continuum-actions" aria-label="Continue exploring"><Link href="/entertainment" className="button home-primary-cta">Explore Entertainment</Link><Link href="/releases" className="button secondary">Public releases</Link><Link href="/community" className="button secondary">Community</Link><Link href="/account/sign-in" className="button secondary">Sign In to My Home</Link></nav>
+        <nav className="hero-actions explore-portal__continuum-actions" aria-label="Continue exploring"><Link href="/entertainment" className="button home-primary-cta">Explore Entertainment</Link><Link href="/entertainment#public-releases" className="button secondary">Public releases</Link><Link href="/community" className="button secondary">Community</Link><Link href="/account/sign-in" className="button secondary">Sign In to My Home</Link></nav>
       </section>
     </div>
   </main>;

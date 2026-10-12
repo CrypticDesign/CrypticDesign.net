@@ -12,7 +12,7 @@ const STATIC_ROUTES = [
   "/entertainment/virtual-rooms", "/entertainment/visual-studies", "/entertainment/store",
   "/professional", "/professional/services", "/professional/articles", "/privacy", "/terms",
   "/professional/case-studies", "/professional/creators",
-  "/professional/inquiry", "/releases", "/products", "/audio", "/search",
+  "/professional/inquiry", "/products", "/audio", "/search",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

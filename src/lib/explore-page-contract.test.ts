@@ -19,7 +19,7 @@ test("Arcade is canonical while Explore remains a compatibility URL", async () =
 
 test("Arcade uses an experience catalog and honest access language", async () => {
   const page = await readFile(pagePath, "utf8");
-  for (const href of ["/entertainment", "/releases", "/community"]) {
+  for (const href of ["/entertainment", "/entertainment#public-releases", "/community"]) {
     assert.match(page, new RegExp(`href: "${href.replaceAll("/", "\\/")}"|href="${href.replaceAll("/", "\\/")}"`));
   }
   assert.match(page, /Public browsing is open/);
