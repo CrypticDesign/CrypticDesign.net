@@ -40,3 +40,30 @@ export function accountAdministrationSessionIssuanceUiEnabled(
       environment.SUPABASE_SERVICE_ROLE_KEY?.trim(),
     );
 }
+
+
+export function accountAdministrationLookupUiEnabled(
+  environment: {
+    NODE_ENV?: string;
+    ACCOUNT_ADMINISTRATION_FIXTURE_UI_ENABLED?: string;
+    ACCOUNT_ADMINISTRATION_OPERATOR_BFF_ENABLED?: string;
+    ACCOUNT_ADMINISTRATION_OPERATOR_LIVE_UI_ENABLED?: string;
+    ACCOUNT_ADMINISTRATION_OPERATOR_LOOKUP_ENABLED?: string;
+  } = process.env,
+) {
+  return accountAdministrationLiveReadUiEnabled(environment) &&
+    environment.ACCOUNT_ADMINISTRATION_OPERATOR_LOOKUP_ENABLED === "true";
+}
+
+export function accountAdministrationCommandsUiEnabled(
+  environment: {
+    NODE_ENV?: string;
+    ACCOUNT_ADMINISTRATION_FIXTURE_UI_ENABLED?: string;
+    ACCOUNT_ADMINISTRATION_OPERATOR_BFF_ENABLED?: string;
+    ACCOUNT_ADMINISTRATION_OPERATOR_LIVE_UI_ENABLED?: string;
+    ACCOUNT_ADMINISTRATION_OPERATOR_COMMANDS_ENABLED?: string;
+  } = process.env,
+) {
+  return accountAdministrationLiveReadUiEnabled(environment) &&
+    environment.ACCOUNT_ADMINISTRATION_OPERATOR_COMMANDS_ENABLED === "true";
+}

@@ -19,10 +19,10 @@ test("middleware applies fail-closed host routing and operator security headers"
   assert.equal(packageJson.scripts.dev, "next dev --turbopack --hostname 127.0.0.1");
 });
 
-test("Gate 3 reauthentication UI accepts no credentials and exposes no command control", () => {
+test("the default Gate 3 state accepts no credentials and exposes no enabled command control", () => {
   assert.match(consoleSource, /This preview does not accept credentials or create an operator session/);
   assert.match(consoleSource, /Begin secure step-up/);
   assert.match(consoleSource, /disabled aria-describedby="operator-step-up-status"/);
   assert.doesNotMatch(consoleSource, /type="password"|onSubmit=|fetch\(|\.rpc\(/);
-  assert.match(consoleSource, /OPERATOR_COMMANDS_ENABLED/);
+  assert.match(consoleSource, /commandsEnabled \? "Enabled locally" : "Disabled"/);
 });

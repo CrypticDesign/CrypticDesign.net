@@ -108,6 +108,10 @@ const requiredCapability: Record<OperatorAction, OperatorCapability> = {
   restore_character: "character:restore",
 };
 
+export function operatorCapabilityForAction(action: OperatorAction): OperatorCapability {
+  return requiredCapability[action];
+}
+
 function requireUuid(value: string, field: string) {
   if (!UUID.test(value)) throw new AccountAdministrationError(`${field} must be a UUID`, "invalid");
 }

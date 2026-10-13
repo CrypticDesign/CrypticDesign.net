@@ -69,7 +69,7 @@ export default function OperatorStepUpPanel({ csrfToken }: { csrfToken: string }
         cache: "no-store",
       });
       setStatus(issuance.ok
-        ? "Fresh step-up verified. The local read-only operator session is active for up to 15 minutes."
+        ? "Fresh step-up verified. The local operator session is active for up to 15 minutes; lookup and mutation authority still depend on their separate gates and live capabilities."
         : "Operator session issuance was denied.");
     } catch {
       setStatus("Operator session issuance is unavailable.");

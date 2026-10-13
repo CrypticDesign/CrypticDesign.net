@@ -7,8 +7,10 @@ import {
   OPERATOR_FIXTURE_INSPECTIONS,
 } from "@/lib/account-administration-operator-fixtures";
 import {
+  accountAdministrationCommandsUiEnabled,
   accountAdministrationFixtureUiEnabled,
   accountAdministrationLiveReadUiEnabled,
+  accountAdministrationLookupUiEnabled,
   accountAdministrationSessionIssuanceUiEnabled,
 } from "@/lib/account-administration-operator-ui";
 import { OPERATOR_CSRF_REQUEST_TOKEN_HEADER, validOperatorCsrfToken } from "@/lib/account-administration-operator-origin";
@@ -26,7 +28,10 @@ export const metadata: Metadata = {
 export default async function AccountAdministrationFixturePage() {
   if (!accountAdministrationFixtureUiEnabled()) notFound();
   const issuanceEnabled = accountAdministrationSessionIssuanceUiEnabled();
-  const csrfToken = issuanceEnabled
+  const liveReadEnabled = accountAdministrationLiveReadUiEnabled();
+  const lookupEnabled = accountAdministrationLookupUiEnabled();
+  const commandsEnabled = accountAdministrationCommandsUiEnabled();
+  const csrfToken = issuanceEnabled || lookupEnabled || commandsEnabled
     ? (await headers()).get(OPERATOR_CSRF_REQUEST_TOKEN_HEADER)
     : null;
 
@@ -35,11 +40,18 @@ export default async function AccountAdministrationFixturePage() {
       accounts={OPERATOR_FIXTURE_ACCOUNTS}
       commands={OPERATOR_FIXTURE_COMMANDS}
       inspections={OPERATOR_FIXTURE_INSPECTIONS}
+      commandsEnabled={commandsEnabled}
       sessionControl={issuanceEnabled && validOperatorCsrfToken(csrfToken)
         ? <OperatorStepUpPanel csrfToken={csrfToken} />
         : null}
     >
-      {accountAdministrationLiveReadUiEnabled() ? <OperatorLiveReadPanel /> : null}
+      {liveReadEnabled ? (
+        <OperatorLiveReadPanel
+          csrfToken={validOperatorCsrfToken(csrfToken) ? csrfToken : null}
+          lookupEnabled={lookupEnabled}
+          commandsEnabled={commandsEnabled}
+        />
+      ) : null}
     </OperatorConsole>
   );
 }

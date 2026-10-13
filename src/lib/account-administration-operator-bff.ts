@@ -9,7 +9,10 @@ import {
 import { createSupabaseOperatorSessionAuthorizationDependencies } from "./account-administration-operator-session-supabase";
 import {
   authorizeLocalOperatorBrowserRequest,
+  operatorCommandsEnabled,
+  operatorLookupEnabled,
   operatorSessionCookieSettings,
+  OPERATOR_CSRF_REQUEST_TOKEN_HEADER,
 } from "./account-administration-operator-origin";
 import type { OperatorCapability, OperatorPrincipal } from "./account-administration";
 import { createRequestSupabaseClient } from "./supabase/server";
@@ -46,6 +49,14 @@ export function operatorBffConfigured(): boolean {
   );
 }
 
+export function operatorLookupConfigured(): boolean {
+  return operatorBffConfigured() && operatorLookupEnabled();
+}
+
+export function operatorCommandsConfigured(): boolean {
+  return operatorBffConfigured() && operatorCommandsEnabled();
+}
+
 async function verifiedSupabaseIdentity(request: NextRequest): Promise<{
   identity: Pick<VerifiedOperatorIdentity, "accountId" | "authSessionReference">;
   applyCookies<T extends NextResponse>(response: T): T;
@@ -73,9 +84,10 @@ async function verifiedSupabaseIdentity(request: NextRequest): Promise<{
   };
 }
 
-export async function authorizeOperatorReadRequest(
+async function authorizeOperatorRequest(
   request: NextRequest,
-  requiredCapability: OperatorCapability = "account:inspect",
+  requiredCapability: OperatorCapability,
+  expectedCsrfToken: string | null,
 ): Promise<AuthorizedOperatorReadRequest | null> {
   if (!operatorBffConfigured()) return null;
 
@@ -90,7 +102,7 @@ export async function authorizeOperatorReadRequest(
     fetchMode: request.headers.get("sec-fetch-mode"),
     operatorRequestHeader: request.headers.get("x-cry-operator-request"),
     csrfHeader: request.headers.get("x-cry-operator-csrf"),
-    expectedCsrfToken: null,
+    expectedCsrfToken,
     environment,
   })) return null;
 
@@ -119,4 +131,35 @@ export async function authorizeOperatorReadRequest(
     if (error instanceof OperatorSessionError) return null;
     throw new OperatorBffUnavailableError();
   }
+}
+
+
+export async function authorizeOperatorReadRequest(
+  request: NextRequest,
+  requiredCapability: OperatorCapability = "account:inspect",
+): Promise<AuthorizedOperatorReadRequest | null> {
+  return authorizeOperatorRequest(request, requiredCapability, null);
+}
+
+export async function authorizeOperatorLookupRequest(
+  request: NextRequest,
+): Promise<AuthorizedOperatorReadRequest | null> {
+  if (!operatorLookupConfigured()) return null;
+  return authorizeOperatorRequest(
+    request,
+    "account:inspect",
+    request.headers.get(OPERATOR_CSRF_REQUEST_TOKEN_HEADER),
+  );
+}
+
+export async function authorizeOperatorCommandRequest(
+  request: NextRequest,
+  requiredCapability: OperatorCapability,
+): Promise<AuthorizedOperatorReadRequest | null> {
+  if (!operatorCommandsConfigured()) return null;
+  return authorizeOperatorRequest(
+    request,
+    requiredCapability,
+    request.headers.get(OPERATOR_CSRF_REQUEST_TOKEN_HEADER),
+  );
 }

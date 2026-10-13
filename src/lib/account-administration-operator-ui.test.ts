@@ -1,8 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
+  accountAdministrationCommandsUiEnabled,
   accountAdministrationFixtureUiEnabled,
   accountAdministrationLiveReadUiEnabled,
+  accountAdministrationLookupUiEnabled,
   accountAdministrationSessionIssuanceUiEnabled,
 } from "./account-administration-operator-ui.ts";
 
@@ -41,4 +43,21 @@ test("session issuance UI requires its own gate, the BFF gate, and complete serv
   assert.equal(accountAdministrationSessionIssuanceUiEnabled({ ...enabled, ACCOUNT_ADMINISTRATION_OPERATOR_BFF_ENABLED: "false" }), false);
   assert.equal(accountAdministrationSessionIssuanceUiEnabled({ ...enabled, SUPABASE_SERVICE_ROLE_KEY: "" }), false);
   assert.equal(accountAdministrationSessionIssuanceUiEnabled({ ...enabled, NODE_ENV: "production" }), false);
+});
+
+test("lookup and command controls require independent gates on the local live UI", () => {
+  const enabled = {
+    NODE_ENV: "development",
+    ACCOUNT_ADMINISTRATION_FIXTURE_UI_ENABLED: "true",
+    ACCOUNT_ADMINISTRATION_OPERATOR_BFF_ENABLED: "true",
+    ACCOUNT_ADMINISTRATION_OPERATOR_LIVE_UI_ENABLED: "true",
+    ACCOUNT_ADMINISTRATION_OPERATOR_LOOKUP_ENABLED: "true",
+    ACCOUNT_ADMINISTRATION_OPERATOR_COMMANDS_ENABLED: "true",
+  };
+  assert.equal(accountAdministrationLookupUiEnabled(enabled), true);
+  assert.equal(accountAdministrationCommandsUiEnabled(enabled), true);
+  assert.equal(accountAdministrationLookupUiEnabled({ ...enabled, ACCOUNT_ADMINISTRATION_OPERATOR_LOOKUP_ENABLED: "false" }), false);
+  assert.equal(accountAdministrationCommandsUiEnabled({ ...enabled, ACCOUNT_ADMINISTRATION_OPERATOR_COMMANDS_ENABLED: "false" }), false);
+  assert.equal(accountAdministrationLookupUiEnabled({ ...enabled, ACCOUNT_ADMINISTRATION_OPERATOR_LIVE_UI_ENABLED: "false" }), false);
+  assert.equal(accountAdministrationCommandsUiEnabled({ ...enabled, NODE_ENV: "production" }), false);
 });

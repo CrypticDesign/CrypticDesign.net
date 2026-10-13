@@ -292,6 +292,10 @@
   grid-template-columns: minmax(0, 1fr) auto;
 }
 .liveReadForms input,
+.liveReadForms select,
+.liveCommand input,
+.liveCommand select,
+.liveCommand textarea,
 .directory > input {
   min-width: 0;
   min-height: var(--target-min);
@@ -302,6 +306,41 @@
   color: var(--text);
 }
 .liveReadForms input { border-radius: var(--radius-control) 0 0 var(--radius-control); }
+.liveReadForms .lookupControls {
+  grid-template-columns: minmax(140px, .5fr) minmax(0, 1fr) auto;
+}
+.lookupControls select {
+  min-width: 0;
+  border-right: 0;
+  border-radius: var(--radius-control) 0 0 var(--radius-control);
+}
+.lookupControls input { border-radius: 0; }
+
+.liveCommand {
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  border: 1px solid color-mix(in srgb, var(--status-warning) 36%, transparent);
+  border-left: 3px solid var(--status-warning);
+  background: color-mix(in srgb, var(--status-warning) 5%, var(--canvas));
+}
+.liveCommand h3 { margin: var(--space-2) 0 0; font: 600 18px "IBM Plex Sans", Arial, sans-serif; }
+.liveCommand > p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+.liveCommand > button { justify-self: start; }
+.commandFields {
+  display: grid;
+  grid-template-columns: minmax(180px, .55fr) minmax(240px, 1fr) minmax(240px, 1fr);
+  gap: var(--space-3);
+}
+.commandFields label {
+  display: grid;
+  gap: var(--space-2);
+  color: color-mix(in srgb, var(--section-accent) 66%, white);
+  font: 700 9px "IBM Plex Sans", Arial, sans-serif;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.commandFields textarea { min-height: 96px; resize: vertical; }
 
 .workspace {
   display: grid;
@@ -495,7 +534,8 @@
   .consoleBody { width: min(100% - 2.5rem, 1312px); }
   .header,
   .sessionBoundary,
-  .stepUpForm { grid-template-columns: 1fr; }
+  .stepUpForm,
+  .commandFields { grid-template-columns: 1fr; }
   .workspace { grid-template-columns: 1fr; }
   .directory { position: static; }
   .accountList { grid-template-columns: repeat(3, 1fr); }
@@ -527,6 +567,9 @@
   .commandMeta,
   .liveReadForms,
   .stepUpForm { grid-template-columns: 1fr; }
+  .liveReadForms .lookupControls { grid-template-columns: 1fr; }
+  .lookupControls select,
+  .lookupControls input { border-right: 1px solid var(--line); border-radius: var(--radius-control); }
   .commandMeta div { border-right: 0; border-bottom: 1px solid var(--line-soft); }
   .metrics { grid-template-columns: 1fr 1fr; }
   .timeline li,

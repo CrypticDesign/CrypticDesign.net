@@ -6,6 +6,7 @@ import {
   authorizeAccountAdministrationInspectionHistory,
   authorizeAccountInspection,
   executeAccountAdministrationCommand,
+  operatorCapabilityForAction,
   planAccountAdministrationCommand,
   type AccountAdministrationDependencies,
   type AdministrationTarget,
@@ -36,6 +37,14 @@ const command: OperatorCommand = {
 function expectCode(fn: () => unknown, code: AccountAdministrationError["code"]) {
   assert.throws(fn, (error: unknown) => error instanceof AccountAdministrationError && error.code === code);
 }
+
+test("maps every governed command to its exact live capability", () => {
+  assert.equal(operatorCapabilityForAction("suspend_account"), "account:suspend");
+  assert.equal(operatorCapabilityForAction("restore_account"), "account:restore");
+  assert.equal(operatorCapabilityForAction("revoke_sessions"), "account:revoke_sessions");
+  assert.equal(operatorCapabilityForAction("suspend_character"), "character:suspend");
+  assert.equal(operatorCapabilityForAction("restore_character"), "character:restore");
+});
 
 test("account inspection is default-deny and requires an active, recently authenticated operator", () => {
   assert.deepEqual(authorizeAccountInspection({ principal, targetAccountId: TARGET_ID, now: NOW }), { operatorAccountId: OPERATOR_ID, targetAccountId: TARGET_ID });
