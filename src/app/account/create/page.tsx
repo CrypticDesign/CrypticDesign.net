@@ -54,7 +54,7 @@ export default function CreateAccountPage() {
         </div>
         <nav className="hero-actions explore-portal__continuum-actions" aria-label="Continue from Request Access">
           <AnalyticsLink href="/community" className="button home-primary-cta" analyticsEvent={{ name: ANALYTICS_EVENTS.COMMUNITY_OPEN, payload: { source: "request_access_continue" } }}>Explore Community</AnalyticsLink>
-          <Link href="/releases" className="button secondary">Browse Releases</Link>
+          <Link href="/entertainment#public-releases" className="button secondary">Browse Releases</Link>
           <AnalyticsLink href="/account/sign-in" className="button secondary" analyticsEvent={{ name: ANALYTICS_EVENTS.SIGN_IN_OPEN, payload: { source: "request_access_continue" } }}>Sign In to My Home</AnalyticsLink>
         </nav>
       </section>

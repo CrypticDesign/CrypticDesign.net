@@ -38,7 +38,7 @@ export default async function CommunityPage() {
           <div><span className="kicker">From across the platform</span><h2 id="community-explore-platform-title">Explore while Community opens.</h2><p>Games, music, video, and release previews are open to browse. These are Entertainment destinations, not Community activity.</p></div>
           <nav className="hero-actions explore-portal__continuum-actions" aria-label="Explore beyond Community">
             <Link href="/entertainment" className="button secondary">Explore Entertainment</Link>
-            <Link href="/releases" className="button secondary">Browse Releases</Link>
+            <Link href="/entertainment#public-releases" className="button secondary">Browse Releases</Link>
             <AnalyticsLink href="/account/create" className="button home-primary-cta" analyticsEvent={{ name: ANALYTICS_EVENTS.REQUEST_ACCESS_OPEN, payload: { source: "community_continue" } }}>Request Access</AnalyticsLink>
           </nav>
         </section>

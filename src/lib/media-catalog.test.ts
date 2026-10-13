@@ -15,3 +15,8 @@ test("every Music and Video stub carries shared construction-page fields", () =>
     assert.ok(entry.href || entry.status === "In development", `${entry.slug} needs a destination or clear in-development language`);
   }
 });
+
+test("Signal & Systems routes to its Cryptic Signal catalog instead of an unrelated Singularis release", () => {
+  const signalAndSystems = MUSIC_ENTRIES.find((entry) => entry.slug === "signal-and-systems");
+  assert.equal(signalAndSystems?.href, "/audio?filter=cryptic-signal");
+});

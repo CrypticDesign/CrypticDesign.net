@@ -40,14 +40,15 @@ test("hero and discovery routes prioritize Entertainment and Community", () => {
   assert.match(home, /href="\/community" className="button home-secondary-cta"[^>]*>Enter Community/);
   assert.doesNotMatch(home, /href="\/professional" className="button home-secondary-cta"/);
   for (const href of [
-    "/entertainment/explore",
-    "/entertainment/listening-rooms",
+    "/entertainment/arcade",
+    "/entertainment#choose-a-mode",
     "/products",
     "/community",
     "/community/creators",
     "/community/groups",
     "/community/events",
   ]) assert.match(home, new RegExp(`href: "${href.replaceAll("/", "\\/")}"|href="${href.replaceAll("/", "\\/")}"`));
+  assert.doesNotMatch(home, /title: "Watch & listen"[^\n]*href: "\/entertainment\/listening-rooms"/);
 });
 
 test("Featured Experiences and CURRENT SIGNAL derive from governed shared data", () => {

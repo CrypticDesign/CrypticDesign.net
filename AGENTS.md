@@ -4,7 +4,7 @@ This repository is the implementation source of truth for the CrypticDesign.net 
 
 ## Locked platform model (Sitemap v20 and low-cost wave launch policy — current direction, confirmed 2026-09-09)
 
-- The current model combines Sitemap v20 and the canonical Platform Information Architecture with `docs/CRY_LowCostWaveLaunchArchitecture_v1_2026-08-03.md`, the CRY-489 admission contract, and the development-experience public-gating policy. The checked-in implementation and verified staging deployment are current executable evidence; Figma availability never blocks governed implementation or closeout.
+- The current model combines Sitemap v20 and the canonical Platform Information Architecture with the CRY-489 admission contract and the development-experience public-gating policy. `docs/CRY_LowCostWaveLaunchArchitecture_v1_2026-08-03.md` is historical launch-planning input where later Jira, Confluence, repository, or production evidence supersedes it. The checked-in implementation and verified production deployment are current executable evidence; Figma availability never blocks governed implementation or closeout.
 - Signed-out primary navigation uses **Home · Play · Community · Professional** with **Sign In** as the account utility. Signed-in navigation uses **My Home · Play · Community · Professional** with **Account** as the account utility. **Search** remains a global utility rather than a primary-nav destination; Store remains contextual unless an approved Jira scope changes that model.
 - **Home** (`/`) is the public Cryptic Design introduction for signed-out visitors. **My Home** (`/`) is the authenticated personal dashboard state.
 - **Entertainment Hub** (`/entertainment`) is the audience front door for releases, franchises, games, cinema, audio, rooms, visual studies, and experiments.
@@ -25,9 +25,10 @@ This repository is the implementation source of truth for the CrypticDesign.net 
 
 ## Deployment environments
 
-- **Temporary staging source of truth:** `https://demo.crypticdesign.net/`. Use this URL for deployment verification, route and redirect smoke tests, visual review, and pre-production acceptance until Robert explicitly promotes the build or names a replacement staging URL.
-- `https://crypticdesign.net/` and `https://www.crypticdesign.net/` remain production-facing domains and may continue serving the legacy site during staging. Do not interpret their state as evidence that the current Next.js staging deployment failed.
-- Production metadata may intentionally use `https://crypticdesign.net` for canonical, Open Graph, robots, sitemap, and host values while the build is staged at the temporary URL.
+- **Canonical production:** `https://crypticdesign.net/`. Production behavior, repository `main`, Jira, and Confluence are the current delivery evidence chain.
+- `https://www.crypticdesign.net/` redirects to the canonical production domain.
+- `https://demo.crypticdesign.net/` is a staging/reference alias for pre-production verification. It does not supersede production or establish a separate product model.
+- Canonical, Open Graph, robots, sitemap, and host metadata use `https://crypticdesign.net`.
 
 ## Deployment cost discipline (Netlify)
 
@@ -88,7 +89,7 @@ Apply this rule to every assistant and agent response in every session loop:
 - Canonical platform architecture: `https://crypticdesign.atlassian.net/wiki/spaces/TEAM/pages/440041473/CrypticDesign.net+Platform+Architecture`
 - Canonical Sitemap v20 / information architecture: `https://crypticdesign.atlassian.net/wiki/spaces/TEAM/pages/434667532/Platform+Information+Architecture`
 - Development-experience public gating: `https://crypticdesign.atlassian.net/wiki/spaces/TEAM/pages/473235458/`
-- Launch architecture: `docs/CRY_LowCostWaveLaunchArchitecture_v1_2026-08-03.md`
+- Historical launch-planning input: `docs/CRY_LowCostWaveLaunchArchitecture_v1_2026-08-03.md` (superseded where current Jira, Confluence, repository, or production evidence differs)
 - Account admission contract: `docs/CRY_489_SingleUseInvitationAdmissionContract_2026-08-16.md`
 - Visual direction: `docs/CRY_VisualDirection_IntegratedScreens_2026-07-12.md`
 - Jira: CRY-242 and its current children, including CRY-489 and CRY-522 for admission and executable-development boundaries

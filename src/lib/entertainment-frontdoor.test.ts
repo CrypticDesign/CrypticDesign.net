@@ -9,7 +9,7 @@ const page = readFileSync(new URL("../app/entertainment/page.tsx", import.meta.u
 test("Entertainment is the canonical six-stage public discovery front door", () => {
   assert.match(page, /canonical: "\/entertainment"/);
   let cursor = -1;
-  for (const stage of ["Enter Entertainment", "Featured /", "Choose a mode", "Enter a world", "Featured across Cryptic Design", ">Continue<"]) {
+  for (const stage of ["Enter Entertainment", "Featured /", "Choose a mode", "Enter a world", "Across Cryptic Design", ">Continue<"]) {
     const next = page.indexOf(stage, cursor + 1);
     assert.ok(next > cursor, stage);
     cursor = next;
@@ -17,7 +17,10 @@ test("Entertainment is the canonical six-stage public discovery front door", () 
   for (const mode of ["Arcade", "Music", "Video"]) assert.ok(page.includes('title="' + mode + '"'));
   assert.match(page, /publicProducts\(\)/);
   assert.match(page, /href="#choose-a-mode"/);
-  assert.match(page, /href="\/releases".*Browse Releases/);
+  assert.match(page, /id="public-releases"/);
+  assert.match(page, /publicReleases\(\)/);
+  assert.match(page, /<ReleaseCard key=\{release\.slug\} release=\{release\} \/>/);
+  assert.match(page, /href="#public-releases".*Browse Releases/);
   assert.match(page, /explore-portal__continuum--cta/);
   assert.match(page, /href="\/community" className="button home-primary-cta"[^>]*>Explore Community/);
   assert.doesNotMatch(page, /Popular now|live mix|Trending|Latest|href="\/library"/i);

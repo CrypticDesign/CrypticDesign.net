@@ -58,7 +58,7 @@ test("compact toggle reuses VDS navigation and shared icon treatment", async () 
 test("keeps Entertainment active across its legacy and current destinations", () => {
   for (const pathname of [
     "/entertainment",
-    "/entertainment/explore",
+    "/entertainment/arcade",
     "/products/singularis",
     "/releases/singularis-overture",
     "/audio",
@@ -82,7 +82,7 @@ test("suppresses the redundant top breadcrumb on franchise roots", () => {
   assert.equal(shouldShowTopBreadcrumb("/entertainment/singularis"), false);
   assert.equal(shouldShowTopBreadcrumb("/entertainment/lifa"), false);
   assert.equal(shouldShowTopBreadcrumb("/products/singularis/archive"), false);
-  assert.equal(shouldShowTopBreadcrumb("/entertainment/explore"), false);
+  assert.equal(shouldShowTopBreadcrumb("/entertainment/arcade"), false);
   assert.equal(shouldShowTopBreadcrumb("/audio"), false);
   assert.equal(shouldShowTopBreadcrumb("/professional/articles"), true);
 });

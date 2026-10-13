@@ -101,13 +101,11 @@ for (const viewport of viewports) {
     assert.ok(activeCount >= 1, `${viewport.name} ${destination.active} navigation state is not active`);
   }
 
-  const exploreResponse = await page.goto(`${baseUrl}/entertainment/explore`, { waitUntil: "domcontentloaded" });
+  const exploreResponse = await page.goto(`${baseUrl}/entertainment/arcade`, { waitUntil: "domcontentloaded" });
   assert.equal(exploreResponse?.status(), 200);
-  await page.getByRole("heading", { name: "Explore the Cryptic universe." }).waitFor();
-  await page.getByRole("heading", { name: "Featured experiences", exact: true }).waitFor();
-  await page.getByRole("heading", { name: "Browse categories", exact: true }).waitFor();
-  await page.getByRole("heading", { name: "Playable catalog", exact: true }).waitFor();
-  await page.getByText("Public discovery is open.", { exact: true }).waitFor();
+  await page.getByRole("heading", { name: "Discover your next interactive world." }).waitFor();
+  await page.getByRole("heading", { name: "Experience catalog", exact: true }).waitFor();
+  await page.getByText("Public browsing is open.", { exact: true }).waitFor();
   assert.equal(await page.getByText(/Join now|Join the community/i).count(), 0);
   const exploreLayout = await page.evaluate(() => ({
     documentWidth: document.documentElement.scrollWidth,

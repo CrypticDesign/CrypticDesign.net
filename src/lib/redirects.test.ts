@@ -28,6 +28,8 @@ const EXPECTED: Record<string, string> = {
   "/creative-works/crypticdesign-net": "/professional",
   "/creative-works/:slug*": "/entertainment",
   "/releases/singularis-vertical-slice": "/products/singularis",
+  "/releases": "/entertainment#public-releases",
+  "/entertainment/explore": "/entertainment/arcade",
   // Legacy /personal chain must point at final destinations, not deleted routes
   "/personal/creative-labs": "/entertainment",
   "/personal/rooms": "/entertainment",
@@ -108,5 +110,19 @@ test("the public sitemap excludes routes that immediately redirect", async () =>
   const source = await import("node:fs/promises").then(({ readFile }) => readFile("src/app/sitemap.ts", "utf8"));
   assert.doesNotMatch(source, /STATIC_ROUTES[\s\S]*"\/professional\/contact"/);
   assert.doesNotMatch(source, /creative-works/);
+  assert.doesNotMatch(source, /"\/entertainment\/explore"/);
+  assert.doesNotMatch(source, /STATIC_ROUTES[\s\S]*"\/releases"(?:,|\])/);
+  assert.match(source, /"\/entertainment\/arcade"/);
   assert.match(source, /releaseDestination\(release\)/);
+});
+
+test("Public Releases is embedded in Entertainment instead of keeping an index page", async () => {
+  const { access } = await import("node:fs/promises");
+  await assert.rejects(access("src/app/releases/page.tsx"));
+  const entertainment = await import("node:fs/promises").then(({ readFile }) => readFile("src/app/entertainment/page.tsx", "utf8"));
+  assert.match(entertainment, /id="public-releases"/);
+  assert.match(entertainment, /publicReleases\(\)/);
+  const breadcrumbs = await import("node:fs/promises").then(({ readFile }) => readFile("src/components/SubNavBreadcrumbs.tsx", "utf8"));
+  assert.match(breadcrumbs, /segment: "public-releases", href: "\/entertainment#public-releases"/);
+  assert.doesNotMatch(breadcrumbs, /return \[\{ segment: "entertainment"[^\n]+\.\.\.route\];\s*\}\s*if \(\["releases"/);
 });

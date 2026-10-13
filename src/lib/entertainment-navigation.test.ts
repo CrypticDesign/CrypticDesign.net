@@ -1,10 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { ARCADE_CATEGORIES, ENTERTAINMENT_NAV_ITEMS, arcadeCategory, entertainmentCategoryHref, isEntertainmentDestinationActive, isEntertainmentNavigationRelevant } from "./entertainment-navigation.ts";
+import { ARCADE_CATEGORIES, ENTERTAINMENT_NAV_ITEMS, arcadeCategory, entertainmentCategoryForPath, entertainmentCategoryHref, entertainmentDestinationForPath, isEntertainmentDestinationActive, isEntertainmentNavigationRelevant } from "./entertainment-navigation.ts";
 
 const canonicalDestinations = [
   "/entertainment",
-  "/entertainment/explore",
+  "/entertainment/arcade",
   "/audio",
   "/entertainment/cinema",
 ];
@@ -23,12 +23,56 @@ test("Entertainment navigation never targets a retired route", () => {
 });
 
 test("active matching includes nested routes without activating the hub", () => {
-  assert.equal(isEntertainmentDestinationActive("/entertainment/explore/singularis/game-01", "/entertainment/explore"), true);
+  assert.equal(isEntertainmentDestinationActive("/entertainment/arcade/singularis/game-01", "/entertainment/arcade"), true);
   assert.equal(isEntertainmentDestinationActive("/entertainment/cinema", "/entertainment"), false);
   assert.equal(isEntertainmentDestinationActive("/entertainment", "/entertainment"), true);
 });
 
-test("Explore drawer exposes scalable categories instead of franchise links", () => {
+test("overview remains visibly active on contextual public routes", () => {
+  for (const pathname of ["/products", "/releases/example"]) {
+    assert.equal(isEntertainmentDestinationActive(pathname, "/entertainment"), true, pathname);
+  }
+  assert.equal(isEntertainmentDestinationActive("/releases/example", "/entertainment/arcade"), false);
+});
+
+test("every shared Entertainment route has exactly one visibly active destination", () => {
+  const routes = [
+    "/entertainment",
+    "/entertainment/arcade",
+    "/entertainment/cinema",
+    "/entertainment/creative-labs",
+    "/entertainment/listening-rooms",
+    "/entertainment/store",
+    "/entertainment/virtual-rooms",
+    "/entertainment/visual-studies",
+    "/audio",
+    "/products",
+    "/products/singularis",
+    "/products/lifa",
+    "/releases/example",
+  ];
+
+  for (const pathname of routes) {
+    const activeDestinations = ENTERTAINMENT_NAV_ITEMS.filter((item) =>
+      isEntertainmentDestinationActive(pathname, item.href),
+    );
+    assert.equal(activeDestinations.length, 1, pathname);
+  }
+});
+
+test("Listening Rooms identifies Music while contextual destinations identify Overview", () => {
+  assert.equal(isEntertainmentDestinationActive("/entertainment/listening-rooms", "/audio"), true);
+  for (const pathname of [
+    "/entertainment/creative-labs",
+    "/entertainment/store",
+    "/entertainment/virtual-rooms",
+    "/entertainment/visual-studies",
+  ]) {
+    assert.equal(isEntertainmentDestinationActive(pathname, "/entertainment"), true, pathname);
+  }
+});
+
+test("Arcade drawer exposes scalable categories instead of franchise links", () => {
   assert.deepEqual(ARCADE_CATEGORIES.map((category) => category.label), [
     "Lobby", "Singularis", "Lifa",
   ]);
@@ -36,20 +80,39 @@ test("Explore drawer exposes scalable categories instead of franchise links", ()
   assert.equal(arcadeCategory("not-a-category"), undefined);
 });
 
-test("Singularis game routes activate Explore while other legacy directors activate Overview", () => {
-  assert.equal(isEntertainmentDestinationActive("/products/singularis", "/entertainment/explore"), true);
+test("Singularis game routes activate Arcade while other legacy directors activate Overview", () => {
+  assert.equal(isEntertainmentDestinationActive("/products/singularis", "/entertainment/arcade"), true);
   assert.equal(isEntertainmentDestinationActive("/products/singularis", "/entertainment"), false);
-  assert.equal(isEntertainmentDestinationActive("/products/lifa", "/entertainment/explore"), true);
+  assert.equal(isEntertainmentDestinationActive("/products/lifa", "/entertainment/arcade"), true);
   assert.equal(isEntertainmentDestinationActive("/products/lifa", "/entertainment"), false);
 });
 
-test("Explore franchise navigation resolves to the single product roots", () => {
+test("release details follow their media kind instead of matching franchise words in the slug", () => {
+  assert.equal(entertainmentDestinationForPath("/releases/singularis-themes-vol-1"), "music");
+  assert.equal(entertainmentDestinationForPath("/releases/singularis-overture"), "video");
+  assert.equal(entertainmentDestinationForPath("/releases/singularis-vertical-slice"), "arcade");
+  assert.equal(entertainmentDestinationForPath("/releases/visual-study-01"), "overview");
+  assert.equal(entertainmentCategoryForPath("/releases/singularis-themes-vol-1"), "singularis");
+  assert.equal(entertainmentCategoryForPath("/releases/singularis-overture"), "singularis");
+
+  assert.equal(isEntertainmentDestinationActive("/releases/singularis-themes-vol-1", "/audio"), true);
+  assert.equal(isEntertainmentDestinationActive("/releases/singularis-themes-vol-1", "/entertainment/arcade"), false);
+  assert.equal(isEntertainmentDestinationActive("/releases/singularis-overture", "/entertainment/cinema"), true);
+  assert.equal(isEntertainmentDestinationActive("/releases/singularis-overture", "/entertainment/arcade"), false);
+});
+
+test("Listening Rooms opens Music at its Collections category", () => {
+  assert.equal(entertainmentDestinationForPath("/entertainment/listening-rooms"), "music");
+  assert.equal(entertainmentCategoryForPath("/entertainment/listening-rooms"), "collections");
+});
+
+test("Arcade franchise navigation resolves to the single product roots", () => {
   assert.equal(entertainmentCategoryHref("arcade", "singularis"), "/products/singularis");
   assert.equal(entertainmentCategoryHref("arcade", "lifa"), "/products/lifa");
 });
 
 test("shows the shared bar across connected entertainment content only", () => {
-  for (const pathname of ["/entertainment/explore", "/audio", "/products/singularis", "/releases/example"]) {
+  for (const pathname of ["/entertainment/arcade", "/audio", "/products/singularis", "/releases/example"]) {
     assert.equal(isEntertainmentNavigationRelevant(pathname), true, pathname);
   }
   for (const pathname of ["/", "/professional", "/account", "/library"]) {

@@ -7,7 +7,8 @@ import { ANALYTICS_EVENTS } from "@/lib/analytics";
 import MediaCard from "@/components/MediaCard";
 import { entertainmentSelection, releaseAvailability } from "@/lib/entertainment-frontdoor";
 import { publicProducts } from "@/lib/products";
-import { releaseDestination, releaseImage } from "@/lib/releases";
+import { publicReleases, releaseDestination, releaseImage } from "@/lib/releases";
+import ReleaseCard from "@/components/ReleaseCard";
 
 export const metadata: Metadata = {
   title: "Entertainment Hub",
@@ -18,7 +19,8 @@ export const metadata: Metadata = {
 };
 
 export default function EntertainmentHub() {
-  const { featured, selected } = entertainmentSelection();
+  const { featured } = entertainmentSelection();
+  const releases = publicReleases();
   const worlds = publicProducts().filter((product) => ["singularis", "lifa"].includes(product.slug));
   return <main>
     <section className="visual-hero !min-h-[560px]" data-section-accent="cyan" aria-labelledby="entertainment-title">
@@ -27,7 +29,7 @@ export default function EntertainmentHub() {
       <div className="visual-hero__content"><div className="signal-rail" /><span className="kicker">Enter Entertainment</span>
         <h1 id="entertainment-title" className="display-title">Enter the worlds, sound, and systems in motion.</h1>
         <p>Explore games, music, video, original worlds, releases, and experiments across one connected entertainment platform.</p>
-        <div className="hero-actions"><a href="#choose-a-mode" className="button">Explore Entertainment</a><Link href="/releases" className="button secondary">Browse Releases</Link></div>
+        <div className="hero-actions"><a href="#choose-a-mode" className="button">Explore Entertainment</a><a href="#public-releases" className="button secondary">Browse Releases</a></div>
       </div>
     </section>
     <div className="shell page-stack">
@@ -41,7 +43,7 @@ export default function EntertainmentHub() {
       <section id="choose-a-mode" data-section-accent="violet" aria-labelledby="choose-a-mode-title">
         <div className="section-heading"><div><span className="kicker">Choose a mode</span><h2 id="choose-a-mode-title" className="section-title">Play. Listen. Watch.</h2></div><p>Browse each catalog without an account. Availability is shown for each experience.</p></div>
         <div className="media-grid">
-          <MediaCard href="/entertainment/explore" image="/images/singularis-marketing-02.jpg" eyebrow="Play" title="Arcade" body="Games, announced prototypes, and interactive worlds with clear availability." />
+          <MediaCard href="/entertainment/arcade" image="/images/singularis-marketing-02.jpg" eyebrow="Play" title="Arcade" body="Games, announced prototypes, and interactive worlds with clear availability." />
           <MediaCard href="/audio" image="/images/signal-systems.png" eyebrow="Listen" title="Music" body="Scores, albums, tracks, signals, and audio releases." accent="violet" />
           <MediaCard href="/entertainment/cinema" image="/images/entertainment-hero.png" eyebrow="Watch" title="Video" body="Films, trailers, transmissions, visual stories, and series." accent="indigo" />
         </div>
@@ -50,14 +52,13 @@ export default function EntertainmentHub() {
         <div className="section-heading"><div><span className="kicker">Enter a world</span><h2 id="entertainment-worlds-title" className="section-title">Worlds beyond a single medium</h2></div><p>Original properties connecting games, music, stories, and experiments.</p></div>
         <div className="media-grid">{worlds.map((world) => <MediaCard key={world.slug} href={`/products/${world.slug}`} image={world.slug === "singularis" ? "/images/singularis.png" : "/images/entertainment-feature.png"} eyebrow={`World / ${world.status.replaceAll("-", " ")}`} title={world.title} body={world.summary} accent="magenta" />)}</div>
       </section>
-      <section data-section-accent="cyan" aria-labelledby="selected-releases-title">
-        <div className="section-heading"><div><span className="kicker">Featured across Cryptic Design</span><h2 id="selected-releases-title" className="section-title">Selected releases</h2></div><p>Explore announced work and its current availability.</p></div>
-        <div className="media-grid">{selected.map((release) => <MediaCard key={release.slug} href={releaseDestination(release)} image={releaseImage(release)} eyebrow={`${release.kind} / ${releaseAvailability(release)}`} title={release.title} body={release.tagline} />)}</div>
-        {!selected.length ? <p>No public selections are available yet.</p> : null}
+      <section id="public-releases" className="scroll-mt-52" data-section-accent="cyan" aria-labelledby="public-releases-title">
+        <div className="section-heading"><div><span className="kicker">Across Cryptic Design</span><h2 id="public-releases-title" className="section-title">Public releases</h2></div><p>Games, films, music, stories, and experiments with their current availability.</p></div>
+        {releases.length ? <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 [&>a]:w-full [&>a]:max-w-none">{releases.map((release) => <ReleaseCard key={release.slug} release={release} />)}</div> : <p>No public releases are available yet.</p>}
       </section>
       <section className="explore-portal__continuum explore-portal__continuum--cta" data-section-accent="indigo" aria-labelledby="entertainment-continue-title">
         <div><span className="kicker">Continue</span><h2 id="entertainment-continue-title">Find your next connection.</h2><p>Discover Community participation paths, browse releases, or sign in to your personal My Home.</p></div>
-        <nav className="hero-actions explore-portal__continuum-actions" aria-label="Continue from Entertainment"><AnalyticsLink href="/community" className="button home-primary-cta" analyticsEvent={{ name: ANALYTICS_EVENTS.COMMUNITY_OPEN, payload: { source: "entertainment_continue" } }}>Explore Community</AnalyticsLink><Link href="/releases" className="button secondary">Browse Releases</Link><AnalyticsLink href="/account/sign-in" className="button secondary" analyticsEvent={{ name: ANALYTICS_EVENTS.SIGN_IN_OPEN, payload: { source: "entertainment_continue" } }}>Sign In to My Home</AnalyticsLink></nav>
+        <nav className="hero-actions explore-portal__continuum-actions" aria-label="Continue from Entertainment"><AnalyticsLink href="/community" className="button home-primary-cta" analyticsEvent={{ name: ANALYTICS_EVENTS.COMMUNITY_OPEN, payload: { source: "entertainment_continue" } }}>Explore Community</AnalyticsLink><a href="#public-releases" className="button secondary">Browse Releases</a><AnalyticsLink href="/account/sign-in" className="button secondary" analyticsEvent={{ name: ANALYTICS_EVENTS.SIGN_IN_OPEN, payload: { source: "entertainment_continue" } }}>Sign In to My Home</AnalyticsLink></nav>
       </section>
     </div>
   </main>;

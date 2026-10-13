@@ -2,6 +2,8 @@
 
 Cryptic Design's owned, browser-first web application platform. Not a marketing site — the platform foundation for personal entertainment, professional services, release publishing, account/character identity, library, feed, Creative Labs, admin publishing, and external syndication metadata.
 
+Canonical production: [crypticdesign.net](https://crypticdesign.net). `demo.crypticdesign.net` is a staging/reference alias, not the production source of truth.
+
 ## Stack
 
 - [Next.js 15](https://nextjs.org) (App Router) + React 19
@@ -47,6 +49,6 @@ src/app/    App Router routes, layouts, global styles
 - Architecture/IA: Confluence — "CrypticDesign.net Platform Architecture" and "Platform Information Architecture"
 - Sitemap: Sitemap v20 as recorded in current Confluence and Jira authority; Figma/FigJam is optional reference tooling, not a completion gate
 - Executable work: Jira — epic CRY-242
-- Implementation/runtime evidence: this repository and the verified deployment
+- Implementation/runtime evidence: this repository and the verified production deployment at `https://crypticdesign.net`
 
 See `AGENTS.md` for agent/contributor operating rules.

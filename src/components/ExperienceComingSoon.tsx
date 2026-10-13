@@ -34,7 +34,7 @@ export default function ExperienceComingSoon({
           </p>
           <div className="mt-5 flex flex-wrap gap-3">
             <Link className="button secondary" href="/account/sign-in">Sign in</Link>
-            <Link className="button secondary" href="/releases">Browse public releases</Link>
+            <Link className="button secondary" href="/entertainment#public-releases">Browse public releases</Link>
           </div>
         </>
       )}

@@ -24,6 +24,7 @@ const LABELS: Record<string, string> = {
   "my-home": "My Home",
   notifications: "Notifications",
   products: "Products",
+  "public-releases": "Public Releases",
   professional: "Professional",
   releases: "Releases",
   request: "Creator Access Request",
@@ -52,7 +53,14 @@ function routeCrumbs(pathname: string): Crumb[] {
     ];
   }
 
-  if (["releases", "products", "audio"].includes(first)) {
+  if (first === "releases") {
+    return [
+      { segment: "entertainment", href: "/entertainment" },
+      { segment: "public-releases", href: "/entertainment#public-releases" },
+      ...route.slice(1),
+    ];
+  }
+  if (["products", "audio"].includes(first)) {
     return [{ segment: "entertainment", href: "/entertainment" }, ...route];
   }
   if (["account", "library"].includes(first)) {
