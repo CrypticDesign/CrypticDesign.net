@@ -7,13 +7,13 @@ import type {
   OperatorFixtureCommand,
   OperatorFixtureInspection,
 } from "@/lib/account-administration-operator-fixtures";
-import { OPERATOR_COMMANDS_ENABLED } from "@/lib/account-administration-operator-origin";
 import styles from "./operator-console.module.css";
 
 type Props = {
   accounts: readonly OperatorFixtureAccount[];
   commands: readonly OperatorFixtureCommand[];
   inspections: readonly OperatorFixtureInspection[];
+  commandsEnabled?: boolean;
   sessionControl?: ReactNode;
   children?: ReactNode;
 };
@@ -29,7 +29,7 @@ function Status({ value }: { value: string }) {
   return <span className={styles.status} data-status={value}>{value.replaceAll("_", " ")}</span>;
 }
 
-export default function OperatorConsole({ accounts, commands, inspections, sessionControl, children }: Props) {
+export default function OperatorConsole({ accounts, commands, inspections, commandsEnabled = false, sessionControl, children }: Props) {
   const [query, setQuery] = useState("");
   const [selectedAccountId, setSelectedAccountId] = useState(accounts[0]?.id ?? "");
   const normalizedQuery = query.trim().toLowerCase();
@@ -58,7 +58,7 @@ export default function OperatorConsole({ accounts, commands, inspections, sessi
             <a href="#operator-accounts">Accounts</a>
             <a href="#inspection-history-title">Audit</a>
           </nav>
-          <span className={styles.operatorMode}>Local · Read-only</span>
+          <span className={styles.operatorMode}>Local · {commandsEnabled ? "Mutations gated" : "Read-only"}</span>
         </div>
       </header>
 
@@ -68,12 +68,12 @@ export default function OperatorConsole({ accounts, commands, inspections, sessi
           <div className="signal-rail" />
           <span className="eyebrow">CRY-400 · Local operator fixture</span>
           <h1 className="display-title">Account administration</h1>
-          <p>Inspect the operator workflow with synthetic records. Any separately enabled live transport is read-only and exposes no mutation controls.</p>
+          <p>Inspect the operator workflow with synthetic records. Live lookup and mutation transports remain independent, local-only, and default-off.</p>
         </div>
         <dl className={styles.environment}>
           <div><dt>Environment</dt><dd>Local development</dd></div>
           <div><dt>Data source</dt><dd>{children ? "Fixtures + opt-in reads" : "Approved fixtures"}</dd></div>
-          <div><dt>Authority</dt><dd>Read-only</dd></div>
+          <div><dt>Authority</dt><dd>{commandsEnabled ? "Gated mutations" : "Read-only"}</dd></div>
         </dl>
       </header>
 
@@ -103,7 +103,7 @@ export default function OperatorConsole({ accounts, commands, inspections, sessi
           <div><dt>Operator host</dt><dd>127.0.0.1 only</dd></div>
           <div><dt>Session cookie</dt><dd>Separate · HttpOnly · Strict</dd></div>
           <div><dt>Maximum session</dt><dd>15 minutes</dd></div>
-          <div><dt>Commands</dt><dd>{OPERATOR_COMMANDS_ENABLED ? "Enabled" : "Disabled"}</dd></div>
+          <div><dt>Commands</dt><dd>{commandsEnabled ? "Enabled locally" : "Disabled"}</dd></div>
         </dl>
         {sessionControl ?? (
           <>

@@ -3,11 +3,12 @@ import test from "node:test";
 import {
   authorizeLocalOperatorBrowserRequest,
   operatorCsrfCookieSettings,
+  operatorCommandsEnabled,
   operatorContentSecurityPolicy,
+  operatorLookupEnabled,
   operatorOriginDecision,
   operatorSecurityHeaders,
   operatorSessionCookieSettings,
-  OPERATOR_COMMANDS_ENABLED,
   validOperatorCsrfToken,
 } from "./account-administration-operator-origin.ts";
 
@@ -123,6 +124,11 @@ test("future browser APIs require exact origin, custom header, and CSRF for writ
   assert.equal(authorizeLocalOperatorBrowserRequest({ ...request, method: "POST", csrfHeader: "wrong-csrf-token", expectedCsrfToken: "csrf-token-value" }), false);
 });
 
-test("operator commands remain disabled at Gate 3", () => {
-  assert.equal(OPERATOR_COMMANDS_ENABLED, false);
+test("operator lookup and commands require independent non-production gates", () => {
+  assert.equal(operatorLookupEnabled({ NODE_ENV: "development" }), false);
+  assert.equal(operatorLookupEnabled({ NODE_ENV: "development", ACCOUNT_ADMINISTRATION_OPERATOR_LOOKUP_ENABLED: "true" }), true);
+  assert.equal(operatorLookupEnabled({ NODE_ENV: "production", ACCOUNT_ADMINISTRATION_OPERATOR_LOOKUP_ENABLED: "true" }), false);
+  assert.equal(operatorCommandsEnabled({ NODE_ENV: "development" }), false);
+  assert.equal(operatorCommandsEnabled({ NODE_ENV: "development", ACCOUNT_ADMINISTRATION_OPERATOR_COMMANDS_ENABLED: "true" }), true);
+  assert.equal(operatorCommandsEnabled({ NODE_ENV: "production", ACCOUNT_ADMINISTRATION_OPERATOR_COMMANDS_ENABLED: "true" }), false);
 });

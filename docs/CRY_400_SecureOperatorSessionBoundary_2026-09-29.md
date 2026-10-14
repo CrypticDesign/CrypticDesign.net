@@ -36,6 +36,8 @@ This progress does not accept a production deployment, apply a hosted database m
 
 On 2026-10-03, the production isolation and cost review selected no production action now. CRY-400 remains local-only and default-off. If production activation is later approved, the cost-minimizing candidate is an exact dedicated hostname alias on the existing Netlify site, bundled into one planned coherent release rather than a second Netlify site or standalone PR. This is logical host isolation on a shared artifact and applies only to read-only Gate 4; mutation capability requires a separate decision. See `docs/CRY_400_ProductionIsolationCostDecision_2026-10-03.md`.
 
+On 2026-10-13, Robert authorized that separate decision for a **local-only, default-off** implementation slice. The isolated browser BFF may now expose exact account UUID, Character UUID, and Character handle lookup plus the existing governed command domain behind independent non-production flags. Lookup is exact-only and feeds the audit-before-disclosure inspection service; email, fuzzy, and bulk Auth-directory search remain excluded. Browser commands require the numeric-loopback origin, custom operator header, double-submit CSRF binding, verified Auth-session identity, a short-lived operator session, live inspect plus action capability, bounded reason, exact action/target confirmation, and the existing idempotent durable command audit. This authorization does not include hosted migrations, production activation, provider configuration, secrets, DNS/hostname changes, deployment, or production account access.
+
 ## Requirements and Constraints
 
 - Robert remains the approval authority for provisioning, deployment, migrations, secrets, and live operator access.

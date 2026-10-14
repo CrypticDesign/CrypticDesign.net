@@ -19,9 +19,9 @@ test("operator fixture UI is explicitly enabled, non-production, non-indexed, an
   assert.match(page, /dynamic = "force-dynamic"/);
 });
 
-test("operator console is fixture-only and exposes no live transport or mutation control", () => {
+test("operator console keeps fixtures isolated from independently gated live transports", () => {
   assert.match(consoleSource, /Fixture isolation active/);
-  assert.match(consoleSource, /separately enabled live transport is read-only/i);
+  assert.match(consoleSource, /Live lookup and mutation transports remain independent, local-only, and default-off/i);
   assert.doesNotMatch(consoleSource, /fetch\(|createServiceRoleSupabaseClient|\.rpc\(|method:\s*["'](?:POST|PATCH|PUT|DELETE)/i);
   assert.doesNotMatch(consoleSource, /suspend account|restore account|revoke sessions/i);
   assert.match(fixtures, /@example\.test/);
@@ -34,7 +34,7 @@ test("operator console covers inspection, diagnostics, and immutable audit histo
   assert.match(consoleSource, /Immutable audit history/);
 });
 
-test("live reads require a separate default-off gate and use GET-only same-origin BFF requests", () => {
+test("live reads remain GET-only while lookup and commands use separately gated CSRF-protected POSTs", () => {
   assert.match(gate, /ACCOUNT_ADMINISTRATION_OPERATOR_LIVE_UI_ENABLED === "true"/);
   assert.match(gate, /ACCOUNT_ADMINISTRATION_OPERATOR_BFF_ENABLED === "true"/);
   assert.match(page, /accountAdministrationLiveReadUiEnabled\(\)/);
@@ -42,7 +42,10 @@ test("live reads require a separate default-off gate and use GET-only same-origi
   assert.match(liveReadPanel, /"x-cry-operator-request": "1"/);
   assert.match(liveReadPanel, /credentials: "same-origin"/);
   assert.match(liveReadPanel, /cache: "no-store"/);
-  assert.doesNotMatch(liveReadPanel, /method:\s*"(?:POST|PUT|PATCH|DELETE)"/);
+  assert.match(liveReadPanel, /method: "POST"/);
+  assert.match(liveReadPanel, /"x-cry-operator-csrf": csrfToken/);
+  assert.match(gate, /ACCOUNT_ADMINISTRATION_OPERATOR_LOOKUP_ENABLED === "true"/);
+  assert.match(gate, /ACCOUNT_ADMINISTRATION_OPERATOR_COMMANDS_ENABLED === "true"/);
   assert.doesNotMatch(liveReadPanel, /createServiceRoleSupabaseClient|ACCOUNT_ADMINISTRATION_INTERNAL_SECRET|Bearer /);
 });
 

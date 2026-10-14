@@ -4,9 +4,22 @@ export const OPERATOR_API_PATH = "/api/operator/";
 export const OPERATOR_REQUEST_HEADER = "x-cry-operator-request";
 export const OPERATOR_CSRF_HEADER = "x-cry-operator-csrf";
 export const OPERATOR_CSRF_REQUEST_TOKEN_HEADER = "x-cry-operator-csrf-token";
-export const OPERATOR_COMMANDS_ENABLED = false;
 
 type RuntimeEnvironment = "development" | "test" | "production";
+
+export function operatorLookupEnabled(
+  environment: { NODE_ENV?: string; ACCOUNT_ADMINISTRATION_OPERATOR_LOOKUP_ENABLED?: string } = process.env,
+) {
+  return environment.NODE_ENV !== "production" &&
+    environment.ACCOUNT_ADMINISTRATION_OPERATOR_LOOKUP_ENABLED === "true";
+}
+
+export function operatorCommandsEnabled(
+  environment: { NODE_ENV?: string; ACCOUNT_ADMINISTRATION_OPERATOR_COMMANDS_ENABLED?: string } = process.env,
+) {
+  return environment.NODE_ENV !== "production" &&
+    environment.ACCOUNT_ADMINISTRATION_OPERATOR_COMMANDS_ENABLED === "true";
+}
 
 function normalizeHost(host: string | null) {
   if (!host || host.includes(",") || /[\s\\/@]/.test(host)) return null;

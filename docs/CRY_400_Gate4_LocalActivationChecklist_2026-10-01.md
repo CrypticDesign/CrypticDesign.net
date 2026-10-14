@@ -1,8 +1,8 @@
 # CRY-400 Gate 4 Local Activation Checklist
 
-**Status:** TOTP/AAL2 ceremony and local default-off issuance path implemented; CRY-400 migrations validated against a disposable local database; no hosted migration, provider, secret, deployment, or hosted-project change authorized
-**Date:** 2026-10-02
-**Scope:** Local read-only account/Character inspection BFF
+**Status:** TOTP/AAL2 ceremony, local default-off issuance, exact lookup, and audited browser-command paths implemented; CRY-400 migrations validated against a disposable local database; no hosted migration, provider, secret, deployment, production activation, or hosted-project change authorized
+**Date:** 2026-10-13
+**Scope:** Local account/Character inspection, exact identifier lookup, and audited command BFF
 
 ## Approved Ceremony
 
@@ -100,6 +100,8 @@ The routing/cost decision was completed locally on 2026-10-03 in `docs/CRY_400_P
 
 - Local UI rollback: set `ACCOUNT_ADMINISTRATION_OPERATOR_LIVE_UI_ENABLED=false` and restart the local server.
 - Local BFF rollback: set `ACCOUNT_ADMINISTRATION_OPERATOR_BFF_ENABLED=false` and restart the local server.
+- Local lookup rollback: set `ACCOUNT_ADMINISTRATION_OPERATOR_LOOKUP_ENABLED=false` and restart the local server.
+- Local command rollback: set `ACCOUNT_ADMINISTRATION_OPERATOR_COMMANDS_ENABLED=false` and restart the local server.
 - Session response: revoke the specific operator session, then disable the principal if compromise is suspected.
 - Provider recovery: retain at least two independently controlled TOTP factors for the operator; provider-side recovery remains owner-controlled.
 - Hosted database rollback is not defined or authorized by this draft. It must be designed and approved before any hosted migration.
@@ -111,7 +113,7 @@ The routing/cost decision was completed locally on 2026-10-03 in `docs/CRY_400_P
 - **Source inputs:** CRY-400 ADR, current repository, Supabase official documentation, local test output, and approved provider/database evidence.
 - **Authority class:** local code and draft documentation only; every external or hosted mutation remains separately gated.
 - **Verification:** focused tests, full tests, lint, typecheck, production build, local database tests, and browser boundary tests proportional to the stage.
-- **Escalation boundary:** hosted configuration, migration application, secrets, DNS/hostname, deployment, production account access, or mutation capability.
+- **Escalation boundary:** hosted configuration, migration application, secrets, DNS/hostname, deployment, production account access, or hosted/production mutation activation.
 - **Usage guardrail:** stop after the authorized stage; do not use GitHub or Netlify as a debugging loop.
 
 ## 2026-10-05 Packaging Handoff
@@ -119,3 +121,14 @@ The routing/cost decision was completed locally on 2026-10-03 in `docs/CRY_400_P
 Robert authorized packaging the completed local CRY-400 foundation into a commit and a separate pull request for review. This supersedes the earlier checklist prohibition on creating a PR for this packaging step only. It does not authorize merge, Netlify deployment, hosted Supabase migrations, MFA/provider configuration, secrets, DNS/hostname changes, production activation, or operator mutation capability.
 
 Pre-PR verification on 2026-10-05 completed with a sealed security diff scan reporting zero findings, 441/441 repository tests passing, focused operator-boundary tests passing, lint passing, TypeScript no-emit passing, the numeric-loopback browser-origin suite passing, and the Next.js production build passing. A real Chromium same-origin request also confirmed that read-only fetches omit `Origin` but supply `Sec-Fetch-Site: same-origin` and `Sec-Fetch-Mode: cors`; the browser boundary now accepts only that narrow GET/HEAD case while preserving exact-Origin and CSRF requirements for writes.
+
+## 2026-10-13 Local Lookup and Mutation Continuation
+
+Robert authorized the next local-only CRY-400 slice on 2026-10-13. This authorization covers default-off exact identifier lookup and browser command transport inside the already isolated numeric-loopback operator surface. It does not authorize applying either CRY-400 migration to a hosted project, enabling hosted MFA, enrolling a production operator, creating a hostname or DNS record, adding secrets, deploying, enabling production flags, or executing against production accounts.
+
+The implementation adds two independent gates, both false by default and both hard-disabled when `NODE_ENV=production`:
+
+- `ACCOUNT_ADMINISTRATION_OPERATOR_LOOKUP_ENABLED` — exact account UUID, Character UUID, or normalized Character handle only. Email, fuzzy, partial, prefix, and bulk directory search are intentionally excluded. A successful resolution flows directly through the existing audit-before-disclosure inspection service.
+- `ACCOUNT_ADMINISTRATION_OPERATOR_COMMANDS_ENABLED` — CSRF-protected browser POST transport for the existing governed command domain. It preserves short-lived operator-session binding, live capability checks, exact confirmation, reason bounds, self/protected-target controls, idempotency, serialization, reconciliation, and durable result auditing.
+
+Account and Character suspend/restore use the existing tested adapters. Session revocation remains provider-limited and returns the existing audited `SESSION_REVOCATION_UNAVAILABLE` result rather than fabricating completion. No new migration is required for this local slice; the previously drafted CRY-400 migrations remain unapplied to hosted projects.
