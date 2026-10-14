@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
+import SearchExperience from "@/components/SearchExperience";
+import { publicSearchIndex } from "@/lib/public-search-index";
 import { socialMetadata } from "@/lib/social-metadata";
 
-const description = "Search Cryptic Design releases, products, franchises, articles, and creative work across the entertainment platform and professional studio, all in one place.";
+const description = "Search Cryptic Design's approved local public index of releases, worlds, articles, and professional services.";
 
 export const metadata: Metadata = {
   title: "Search",
@@ -11,18 +14,22 @@ export const metadata: Metadata = {
 };
 
 export default function SearchPage() {
+  const records = publicSearchIndex();
+
   return (
-    <main className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-16 sm:px-6">
-      <h1 className="text-3xl font-semibold text-white">Search</h1>
-      <p className="max-w-xl text-neutral-400">
-        Site-wide search across releases is coming soon.
-      </p>
-      <input
-        type="search"
-        disabled
-        placeholder="Search releases — coming soon"
-        className="max-w-md rounded border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-sm text-neutral-400 placeholder:text-neutral-600"
-      />
+    <main className="shell page-stack py-12 sm:py-16">
+      <header className="max-w-4xl">
+        <div className="signal-rail" />
+        <span className="kicker">Utility / Public discovery</span>
+        <h1 className="display-title mt-3">Search what is public now.</h1>
+        <p className="mt-5 max-w-3xl text-lg leading-relaxed text-[var(--muted)]">
+          Find approved public work without implying access to private accounts, inactive services, or future entitlements.
+        </p>
+      </header>
+
+      <Suspense fallback={<div className="panel p-6 text-[var(--muted)]" aria-live="polite" aria-busy="true">Loading the local public index…</div>}>
+        <SearchExperience records={records} />
+      </Suspense>
     </main>
   );
 }
