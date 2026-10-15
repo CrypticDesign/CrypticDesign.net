@@ -18,15 +18,14 @@ function VideoCard({ entry }: { entry: VideoEntry }) {
         <p>{entry.premise}</p>
         <dl>
           <div><dt>Playback</dt><dd>{entry.delivery.playback}</dd></div>
-          <div><dt>Poster</dt><dd>{entry.delivery.poster}</dd></div>
+          <div><dt>Preview</dt><dd>{entry.delivery.poster}</dd></div>
           <div><dt>Captions</dt><dd>{entry.delivery.captions}</dd></div>
           <div><dt>Transcript</dt><dd>{entry.delivery.transcript}</dd></div>
-          <div><dt>Rights</dt><dd>{entry.delivery.rights}</dd></div>
           <div><dt>Age guidance</dt><dd>{entry.delivery.ageGuidance}</dd></div>
         </dl>
-        <p className="video-card__fallback">If media cannot load: {entry.delivery.fallback.toLowerCase()}.</p>
+        <p className="video-card__fallback">{entry.delivery.fallback}.</p>
         <div className="video-card__actions">
-          {entry.href ? <Link className="text-link" href={entry.href}>View release details →</Link> : null}
+          {entry.href ? <Link className="text-link" href={entry.href}>Explore this release →</Link> : null}
           <Link className="text-link" href={entry.delivery.contextHref}>{entry.delivery.contextLabel} →</Link>
         </div>
       </div>
@@ -43,9 +42,9 @@ export default function VideoDestination({ selectedLabel, rootView, entries }: {
         <div className="video-destination__wash" />
         <div className="shell video-destination__hero-content">
           <span className="eyebrow">Entertainment / Video</span>
-          <h1 id="video-title" className="display-title">{rootView ? "Watch the worlds of Cryptic Design." : selectedLabel}</h1>
-          <p>{rootView ? "Films, trailers, transmissions, production stories, and visual experiences—each with its public availability stated before you open it." : `Explore ${selectedLabel} video from Cryptic Design.`}</p>
-          <div className="hero-actions"><a className="button" href="#video-catalog">Browse video</a><Link className="button secondary" href="/entertainment">Entertainment home</Link></div>
+          <h1 id="video-title" className="display-title">{rootView ? "Watch Cryptic Design in motion." : selectedLabel}</h1>
+          <p>{rootView ? "Explore trailers, episodes, transmissions, behind-the-work features, shorts, and visualizers. Every title shows whether it is ready to watch." : `Explore ${selectedLabel} from Cryptic Design. Every title shows whether it is ready to watch.`}</p>
+          <div className="hero-actions"><a className="button" href="#video-catalog">Explore Video</a><Link className="button secondary" href="/entertainment">Return to Entertainment</Link></div>
         </div>
       </header>
 
@@ -54,30 +53,30 @@ export default function VideoDestination({ selectedLabel, rootView, entries }: {
           <section className="video-feature" aria-labelledby="video-feature-title">
             <div className="video-feature__poster">
               <Image src="/images/singularis.png" alt="Singularis: Overture preview artwork" fill sizes="(max-width: 900px) 100vw, 56vw" />
-              <span>Poster preview</span>
+              <span>Preview artwork</span>
             </div>
             <div className="video-feature__content">
               <span className="kicker">Featured / Coming soon</span>
               <h2 id="video-feature-title">Singularis: Overture</h2>
-              <p>A cinematic introduction to Singularis. The approved release record is public; the film itself is not yet published.</p>
-              <p className="video-playback-status" role="status" aria-live="polite"><strong>Playback unavailable</strong><span>No public video source has been approved. The poster and release context remain available.</span></p>
-              <div className="hero-actions"><Link className="button" href="/releases/singularis-overture">View release details</Link><Link className="button secondary" href="/products/singularis">Explore Singularis</Link></div>
+              <p>An opening transmission into the Singularis universe, connecting its worlds, signals, and stories.</p>
+              <p className="video-playback-status" role="status" aria-live="polite"><strong>Coming soon</strong><span>Preview artwork and release details are available now. Playback will appear here when the video is published.</span></p>
+              <div className="hero-actions"><Link className="button" href="/releases/singularis-overture">Explore Overture</Link><Link className="button secondary" href="/products/singularis">Explore Singularis</Link></div>
             </div>
           </section>
         ) : null}
 
         <section aria-labelledby="video-catalog-title">
-          <div className="section-heading"><div><span className="kicker">{rootView ? "Video catalog" : selectedLabel}</span><h2 id="video-catalog-title" className="section-title">{rootView ? "Announced and developing video" : `${selectedLabel} video`}</h2></div><p>No title displays a play control until approved media is actually published.</p></div>
+          <div className="section-heading"><div><span className="kicker">{rootView ? "Video" : selectedLabel}</span><h2 id="video-catalog-title" className="section-title">{rootView ? "Explore every announced title" : `${selectedLabel} video`}</h2></div><p>Browse what is coming next. Watch controls appear only when a video is ready to play.</p></div>
           <div className="video-grid">{entries.map((entry) => <VideoCard entry={entry} key={entry.slug} />)}</div>
         </section>
 
         <section className="video-behavior" aria-labelledby="video-behavior-title">
-          <div className="section-heading"><div><span className="kicker">Playback behavior</span><h2 id="video-behavior-title" className="section-title">What to expect when video arrives</h2></div></div>
+          <div className="section-heading"><div><span className="kicker">Viewing experience</span><h2 id="video-behavior-title" className="section-title">Clear, accessible playback</h2></div></div>
           <div className="video-behavior__grid">
-            <article><strong>Before playback</strong><p>An approved poster, publication status, rights state, and age guidance appear first.</p></article>
-            <article><strong>While loading</strong><p>Status is announced to assistive technology and controls remain unavailable until the media is ready.</p></article>
-            <article><strong>If playback fails</strong><p>The poster stays visible, an error is announced, and release and franchise links remain usable.</p></article>
-            <article><strong>Captions and transcript</strong><p>Both publish with playable media. Neither is claimed before an approved video source exists.</p></article>
+            <article><strong>Before you watch</strong><p>Each title shows its availability and age guidance before playback begins.</p></article>
+            <article><strong>While video loads</strong><p>Loading status is announced to assistive technology, and controls activate only when the video is ready.</p></article>
+            <article><strong>If playback is interrupted</strong><p>Preview artwork and related links remain available, with the playback issue clearly announced.</p></article>
+            <article><strong>Captions and transcripts</strong><p>Every playable video will include captions and a transcript.</p></article>
           </div>
         </section>
       </div>

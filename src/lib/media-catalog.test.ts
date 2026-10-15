@@ -25,13 +25,13 @@ test("every Video entry declares a truthful delivery and fallback state", () => 
   for (const entry of VIDEO_ENTRIES) {
     assert.match(entry.thumbnail, /^\/images\//, `${entry.slug} needs a local preview thumbnail`);
     assert.ok(entry.thumbnailAlt, `${entry.slug} needs descriptive thumbnail text`);
-    assert.equal(entry.delivery.playback, "Not yet published", entry.slug);
-    assert.equal(entry.delivery.ageGuidance, "Not rated", entry.slug);
-    assert.equal(entry.delivery.captions, "Publishes with playable video", entry.slug);
-    assert.equal(entry.delivery.transcript, "Publishes with playable video", entry.slug);
+    assert.equal(entry.delivery.playback, "Coming soon", entry.slug);
+    assert.equal(entry.delivery.ageGuidance, "Rating pending", entry.slug);
+    assert.equal(entry.delivery.captions, "Available with playback", entry.slug);
+    assert.equal(entry.delivery.transcript, "Available with playback", entry.slug);
     assert.ok(entry.delivery.rights, `${entry.slug} needs a rights state`);
     assert.ok(entry.delivery.contextHref, `${entry.slug} needs a current product, release, or franchise context`);
-    assert.match(entry.delivery.fallback, /Poster, status, and context links/);
+    assert.match(entry.delivery.fallback, /Preview artwork and related links/);
   }
 });
 

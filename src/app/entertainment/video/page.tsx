@@ -4,7 +4,7 @@ import { VIDEO_ENTRIES, mediaEntriesFor } from "@/lib/media-catalog";
 import { videoCategory } from "@/lib/entertainment-navigation";
 import { socialMetadata } from "@/lib/social-metadata";
 
-const description = "Films, trailers, transmissions, production stories, and visual experiences from Cryptic Design, with clear public availability.";
+const description = "Explore trailers, episodes, transmissions, behind-the-work features, shorts, and visualizers from Cryptic Design.";
 
 export const metadata: Metadata = {
   title: "Video",
