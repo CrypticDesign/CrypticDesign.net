@@ -23,6 +23,8 @@ test("Signal & Systems routes to its Cryptic Signal catalog instead of an unrela
 
 test("every Video entry declares a truthful delivery and fallback state", () => {
   for (const entry of VIDEO_ENTRIES) {
+    assert.match(entry.thumbnail, /^\/images\//, `${entry.slug} needs a local preview thumbnail`);
+    assert.ok(entry.thumbnailAlt, `${entry.slug} needs descriptive thumbnail text`);
     assert.equal(entry.delivery.playback, "Not yet published", entry.slug);
     assert.equal(entry.delivery.ageGuidance, "Not rated", entry.slug);
     assert.equal(entry.delivery.captions, "Publishes with playable video", entry.slug);

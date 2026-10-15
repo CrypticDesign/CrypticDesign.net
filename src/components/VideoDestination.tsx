@@ -5,24 +5,30 @@ import type { VideoEntry } from "@/lib/media-catalog";
 function VideoCard({ entry }: { entry: VideoEntry }) {
   return (
     <article className="video-card">
-      <div className="video-card__heading">
-        <span>{entry.franchise}</span>
-        <strong>{entry.delivery.availability}</strong>
-      </div>
-      <h3>{entry.title}</h3>
-      <p>{entry.premise}</p>
-      <dl>
-        <div><dt>Playback</dt><dd>{entry.delivery.playback}</dd></div>
-        <div><dt>Poster</dt><dd>{entry.delivery.poster}</dd></div>
-        <div><dt>Captions</dt><dd>{entry.delivery.captions}</dd></div>
-        <div><dt>Transcript</dt><dd>{entry.delivery.transcript}</dd></div>
-        <div><dt>Rights</dt><dd>{entry.delivery.rights}</dd></div>
-        <div><dt>Age guidance</dt><dd>{entry.delivery.ageGuidance}</dd></div>
-      </dl>
-      <p className="video-card__fallback">If media cannot load: {entry.delivery.fallback.toLowerCase()}.</p>
-      <div className="video-card__actions">
-        {entry.href ? <Link className="text-link" href={entry.href}>View release details →</Link> : null}
-        <Link className="text-link" href={entry.delivery.contextHref}>{entry.delivery.contextLabel} →</Link>
+      <figure className="video-card__thumbnail">
+        <Image src={entry.thumbnail} alt={entry.thumbnailAlt} fill sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 33vw" />
+        <figcaption>Preview image</figcaption>
+      </figure>
+      <div className="video-card__body">
+        <div className="video-card__heading">
+          <span>{entry.franchise}</span>
+          <strong>{entry.delivery.availability}</strong>
+        </div>
+        <h3>{entry.title}</h3>
+        <p>{entry.premise}</p>
+        <dl>
+          <div><dt>Playback</dt><dd>{entry.delivery.playback}</dd></div>
+          <div><dt>Poster</dt><dd>{entry.delivery.poster}</dd></div>
+          <div><dt>Captions</dt><dd>{entry.delivery.captions}</dd></div>
+          <div><dt>Transcript</dt><dd>{entry.delivery.transcript}</dd></div>
+          <div><dt>Rights</dt><dd>{entry.delivery.rights}</dd></div>
+          <div><dt>Age guidance</dt><dd>{entry.delivery.ageGuidance}</dd></div>
+        </dl>
+        <p className="video-card__fallback">If media cannot load: {entry.delivery.fallback.toLowerCase()}.</p>
+        <div className="video-card__actions">
+          {entry.href ? <Link className="text-link" href={entry.href}>View release details →</Link> : null}
+          <Link className="text-link" href={entry.delivery.contextHref}>{entry.delivery.contextLabel} →</Link>
+        </div>
       </div>
     </article>
   );
