@@ -6,7 +6,7 @@ const canonicalDestinations = [
   "/entertainment",
   "/entertainment/arcade",
   "/audio",
-  "/entertainment/cinema",
+  "/entertainment/video",
 ];
 
 test("Entertainment navigation exposes only scalable media destinations", () => {
@@ -24,7 +24,7 @@ test("Entertainment navigation never targets a retired route", () => {
 
 test("active matching includes nested routes without activating the hub", () => {
   assert.equal(isEntertainmentDestinationActive("/entertainment/arcade/singularis/game-01", "/entertainment/arcade"), true);
-  assert.equal(isEntertainmentDestinationActive("/entertainment/cinema", "/entertainment"), false);
+  assert.equal(isEntertainmentDestinationActive("/entertainment/video", "/entertainment"), false);
   assert.equal(isEntertainmentDestinationActive("/entertainment", "/entertainment"), true);
 });
 
@@ -39,7 +39,7 @@ test("every shared Entertainment route has exactly one visibly active destinatio
   const routes = [
     "/entertainment",
     "/entertainment/arcade",
-    "/entertainment/cinema",
+    "/entertainment/video",
     "/entertainment/creative-labs",
     "/entertainment/listening-rooms",
     "/entertainment/store",
@@ -97,7 +97,7 @@ test("release details follow their media kind instead of matching franchise word
 
   assert.equal(isEntertainmentDestinationActive("/releases/singularis-themes-vol-1", "/audio"), true);
   assert.equal(isEntertainmentDestinationActive("/releases/singularis-themes-vol-1", "/entertainment/arcade"), false);
-  assert.equal(isEntertainmentDestinationActive("/releases/singularis-overture", "/entertainment/cinema"), true);
+  assert.equal(isEntertainmentDestinationActive("/releases/singularis-overture", "/entertainment/video"), true);
   assert.equal(isEntertainmentDestinationActive("/releases/singularis-overture", "/entertainment/arcade"), false);
 });
 

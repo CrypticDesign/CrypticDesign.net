@@ -45,7 +45,7 @@ export default function EntertainmentHub() {
         <div className="media-grid">
           <MediaCard href="/entertainment/arcade" image="/images/singularis-marketing-02.jpg" eyebrow="Play" title="Arcade" body="Games, announced prototypes, and interactive worlds with clear availability." />
           <MediaCard href="/audio" image="/images/signal-systems.png" eyebrow="Listen" title="Music" body="Scores, albums, tracks, signals, and audio releases." accent="violet" />
-          <MediaCard href="/entertainment/cinema" image="/images/entertainment-hero.png" eyebrow="Watch" title="Video" body="Films, trailers, transmissions, visual stories, and series." accent="indigo" />
+          <MediaCard href="/entertainment/video" image="/images/entertainment-hero.png" eyebrow="Watch" title="Video" body="Films, trailers, transmissions, visual stories, and series." accent="indigo" />
         </div>
       </section>
       <section data-section-accent="magenta" aria-labelledby="entertainment-worlds-title">

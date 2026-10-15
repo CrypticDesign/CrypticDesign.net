@@ -35,6 +35,9 @@ const nextConfig: NextConfig = {
       // CRY-242 / CRY-416: Arcade is canonical under Sitemap v20. Preserve the
       // former Explore URL as an inbound compatibility path.
       { source: "/entertainment/explore", destination: "/entertainment/arcade", permanent: true },
+      // CRY-417: Video is the audience-facing v20 label. Preserve the former
+      // Cinema URL for inbound links without retaining duplicate content.
+      { source: "/entertainment/cinema", destination: "/entertainment/video", permanent: true },
       // Public Releases is embedded in the Entertainment Overview. Preserve the
       // former index URL as an inbound compatibility path to that section.
       { source: "/releases", destination: "/entertainment#public-releases", permanent: true },

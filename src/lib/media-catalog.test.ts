@@ -20,3 +20,21 @@ test("Signal & Systems routes to its Cryptic Signal catalog instead of an unrela
   const signalAndSystems = MUSIC_ENTRIES.find((entry) => entry.slug === "signal-and-systems");
   assert.equal(signalAndSystems?.href, "/audio?filter=cryptic-signal");
 });
+
+test("every Video entry declares a truthful delivery and fallback state", () => {
+  for (const entry of VIDEO_ENTRIES) {
+    assert.equal(entry.delivery.playback, "Not yet published", entry.slug);
+    assert.equal(entry.delivery.ageGuidance, "Not rated", entry.slug);
+    assert.equal(entry.delivery.captions, "Publishes with playable video", entry.slug);
+    assert.equal(entry.delivery.transcript, "Publishes with playable video", entry.slug);
+    assert.ok(entry.delivery.rights, `${entry.slug} needs a rights state`);
+    assert.ok(entry.delivery.contextHref, `${entry.slug} needs a current product, release, or franchise context`);
+    assert.match(entry.delivery.fallback, /Poster, status, and context links/);
+  }
+});
+
+test("only the approved Overture record links to a public release detail", () => {
+  const linked = VIDEO_ENTRIES.filter((entry) => entry.href);
+  assert.deepEqual(linked.map((entry) => [entry.slug, entry.href]), [["singularis-overture", "/releases/singularis-overture"]]);
+  assert.equal(linked[0]?.delivery.rights, "Cryptic Design owned");
+});
