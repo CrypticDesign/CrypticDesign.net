@@ -30,6 +30,7 @@ const EXPECTED: Record<string, string> = {
   "/releases/singularis-vertical-slice": "/products/singularis",
   "/releases": "/entertainment#public-releases",
   "/entertainment/explore": "/entertainment/arcade",
+  "/entertainment/cinema": "/entertainment/video",
   // Legacy /personal chain must point at final destinations, not deleted routes
   "/personal/creative-labs": "/entertainment",
   "/personal/rooms": "/entertainment",
@@ -111,6 +112,8 @@ test("the public sitemap excludes routes that immediately redirect", async () =>
   assert.doesNotMatch(source, /STATIC_ROUTES[\s\S]*"\/professional\/contact"/);
   assert.doesNotMatch(source, /creative-works/);
   assert.doesNotMatch(source, /"\/entertainment\/explore"/);
+  assert.doesNotMatch(source, /"\/entertainment\/cinema"/);
+  assert.match(source, /"\/entertainment\/video"/);
   assert.doesNotMatch(source, /STATIC_ROUTES[\s\S]*"\/releases"(?:,|\])/);
   assert.match(source, /"\/entertainment\/arcade"/);
   assert.match(source, /releaseDestination\(release\)/);

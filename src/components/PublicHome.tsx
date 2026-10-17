@@ -70,7 +70,7 @@ const explorePaths: readonly {
   accent: string;
 }[] = [
   { href: "/entertainment/arcade", icon: "play", title: "Play", body: "Games, prototypes, arcade experiences, and interactive worlds.", accent: "blue" },
-  { href: "/entertainment#choose-a-mode", icon: "listen", title: "Watch & listen", body: "Music, film, visual media, stories, and cinematic experiences.", accent: "cyan" },
+  { href: "/entertainment#choose-a-mode", icon: "listen", title: "Watch & listen", body: "Music, video, visual stories, and cinematic experiences.", accent: "cyan" },
   { href: "/products", icon: "worlds", title: "Explore worlds", body: "Singularis, Lifa, releases, experiments, and interconnected projects.", accent: "indigo" },
   { href: "/community", icon: "crew", title: "Discover community", body: "Creators, groups, events, and governed participation.", accent: "violet" },
 ];

@@ -15,7 +15,7 @@ export const ENTERTAINMENT_NAV_ITEMS: readonly EntertainmentNavItem[] = [
   { href: "/entertainment", label: "Overview", description: "Entertainment", icon: "all", theme: "cyan" },
   { href: "/entertainment/arcade", label: "Arcade", description: "Games & interactive worlds", icon: "arcade", theme: "cyan" },
   { href: "/audio", label: "Music", description: "Sound & signal", icon: "music", theme: "cyan" },
-  { href: "/entertainment/cinema", label: "Video", description: "Watch & listen", icon: "video", theme: "cyan" },
+  { href: "/entertainment/video", label: "Video", description: "Watch & listen", icon: "video", theme: "cyan" },
 ] as const;
 
 export const ARCADE_CATEGORIES = [
@@ -66,7 +66,7 @@ export function videoCategory(slug: string | undefined) {
 export function entertainmentCategoryHref(destination: "arcade" | "music" | "video", slug: string) {
   if (destination === "arcade" && slug === "singularis") return "/products/singularis";
   if (destination === "arcade" && slug === "lifa") return "/products/lifa";
-  const roots = { arcade: "/entertainment/arcade", music: "/audio", video: "/entertainment/cinema" } as const;
+  const roots = { arcade: "/entertainment/arcade", music: "/audio", video: "/entertainment/video" } as const;
   const queries = { arcade: "genre", music: "filter", video: "filter" } as const;
   return slug === "all" ? roots[destination] : `${roots[destination]}?${queries[destination]}=${slug}`;
 }
@@ -102,8 +102,8 @@ export function entertainmentDestinationForPath(pathname: string): Entertainment
   ) return "music";
 
   if (
-    pathname === "/entertainment/cinema"
-    || pathname.startsWith("/entertainment/cinema/")
+    pathname === "/entertainment/video"
+    || pathname.startsWith("/entertainment/video/")
   ) return "video";
 
   const release = releaseFromPath(pathname);
@@ -128,6 +128,6 @@ export function isEntertainmentDestinationActive(pathname: string, href: string)
   if (href === "/entertainment") return isEntertainmentNavigationRelevant(pathname) && destination === "overview";
   if (href === "/entertainment/arcade") return destination === "arcade";
   if (href === "/audio") return destination === "music";
-  if (href === "/entertainment/cinema") return destination === "video";
+  if (href === "/entertainment/video") return destination === "video";
   return pathname === href || pathname.startsWith(`${href}/`);
 }

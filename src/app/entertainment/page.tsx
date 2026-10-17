@@ -45,7 +45,7 @@ export default function EntertainmentHub() {
         <div className="media-grid">
           <MediaCard href="/entertainment/arcade" image="/images/singularis-marketing-02.jpg" eyebrow="Play" title="Arcade" body="Games, announced prototypes, and interactive worlds with clear availability." />
           <MediaCard href="/audio" image="/images/signal-systems.png" eyebrow="Listen" title="Music" body="Scores, albums, tracks, signals, and audio releases." accent="violet" />
-          <MediaCard href="/entertainment/cinema" image="/images/entertainment-hero.png" eyebrow="Watch" title="Video" body="Films, trailers, transmissions, visual stories, and series." accent="indigo" />
+          <MediaCard href="/entertainment/video" image="/images/entertainment-hero.png" eyebrow="Watch" title="Video" body="Trailers, episodes, transmissions, shorts, and visualizers." accent="indigo" />
         </div>
       </section>
       <section data-section-accent="magenta" aria-labelledby="entertainment-worlds-title">
@@ -53,7 +53,7 @@ export default function EntertainmentHub() {
         <div className="media-grid">{worlds.map((world) => <MediaCard key={world.slug} href={`/products/${world.slug}`} image={world.slug === "singularis" ? "/images/singularis.png" : "/images/entertainment-feature.png"} eyebrow={`World / ${world.status.replaceAll("-", " ")}`} title={world.title} body={world.summary} accent="magenta" />)}</div>
       </section>
       <section id="public-releases" className="scroll-mt-52" data-section-accent="cyan" aria-labelledby="public-releases-title">
-        <div className="section-heading"><div><span className="kicker">Across Cryptic Design</span><h2 id="public-releases-title" className="section-title">Public releases</h2></div><p>Games, films, music, stories, and experiments with their current availability.</p></div>
+        <div className="section-heading"><div><span className="kicker">Across Cryptic Design</span><h2 id="public-releases-title" className="section-title">Public releases</h2></div><p>Games, video, music, stories, and experiments—ready now or clearly marked as coming soon.</p></div>
         {releases.length ? <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 [&>a]:w-full [&>a]:max-w-none">{releases.map((release) => <ReleaseCard key={release.slug} release={release} />)}</div> : <p>No public releases are available yet.</p>}
       </section>
       <section className="explore-portal__continuum explore-portal__continuum--cta" data-section-accent="indigo" aria-labelledby="entertainment-continue-title">

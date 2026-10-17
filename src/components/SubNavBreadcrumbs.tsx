@@ -31,6 +31,7 @@ const LABELS: Record<string, string> = {
   settings: "Settings",
   "sign-in": "Sign In",
   subscription: "Subscription",
+  video: "Video",
   "virtual-rooms": "Virtual Rooms",
 };
 
