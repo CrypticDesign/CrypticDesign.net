@@ -135,8 +135,11 @@ export default function FabMediaPlayer() {
     repeat,
     expanded,
     queueOpen,
-    silentPreview,
+    playbackStatus,
+    statusPresentation,
+    playbackBlocked,
     toggle,
+    retry,
     next,
     previous,
     seek,
@@ -196,7 +199,7 @@ export default function FabMediaPlayer() {
         <Waveform bars={ORB_BARS} />
         <span className="sr-only">
           Open the Cryptic Signal player — {playing ? "playing" : "paused"}: {track.title} by{" "}
-          {track.artist}
+          {track.artist}. {statusPresentation.label}.
         </span>
       </button>
 
@@ -300,6 +303,16 @@ export default function FabMediaPlayer() {
               <Waveform bars={PANEL_BARS} />
             </div>
 
+            <div className="cs-panel__status" data-status={playbackStatus} role="status" aria-live="polite">
+              <span>
+                <strong>{statusPresentation.label}</strong>
+                {statusPresentation.message}
+              </span>
+              {statusPresentation.retryable ? (
+                <button type="button" onClick={retry}>Try again</button>
+              ) : null}
+            </div>
+
             <div className="cs-panel__transport">
               <button
                 type="button"
@@ -322,7 +335,8 @@ export default function FabMediaPlayer() {
                 ref={playRef}
                 type="button"
                 className="cs-play"
-                aria-label={playing ? "Pause" : "Play"}
+                aria-label={playbackBlocked ? statusPresentation.label : playing ? "Pause" : "Play"}
+                disabled={playbackBlocked}
                 onClick={toggle}
               >
                 {playing ? <PauseIcon /> : <PlayIcon />}
@@ -352,17 +366,24 @@ export default function FabMediaPlayer() {
                 value={Math.min(currentTime, duration)}
                 aria-label="Seek"
                 aria-valuetext={`${formatTime(currentTime)} of ${formatTime(duration)}`}
+                disabled={playbackBlocked || duration <= 0}
                 style={cssVars({ "--cs-fill": progress })}
                 onChange={(event) => seek(Number(event.target.value))}
               />
               <span>{formatTime(duration)}</span>
             </div>
 
-            {silentPreview ? (
-              <p className="sr-only">
-                Preview timeline. Audio streams here once Cryptic Signal releases publish.
-              </p>
-            ) : null}
+            <p className="cs-panel__support">
+              Audio · {track.support.chapters === "available" ? "Chapters available" : "No chapters"}
+              {track.support.transcript === "available" ? " · Transcript available" : " · No transcript"}
+              <span className="sr-only">
+                {track.support.captions === "not-applicable"
+                  ? " Captions do not apply to this audio track."
+                  : track.support.captions === "available"
+                    ? " Captions are available."
+                    : " Captions are not offered."}
+              </span>
+            </p>
           </section>
       </div>
     </div>

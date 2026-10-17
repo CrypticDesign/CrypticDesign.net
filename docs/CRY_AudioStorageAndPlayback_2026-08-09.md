@@ -4,19 +4,22 @@
 **Status:** Proposal, awaiting Robert's decision. No backend work started.
 **Context:** The Cryptic Signal floating player (branch `agent/cry-fab-player`) now
 plays real files. It needs a storage answer before the catalog grows past a
-handful of preview tracks.
+handful of preview tracks. This brief was reconciled with the four-file preview
+catalog on 2026-10-17; its storage recommendation remains unapproved.
 
 ---
 
 ## 1. Where audio lives today
 
 Files sit in `public/audio/` and Next serves them as static assets at
-`/audio/<file>.mp3`. Two preview tracks are committed for the demo:
+`/audio/<file>.mp3`. Four preview tracks are committed for the public player:
 
 | File | Track | Size | Runtime |
 | --- | --- | --- | --- |
 | `cda001-reflection.mp3` | Reflection | 4.6 MB | 2:29 |
 | `labprmg001-baseline.mp3` | Baseline | 4.9 MB | 3:25 |
+| `sin-kyrie-of-a-dying-star-cabaret.mp3` | Kyrie of a Dying Star Cabaret | 5.8 MB | 4:17 |
+| `sin-leviathan-dreaming.mp3` | Leviathan Dreaming | 8.5 MB | 6:33 |
 
 The player never hardcodes an origin. `src/lib/player.ts` resolves every track
 through a single base:
@@ -117,7 +120,7 @@ reflect it, or drop the badge.
    `.env.example`.
 4. Add `/api/audio/[trackId]` with the entitlement check above.
 5. `git rm` the files under `public/audio/` and add the path to `.gitignore`.
-   History still carries the blobs; that is acceptable at two files.
+   History still carries the blobs; that is acceptable at the current four files.
 6. Verify range requests and seeking against the deployed bucket.
 
 ## 6. Open questions for Robert

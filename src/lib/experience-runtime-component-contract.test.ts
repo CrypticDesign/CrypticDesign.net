@@ -69,7 +69,11 @@ test("audio priority pauses and deliberately restores the global player", () => 
   assert.match(runtime, /requestAudioPriority\(runtimeId\)/);
   assert.match(runtime, /releaseAudioPriority\(runtimeId\)/);
   assert.match(player, /resumeAfterExperienceRef\.current = playingRef\.current/);
-  assert.match(player, /if \(resumeAfterExperienceRef\.current\) setPlaying\(true\)/);
+  assert.match(
+    player,
+    /if \(resumeAfterExperienceRef\.current\) \{[\s\S]*?setPlaying\(true\)/,
+  );
+  assert.match(player, /setPlaybackStatus\("interrupted"\)/);
 });
 
 test("focus, Escape, fallback, and unmount cleanup remain explicit", () => {
