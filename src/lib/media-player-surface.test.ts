@@ -33,6 +33,10 @@ test("the shared player exposes truthful operational and accessibility states", 
   assert.match(provider, /setPlaybackStatus\("interrupted"\)/);
   assert.match(provider, /liveSourceStatus\("error"\)/);
   assert.match(provider, /if \(audioPriorityOwnerRef\.current\) return "interrupted"/);
+  assert.match(provider, /const attachedAudioSource = hasAudioSource && playbackStatus !== "idle"/);
+  assert.match(provider, /src=\{attachedAudioSource\}/);
+  assert.match(provider, /preload="none"/);
+  assert.doesNotMatch(provider, /preload="metadata"/);
   assert.doesNotMatch(provider, /preview clock/i);
 
   assert.match(surface, /role="status"/);

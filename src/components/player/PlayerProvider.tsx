@@ -107,6 +107,10 @@ export function PlayerProvider({
   const duration = metaDuration && metaDuration > 0 ? metaDuration : declaredDuration;
   const hasAudioSource = Boolean(track?.src && track.availability === "public");
   const playbackBlocked = playbackIsBlocked(playbackStatus);
+  // The player is mounted in the root layout, so attaching a source while idle
+  // would let every page view and automated browser request audio metadata.
+  // Keep the URL off the media element until a person initiates playback.
+  const attachedAudioSource = hasAudioSource && playbackStatus !== "idle" ? track?.src : undefined;
   const statusPresentation = useMemo(
     () => playerStatusPresentation(playbackStatus),
     [playbackStatus],
@@ -402,8 +406,8 @@ export function PlayerProvider({
       {children}
       <audio
         ref={audioRef}
-        src={hasAudioSource ? track?.src : undefined}
-        preload="metadata"
+        src={attachedAudioSource}
+        preload="none"
         onLoadStart={() => setPlaybackStatus("loading")}
         onLoadedMetadata={(event) => {
           setMetaDuration(event.currentTarget.duration);

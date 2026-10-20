@@ -1,11 +1,34 @@
 # Audio storage and playback — decision brief
 
 **Date:** 2026-08-09
-**Status:** Proposal, awaiting Robert's decision. No backend work started.
+**Status:** Incident-informed recommendation, awaiting Robert's provider approval. No backend work started.
 **Context:** The Cryptic Signal floating player (branch `agent/cry-fab-player`) now
 plays real files. It needs a storage answer before the catalog grows past a
 handful of preview tracks. This brief was reconciled with the four-file preview
 catalog on 2026-10-17; its storage recommendation remains unapproved.
+
+## Incident update — 2026-10-20
+
+Netlify recorded 42.89 GB of web bandwidth and charged 857.7 of the current
+period's 1,100 consumed credits to bandwidth, despite Google Analytics showing
+only 13 active users. Netlify's daily billing chart shows a sudden change from
+38.3 MB on September 5 to 1.6 GB and 7,700 requests on September 6, followed by
+roughly 0.5-2.9 GB of sustained daily use until the project was paused.
+
+The traffic shape is automated, not ordinary human use. Exact historical URL
+attribution is unavailable because Personal Observability retains only 24 hours,
+but the global player provided a strong application-level multiplier: it mounted
+on every route with the first MP3 attached and `preload="metadata"`. A local
+containment patch now leaves the audio `src` unset while idle and uses
+`preload="none"`. Chromium verification observed zero MP3 requests on page load
+and one request after Play, while the full test, type, lint, and build suite
+passed.
+
+This incident meets the earlier R2 decision threshold: egress is the dominant
+hosting cost. The revised recommendation is Cloudflare R2 behind a custom media
+domain for public audio. The existing `NEXT_PUBLIC_AUDIO_BASE_URL` indirection
+means that migration requires no player-component rewrite. Provider account,
+billing, bucket, upload, DNS, and Netlify environment changes remain owner-gated.
 
 ---
 
@@ -58,7 +81,7 @@ assets, so scrubbing already works. Any replacement must preserve range support.
 - **Against:** every problem in §2 except seeking.
 - **Verdict:** correct for two demo tracks. Not correct for a catalog.
 
-### B. Supabase Storage — *recommended*
+### B. Supabase Storage
 Supabase is already in the stack for auth and the character store, so this adds
 no new vendor, no new billing relationship, and no new access-control model.
 
@@ -70,25 +93,26 @@ no new vendor, no new billing relationship, and no new access-control model.
 - **Against:** egress is billed on the Supabase plan; large catalogs get pricier
   than object storage with free egress.
 
-### C. Cloudflare R2
+### C. Cloudflare R2 — *recommended for public audio after the incident*
 - **For:** zero egress fees, and Cloudflare is already in the stack (DNS).
   Best economics if the catalog gets large or traffic spikes.
 - **Against:** a second access-control system to wire to Supabase identity;
   signed URLs and tokens live in a different place than the rest of auth.
-- **Verdict:** the right move *later*, if egress becomes the dominant cost.
+- **Verdict:** the egress threshold has now been met. Use R2 for public audio,
+  subject to owner approval and deployed verification.
 
 ### D. Managed audio platform (Mux, Bunny Stream)
 - **For:** transcoding, HLS, adaptive bitrate, per-title analytics out of the box.
 - **Against:** overkill for MP3 delivery; another vendor and monthly floor.
 - **Verdict:** revisit only if adaptive streaming or DRM becomes a requirement.
 
-## 4. Recommended design (Option B)
+## 4. Recommended design (revised: R2 public delivery, governed private delivery)
 
 **Buckets**
 
 | Bucket | Visibility | Holds |
 | --- | --- | --- |
-| `audio-public` | public | tracks whose release is `visibility_status: public` |
+| `audio-public` | public R2 bucket behind a custom domain | tracks whose release is `visibility_status: public` |
 | `audio-gated` | private | `account-required` and `entitlement-required` tracks |
 
 **Track model.** `PlayerTrack.src` becomes a storage *key* rather than a URL for
@@ -114,14 +138,21 @@ reflect it, or drop the badge.
 
 ## 5. Migration steps, once approved
 
-1. Create both buckets and the storage RLS policies.
-2. Upload the existing tracks; record keys in `src/lib/player.ts`.
-3. Set `NEXT_PUBLIC_AUDIO_BASE_URL` to the public bucket URL in Netlify and
+1. Create an R2 bucket for public web derivatives and connect a custom media
+   domain with cache and access controls.
+2. Create the governed private-storage path only when restricted playback is
+   in scope; keep it separate from the public R2 bucket.
+3. Upload the existing public tracks; preserve their current filenames/keys.
+4. Set `NEXT_PUBLIC_AUDIO_BASE_URL` to the public custom-domain URL in Netlify and
    `.env.example`.
-4. Add `/api/audio/[trackId]` with the entitlement check above.
-5. `git rm` the files under `public/audio/` and add the path to `.gitignore`.
+5. Add `/api/audio/[trackId]` with the entitlement check above when restricted
+   playback is approved.
+6. `git rm` the files under `public/audio/` and add the path to `.gitignore`.
    History still carries the blobs; that is acceptable at the current four files.
-6. Verify range requests and seeking against the deployed bucket.
+7. Verify range requests, seeking, cache headers, hotlink policy, and playback
+   against the deployed bucket.
+8. During the first 24 hours after Netlify resumes, capture `Bandwidth by URL`
+   and `Bandwidth by client type` before the Personal-plan window expires.
 
 ## 6. Open questions for Robert
 
