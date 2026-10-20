@@ -1,0 +1,5 @@
+[build]
+  # Preserve every Deploy Preview (the GitHub ruleset requires that check), but
+  # skip production builds when a merge only changes documentation, evidence,
+  # tests, or repository operations.
+  ignore = "node scripts/netlify-ignore-build.mjs"

@@ -88,5 +88,11 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
+  // Public assets are already served by Netlify's CDN and do not need auth,
+  // operator-origin, or indexing policy evaluation. Keeping them out of the
+  // middleware prevents an Edge Function invocation for every image/audio
+  // request while preserving middleware coverage for pages and APIs.
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico|audio/|brand/|images/|share/|share\\.png|share-placeholder\\.svg).*)",
+  ],
 };

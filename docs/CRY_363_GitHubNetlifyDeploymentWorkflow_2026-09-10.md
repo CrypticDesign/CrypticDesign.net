@@ -1,6 +1,6 @@
 # CRY-363 GitHub to Netlify Deployment Workflow
 
-**Verified:** 2026-09-10 (America/Chicago)
+**Verified:** 2026-09-10; cost and repository-control refresh 2026-10-19 (America/Chicago)
 
 **Repository:** `CrypticDesign/CrypticDesign.net`
 
@@ -8,7 +8,19 @@
 
 **Authority:** CRY-363, CRY-320, CrypticDesign.net Platform Operations Manual, Infrastructure and Operations Architecture
 
-**Result:** Conditional pass. PR verification, Deploy Preview behavior, Netlify Git-only production enforcement, and the GitHub `production-main` ruleset are verified. One post-change approved merge must still confirm exactly one production deploy, and the duplicate same-SHA scheduling incident still requires Netlify audit/support follow-up.
+**Result:** Conditional pass. PR verification, Deploy Preview behavior, Netlify Git-only production enforcement, and the GitHub `production-main` ruleset are verified. Repository-controlled production-only ignore filtering and static-asset middleware exclusions are locally implemented and verified. A Deploy Preview and one approved production merge remain required to prove the hosted behavior; the duplicate same-SHA scheduling incident still requires Netlify audit/support follow-up.
+
+## 2026-10-19 credit exhaustion finding
+
+The Sep 22-Oct 21 billing period exhausted the available balance and paused deploys. The Netlify usage UI showed:
+
+- 1,100 total credits consumed;
+- 11 production deploys, costing 165 credits;
+- 41.5 GB of bandwidth on `crypticdesign.net`, with 857.7 bandwidth credits displayed in the billing breakdown;
+- 119,000 web requests and 69,000 Edge Function requests; and
+- 32 total builds, including Deploy Previews and branch builds that carry no production-deploy charge.
+
+The incident is therefore not primarily a build-count problem. Production deploys represented 15% of the 1,100 consumed credits; bandwidth was the dominant category. Release batching remains necessary, while bandwidth, static-asset size, traffic quality, and middleware coverage require their own controls.
 
 ## Authoritative production branch
 
@@ -63,6 +75,8 @@ At the stated 15 credits per production deploy, this incident used 45 credits wh
 - `.github/pull_request_template.md` makes the preview check, coherent batching decision, metered merge impact, and rollback target explicit before merge.
 - `src/lib/deployment-workflow-contract.test.ts` prevents the verification workflow from silently gaining a `push`, `pull_request_target`, credential, or production-deploy path and preserves the PR release gates.
 - `AGENTS.md` now records the verified trigger boundary and points operators to this runbook.
+- `netlify.toml` runs `scripts/netlify-ignore-build.mjs`. The script filters only `CONTEXT=production`; Deploy Previews and branch deploys always build. Production builds are skipped only when all changed files are known non-deploy inputs such as documentation, evidence, tests, database migrations, or repository operations. Missing commit refs and unknown paths fail open and build.
+- `src/middleware.ts` excludes CDN-served `/audio/*`, `/brand/*`, `/images/*`, `/share/*`, and the root share images. Pages and APIs retain the authentication, operator-origin, and indexing policies while static files no longer incur an Edge Function invocation.
 
 These controls improve release readiness but deliberately do not pretend that a repository file can enforce provider account settings.
 
@@ -115,10 +129,22 @@ Open a Netlify support request or inspect the team audit log using the three dep
 - Direct-to-`main` iteration: reduced from one 15-credit deploy per routine push to zero production deploys before the final merge now that the GitHub ruleset is active. Organization Admin retains an always-allow emergency bypass.
 - Non-Git production triggers: reduced to zero now that Netlify Git-only production enforcement is enabled.
 - Duplicate Git scheduling: not guaranteed fixed by repository controls; resolving the provider duplicate would have saved 15 credits in the September 9 incident.
+- Documentation/evidence/test-only merges: reduced from one 15-credit production deploy to zero once the repository ignore rule is active. Deploy Preview checks remain unchanged.
+- Public static assets: no longer pass through middleware after the matcher change, reducing avoidable Edge Function requests. This does not remove bandwidth charges for the asset response itself.
 
 For the observed September 9 incident, the full target is 15 credits instead of 45, saving 30 credits (66.7%). Future monthly savings are `15 credits × the number of avoided direct-main, manual/API, and duplicate production deploys`; no honest fixed monthly amount can be claimed from one incident.
 
 ## Local verification
+
+Refresh on 2026-10-19 for the production-cost controls:
+
+- `npm test`: pass, 499/499 with a workspace-local temporary directory;
+- `npx tsc --noEmit`: pass;
+- `npm run lint`: pass;
+- `npm run build`: pass, Next.js 15.5.21 compiled successfully and generated 76/76 static pages;
+- ignore-command contract: same-SHA production comparison exits `0` (skip), a deploy-relevant production diff exits `1` (build), and Deploy Preview context exits `1` (build).
+
+Earlier 2026-09-10 evidence:
 
 Run on 2026-09-10 with temporary Node `v24.21.0`, matching Netlify's configured Node 24.x runtime:
 
@@ -135,3 +161,4 @@ Run on 2026-09-10 with temporary Node `v24.21.0`, matching Netlify's configured 
 - [x] **PASS — CLI/API/MCP production publication blocked:** these methods remain available only for non-production contexts.
 - [ ] **PENDING — Single-deploy release proof:** one approved merge to `main` must produce exactly one production deploy for its merge SHA.
 - [ ] **PENDING — Duplicate scheduling audit:** Netlify audit/support must explain the duplicate Git-attributed production builds for the same September 9 merge SHA and confirm their credit treatment.
+- [ ] **PENDING — Hosted ignore-rule proof:** after credits resume, a non-deploy-only merge must be recorded as an ignored production build while its PR still receives the Deploy Preview check.
