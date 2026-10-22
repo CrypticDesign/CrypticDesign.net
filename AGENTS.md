@@ -32,7 +32,7 @@ This repository is the implementation source of truth for the CrypticDesign.net 
 
 ## Deployment cost discipline (Netlify)
 
-Netlify project `frabjous-frangipane-650548` is linked to this GitHub repository with `main` as its production branch and automatic publishing enabled. **Production deploy credits are finite and metered.** The verified operating state on 2026-10-19 is Personal, 1,000 included credits/month, auto recharge disabled, and the Sep 22-Oct 21 billing period exhausted at 1,100 consumed credits, which paused deploys. Eleven production deploys accounted for 165 credits; production-domain bandwidth was the larger cost driver at 41.5 GB and 857.7 displayed credits. Production deploys cost 15 credits each; Deploy Previews and branch deploys have zero deployment charge but their bandwidth and requests remain metered.
+Netlify project `frabjous-frangipane-650548` is linked to this GitHub repository with `main` as its production branch and automatic publishing enabled. **Production deploy credits, bandwidth, requests, and compute are finite and metered.** The verified incident state on 2026-10-20 is Personal, 1,000 credits/month, auto recharge disabled, and the project paused after consuming 1,100 credits. Web bandwidth dominated the period at 42.89 GB / 857.7 credits; 11 production deploys consumed 165 credits, 127,065 web requests consumed 25.4 credits, and compute consumed 51.9 credits.
 
 - **Every push/merge to `main` triggers a production build that spends credits.** Opening or updating a pull request against `main` creates a non-production Deploy Preview instead. An ordinary feature-branch push without an open pull request does not deploy; branch deploys are limited to the branches explicitly enabled in Netlify.
 - **Production-only ignore filtering is repository controlled.** `netlify.toml` runs `scripts/netlify-ignore-build.mjs`. It skips a production build only when the merge changes documentation, evidence, tests, database files, or repository operations without changing deploy-relevant files. Deploy Previews and branch deploys are never filtered, preserving the required PR preview check. Missing or unusable commit refs fail open and build.
@@ -43,6 +43,11 @@ Netlify project `frabjous-frangipane-650548` is linked to this GitHub repository
 - **Do not push directly to `main`.** Work on `agent/<topic>` branches and merge via PR. This gates review and naturally batches deploys.
 - **Do not trigger production from Netlify UI, CLI, API, or MCP during routine work.** Provider-side Git-only production enforcement and GitHub `main` protection are required controls; their exact configuration and the verified trigger map are in `docs/CRY_363_GitHubNetlifyDeploymentWorkflow_2026-09-10.md`.
 - **Treat every deploy as a spend.** Before merging, confirm the change is worth a build credit and that nothing else is about to follow it that could be batched in.
+- **Treat every large asset response as a spend.** Google Analytics is not a bandwidth ledger: bots, crawlers, hotlinks, clients that block analytics, and non-consenting browsers still generate Netlify requests and bytes.
+- **Never attach or preload public audio/video globally before playback intent.** A root-layout media element must keep its source unset while idle and use `preload="none"`; browser/network verification must prove zero media requests before Play.
+- **Do not use Netlify static hosting as the long-term origin for public media.** The four-track preview catalog may remain only as a temporary fallback. The current recommendation is Cloudflare R2 through `NEXT_PUBLIC_AUDIO_BASE_URL`, subject to explicit provider, billing, DNS, and environment approval.
+- **Do not buy credits before removing preventable traffic multipliers.** The site is paused now; land and verify containment before service resumes.
+- **Capture the first 24 hours after resumption.** Personal Observability retains only 24 hours, so record `Bandwidth by URL` and `Bandwidth by client type` before the evidence expires.
 
 ## Sitemap sync rule
 

@@ -15,10 +15,81 @@ export interface PlayerTrack {
   duration: number;
   /** Audio file URL. Absent until catalog audio publishes. */
   src?: string;
+  /** Whether this browser may request the source. Restricted tracks never expose one. */
+  availability: "public" | "unavailable" | "restricted";
+  /** Explicit V1 disposition for optional navigation and accessibility media. */
+  support: {
+    chapters: "available" | "not-offered";
+    captions: "available" | "not-applicable" | "not-offered";
+    transcript: "available" | "not-offered";
+  };
   format: string;
   bitrate: string;
   /** In-platform destination for the track's release view. */
   href?: string;
+}
+
+export type PlayerPlaybackStatus =
+  | "idle"
+  | "loading"
+  | "ready"
+  | "playing"
+  | "paused"
+  | "buffering"
+  | "offline"
+  | "unavailable"
+  | "restricted"
+  | "interrupted"
+  | "error";
+
+export interface PlayerStatusPresentation {
+  label: string;
+  message: string;
+  retryable: boolean;
+}
+
+/** Establish the truthful state before the browser attempts playback. */
+export function initialPlaybackStatus(
+  track: PlayerTrack | undefined,
+  online = true,
+): PlayerPlaybackStatus {
+  if (!track) return "unavailable";
+  if (track.availability === "restricted") return "restricted";
+  if (track.availability === "unavailable" || !track.src) return "unavailable";
+  if (!online) return "offline";
+  return "idle";
+}
+
+/** Public-facing status copy shared by the visual and assistive interfaces. */
+export function playerStatusPresentation(status: PlayerPlaybackStatus): PlayerStatusPresentation {
+  switch (status) {
+    case "loading":
+      return { label: "Loading", message: "Preparing this track.", retryable: false };
+    case "ready":
+      return { label: "Ready", message: "This track is ready to play.", retryable: false };
+    case "playing":
+      return { label: "Playing", message: "Playback is active.", retryable: false };
+    case "paused":
+      return { label: "Paused", message: "Playback is paused.", retryable: false };
+    case "buffering":
+      return { label: "Buffering", message: "Playback will continue when enough audio is ready.", retryable: false };
+    case "offline":
+      return { label: "Offline", message: "Reconnect to continue listening.", retryable: true };
+    case "unavailable":
+      return { label: "Unavailable", message: "Audio is not available for this track.", retryable: false };
+    case "restricted":
+      return { label: "Restricted", message: "This track is not available with your current access.", retryable: false };
+    case "interrupted":
+      return { label: "Paused for experience", message: "Another experience is using audio. Playback will resume when it ends.", retryable: false };
+    case "error":
+      return { label: "Playback problem", message: "The track could not be played. Try again.", retryable: true };
+    default:
+      return { label: "Ready", message: "Choose play to begin listening.", retryable: false };
+  }
+}
+
+export function playbackIsBlocked(status: PlayerPlaybackStatus): boolean {
+  return status === "offline" || status === "unavailable" || status === "restricted" || status === "interrupted";
 }
 
 /**
@@ -45,6 +116,8 @@ const CATALOG_TRACKS: PlayerTrack[] = [
     artwork: "/images/signal-systems.png",
     duration: 149,
     src: audioUrl("cda001-reflection.mp3"),
+    availability: "public",
+    support: { chapters: "not-offered", captions: "not-applicable", transcript: "not-offered" },
     format: "MP3",
     bitrate: "320 Kbps",
     href: "/audio",
@@ -56,6 +129,8 @@ const CATALOG_TRACKS: PlayerTrack[] = [
     artwork: "/images/entertainment-feature.png",
     duration: 205,
     src: audioUrl("labprmg001-baseline.mp3"),
+    availability: "public",
+    support: { chapters: "not-offered", captions: "not-applicable", transcript: "not-offered" },
     format: "MP3",
     bitrate: "320 Kbps",
     href: "/audio",
@@ -67,6 +142,8 @@ const CATALOG_TRACKS: PlayerTrack[] = [
     artwork: "/images/singularis.png",
     duration: 257,
     src: audioUrl("sin-kyrie-of-a-dying-star-cabaret.mp3"),
+    availability: "public",
+    support: { chapters: "not-offered", captions: "not-applicable", transcript: "not-offered" },
     format: "MP3",
     bitrate: "181 Kbps",
     href: "/products/singularis",
@@ -78,6 +155,8 @@ const CATALOG_TRACKS: PlayerTrack[] = [
     artwork: "/images/singularis.png",
     duration: 393,
     src: audioUrl("sin-leviathan-dreaming.mp3"),
+    availability: "public",
+    support: { chapters: "not-offered", captions: "not-applicable", transcript: "not-offered" },
     format: "MP3",
     bitrate: "173 Kbps",
     href: "/products/singularis",

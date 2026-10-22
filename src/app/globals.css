@@ -486,9 +486,17 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .cs-panel__body .cs-wave{align-items:flex-end;height:70px;width:168px;gap:3px}
 .cs-panel__body .cs-wave i{width:4px;min-height:3px;transform-origin:bottom;background:linear-gradient(180deg,#9bf6ff 0,#22e2ff 40%,#0aa8d6 100%);-webkit-mask:repeating-linear-gradient(0deg,#000 0 4px,transparent 4px 6px);mask:repeating-linear-gradient(0deg,#000 0 4px,transparent 4px 6px)}
 
+.cs-panel__status{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 var(--cs-panel-pad) 10px;padding:9px 12px;border-left:2px solid var(--cyan);background:rgba(0,223,255,.06);color:#9eb0bf;font:400 11px/1.45 "IBM Plex Sans",Arial,sans-serif}
+.cs-panel__status span{display:flex;flex-wrap:wrap;gap:7px}
+.cs-panel__status strong{color:#dffcff;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.cs-panel__status[data-status="error"],.cs-panel__status[data-status="offline"],.cs-panel__status[data-status="unavailable"],.cs-panel__status[data-status="restricted"]{border-left-color:var(--cs-arc);background:rgba(255,58,166,.07)}
+.cs-panel__status button{flex:none;padding:5px 8px;border:1px solid rgba(0,223,255,.45);background:transparent;color:#dffcff;font:600 10px "IBM Plex Sans",Arial,sans-serif;letter-spacing:.04em;text-transform:uppercase;cursor:pointer}
+.cs-panel__status button:hover{border-color:var(--cyan);color:var(--cyan)}
+
 .cs-panel__transport{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 92px 10px}
 .cs-play{display:grid;place-items:center;width:64px;height:64px;padding:0;border:2px solid rgba(0,223,255,.7);border-radius:50%;background:rgba(4,16,26,.5);color:#fff;cursor:pointer;box-shadow:0 0 30px rgba(0,223,255,.22),inset 0 0 24px rgba(0,223,255,.08);transition:background-color var(--motion-fast) var(--ease-standard),box-shadow var(--motion-fast) var(--ease-standard)}
 .cs-play:hover{background:rgba(0,223,255,.16);box-shadow:0 0 34px rgba(0,223,255,.5)}
+.cs-play:disabled{border-color:rgba(142,161,179,.35);color:#667785;cursor:not-allowed;box-shadow:none}
 
 .cs-panel__timeline{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:18px;padding:0 var(--cs-panel-pad) 4px;color:#fff;font:400 15px "IBM Plex Sans",Arial,sans-serif;font-variant-numeric:tabular-nums}
 
@@ -499,6 +507,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .cs-range::-moz-range-track{height:4px;border-radius:2px;background:#2b3d4c}
 .cs-range::-moz-range-progress{height:4px;border-radius:2px;background:#22e2ff}
 .cs-range::-moz-range-thumb{width:14px;height:14px;border:0;border-radius:50%;background:var(--cyan)}
+.cs-range:disabled{cursor:not-allowed;opacity:.45}
+
+.cs-panel__support{margin:5px var(--cs-panel-pad) 0;color:#71889a;font:500 9px/1.4 "IBM Plex Sans",Arial,sans-serif;letter-spacing:.05em;text-align:center;text-transform:uppercase}
 
 .cs-panel__queue{position:absolute;right:0;bottom:calc(100% + 10px);width:100%;max-height:230px;overflow:auto;margin:0;padding:0;list-style:none;border:1px solid rgba(0,223,255,.3);background:#061019;box-shadow:0 18px 40px rgba(0,0,0,.6)}
 .cs-panel__queue button{display:grid;grid-template-columns:26px minmax(0,1fr) auto;gap:12px;width:100%;padding:11px 16px;border:0;background:none;color:var(--cs-ink);font-size:13px;text-align:left;cursor:pointer}
@@ -518,7 +529,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   .cs-panel__art{width:76px;height:76px}
   .cs-panel__title{font-size:18px}
   .cs-panel__body .cs-wave{display:none}
-.cs-panel__transport{padding-inline:10px}
+  .cs-panel__status{align-items:flex-start;flex-direction:column;gap:7px}
+  .cs-panel__transport{padding-inline:10px}
 }
 
 /* CRY-489 — account surfaces aligned to the Cryptic Design visual system. */
