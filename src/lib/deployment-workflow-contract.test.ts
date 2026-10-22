@@ -7,6 +7,8 @@ const pullRequestTemplate = readFileSync(
   ".github/pull_request_template.md",
   "utf8",
 );
+const netlifyConfig = readFileSync("netlify.toml", "utf8");
+const middleware = readFileSync("src/middleware.ts", "utf8");
 
 test("repository verification runs on pull requests to main without a production deploy step", () => {
   assert.match(workflow, /pull_request:\s*\n\s+branches:\s*\n\s+- main/);
@@ -25,4 +27,24 @@ test("pull requests disclose preview, production-credit, and rollback gates", ()
   assert.match(pullRequestTemplate, /intentional release or operationally justified fix/);
   assert.match(pullRequestTemplate, /metered Netlify production deploy/);
   assert.match(pullRequestTemplate, /rollback target or prior known-good deploy/);
+});
+
+test("Netlify filters only non-deploy production changes", () => {
+  assert.match(netlifyConfig, /ignore\s*=\s*"node \.\/scripts\/netlify-ignore-build\.mjs"/);
+});
+
+test("middleware excludes CDN-served public assets", () => {
+  for (const matcherToken of [
+    "_next/static",
+    "_next/image",
+    "favicon.ico",
+    "audio/",
+    "brand/",
+    "images/",
+    "share/",
+    "share\\\\.png",
+    "share-placeholder\\\\.svg",
+  ]) {
+    assert.ok(middleware.includes(matcherToken), matcherToken);
+  }
 });
