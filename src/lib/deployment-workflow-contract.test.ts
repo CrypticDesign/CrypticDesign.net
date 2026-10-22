@@ -30,7 +30,7 @@ test("pull requests disclose preview, production-credit, and rollback gates", ()
 });
 
 test("Netlify filters only non-deploy production changes", () => {
-  assert.match(netlifyConfig, /ignore\s*=\s*"node scripts\/netlify-ignore-build\.mjs"/);
+  assert.match(netlifyConfig, /ignore\s*=\s*"node \.\/scripts\/netlify-ignore-build\.mjs"/);
 });
 
 test("middleware excludes CDN-served public assets", () => {
