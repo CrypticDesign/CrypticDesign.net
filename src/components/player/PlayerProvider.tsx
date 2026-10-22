@@ -5,9 +5,8 @@
  *
  * One provider is mounted in the root layout, so any surface can call
  * `usePlayer()` to start a track without owning its own <audio> element.
- * When the current track has no `src` (catalog audio is not published yet)
- * the provider runs a preview clock over the track's declared duration so
- * transport, seeking and queue behaviour stay honest and testable.
+ * Missing, restricted, offline and failed media remain explicit states; the
+ * provider never simulates playback when no source is available.
  */
 
 import {
@@ -19,7 +18,15 @@ import {
   useRef,
   useState,
 } from "react";
-import { defaultQueue, type PlayerTrack } from "@/lib/player";
+import {
+  defaultQueue,
+  initialPlaybackStatus,
+  playbackIsBlocked,
+  playerStatusPresentation,
+  type PlayerPlaybackStatus,
+  type PlayerStatusPresentation,
+  type PlayerTrack,
+} from "@/lib/player";
 
 export type RepeatMode = "off" | "all" | "one";
 
@@ -37,9 +44,11 @@ interface PlayerValue {
   expanded: boolean;
   queueOpen: boolean;
   audioPriorityOwner: string | null;
-  /** True while the active track has no published audio file to stream. */
-  silentPreview: boolean;
+  playbackStatus: PlayerPlaybackStatus;
+  statusPresentation: PlayerStatusPresentation;
+  playbackBlocked: boolean;
   toggle: () => void;
+  retry: () => void;
   next: () => void;
   previous: () => void;
   seek: (seconds: number) => void;
@@ -56,7 +65,6 @@ interface PlayerValue {
 
 const PlayerContext = createContext<PlayerValue | null>(null);
 
-const TICK_MS = 250;
 const VOLUME_KEY = "crypticdesign.player.volume.v1";
 const RESTART_THRESHOLD_SECONDS = 3;
 
@@ -83,6 +91,10 @@ export function PlayerProvider({
   const [queueOpen, setQueueOpen] = useState(false);
   const [metaDuration, setMetaDuration] = useState<number | null>(null);
   const [audioPriorityOwner, setAudioPriorityOwner] = useState<string | null>(null);
+  const [online, setOnline] = useState(true);
+  const [playbackStatus, setPlaybackStatus] = useState<PlayerPlaybackStatus>(() =>
+    initialPlaybackStatus(queue[0]),
+  );
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const timeRef = useRef(0);
@@ -93,8 +105,23 @@ export function PlayerProvider({
   const track = queue[index];
   const declaredDuration = track?.duration ?? 0;
   const duration = metaDuration && metaDuration > 0 ? metaDuration : declaredDuration;
-  const hasAudioSource = Boolean(track?.src);
+  const hasAudioSource = Boolean(track?.src && track.availability === "public");
+  const playbackBlocked = playbackIsBlocked(playbackStatus);
+  // The player is mounted in the root layout, so attaching a source while idle
+  // would let every page view and automated browser request audio metadata.
+  // Keep the URL off the media element until a person initiates playback.
+  const attachedAudioSource = hasAudioSource && playbackStatus !== "idle" ? track?.src : undefined;
+  const statusPresentation = useMemo(
+    () => playerStatusPresentation(playbackStatus),
+    [playbackStatus],
+  );
   playingRef.current = playing;
+
+  const liveSourceStatus = useCallback((connectedStatus: PlayerPlaybackStatus) => {
+    if (audioPriorityOwnerRef.current) return "interrupted";
+    if (!window.navigator.onLine) return "offline";
+    return connectedStatus;
+  }, []);
 
   const setTime = useCallback((value: number) => {
     timeRef.current = value;
@@ -123,25 +150,47 @@ export function PlayerProvider({
       return;
     }
     const target = resolveNext(index);
+    const nextStatus = audioPriorityOwnerRef.current
+      ? "interrupted"
+      : initialPlaybackStatus(queue[target.index], online);
     setTime(0);
     setIndex(target.index);
-    if (target.stop) setPlaying(false);
-  }, [index, repeat, resolveNext, setTime]);
+    if (target.stop) {
+      setPlaying(false);
+      setPlaybackStatus(nextStatus === "idle" ? "paused" : nextStatus);
+    } else if (playbackIsBlocked(nextStatus)) {
+      setPlaying(false);
+      setPlaybackStatus(nextStatus);
+    } else {
+      setPlaybackStatus("loading");
+    }
+  }, [index, online, queue, repeat, resolveNext, setTime]);
 
-  /** Preview clock — only runs when there is no real audio file to drive time. */
   useEffect(() => {
-    if (!playing || hasAudioSource || duration <= 0) return;
-    const timer = window.setInterval(() => {
-      const nextTime = timeRef.current + TICK_MS / 1000;
-      if (nextTime >= duration) {
-        setTime(duration);
-        handleEnded();
+    const updateConnection = () => {
+      const isOnline = window.navigator.onLine;
+      setOnline(isOnline);
+      if (!isOnline) {
+        setPlaying(false);
+        setPlaybackStatus(initialPlaybackStatus(track, false));
         return;
       }
-      setTime(nextTime);
-    }, TICK_MS);
-    return () => window.clearInterval(timer);
-  }, [duration, handleEnded, hasAudioSource, playing, setTime]);
+      setPlaybackStatus((current) =>
+        current === "offline"
+          ? audioPriorityOwnerRef.current
+            ? "interrupted"
+            : initialPlaybackStatus(track, true)
+          : current,
+      );
+    };
+    updateConnection();
+    window.addEventListener("online", updateConnection);
+    window.addEventListener("offline", updateConnection);
+    return () => {
+      window.removeEventListener("online", updateConnection);
+      window.removeEventListener("offline", updateConnection);
+    };
+  }, [track]);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -155,8 +204,12 @@ export function PlayerProvider({
       audio.pause();
       return;
     }
-    void audio.play().catch(() => setPlaying(false));
-  }, [hasAudioSource, index, playing]);
+    setPlaybackStatus("loading");
+    void audio.play().catch(() => {
+      setPlaying(false);
+      setPlaybackStatus(liveSourceStatus("error"));
+    });
+  }, [hasAudioSource, index, liveSourceStatus, playing]);
 
   useEffect(() => {
     try {
@@ -169,13 +222,42 @@ export function PlayerProvider({
     }
   }, []);
 
-  const toggle = useCallback(() => setPlaying((value) => !value), []);
+  const toggle = useCallback(() => {
+    if (!track || playbackBlocked) return;
+    setPlaying((value) => {
+      const nextValue = !value;
+      setPlaybackStatus(nextValue ? "loading" : "paused");
+      return nextValue;
+    });
+  }, [playbackBlocked, track]);
+
+  const retry = useCallback(() => {
+    const audio = audioRef.current;
+    const isOnline = window.navigator.onLine;
+    setOnline(isOnline);
+    if (!isOnline) {
+      setPlaybackStatus("offline");
+      return;
+    }
+    if (!audio || !hasAudioSource || audioPriorityOwnerRef.current) return;
+    setPlaybackStatus("loading");
+    audio.load();
+    setPlaying(true);
+  }, [hasAudioSource]);
 
   const next = useCallback(() => {
-    setIndex((from) => resolveNext(from).index);
+    setIndex((from) => {
+      const target = resolveNext(from).index;
+      const nextStatus = audioPriorityOwnerRef.current
+        ? "interrupted"
+        : initialPlaybackStatus(queue[target], online);
+      setPlaybackStatus(nextStatus);
+      if (playbackIsBlocked(nextStatus)) setPlaying(false);
+      return target;
+    });
     setMetaDuration(null);
     setTime(0);
-  }, [resolveNext, setTime]);
+  }, [online, queue, resolveNext, setTime]);
 
   const previous = useCallback(() => {
     if (timeRef.current > RESTART_THRESHOLD_SECONDS) {
@@ -183,18 +265,27 @@ export function PlayerProvider({
       if (audioRef.current) audioRef.current.currentTime = 0;
       return;
     }
-    setIndex((from) => (from - 1 + queue.length) % queue.length);
+    setIndex((from) => {
+      const target = (from - 1 + queue.length) % queue.length;
+      const nextStatus = audioPriorityOwnerRef.current
+        ? "interrupted"
+        : initialPlaybackStatus(queue[target], online);
+      setPlaybackStatus(nextStatus);
+      if (playbackIsBlocked(nextStatus)) setPlaying(false);
+      return target;
+    });
     setMetaDuration(null);
     setTime(0);
-  }, [queue.length, setTime]);
+  }, [online, queue, setTime]);
 
   const seek = useCallback(
     (seconds: number) => {
+      if (playbackBlocked) return;
       const target = clamp(seconds, 0, duration);
       setTime(target);
       if (audioRef.current) audioRef.current.currentTime = target;
     },
-    [duration, setTime],
+    [duration, playbackBlocked, setTime],
   );
 
   const setVolume = useCallback((value: number) => {
@@ -211,13 +302,17 @@ export function PlayerProvider({
   const playTrackAt = useCallback(
     (target: number) => {
       if (target < 0 || target >= queue.length) return;
+      const nextStatus = audioPriorityOwnerRef.current
+        ? "interrupted"
+        : initialPlaybackStatus(queue[target], online);
       setIndex(target);
       setMetaDuration(null);
       setTime(0);
-      setPlaying(true);
+      setPlaybackStatus(playbackIsBlocked(nextStatus) ? nextStatus : "loading");
+      setPlaying(!playbackIsBlocked(nextStatus));
       setExpanded(true);
     },
-    [queue.length, setTime],
+    [online, queue, setTime],
   );
 
   const requestAudioPriority = useCallback((ownerId: string) => {
@@ -226,15 +321,22 @@ export function PlayerProvider({
     audioPriorityOwnerRef.current = ownerId;
     setAudioPriorityOwner(ownerId);
     setPlaying(false);
+    setPlaybackStatus("interrupted");
   }, []);
 
   const releaseAudioPriority = useCallback((ownerId: string) => {
     if (audioPriorityOwnerRef.current !== ownerId) return;
     audioPriorityOwnerRef.current = null;
     setAudioPriorityOwner(null);
-    if (resumeAfterExperienceRef.current) setPlaying(true);
+    if (resumeAfterExperienceRef.current) {
+      setPlaybackStatus("loading");
+      setPlaying(true);
+    } else {
+      const restoredStatus = initialPlaybackStatus(track, online);
+      setPlaybackStatus(restoredStatus === "idle" ? "paused" : restoredStatus);
+    }
     resumeAfterExperienceRef.current = false;
-  }, []);
+  }, [online, track]);
 
   const value = useMemo<PlayerValue>(
     () => ({
@@ -251,8 +353,11 @@ export function PlayerProvider({
       expanded,
       queueOpen,
       audioPriorityOwner,
-      silentPreview: !hasAudioSource,
+      playbackStatus,
+      statusPresentation,
+      playbackBlocked,
       toggle,
+      retry,
       next,
       previous,
       seek,
@@ -272,20 +377,23 @@ export function PlayerProvider({
       audioPriorityOwner,
       duration,
       expanded,
-      hasAudioSource,
       index,
       muted,
       next,
       playTrackAt,
       playing,
+      playbackBlocked,
+      playbackStatus,
       previous,
       queue,
       queueOpen,
       releaseAudioPriority,
       repeat,
+      retry,
       seek,
       setVolume,
       shuffle,
+      statusPresentation,
       toggle,
       track,
       volume,
@@ -298,9 +406,28 @@ export function PlayerProvider({
       {children}
       <audio
         ref={audioRef}
-        src={track?.src}
-        preload="metadata"
-        onLoadedMetadata={(event) => setMetaDuration(event.currentTarget.duration)}
+        src={attachedAudioSource}
+        preload="none"
+        onLoadStart={() => setPlaybackStatus("loading")}
+        onLoadedMetadata={(event) => {
+          setMetaDuration(event.currentTarget.duration);
+          if (!playingRef.current) setPlaybackStatus(liveSourceStatus("ready"));
+        }}
+        onCanPlay={() =>
+          setPlaybackStatus(liveSourceStatus(playingRef.current ? "playing" : "ready"))
+        }
+        onPlaying={() => setPlaybackStatus(liveSourceStatus("playing"))}
+        onPause={() => {
+          if (audioPriorityOwnerRef.current) setPlaybackStatus("interrupted");
+          else if (playingRef.current) setPlaybackStatus("buffering");
+          else setPlaybackStatus((current) => playbackIsBlocked(current) || current === "error" ? current : "paused");
+        }}
+        onWaiting={() => setPlaybackStatus(liveSourceStatus("buffering"))}
+        onStalled={() => setPlaybackStatus(liveSourceStatus("buffering"))}
+        onError={() => {
+          setPlaying(false);
+          setPlaybackStatus(liveSourceStatus("error"));
+        }}
         onTimeUpdate={(event) => setTime(event.currentTarget.currentTime)}
         onEnded={handleEnded}
       />
