@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import PageScene from "@/components/PageScene";
+import RootPageHero from "@/components/RootPageHero";
 import ProfessionalServiceCards from "@/components/ProfessionalServiceCards";
 import ProfessionalProofCards from "@/components/ProfessionalProofCards";
 import { professionalCopy as copy } from "@/lib/professional-copy";
@@ -10,10 +10,9 @@ export const metadata:Metadata={title:"Professional",alternates:{canonical:"/pro
 
 export default function ProfessionalHub() {
   return <main>
-    <section className="visual-hero !min-h-[620px]" data-section-accent="violet" aria-labelledby="professional-title">
-      <PageScene sceneId="professional" fallbackPoster="/images/professional-hero.png" /><div className="visual-hero__wash" />
-      <div className="visual-hero__content"><div className="signal-rail" /><span className="kicker">Professional</span><h1 id="professional-title" className="display-title">{copy.hero.title}</h1><p>{copy.hero.lead}</p><div className="hero-actions"><Link href="/professional/inquiry" className="button">Start a Project</Link><Link href="/professional/case-studies" className="button secondary">View Case Studies</Link></div></div>
-    </section>
+    <RootPageHero sceneId="professional" fallbackPoster="/images/professional-hero.png" accent="violet" labelledBy="professional-title" accessibleLabel="Professional interactive background" className="!min-h-[620px]">
+      <div className="signal-rail" /><span className="kicker">Professional</span><h1 id="professional-title" className="display-title">{copy.hero.title}</h1><p>{copy.hero.lead}</p><div className="hero-actions"><Link href="/professional/inquiry" className="button">Start a Project</Link><Link href="/professional/case-studies" className="button secondary">View Case Studies</Link></div>
+    </RootPageHero>
     <div className="shell page-stack">
       <section id="capabilities" aria-labelledby="capabilities-title"><div className="section-heading"><div><span className="kicker">Capabilities</span><h2 id="capabilities-title" className="section-title">{copy.capabilities.title}</h2></div><p>{copy.capabilities.lead}</p></div><ProfessionalServiceCards /><Link href="/professional/services" className="text-link">Explore Services</Link></section>
       <section id="engagement" aria-labelledby="engagement-title"><div className="section-heading"><div><span className="kicker">Engagement / Ways to Engage</span><h2 id="engagement-title" className="section-title">{copy.engagement.title}</h2></div><p>{copy.engagement.lead}</p></div><div className="grid gap-4 md:grid-cols-2">{copy.engagement.cards.map(card => <div key={card.title} className="panel border-t-2 border-t-[var(--section-accent)] p-6"><h3 className="text-xl font-semibold">{card.title}</h3><p className="mt-3 leading-relaxed text-[var(--muted)]">{card.copy}</p></div>)}</div><p className="mt-6 text-[var(--muted)]">{copy.engagement.support}</p><Link href="/professional/inquiry" className="text-link">Discuss the Work</Link></section>

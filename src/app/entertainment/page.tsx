@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import ExperienceRuntime from "@/components/ExperienceRuntime";
+import RootPageHero from "@/components/RootPageHero";
 import { AnalyticsLink } from "@/components/AnalyticsLink";
 import { ANALYTICS_EVENTS } from "@/lib/analytics";
 import MediaCard from "@/components/MediaCard";
@@ -23,15 +23,12 @@ export default function EntertainmentHub() {
   const releases = publicReleases();
   const worlds = publicProducts().filter((product) => ["singularis", "lifa"].includes(product.slug));
   return <main>
-    <section className="visual-hero !min-h-[560px]" data-section-accent="cyan" aria-labelledby="entertainment-title">
-      <ExperienceRuntime runtimeId="cryptic-design:entertainment:v1" sceneId="entertainment" fallbackPoster="/images/entertainment-hero.png" accessibleLabel="Entertainment interactive experience" launchMode="fullscreen" />
-      <div className="visual-hero__wash" />
-      <div className="visual-hero__content"><div className="signal-rail" /><span className="kicker">Enter Entertainment</span>
+    <RootPageHero sceneId="entertainment" fallbackPoster="/images/entertainment-hero.png" accent="cyan" labelledBy="entertainment-title" accessibleLabel="Entertainment interactive experience">
+      <div className="signal-rail" /><span className="kicker">Enter Entertainment</span>
         <h1 id="entertainment-title" className="display-title">Enter the worlds, sound, and systems in motion.</h1>
         <p>Explore games, music, video, original worlds, releases, and experiments across one connected entertainment platform.</p>
         <div className="hero-actions"><a href="#choose-a-mode" className="button">Explore Entertainment</a><a href="#public-releases" className="button secondary">Browse Releases</a></div>
-      </div>
-    </section>
+    </RootPageHero>
     <div className="shell page-stack">
       {featured ? <section className="feature-split" data-section-accent="indigo" aria-labelledby="featured-release-title">
         <div className="feature-split__image"><Image src={releaseImage(featured)} alt="" fill sizes="(max-width:900px) 100vw, 60vw" /></div>

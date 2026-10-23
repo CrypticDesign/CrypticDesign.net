@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import PortalIcon, { type EcosystemPortalIconName } from "@/components/EcosystemPortalIcon";
-import PageScene from "@/components/PageScene";
+import RootPageHero from "@/components/RootPageHero";
 import { AnalyticsLink } from "@/components/AnalyticsLink";
 import type { AccountAdmissionMode } from "@/lib/account-admission";
 import { ANALYTICS_EVENTS } from "@/lib/analytics";
@@ -91,10 +91,15 @@ export default function PublicHome({ accountAdmissionMode }: { accountAdmissionM
 
   return (
     <main className="public-home public-home-portal public-home-v2">
-      <section className="visual-hero public-home-hero public-home-portal__hero" data-section-accent="blue" aria-labelledby="public-home-title">
-        <PageScene sceneId="public-home" fallbackPoster="/images/entertainment-hero.png" interaction="ambient" quality="auto" />
-        <div className="visual-hero__wash" />
-        <div className="visual-hero__content public-home-portal__hero-content">
+      <RootPageHero
+        sceneId="public-home"
+        fallbackPoster="/images/entertainment-hero.png"
+        accent="blue"
+        labelledBy="public-home-title"
+        accessibleLabel="Home interactive background"
+        className="public-home-hero public-home-portal__hero"
+        contentClassName="public-home-portal__hero-content"
+      >
           <div className="signal-rail" />
           <span className="kicker">An independent entertainment universe</span>
           <h1 id="public-home-title" className="display-title">Worlds to explore.<br />Stories to experience.<br /><em>Systems that connect them.</em></h1>
@@ -107,8 +112,7 @@ export default function PublicHome({ accountAdmissionMode }: { accountAdmissionM
             <span>Already a member?</span>
             <AnalyticsLink href="/account/sign-in" analyticsEvent={{ name: ANALYTICS_EVENTS.SIGN_IN_OPEN, payload: { source: "home_hero" } }}>Sign in to My Home <span aria-hidden="true">→</span></AnalyticsLink>
           </div>
-        </div>
-      </section>
+      </RootPageHero>
 
       <div className="shell public-home-portal__stack public-home-v2__stack">
         <section className="public-home-portal__featured" data-section-accent="cyan" aria-labelledby="featured-experiences-title">

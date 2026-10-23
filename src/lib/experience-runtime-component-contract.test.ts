@@ -6,11 +6,14 @@ const runtime = readFileSync(new URL("../components/ExperienceRuntime.tsx", impo
 const scene = readFileSync(new URL("../components/PageScene.tsx", import.meta.url), "utf8");
 const player = readFileSync(new URL("../components/player/PlayerProvider.tsx", import.meta.url), "utf8");
 const entertainment = readFileSync(new URL("../app/entertainment/page.tsx", import.meta.url), "utf8");
+const rootHero = readFileSync(new URL("../components/RootPageHero.tsx", import.meta.url), "utf8");
 
 test("Entertainment consumes the shared ExperienceRuntime rather than a route-specific renderer", () => {
-  assert.match(entertainment, /<ExperienceRuntime/);
-  assert.match(entertainment, /runtimeId="cryptic-design:entertainment:v1"/);
-  assert.match(entertainment, /launchMode="fullscreen"/);
+  assert.match(entertainment, /<RootPageHero/);
+  assert.match(entertainment, /sceneId="entertainment"/);
+  assert.match(rootHero, /<ExperienceRuntime/);
+  assert.match(rootHero, /runtimeId=\{`cryptic-design:\$\{sceneId\}:v1`\}/);
+  assert.match(rootHero, /launchMode="fullscreen"/);
   assert.doesNotMatch(entertainment, /<PageScene/);
 });
 
