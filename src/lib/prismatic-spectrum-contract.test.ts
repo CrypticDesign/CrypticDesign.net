@@ -22,6 +22,7 @@ const spectrum = [
 ] as const;
 
 function assertAccentOrder(source: string, expected: readonly string[]) {
+  source = source.replace(/<RootPageHero\b[^>]*? accent="([^"]+)"/g, 'data-section-accent="$1"');
   let cursor = -1;
   for (const accent of expected) {
     const next = source.indexOf(`data-section-accent="${accent}"`, cursor + 1);
@@ -86,7 +87,7 @@ test("destination subnavigation inherits the same canonical accent as its primar
 });
 
 test("Community uses Indigo for identity and Magenta only for social emphasis", () => {
-  assert.match(community, /community-portal__hero" data-section-accent="indigo"/);
+  assert.match(community, /<RootPageHero[\s\S]*?accent="indigo"/);
   assert.match(community, /explore-portal__continuum explore-portal__continuum--cta" data-section-accent="magenta"/);
   assert.match(community, /community-explore-card community-explore-card--social/);
   assert.match(globals, /\.community-portal__hero-content \.display-title em\{color:var\(--cry-accent-magenta\)\}/);

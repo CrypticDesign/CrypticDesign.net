@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import CommunityAvailabilityPanel from "@/components/CommunityAvailabilityPanel";
 import PortalIcon from "@/components/EcosystemPortalIcon";
-import PageScene from "@/components/PageScene";
+import RootPageHero from "@/components/RootPageHero";
 import { AnalyticsLink } from "@/components/AnalyticsLink";
 import { ANALYTICS_EVENTS } from "@/lib/analytics";
 import { getInitialAccountAuthenticated } from "@/lib/server-account-state";
@@ -20,11 +20,18 @@ export default async function CommunityPage() {
   const authenticated = await getInitialAccountAuthenticated();
   return (
     <main className="community-portal community-explore">
-      <section className="visual-hero community-portal__hero" data-section-accent="indigo" aria-labelledby="community-title">
-        <PageScene sceneId="community" fallbackPoster="/images/current-focus.png" /><div className="visual-hero__wash" />
-        <div className="visual-hero__content community-portal__hero-content"><div className="signal-rail" /><span className="kicker">Community / Explore</span><h1 id="community-title" className="display-title">Find the signal.<br /><em>Share the journey.</em></h1><p>Discover the people, groups, events, and shared experiences forming around Cryptic Design. Public Community is opening in stages, and every visible path reflects real current availability.</p><div className="hero-actions"><a href="#participation-paths" className="button community-primary-cta">See Participation Paths</a><Link href={authenticated ? "/" : "/account/sign-in"} className="button community-secondary-cta">{authenticated ? "Return to My Home" : "Sign in to My Home"}</Link></div></div>
-        <CommunityAvailabilityPanel className="community-portal__hero-status" showSignInAction={false} />
-      </section>
+      <RootPageHero
+        sceneId="community"
+        fallbackPoster="/images/current-focus.png"
+        accent="indigo"
+        labelledBy="community-title"
+        accessibleLabel="Community interactive background"
+        className="community-portal__hero"
+        contentClassName="community-portal__hero-content"
+        status={<CommunityAvailabilityPanel showSignInAction={false} />}
+      >
+        <div className="signal-rail" /><span className="kicker">Community / Explore</span><h1 id="community-title" className="display-title">Find the signal.<br /><em>Share the journey.</em></h1><p>Discover the people, groups, events, and shared experiences forming around Cryptic Design. Public Community is opening in stages, and every visible path reflects real current availability.</p><div className="hero-actions"><a href="#participation-paths" className="button community-primary-cta">See Participation Paths</a><Link href={authenticated ? "/" : "/account/sign-in"} className="button community-secondary-cta">{authenticated ? "Return to My Home" : "Sign in to My Home"}</Link></div>
+      </RootPageHero>
       <div className="shell community-portal__stack community-explore__stack">
         <section id="participation-paths" data-section-accent="indigo" aria-labelledby="participation-paths-title">
           <div className="public-home-portal__section-label"><h2 id="participation-paths-title">Participation paths</h2><span>What is open, and what is next</span></div>

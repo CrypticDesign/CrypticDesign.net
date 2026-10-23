@@ -28,9 +28,9 @@ test("signed-out Home preserves the required nine-stage semantic journey", () =>
   ]);
 });
 
-test("Home keeps the authenticated route boundary and one shared PageScene", () => {
+test("Home keeps the authenticated route boundary and one shared root hero", () => {
   assert.match(page, /authenticated[\s\S]*<MyHomeDashboard initialAuthenticated \/>[\s\S]*<PublicHome/);
-  assert.equal(home.match(/<PageScene /g)?.length, 1);
+  assert.equal(home.match(/<RootPageHero\b/g)?.length, 1);
   assert.match(home, /sceneId="public-home"/);
   assert.match(home, /fallbackPoster="\/images\/entertainment-hero\.png"/);
 });
