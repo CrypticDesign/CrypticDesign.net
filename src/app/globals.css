@@ -696,3 +696,52 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .professional-experience .button.secondary{border-color:var(--section-accent)}
 .professional-inquiry-control{min-height:48px;border:1px solid var(--line);border-radius:var(--radius-control);background:var(--surface);padding:12px 16px;color:var(--text);width:100%;min-width:0}
 .professional-inquiry-control:focus-visible{outline:2px solid var(--section-accent-text);outline-offset:3px;border-color:var(--section-accent)}
+
+/* CRY-312 keeps essential Forge control boundaries above WCAG 1.4.11's 3:1 threshold. */
+:root{--control-line:#526779}
+.character-forge .forge-fields input,.character-forge .forge-fields textarea,.character-forge .choice-grid button,.character-forge .button.secondary{border-color:var(--control-line)}
+.forge-discard-confirmation{width:min(calc(100% - 2rem),520px);max-width:520px;margin:auto;color:var(--text);box-shadow:0 24px 72px rgb(0 0 0 / 62%)}
+.forge-discard-confirmation:not([open]){display:none}
+.forge-discard-confirmation::backdrop{background:rgb(0 3 8 / 78%);backdrop-filter:blur(3px)}
+
+/* CRY-310/311 reconcile the approved Forge taxonomy and persona-first Character Home. */
+.character-forge .forge-steps{grid-template-columns:repeat(8,minmax(0,1fr));overflow-x:hidden}
+.character-forge .forge-steps button{min-width:0;padding:8px 3px;font-size:8px;line-height:1.25}
+.forge-option-stack{display:grid;gap:18px}
+.forge-current-foundation,.forge-deferred,.forge-confirm{display:grid;gap:8px;padding:18px;border:1px solid var(--control-line);background:linear-gradient(135deg,rgba(0,223,255,.07),rgba(111,123,255,.04))}
+.forge-current-foundation strong,.forge-deferred strong,.forge-confirm h3{font:700 clamp(20px,2vw,28px) "Roboto","IBM Plex Sans",Arial,sans-serif}
+.forge-current-foundation p,.forge-deferred p,.forge-confirm p{margin:0;color:var(--muted);font-size:12px;line-height:1.65}
+.forge-deferred{border-style:dashed;background:rgba(82,103,121,.08)}
+.forge-confirm h3{margin:0;color:var(--text)}
+.forge-confirm .forge-boundary{margin-top:8px}
+
+.character-home-hero__actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.character-home-nav{position:sticky;z-index:12;top:0;display:grid;grid-template-columns:repeat(5,1fr);border-bottom:2px solid var(--cyan);background:rgba(3,8,15,.96);backdrop-filter:blur(12px)}
+.character-home-nav a{display:grid;min-height:58px;place-items:center;border-right:1px solid var(--line);color:var(--muted);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.character-home-nav a:last-child{border-right:0}
+.character-home-nav a:hover,.character-home-nav a:focus-visible{background:rgba(0,223,255,.08);color:var(--cyan)}
+.character-home-section{display:grid;gap:20px;scroll-margin-top:76px;padding-top:8px}
+.character-home-section>header{max-width:760px}
+.character-home-section>header .section-title{margin:8px 0 10px}
+.character-home-section>header p{margin:0;color:var(--muted);line-height:1.65}
+.character-home-journey{padding:28px;border-top:2px solid var(--cyan);background:linear-gradient(135deg,rgba(0,223,255,.055),rgba(111,123,255,.025))}
+.character-home-journey__summary{display:grid;grid-template-columns:repeat(2,1fr)}
+.character-home-journey__summary>div{display:grid;gap:6px;padding:18px}
+.character-home-journey__summary>div+div{border-left:1px solid var(--line)}
+.character-home-journey__summary span,.character-home-card>span,.character-home-timeline span{color:var(--cyan);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.character-home-journey__summary strong{font-size:22px}.character-home-journey__summary small{color:var(--muted)}
+.character-home-progress{height:6px;overflow:hidden;background:var(--surface)}
+.character-home-progress span{display:block;height:100%;background:linear-gradient(90deg,var(--cyan),var(--indigo))}
+.character-home-card-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.character-home-card{padding:20px;border-top:2px solid var(--indigo)}
+.character-home-card h3{margin:9px 0 8px;font-size:18px}.character-home-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}
+.character-home-timeline{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+.character-home-timeline li{display:grid;grid-template-columns:minmax(130px,.45fr) 1fr auto;align-items:center;gap:18px;padding:16px 18px}
+.character-home-timeline time{color:var(--muted);font-size:11px}
+.character-home-empty{margin:0;padding:22px;color:var(--muted)}
+.character-settings-appearance{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;padding:18px;border:1px solid var(--control-line);background:rgba(0,223,255,.025)}
+.character-settings-appearance>legend{grid-column:1/-1;margin:0;font-weight:700}.character-settings-appearance>p{grid-column:1/-1;margin:0;color:var(--muted);font-size:12px;line-height:1.6}
+.character-settings-appearance__group{display:grid;align-content:start;gap:9px}.character-settings-appearance__group>strong{font-size:12px}.identity-settings .character-settings-appearance .choice-grid button{border-color:var(--control-line)}
+
+@media(max-width:700px){.character-home-nav{grid-template-columns:repeat(5,minmax(112px,1fr));overflow-x:auto}.character-home-nav a{min-width:112px}.character-home-card-grid,.character-home-journey__summary,.character-settings-appearance{grid-template-columns:1fr}.character-home-journey{padding:22px 16px}.character-home-journey__summary>div+div{border-top:1px solid var(--line);border-left:0}.character-home-timeline li{grid-template-columns:1fr;gap:6px}.character-home-hero__actions{display:grid}.character-home-hero__actions .button{width:100%}}
+@media(max-width:640px){.character-forge .forge-steps{overflow-x:auto}.character-forge .forge-steps button{flex:1 0 92px;min-width:92px;padding-inline:5px;font-size:9px}}

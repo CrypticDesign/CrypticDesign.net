@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import * as THREE from "three";
 import type { AvatarRecipe } from "@/lib/avatar";
 import {
@@ -19,15 +19,23 @@ const outfits = { signal: 0x101f2f, archive: 0x292339, drift: 0x26332f };
 export default function AvatarStudio({ recipe, label, compact = false }: { recipe: AvatarRecipe; label: string; compact?: boolean }) {
   const host = useRef<HTMLDivElement>(null);
   const viewport = useRef<HTMLDivElement>(null);
-  const status = useRef<HTMLSpanElement>(null);
   const controlsId = useId();
   const summaryId = useId();
   const executeCommand = useRef<(command: AvatarViewCommand) => void>(() => undefined);
+  const [presentation, setPresentation] = useState<"loading" | "interactive" | "fallback">("loading");
+  const [announcement, setAnnouncement] = useState("");
   useEffect(() => {
     const root = host.current; const element = viewport.current; if (!root || !element) return;
-    delete element.dataset.fallback;
+    setPresentation("loading");
+    setAnnouncement("");
+    const announce = (message: string) => setAnnouncement(message);
     let renderer: THREE.WebGLRenderer;
-    try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); } catch { element.dataset.fallback = "true"; return; }
+    try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); } catch {
+      setPresentation("fallback");
+      announce("Interactive 3D is unavailable. Static and structured character presentations are active.");
+      return;
+    }
+    setPresentation("interactive");
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); renderer.outputColorSpace = THREE.SRGBColorSpace;
     const scene = new THREE.Scene(); const camera = new THREE.PerspectiveCamera(34, 1, .1, 100); camera.position.set(0, .2, AVATAR_CAMERA_DEFAULT_DISTANCE);
     const group = new THREE.Group(); scene.add(group);
@@ -53,7 +61,6 @@ export default function AvatarStudio({ recipe, label, compact = false }: { recip
     const stopAnimation = () => { if (frame) cancelAnimationFrame(frame); frame = 0; };
     const animate = () => { if (!shouldAnimate()) { frame = 0; return; } if (!dragging) group.rotation.y += .0022; render(); frame = requestAnimationFrame(animate); };
     const startAnimation = () => { if (!frame && shouldAnimate()) frame = requestAnimationFrame(animate); };
-    const announce = (message: string) => { if (status.current) status.current.textContent = message; };
     resize(); startAnimation();
     const down = (event: PointerEvent) => { root.focus({ preventScroll: true }); dragging = true; last = event.clientX; renderer.domElement.setPointerCapture(event.pointerId); };
     const move = (event: PointerEvent) => { if (dragging) { group.rotation.y += (event.clientX - last) * .012; last = event.clientX; render(); } };
@@ -73,8 +80,8 @@ export default function AvatarStudio({ recipe, label, compact = false }: { recip
       runCommand(command);
     };
     const wheel = (event: WheelEvent) => { if (document.activeElement !== root) return; event.preventDefault(); camera.position.z = clampAvatarCameraDistance(camera.position.z + Math.sign(event.deltaY) * .25); render(); };
-    const contextLost = (event: Event) => { event.preventDefault(); contextAvailable = false; stopAnimation(); element.dataset.fallback = "true"; announce("WebGL became unavailable. Static and text presentations are active."); };
-    const contextRestored = () => { contextAvailable = true; delete element.dataset.fallback; resize(); startAnimation(); announce("Interactive character view restored."); };
+    const contextLost = (event: Event) => { event.preventDefault(); contextAvailable = false; stopAnimation(); setPresentation("fallback"); announce("Interactive 3D became unavailable. Static and structured character presentations are active."); };
+    const contextRestored = () => { contextAvailable = true; setPresentation("interactive"); resize(); startAnimation(); announce("Interactive 3D character view restored."); };
     const visibilityChanged = () => { if (document.hidden) stopAnimation(); else startAnimation(); };
     const motionChanged = (event: MediaQueryListEvent) => { reduce = event.matches; if (reduce) stopAnimation(); else startAnimation(); render(); };
     const intersectionObserver = new IntersectionObserver(([entry]) => { inViewport = entry.isIntersecting; if (inViewport) startAnimation(); else stopAnimation(); });
@@ -84,14 +91,19 @@ export default function AvatarStudio({ recipe, label, compact = false }: { recip
     return () => { executeCommand.current = () => undefined; contextAvailable = false; stopAnimation(); observer.disconnect(); intersectionObserver.disconnect(); document.removeEventListener("visibilitychange", visibilityChanged); motionQuery.removeEventListener("change", motionChanged); root.removeEventListener("keydown", keydown); renderer.domElement.removeEventListener("pointerdown", down); renderer.domElement.removeEventListener("pointermove", move); renderer.domElement.removeEventListener("pointerup", up); renderer.domElement.removeEventListener("pointercancel", up); renderer.domElement.removeEventListener("wheel", wheel); renderer.domElement.removeEventListener("webglcontextlost", contextLost); renderer.domElement.removeEventListener("webglcontextrestored", contextRestored); renderer.dispose(); renderer.forceContextLoss(); renderer.domElement.remove(); scene.traverse((object) => { if (object instanceof THREE.Mesh) { object.geometry.dispose(); const materials = Array.isArray(object.material) ? object.material : [object.material]; materials.forEach((material) => material.dispose()); } }); };
   }, [recipe]);
   const summary = describeAvatarRecipe(recipe);
-  return <div className={`avatar-stage ${compact ? "avatar-stage--compact" : ""}`} ref={host} role="group" tabIndex={0} aria-label={`${label}, an interactive three-dimensional Cryptic persona`} aria-describedby={`${controlsId} ${summaryId}`} aria-keyshortcuts="ArrowLeft ArrowRight ArrowUp ArrowDown Home 1 2 3">
-    <div className="avatar-stage__viewport" ref={viewport}>
+  const stageLabel = presentation === "fallback"
+    ? `${label}, static Cryptic persona preview`
+    : presentation === "loading"
+      ? `${label}, Cryptic persona preview loading`
+      : `${label}, an interactive three-dimensional Cryptic persona`;
+  return <div className={`avatar-stage ${compact ? "avatar-stage--compact" : ""}`} ref={host} role="group" tabIndex={0} aria-label={stageLabel} aria-busy={presentation === "loading"} aria-describedby={`${controlsId} ${summaryId}`} aria-keyshortcuts="ArrowLeft ArrowRight ArrowUp ArrowDown Home 1 2 3">
+    <div className="avatar-stage__viewport" ref={viewport} data-fallback={presentation === "fallback" ? "true" : undefined}>
       <div className="avatar-fallback"><span className="kicker">Static persona fallback</span><strong aria-hidden="true">{label.slice(0, 1).toUpperCase() || "C"}</strong><span>{label}</span><p className="avatar-fallback__summary">{summary}</p></div>
-      <p id={controlsId} className="avatar-stage__hint">Drag or use the controls below to inspect</p>
+      <p id={controlsId} className="avatar-stage__hint">{presentation === "fallback" ? "Static preview active; the structured description remains available" : "Drag or use the controls below to inspect"}</p>
     </div>
-    <div className="avatar-stage__toolbar" role="toolbar" aria-label="Character preview controls">
+    {presentation === "interactive" ? <div className="avatar-stage__toolbar" role="group" aria-label="Character preview controls">
       <div className="avatar-stage__toolbar-group"><span>View</span>
-        <button type="button" onClick={() => executeCommand.current({ type: "view", mode: "full-body" })}>Full</button>
+        <button type="button" onClick={() => executeCommand.current({ type: "view", mode: "full-body" })}>Full body</button>
         <button type="button" onClick={() => executeCommand.current({ type: "view", mode: "portrait" })}>Portrait</button>
         <button type="button" onClick={() => executeCommand.current({ type: "view", mode: "detail" })}>Detail</button>
       </div>
@@ -102,7 +114,7 @@ export default function AvatarStudio({ recipe, label, compact = false }: { recip
         <button type="button" data-icon="true" aria-label="Zoom in" title="Zoom in" onClick={() => executeCommand.current({ type: "zoom", amount: -0.35 })}>＋</button>
         <button type="button" onClick={() => executeCommand.current({ type: "reset" })}>Reset</button>
       </div>
-    </div>
-    <p id={summaryId} className="avatar-stage__summary">{summary}</p><span ref={status} className="sr-only" aria-live="polite" />
+    </div> : null}
+    <p id={summaryId} className="avatar-stage__summary">{summary}</p><span className="sr-only" aria-live="polite">{announcement}</span>
   </div>;
 }

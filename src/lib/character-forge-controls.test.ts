@@ -7,8 +7,8 @@ import {
 } from "./character-forge-controls.ts";
 
 test("the Forge uses the approved classless step model", () => {
-  assert.deepEqual(CHARACTER_FORGE_STEPS, ["Identity", "Form", "Style", "Story", "Review"]);
-  assert.ok(!CHARACTER_FORGE_STEPS.includes("Signal" as never));
+  assert.deepEqual(CHARACTER_FORGE_STEPS, ["Identity", "Body", "Face", "Hair", "Wardrobe", "Traits & Signals", "Review", "Confirm"]);
+  assert.ok(!CHARACTER_FORGE_STEPS.includes("Class" as never));
 });
 
 test("identity validation explains missing and malformed values", () => {
@@ -26,5 +26,6 @@ test("future steps stay locked until the preceding flow unlocks them", () => {
   assert.equal(canOpenCharacterForgeStep(0, 0), true);
   assert.equal(canOpenCharacterForgeStep(1, 0), false);
   assert.equal(canOpenCharacterForgeStep(3, 3), true);
-  assert.equal(canOpenCharacterForgeStep(5, 5), false);
+  assert.equal(canOpenCharacterForgeStep(7, 7), true);
+  assert.equal(canOpenCharacterForgeStep(8, 8), false);
 });

@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
+import { FormEvent, KeyboardEvent, useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import AvatarStudio from "@/components/AvatarStudio";
 import { AVATAR_OUTFITS, AVATAR_SKIN_TONES, AVATAR_TRAITS, DEFAULT_AVATAR_RECIPE, type AvatarRecipe } from "@/lib/avatar";
@@ -38,6 +38,7 @@ export default function CharacterCreator() {
   const handleRef = useRef<HTMLInputElement>(null);
   const keepEditingRef = useRef<HTMLButtonElement>(null);
   const discardTriggerRef = useRef<HTMLButtonElement>(null);
+  const discardDialogRef = useRef<HTMLDialogElement>(null);
   const previousStep = useRef(0);
   const requestId = useRef<string | null>(null);
 
@@ -83,7 +84,10 @@ export default function CharacterCreator() {
   }, [step]);
 
   useEffect(() => {
-    if (confirmDiscard) keepEditingRef.current?.focus({ preventScroll: true });
+    const dialog = discardDialogRef.current;
+    if (!confirmDiscard || !dialog) return;
+    if (!dialog.open) dialog.showModal();
+    requestAnimationFrame(() => keepEditingRef.current?.focus({ preventScroll: true }));
   }, [confirmDiscard]);
 
   useEffect(() => {
@@ -158,6 +162,21 @@ export default function CharacterCreator() {
     requestAnimationFrame(() => discardTriggerRef.current?.focus({ preventScroll: true }));
   }
 
+  function trapDiscardDialogFocus(event: KeyboardEvent<HTMLDialogElement>) {
+    if (event.key !== "Tab") return;
+    const buttons = discardDialogRef.current?.querySelectorAll<HTMLButtonElement>("button:not([disabled])");
+    const first = buttons?.[0];
+    const last = buttons?.[buttons.length - 1];
+    if (!first || !last) return;
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
+
   async function startPreviewSession() {
     setError(null);
     const response = await fetch("/api/membership/session", { method: "POST" });
@@ -219,26 +238,36 @@ export default function CharacterCreator() {
         <div className="forge-progress"><span className="kicker">Step {step + 1} of {CHARACTER_FORGE_STEPS.length}</span><p aria-live="polite">{dirty ? "Unsaved draft · held in this tab only" : "Draft starts private"}</p></div>
         <h2 ref={headingRef} tabIndex={-1} className="section-title">{CHARACTER_FORGE_STEPS[step]}</h2>
 
-        {confirmDiscard ? <section className="forge-discard-confirmation" role="alertdialog" aria-labelledby="forge-discard-title" aria-describedby="forge-discard-description">
+        {confirmDiscard ? <dialog ref={discardDialogRef} className="forge-discard-confirmation" role="alertdialog" aria-labelledby="forge-discard-title" aria-describedby="forge-discard-description" onCancel={(event) => { event.preventDefault(); keepEditing(); }} onKeyDown={trapDiscardDialogFocus}>
           <strong id="forge-discard-title">Discard this draft?</strong>
           <p id="forge-discard-description">This clears the identity, appearance, and biography held in this tab. No character or history entry will be created.</p>
           <div><button ref={keepEditingRef} type="button" className="button secondary" onClick={keepEditing}>Keep editing</button><button type="button" className="button" onClick={discardDraft}>Discard draft</button></div>
-        </section> : <>
+        </dialog> : <>
         {step === 0 ? <div className="forge-fields">
           <label htmlFor="forge-name">Display name<input ref={nameRef} id="forge-name" required maxLength={32} value={name} aria-invalid={Boolean(identityErrors.name)} aria-describedby={identityErrors.name ? "forge-name-error" : undefined} onChange={(event) => { setName(event.target.value); setIdentityErrors((current) => ({ ...current, name: undefined })); markDirty(); }} /></label>
           {identityErrors.name ? <span id="forge-name-error" className="forge-field-error">{identityErrors.name}</span> : null}
           <label htmlFor="forge-handle">Handle <span>Lowercase letters, numbers, and hyphens</span><input ref={handleRef} id="forge-handle" required minLength={3} maxLength={32} value={handle} aria-invalid={Boolean(identityErrors.handle)} aria-describedby={identityErrors.handle ? "forge-handle-error" : undefined} onChange={(event) => { setHandle(event.target.value.toLowerCase().replace(/\s+/g, "-")); setIdentityErrors((current) => ({ ...current, handle: undefined })); markDirty(); }} /></label>
           {identityErrors.handle ? <span id="forge-handle-error" className="forge-field-error">{identityErrors.handle}</span> : null}
+          <label htmlFor="forge-bio">Biography <span>Optional · private by default · {bio.length}/280</span><textarea id="forge-bio" maxLength={280} value={bio} onChange={(event) => { setBio(event.target.value); markDirty(); }} /></label>
           <p className="forge-boundary">Your name and handle become the durable identity. Appearance can change later.</p>
         </div> : null}
 
-        {step === 1 ? <div><fieldset><legend>Skin material</legend><div className="choice-grid">{AVATAR_SKIN_TONES.map((value) => <button type="button" key={value} aria-pressed={avatar.skinTone === value} onClick={() => patchAvatar({ skinTone: value })}>{value}</button>)}</div></fieldset><fieldset><legend>Optional traits</legend><div className="choice-grid">{AVATAR_TRAITS.map((value) => <button type="button" key={value} aria-pressed={avatar.trait === value} onClick={() => patchAvatar({ trait: value })}>{value}</button>)}</div></fieldset></div> : null}
+        {step === 1 ? <div className="forge-option-stack">
+          <div className="forge-current-foundation" role="status"><span className="kicker">Current foundation</span><strong>Balanced humanoid</strong><p>The current owned renderer uses one wardrobe-neutral body foundation. Slender and broad authored presets remain deferred until their production assets pass controlled intake.</p></div>
+          <p className="forge-boundary">Body presentation is cosmetic and never determines identity, ability, age, access, or eligibility.</p>
+        </div> : null}
 
-        {step === 2 ? <div><fieldset><legend>Outfit</legend><div className="choice-grid">{AVATAR_OUTFITS.map((value) => <button type="button" key={value} aria-pressed={avatar.outfit === value} onClick={() => patchAvatar({ outfit: value })}>{value}</button>)}</div></fieldset><fieldset><legend>Signal color</legend><div className="choice-grid">{(["cyan", "violet", "magenta", "indigo"] as const).map((value) => <button type="button" key={value} aria-pressed={avatar.accent === value} onClick={() => patchAvatar({ accent: value })}>{value}</button>)}</div></fieldset><p className="forge-boundary">Appearance is cosmetic. It cannot grant abilities, progression, access, purchases, or authority.</p></div> : null}
+        {step === 2 ? <div className="forge-option-stack"><fieldset><legend>Skin material</legend><div className="choice-grid">{AVATAR_SKIN_TONES.map((value) => <button type="button" key={value} aria-pressed={avatar.skinTone === value} onClick={() => patchAvatar({ skinTone: value })}>{value}</button>)}</div></fieldset><div className="forge-deferred"><span className="kicker">Deferred option</span><strong>Face presets</strong><p>The approved face families are documented, but this slice keeps the neutral owned foundation until compatible face assets and refinements complete intake.</p></div></div> : null}
 
-        {step === 3 ? <div className="forge-fields"><label htmlFor="forge-bio">Biography <span>Optional · private by default · {bio.length}/280</span><textarea id="forge-bio" maxLength={280} value={bio} onChange={(event) => { setBio(event.target.value); markDirty(); }} /></label><p className="forge-boundary">Character Forge is classless. Your choices describe presentation, not capability or eligibility.</p></div> : null}
+        {step === 3 ? <div className="forge-option-stack"><div className="forge-current-foundation" role="status"><span className="kicker">Current selection</span><strong>No hair</strong><p>No-hair is the supported foundation for the current procedural renderer.</p></div><div className="forge-deferred"><span className="kicker">Deferred option</span><strong>Authored hairstyles</strong><p>Eight approved hairstyle directions will unlock only after owned assets pass rig, compatibility, performance, and provenance checks.</p></div></div> : null}
 
-        {step === 4 ? <div className="forge-review" aria-label="Review character draft"><dl><div><dt>Name</dt><dd>{name.trim()}</dd></div><div><dt>Handle</dt><dd>@{handle}</dd></div><div><dt>Body</dt><dd>{avatar.skinTone} · {avatar.trait === "none" ? "no optional trait" : avatar.trait}</dd></div><div><dt>Style</dt><dd>{avatar.outfit} · {avatar.accent} signal</dd></div><div><dt>Biography</dt><dd>{bio.trim() || "No biography yet"}</dd></div><div><dt>Visibility</dt><dd>Private by default</dd></div></dl><p className="forge-boundary">Establishing this persona creates the durable character identity. Appearance remains editable afterward.</p></div> : null}
+        {step === 4 ? <div className="forge-option-stack"><fieldset><legend>Outfit</legend><div className="choice-grid">{AVATAR_OUTFITS.map((value) => <button type="button" key={value} aria-pressed={avatar.outfit === value} onClick={() => patchAvatar({ outfit: value })}>{value}</button>)}</div></fieldset><p className="forge-boundary">The current wardrobe is a controlled technical foundation. Appearance is cosmetic and separate from membership, purchases, and entitlements.</p></div> : null}
+
+        {step === 5 ? <div className="forge-option-stack"><fieldset><legend>Optional traits</legend><div className="choice-grid">{AVATAR_TRAITS.map((value) => <button type="button" key={value} aria-pressed={avatar.trait === value} onClick={() => patchAvatar({ trait: value })}>{value}</button>)}</div></fieldset><fieldset><legend>Signal color</legend><div className="choice-grid">{(["cyan", "violet", "magenta", "indigo"] as const).map((value) => <button type="button" key={value} aria-pressed={avatar.accent === value} onClick={() => patchAvatar({ accent: value })}>{value}</button>)}</div></fieldset><p className="forge-boundary">Traits and signals are cosmetic. They cannot grant abilities, progression, access, purchases, or authority.</p></div> : null}
+
+        {step === 6 ? <div className="forge-review" aria-label="Review character draft"><dl><div><dt>Name</dt><dd>{name.trim()}</dd></div><div><dt>Handle</dt><dd>@{handle}</dd></div><div><dt>Body</dt><dd>Balanced humanoid foundation</dd></div><div><dt>Face</dt><dd>{avatar.skinTone} material · neutral face foundation</dd></div><div><dt>Hair</dt><dd>No hair</dd></div><div><dt>Wardrobe</dt><dd>{avatar.outfit}</dd></div><div><dt>Traits & signals</dt><dd>{avatar.trait === "none" ? "No optional trait" : avatar.trait} · {avatar.accent}</dd></div><div><dt>Biography</dt><dd>{bio.trim() || "No biography yet"}</dd></div><div><dt>Visibility</dt><dd>Private by default</dd></div></dl><p className="forge-boundary">Review the durable identity and current appearance before continuing. You can still go back and revise any unlocked step.</p></div> : null}
+
+        {step === 7 ? <div className="forge-confirm"><span className="kicker">Ready to establish</span><h3>{name.trim()}</h3><p>@{handle} will become your one persistent Cryptic persona. The character starts private; no public profile, social action, purchase, entitlement, or progression is created by this appearance.</p><p className="forge-boundary">Confirmation creates the durable identity and its history entry. Appearance remains editable afterward, but the one-character boundary is enforced.</p></div> : null}
 
         {error ? <p role="alert" className="forge-submit-error">{error}</p> : null}
         <div className="forge-actions">
