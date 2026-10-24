@@ -13,10 +13,12 @@ test("the avatar viewer exposes keyboard rotation, zoom, reset, and a visible fo
 });
 
 test("the avatar viewer exposes the same inspection commands as visible controls", () => {
-  assert.match(component, /role="toolbar" aria-label="Character preview controls"/);
+  assert.match(component, /role="group" aria-label="Character preview controls"/);
+  assert.doesNotMatch(component, /role="toolbar"/);
+  assert.match(component, /presentation === "interactive" \? <div className="avatar-stage__toolbar"/);
   assert.match(component, /aria-label="Rotate character left"/);
   assert.match(component, /aria-label="Zoom in"/);
-  assert.match(component, />Full<\/button>/);
+  assert.match(component, />Full body<\/button>/);
   assert.match(component, />Portrait<\/button>/);
   assert.match(component, />Detail<\/button>/);
   assert.match(component, />Reset<\/button>/);
@@ -31,7 +33,10 @@ test("the viewer exposes deterministic view presets and a renderer-independent r
 });
 
 test("the viewer swaps to its static fallback when WebGL is unavailable or loses context", () => {
-  assert.match(component, /catch \{ element\.dataset\.fallback = "true"/);
+  assert.match(component, /catch \{[\s\S]*setPresentation\("fallback"\)/);
+  assert.match(component, /static Cryptic persona preview/);
+  assert.match(component, /Interactive 3D is unavailable\. Static and structured character presentations are active\./);
+  assert.match(component, /data-fallback=\{presentation === "fallback" \? "true" : undefined\}/);
   assert.match(component, /"webglcontextlost", contextLost/);
   assert.match(component, /"webglcontextrestored", contextRestored/);
   assert.match(styles, /\.avatar-stage__viewport\[data-fallback="true"\] canvas\{display:none\}/);

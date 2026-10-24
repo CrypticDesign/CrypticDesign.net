@@ -1,4 +1,13 @@
-export const CHARACTER_FORGE_STEPS = ["Identity", "Form", "Style", "Story", "Review"] as const;
+export const CHARACTER_FORGE_STEPS = [
+  "Identity",
+  "Body",
+  "Face",
+  "Hair",
+  "Wardrobe",
+  "Traits & Signals",
+  "Review",
+  "Confirm",
+] as const;
 
 export const CHARACTER_HANDLE_PATTERN = /^[a-z0-9][a-z0-9-]{1,30}[a-z0-9]$/;
 
