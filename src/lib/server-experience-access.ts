@@ -7,6 +7,8 @@ import type { NextRequest } from "next/server";
 
 import { resolveAccountSession } from "./account-session";
 import { memberAuthAvailableForHeaders } from "./member-auth-environment";
+import { membershipSandboxEnabled, membershipSandboxPreferred } from "./membership-store";
+import { SANDBOX_SESSION_COOKIE, verifySandboxSession } from "./sandbox-session";
 import {
   DEVELOPMENT_ENTITLEMENT_SOURCES,
   resolveDevelopmentEntitlement,
@@ -83,6 +85,7 @@ async function hasExactDevelopmentAuthorization(
 
 export interface ResolvedExperienceAuthorization {
   access: ExperienceAccessDecision;
+  authenticated: boolean;
   memberId: string | null;
 }
 
@@ -91,43 +94,64 @@ async function resolveForIdentity(
   accountId: string | null,
   definition: ExperienceAccessDefinition,
 ): Promise<ResolvedExperienceAuthorization> {
+  const authenticated = Boolean(accountId);
   if (definition.declaration === "PUBLIC_RELEASE") {
-    return { access: resolveExperienceAccess(definition.declaration, false), memberId: null };
+    return { access: resolveExperienceAccess(definition.declaration, false), authenticated, memberId: null };
   }
-  if (!client || !accountId) return { access: resolveExperienceAccess(definition.declaration, false), memberId: null };
+  if (!client || !accountId) {
+    return { access: resolveExperienceAccess(definition.declaration, false), authenticated, memberId: null };
+  }
 
   try {
     const memberId = await resolveMemberId(client, accountId);
-    if (!memberId) return { access: resolveExperienceAccess(definition.declaration, false), memberId: null };
+    if (!memberId) {
+      return { access: resolveExperienceAccess(definition.declaration, false), authenticated, memberId: null };
+    }
     return {
       access: resolveExperienceAccess(
         definition.declaration,
         await hasExactDevelopmentAuthorization(client, memberId, definition),
       ),
+      authenticated,
       memberId,
     };
   } catch {
-    return { access: resolveExperienceAccess(definition.declaration, false), memberId: null };
+    return { access: resolveExperienceAccess(definition.declaration, false), authenticated, memberId: null };
   }
 }
 
 export async function resolvePageExperienceAuthorization(
   definition: ExperienceAccessDefinition,
 ): Promise<ResolvedExperienceAuthorization> {
-  if (definition.declaration === "PUBLIC_RELEASE" || !supabaseConfigured()) {
-    return { access: resolveExperienceAccess(definition.declaration, false), memberId: null };
+  if (definition.declaration === "PUBLIC_RELEASE") {
+    return { access: resolveExperienceAccess(definition.declaration, false), authenticated: false, memberId: null };
   }
 
   const requestHeaders = await headers();
   if (!memberAuthAvailableForHeaders(requestHeaders)) {
-    return { access: resolveExperienceAccess(definition.declaration, false), memberId: null };
+    return { access: resolveExperienceAccess(definition.declaration, false), authenticated: false, memberId: null };
+  }
+
+  const cookieStore = await cookies();
+  if (membershipSandboxPreferred()) {
+    const accountId = verifySandboxSession(cookieStore.get(SANDBOX_SESSION_COOKIE)?.value);
+    return resolveForIdentity(null, accountId, definition);
+  }
+
+  if (!supabaseConfigured()) {
+    if (membershipSandboxEnabled()) {
+      const accountId = verifySandboxSession(cookieStore.get(SANDBOX_SESSION_COOKIE)?.value);
+      return resolveForIdentity(null, accountId, definition);
+    }
+    return { access: resolveExperienceAccess(definition.declaration, false), authenticated: false, memberId: null };
   }
 
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
-  if (!url || !key) return { access: resolveExperienceAccess(definition.declaration, false), memberId: null };
+  if (!url || !key) {
+    return { access: resolveExperienceAccess(definition.declaration, false), authenticated: false, memberId: null };
+  }
 
-  const cookieStore = await cookies();
   const client = createServerClient(url, key, {
     cookies: {
       getAll: () => cookieStore.getAll(),

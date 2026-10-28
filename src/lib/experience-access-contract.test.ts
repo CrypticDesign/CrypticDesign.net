@@ -5,6 +5,7 @@ import test from "node:test";
 const products = readFileSync("src/lib/products.ts", "utf8");
 const productPage = readFileSync("src/app/products/[slug]/page.tsx", "utf8");
 const serverAccess = readFileSync("src/lib/server-experience-access.ts", "utf8");
+const comingSoon = readFileSync("src/components/ExperienceComingSoon.tsx", "utf8");
 const arcade = readFileSync("src/app/entertainment/arcade/page.tsx", "utf8");
 const firstSignal = readFileSync("src/lib/first-signal.ts", "utf8");
 const firstSignalRoute = readFileSync("src/app/api/characters/[id]/first-signal/route.ts", "utf8");
@@ -30,6 +31,16 @@ test("server authorization maps the authenticated account to its own exact grant
   assert.match(serverAccess, /\.eq\("resource", definition\.resource\)/);
   assert.match(serverAccess, /\.eq\("action", definition\.action\)/);
   assert.match(serverAccess, /DEVELOPMENT_ENTITLEMENT_SOURCES/);
+});
+
+test("coming-soon actions distinguish authentication from development authorization", () => {
+  assert.match(serverAccess, /authenticated: boolean/);
+  assert.match(serverAccess, /const authenticated = Boolean\(accountId\)/);
+  assert.match(serverAccess, /verifySandboxSession\(cookieStore\.get\(SANDBOX_SESSION_COOKIE\)\?\.value\)/);
+  assert.match(productPage, /authenticated=\{experienceAuthorization\?\.authenticated \?\? false\}/);
+  assert.match(comingSoon, /authenticated \? "\/account" : "\/account\/sign-in"/);
+  assert.match(comingSoon, /authenticated \? "Open account" : "Sign in"/);
+  assert.match(comingSoon, /Your account is signed in, but it does not currently have access to this unfinished build/);
 });
 
 test("Arcade copy does not advertise unfinished builds as public play", () => {
