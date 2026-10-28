@@ -4,16 +4,20 @@ import test from "node:test";
 
 const component = readFileSync("src/components/SingularisGamespace.tsx", "utf8");
 const productPage = readFileSync("src/app/products/[slug]/page.tsx", "utf8");
+const persistence = readFileSync("src/lib/singularis-experience-persistence.ts", "utf8");
 const route = readFileSync("src/app/games/singularis/[...assetPath]/route.ts", "utf8");
 const build = readFileSync("protected-experiences/singularis/v05/index.html", "utf8");
 
 test("mounts Singularis as a consumer of the canonical shared ExperienceRuntime", () => {
   assert.match(productPage, /experienceAccess\?\.executable/);
-  assert.match(productPage, /runtimeId="singularis:continuous-gamespace:v1"/);
+  assert.match(productPage, /runtimeId=\{SINGULARIS_EXPERIENCE_ID\}/);
+  assert.match(persistence, /SINGULARIS_EXPERIENCE_ID = "singularis:continuous-gamespace:v1"/);
   assert.match(productPage, /controls="consumer"/);
   assert.match(productPage, /<SingularisGamespace \/>/);
   assert.match(component, /useExperienceRuntime\(\)/);
-  assert.match(component, /const \{ reportReady \} = runtime/);
+  assert.match(component, /const \{ hydrateAuthoritativeContext, reportReady \} = runtime/);
+  assert.match(component, /createDevelopmentExperienceSaveStore\(window\.localStorage\)/);
+  assert.match(component, /dispatch\(\{ type: "HYDRATE_STATE", state: resolution\.checkpoint\.payload \}\)/);
   assert.match(component, /reportReady\(\)/);
   assert.match(component, /runtime\.requestFullscreen\(\)/);
   assert.match(component, /runtime\.enableAudio/);

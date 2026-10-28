@@ -42,22 +42,29 @@ function entitlementGrantFromRow(row: EntitlementRow): EntitlementGrant | null {
   };
 }
 
-async function hasExactDevelopmentAuthorization(
+async function resolveMemberId(
   client: SupabaseClient,
   accountId: string,
-  definition: ExperienceAccessDefinition,
-): Promise<boolean> {
+): Promise<string | null> {
   const { data: member, error: memberError } = await client
     .from("member_profiles")
     .select("id")
     .eq("account_id", accountId)
     .maybeSingle();
-  if (memberError || !member?.id) return false;
+  if (memberError || !member?.id) return null;
+  return String(member.id);
+}
+
+async function hasExactDevelopmentAuthorization(
+  client: SupabaseClient,
+  memberId: string,
+  definition: ExperienceAccessDefinition,
+): Promise<boolean> {
 
   const { data, error } = await client
     .from("entitlement_grants")
     .select("id, member_id, resource, action, source, source_id, effective_at, expires_at, revoked_at, revocation_reason, created_at")
-    .eq("member_id", member.id)
+    .eq("member_id", memberId)
     .eq("resource", definition.resource)
     .eq("action", definition.action)
     .in("source", [...DEVELOPMENT_ENTITLEMENT_SOURCES]);
@@ -68,47 +75,57 @@ async function hasExactDevelopmentAuthorization(
     .filter((grant): grant is EntitlementGrant => grant !== null);
   return resolveDevelopmentEntitlement(
     definition,
-    String(member.id),
+    memberId,
     grants,
     new Date().toISOString(),
   ).allowed;
+}
+
+export interface ResolvedExperienceAuthorization {
+  access: ExperienceAccessDecision;
+  memberId: string | null;
 }
 
 async function resolveForIdentity(
   client: SupabaseClient | null,
   accountId: string | null,
   definition: ExperienceAccessDefinition,
-): Promise<ExperienceAccessDecision> {
+): Promise<ResolvedExperienceAuthorization> {
   if (definition.declaration === "PUBLIC_RELEASE") {
-    return resolveExperienceAccess(definition.declaration, false);
+    return { access: resolveExperienceAccess(definition.declaration, false), memberId: null };
   }
-  if (!client || !accountId) return resolveExperienceAccess(definition.declaration, false);
+  if (!client || !accountId) return { access: resolveExperienceAccess(definition.declaration, false), memberId: null };
 
   try {
-    return resolveExperienceAccess(
-      definition.declaration,
-      await hasExactDevelopmentAuthorization(client, accountId, definition),
-    );
+    const memberId = await resolveMemberId(client, accountId);
+    if (!memberId) return { access: resolveExperienceAccess(definition.declaration, false), memberId: null };
+    return {
+      access: resolveExperienceAccess(
+        definition.declaration,
+        await hasExactDevelopmentAuthorization(client, memberId, definition),
+      ),
+      memberId,
+    };
   } catch {
-    return resolveExperienceAccess(definition.declaration, false);
+    return { access: resolveExperienceAccess(definition.declaration, false), memberId: null };
   }
 }
 
-export async function resolvePageExperienceAccess(
+export async function resolvePageExperienceAuthorization(
   definition: ExperienceAccessDefinition,
-): Promise<ExperienceAccessDecision> {
+): Promise<ResolvedExperienceAuthorization> {
   if (definition.declaration === "PUBLIC_RELEASE" || !supabaseConfigured()) {
-    return resolveExperienceAccess(definition.declaration, false);
+    return { access: resolveExperienceAccess(definition.declaration, false), memberId: null };
   }
 
   const requestHeaders = await headers();
   if (!memberAuthAvailableForHeaders(requestHeaders)) {
-    return resolveExperienceAccess(definition.declaration, false);
+    return { access: resolveExperienceAccess(definition.declaration, false), memberId: null };
   }
 
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
-  if (!url || !key) return resolveExperienceAccess(definition.declaration, false);
+  if (!url || !key) return { access: resolveExperienceAccess(definition.declaration, false), memberId: null };
 
   const cookieStore = await cookies();
   const client = createServerClient(url, key, {
@@ -123,9 +140,16 @@ export async function resolvePageExperienceAccess(
   return resolveForIdentity(client, error ? null : data.user?.id ?? null, definition);
 }
 
+export async function resolvePageExperienceAccess(
+  definition: ExperienceAccessDefinition,
+): Promise<ExperienceAccessDecision> {
+  return (await resolvePageExperienceAuthorization(definition)).access;
+}
+
 export interface RequestExperienceAccess {
   access: ExperienceAccessDecision;
   session: AccountSession;
+  memberId: string | null;
 }
 
 export async function resolveRequestExperienceAccess(
@@ -133,8 +157,10 @@ export async function resolveRequestExperienceAccess(
   definition: ExperienceAccessDefinition,
 ): Promise<RequestExperienceAccess> {
   const session = await resolveAccountSession(request);
+  const resolved = await resolveForIdentity(session.client, session.accountId, definition);
   return {
-    access: await resolveForIdentity(session.client, session.accountId, definition),
+    access: resolved.access,
     session,
+    memberId: resolved.memberId,
   };
 }

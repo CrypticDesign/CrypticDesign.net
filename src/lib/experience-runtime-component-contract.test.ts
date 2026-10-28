@@ -41,13 +41,13 @@ test("property runtimes can compose inside the shared wrapper and consume its co
   assert.match(runtime, /export function useExperienceRuntime\(\): ExperienceRuntimeController/);
   assert.match(runtime, /<ExperienceRuntimeContext\.Provider value=\{controller\}>/);
   assert.match(runtime, /\{hasCustomSurface \? children : \(/);
-  assert.match(runtime, /authoritativeContext: context/);
+  assert.match(runtime, /authoritativeContext: state\.context \?\? context/);
 });
 
 test("the consumer controller exposes lifecycle, fullscreen, audio, readiness, and hydration state", () => {
   for (const member of [
     "activate", "deactivate", "requestFullscreen", "enableAudio", "muteAudio", "setAudioVolume",
-    "reportReady", "reportFallback", "interrupt", "resolve", "markUpdated",
+    "hydrateAuthoritativeContext", "reportReady", "reportFallback", "interrupt", "resolve", "markUpdated",
   ]) assert.match(runtime, new RegExp(`${member}:`));
   assert.match(runtime, /capabilities,/);
   assert.match(runtime, /authoritativeContext: ExperienceRuntimeAuthoritativeContextV1/);

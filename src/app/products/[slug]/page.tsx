@@ -8,9 +8,11 @@ import ReleaseCard from "@/components/ReleaseCard";
 import SingularisGamespace from "@/components/SingularisGamespace";
 import { AnalyticsAnchor } from "@/components/AnalyticsLink";
 import { ANALYTICS_EVENTS } from "@/lib/analytics";
+import { EXPERIENCE_RUNTIME_CONTEXT_VERSION } from "@/lib/experience-runtime";
 import { getProduct } from "@/lib/products";
 import { publicReleases } from "@/lib/releases";
-import { resolvePageExperienceAccess } from "@/lib/server-experience-access";
+import { resolvePageExperienceAuthorization } from "@/lib/server-experience-access";
+import { SINGULARIS_EXPERIENCE_ID } from "@/lib/singularis-experience-persistence";
 import { socialMetadata } from "@/lib/social-metadata";
 
 export const dynamic = "force-dynamic";
@@ -49,9 +51,10 @@ export default async function ProductHome({
   const { release: selectedReleaseSlug } = await searchParams;
   const product = getProduct(slug);
   if (!product) notFound();
-  const experienceAccess = product.experience
-    ? await resolvePageExperienceAccess(product.experience)
+  const experienceAuthorization = product.experience
+    ? await resolvePageExperienceAuthorization(product.experience)
     : null;
+  const experienceAccess = experienceAuthorization?.access ?? null;
 
   const releases = publicReleases().filter((release) =>
     product.releaseSlugs.includes(release.slug),
@@ -146,10 +149,19 @@ export default async function ProductHome({
         </div>
         {experienceAccess?.executable ? (
           <ExperienceRuntime
-            runtimeId="singularis:continuous-gamespace:v1"
+            runtimeId={SINGULARIS_EXPERIENCE_ID}
             accessibleLabel="Singularis interactive experience"
             controls="consumer"
             capabilities={{ controller: true }}
+            authoritativeContext={{
+              contractVersion: EXPERIENCE_RUNTIME_CONTEXT_VERSION,
+              experienceId: SINGULARIS_EXPERIENCE_ID,
+              access: {
+                status: experienceAccess.developmentAuthorized ? "authorized" : "public",
+                subjectId: experienceAuthorization?.memberId ?? undefined,
+              },
+              resume: { status: "none" },
+            }}
           >
             <SingularisGamespace />
           </ExperienceRuntime>

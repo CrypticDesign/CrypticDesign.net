@@ -3,8 +3,21 @@
 import Image from "next/image";
 import { useEffect, useReducer, useRef, useState } from "react";
 import { useExperienceRuntime } from "@/components/ExperienceRuntime";
+import {
+  canPersistExperiencePreview,
+  createDevelopmentExperienceSaveStore,
+  withExperienceSaveResolution,
+  type DevelopmentExperienceSaveStore,
+} from "@/lib/experience-persistence";
 import SingularisUniverseViewport from "@/components/SingularisUniverseViewport";
 import { createSingularisGamespaceState, singularisGamespaceReducer, type GamespacePhase, type SingularisSimpleActionType } from "@/lib/singularis-gamespace";
+import {
+  SINGULARIS_EXPERIENCE_ID,
+  SINGULARIS_SAVE_SCHEMA_VERSION,
+  createSingularisCheckpointDraft,
+  isSingularisGamespaceState,
+  shouldPersistSingularisState,
+} from "@/lib/singularis-experience-persistence";
 import { recordSingularisEvent, type SingularisEventName } from "@/lib/singularis-instrumentation";
 
 const actionCards = [
@@ -60,11 +73,18 @@ export default function SingularisGamespace() {
   const [franchiseDrawerOpen, setFranchiseDrawerOpen] = useState(true);
   const [workspaceSection, setWorkspaceSection] = useState<SingularisWorkspaceSection>("mission-control");
   const [embeddedRuntime, setEmbeddedRuntime] = useState<EmbeddedRuntimeState>(initialEmbeddedRuntime);
+  const [resumeMessage, setResumeMessage] = useState("Checking saved development progress…");
+  const [saveReady, setSaveReady] = useState(false);
   const embeddedRuntimeRef = useRef<HTMLIFrameElement>(null);
+  const hydrationStartedRef = useRef(false);
+  const saveStoreRef = useRef<DevelopmentExperienceSaveStore | null>(null);
+  const saveSubjectRef = useRef<string | null>(null);
+  const saveSequenceRef = useRef(0);
+  const previousSavedStateRef = useRef<ReturnType<typeof createSingularisGamespaceState> | null>(null);
   const immersive = ["entering", "training", "interrupted", "complete", "operation"].includes(state.phase);
   const fullscreen = runtime.state.phase === "active-fullscreen";
   const expanded = runtime.isExpanded;
-  const { reportReady } = runtime;
+  const { hydrateAuthoritativeContext, reportReady } = runtime;
 
   const act = (type: SingularisSimpleActionType, event?: SingularisEventName) => {
     if (event) recordSingularisEvent(event);
@@ -72,19 +92,66 @@ export default function SingularisGamespace() {
   };
 
   useEffect(() => {
-    reportReady();
-  }, [reportReady]);
+    if (hydrationStartedRef.current) return;
+    hydrationStartedRef.current = true;
+    const context = runtime.authoritativeContext;
+    if (!canPersistExperiencePreview(context) || !context.access.subjectId) {
+      setResumeMessage("This session is non-persistent. No account progress will be created.");
+      previousSavedStateRef.current = state;
+      setSaveReady(true);
+      recordSingularisEvent("singularis_arrival_viewed");
+      reportReady();
+      return;
+    }
+
+    const subjectId = context.access.subjectId;
+    try {
+      const store = createDevelopmentExperienceSaveStore(window.localStorage);
+      const resolution = store.resolve({
+        experienceId: SINGULARIS_EXPERIENCE_ID,
+        subjectId,
+        acceptedSchemaVersions: [SINGULARIS_SAVE_SCHEMA_VERSION],
+      }, isSingularisGamespaceState);
+      saveStoreRef.current = store;
+      saveSubjectRef.current = subjectId;
+      hydrateAuthoritativeContext(withExperienceSaveResolution(context, resolution));
+      if (resolution.status === "available") {
+        dispatch({ type: "HYDRATE_STATE", state: resolution.checkpoint.payload });
+        previousSavedStateRef.current = resolution.checkpoint.payload;
+        saveSequenceRef.current = resolution.checkpoint.sequence;
+        setResumeMessage(`Continued from checkpoint ${resolution.checkpoint.payload.session.checkpoint + 1} saved on this browser. Production account sync is not enabled.`);
+      } else if (resolution.status === "incompatible") {
+        previousSavedStateRef.current = state;
+        setResumeMessage(`${resolution.reason} Start a new local session when ready; production account sync is not enabled.`);
+        recordSingularisEvent("singularis_arrival_viewed");
+      } else {
+        previousSavedStateRef.current = state;
+        setResumeMessage("No saved development session exists on this browser. Production account sync is not enabled.");
+        recordSingularisEvent("singularis_arrival_viewed");
+      }
+    } catch {
+      previousSavedStateRef.current = state;
+      setResumeMessage("Saved development progress is unavailable in this browser. The session can continue without persistence.");
+      reportReady();
+    }
+    setSaveReady(true);
+  }, [hydrateAuthoritativeContext, reportReady, runtime.authoritativeContext, state]);
   useEffect(() => {
     if (immersive && (runtime.state.phase === "ready" || runtime.state.phase === "updated")) runtime.activate();
     else if (!immersive && runtime.isActive) void runtime.deactivate();
   }, [immersive, runtime]);
   useEffect(() => {
-    if (window.localStorage.getItem("cryptic:singularis-pilot-active") === "true") dispatch({ type: "HYDRATE_RETURNING_PILOT" });
-    else recordSingularisEvent("singularis_arrival_viewed");
-  }, []);
-  useEffect(() => {
-    if (state.player.pilotStatus === "active") window.localStorage.setItem("cryptic:singularis-pilot-active", "true");
-  }, [state.player.pilotStatus]);
+    if (!saveReady) return;
+    const previous = previousSavedStateRef.current;
+    const store = saveStoreRef.current;
+    const subjectId = saveSubjectRef.current;
+    if (store && subjectId && shouldPersistSingularisState(previous, state)) {
+      const result = store.write(createSingularisCheckpointDraft(state, subjectId, ++saveSequenceRef.current));
+      if (result.status === "accepted") setResumeMessage("Progress saved on this browser. Production account sync is not enabled.");
+      if (result.status === "rejected") setResumeMessage(result.reason);
+    }
+    previousSavedStateRef.current = state;
+  }, [saveReady, state]);
   useEffect(() => {
     if (previousPhaseRef.current === state.phase) return;
     previousPhaseRef.current = state.phase;
@@ -136,7 +203,11 @@ export default function SingularisGamespace() {
   const toggleFullscreen = () => runtime.requestFullscreen();
 
   const resetExperience = () => {
-    window.localStorage.removeItem("cryptic:singularis-pilot-active");
+    const subjectId = saveSubjectRef.current;
+    if (subjectId) saveStoreRef.current?.clear({ experienceId: SINGULARIS_EXPERIENCE_ID, subjectId });
+    saveSequenceRef.current = 0;
+    previousSavedStateRef.current = null;
+    setResumeMessage("Saved development progress was cleared from this browser. Production account sync remains disabled.");
     dispatch({ type: "RESET_EXPERIENCE" });
   };
 
@@ -180,7 +251,7 @@ export default function SingularisGamespace() {
 
   const renderSidePanel = () => {
     if (state.phase === "arrival") return <aside className="sin-cgs__panel"><span>First Contact</span><h2>Understand it in 30 seconds.</h2><p>Singularis is a living action universe. You create a pilot, learn to fly, accept Operations, and shape what becomes available next.</p><hr/><h3>What you’ll do</h3><ul><li>Pilot a Leviathan-class spacecraft</li><li>Fight through music-driven Operations</li><li>Upgrade your pilot and unlock technology</li><li>Discover sectors and influence the world</li></ul><hr/><h3>Your identity begins here</h3><div className="sin-cgs__identity">CrypticDesign.net Member <b>↓</b> Singularis Pilot <b>↓</b> Leviathan Craft</div></aside>;
-    if (state.phase === "training" || state.phase === "operation") return <aside className="sin-cgs__panel"><span>State</span><h2>Active Gameplay</h2><hr/><h3>Continuity checks</h3><ul className="checks"><li>Track never stops</li><li>Input is unquantized</li><li>Runtime owns immediate play state</li><li>Platform owns durable state</li></ul>{state.phase === "training" ? <button onClick={() => { window.localStorage.setItem("cryptic:singularis-pilot-active", "true"); act("COMPLETE_TRAINING", "training_simulation_completed"); }}>Complete training</button> : <button className="secondary" onClick={() => act("END_OPERATION")}>Return to Pilot Preparation</button>}</aside>;
+    if (state.phase === "training" || state.phase === "operation") return <aside className="sin-cgs__panel"><span>State</span><h2>Active Gameplay</h2><hr/><h3>Continuity checks</h3><ul className="checks"><li>Track never stops</li><li>Input is unquantized</li><li>Runtime owns immediate play state</li><li>Platform owns durable state</li></ul>{state.phase === "training" ? <button onClick={() => act("COMPLETE_TRAINING", "training_simulation_completed")}>Complete training</button> : <button className="secondary" onClick={() => act("END_OPERATION")}>Return to Pilot Preparation</button>}</aside>;
     if (state.phase === "interrupted") return <aside className="sin-cgs__panel"><span>Interruption state</span><h2>Nothing has been lost</h2><p>Your current session is safely held while you decide what happens next.</p><hr/><h3>Held state</h3><ul className="checks"><li>Pilot identity — retained</li><li>Leviathan — {state.player.leviathan}</li><li>Simulation — Training 01</li><li>Checkpoint — {state.session.checkpoint + 1}</li><li>World connection — active</li></ul><hr/><h3>Ending the simulation</h3><p>No result, reward, or penalty is recorded.</p></aside>;
     if (state.phase === "complete") return <aside className="sin-cgs__panel"><span>Training outcome</span><h2>Your Pilot is ready</h2><p>This completion changes your standing in Singularis without creating a combat result or affecting the shared war effort.</p><hr/><h3>Unlocked</h3><ul className="checks"><li>Pilot identity — Active</li><li>Leviathan assignment — Bond established</li><li>Introductory Operations — Available</li><li>Pilot progression — Cadet initiated</li></ul><hr/><h3>Recommended next activity</h3><article><strong>Transit Escort</strong><p>A low-risk introductory Operation focused on navigation and formation support.</p></article></aside>;
     if (state.phase === "synchronized") return <aside className="sin-cgs__panel"><span>Synchronization complete</span><h2>Your standing has changed</h2><p>Training updates your Pilot record and available activities without altering the shared war effort.</p><hr/><h3>Pilot state updated</h3><ul className="checks"><li>Pilot identity — Active</li><li>Leviathan bond — Established</li><li>Progression — Cadet initiated</li><li>Operations — Transit Escort available</li></ul><hr/><h3>Shared world state</h3><article><strong>Continuous and unaffected</strong><p>No combat score, rewards, territory change, or war-effort contribution was created by training.</p></article><button onClick={() => act("BEGIN_TRANSIT_ESCORT", "transit_escort_selected")}>Begin Transit Escort</button></aside>;
@@ -202,7 +273,7 @@ export default function SingularisGamespace() {
         </div>
       </details>
       <header className="sin-cgs__heading">
-        <div className="sin-cgs__heading-copy"><span>{state.phase === "arrival" ? "First-time arrival" : state.phase === "training" ? "State 04" : "Working draft"}</span><h1 id="singularis-title">{title}</h1><p>{subtitle}</p>{state.phase === "arrival" && <div className="sin-cgs__tags"><b>Persistent world</b><b>Arcade action</b><b>Music-driven</b></div>}</div>
+        <div className="sin-cgs__heading-copy"><span>{state.phase === "arrival" ? "First-time arrival" : state.phase === "training" ? "State 04" : "Working draft"}</span><h1 id="singularis-title">{title}</h1><p>{subtitle}</p><p className="sin-cgs__resume-status" role="status" data-resume-status>{resumeMessage}</p>{state.phase === "arrival" && <div className="sin-cgs__tags"><b>Persistent world</b><b>Arcade action</b><b>Music-driven</b></div>}</div>
       </header>
       <details className="sin-cgs__nav-menu">
         <summary><strong>Singularis workspace</strong><span>{singularisWorkspaceSections.find((section) => section.id === workspaceSection)?.label}</span></summary>

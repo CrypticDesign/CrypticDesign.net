@@ -26,6 +26,9 @@ export interface ExperienceRuntimeAuthoritativeContextV1 {
     status: ExperienceRuntimeResumeStatus;
     checkpointId?: string;
     schemaVersion?: string;
+    savedAt?: string;
+    source?: "platform" | "development-preview";
+    reason?: string;
     payload?: unknown;
   };
 }
@@ -157,7 +160,8 @@ export function experienceRuntimeReducer(
   }
 }
 
-export function runtimeLauncherLabel(context?: ExperienceRuntimeAuthoritativeContextV1): "Play" | "Continue" | "Unavailable" {
-  if (context?.access.status === "denied" || context?.resume?.status === "incompatible") return "Unavailable";
+export function runtimeLauncherLabel(context?: ExperienceRuntimeAuthoritativeContextV1): "Play" | "Continue" | "Start new" | "Unavailable" {
+  if (context?.access.status === "denied") return "Unavailable";
+  if (context?.resume?.status === "incompatible") return "Start new";
   return context?.resume?.status === "available" ? "Continue" : "Play";
 }

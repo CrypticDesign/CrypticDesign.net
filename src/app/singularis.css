@@ -85,4 +85,5 @@
 .sin-cgs__hero-art:after{content:"";position:absolute;inset:0;box-shadow:inset 0 -42px 50px rgb(5 8 13 / 58%);pointer-events:none}
 .sin-cgs__hero-art img{object-fit:cover;object-position:center 52%}
 .sin-cgs__heading-copy>span{color:#d6a62e;font:600 11px "IBM Plex Sans",Arial;letter-spacing:.05em;text-transform:uppercase}
+.sin-cgs__heading .sin-cgs__resume-status{max-width:760px;margin-top:12px;padding:9px 12px;border-left:2px solid #7fb8ff;background:#07101acc;color:#9fb1c4;font-size:12px}
 @media(max-width:560px){.sin-cgs__hero-art{height:210px;margin-bottom:18px}.sin-cgs__hero-art img{object-position:center 50%}}
