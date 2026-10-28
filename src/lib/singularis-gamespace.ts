@@ -22,6 +22,7 @@ export interface SingularisPlayerState {
 }
 
 export interface SingularisSessionState {
+  sessionId: string;
   runtimeMode: "observational" | "simulation";
   simulationId: "Training Simulation 01" | "Transit Escort 01";
   checkpoint: number;
@@ -56,6 +57,7 @@ export interface SingularisGamespaceState {
 
 export type SingularisGamespaceAction =
   | { type: "HYDRATE_RETURNING_PILOT" }
+  | { type: "HYDRATE_STATE"; state: SingularisGamespaceState }
   | { type: "PREPARE" }
   | { type: "ENTER_TRAINING" }
   | { type: "RUNTIME_READY" }
@@ -73,7 +75,7 @@ export type SingularisGamespaceAction =
   | { type: "LOAD_DEMO_PHASE"; phase: GamespacePhase }
   | { type: "WORLD_TICK" };
 
-export type SingularisSimpleActionType = Exclude<SingularisGamespaceAction["type"], "LOAD_DEMO_PHASE">;
+export type SingularisSimpleActionType = Exclude<SingularisGamespaceAction["type"], "LOAD_DEMO_PHASE" | "HYDRATE_STATE">;
 
 export function createSingularisGamespaceState(now = Date.now()): SingularisGamespaceState {
   return {
@@ -90,6 +92,7 @@ export function createSingularisGamespaceState(now = Date.now()): SingularisGame
       trainingRecordCount: 0,
     },
     session: {
+      sessionId: `singularis-session-${now}`,
       runtimeMode: "observational",
       simulationId: "Training Simulation 01",
       checkpoint: 0,
@@ -131,6 +134,8 @@ export function singularisGamespaceReducer(
   action: SingularisGamespaceAction,
 ): SingularisGamespaceState {
   switch (action.type) {
+    case "HYDRATE_STATE":
+      return action.state;
     case "HYDRATE_RETURNING_PILOT":
       return {
         ...state,
@@ -193,13 +198,14 @@ export function singularisGamespaceReducer(
         ? { ...state, phase: "preparation", session: { ...state.session, runtimeMode: "observational", simulationId: "Training Simulation 01", inputState: "locked", transitionState: "idle", pauseState: "ended" } }
         : state;
     case "RESET_EXPERIENCE":
-      return createSingularisGamespaceState(state.world.worldTimestamp);
+      return createSingularisGamespaceState(state.world.worldTimestamp + 1);
     case "REPLAY_TRAINING":
       return {
         ...state,
         phase: "entering",
         session: {
           ...state.session,
+          sessionId: `${state.session.sessionId}:replay:${state.player.trainingRecordCount + 1}`,
           runtimeMode: "simulation",
           simulationId: "Training Simulation 01",
           checkpoint: 0,

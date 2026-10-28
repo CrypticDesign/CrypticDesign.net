@@ -1,4 +1,5 @@
 import type { SingularisGamespaceState } from "./singularis-gamespace";
+import { isSingularisGamespaceState } from "./singularis-experience-persistence.ts";
 
 export const SINGULARIS_GAME_STATE_CONTRACT_VERSION = 1 as const;
 
@@ -45,12 +46,6 @@ export interface SingularisGameStateTransport {
   submitCompletion(proposal: SingularisCompletionProposalV1): Promise<unknown>;
 }
 
-function isGamespaceState(value: unknown): value is SingularisGamespaceState {
-  if (!value || typeof value !== "object") return false;
-  const candidate = value as Partial<SingularisGamespaceState>;
-  return typeof candidate.phase === "string" && !!candidate.player && !!candidate.session && !!candidate.world;
-}
-
 export function isRuntimeSnapshotV1(value: unknown): value is SingularisRuntimeSnapshotV1 {
   if (!value || typeof value !== "object") return false;
   const snapshot = value as Partial<SingularisRuntimeSnapshotV1>;
@@ -73,7 +68,7 @@ export function createProductionGameStateAdapter(transport?: SingularisGameState
       if (!transport) return { status: "unavailable", reason: "Production game-state transport is not configured." };
       try {
         const response = await transport.hydrate(memberId, SINGULARIS_GAME_STATE_CONTRACT_VERSION);
-        if (!isGamespaceState(response)) return { status: "unavailable", reason: "Platform returned an invalid game-state envelope." };
+        if (!isSingularisGamespaceState(response)) return { status: "unavailable", reason: "Platform returned an invalid game-state envelope." };
         return { status: "ready", state: response };
       } catch {
         return { status: "unavailable", reason: "Platform game state could not be reached." };
@@ -86,7 +81,7 @@ export function createProductionGameStateAdapter(transport?: SingularisGameState
         const response = await transport.submitCompletion(proposal);
         if (!response || typeof response !== "object" || !("status" in response)) return { status: "rejected", reason: "Platform returned an invalid completion resolution." };
         const resolution = response as SingularisCompletionResolution;
-        if (["accepted", "duplicate"].includes(resolution.status) && !("state" in resolution && isGamespaceState(resolution.state))) return { status: "rejected", reason: "Accepted completion omitted authoritative state." };
+        if (["accepted", "duplicate"].includes(resolution.status) && !("state" in resolution && isSingularisGamespaceState(resolution.state))) return { status: "rejected", reason: "Accepted completion omitted authoritative state." };
         if (!["accepted", "duplicate", "rejected", "pending_review", "unavailable"].includes(resolution.status)) return { status: "rejected", reason: "Platform returned an unknown completion status." };
         return resolution;
       } catch {

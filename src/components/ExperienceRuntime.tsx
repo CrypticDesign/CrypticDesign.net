@@ -54,6 +54,7 @@ export interface ExperienceRuntimeController {
   enableAudio: () => void;
   muteAudio: () => void;
   setAudioVolume: (volume: number) => void;
+  hydrateAuthoritativeContext: (context: ExperienceRuntimeAuthoritativeContextV1) => void;
   reportReady: () => void;
   reportFallback: (reason: string) => void;
   interrupt: () => Promise<void>;
@@ -151,6 +152,13 @@ export default function ExperienceRuntime({
 
   const reportReady = useCallback(() => dispatch({ type: "PRESENT" }), []);
   const reportFallback = useCallback((reason: string) => dispatch({ type: "FALLBACK", reason }), []);
+  const hydrateAuthoritativeContext = useCallback((nextContext: ExperienceRuntimeAuthoritativeContextV1) => {
+    contextRef.current = nextContext;
+    setExpandedFallback(false);
+    releaseAudioPriority(runtimeId);
+    dispatch({ type: "HYDRATE", context: nextContext });
+    window.requestAnimationFrame(() => dispatch({ type: "PRESENT" }));
+  }, [releaseAudioPriority, runtimeId]);
 
   const handleSceneStatus = useCallback((status: "ready" | "fallback", reason?: string) => {
     if (status === "fallback") reportFallback(reason ?? "runtime-unavailable");
@@ -242,7 +250,7 @@ export default function ExperienceRuntime({
   const controller = useMemo<ExperienceRuntimeController>(() => ({
     state,
     capabilities,
-    authoritativeContext: context,
+    authoritativeContext: state.context ?? context,
     isActive,
     isExpanded: expandedFallback || state.phase === "active-fullscreen",
     activate,
@@ -251,6 +259,7 @@ export default function ExperienceRuntime({
     enableAudio,
     muteAudio,
     setAudioVolume,
+    hydrateAuthoritativeContext,
     reportReady,
     reportFallback,
     interrupt,
@@ -263,6 +272,7 @@ export default function ExperienceRuntime({
     deactivate,
     enableAudio,
     expandedFallback,
+    hydrateAuthoritativeContext,
     interrupt,
     isActive,
     markUpdated,
@@ -334,7 +344,7 @@ export default function ExperienceRuntime({
               disabled={state.phase !== "ready" && state.phase !== "updated" || launcher === "Unavailable"}
               onClick={launchMode === "fullscreen" ? () => void activateFullscreen() : activate}
             >
-              {launcher === "Unavailable" ? "Experience unavailable" : launchMode === "fullscreen" ? "Fullscreen" : launcher === "Continue" ? "Continue experience" : "Enter experience"}
+              {launcher === "Unavailable" ? "Experience unavailable" : launchMode === "fullscreen" ? "Fullscreen" : launcher === "Continue" ? "Continue experience" : launcher === "Start new" ? "Start new session" : "Enter experience"}
             </button>
           ) : null}
           {isActive ? (

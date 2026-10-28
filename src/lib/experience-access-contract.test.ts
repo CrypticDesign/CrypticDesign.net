@@ -13,7 +13,8 @@ const releases = readFileSync("src/lib/releases.ts", "utf8");
 test("unfinished product declarations remain discoverable but execute only after server access", () => {
   assert.match(products, /SINGULARIS_EXPERIENCE[\s\S]*PUBLIC_COMING_SOON/);
   assert.match(products, /LIFA_EXPERIENCE[\s\S]*PUBLIC_COMING_SOON/);
-  assert.match(productPage, /resolvePageExperienceAccess/);
+  assert.match(productPage, /resolvePageExperienceAuthorization/);
+  assert.match(productPage, /subjectId: experienceAuthorization\?\.memberId \?\? undefined/);
   assert.match(productPage, /experienceAccess\?\.executable \? \(/);
   assert.match(productPage, /<ExperienceComingSoon/);
   assert.match(productPage, /dynamic = "force-dynamic"/);

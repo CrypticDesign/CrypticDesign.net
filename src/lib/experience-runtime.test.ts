@@ -63,7 +63,8 @@ test("accepts versioned authoritative resume context without inventing persisten
     resume: { status: "available", checkpointId: "checkpoint-from-resolver", schemaVersion: "3" },
   };
   assert.equal(runtimeLauncherLabel(resumable), "Continue");
-  assert.equal(runtimeLauncherLabel({ ...resumable, resume: { status: "incompatible" } }), "Unavailable");
+  assert.equal(runtimeLauncherLabel({ ...resumable, resume: { status: "incompatible" } }), "Start new");
+  assert.equal(runtimeLauncherLabel({ ...resumable, access: { status: "denied" } }), "Unavailable");
   assert.equal(runtimeLauncherLabel(undefined), "Play");
 });
 
