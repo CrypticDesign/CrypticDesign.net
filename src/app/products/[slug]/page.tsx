@@ -170,6 +170,7 @@ export default async function ProductHome({
             title={product.title}
             summary="Explore the Singularis universe and its released music while the playable browser experience remains under development."
             access={experienceAccess}
+            authenticated={experienceAuthorization?.authenticated ?? false}
           />
         )}
         {transmissions.length > 0 && (
@@ -210,6 +211,7 @@ export default async function ProductHome({
               title={product.title}
               summary="Lifa remains publicly discoverable while its playable development builds stay closed until a public release is approved."
               access={experienceAccess}
+              authenticated={experienceAuthorization?.authenticated ?? false}
             />
           )}
           <div className="flex flex-wrap gap-4 text-sm">

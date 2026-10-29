@@ -6,11 +6,13 @@ export default function ExperienceComingSoon({
   title,
   summary,
   access,
+  authenticated,
   headingLevel = "h2",
 }: {
   title: string;
   summary: string;
   access: ExperienceAccessDecision;
+  authenticated: boolean;
   headingLevel?: "h1" | "h2";
 }) {
   const unlocked = access.state === "DEVELOPMENT_UNLOCKED";
@@ -30,10 +32,14 @@ export default function ExperienceComingSoon({
       {!unlocked && (
         <>
           <p className="mt-3 max-w-2xl text-sm text-muted-foreground">
-            Public browsing and released media remain available. Signing in does not by itself unlock unfinished builds; development execution requires separate authorization.
+            {authenticated
+              ? "Your account is signed in, but it does not currently have access to this unfinished build. Public browsing and released media remain available."
+              : "Public browsing and released media remain available. Sign in to check whether your account has development access; unfinished builds require separate authorization."}
           </p>
           <div className="mt-5 flex flex-wrap gap-3">
-            <Link className="button secondary" href="/account/sign-in">Sign in</Link>
+            <Link className="button secondary" href={authenticated ? "/account" : "/account/sign-in"}>
+              {authenticated ? "Open account" : "Sign in"}
+            </Link>
             <Link className="button secondary" href="/entertainment#public-releases">Browse public releases</Link>
           </div>
         </>
