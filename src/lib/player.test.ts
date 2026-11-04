@@ -5,6 +5,8 @@ import {
   defaultQueue,
   initialPlaybackStatus,
   playbackIsBlocked,
+  playerTrackIndexById,
+  playerTrackSharePath,
   playerStatusPresentation,
   type PlayerTrack,
 } from "./player.ts";
@@ -24,6 +26,23 @@ test("the default player library contains only playable tracks", () => {
   assert.ok(queue.every((track) => track.src), "every library track must have an audio source");
   assert.ok(queue.every((track) => track.availability === "public"));
   assert.ok(queue.every((track) => track.support.captions === "not-applicable"));
+});
+
+test("builds stable public share paths without exposing media source URLs", () => {
+  const queue = defaultQueue();
+
+  assert.equal(playerTrackSharePath(queue[0]), "/audio?track=reflection");
+  assert.equal(playerTrackSharePath({ id: "signal / one" }), "/audio?track=signal%20%2F%20one");
+  assert.doesNotMatch(playerTrackSharePath(queue[0]), /\.mp3|\/audio\/cda001/i);
+});
+
+test("resolves shared track ids only when they exist in the playable queue", () => {
+  const queue = defaultQueue();
+
+  assert.equal(playerTrackIndexById(queue, "baseline"), 1);
+  assert.equal(playerTrackIndexById(queue, "leviathan-dreaming"), 3);
+  assert.equal(playerTrackIndexById(queue, "not-published"), null);
+  assert.equal(playerTrackIndexById(queue, null), null);
 });
 
 const track: PlayerTrack = {

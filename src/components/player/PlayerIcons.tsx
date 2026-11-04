@@ -36,6 +36,17 @@ export function QueueIcon(props: IconProps) {
   );
 }
 
+export function ShareIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <circle cx="5" cy="10" r="2" />
+      <circle cx="15" cy="5" r="2" />
+      <circle cx="15" cy="15" r="2" />
+      <path d="M6.8 9.1l6.4-3.2M6.8 10.9l6.4 3.2" />
+    </Svg>
+  );
+}
+
 export function VolumeIcon(props: IconProps) {
   return (
     <Svg size={20} {...props}>

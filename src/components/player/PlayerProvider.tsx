@@ -21,7 +21,9 @@ import {
 import {
   defaultQueue,
   initialPlaybackStatus,
+  PLAYER_TRACK_QUERY_PARAM,
   playbackIsBlocked,
+  playerTrackIndexById,
   playerStatusPresentation,
   type PlayerPlaybackStatus,
   type PlayerStatusPresentation,
@@ -127,6 +129,26 @@ export function PlayerProvider({
     timeRef.current = value;
     setCurrentTime(value);
   }, []);
+
+  useEffect(() => {
+    const selectSharedTrack = () => {
+      const trackId = new URLSearchParams(window.location.search).get(PLAYER_TRACK_QUERY_PARAM);
+      const target = playerTrackIndexById(queue, trackId);
+      if (target === null) return;
+
+      const nextStatus = initialPlaybackStatus(queue[target], window.navigator.onLine);
+      setIndex(target);
+      setMetaDuration(null);
+      setTime(0);
+      setPlaying(false);
+      setPlaybackStatus(nextStatus);
+      setExpanded(true);
+    };
+
+    selectSharedTrack();
+    window.addEventListener("popstate", selectSharedTrack);
+    return () => window.removeEventListener("popstate", selectSharedTrack);
+  }, [queue, setTime]);
 
   /** Where playback goes after the current track, and whether it stops there. */
   const resolveNext = useCallback(

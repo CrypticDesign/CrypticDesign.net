@@ -468,7 +468,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .cs-icon-btn[aria-pressed="true"],.cs-icon-btn[aria-expanded="true"]{color:var(--cyan)}
 @media(pointer:coarse){.cs-icon-btn{width:var(--target-min);height:var(--target-min)}}
 
-/* Volume lives in a popover so the tool row stays a clean three-icon set. */
+/* Volume lives in a popover so the tool row stays compact. */
 .cs-vol{position:relative;display:inline-flex}
 .cs-vol__pop{position:absolute;top:calc(100% + 4px);left:50%;transform:translateX(-50%);padding:10px 12px;background:#08151f;border:1px solid var(--line);opacity:0;visibility:hidden;transition:opacity var(--motion-fast) var(--ease-standard);z-index:2}
 .cs-vol:hover .cs-vol__pop,.cs-vol:focus-within .cs-vol__pop{opacity:1;visibility:visible}
@@ -525,6 +525,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   .cs-orb__track{inset:8px;border-width:6px}
   .cs-orb .cs-wave{height:28px;gap:3px}
   .cs-chassis{width:100%;padding:14px 12px}
+  .cs-panel__bar{flex-wrap:wrap;justify-content:flex-end;padding-inline:10px}
+  .cs-panel__tools{gap:4px}
+  .cs-panel__eyebrow{display:none}
+  .cs-panel__bar[data-share-message="true"] .cs-panel__eyebrow{display:block;flex:1 0 100%;text-align:right}
   .cs-panel__body{grid-template-columns:76px minmax(0,1fr);gap:14px}
   .cs-panel__art{width:76px;height:76px}
   .cs-panel__title{font-size:18px}

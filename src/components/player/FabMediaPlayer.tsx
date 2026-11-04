@@ -13,8 +13,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
-import { formatTime } from "@/lib/player";
+import { useEffect, useRef, useState } from "react";
+import { formatTime, playerTrackSharePath, type PlayerTrack } from "@/lib/player";
 import { usePlayer } from "./PlayerProvider";
 import {
   CollapseIcon,
@@ -25,6 +25,7 @@ import {
   PreviousIcon,
   QueueIcon,
   RepeatIcon,
+  ShareIcon,
   ShuffleIcon,
   VolumeIcon,
 } from "./PlayerIcons";
@@ -82,6 +83,23 @@ function Waveform({ bars }: { bars: Bar[] }) {
       ))}
     </span>
   );
+}
+
+async function copyTrackLink(url: string): Promise<void> {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(url);
+    return;
+  }
+
+  const field = document.createElement("textarea");
+  field.value = url;
+  field.setAttribute("readonly", "");
+  field.style.cssText = "position:fixed;left:-9999px;opacity:0";
+  document.body.append(field);
+  field.select();
+  const copied = document.execCommand("copy");
+  field.remove();
+  if (!copied) throw new Error("Clipboard copy was unavailable.");
 }
 
 /**
@@ -156,6 +174,8 @@ export default function FabMediaPlayer() {
   const orbRef = useRef<HTMLButtonElement | null>(null);
   const playRef = useRef<HTMLButtonElement | null>(null);
   const interacted = useRef(false);
+  const shareTimer = useRef<number | null>(null);
+  const [shareMessage, setShareMessage] = useState("");
 
   // Move focus with the disclosure, but never steal it on first paint.
   useEffect(() => {
@@ -163,6 +183,10 @@ export default function FabMediaPlayer() {
     const target = expanded ? playRef.current : orbRef.current;
     target?.focus();
   }, [expanded]);
+
+  useEffect(() => () => {
+    if (shareTimer.current !== null) window.clearTimeout(shareTimer.current);
+  }, []);
 
   if (!track) return null;
 
@@ -174,6 +198,41 @@ export default function FabMediaPlayer() {
     if (event.key !== "Escape") return;
     interacted.current = true;
     setExpanded(false);
+  }
+
+  function announceShare(message: string) {
+    if (shareTimer.current !== null) window.clearTimeout(shareTimer.current);
+    setShareMessage(message);
+    shareTimer.current = window.setTimeout(() => {
+      setShareMessage("");
+      shareTimer.current = null;
+    }, 2600);
+  }
+
+  async function shareCurrentTrack(currentTrack: PlayerTrack) {
+    const url = new URL(playerTrackSharePath(currentTrack), window.location.origin).toString();
+    const data = {
+      title: `${currentTrack.title} — ${currentTrack.artist}`,
+      text: `Listen to ${currentTrack.title} by ${currentTrack.artist} on Cryptic Signal.`,
+      url,
+    };
+
+    if (typeof navigator.share === "function") {
+      try {
+        await navigator.share(data);
+        announceShare("Track shared");
+        return;
+      } catch (error) {
+        if (error instanceof Error && error.name === "AbortError") return;
+      }
+    }
+
+    try {
+      await copyTrackLink(url);
+      announceShare("Track link copied");
+    } catch {
+      announceShare("Share unavailable");
+    }
   }
 
   return (
@@ -228,8 +287,8 @@ export default function FabMediaPlayer() {
             aria-label="Cryptic Signal player"
             onKeyDown={handleKeyDown}
           >
-            <header className="cs-panel__bar">
-              <span className="cs-panel__eyebrow">Now playing</span>
+            <header className="cs-panel__bar" data-share-message={Boolean(shareMessage)}>
+              <span className="cs-panel__eyebrow">{shareMessage || "Now playing"}</span>
               <div className="cs-panel__tools">
                 <button
                   type="button"
@@ -240,6 +299,16 @@ export default function FabMediaPlayer() {
                 >
                   <QueueIcon />
                 </button>
+                <button
+                  type="button"
+                  className="cs-icon-btn"
+                  aria-label={shareMessage || `Share ${track.title}`}
+                  title={shareMessage || `Share ${track.title}`}
+                  onClick={() => void shareCurrentTrack(track)}
+                >
+                  <ShareIcon />
+                </button>
+                <span className="sr-only" role="status" aria-live="polite">{shareMessage}</span>
                 <span className="cs-vol">
                   <button
                     type="button"
