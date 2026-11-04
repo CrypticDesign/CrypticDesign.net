@@ -46,3 +46,23 @@ test("the shared player exposes truthful operational and accessibility states", 
   assert.match(surface, /No chapters/);
   assert.match(surface, /No transcript/);
 });
+
+test("the shared player exposes stable track sharing without autoplaying deep links", () => {
+  const provider = readFileSync(path.join(root, "src/components/player/PlayerProvider.tsx"), "utf8");
+  const surface = readFileSync(path.join(root, "src/components/player/FabMediaPlayer.tsx"), "utf8");
+  const model = readFileSync(path.join(root, "src/lib/player.ts"), "utf8");
+
+  assert.match(model, /playerTrackSharePath/);
+  assert.match(model, /encodeURIComponent\(track\.id\)/);
+  assert.match(provider, /PLAYER_TRACK_QUERY_PARAM/);
+  assert.match(provider, /playerTrackIndexById/);
+  assert.match(provider, /setPlaying\(false\)/);
+  assert.match(provider, /setExpanded\(true\)/);
+
+  assert.match(surface, /navigator\.share/);
+  assert.match(surface, /navigator\.clipboard\.writeText/);
+  assert.match(surface, /playerTrackSharePath\(/);
+  assert.match(surface, /ShareIcon/);
+  assert.match(surface, /role="status" aria-live="polite"/);
+  assert.doesNotMatch(surface, /track\.src[^\n]+share|share[^\n]+track\.src/i);
+});

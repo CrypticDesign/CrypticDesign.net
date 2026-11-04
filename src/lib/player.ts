@@ -29,6 +29,23 @@ export interface PlayerTrack {
   href?: string;
 }
 
+export const PLAYER_TRACK_QUERY_PARAM = "track";
+
+/** Stable public path for sharing a track without exposing its audio source URL. */
+export function playerTrackSharePath(track: Pick<PlayerTrack, "id">): string {
+  return `/audio?${PLAYER_TRACK_QUERY_PARAM}=${encodeURIComponent(track.id)}`;
+}
+
+/** Resolve an incoming shared track id against the currently publishable queue. */
+export function playerTrackIndexById(
+  queue: readonly PlayerTrack[],
+  trackId: string | null,
+): number | null {
+  if (!trackId) return null;
+  const index = queue.findIndex((track) => track.id === trackId);
+  return index >= 0 ? index : null;
+}
+
 export type PlayerPlaybackStatus =
   | "idle"
   | "loading"
